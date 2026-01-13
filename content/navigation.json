@@ -1,0 +1,72 @@
+{
+  "sections": [
+    {
+      "title": "Getting Started",
+      "items": [
+        {
+          "title": "Authentication",
+          "slug": "authentication"
+        }
+      ]
+    },
+    {
+      "title": "User",
+      "items": [
+        {
+          "title": "Get User Profile",
+          "slug": "user-me"
+        },
+        {
+          "title": "Get Balance",
+          "slug": "get-balance"
+        }
+      ]
+    },
+    {
+      "title": "Crawler",
+      "items": [
+        {
+          "title": "List Crawlers",
+          "slug": "list-crawlers"
+        },
+        {
+          "title": "Get Crawler Details",
+          "slug": "get-crawler-details"
+        },
+        {
+          "title": "Get Crawler Parameters",
+          "slug": "get-crawler-parameters"
+        }
+      ]
+    },
+    {
+      "title": "Squid",
+      "items": [
+        {
+          "title": "Create Squid",
+          "slug": "create-squid"
+        },
+        {
+          "title": "Update Squid",
+          "slug": "update-squid"
+        },
+        {
+          "title": "List Squids",
+          "slug": "list-squids"
+        },
+        {
+          "title": "Get Squid Details",
+          "slug": "get-squid-details"
+        },
+        {
+          "title": "Empty Squid",
+          "slug": "empty-squid"
+        },
+        {
+          "title": "Delete Squid",
+          "slug": "delete-squid"
+        }
+      ]
+    }
+  ]
+}

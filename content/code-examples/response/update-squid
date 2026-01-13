@@ -1,0 +1,19 @@
+{
+  "name": "Updated Squid Name",
+  "no_line_breaks": true,
+  "is_active": true,
+  "params": {
+    "max_results": 150,
+    "functions": {
+      "collect_contacts": true,
+      "details": true,
+      "images": false
+    },
+    "ratings": "4.0+",
+    "country": "United States",
+    "language": "English (United States)"
+  },
+  "to_complete": false,
+  "run_notify": "on_success",
+  "export_unique_results": true
+}

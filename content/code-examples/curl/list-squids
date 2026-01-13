@@ -1,0 +1,2 @@
+curl -X GET "https://api.lobstr.io/v1/squids?name=Google&limit=10&page=1" \
+  -H "Authorization: Token YOUR_API_KEY"
