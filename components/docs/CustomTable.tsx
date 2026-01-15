@@ -25,22 +25,26 @@ export default function CustomTable({ title, columns, rows }: CustomTableProps) 
             className="bg-surface border border-border rounded-lg p-4"
           >
             <div className="grid gap-4">
-              {columns.map((col, colIndex) => (
-                <div key={colIndex}>
-                  <div className="text-xs text-text-muted uppercase tracking-wider mb-1">
-                    {col.header}
+              {columns.map((col, colIndex) => {
+                const value = row[col.key];
+                const isHighlighted = typeof value === 'string' && value.startsWith('**');
+                return (
+                  <div key={colIndex}>
+                    <div className="text-xs text-text-muted uppercase tracking-wider mb-1">
+                      {col.header}
+                    </div>
+                    <div className="text-sm text-text-secondary">
+                      {isHighlighted ? (
+                        <code className="text-accent-red font-semibold">
+                          {(value as string).replace(/\*\*/g, '')}
+                        </code>
+                      ) : (
+                        value
+                      )}
+                    </div>
                   </div>
-                  <div className="text-sm text-text-secondary">
-                    {typeof row[col.key] === 'string' && row[col.key].toString().startsWith('**') ? (
-                      <code className="text-accent-red font-semibold">
-                        {row[col.key].toString().replace(/\*\*/g, '')}
-                      </code>
-                    ) : (
-                      row[col.key]
-                    )}
-                  </div>
-                </div>
-              ))}
+                );
+              })}
             </div>
           </div>
         ))}
