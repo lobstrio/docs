@@ -25,7 +25,7 @@ export default function ParametersList({ title, parameters }: ParametersListProp
           >
             <div className="flex items-start justify-between mb-2">
               <div>
-                <code className="text-base text-accent-blue font-semibold">
+                <code className="text-base text-accent-red font-semibold">
                   {param.name}
                 </code>
                 <span className="text-sm text-text-muted ml-2">

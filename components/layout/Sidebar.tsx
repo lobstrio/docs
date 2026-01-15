@@ -33,9 +33,9 @@ export default function Sidebar({ navigation }: SidebarProps) {
   return (
     <div className="p-6">
       {/* Logo/Header */}
-      <Link href="/" className="block mb-8">
-        <h2 className="text-xl font-bold text-text-primary">Lobstr.io API</h2>
-        <p className="text-sm text-text-muted">Documentation</p>
+      <Link href="/" className="flex items-center gap-2 mb-8">
+        <span className="text-xl font-bold text-red-500">lobstr.io</span>
+        <span className="text-text-muted text-sm font-medium">API Docs</span>
       </Link>
 
       {/* Navigation Sections */}
@@ -45,7 +45,7 @@ export default function Sidebar({ navigation }: SidebarProps) {
             {/* Section Header */}
             <button
               onClick={() => toggleSection(section.title)}
-              className="flex items-center justify-between w-full text-sm font-semibold text-text-primary mb-2 hover:text-accent-blue transition-colors"
+              className="flex items-center justify-between w-full text-sm font-semibold text-text-primary mb-2 hover:text-accent-red transition-colors"
             >
               <span>{section.title}</span>
               {expandedSections[section.title] ? (

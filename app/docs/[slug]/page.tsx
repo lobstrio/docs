@@ -65,20 +65,49 @@ export default async function DocPage({ params }: PageProps) {
     const content = await loadDocContent(slug);
     const navigation = await loadNavigation();
 
-    // Generate syntax-highlighted HTML for code examples
+    // Language to Shiki language mapping
+    const langMap: Record<string, string> = {
+      curl: 'bash',
+      python: 'python',
+      javascript: 'javascript',
+      typescript: 'typescript',
+      go: 'go',
+      ruby: 'ruby',
+      php: 'php',
+      java: 'java',
+      csharp: 'csharp',
+      rust: 'rust',
+      node: 'javascript',
+    };
+
+    // Generate syntax-highlighted HTML for all language examples
+    const highlightedLanguages = await Promise.all(
+      content.examples.languages.map(async (example) => ({
+        language: example.language,
+        label: example.label,
+        code: example.code,
+        html: await codeToHtml(example.code || '# No example available', {
+          lang: langMap[example.language] || 'text',
+          theme: 'github-dark',
+        }),
+      }))
+    );
+
+    // Generate syntax-highlighted HTML for all responses
+    const highlightedResponses = await Promise.all(
+      content.examples.responses.map(async (response) => ({
+        status: response.status,
+        body: response.body,
+        html: await codeToHtml(response.body || '{}', {
+          lang: 'json',
+          theme: 'github-dark',
+        }),
+      }))
+    );
+
     const highlightedCode = {
-      curl: await codeToHtml(content.examples.curl || '# No example available', {
-        lang: 'bash',
-        theme: 'github-dark',
-      }),
-      python: await codeToHtml(content.examples.python || '# No example available', {
-        lang: 'python',
-        theme: 'github-dark',
-      }),
-      response: await codeToHtml(content.examples.response.body || '{}', {
-        lang: 'json',
-        theme: 'github-dark',
-      }),
+      languages: highlightedLanguages,
+      responses: highlightedResponses,
     };
 
     return (

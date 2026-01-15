@@ -50,15 +50,28 @@ export interface BodyField {
 }
 
 /**
- * Code examples for each endpoint
+ * Response example with status code
+ */
+export interface ResponseExample {
+  status: number;
+  body: string;
+}
+
+/**
+ * Language example (curl, python, javascript, go, etc.)
+ */
+export interface LanguageExample {
+  language: string;
+  label: string;
+  code: string;
+}
+
+/**
+ * Code examples for each endpoint (dynamic structure)
  */
 export interface CodeExamples {
-  curl: string;
-  python: string;
-  response: {
-    status: number;
-    body: string;
-  };
+  languages: LanguageExample[];
+  responses: ResponseExample[];
 }
 
 /**
@@ -98,6 +111,48 @@ export interface ResponseFieldsSection {
 }
 
 /**
+ * Event type for webhooks
+ */
+export interface EventType {
+  event: string;
+  description: string;
+  trigger: string;
+}
+
+/**
+ * Section with event types (for webhooks)
+ */
+export interface EventTypesSection {
+  title: string;
+  events: EventType[];
+}
+
+/**
+ * Table column definition
+ */
+export interface TableColumn {
+  header: string;
+  key: string;
+  width?: string;
+}
+
+/**
+ * Table row (flexible key-value structure)
+ */
+export interface TableRow {
+  [key: string]: string;
+}
+
+/**
+ * Section with custom table
+ */
+export interface TableSection {
+  title?: string;
+  columns: TableColumn[];
+  rows: TableRow[];
+}
+
+/**
  * Main content structure for each endpoint
  */
 export interface EndpointContent {
@@ -107,7 +162,7 @@ export interface EndpointContent {
   body?: BodyField[];
   proTips: ProTip[];
   additionalNotes?: string;
-  sections?: Record<string, ParameterSection | ResponseFieldsSection>;
+  sections?: Record<string, ParameterSection | ResponseFieldsSection | EventTypesSection | TableSection>;
 }
 
 /**

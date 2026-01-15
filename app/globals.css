@@ -15,7 +15,7 @@
   --color-accent-blue: #3b82f6;
   --color-accent-green: #10b981;
   --color-accent-yellow: #f59e0b;
-  --color-accent-red: #ef4444;
+  --color-accent-red: rgb(255, 0, 0);
 }
 
 @layer base {
@@ -60,6 +60,18 @@
     padding: 1rem;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
+    margin: 0;
+  }
+
+  pre code {
+    background: none !important;
+    padding: 0 !important;
+    border: none !important;
+    border-radius: 0 !important;
+    font-size: 0.875rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    color: var(--color-text-secondary);
+    line-height: 1.7;
   }
 
   code {
@@ -67,9 +79,65 @@
     font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   }
 
+  /* Syntax highlighting for code in markdown */
+  pre code .token.comment,
+  pre code .token.prolog,
+  pre code .token.doctype,
+  pre code .token.cdata {
+    color: #6a9955;
+  }
+
+  pre code .token.punctuation {
+    color: #d4d4d8;
+  }
+
+  pre code .token.property,
+  pre code .token.tag,
+  pre code .token.boolean,
+  pre code .token.number,
+  pre code .token.constant,
+  pre code .token.symbol,
+  pre code .token.deleted {
+    color: #b5cea8;
+  }
+
+  pre code .token.selector,
+  pre code .token.attr-name,
+  pre code .token.string,
+  pre code .token.char,
+  pre code .token.builtin,
+  pre code .token.inserted {
+    color: #ce9178;
+  }
+
+  pre code .token.operator,
+  pre code .token.entity,
+  pre code .token.url,
+  pre code .language-css .token.string,
+  pre code .style .token.string {
+    color: #d4d4d8;
+  }
+
+  pre code .token.atrule,
+  pre code .token.attr-value,
+  pre code .token.keyword {
+    color: #c586c0;
+  }
+
+  pre code .token.function,
+  pre code .token.class-name {
+    color: #dcdcaa;
+  }
+
+  pre code .token.regex,
+  pre code .token.important,
+  pre code .token.variable {
+    color: #d16969;
+  }
+
   /* Selection */
   ::selection {
-    background-color: rgba(59, 130, 246, 0.3);
+    background-color: rgba(239, 68, 68, 0.3);
     color: var(--color-text-primary);
   }
 
@@ -101,12 +169,12 @@
   }
 
   .prose a {
-    color: var(--color-accent-blue);
+    color: var(--color-accent-red);
     text-decoration: underline;
   }
 
   .prose a:hover {
-    color: #60a5fa;
+    color: #f87171;
   }
 
   .prose strong {
@@ -119,7 +187,7 @@
     padding: 0.125rem 0.375rem;
     border-radius: 0.25rem;
     font-size: 0.875em;
-    color: var(--color-accent-blue);
+    color: var(--color-accent-red);
   }
 
   .prose h2 {
@@ -186,12 +254,12 @@
   }
 
   .btn-primary {
-    background-color: var(--color-accent-blue);
+    background-color: var(--color-accent-red);
     color: white;
   }
 
   .btn-primary:hover {
-    background-color: #2563eb;
+    background-color: #dc2626;
   }
 
   .btn-secondary {
@@ -222,7 +290,7 @@
 
   .badge-post {
     background-color: rgba(59, 130, 246, 0.2);
-    color: var(--color-accent-blue);
+    color: var(--color-accent-red);
     border: 1px solid rgba(59, 130, 246, 0.3);
   }
 

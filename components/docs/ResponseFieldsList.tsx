@@ -24,7 +24,7 @@ export default function ResponseFieldsList({ title, fields }: ResponseFieldsList
           >
             <div className="flex items-start justify-between mb-2">
               <div>
-                <code className="text-base text-accent-blue font-semibold">
+                <code className="text-base text-accent-red font-semibold">
                   {field.path}
                 </code>
                 {field.type && (

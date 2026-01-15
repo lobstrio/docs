@@ -13,9 +13,9 @@ export default function ProTip({ type, children }: ProTipProps) {
   const config = {
     tip: {
       icon: Lightbulb,
-      borderColor: 'border-accent-blue',
-      iconColor: 'text-accent-blue',
-      bgColor: 'bg-accent-blue/10',
+      borderColor: 'border-accent-red',
+      iconColor: 'text-accent-red',
+      bgColor: 'bg-accent-red/10',
       title: 'Pro Tip',
     },
     warning: {

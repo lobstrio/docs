@@ -18,6 +18,7 @@ const config: Config = {
           muted: '#71717a',         // zinc-500
         },
         accent: {
+          primary: '#ef4444',       // red-500 (main brand color)
           blue: '#3b82f6',          // blue-500
           green: '#10b981',         // emerald-500
           yellow: '#f59e0b',        // amber-500
@@ -34,7 +35,7 @@ const config: Config = {
             '--tw-prose-body': '#d4d4d8',
             '--tw-prose-headings': '#fafafa',
             '--tw-prose-lead': '#d4d4d8',
-            '--tw-prose-links': '#3b82f6',
+            '--tw-prose-links': '#ef4444',
             '--tw-prose-bold': '#fafafa',
             '--tw-prose-counters': '#71717a',
             '--tw-prose-bullets': '#71717a',

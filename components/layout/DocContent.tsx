@@ -3,6 +3,7 @@ import ProTip from '@/components/ui/ProTip';
 import CopyForLLMButton from '@/components/ui/CopyForLLMButton';
 import ParametersList from '@/components/docs/ParametersList';
 import ResponseFieldsList from '@/components/docs/ResponseFieldsList';
+import CustomTable from '@/components/docs/CustomTable';
 import { getMethodBadgeClass } from '@/lib/utils/code-generator';
 import { marked } from 'marked';
 
@@ -17,63 +18,122 @@ interface DocContentProps {
 export default function DocContent({ content }: DocContentProps) {
   const methodBadgeClass = getMethodBadgeClass(content.metadata.method);
 
-  // Process introduction - separate text from section markers
-  const processIntroduction = () => {
-    const text = content.content.introduction;
-    const markerRegex = /\{\{RENDER:(\w+)\}\}/g;
+  // Configure marked renderer for custom code blocks
+  const renderer = new marked.Renderer();
 
-    // Remove all {{RENDER:}} markers from the text
-    const cleanText = text.replace(markerRegex, '');
+  // Override code block rendering
+  renderer.code = (token: any) => {
+    const code = token.text || token;
+    const lang = token.lang || 'text';
+    // Escape HTML in code
+    const escapedCode = String(code)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#039;');
 
-    // Parse the clean markdown
-    const html = marked.parse(cleanText, {
-      async: false,
-      breaks: true,
-      gfm: true,
-    }) as string;
-
-    return html;
+    return `
+      <div class="my-6 relative group">
+        <div class="absolute top-3 right-3 z-10">
+          <span class="inline-block px-2 py-1 text-xs font-medium uppercase bg-zinc-800 text-zinc-400 rounded border border-zinc-700">
+            ${lang}
+          </span>
+        </div>
+        <div class="bg-surface border border-border rounded-lg overflow-hidden">
+          <pre class="p-4 overflow-x-auto text-sm"><code class="language-${lang}">${escapedCode}</code></pre>
+        </div>
+      </div>
+    `;
   };
 
-  // Collect all sections to render at the end
-  const renderSections = () => {
-    if (!content.content.sections) return null;
+  // Override inline code rendering
+  renderer.codespan = (token: any) => {
+    const code = token.text || token;
+    return `<code class="px-1.5 py-0.5 text-sm bg-surface border border-border rounded text-accent-green font-mono">${code}</code>`;
+  };
 
-    const sections: JSX.Element[] = [];
+  // Process introduction: render {{RENDER:}} sections inline, track which were rendered
+  const processIntroductionWithSections = (): { parts: (string | JSX.Element)[]; renderedSections: Set<string> } => {
     const text = content.content.introduction;
     const markerRegex = /\{\{RENDER:(\w+)\}\}/g;
+    const parts: (string | JSX.Element)[] = [];
+    const renderedSections = new Set<string>();
+    let lastIndex = 0;
     let match;
+    let sectionIndex = 0;
 
     while ((match = markerRegex.exec(text)) !== null) {
+      // Add text before the marker
+      const textBefore = text.substring(lastIndex, match.index);
+      if (textBefore) {
+        const html = marked.parse(textBefore, {
+          async: false,
+          breaks: true,
+          gfm: true,
+          renderer: renderer,
+        }) as string;
+        parts.push(html);
+      }
+
+      // Add the rendered section inline
       const sectionName = match[1];
       const section = content.content.sections?.[sectionName];
 
       if (section) {
+        renderedSections.add(sectionName);
         if ('fields' in section) {
-          sections.push(
+          parts.push(
             <ResponseFieldsList
-              key={sectionName}
+              key={`inline-section-${sectionIndex++}`}
               title={section.title}
               fields={section.fields}
             />
           );
         } else if ('parameters' in section) {
-          sections.push(
+          parts.push(
             <ParametersList
-              key={sectionName}
+              key={`inline-section-${sectionIndex++}`}
               title={section.title}
               parameters={section.parameters}
             />
           );
+        } else if ('columns' in section && 'rows' in section) {
+          parts.push(
+            <CustomTable
+              key={`inline-section-${sectionIndex++}`}
+              title={section.title}
+              columns={section.columns}
+              rows={section.rows}
+            />
+          );
         }
       }
+
+      lastIndex = match.index + match[0].length;
     }
 
-    return sections;
+    // Add remaining text after the last marker
+    const textAfter = text.substring(lastIndex);
+    if (textAfter) {
+      const html = marked.parse(textAfter, {
+        async: false,
+        breaks: true,
+        gfm: true,
+        renderer: renderer,
+      }) as string;
+      parts.push(html);
+    }
+
+    return { parts, renderedSections };
   };
 
-  const introductionHtml = processIntroduction();
-  const sections = renderSections();
+  const { parts: contentParts, renderedSections } = processIntroductionWithSections();
+
+  // Get sections NOT mentioned in introduction (to render after headers)
+  const unmentiondSections = content.content.sections
+    ? Object.entries(content.content.sections).filter(([key]) => !renderedSections.has(key))
+    : [];
 
   return (
     <div className="prose prose-invert max-w-none">
@@ -96,11 +156,16 @@ export default function DocContent({ content }: DocContentProps) {
         </div>
       </div>
 
-      {/* Introduction */}
-      <div
-        className="text-lg leading-relaxed mb-8"
-        dangerouslySetInnerHTML={{ __html: introductionHtml }}
-      />
+      {/* Introduction with inline {{RENDER:}} sections */}
+      <div className="text-lg leading-relaxed mb-8">
+        {contentParts.map((part, index) =>
+          typeof part === 'string' ? (
+            <div key={index} dangerouslySetInnerHTML={{ __html: part }} />
+          ) : (
+            part
+          )
+        )}
+      </div>
 
       {/* Headers Section */}
       {content.content.headers.length > 0 && (
@@ -128,7 +193,7 @@ export default function DocContent({ content }: DocContentProps) {
                     className="border-b border-border last:border-0"
                   >
                     <td className="px-4 py-3">
-                      <code className="text-sm text-accent-blue">
+                      <code className="text-sm text-accent-red">
                         {header.key}
                       </code>
                     </td>
@@ -154,6 +219,41 @@ export default function DocContent({ content }: DocContentProps) {
         </div>
       )}
 
+      {/* Sections NOT mentioned in introduction */}
+      {unmentiondSections.length > 0 && (
+        <div className="mb-8">
+          {unmentiondSections.map(([key, section]) => {
+            if ('fields' in section) {
+              return (
+                <ResponseFieldsList
+                  key={`section-${key}`}
+                  title={section.title}
+                  fields={section.fields}
+                />
+              );
+            } else if ('parameters' in section) {
+              return (
+                <ParametersList
+                  key={`section-${key}`}
+                  title={section.title}
+                  parameters={section.parameters}
+                />
+              );
+            } else if ('columns' in section && 'rows' in section) {
+              return (
+                <CustomTable
+                  key={`section-${key}`}
+                  title={section.title}
+                  columns={section.columns}
+                  rows={section.rows}
+                />
+              );
+            }
+            return null;
+          })}
+        </div>
+      )}
+
       {/* Parameters Section */}
       {content.content.parameters.length > 0 && (
         <div className="mb-8">
@@ -166,7 +266,7 @@ export default function DocContent({ content }: DocContentProps) {
               >
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <code className="text-base text-accent-blue font-semibold">
+                    <code className="text-base text-accent-red font-semibold">
                       {param.name}
                     </code>
                     <span className="text-sm text-text-muted ml-2">
@@ -193,13 +293,6 @@ export default function DocContent({ content }: DocContentProps) {
               </div>
             ))}
           </div>
-        </div>
-      )}
-
-      {/* Response Fields and Custom Sections */}
-      {sections && sections.length > 0 && (
-        <div className="mb-8">
-          {sections}
         </div>
       )}
 
