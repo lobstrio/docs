@@ -9,7 +9,7 @@
     "requiresAuth": true
   },
   "content": {
-    "introduction": "This endpoint returns the authenticated user's complete profile data in a single API call. Use it to verify authentication, retrieve user details, and check account status.\n\nThis is typically the first endpoint you'll call after authentication to confirm your credentials are working correctly.\n\n{{RENDER:responseFields}}",
+    "introduction": "This endpoint returns the authenticated user's complete profile data in a single API call. Use it to verify authentication, retrieve user details, and check account status.\n\nThis is typically the first endpoint you'll call after authentication to confirm your credentials are working correctly.",
     "sections": {
       "responseFields": {
         "title": "Response Field Explanations",

@@ -6,6 +6,10 @@
         {
           "title": "Authentication",
           "slug": "authentication"
+        },
+        {
+          "title": "Rate Limiting",
+          "slug": "rate-limiting"
         }
       ]
     },
@@ -65,6 +69,143 @@
         {
           "title": "Delete Squid",
           "slug": "delete-squid"
+        }
+      ]
+    },
+    {
+      "title": "Delivery",
+      "items": [
+        {
+          "title": "Configure Email Delivery",
+          "slug": "configure-email-delivery"
+        },
+        {
+          "title": "Configure SFTP Delivery",
+          "slug": "configure-sftp-delivery"
+        },
+        {
+          "title": "Configure Google Sheet Delivery",
+          "slug": "configure-google-sheet-delivery"
+        },
+        {
+          "title": "Configure Amazon S3 Delivery",
+          "slug": "configure-s3-delivery"
+        },
+        {
+          "title": "Configure Webhook Delivery",
+          "slug": "configure-webhook-delivery"
+        },
+        {
+          "title": "Test Delivery Configuration",
+          "slug": "test-delivery"
+        }
+      ]
+    },
+    {
+      "title": "Account",
+      "items": [
+        {
+          "title": "List Accounts",
+          "slug": "list-accounts"
+        },
+        {
+          "title": "List Account Types",
+          "slug": "list-account-types"
+        },
+        {
+          "title": "Get Account Details",
+          "slug": "get-account-details"
+        },
+        {
+          "title": "Sync Account",
+          "slug": "sync-account"
+        },
+        {
+          "title": "Check Sync Status",
+          "slug": "check-sync-status"
+        },
+        {
+          "title": "Update Account Limits",
+          "slug": "update-account-limits"
+        },
+        {
+          "title": "Refresh Cookies",
+          "slug": "refresh-cookies"
+        },
+        {
+          "title": "Delete Account",
+          "slug": "delete-account"
+        }
+      ]
+    },
+    {
+      "title": "Task",
+      "items": [
+        {
+          "title": "Add Tasks",
+          "slug": "add-tasks"
+        },
+        {
+          "title": "Upload Tasks",
+          "slug": "upload-tasks"
+        },
+        {
+          "title": "Check Upload Status",
+          "slug": "check-upload-status"
+        },
+        {
+          "title": "List Tasks",
+          "slug": "list-tasks"
+        },
+        {
+          "title": "Get Task",
+          "slug": "get-task"
+        },
+        {
+          "title": "Delete Task",
+          "slug": "delete-task"
+        }
+      ]
+    },
+    {
+      "title": "Run",
+      "items": [
+        {
+          "title": "Start Run",
+          "slug": "start-run"
+        },
+        {
+          "title": "List Runs",
+          "slug": "list-runs"
+        },
+        {
+          "title": "Get Run",
+          "slug": "get-run"
+        },
+        {
+          "title": "Get Run Stats",
+          "slug": "get-run-stats"
+        },
+        {
+          "title": "Get Run Tasks",
+          "slug": "get-run-tasks"
+        },
+        {
+          "title": "Abort Run",
+          "slug": "abort-run"
+        },
+        {
+          "title": "Download Run",
+          "slug": "download-run"
+        }
+      ]
+    },
+    {
+      "title": "Result",
+      "items": [
+        {
+          "title": "Get Results",
+          "slug": "get-results"
         }
       ]
     }

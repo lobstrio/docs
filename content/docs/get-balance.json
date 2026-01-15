@@ -9,7 +9,7 @@
     "requiresAuth": true
   },
   "content": {
-    "introduction": "This endpoint returns your current account balance and credit information. Use it to check available credits before launching expensive scraping operations or to monitor your spending.\n\nIt's recommended to check your balance before starting large-scale data collection tasks to ensure you have sufficient credits.\n\n{{RENDER:responseFields}}",
+    "introduction": "This endpoint returns your current account balance and credit information. Use it to check available credits before launching expensive scraping operations or to monitor your spending.\n\nIt's recommended to check your balance before starting large-scale data collection tasks to ensure you have sufficient credits.",
     "sections": {
       "responseFields": {
         "title": "Response Field Explanations",
