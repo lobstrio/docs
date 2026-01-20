@@ -208,6 +208,380 @@
           "slug": "get-results"
         }
       ]
+    },
+    {
+      "title": "Examples",
+      "subsections": [
+        {
+          "title": "Google Maps Reviews Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/google-maps-reviews-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/google-maps-reviews-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/google-maps-reviews-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Google Maps Search Scraper",
+          "items": [
+            {
+              "title": "Add Task URLs",
+              "slug": "examples/google-maps-search-scraper/add-task-urls"
+            },
+            {
+              "title": "Get Geolocation",
+              "slug": "examples/google-maps-search-scraper/get-geolocation"
+            },
+            {
+              "title": "Add Task Params",
+              "slug": "examples/google-maps-search-scraper/add-task-params"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/google-maps-search-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/google-maps-search-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Google Search Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/google-search-scraper/add-tasks"
+            },
+            {
+              "title": "Get Geolocation",
+              "slug": "examples/google-search-scraper/get-geolocation"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/google-search-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/google-search-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Google News Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/google-news-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/google-news-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/google-news-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Twitter Profile Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/twitter-profile-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/twitter-profile-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/twitter-profile-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Twitter Search Results Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/twitter-search-results-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/twitter-search-results-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/twitter-search-results-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Twitter User Tweets Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/twitter-user-tweets-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/twitter-user-tweets-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/twitter-user-tweets-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Leboncoin Listings Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/leboncoin-listings-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/leboncoin-listings-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/leboncoin-listings-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Leboncoin Listings & Phone Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/leboncoin-phone-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/leboncoin-phone-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/leboncoin-phone-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Leboncoin Auto Message Sender",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/leboncoin-auto-message-sender/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/leboncoin-auto-message-sender/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/leboncoin-auto-message-sender/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Facebook Pages Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/facebook-pages-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/facebook-pages-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/facebook-pages-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Facebook Page Details Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/facebook-page-details-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/facebook-page-details-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/facebook-page-details-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Vinted Products Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/vinted-products-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/vinted-products-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/vinted-products-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Sales Navigator Leads Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/sales-navigator-leads-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/sales-navigator-leads-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/sales-navigator-leads-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "SeLoger Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/seloger-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/seloger-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/seloger-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "YouTube Channel Email Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/youtube-channel-email-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/youtube-channel-email-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/youtube-channel-email-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Yelp Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/yelp-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/yelp-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/yelp-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Idealista Listings Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/idealista-listings-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/idealista-listings-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/idealista-listings-scraper/get-results"
+            }
+          ]
+        },
+        {
+          "title": "PAP Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/pap-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/pap-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/pap-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "Pages Jaunes Companies Search Export",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/pages-jaunes-companies-search-export/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/pages-jaunes-companies-search-export/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/pages-jaunes-companies-search-export/get-results"
+            }
+          ]
+        },
+        {
+          "title": "TripAdvisor Restaurants Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/tripadvisor-restaurants-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/tripadvisor-restaurants-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/tripadvisor-restaurants-scraper/get-results"
+            }
+          ]
+        }
+      ]
     }
   ]
 }
