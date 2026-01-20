@@ -1,0 +1,2 @@
+curl -X GET "https://api.lobstr.io/v1/googlelocations?q=Alabama&country_name=United%20States" \
+  -H "Authorization: Token YOUR_API_KEY"
