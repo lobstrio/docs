@@ -1,0 +1,74 @@
+{
+  "slug": "examples/google-maps-search-scraper/update-settings",
+  "title": "Update Settings",
+  "description": "Configure the Google Maps Search Scraper parameters",
+  "category": "Google Maps Search Scraper",
+  "metadata": {
+    "method": "POST",
+    "endpoint": "/v1/squids/{squid_hash}",
+    "requiresAuth": true
+  },
+  "content": {
+    "introduction": "Configure the scraper parameters to control how places are collected. These settings include language, location context, filters, and optional data collection features.",
+    "sections": {
+      "scraperParams": {
+        "title": "Scraper Parameters",
+        "content": "Set these parameters in the `params` object:",
+        "columns": [
+          {"header": "Parameter", "key": "param"},
+          {"header": "Type", "key": "type"},
+          {"header": "Description", "key": "description"}
+        ],
+        "rows": [
+          {"param": "**country**", "type": "string", "description": "Regional context for search results (e.g., `United States`)"},
+          {"param": "**ratings**", "type": "string", "description": "Filter by rating threshold: `Any rating`, `4.0+`, `2.5+`"},
+          {"param": "**language**", "type": "string", "description": "Language for place names and metadata (e.g., `English (United States)`)"},
+          {"param": "**max_results**", "type": "integer", "description": "Maximum places to collect before task ends"}
+        ]
+      },
+      "functions": {
+        "title": "Optional Functions",
+        "content": "Enable these in the `params.functions` object:",
+        "columns": [
+          {"header": "Function", "key": "func"},
+          {"header": "Type", "key": "type"},
+          {"header": "Description", "key": "description"}
+        ],
+        "rows": [
+          {"func": "**collect_contacts**", "type": "boolean", "description": "Visit business website to extract email, Facebook, Instagram, and additional phone"},
+          {"func": "**images**", "type": "boolean", "description": "Collect all image URLs from the Google Place page"},
+          {"func": "**details**", "type": "boolean", "description": "Collect additional metadata like plus_code, poi, health, and last_opening_hours_updated_at"}
+        ]
+      }
+    },
+    "parameters": [],
+    "headers": [
+      {
+        "key": "Authorization",
+        "value": "Token YOUR_API_KEY",
+        "required": true,
+        "description": "Your API authentication token"
+      },
+      {
+        "key": "Content-Type",
+        "value": "application/json",
+        "required": true,
+        "description": "Request body format"
+      }
+    ],
+    "proTips": [
+      {
+        "type": "warning",
+        "content": "Enabling `collect_contacts`, `images`, or `details` may incur additional credits."
+      },
+      {
+        "type": "tip",
+        "content": "Set `export_unique_results: true` to avoid duplicate entries when places appear multiple times in search results."
+      }
+    ]
+  },
+  "seo": {
+    "title": "Update Settings - Google Maps Search Scraper - Lobstr.io API",
+    "description": "Configure the Google Maps Search Scraper parameters including filters, language, and data collection options."
+  }
+}

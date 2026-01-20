@@ -1,0 +1,17 @@
+{
+  "name": "Google Maps Search Export",
+  "no_line_breaks": true,
+  "params": {
+    "country": "United States",
+    "ratings": "Any rating",
+    "language": "English (United States)",
+    "functions": {
+      "images": true,
+      "details": true,
+      "collect_contacts": true
+    },
+    "max_results": 200
+  },
+  "to_complete": false,
+  "export_unique_results": true
+}
