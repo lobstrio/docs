@@ -1,0 +1,13 @@
+{
+  "name": "Leboncoin Listings Search Export (22)",
+  "no_line_breaks": true,
+  "params": {
+    "max_date": null,
+    "max_pages": 1,
+    "hours_back": null,
+    "max_results": 3,
+    "online_shop": true
+  },
+  "to_complete": false,
+  "export_unique_results": true
+}
