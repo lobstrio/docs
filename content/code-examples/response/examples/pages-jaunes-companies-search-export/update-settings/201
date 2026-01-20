@@ -1,0 +1,14 @@
+{
+  "name": "Pages Jaunes Companies Search Export (2)",
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "functions": {
+      "results_details": true,
+      "collect_contacts": true
+    },
+    "max_pages": 3
+  }
+}
