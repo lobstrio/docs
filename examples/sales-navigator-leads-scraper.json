@@ -1,0 +1,240 @@
+{
+	"name": "Sales Navigator Leads Scraper",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.linkedin.com/sales/search/people?query=(spellCorrectionEnabled%3Atrue%2CrecentSearchParam%3A(id%3A3772932001%2CdoLogHistory%3Atrue)%2Cfilters%3AList((type%3ACOMPANY_HEADCOUNT%2Cvalues%3AList((id%3AD%2Ctext%3A51-200%2CselectionType%3AINCLUDED)))%2C(type%3ASENIORITY_LEVEL%2Cvalues%3AList((id%3A300%2Ctext%3AVice%2520President%2CselectionType%3AINCLUDED))))%2Ckeywords%3AJerry%2520from%2520JSL%2520Foods%252C%2520inc.)&sessionId=DlniK9%2BvQfKBJJMOnlV5%2FQ%3D%3D\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.linkedin.com/sales/search/people?query=(spellCorrectionEnabled%3Atrue%2CrecentSearchParam%3A(id%3A3772932001%2CdoLogHistory%3Atrue)%2Cfilters%3AList((type%3ACOMPANY_HEADCOUNT%2Cvalues%3AList((id%3AD%2Ctext%3A51-200%2CselectionType%3AINCLUDED)))%2C(type%3ASENIORITY_LEVEL%2Cvalues%3AList((id%3A300%2Ctext%3AVice%2520President%2CselectionType%3AINCLUDED))))%2Ckeywords%3AJerry%2520from%2520JSL%2520Foods%252C%2520inc.)&sessionId=DlniK9%2BvQfKBJJMOnlV5%2FQ%3D%3D\" \r\n        }\r\n    ],\r\n    \"squid\": \"<squid_hash>\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"1995ef75ed06f21b514298b31caa8139\",\n            \"created_at\": \"2025-07-07T10:04:54.651445\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.linkedin.com/sales/search/people?query=(spellCorrectionEnabled%3Atrue%2CrecentSearchParam%3A(id%3A3772932001%2CdoLogHistory%3Atrue)%2Cfilters%3AList((type%3ACOMPANY_HEADCOUNT%2Cvalues%3AList((id%3AD%2Ctext%3A51-200%2CselectionType%3AINCLUDED)))%2C(type%3ASENIORITY_LEVEL%2Cvalues%3AList((id%3A300%2Ctext%3AVice%2520President%2CselectionType%3AINCLUDED))))%2Ckeywords%3AJerry%2520from%2520JSL%2520Foods%252C%2520inc.)&sessionId=DlniK9%2BvQfKBJJMOnlV5%2FQ%3D%3D\"\n            },\n            \"module\": 2,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Sales Navigator Leads Scraper (1)\",\r\n  \"no_line_breaks\": true,\r\n  \"accounts\": [\r\n    \"<account_hash>\"\r\n  ],\r\n  \"params\": {\r\n    \"functions\": {\r\n      \"email\": true\r\n    },\r\n    \"max_pages\": 100,\r\n    \"max_results\": null,\r\n    \"profiles_per_page\": 25\r\n  },\r\n  \"to_complete\": false,\r\n  \"export_unique_results\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Sales Navigator Leads Scraper** behaves — including pagination, result limits, and optional email enrichment.\n\n➡️ These parameters are specific to the **Sales Navigator Leads Scraper**. _Refer to the_ [Constructing the <code>params</code> Object](#1cae1d9a-b706-4ec4-8414-b067c60cc8d7) _section to understand how to format and apply them._\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **functions.email** | boolean | If `true`, finds emails using Lobstr.io's enrichment service (incurs extra credits). |\n| **profiles_per_page** | integer | Number of leads to scrape per page. Allowed max: 25. |\n| **max_pages** | integer | Maximum number of pages to crawl. Allowed max: 100. |\n| **max_results** | integer or null | Total number of leads to collect before stopping. `null` means no limit. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Sales Navigator Leads Scraper (1)\",\r\n  \"accounts\": [\r\n    \"<sales_nav_account1_hash>\",\r\n    \"<sales_nav_account2_hash>\"\r\n  ],\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"functions\": {\r\n      \"email\": true\r\n    },\r\n    \"max_pages\": 100,\r\n    \"max_results\": null,\r\n    \"profiles_per_page\": 25\r\n  },\r\n  \"to_complete\": false,\r\n  \"export_unique_results\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"Sales Navigator Leads Scraper (1)\",\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"functions\": {\n      \"email\": true\n    },\n    \"max_pages\": 100,\n    \"max_results\": null,\n    \"profiles_per_page\": 25\n  },\n  \"to_complete\": false,\n  \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Sales Navigator Leads Scraper**.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **api_urn** | string | The LinkedIn API URN identifying this lead record. |\n| **first_name** / **last_name** | string | Lead’s given name and family name. |\n| **full_name** | string | Lead’s full name. |\n| **headline** | string | Lead’s current LinkedIn headline (job title + company). |\n| **position** | string | Lead’s current position title. |\n| **company_name** | string | Name of the company where the lead works. |\n| **company_id** | integer | Internal LinkedIn company ID. |\n| **company_linkedin_url** | string (URL) | URL of the company’s LinkedIn page. |\n| **company_description** | string | Text description of the company. |\n| **company_domain** | string | Company website domain (if available). |\n| **company_employee_count_range** | string | Range label for company size (e.g., “51-200”). |\n| **company_revenue_range** | string | Revenue bracket label (e.g., “10.0 mil USD – 20.0 mil USD”). |\n| **company_created_at** | string (ISO) | When the company was first scraped. |\n| **company_updated_at** | string (ISO) | When the company data was last refreshed. |\n| **location** | string | Lead’s location string (city, state, country). |\n| **connections** | integer | Number of 1st-degree connections the lead has. |\n| **current_job_numbers** | integer | Number of concurrent positions held by the lead. |\n| **seniority** | string | Lead’s seniority level (e.g., “Vice President”). |\n| **started_on** | string (ISO) | When the lead started their current position. |\n| **months_in_position** | integer | Tenure in current role (in months). |\n| **years_in_position** | integer | Tenure in current role (in years). |\n| **email** | string or null | Lead’s email address (if `functions.email = true` and enrichment succeeded). |\n| **functions.email.filling_date** | string | When the email enrichment was performed (`DD/MM/YYYY, HH:mm:ss Z`). |\n| **linkedin_profile_url** | string (URL) | Direct URL to the lead’s public LinkedIn profile. |\n| **sales_navigator_profile_url** | string (URL) | URL to the lead’s Sales Navigator profile page. |\n| **company_profile_picture** | string (URL) | URL of the company’s LinkedIn logo image. |\n| **industry** | string or null | Lead’s industry category. |\n| **match_filters** | boolean | `true` if the lead matched your Sales Navigator filters exactly. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n    \"total_results\": 87,\n    \"limit\": 2,\n    \"page\": 1,\n    \"total_pages\": 44,\n    \"result_from\": 1,\n    \"result_to\": 2,\n    \"data\": [\n        {\n            \"id\": 1287975,\n            \"object\": \"result\",\n            \"squid\": \"25baebaace0143f1bfa185e7541c1d43\",\n            \"run\": \"02a09b072c0447d08cd7b604ebe1d98d\",\n            \"api_urn\": \"ACwAAAMLy3oB_mvmAyf8HrF-__M70NBXhSt1PHw, NAME_SEARCH, fvzZ\",\n            \"awards\": null,\n            \"certifications\": null,\n            \"company_created_at\": \"2025-05-29T15:08:43.770Z\",\n            \"company_description\": \"JSL Foods is a third generation family owned company that is the category leader of fresh, refrigerated, pre-cooked Asian Noodles, Rice Blends and Asian Wrappers (Egg Roll, Won Ton and Gyoza). We produce products under the Fortune and Twin Dragon labels. Fortune Asian Noodle product line consists of Yakisoba, Udon and gluten free Rice Noodles.\",\n            \"company_domain\": \"jslfoods.com\",\n            \"company_employee_count\": null,\n            \"company_employee_count_range\": \"51-200\",\n            \"company_entityurn\": \"urn:li:fs_salesCompany:1006741\",\n            \"company_founded_year\": null,\n            \"company_has_no_domain\": null,\n            \"company_id\": 1006741,\n            \"company_industry\": \"Food and Beverage Manufacturing\",\n            \"company_linkedin_url\": \"https://www.linkedin.com/company/jslfoods/\",\n            \"company_location\": \"United States\",\n            \"company_name\": \"JSL Foods, Inc.\",\n            \"company_phone\": null,\n            \"company_profile_picture\": \"https://media.licdn.com/dms/image/v2/D4E0BAQG573A9JMOKVQ/company-logo_\",\n            \"company_revenue_range\": \"10.0 mil USD - 20.0 mil USD\",\n            \"company_scraping_time\": \"2025-06-10T18:18:13.158Z\",\n            \"company_specialties\": null,\n            \"company_type\": \"Privately Held\",\n            \"company_updated_at\": \"2025-06-10T18:18:13.159Z\",\n            \"connections\": 0,\n            \"current_job_numbers\": 1,\n            \"degree\": \"3rd\",\n            \"educations\": null,\n            \"elapsed\": null,\n            \"email\": null,\n            \"email_bounce_rate\": null,\n            \"email_status\": null,\n            \"email_type\": null,\n            \"first_name\": \"Jerry\",\n            \"full_name\": \"Jerry Kobayashi\",\n            \"functions\": {\n                \"email\": {\n                    \"filling_date\": \"06/20/2025, 12:16:58 +0200\"\n                }\n            },\n            \"headline\": \"Vice President of Operations JSL Foods, Inc.\",\n            \"industry\": null,\n            \"is_open\": false,\n            \"is_premium\": false,\n            \"is_saved\": false,\n            \"job_seeker\": null,\n            \"kaspr_data\": null,\n            \"languages\": null,\n            \"last_name\": \"Kobayashi\",\n            \"last_scraping_time\": null,\n            \"linkedin_profile_url\": \"https://www.linkedin.com/in/ACwAAAMLy3oB_mvmAyf8HrF-__M70NBXhSt1PHw\",\n            \"location\": \"Los Angeles, California, United States\",\n            \"match_filters\": true,\n            \"mobile_phone\": null,\n            \"months_in_company\": 11,\n            \"months_in_position\": 11,\n            \"native_id\": 1287975,\n            \"no_match_reason\": null,\n            \"organizations\": null,\n            \"person_id\": 51104634,\n            \"picture_url\": null,\n            \"position\": \"Vice President of Operations\",\n            \"positions\": null,\n            \"projects\": null,\n            \"publications\": null,\n            \"sales_navigator_profile_url\": \"https://www.linkedin.com/sales/people/ACwAAAMLy3oB_mvmAyf8HrF-__M70NBXhSt1PHw,NAME_SEARCH,fvzZ\",\n            \"scraping_time\": \"2025-06-20T11:47:53.554Z\",\n            \"seniority\": \"Vice President\",\n            \"skills\": null,\n            \"started_on\": \"2013-08-01T00:00:00Z\",\n            \"summary\": \"\",\n            \"volunteerings\": null,\n            \"websites\": null,\n            \"years_in_company\": 11,\n            \"years_in_position\": 11\n        }\n    ],\n    \"next\": \"https://api.lobstr.io/v1/results?squid=d8991f04bffe4741ae8d7806ed0f9faf&run=cd0d66ca56c6416abc291ba33951b129&page_size=2&page=2\",\n    \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

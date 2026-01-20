@@ -1,0 +1,427 @@
+
+{
+	"name": "Run",
+	"item": [
+		{
+			"name": "Get run",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/runs/{{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"runs",
+						"{{run_hash}}"
+					]
+				},
+				"description": "This endpoint retrieves detailed information about a specific run using its hash ID.\n\nThese fields define details related to an individual squid run.\n\n| Name | Type | Description |\n| --- | --- | --- |\n| **id** | String | Unique identifier of the squid run. |\n| **object** | String | Type of returned object (always `run`). |\n| **created_at** | Timestamp | Date and time when the run was initially created. |\n| **started_at** | Timestamp | Date and time when the scraping run started executing. |\n| **next_launch_at** | Timestamp | Scheduled date/time for the next execution (if recurring). |\n| **ended_at** | Timestamp | Date and time when the scraping run completed or stopped. |\n| **duration** | Float | Duration of the scraping run in seconds. |\n| **credit_used** | Float | Total credits consumed during the run. |\n| **origin** | String | Origin of the run initiation (e.g., `user`, `schedule`). |\n| **status** | String | Current status of the squid run (see statuses below). |\n| **export_time** | Timestamp | Date and time when export was generated. |\n| **export_done** | Boolean | Indicates if the export was successfully generated. |\n| **mail_done** | Boolean/Null | Indicates if email notifications have been sent. |\n| **mail_time** | Timestamp | Time when the email notification was sent. |\n| **total_results** | Integer | Total number of results collected. |\n| **total_unique_results** | Integer | Number of unique results collected. |\n| **crawler_id** | String | Identifier of the specific crawler used. |\n| **done_reason** | String | Reason indicating why the run finished (see reasons below). |\n| **done_reason_desc** | String/Null | Additional description providing context for `done_reason`. |\n| **shared** | Boolean | Indicates if the run result is shared publicly. |\n| **squid** | String | Secondary unique identifier linked to the scraping configuration. |\n\nEach run starts with the initial status `PENDING` and goes through one or more transitional statuses before reaching one of the terminal statuses.\n\n## Statuses (`status`):\n\nThe following are the potential statuses a run may have from initiation to completion.\n\n| Status | Phase | Description |\n| --- | --- | --- |\n| **PENDING** | 🕒 Waiting | Run is created and waiting to start execution. |\n| **RUNNING** | 🔄 In Progress | Run is currently collecting data. |\n| **UPLOADING** | 🔄 In Progress | Data collection is complete, now uploading/exporting results. |\n| **PAUSED** | 🕒 Waiting but 🔄 In Progress | Run has been temporarily paused; it can resume or be aborted. |\n| **ABORTED** | ✅ Completed | Run was manually stopped before completion. |\n| **DONE** | ✅ Completed | Run finished all tasks and exported the results successfully. |\n| **ERROR** | 🕒 Waiting or ✅ Completed | Run failed due to an error (if an error is based on user input, it will be considered completed). |\n\nEach run moves through these statuses sequentially based on its execution lifecycle.\n\n## Done Reasons (`done_reason`):\n\nThese reasons indicate why a scraping run concluded, either successfully or unsuccessfully.\n\n| Done Reason | Description |\n| --- | --- |\n| **maintenance_fees_not_paid** | Maintenance fees for this custom module have not been paid. |\n| **deactivated** | Run has been deactivated. |\n| **no_credits_left** | No credits remaining. |\n| **too_many_requests** | Run stopped due to excessive requests. |\n| **checkpoint_reached** | Account is blocked at a checkpoint (manual verification required). |\n| **otp_needed** | OTP verification required; please re-sync accounts. |\n| **batch_wait** | Current batch completed; awaiting timeout. |\n| **no_account_available** | No available accounts; refresh required. _(Account refers to scraper-linked accounts such as Facebook, LinkedIn, Twitter, etc.)_ |\n| **wrong_credentials** | Account credentials invalid. _(Account refers to scraper-linked accounts such as Facebook, LinkedIn, Twitter, etc.)_ |\n| **aborted** | Scraping run manually aborted by user. |\n| **tasks_done** | All assigned tasks completed successfully. |\n| **slots_limit_exceeded** | Scraping slots limit exceeded. |\n| **limit_exceeded** | Scraper-linked account limit exceeded. _(Account refers to scraper-linked accounts such as Facebook, LinkedIn, Twitter, etc.)_ |\n| **cookies_expired** | Scraper-linked account cookies expired; renewal required. _(Account refers to scraper-linked accounts such as Facebook, LinkedIn, Twitter, etc.)_ |\n| **no_accounts** | No scraper-linked accounts available to initiate run. |\n| **last_invoice_not_paid** | Previous invoice payment pending. |\n| **export_fix** | Export regenerated successfully after previous failure. |\n\nEach run concludes with one specific reason, clearly indicating the cause of completion or termination."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/runs/{{run_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"runs",
+								"{{run_hash}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"0393be3ea6f74986906153df1c3f9894\",\n    \"object\": \"run\",\n    \"created_at\": \"2025-02-04T10:26:50.847633\",\n    \"started_at\": \"2025-02-04T10:25:41.623683\",\n    \"next_launch_at\": null,\n    \"ended_at\": \"2025-02-04T10:26:52.222239\",\n    \"duration\": 50.1833,\n    \"credit_used\": 50.1833,\n    \"origin\": \"user\",\n    \"status\": \"aborted\",\n    \"export_time\": \"2025-02-04T10:26:53.780636\",\n    \"export_done\": true,\n    \"mail_done\": null,\n    \"mail_time\": null,\n    \"total_results\": 40,\n    \"total_unique_results\": 40,\n    \"crawler_id\": \"4734d096159ef05210e0e1677e8be823\",\n    \"done_reason\": \"aborted\",\n    \"done_reason_desc\": null,\n    \"shared\": false,\n    \"squid\": \"e445405ef4ab41208ef7d29b92a1a9dd\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List runs",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/runs?squid={{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"runs"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						}
+					]
+				},
+				"description": "This endpoint retrieves a paginated list of all runs for a specific squid."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/runs?squid={{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"runs"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 4,\n    \"limit\": 50,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 5,\n    \"data\": [\n        {\n            \"id\": \"381cfbb47e474782857ddc035298b6f3\",\n            \"object\": \"run\",\n            \"squid\": \"b6c56d18cb0046949461ba9ca278e8ad\",\n            \"is_done\": true,\n            \"started_at\": \"2025-02-04T10:25:13Z\",\n            \"total_results\": 0,\n            \"total_unique_results\": 0,\n            \"next_launch_at\": null,\n            \"ended_at\": \"2025-02-04T10:25:21Z\",\n            \"duration\": 0.0415,\n            \"credit_used\": 0.0415,\n            \"origin\": \"user\",\n            \"force_launch\": false,\n            \"status\": \"done\",\n            \"export_done\": true,\n            \"export_count\": 1,\n            \"export_time\": \"2025-02-04T10:25:25Z\",\n            \"email_done\": null,\n            \"email_time\": null,\n            \"created_at\": \"2025-02-04T10:25:13Z\",\n            \"done_reason\": \"tasks_done\",\n            \"done_reason_desc\": null\n        },\n        {\n            \"id\": \"3aa75b3f05c144f6a87f8397e229024e\",\n            \"object\": \"run\",\n            \"squid\": \"b6c56d18cb0046949461ba9ca278e8ad\",\n            \"is_done\": true,\n            \"started_at\": \"2025-01-29T09:53:27Z\",\n            \"total_results\": 0,\n            \"total_unique_results\": 0,\n            \"next_launch_at\": null,\n            \"ended_at\": \"2025-01-29T09:53:33Z\",\n            \"duration\": 0.0466,\n            \"credit_used\": 0.0466,\n            \"origin\": \"user\",\n            \"force_launch\": false,\n            \"status\": \"done\",\n            \"export_done\": true,\n            \"export_count\": 1,\n            \"export_time\": \"2025-01-29T09:53:37Z\",\n            \"email_done\": null,\n            \"email_time\": null,\n            \"created_at\": \"2025-01-29T09:53:27Z\",\n            \"done_reason\": \"tasks_done\",\n            \"done_reason_desc\": null\n        },\n        {\n            \"id\": \"b6ca585aa07e45a28097ec7b2ee3690f\",\n            \"object\": \"run\",\n            \"squid\": \"b6c56d18cb0046949461ba9ca278e8ad\",\n            \"is_done\": true,\n            \"started_at\": \"2025-01-29T09:52:36Z\",\n            \"total_results\": 1,\n            \"total_unique_results\": 1,\n            \"next_launch_at\": null,\n            \"ended_at\": \"2025-01-29T09:52:45Z\",\n            \"duration\": 3.1849,\n            \"credit_used\": 3.1849,\n            \"origin\": \"user\",\n            \"force_launch\": false,\n            \"status\": \"done\",\n            \"export_done\": true,\n            \"export_count\": 1,\n            \"export_time\": \"2025-01-29T09:52:52Z\",\n            \"email_done\": null,\n            \"email_time\": null,\n            \"created_at\": \"2025-01-29T09:52:36Z\",\n            \"done_reason\": \"tasks_done\",\n            \"done_reason_desc\": null\n        },\n        {\n            \"id\": \"9fdffb349f9f4109861052e3c0ced877\",\n            \"object\": \"run\",\n            \"squid\": \"b6c56d18cb0046949461ba9ca278e8ad\",\n            \"is_done\": true,\n            \"started_at\": \"2025-01-29T09:51:47Z\",\n            \"total_results\": 1,\n            \"total_unique_results\": 1,\n            \"next_launch_at\": null,\n            \"ended_at\": \"2025-01-29T09:51:56Z\",\n            \"duration\": 3.2,\n            \"credit_used\": 3.2,\n            \"origin\": \"user\",\n            \"force_launch\": false,\n            \"status\": \"done\",\n            \"export_done\": true,\n            \"export_count\": 1,\n            \"export_time\": \"2025-01-29T09:51:59Z\",\n            \"email_done\": null,\n            \"email_time\": null,\n            \"created_at\": \"2025-01-29T09:51:47Z\",\n            \"done_reason\": \"tasks_done\",\n            \"done_reason_desc\": null\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Start run",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/runs",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"runs"
+					]
+				},
+				"description": "This endpoint initiates a new run for a specified squid, starting the scraping process for all tasks within that squid."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/runs",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"runs"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"dd3473abe4cb41b683551e851edded94\",\n    \"object\": \"run\",\n    \"squid\": \"b6c56d18cb0046949461ba9ca278e8ad\",\n    \"is_done\": false,\n    \"started_at\": \"2025-02-10T14:27:45Z\",\n    \"total_results\": 0,\n    \"total_unique_results\": 0,\n    \"next_launch_at\": null,\n    \"ended_at\": null,\n    \"duration\": 0,\n    \"credit_used\": 0,\n    \"origin\": \"user\",\n    \"force_launch\": false,\n    \"status\": \"pending\",\n    \"export_done\": null,\n    \"export_count\": 0,\n    \"export_time\": null,\n    \"email_done\": null,\n    \"email_time\": null,\n    \"created_at\": \"2025-02-10T14:27:45Z\",\n    \"done_reason\": null,\n    \"done_reason_desc\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Abort run",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/runs/{{run_hash}}/abort",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"runs",
+						"{{run_hash}}",
+						"abort"
+					]
+				},
+				"description": "This endpoint aborts an active run using its hash ID."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/runs/{{run_hash}}/abort",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"runs",
+								"{{run_hash}}",
+								"abort"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"300e9c5c127d421c90f431478d9a2cfb\",\n    \"object\": \"run\",\n    \"squid\": \"e445405ef4ab41208ef7d29b92a1a9dd\",\n    \"is_done\": true,\n    \"started_at\": \"2025-02-10T14:30:55Z\",\n    \"total_results\": 6,\n    \"total_unique_results\": 6,\n    \"next_launch_at\": null,\n    \"ended_at\": \"2025-02-10T14:31:10Z\",\n    \"duration\": 10.4498,\n    \"credit_used\": 10.4498,\n    \"origin\": \"user\",\n    \"force_launch\": false,\n    \"status\": \"uploading\",\n    \"export_done\": null,\n    \"export_count\": 0,\n    \"export_time\": null,\n    \"email_done\": null,\n    \"email_time\": null,\n    \"created_at\": \"2025-02-10T14:30:55Z\",\n    \"done_reason\": \"aborted\",\n    \"done_reason_desc\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Get run stats",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/runs/{{run_hash}}/stats",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"runs",
+						"{{run_hash}}",
+						"stats"
+					]
+				},
+				"description": "This endpoint retrieves detailed statistics about a specific run using its hash ID."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/runs/{{run_hash}}/stats",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"runs",
+								"{{run_hash}}",
+								"stats"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"300e9c5c127d421c90f431478d9a2cfb\",\n    \"object\": \"run\",\n    \"duration\": \"0:00:15.175532\",\n    \"ended_at\": \"2025-02-10T14:31:10\",\n    \"eta\": \"∞\",\n    \"is_done\": true,\n    \"percent_done\": \"100%\",\n    \"started_at\": \"2025-02-10T14:30:55\",\n    \"total_requests\": null,\n    \"total_results\": 6,\n    \"total_tasks\": 0,\n    \"total_tasks_done\": 0,\n    \"total_tasks_left\": 0,\n    \"current_task\": \"\",\n    \"results_total\": 138,\n    \"results_done\": 6,\n    \"updated_at\": \"2025-02-10T14:31:10\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get run tasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/runtasks?run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"runtasks"
+					],
+					"query": [
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "This endpoint retrieves a paginated list of all tasks executed within a specific run."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/runtasks?run={{run_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"runtasks"
+							],
+							"query": [
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 1,\n    \"limit\": 50,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 2,\n    \"data\": [\n        {\n            \"object\": \"runtask\",\n            \"id\": \"1262f6f99dac7dffb05a513fff0ded77\",\n            \"started_at\": \"2025-02-10T14:30:58Z\",\n            \"ended_at\": \"2025-02-10T14:31:10Z\",\n            \"total_results\": 138,\n            \"last_result\": 6,\n            \"total_pages\": 1,\n            \"done_reason\": \"run_aborted\",\n            \"last_page\": 0,\n            \"status\": \"aborted\",\n            \"run\": \"300e9c5c127d421c90f431478d9a2cfb\",\n            \"task\": \"d30334cd8d21ab16048c5e2e7136a9f1\",\n            \"params\": {\n                \"url\": \"https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,17z\"\n            },\n            \"last_collection_at\": \"2025-02-10T14:31:10Z\",\n            \"done_reason_desc\": null\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Download run",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/runs/{{run_hash}}/download",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"runs",
+						"{{run_hash}}",
+						"download"
+					]
+				},
+				"description": "This endpoint generates a temporary download URL for the results of a specific run."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/runs/{{run_hash}}/download",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"runs",
+								"{{run_hash}}",
+								"download"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"s3\": \"https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/lobstrc106a44a98044ef18acc59986ae10967/eebce7802e7740979a0b8450de10c99e.csv.csv?response-content-disposition=attachment%3B%20filename%3Dmy-cool-squid_20250305_0927.csv&AWSAccessKeyId=AKIA3X7XNQGAHJ4R5SEQ&Signature=9CB7fDmysbdySN9a%2F7b9DDa6zhg%3D&Expires=1741771664\"\n}"
+				}
+			]
+		}
+	],
+	"description": "The execution instance of a squid's tasks at a specific time. Tracks the progress, status, and results of tasks being processed during a particular execution window."
+}

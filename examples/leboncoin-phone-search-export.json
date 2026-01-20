@@ -1,0 +1,228 @@
+{
+	"name": "Leboncoin Listings & Phone Search Export",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"bbeff62182c6239a8df533ec9d281c2e\",\n            \"created_at\": \"2025-07-04T04:57:45.202264\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2\"\n            },\n            \"module\": 103,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Leboncoin Listings & Phone Search Export (1)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n      \"max_date\": null,\r\n      \"functions\": {\r\n        \"phone\": true\r\n      },\r\n      \"max_pages\": 99,\r\n      \"hours_back\": null,\r\n      \"max_results\": null,\r\n      \"online_shop\": true\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Leboncoin Listings & Phone Search Export** crawler behaves. Most parameters are shared with the [Leboncoin Listings Search Export](#6a9e6eb1-3b5c-494e-9cdb-b10aebc8d1f2) crawler, see that section for common settings.\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **functions.phone** | boolean | If `true`, visits each listing to extract phone numbers (incurs extra credits). |\n\n---\n\n### ⚠️ **Additional Notes**\n\n- Enabling **functions.phone** adds extra requests per listing, increasing run time and credit usage."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Leboncoin Listings & Phone Search Export (1)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n      \"max_date\": null,\r\n      \"functions\": {\r\n        \"phone\": true\r\n      },\r\n      \"max_pages\": 99,\r\n      \"hours_back\": null,\r\n      \"max_results\": null,\r\n      \"online_shop\": true\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"name\": \"Leboncoin Listings & Phone Search Export (1)\",\n    \"no_line_breaks\": true,\n    \"params\": {\n        \"max_date\": null,\n        \"functions\": {\n            \"phone\": true\n        },\n        \"max_pages\": 99,\n        \"hours_back\": null,\n        \"max_results\": null,\n        \"online_shop\": true\n    },\n    \"to_complete\": false,\n    \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are identical to those of [Leboncoin Listings Search Export](#6a9e6eb1-3b5c-494e-9cdb-b10aebc8d1f2)\n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}&page_size=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n    \"total_results\": 87,\n    \"limit\": 2,\n    \"page\": 1,\n    \"total_pages\": 44,\n    \"result_from\": 1,\n    \"result_to\": 2,\n    \"data\": [\n        {\n            \"id\": 48424500,\n            \"object\": \"result\",\n            \"squid\": \"d8991f04bffe4741ae8d7806ed0f9faf\",\n            \"run\": \"cd0d66ca56c6416abc291ba33951b129\",\n            \"DPE\": \"d\",\n            \"DPE_int\": null,\n            \"DPE_string\": \"D\",\n            \"GES\": \"b\",\n            \"GES_int\": null,\n            \"GES_string\": \"B\",\n            \"ad_type\": \"offer\",\n            \"annonce_id\": \"2945172977\",\n            \"api_key\": \"54bb0281238b45a03f0ee695f73e704f\",\n            \"area\": 88,\n            \"booster\": false,\n            \"capacity\": null,\n            \"category_name\": \"Locations\",\n            \"charges_included\": true,\n            \"city\": \"Lyon\",\n            \"city_label\": \"Lyon 69003\",\n            \"continuous_top_ads\": false,\n            \"currency\": \"EUR\",\n            \"custom_ref\": null,\n            \"department\": \"Rhône\",\n            \"description\": \"Appartement 3 pièces 88 m²\\n\\nExclusivité ...Venez découvrir ce T3 meublé de 88 M2 idéalement plaçé à LYON 69003 au 4éme étage avec ascenseur.Prestations de qualité avec un hall d 'entrée , une cuisine séparée équipée avec balcon au calme sur cour , deux chambres expo est , une sdb et un wc séparé.Un séjour spacieux avec balcon expo ouest sans vis à vis direct , une grande buanderie avec lave et sèche linge et espace repassage.Disponible .\\n Double vitrage, sol marbre ,fibre ,chauffage collectif au sol et eau froide dans les charges.Un grand garage box fermé pour 150EUR par mois au sous sol en supplément.Contact:bruno PERBET [Coordonnées masquées] / [Coordonnées masquées]\\n\\nSurface : 88 m²\\nLoyer : 1810 € / mois (charges comprises)\\nMontant des charges : 200 € / mois\\nModalité de récupération des charges locatives : Prévisionnelles mensuelles avec régularisation annuelle\\nHonoraires à la charge du locataire : 1144 € dont 264 € pour l’état des lieux\\nDépôt de garantie : 3520 €\\nComplément de loyer : 123 € / mois (inclus dans le loyer CC)\\nDate de réalisation du diagnostic énergétique : 22/06/2021\\n\\nConsommation énergie primaire : 200 kWh/m²/an\\nConsommation énergie finale : 0 kWh/m²/an\\n\\nMontant estimé des dépenses annuelles d'énergie pour un usage standard : entre 810 € et 1 100 € par an. Prix moyens des énergies indexés sur l'année Non communiqué (abonnements compris)\\n\\nZone soumise à encadrement des loyers.\\nLoyer de base : 1241 €.\\nLoyer de référence majoré (loyer de base à ne pas dépasser) : 1487 €.\",\n            \"detailed_time\": null,\n            \"details\": {\n                \"GES\": \"B\",\n                \"Ascenseur\": \"Oui\",\n                \"Extérieur\": \"Balcon\",\n                \"Honoraires\": \"1144\",\n                \"Référence\": \"PBLAP330004876\",\n                \"Type de bien\": \"Appartement\",\n                \"Ce bien est :\": \"Meublé\",\n                \"État du bien\": \"Bon état\",\n                \"Classe énergie\": \"D\",\n                \"Charges incluses\": \"Oui\",\n                \"Caractéristiques\": \"Cuisine équipée\",\n                \"Charges locatives\": \"200 €\",\n                \"Mode de chauffage\": \"Electrique\",\n                \"Nombre de pièces\": \"3\",\n                \"Surface habitable\": \"88 m²\",\n                \"Type de chauffage\": \"Collectif\",\n                \"Nombre de chambres\": \"2 ch.\",\n                \"Dépôt de garantie\": \"3520 €\",\n                \"Complément de loyer\": \"123 €\",\n                \"Étage de votre bien\": \"4\",\n                \"Année de construction\": \"1992\",\n                \"Disponible à partir de\": \"03/2025\",\n                \"Frais d'état des lieux\": \"264 €\",\n                \"Étage de l'appartement\": null,\n                \"Nombre de salles de bain\": \"1\",\n                \"Loyer de référence majoré\": \"1487 €\",\n                \"Loyer mensuel (hors charges)\": \"1241\",\n                \"Nombre d’étages dans l’immeuble\": \"9\",\n                \"Bien soumis à l'encadrement des loyers\": \"Oui\"\n            },\n            \"district\": null,\n            \"expiration_date\": null,\n            \"first_publication_date\": \"2025-03-01T09:32:00Z\",\n            \"floor\": null,\n            \"functions\": {\n                \"phone\": {\n                    \"filling_date\": \"07/04/2025, 06:16:21 +0200\"\n                }\n            },\n            \"furnished\": true,\n            \"gallery\": false,\n            \"has_online_shop\": false,\n            \"has_option\": false,\n            \"has_phone\": true,\n            \"has_swimming_pool\": null,\n            \"is_active\": null,\n            \"is_boosted\": true,\n            \"is_deactivated\": null,\n            \"is_detailed\": null,\n            \"is_exclusive\": null,\n            \"is_mobile\": false,\n            \"land_plot_area\": null,\n            \"last_publication_date\": \"2025-07-03T14:45:03Z\",\n            \"lat\": \"45.76326\",\n            \"lng\": \"4.84959\",\n            \"mail\": null,\n            \"more_details\": {\n                \"ges\": \"B\",\n                \"rooms\": \"3\",\n                \"square\": \"88 m²\",\n                \"bedrooms\": \"2 ch.\",\n                \"elevator\": \"Oui\",\n                \"furnished\": \"Meublé\",\n                \"is_import\": \"true\",\n                \"custom_ref\": \"PBLAP330004876\",\n                \"lease_type\": \"rent\",\n                \"store_logo\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/61/d1/d7/61d1d726-ca70-4faa-bba3-5929753526e8?rule=bo-thumb\",\n                \"store_name\": \"VMA IMMO\",\n                \"district_id\": \"3000412\",\n                \"energy_rate\": \"D\",\n                \"rental_fees\": \"1144\",\n                \"floor_number\": \"4\",\n                \"heating_mode\": \"Electrique\",\n                \"heating_type\": \"Collectif\",\n                \"mandate_type\": \"simple\",\n                \"nb_bathrooms\": \"1\",\n                \"building_year\": \"1992\",\n                \"specificities\": \"Cuisine équipée\",\n                \"available_date\": \"03/2025\",\n                \"external_ad_id\": \"laboiteimmo_16478_4876\",\n                \"floor_property\": \"\",\n                \"inventory_fees\": \"264 €\",\n                \"outside_access\": \"Balcon\",\n                \"pro_rates_link\": \"https://www.vma-immo.com/i/redac/honoraires?honofor=1\",\n                \"activity_sector\": \"2\",\n                \"monthly_charges\": \"200 €\",\n                \"online_store_id\": \"38794\",\n                \"rent_supplement\": \"123 €\",\n                \"charges_included\": \"Oui\",\n                \"district_type_id\": \"9\",\n                \"global_condition\": \"Bon état\",\n                \"real_estate_type\": \"Appartement\",\n                \"security_deposit\": \"3520 €\",\n                \"nb_floors_building\": \"9\",\n                \"district_visibility\": \"true\",\n                \"has_visibility_option\": \"true\",\n                \"is_public_rent_control\": \"Oui\",\n                \"rent_excluding_charges\": \"1241\",\n                \"district_resolution_type\": \"integration_flux\",\n                \"rent_control_inflated_price\": \"1487 €\"\n            },\n            \"native_id\": 48424500,\n            \"no_salesmen\": false,\n            \"online_shop_url\": null,\n            \"owner_name\": \"VMA IMMO\",\n            \"owner_siren\": \"533819413\",\n            \"owner_store_id\": \"15611964\",\n            \"owner_type\": \"1\",\n            \"phone\": \"+33486259896\",\n            \"phone_from_user\": null,\n            \"photosup\": false,\n            \"picture\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/42/f1/10/42f110e0cee942594c917b37b12a82b8ea99729e.jpg?rule=ad-large\",\n            \"pictures\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/42/f1/10/42f110e0cee942594c917b37b12a82b8ea99729e.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/ed/2e/23/ed2e234b5b96433d65bad228dd75f5a21cf454b1.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/ac/9b/00/ac9b00106feb50127441ea60782c13b0de873d34.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/5f/25/f8/5f25f85970f994fa072467230a68a1a2f11a82f5.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/da/75/bd/da75bde657b1c268d038e87d48e912295b7ae411.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/81/f2/f1/81f2f1510345550a6950bfbbb3b01f30aebb6562.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/eb/e2/d4/ebe2d47163085a8bd8acd2b5580c7b3ca708e49f.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/e0/3a/65/e03a65748061d4ae2783026aa4c4b247c28d2938.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/41/fb/df/41fbdf5cdfdc8cf96755cb24c9c04fc631a02441.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/de/e6/8b/dee68b0feb265aa7d38a267ae2e8d7611781f90b.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/ed/0b/14/ed0b146ca399f947a9d73cbdb7d983eb2eaa9259.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/dd/1a/53/dd1a53d1eeb3736233dd1d2cd9f9900d9c553c9d.jpg?rule=ad-large\",\n            \"postal_code\": \"69003\",\n            \"price\": 1810,\n            \"price_per_square_meter\": null,\n            \"real_estate_type\": \"Appartement\",\n            \"ref\": null,\n            \"region\": \"Rhône-Alpes\",\n            \"room_count\": 3,\n            \"scraping_time\": \"2025-07-04T04:16:21.042Z\",\n            \"sleepingroom_count\": null,\n            \"source\": \"city\",\n            \"square_metter_price\": null,\n            \"status_code\": null,\n            \"sub_toplist\": false,\n            \"title\": \"Appartement 3 pièces 88 m²\",\n            \"urgent\": false,\n            \"url\": \"https://www.leboncoin.fr/ad/locations/2945172977\",\n            \"user_id\": \"901ba0c7-d1f2-4654-8aff-a6d599f4847f\"\n        },\n        {\n            \"id\": 48727392,\n            \"object\": \"result\",\n            \"squid\": \"d8991f04bffe4741ae8d7806ed0f9faf\",\n            \"run\": \"cd0d66ca56c6416abc291ba33951b129\",\n            \"DPE\": \"d\",\n            \"DPE_int\": null,\n            \"DPE_string\": \"D\",\n            \"GES\": \"g\",\n            \"GES_int\": null,\n            \"GES_string\": \"G\",\n            \"ad_type\": \"offer\",\n            \"annonce_id\": \"2943221394\",\n            \"api_key\": \"54bb0281238b45a03f0ee695f73e704f\",\n            \"area\": 67,\n            \"booster\": false,\n            \"capacity\": null,\n            \"category_name\": \"Locations\",\n            \"charges_included\": true,\n            \"city\": \"Lyon\",\n            \"city_label\": \"Lyon 69007\",\n            \"continuous_top_ads\": false,\n            \"currency\": \"EUR\",\n            \"custom_ref\": null,\n            \"department\": \"Rhône\",\n            \"description\": \"Appartement Lyon 3 pièces 67.03 m2\\n\\nSAXE-GAMBETTA - Bel appartement T3 MEUBLE de 67m2 au 1er étage avec ascenseur, comprenant un hall d'entrée avec rangements, une spécieuse pièce de vie avec cuisine aménagée, 2 grandes chambres, ainsi que 2 salles d'eau avec WC. Appartement situé dans une résidence avec services : accueil, restaurant avec belles terrasses extérieures, service de sécurité et permanence 24h/24. Une cave complète ce bien. Garage possible dans la résidence en supplément pour 100/mois. Indice de performance énergétique : D Libre de suite. Loyer avec charges : 1.590   Dépôt de garantie : 1.590 . Honoraires d'agence : 871 .\\nRéférence annonce : KVLV-Y3L-37G\\nDate de réalisation du diagnostic : 03/02/2020\\nDépôt de garantie : 1590 €\\nMontant des charges : 900 € / mois\",\n            \"detailed_time\": null,\n            \"details\": {\n                \"GES\": \"G\",\n                \"Ascenseur\": \"Oui\",\n                \"Référence\": \"KVLV-Y3L-37G\",\n                \"Type de bien\": \"Appartement\",\n                \"Ce bien est :\": \"Meublé\",\n                \"Classe énergie\": \"D\",\n                \"Charges incluses\": \"Oui\",\n                \"Caractéristiques\": \"Avec garage ou place de parking, Plusieurs toilettes\",\n                \"Charges locatives\": \"900 €\",\n                \"Mode de chauffage\": \"Electrique\",\n                \"Nombre de pièces\": \"3\",\n                \"Places de parking\": \"1\",\n                \"Surface habitable\": \"67 m²\",\n                \"Type de chauffage\": \"Individuel\",\n                \"Nombre de chambres\": \"2 ch.\",\n                \"Dépôt de garantie\": \"1590 €\",\n                \"Étage de votre bien\": \"1\",\n                \"Nombre de salles d'eau\": \"2\",\n                \"Disponible à partir de\": \"19/03/2025\",\n                \"Frais d'état des lieux\": \"201 €\",\n                \"Loyer de référence majoré\": \"1032 €\",\n                \"Loyer mensuel (hors charges)\": \"690\"\n            },\n            \"district\": null,\n            \"expiration_date\": null,\n            \"first_publication_date\": \"2025-02-25T07:46:00Z\",\n            \"floor\": null,\n            \"functions\": {\n                \"phone\": {\n                    \"filling_date\": \"07/04/2025, 06:32:52 +0200\"\n                }\n            },\n            \"furnished\": true,\n            \"gallery\": false,\n            \"has_online_shop\": false,\n            \"has_option\": false,\n            \"has_phone\": true,\n            \"has_swimming_pool\": null,\n            \"is_active\": null,\n            \"is_boosted\": false,\n            \"is_deactivated\": null,\n            \"is_detailed\": null,\n            \"is_exclusive\": null,\n            \"is_mobile\": false,\n            \"land_plot_area\": null,\n            \"last_publication_date\": \"2025-07-02T19:35:04Z\",\n            \"lat\": \"45.75309\",\n            \"lng\": \"4.84514\",\n            \"mail\": null,\n            \"more_details\": {\n                \"ges\": \"G\",\n                \"rooms\": \"3\",\n                \"square\": \"67 m²\",\n                \"bedrooms\": \"2 ch.\",\n                \"elevator\": \"Oui\",\n                \"furnished\": \"Meublé\",\n                \"is_import\": \"true\",\n                \"old_price\": \"1690\",\n                \"custom_ref\": \"KVLV-Y3L-37G\",\n                \"lease_type\": \"rent\",\n                \"district_id\": \"3000406\",\n                \"energy_rate\": \"D\",\n                \"nb_parkings\": \"1\",\n                \"floor_number\": \"1\",\n                \"heating_mode\": \"Electrique\",\n                \"heating_type\": \"Individuel\",\n                \"mandate_type\": \"exclusive\",\n                \"specificities\": \"Avec garage ou place de parking, Plusieurs toilettes\",\n                \"available_date\": \"19/03/2025\",\n                \"external_ad_id\": \"ubiflow_ACCPI528231_460144280\",\n                \"inventory_fees\": \"201 €\",\n                \"nb_shower_room\": \"2\",\n                \"pro_rates_link\": \"https://telemaque.orpi.coop/agence/232/bareme.pdf\",\n                \"activity_sector\": \"2\",\n                \"monthly_charges\": \"900 €\",\n                \"charges_included\": \"Oui\",\n                \"district_type_id\": \"9\",\n                \"real_estate_type\": \"Appartement\",\n                \"security_deposit\": \"1590 €\",\n                \"district_visibility\": \"true\",\n                \"rent_excluding_charges\": \"690\",\n                \"district_resolution_type\": \"integration\",\n                \"rent_control_inflated_price\": \"1032 €\"\n            },\n            \"native_id\": 48727392,\n            \"no_salesmen\": false,\n            \"online_shop_url\": null,\n            \"owner_name\": \"Immo Du Quai Gestion\",\n            \"owner_siren\": \"520267733\",\n            \"owner_store_id\": \"7866232\",\n            \"owner_type\": \"1\",\n            \"phone\": \"0487743100\",\n            \"phone_from_user\": null,\n            \"photosup\": false,\n            \"picture\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/dd/e9/89/dde98921a6d101543d3f19a4ca206c1693860dbd.jpg?rule=ad-large\",\n            \"pictures\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/dd/e9/89/dde98921a6d101543d3f19a4ca206c1693860dbd.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/30/c7/26/30c726cd40de73c69a41a2091b254ce304753993.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/e6/4e/51/e64e516103dd1c682dcb83db4a59f57f198aca18.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/14/6b/1b/146b1bca20d501bd714b3599ed31ef8ba7413fa4.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/22/9b/d6/229bd635a8df9cca10a299c1784166e3e9aa53c7.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/ee/a5/ac/eea5ac7221bea7fabefad7329c1fd84f4ef0051a.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/5b/a4/58/5ba458e52daaa5ea1eb515a5a3cb54555430d8bc.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/74/be/d6/74bed6fb7b755dbb611925c0872e6e2049fa0cd7.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/fb/15/56/fb155683a5fdea5fa229fccebe2f4872a38a7149.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/5b/96/dc/5b96dc813677c3f06fb9606ec15a918a16cb2068.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/84/fc/a2/84fca2c309f354104a728fbc9e03a19dabc6bf5a.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/f1/07/db/f107dba7e1ad67fa84b17d13e37736295f56dedb.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/50/ad/b0/50adb07e78ac55ee3b5e188a4c02bd85abad361a.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/53/ed/ab/53edabc0b2354b707469b86d74942542120b4eef.jpg?rule=ad-large\",\n            \"postal_code\": \"69007\",\n            \"price\": 1590,\n            \"price_per_square_meter\": null,\n            \"real_estate_type\": \"Appartement\",\n            \"ref\": null,\n            \"region\": \"Rhône-Alpes\",\n            \"room_count\": 3,\n            \"scraping_time\": \"2025-07-04T04:32:52.681Z\",\n            \"sleepingroom_count\": null,\n            \"source\": \"city\",\n            \"square_metter_price\": null,\n            \"status_code\": null,\n            \"sub_toplist\": false,\n            \"title\": \"Appartement 3 pièces 67 m²\",\n            \"urgent\": false,\n            \"url\": \"https://www.leboncoin.fr/ad/locations/2943221394\",\n            \"user_id\": \"d018cd4c-8e65-4ce0-b2de-3a68f23bddb1\"\n        }\n    ],\n    \"next\": \"https://api.lobstr.io/v1/results?squid=d8991f04bffe4741ae8d7806ed0f9faf&run=cd0d66ca56c6416abc291ba33951b129&page_size=2&page=2\",\n    \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

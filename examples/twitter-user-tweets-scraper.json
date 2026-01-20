@@ -1,0 +1,227 @@
+
+{
+	"name": "Twitter User Tweets Scraper",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"tasks\": [\r\n{\r\n\"screen_name\": \"elonmusk\" \r\n}\r\n],\r\n\"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"tasks\": [\r\n{\r\n\"screen_name\": \"elonmusk\" \r\n}\r\n],\r\n\"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n\"duplicated_count\": 0,\n\"tasks\": [\n{\n\"id\": \"dea6b229a9cf67cc5363dfe6062b63ba\",\n\"created_at\": \"2025-07-07T09:36:01.623358\",\n\"is_active\": true,\n\"params\": {\n\"username\": \"elonmusk\"\n},\n\"module\": 127,\n\"object\": \"task\"\n}\n]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Twitter User Tweets Scraper (2)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n\"json\": true,\r\n\"hours_back\": null,\r\n\"max_results\": 98,\r\n\"exclude_reposts\": true,\r\n\"collect_pinned_tweets\": true\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Twitter Profile Scraper** behaves — specifically whether to return parsed fields or the raw API response.\n\n➡️ These parameters are specific to the **Twitter Profile Scraper**. _Refer to the_ [Constructing the `params` Object](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter | Type| Description|\n| --------- | ------- | -------------------------------------------------------------------------------------------------------- |\n| **json**  | boolean | If `true`, returns the complete raw JSON payload for the user profile, before any internal data parsing. |\n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Twitter User Tweets Scraper (2)\",\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n\"json\": true,\r\n\"hours_back\": null,\r\n\"max_results\": 98,\r\n\"exclude_reposts\": true,\r\n\"collect_pinned_tweets\": true\r\n  },\r\n  \"to_complete\": false,\r\n  \"export_unique_results\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"Twitter User Tweets Scraper (2)\",\n  \"no_line_breaks\": true,\n  \"params\": {\n\"json\": true,\n\"hours_back\": null,\n\"max_results\": 98,\n\"exclude_reposts\": true,\n\"collect_pinned_tweets\": true\n  },\n  \"to_complete\": false,\n  \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects extend those from the [Twitter Profile Scraper](#eedf17a4-eedf-477d-ba15-93e11a9ab4ac) with tweet-specific fields:\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **content** | string | Full text of the tweet. |\n| **_json** | object | Raw JSON payload for the tweet, before any parsing. |\n| **published_at** | string (ISO) | When the tweet was originally posted. |\n| **scraping_time** | string (ISO) | When this tweet was fetched by the scraper. |\n| **tweet_url** | string | Direct URL to the tweet on Twitter. |\n| **original_tweet_id** | string | ID of the quoted tweet, if this is a quote. |\n| **original_tweet_url** | string | URL of the quoted tweet, if applicable. |\n| **likes** | integer | Number of likes (favorites) the tweet has received. |\n| **retweet_count** | integer | Number of times the tweet was retweeted. |\n| **reply_count** | integer | Number of replies to the tweet. |\n| **quote_count** | integer | Number of quote-tweets. |\n| **bookmarks_count** | integer | Number of times the tweet was bookmarked. |\n| **views_count** | integer | Impressions or view count for the tweet. |\n| **is_retweeted** | boolean | `true` if this record represents a retweet. |\n| **is_quoted** | boolean | `true` if this record represents a quote-tweet. |\n| **is_pinned** | boolean | `true` if this tweet is pinned on the user’s profile. |\n| **in_reply_to_status_id_str** | string or null | Tweet ID that this tweet replies to, if any. |\n| **in_reply_to_user_id_str** | string or null | User ID of the tweet this one replies to. |\n| **in_reply_to_screen_name** | string or null | Screen name of the tweet this one replies to. |\n| **media_0_url**, **media_1_url**, … | string or null | URLs of attached media items (images, videos), if any. |\n| **binded_media_title**, **binded_media_domain**, **binded_media_thumbnail_url**, etc. | string or null | Data about any Twitter Card or embedded media (card title, domain, thumbnail, link). |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n\"total_results\": 1,\n\"limit\": 10,\n\"page\": 1,\n\"total_pages\": 1,\n\"result_from\": 1,\n\"result_to\": 1,\n\"data\": [\n{\n\"id\": 1683460,\n\"object\": \"result\",\n\"squid\": \"fcd3fff4053e444b8a98b3660bee8b03\",\n\"run\": \"a425bfbc7a924814b9234da3dbe07d16\",\n\"_json\": {\n\"core\": {\n\"user_results\": {\n\"result\": {\n  \"id\": \"VXNlcjo4ODA0MTI1Mzg2MjU4MTA0MzI=\",\n  \"legacy\": {\n\"name\": \"Bill Ackman\",\n\"can_dm\": false,\n\"entities\": {\n\"description\": {\n\"urls\": []\n}\n},\n\"location\": \"New York, NY\",\n\"verified\": false,\n\"created_at\": \"Thu Jun 29 13:08:01 +0000 2017\",\n\"description\": \"CEO Pershing Square, Co-trustee @PershingSqFdn\",\n\"media_count\": 102,\n\"screen_name\": \"BillAckman\",\n\"listed_count\": 9799,\n\"can_media_tag\": true,\n\"friends_count\": 984,\n\"is_translator\": false,\n\"want_retweets\": false,\n\"statuses_count\": 11304,\n\"default_profile\": true,\n\"followers_count\": 1810546,\n\"translator_type\": \"none\",\n\"favourites_count\": 11355,\n\"possibly_sensitive\": false,\n\"fast_followers_count\": 0,\n\"has_custom_timelines\": true,\n\"pinned_tweet_ids_str\": [\n\"1941835114532462650\"\n],\n\"default_profile_image\": false,\n\"withheld_in_countries\": [],\n\"normal_followers_count\": 1810546,\n\"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1619837521059348481/9UeNLFmD_normal.jpg\",\n\"profile_interstitial_type\": \"\"\n  },\n  \"rest_id\": \"880412538625810432\",\n  \"__typename\": \"User\",\n  \"professional\": {\n\"rest_id\": \"1553714844238479361\",\n\"category\": [],\n\"professional_type\": \"Creator\"\n  },\n  \"is_blue_verified\": true,\n  \"profile_image_shape\": \"Circle\",\n  \"has_graduated_access\": true,\n  \"affiliates_highlighted_label\": {\n\"label\": {\n\"url\": {\n\"url\": \"https://twitter.com/PershingSqFdn\",\n\"urlType\": \"DeepLink\"\n},\n\"badge\": {\n\"url\": \"https://pbs.twimg.com/profile_images/1882511250166353920/XPTIUaEy_bigger.jpg\"\n},\n\"description\": \"Pershing Square Philanthropies\",\n\"userLabelType\": \"BusinessLabel\",\n\"userLabelDisplayType\": \"Badge\"\n}\n  }\n}\n}\n},\n\"views\": {\n\"count\": \"957276\",\n\"state\": \"EnabledWithCount\"\n},\n\"legacy\": {\n\"lang\": \"en\",\n\"id_str\": \"1941835114532462650\",\n\"entities\": {\n\"urls\": [],\n\"symbols\": [],\n\"hashtags\": [],\n\"timestamps\": [],\n\"user_mentions\": [\n  {\n\"name\": \"Ayaan Hirsi Ali\",\n\"id_str\": \"15912890\",\n\"indices\": [\n36,\n42\n],\n\"screen_name\": \"Ayaan\"\n  },\n  {\n\"name\": \"Zohran Kwame Mamdani\",\n\"id_str\": \"266980765\",\n\"indices\": [\n254,\n269\n],\n\"screen_name\": \"ZohranKMamdani\"\n  }\n]\n},\n\"favorited\": false,\n\"full_text\": \"This is a superb must-read piece by @Ayaan that explains the transformation of our universities from institutions that seek to educate the next generation of leaders to advance society, to ideological indoctrination institutes that graduate the likes of @ZohranKMamdani.  \\n\\nIf you\",\n\"retweeted\": false,\n\"bookmarked\": false,\n\"created_at\": \"Sun Jul 06 12:22:23 +0000 2025\",\n\"quote_count\": 105,\n\"reply_count\": 603,\n\"user_id_str\": \"880412538625810432\",\n\"retweet_count\": 2504,\n\"bookmark_count\": 1983,\n\"favorite_count\": 10507,\n\"is_quote_status\": true,\n\"display_text_range\": [\n0,\n280\n],\n\"conversation_id_str\": \"1941835114532462650\",\n\"quoted_status_id_str\": \"1941821990253244437\",\n\"quoted_status_permalink\": {\n\"url\": \"https://t.co/f9vwBiWLlL\",\n\"display\": \"x.com/ayaan/status/1…\",\n\"expanded\": \"https://twitter.com/ayaan/status/1941821990253244437\"\n}\n},\n\"source\": \"<a href=\\\"http://twitter.com/download/iphone\\\" rel=\\\"nofollow\\\">Twitter for iPhone</a>\",\n\"rest_id\": \"1941835114532462650\",\n\"__typename\": \"Tweet\",\n\"note_tweet\": {\n\"is_expandable\": true,\n\"note_tweet_results\": {\n\"result\": {\n  \"id\": \"Tm90ZVR3ZWV0OjE5NDE4MzUxMTQzMjI3OTI0NDk=\",\n  \"text\": \"This is a superb must-read piece by @Ayaan that explains the transformation of our universities from institutions that seek to educate the next generation of leaders to advance society, to ideological indoctrination institutes that graduate the likes of @ZohranKMamdani.  \\n\\nIf you wonder why American taxpayers question why their funds should go to these universities, read this piece and it will be abundantly clear. \\n\\nThe problems at universities are principally in the ‘studies’ degrees, but federal funding is being withdrawn from the STEM departments. (This is because the studies’ degree programs don’t qualify for much federal funding).\\n\\nOur government is withdrawing funding  from @Harvard, @Columbia and other problematic universities because money is fungible, and sending taxpayer money to institutions educating the future enemies of our country is contrary to the interests of our nation. \\n\\nA potential solution to this problem is for universities to spinoff their science and other STEM departments that receive federal funding into new independent entities that are independently financed and governed. This approach will also have the beneficial effect of helping them increase donations from alumni and others who want their funds directed to programs that advance society’s interests rather than siphoned off to other areas that the donors did not intend to support. The risk of Federal funding and charitable donation ‘overhead allocations’ being misused and/or misdirected will be largely eliminated.  \\n\\nBy separating STEM into separate universities, the studies degree programs will also have to be sustained with independent funding, which will increase scrutiny of these departments and their activities.  Closer scrutiny by alumni and other outside observers of these program areas will help balance the anti-American radicalism that has emerged in these departments.\",\n  \"entity_set\": {\n\"urls\": [],\n\"symbols\": [],\n\"hashtags\": [],\n\"user_mentions\": [\n{\n\"name\": \"Ayaan Hirsi Ali\",\n\"id_str\": \"15912890\",\n\"indices\": [\n36,\n42\n],\n\"screen_name\": \"Ayaan\"\n},\n{\n\"name\": \"Zohran Kwame Mamdani\",\n\"id_str\": \"266980765\",\n\"indices\": [\n254,\n269\n],\n\"screen_name\": \"ZohranKMamdani\"\n},\n{\n\"name\": \"Harvard University\",\n\"id_str\": \"39585367\",\n\"indices\": [\n689,\n697\n],\n\"screen_name\": \"Harvard\"\n},\n{\n\"name\": \"Columbia University\",\n\"id_str\": \"248795646\",\n\"indices\": [\n699,\n708\n],\n\"screen_name\": \"Columbia\"\n}\n]\n  }\n}\n}\n},\n\"edit_control\": {\n\"edit_tweet_ids\": [\n\"1941835114532462650\"\n],\n\"edits_remaining\": \"5\",\n\"is_edit_eligible\": true,\n\"editable_until_msecs\": \"1751808143000\"\n},\n\"socialContext\": {\n\"text\": \"Pinned\",\n\"type\": \"TimelineGeneralContext\",\n\"contextType\": \"Pin\"\n},\n\"unmention_data\": {},\n\"is_translatable\": false,\n\"quoted_status_result\": {\n\"result\": {\n\"card\": {\n  \"legacy\": {\n\"url\": \"https://t.co/49x6Fx4Bco\",\n\"name\": \"summary_large_image\",\n\"card_platform\": {\n\"platform\": {\n\"device\": {\n\"name\": \"Swift\",\n\"version\": \"12\"\n},\n\"audience\": {\n\"name\": \"production\"\n}\n}\n},\n\"binding_values\": [\n{\n\"key\": \"photo_image_full_size_large\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=800x419\",\n  \"width\": 800,\n  \"height\": 419\n}\n}\n},\n{\n\"key\": \"thumbnail_image\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=280x150\",\n  \"width\": 267,\n  \"height\": 150\n}\n}\n},\n{\n\"key\": \"description\",\n\"value\": {\n\"type\": \"STRING\",\n\"string_value\": \"David Friedberg's recent All-In podcast argument sounds convincing: student debt creates desperate graduates, financial stress drives political radicalism, and young Americans embrace socialism...\"\n}\n},\n{\n\"key\": \"domain\",\n\"value\": {\n\"type\": \"STRING\",\n\"string_value\": \"courage.media\"\n}\n},\n{\n\"key\": \"thumbnail_image_large\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=800x320_1\",\n  \"width\": 569,\n  \"height\": 320\n}\n}\n},\n{\n\"key\": \"summary_photo_image_small\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=386x202\",\n  \"width\": 386,\n  \"height\": 202\n}\n}\n},\n{\n\"key\": \"thumbnail_image_original\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=orig\",\n  \"width\": 2048,\n  \"height\": 1152\n}\n}\n},\n{\n\"key\": \"site\",\n\"value\": {\n\"type\": \"USER\",\n\"scribe_key\": \"publisher_id\",\n\"user_value\": {\n  \"path\": [],\n  \"id_str\": \"1821502805523484672\"\n}\n}\n},\n{\n\"key\": \"photo_image_full_size_small\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=386x202\",\n  \"width\": 386,\n  \"height\": 202\n}\n}\n},\n{\n\"key\": \"summary_photo_image_large\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=800x419\",\n  \"width\": 800,\n  \"height\": 419\n}\n}\n},\n{\n\"key\": \"thumbnail_image_small\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=144x144\",\n  \"width\": 144,\n  \"height\": 81\n}\n}\n},\n{\n\"key\": \"creator\",\n\"value\": {\n\"type\": \"USER\",\n\"user_value\": {\n  \"path\": [],\n  \"id_str\": \"1821502805523484672\"\n}\n}\n},\n{\n\"key\": \"thumbnail_image_x_large\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=png&name=2048x2048_2_exp\",\n  \"width\": 2048,\n  \"height\": 1152\n}\n}\n},\n{\n\"key\": \"photo_image_full_size_original\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=orig\",\n  \"width\": 2048,\n  \"height\": 1152\n}\n}\n},\n{\n\"key\": \"vanity_url\",\n\"value\": {\n\"type\": \"STRING\",\n\"scribe_key\": \"vanity_url\",\n\"string_value\": \"courage.media\"\n}\n},\n{\n\"key\": \"photo_image_full_size\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=600x314\",\n  \"width\": 600,\n  \"height\": 314\n}\n}\n},\n{\n\"key\": \"thumbnail_image_color\",\n\"value\": {\n\"type\": \"IMAGE_COLOR\",\n\"image_color_value\": {\n  \"palette\": [\n{\n\"rgb\": {\n\"red\": 39,\n\"blue\": 33,\n\"green\": 36\n},\n\"percentage\": 56.46\n},\n{\n\"rgb\": {\n\"red\": 133,\n\"blue\": 98,\n\"green\": 113\n},\n\"percentage\": 11.68\n},\n{\n\"rgb\": {\n\"red\": 204,\n\"blue\": 202,\n\"green\": 203\n},\n\"percentage\": 8.57\n},\n{\n\"rgb\": {\n\"red\": 77,\n\"blue\": 43,\n\"green\": 94\n},\n\"percentage\": 5.7\n},\n{\n\"rgb\": {\n\"red\": 40,\n\"blue\": 61,\n\"green\": 52\n},\n\"percentage\": 3.34\n}\n  ]\n}\n}\n},\n{\n\"key\": \"title\",\n\"value\": {\n\"type\": \"STRING\",\n\"string_value\": \"How the State Pays to Undermine the Nation\"\n}\n},\n{\n\"key\": \"summary_photo_image_color\",\n\"value\": {\n\"type\": \"IMAGE_COLOR\",\n\"image_color_value\": {\n  \"palette\": [\n{\n\"rgb\": {\n\"red\": 39,\n\"blue\": 33,\n\"green\": 36\n},\n\"percentage\": 56.46\n},\n{\n\"rgb\": {\n\"red\": 133,\n\"blue\": 98,\n\"green\": 113\n},\n\"percentage\": 11.68\n},\n{\n\"rgb\": {\n\"red\": 204,\n\"blue\": 202,\n\"green\": 203\n},\n\"percentage\": 8.57\n},\n{\n\"rgb\": {\n\"red\": 77,\n\"blue\": 43,\n\"green\": 94\n},\n\"percentage\": 5.7\n},\n{\n\"rgb\": {\n\"red\": 40,\n\"blue\": 61,\n\"green\": 52\n},\n\"percentage\": 3.34\n}\n  ]\n}\n}\n},\n{\n\"key\": \"summary_photo_image_x_large\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=png&name=2048x2048_2_exp\",\n  \"width\": 2048,\n  \"height\": 1152\n}\n}\n},\n{\n\"key\": \"summary_photo_image\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=600x314\",\n  \"width\": 600,\n  \"height\": 314\n}\n}\n},\n{\n\"key\": \"photo_image_full_size_color\",\n\"value\": {\n\"type\": \"IMAGE_COLOR\",\n\"image_color_value\": {\n  \"palette\": [\n{\n\"rgb\": {\n\"red\": 39,\n\"blue\": 33,\n\"green\": 36\n},\n\"percentage\": 56.46\n},\n{\n\"rgb\": {\n\"red\": 133,\n\"blue\": 98,\n\"green\": 113\n},\n\"percentage\": 11.68\n},\n{\n\"rgb\": {\n\"red\": 204,\n\"blue\": 202,\n\"green\": 203\n},\n\"percentage\": 8.57\n},\n{\n\"rgb\": {\n\"red\": 77,\n\"blue\": 43,\n\"green\": 94\n},\n\"percentage\": 5.7\n},\n{\n\"rgb\": {\n\"red\": 40,\n\"blue\": 61,\n\"green\": 52\n},\n\"percentage\": 3.34\n}\n  ]\n}\n}\n},\n{\n\"key\": \"photo_image_full_size_x_large\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=png&name=2048x2048_2_exp\",\n  \"width\": 2048,\n  \"height\": 1152\n}\n}\n},\n{\n\"key\": \"card_url\",\n\"value\": {\n\"type\": \"STRING\",\n\"scribe_key\": \"card_url\",\n\"string_value\": \"https://t.co/49x6Fx4Bco\"\n}\n},\n{\n\"key\": \"summary_photo_image_original\",\n\"value\": {\n\"type\": \"IMAGE\",\n\"image_value\": {\n  \"url\": \"https://pbs.twimg.com/card_img/1941821992631492608/jQJ0KbLH?format=jpg&name=orig\",\n  \"width\": 2048,\n  \"height\": 1152\n}\n}\n}\n],\n\"user_refs_results\": [\n{\n\"result\": {\n\"id\": \"VXNlcjoxODIxNTAyODA1NTIzNDg0Njcy\",\n\"legacy\": {\n  \"url\": \"https://t.co/STSgoQvJDt\",\n  \"name\": \"Courage.Media\",\n  \"can_dm\": false,\n  \"entities\": {\n\"url\": {\n\"urls\": [\n{\n\"url\": \"https://t.co/STSgoQvJDt\",\n\"indices\": [\n0,\n23\n],\n\"display_url\": \"courage.media\",\n\"expanded_url\": \"http://courage.media\"\n}\n]\n},\n\"description\": {\n\"urls\": []\n}\n  },\n  \"location\": \"\",\n  \"verified\": false,\n  \"created_at\": \"Thu Aug 08 11:04:53 +0000 2024\",\n  \"description\": \"Founder: @Ayaan\\nAn ad-free platform that challenges prevailing ideologies to defend Western values. Discover our articles and podcast below.\",\n  \"media_count\": 293,\n  \"screen_name\": \"CourageMedia___\",\n  \"listed_count\": 21,\n  \"can_media_tag\": true,\n  \"friends_count\": 113,\n  \"is_translator\": false,\n  \"want_retweets\": false,\n  \"statuses_count\": 809,\n  \"default_profile\": true,\n  \"followers_count\": 5053,\n  \"translator_type\": \"none\",\n  \"favourites_count\": 214,\n  \"possibly_sensitive\": false,\n  \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1821502805523484672/1740138243\",\n  \"fast_followers_count\": 0,\n  \"has_custom_timelines\": false,\n  \"pinned_tweet_ids_str\": [\n\"1846637591610683574\"\n  ],\n  \"default_profile_image\": false,\n  \"withheld_in_countries\": [],\n  \"normal_followers_count\": 5053,\n  \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1839305142811897859/0t_8DQlR_normal.jpg\",\n  \"profile_interstitial_type\": \"\"\n},\n\"rest_id\": \"1821502805523484672\",\n\"__typename\": \"User\",\n\"is_blue_verified\": true,\n\"profile_image_shape\": \"Circle\",\n\"has_graduated_access\": true,\n\"affiliates_highlighted_label\": {}\n}\n},\n{\n\"result\": {\n\"id\": \"VXNlcjoxODIxNTAyODA1NTIzNDg0Njcy\",\n\"legacy\": {\n  \"url\": \"https://t.co/STSgoQvJDt\",\n  \"name\": \"Courage.Media\",\n  \"can_dm\": false,\n  \"entities\": {\n\"url\": {\n\"urls\": [\n{\n\"url\": \"https://t.co/STSgoQvJDt\",\n\"indices\": [\n0,\n23\n],\n\"display_url\": \"courage.media\",\n\"expanded_url\": \"http://courage.media\"\n}\n]\n},\n\"description\": {\n\"urls\": []\n}\n  },\n  \"location\": \"\",\n  \"verified\": false,\n  \"created_at\": \"Thu Aug 08 11:04:53 +0000 2024\",\n  \"description\": \"Founder: @Ayaan\\nAn ad-free platform that challenges prevailing ideologies to defend Western values. Discover our articles and podcast below.\",\n  \"media_count\": 293,\n  \"screen_name\": \"CourageMedia___\",\n  \"listed_count\": 21,\n  \"can_media_tag\": true,\n  \"friends_count\": 113,\n  \"is_translator\": false,\n  \"want_retweets\": false,\n  \"statuses_count\": 809,\n  \"default_profile\": true,\n  \"followers_count\": 5053,\n  \"translator_type\": \"none\",\n  \"favourites_count\": 214,\n  \"possibly_sensitive\": false,\n  \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/1821502805523484672/1740138243\",\n  \"fast_followers_count\": 0,\n  \"has_custom_timelines\": false,\n  \"pinned_tweet_ids_str\": [\n\"1846637591610683574\"\n  ],\n  \"default_profile_image\": false,\n  \"withheld_in_countries\": [],\n  \"normal_followers_count\": 5053,\n  \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1839305142811897859/0t_8DQlR_normal.jpg\",\n  \"profile_interstitial_type\": \"\"\n},\n\"rest_id\": \"1821502805523484672\",\n\"__typename\": \"User\",\n\"is_blue_verified\": true,\n\"profile_image_shape\": \"Circle\",\n\"has_graduated_access\": true,\n\"affiliates_highlighted_label\": {}\n}\n}\n]\n  },\n  \"rest_id\": \"https://t.co/49x6Fx4Bco\"\n},\n\"core\": {\n  \"user_results\": {\n\"result\": {\n\"id\": \"VXNlcjoxNTkxMjg5MA==\",\n\"legacy\": {\n\"url\": \"https://t.co/wfG6jCkkT5\",\n\"name\": \"Ayaan Hirsi Ali\",\n\"can_dm\": false,\n\"entities\": {\n\"url\": {\n  \"urls\": [\n{\n\"url\": \"https://t.co/wfG6jCkkT5\",\n\"indices\": [\n0,\n23\n],\n\"display_url\": \"courage.media\",\n\"expanded_url\": \"https://courage.media/\"\n}\n  ]\n},\n\"description\": {\n  \"urls\": []\n}\n},\n\"location\": \"\",\n\"verified\": false,\n\"created_at\": \"Wed Aug 20 02:35:12 +0000 2008\",\n\"description\": \"Christian, founder @AHAFoundation, fellow @HooverInst and host of the Ayaan Hirsi Ali Podcast. Opinions my own. Check out my work at Courage Media:\",\n\"media_count\": 544,\n\"screen_name\": \"Ayaan\",\n\"listed_count\": 3229,\n\"can_media_tag\": true,\n\"friends_count\": 829,\n\"is_translator\": false,\n\"want_retweets\": false,\n\"statuses_count\": 3926,\n\"default_profile\": true,\n\"followers_count\": 562967,\n\"translator_type\": \"none\",\n\"favourites_count\": 961,\n\"possibly_sensitive\": false,\n\"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/15912890/1729106136\",\n\"fast_followers_count\": 0,\n\"has_custom_timelines\": false,\n\"pinned_tweet_ids_str\": [\n\"1846637177788043523\"\n],\n\"default_profile_image\": false,\n\"withheld_in_countries\": [],\n\"normal_followers_count\": 562967,\n\"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1356355762797207552/PR7XKd8d_normal.jpg\",\n\"profile_interstitial_type\": \"\"\n},\n\"rest_id\": \"15912890\",\n\"__typename\": \"User\",\n\"professional\": {\n\"rest_id\": \"1487914891377737728\",\n\"category\": [],\n\"professional_type\": \"Creator\"\n},\n\"is_blue_verified\": true,\n\"profile_image_shape\": \"Circle\",\n\"has_graduated_access\": true,\n\"affiliates_highlighted_label\": {}\n}\n  }\n},\n\"views\": {\n  \"count\": \"1286037\",\n  \"state\": \"EnabledWithCount\"\n},\n\"legacy\": {\n  \"lang\": \"en\",\n  \"id_str\": \"1941821990253244437\",\n  \"entities\": {\n\"urls\": [\n{\n\"url\": \"https://t.co/49x6Fx4Bco\",\n\"indices\": [\n165,\n188\n],\n\"display_url\": \"courage.media/2025/07/06/the…\",\n\"expanded_url\": \"https://courage.media/2025/07/06/the-american-dream-rewritten-in-marxist-ink/\"\n}\n],\n\"symbols\": [],\n\"hashtags\": [],\n\"timestamps\": [],\n\"user_mentions\": []\n  },\n  \"favorited\": false,\n  \"full_text\": \"Universities didn't accidentally produce socialists while teaching legitimate scholarship. They built ideological assembly lines disguised as academic departments.\\n\\nhttps://t.co/49x6Fx4Bco\",\n  \"retweeted\": false,\n  \"bookmarked\": false,\n  \"created_at\": \"Sun Jul 06 11:30:14 +0000 2025\",\n  \"quote_count\": 242,\n  \"reply_count\": 383,\n  \"user_id_str\": \"15912890\",\n  \"retweet_count\": 3600,\n  \"bookmark_count\": 2112,\n  \"favorite_count\": 13053,\n  \"is_quote_status\": false,\n  \"display_text_range\": [\n0,\n188\n  ],\n  \"possibly_sensitive\": false,\n  \"conversation_id_str\": \"1941821990253244437\",\n  \"possibly_sensitive_editable\": true\n},\n\"source\": \"<a href=\\\"https://www.hootsuite.com\\\" rel=\\\"nofollow\\\">Hootsuite Inc.</a>\",\n\"rest_id\": \"1941821990253244437\",\n\"__typename\": \"Tweet\",\n\"edit_control\": {\n  \"edit_tweet_ids\": [\n\"1941821990253244437\"\n  ],\n  \"edits_remaining\": \"5\",\n  \"is_edit_eligible\": true,\n  \"editable_until_msecs\": \"1751805014000\"\n},\n\"unmention_data\": {},\n\"is_translatable\": false\n}\n},\n\"quick_promote_eligibility\": {\n\"eligibility\": \"IneligibleNotProfessional\"\n}\n},\n\"binded_media_description\": null,\n\"binded_media_domain\": null,\n\"binded_media_thumbnail_url\": null,\n\"binded_media_title\": null,\n\"binded_media_url\": null,\n\"bookmarks_count\": 1983,\n\"content\": \"This is a superb must-read piece by @Ayaan that explains the transformation of our universities from institutions that seek to educate the next generation of leaders to advance society, to ideological indoctrination institutes that graduate the likes of @ZohranKMamdani.  \\n\\nIf you wonder why American taxpayers question why their funds should go to these universities, read this piece and it will be abundantly clear. \\n\\nThe problems at universities are principally in the ‘studies’ degrees, but federal funding is being withdrawn from the STEM departments. (This is because the studies’ degree programs don’t qualify for much federal funding).\\n\\nOur government is withdrawing funding  from @Harvard, @Columbia and other problematic universities because money is fungible, and sending taxpayer money to institutions educating the future enemies of our country is contrary to the interests of our nation. \\n\\nA potential solution to this problem is for universities to spinoff their science and other STEM departments that receive federal funding into new independent entities that are independently financed and governed. This approach will also have the beneficial effect of helping them increase donations from alumni and others who want their funds directed to programs that advance society’s interests rather than siphoned off to other areas that the donors did not intend to support. The risk of Federal funding and charitable donation ‘overhead allocations’ being misused and/or misdirected will be largely eliminated.  \\n\\nBy separating STEM into separate universities, the studies degree programs will also have to be sustained with independent funding, which will increase scrutiny of these departments and their activities.  Closer scrutiny by alumni and other outside observers of these program areas will help balance the anti-American radicalism that has emerged in these departments.\",\n\"functions\": null,\n\"in_reply_to_screen_name\": null,\n\"in_reply_to_status_id_str\": null,\n\"in_reply_to_user_id_str\": null,\n\"internal_unique_id\": \"1941835114532462650\",\n\"is_pinned\": true,\n\"is_quoted\": true,\n\"is_retweeted\": false,\n\"likes\": 10507,\n\"media_0_thumbnail\": null,\n\"media_0_type\": null,\n\"media_0_url\": null,\n\"media_1_thumbnail\": null,\n\"media_1_type\": null,\n\"media_1_url\": null,\n\"media_2_thumbnail\": null,\n\"media_2_type\": null,\n\"media_2_url\": null,\n\"media_3_thumbnail\": null,\n\"media_3_type\": null,\n\"media_3_url\": null,\n\"name\": \"Bill Ackman\",\n\"native_id\": 1683460,\n\"original_tweet_id\": \"1941821990253244437\",\n\"original_tweet_url\": \"https://twitter.com/ayaan/status/1941821990253244437\",\n\"published_at\": \"2025-07-06T12:22:23Z\",\n\"quote_count\": 105,\n\"reply_count\": 603,\n\"retweet_count\": 2504,\n\"scraping_time\": \"2025-07-07T09:47:58.253Z\",\n\"tweet_url\": \"https://twitter.com/BillAckman/status/1941835114532462650\",\n\"user_id\": \"880412538625810432\",\n\"username\": \"BillAckman\",\n\"views_count\": 957276\n}\n],\n\"next\": null,\n\"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

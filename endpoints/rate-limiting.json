@@ -1,0 +1,6 @@
+
+{
+	"name": "Rate Limiting",
+	"item": [],
+	"description": "This API enforces rate limits to ensure fair usage and stable service performance.\n\n### Rate Limit Headers:\n\n- `X-RateLimit-Limit`: Total requests allowed per minute.\n    \n- `X-RateLimit-Remaining`: Number of requests remaining in the current rate limit window.\n    \n- `X-RateLimit-Reset`: UNIX timestamp indicating when the rate limit window resets.\n    \n- `Retry-After`: Seconds until you can retry after hitting the limit.\n    \n\n### Example Response (Rate Limited):\n\n``` json\n{\n  \"error\": \"Rate limit exceeded. Please try again later.\",\n  \"type\": \"RateLimitExceeded\",\n  \"code\": 429\n}\n\n ```\n\n### Endpoint-Specific Limits:\n\n| Endpoint | Limit |\n| --- | --- |\n| `/v1/squids` | 120 (req/min) |\n| `/v1/tasks` | 90 (req/min) |\n| `/v1/runtasks` | 90 (req/min) |\n| `/v1/runs` | 120 (req/min) |\n| `/v1/results` | 2 (req/sec) |\n\n### Example\n\nX-RateLimit-Limit: 120  \nX-RateLimit-Remaining: 0  \nX-RateLimit-Reset: 1716909300  \nRetry-After: 45"
+}

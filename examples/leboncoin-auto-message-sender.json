@@ -1,0 +1,228 @@
+{
+	"name": "Leboncoin Auto Message Sender",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.leboncoin.fr/ad/locations/2943434204\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.leboncoin.fr/ad/locations/2943434204\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"bbeff62182c6239a8df533ec9d281c2e\",\n            \"created_at\": \"2025-07-04T04:57:45.202264\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.leboncoin.fr/ad/locations/2943434204\"\n            },\n            \"module\": 103,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Leboncoin Auto Message Sender (4)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"message\": \"Hello #pseudo#,\\n\\nI want to enquire about #title#.\",\r\n    \"hours_back\": 1,\r\n    \"max_results\": 3,\r\n    \"max_unique_results_per_run\": 10\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Leboncoin Auto Message Sender** behaves — including message templating, one-time enforcement, and time-based filtering.\n\n➡️ These parameters are specific to the **Leboncoin Auto Message Sender**. _Refer to the_ [Constructing the <code>params</code> Object](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **message** | string | Template for the message sent to sellers. Supports dynamic variables: `#title#` (listing title) and `#pseudo#` (seller pseudonym). |\n| **hours_back** | integer or null | Collect only listings posted in the last _X_ hours (e.g., `24`). Set to `null` to disable time-based filtering. |\n| **max_results** | integer or null | Maximum number of listings to process before stopping. Use `null` for no limit. |\n| **max_unique_results_per_run** | integer or null | Maximum number of unique results retrieved across all tasks in the entire run. use `null` for unlimited |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Leboncoin Auto Message Sender (4)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"message\": \"Hello #pseudo#,\\n\\nI want to enquire about #title#.\",\r\n    \"max_unique_results_per_run\": 20,\r\n    \"hours_back\": 1,\r\n    \"max_results\": 3\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"Leboncoin Auto Message Sender (4)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"message\": \"Hello #pseudo#,\\n\\nI want to enquire about #title#.\",\n    \"max_unique_results_per_run\": 20,\n    \"hours_back\": 1,\n    \"max_results\": 3\n  }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Leboncoin Auto Message Sender**.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **annonce_id** | string | Listing ID on Leboncoin to which the message was targeted. |\n| **message** | string | The actual message sent, with `#title#` and `#pseudo#` dynamically substituted. |\n| **functions.one_time_message.filling_date** | string | Timestamp when the one-time-message function was executed (`DD/MM/YYYY, HH:mm:ss Z`). |\n| **is_sent** | boolean | `true` if the message was successfully sent. |\n| **was_already_sent** | boolean or null | `true` if the send was skipped because the same message had already been sent to this listing. |\n| **is_deactivated** | boolean | `true` if the listing was deactivated at the time of processing. |\n| **last_publication_date** | string (ISO) | Timestamp when the listing was last published or updated. |\n| **message_hash** | string or null | Hash of the message content, used to detect and prevent duplicate sends. |\n| **url** | string | Direct URL of the Leboncoin listing. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}&page_size=2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 1,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 1,\n  \"data\": [\n    {\n      \"id\": 32892,\n      \"object\": \"result\",\n      \"squid\": \"939b056f17ea4361b2e129f586e4d215\",\n      \"run\": \"2508e5e663ff4d739c3d9c5bdbce7639\",\n      \"annonce_id\": \"2928122417\",\n      \"functions\": {\n        \"one_time_message\": {\n          \"filling_date\": \"01/31/2025, 15:52:59 +0200\"\n        }\n      },\n      \"is_deactivated\": false,\n      \"is_sent\": true,\n      \"last_publication_date\": \"2025-01-31T14:51:12Z\",\n      \"message\": \"Hello SQUARE HABITAT   CHAUVIGNY,\\n\\nJe viens de voir votre article qui porte le nom:\\nMaison 5 pièces 148 m²\\n\\nL'offre m'intéresse?\\nEst-ce que vous pouvez me recontacter via la messagerie leboncoin?\\n\\nA très vite,\\nSasha\",\n      \"message_hash\": null,\n      \"native_id\": 32892,\n      \"scraping_time\": \"2025-01-31T14:52:59.369Z\",\n      \"url\": \"https://www.leboncoin.fr/ad/ventes_immobilieres/2928122417\",\n      \"was_already_sent\": null\n    }\n  ],\n  \"next\": null,\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

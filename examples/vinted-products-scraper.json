@@ -1,0 +1,239 @@
+{
+	"name": "Vinted Products Scraper",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.vinted.fr/catalog?search_text=&order=newest_first\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.vinted.fr/catalog?search_text=&order=newest_first\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"82367f24d9450b2222080eed91662968\",\n      \"created_at\": \"2025-07-17T09:06:47.287893\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.vinted.fr/catalog?search_text=&order=newest_first\"\n      },\n      \"module\": 115,\n      \"object\": \"task\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Vinted Products Scraper (2)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_pages\": 10\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Vinted Products Scraper (2)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_pages\": 32\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"Vinted Products Scraper (2)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"max_pages\": 32\n  }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Vinted Products Scraper**. Each record represents one marketplace listing.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Unique identifier for this result record. |\n| **object** | string | Always `\"result\"`. |\n| **squid** | string | Hash ID of the squid that produced this result. |\n| **run** | string | Hash ID of the run during which this result was scraped. |\n| **badge** | string or null | Special badge or label on the listing (e.g., “New”, “Sale”). |\n| **brand_title** | string or null | Brand name of the item, if provided. |\n| **content_source** | string | Source type of the content (e.g., `\"catalog\"`). |\n| **conversion** | number or null | Conversion metric or rate, if available. |\n| **currency** | string or null | Currency code for price fields (e.g., `\"€\"`). |\n| **description** | string or null | Text description of the item, if provided. |\n| **discount** | number or null | Discount percentage applied to the base price. |\n| **favourite_count** | integer | Total number of users who have favorited this item. |\n| **favourite_group_id** | string or null | Identifier of the favorites group, if the item is grouped. |\n| **functions** | object or null | Reserved for any function-specific metadata (currently `null`). |\n| **image_dominant_color** | string or null | Hex code of the image’s dominant color, if computed. |\n| **image_url** | string or null | URL of the item’s main image. |\n| **internal_id** | string | Internal Vinted listing identifier. |\n| **is_favourite** | boolean | `true` if the current user has favorited this item. |\n| **is_for_swap** | boolean or null | `true` if the item is marked as available for a swap instead of purchase. |\n| **is_visible** | boolean | `true` if the listing is publicly visible. |\n| **native_id** | integer | Native numeric ID matching the listing. |\n| **price** | number | Listing price in the specified currency. |\n| **promoted** | boolean | `true` if the listing is promoted (paid placement). |\n| **scraping_time** | string (ISO) | Timestamp when this result was fetched (e.g., `\"2025-01-29T09:35:41.930Z\"`). |\n| **service_fee** | number | Platform service fee added to the base price. |\n| **size_title** | string or null | Size label for apparel (e.g., `\"S / 36 / 8\"`). |\n| **status** | string or null | Current listing status (e.g., `\"sold\"`, `\"reserved\"`), if provided. |\n| **title** | string | Headline or title of the item. |\n| **total_item_price** | number | Sum of `price` + `service_fee`. |\n| **url** | string | Direct URL to the Vinted listing. |\n| **user_business** | boolean | `true` if the seller is registered as a business. |\n| **user_id** | string | Unique identifier of the seller. |\n| **user_is_hidden** | boolean or null | `true` if the seller’s identity is hidden. |\n| **user_is_sus** | boolean or null | `true` if the seller is flagged as suspicious. |\n| **user_login** | string | Seller’s Vinted username. |\n| **user_orientation** | string or null | Seller’s listed orientation or preference, if any. |\n| **user_photo_url** | string or null | URL of the seller’s profile photo. |\n| **user_profile_url** | string | Direct URL to the seller’s Vinted profile page. |\n| **view_count** | integer | Number of times this listing has been viewed. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 1,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 1,\n  \"data\": [\n    {\n        \"id\": 2220866,\n        \"object\": \"result\",\n        \"squid\": \"2eea95bc41594fb5898e86e671e4bb3f\",\n        \"run\": \"c52de994a19544de9c729b2e4b428255\",\n        \"badge\": null,\n        \"brand_title\": \"Primark\",\n        \"content_source\": \"catalog\",\n        \"conversion\": null,\n        \"currency\": null,\n        \"description\": null,\n        \"discount\": null,\n        \"favourite_count\": 0,\n        \"favourite_group_id\": null,\n        \"functions\": null,\n        \"image_dominant_color\": null,\n        \"image_url\": null,\n        \"internal_id\": \"5729689121\",\n        \"is_favourite\": false,\n        \"is_for_swap\": null,\n        \"is_visible\": true,\n        \"native_id\": 2220866,\n        \"price\": 14,\n        \"promoted\": false,\n        \"scraping_time\": \"2025-01-29T09:35:41.930Z\",\n        \"service_fee\": 1.4,\n        \"size_title\": \"S / 36 / 8\",\n        \"status\": null,\n        \"title\": \"Pyjama stitch primark\",\n        \"total_item_price\": 15.4,\n        \"url\": \"https://www.vinted.fr/items/5729689121-pyjama-stitch-primark\",\n        \"user_business\": false,\n        \"user_id\": \"209950955\",\n        \"user_is_hidden\": null,\n        \"user_is_sus\": null,\n        \"user_login\": \"laurakev91\",\n        \"user_orientation\": null,\n        \"user_photo_url\": null,\n        \"user_profile_url\": \"https://www.vinted.fr/member/209950955-laurakev91\",\n        \"view_count\": 0\n    }\n  ],\n  \"next\": null,\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

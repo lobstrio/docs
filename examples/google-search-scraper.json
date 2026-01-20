@@ -1,0 +1,290 @@
+{
+	"name": "Google Search Scraper",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"keyword\": \"crab\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"keyword\": \"crab\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"36a5f24a550f89c2b997107ca043ec8a\",\n            \"created_at\": \"2025-06-30T08:25:29.311114\",\n            \"is_active\": true,\n            \"params\": {\n                \"keyword\": \"crab\"\n            },\n            \"module\": 128,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get googlelocation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/googlelocations?q=Alabama&country_name=United States",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"googlelocations"
+					],
+					"query": [
+						{
+							"key": "q",
+							"value": "Alabama"
+						},
+						{
+							"key": "country_name",
+							"value": "United States"
+						}
+					]
+				},
+				"description": "Use this endpoint to fetch valid **location** values used in the `params` of the **Google Search Scraper**. These values provide geographic bias for your search queries.\n\n---\n\n### 🧾 Query Parameters\n\n| Parameter        | Required | Description                                                         |\n| ---------------- | -------- | ------------------------------------------------------------------- |\n| **q**            | ✅ Yes   | Substring to search for in region, district, or city names.         |\n| **country_name** | ✅ Yes   | Full country name to scope the search (e.g., `United States`).      |\n\n---\n\n### 📄 Response Fields\n\n| Field             | Type   | Description                                                                                 |\n| ----------------- | ------ | ------------------------------------------------------------------------------------------- |\n| **name**          | string | Display name of the location (region, district, or city).                                   |\n| **canonical_name**| string | Full hierarchical name including its parent contexts (e.g., `\"Alabama,United States\"`).     |\n| **country_name**  | string | Country associated with this location (matches your `country_name` query).                  |\n| **country_code**  | string | ISO 2-letter country code for the location’s country (e.g., `US`).                          |\n\n---\n\n### 📎 Use In Context\n\n- Use each returned **name** as the value for your `params.location` when running the Google Search Scraper.\n- Ensures you supply a valid, recognized geographic bias (e.g., state, district, or city).\n- Combine with other `params` (like `country`, `language`, `max_pages`, etc.) to build precise and accurate search tasks.  \n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/googlelocations?q=Alabama&country_name=United%20States",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"googlelocations"
+							],
+							"query": [
+								{
+									"key": "q",
+									"value": "Alabama"
+								},
+								{
+									"key": "country_name",
+									"value": "United%20States"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"success\": true,\n    \"data\": [\n        {\n            \"name\": \"Alabama\",\n            \"canonical_name\": \"Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"Alabama's 1st Congressional District 2022 redistricting\",\n            \"canonical_name\": \"Alabama's 1st Congressional District 2022 redistricting,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"Alabama's 2nd Congressional District 2022 redistricting\",\n            \"canonical_name\": \"Alabama's 2nd Congressional District 2022 redistricting,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"Alabama's 3rd Congressional District 2022 redistricting\",\n            \"canonical_name\": \"Alabama's 3rd Congressional District 2022 redistricting,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"Alabama's 4th Congressional District 2022 redistricting\",\n            \"canonical_name\": \"Alabama's 4th Congressional District 2022 redistricting,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"Alabama's 5th Congressional District 2022 redistricting\",\n            \"canonical_name\": \"Alabama's 5th Congressional District 2022 redistricting,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"Alabama's 6th Congressional District 2022 redistricting\",\n            \"canonical_name\": \"Alabama's 6th Congressional District 2022 redistricting,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"Alabama's 7th Congressional District 2022 redistricting\",\n            \"canonical_name\": \"Alabama's 7th Congressional District 2022 redistricting,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"The University of Alabama\",\n            \"canonical_name\": \"The University of Alabama,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        },\n        {\n            \"name\": \"University of Alabama at Birmingham\",\n            \"canonical_name\": \"University of Alabama at Birmingham,Alabama,United States\",\n            \"country_name\": \"United States\",\n            \"country_code\": \"US\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Google Search Scraper (2)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"country\": \"United States\",\r\n    \"language\": \"English\",\r\n    \"max_pages\": 4,\r\n    \"mobile_results\": true,\r\n    \"results_per_page\": 10,\r\n    \"location\": \"Alabama\"\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "➡️ These parameters are specific to the **Google Search Scraper**. _Refer to the_ [Constructing the <code>params</code> Object](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **max_pages** | integer | Maximum number of Google Search result pages crawled per URL. Google limits total results to \\~300–400. |\n| **mobile_results** | boolean | If `true`, returns results as if from a mobile device; otherwise returns desktop results by default. |\n| **results_per_page** | integer | Number of search results per page. Allowed values: 10, 20, 30, 40, 50, 100. Defaults to 10. |\n| **country** | string | Sets the IP‐origin country and Google domain (e.g., `google.fr` for France). Default: `United States`. |\n| **location** | string | Geographic bias for search results (e.g., a state or city). |\n| **language** | string | Language for search results (overrides the country default). Defaults to English for the chosen country. |\n\n---\n\n### ⚠️ **Additional Notes**\n\n- To discover valid **location** values, use the [Get googlocations](#04a70a53-c58a-4084-8cde-3e1acd04dd57) endpoint."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Google Search Scraper (2)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"country\": \"United States\",\r\n    \"language\": \"English\",\r\n    \"max_pages\": 4,\r\n    \"mobile_results\": true,\r\n    \"results_per_page\": 10,\r\n    \"location\": \"Alabama\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"name\": \"Google Search Scraper (2)\",\n    \"no_line_breaks\": true,\n    \"params\": {\n        \"country\": \"United States\",\n        \"language\": \"English\",\n        \"max_pages\": 4,\n        \"mobile_results\": true,\n        \"results_per_page\": 10,\n        \"location\": \"Alabama\"\n    },\n    \"to_complete\": false,\n    \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "When you run a **Google Search Squid**, each returned “result” record follows this schema:\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Unique identifier for this result |\n| **object** | string | Always \"result\" |\n| **squid** | string | Hash ID of the squid that produced this result |\n| **run** | string | Hash ID of the run during which this result was scraped |\n| **page** | integer | Search‐results page number (1-based) |\n| **title** | string | The page title as shown in Google’s results |\n| **url** | string | Canonical URL of the result |\n| **displayed_url** | string | The “pretty” URL shown beneath the title |\n| **description** | string | Snippet or meta‐description extracted from the page |\n| **snippet_segments** | array | (Optional) tokenized segments of the snippet |\n| **emphasized_keywords** | string (JSON) | JSON-stringified map of which keywords Google emphasized |\n| **answer** | string or null | If Google provided a direct answer snippet (e.g. featured Q&A), otherwise null |\n| **question** | string or null | Original query question for featured Q&A results, otherwise null |\n| **date** | string or null | Publication date or date metadata if detected |\n| **is_organic** | boolean | true for non-paid (organic) results |\n| **is_paid** | boolean | true for ad or paid listings |\n| **is_question_answer** | boolean or null | true if this is a featured “People also ask” or Q&A snippet |\n| **is_related_query** | boolean or null | true if this entry represents a related search suggestion |\n| **total_results** | string | Google’s reported total count of matching results (“0”, “42”, “1,234”, etc.) |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 5,\n    \"limit\": 10,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 5,\n    \"data\": [\n        {\n            \"id\": 706594,\n            \"object\": \"result\",\n            \"squid\": \"c3744f29e3b740feaae2c628da82680c\",\n            \"run\": \"5227fec5bd4a43ecabb22f52654f76c0\",\n            \"answer\": null,\n            \"date\": null,\n            \"description\": \"Crabs are decapod crustaceans of the infraorder Brachyura (meaning \\\"short tailed\\\" in Greek), which typically have a very short projecting tail-like abdomen, ...\",\n            \"displayed_url\": \"https://en.wikipedia.org\",\n            \"emphasized_keywords\": \"{}\",\n            \"functions\": null,\n            \"is_organic\": true,\n            \"is_paid\": false,\n            \"is_question_answer\": null,\n            \"is_related_query\": null,\n            \"page\": 1,\n            \"question\": null,\n            \"scraping_time\": \"2025-06-30T08:16:53.273Z\",\n            \"snippet_segments\": [],\n            \"title\": \"Crab\",\n            \"total_results\": \"0\",\n            \"url\": \"https://en.wikipedia.org/wiki/Crab\"\n        },\n        {\n            \"id\": 1484002,\n            \"object\": \"result\",\n            \"squid\": \"c3744f29e3b740feaae2c628da82680c\",\n            \"run\": \"5227fec5bd4a43ecabb22f52654f76c0\",\n            \"answer\": null,\n            \"date\": null,\n            \"description\": \"King, Dungeness, Blue, Snow, Fidler, Stone, some of these you can't get in the US and some aren't even a species that you would eat.\",\n            \"displayed_url\": \"10.2K+ reactions · 7 months ago\",\n            \"emphasized_keywords\": \"{}\",\n            \"functions\": null,\n            \"is_organic\": true,\n            \"is_paid\": false,\n            \"is_question_answer\": null,\n            \"is_related_query\": null,\n            \"page\": 1,\n            \"question\": null,\n            \"scraping_time\": \"2025-06-30T08:16:54.234Z\",\n            \"snippet_segments\": [],\n            \"title\": \"Types Of crab 🦀 #chefvickybisht\",\n            \"total_results\": \"0\",\n            \"url\": \"https://www.facebook.com/chef.vicky.bisht1/posts/types-of-crab-chefvickybisht/624721676789101/\"\n        },\n        {\n            \"id\": 706597,\n            \"object\": \"result\",\n            \"squid\": \"c3744f29e3b740feaae2c628da82680c\",\n            \"run\": \"5227fec5bd4a43ecabb22f52654f76c0\",\n            \"answer\": null,\n            \"date\": null,\n            \"description\": \"Joe's Crab Shack, known for it's extensive menu from seafood boils and crab legs to American comfort food. Find a Joe's Crab Shack near you!\",\n            \"displayed_url\": \"https://www.joescrabshack.com\",\n            \"emphasized_keywords\": \"{}\",\n            \"functions\": null,\n            \"is_organic\": true,\n            \"is_paid\": false,\n            \"is_question_answer\": null,\n            \"is_related_query\": null,\n            \"page\": 1,\n            \"question\": null,\n            \"scraping_time\": \"2025-06-30T08:16:55.371Z\",\n            \"snippet_segments\": [],\n            \"title\": \"Joe's Crab Shack\",\n            \"total_results\": \"0\",\n            \"url\": \"https://www.joescrabshack.com/\"\n        },\n        {\n            \"id\": 3258169,\n            \"object\": \"result\",\n            \"squid\": \"c3744f29e3b740feaae2c628da82680c\",\n            \"run\": \"5227fec5bd4a43ecabb22f52654f76c0\",\n            \"answer\": null,\n            \"date\": \"2024-11-11\",\n            \"description\": \"Nov 11, 2024 — From crab bisque to crab rangoon to crab linguine and crab risotto, and everything in between. They're irresistible as part of a hearty and classic comfort ...\",\n            \"displayed_url\": \"https://www.vitalchoice.com\",\n            \"emphasized_keywords\": \"{}\",\n            \"functions\": null,\n            \"is_organic\": true,\n            \"is_paid\": false,\n            \"is_question_answer\": null,\n            \"is_related_query\": null,\n            \"page\": 1,\n            \"question\": null,\n            \"scraping_time\": \"2025-06-30T08:16:56.415Z\",\n            \"snippet_segments\": null,\n            \"title\": \"7 Types of Crab You Should Eat\",\n            \"total_results\": \"0\",\n            \"url\": \"https://www.vitalchoice.com/articles/food-facts/types-of-crab?srsltid=AfmBOoqgXUFsSVUN-7xI0-to8ZF4EitwUcMykg2Urd-1yaud6OjLwhc-\"\n        },\n        {\n            \"id\": 1484263,\n            \"object\": \"result\",\n            \"squid\": \"c3744f29e3b740feaae2c628da82680c\",\n            \"run\": \"5227fec5bd4a43ecabb22f52654f76c0\",\n            \"answer\": null,\n            \"date\": null,\n            \"description\": \"The definitive test for identifying a soft-shelled crab is the pinch test. When done correctly, the pinch is delivered by the recreational crabber to the crab.\",\n            \"displayed_url\": \"https://wdfw.wa.gov\",\n            \"emphasized_keywords\": \"{}\",\n            \"functions\": null,\n            \"is_organic\": true,\n            \"is_paid\": false,\n            \"is_question_answer\": null,\n            \"is_related_query\": null,\n            \"page\": 1,\n            \"question\": null,\n            \"scraping_time\": \"2025-06-30T08:16:57.483Z\",\n            \"snippet_segments\": [],\n            \"title\": \"Crab identification and soft-shelled crab | Washington Department of Fish & Wildlife\",\n            \"total_results\": \"0\",\n            \"url\": \"https://wdfw.wa.gov/fishing/basics/crab\"\n        }\n    ],\n    \"warning\": \"Export limit reached - only 30 results returned. Upgrade to premium to access the full dataset: https://app.lobstr.io/dashboard/pricing.\",\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

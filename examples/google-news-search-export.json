@@ -1,0 +1,218 @@
+{
+	"name": "Google News Search Export",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"keyword\": \"crab\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"keyword\": \"crab\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"5f5ccd42b74cf18196dcb7fe14fb8030\",\n            \"created_at\": \"2025-07-04T04:51:12.532884\",\n            \"is_active\": true,\n            \"params\": {\n                \"keyword\": \"crab\"\n            },\n            \"module\": 131,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Google News Search Export (1)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n        \"language\": \"English (United States)\",\r\n        \"time_range\": \"Any time\",\r\n        \"max_results\": 100\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Google News Search Export** crawler behaves — including language, recency filters, and result limits.\n\n➡️ These parameters are specific to the **Google News Search Export** crawler. _Refer to the_ [<i>Constructing the </i><code><i>params</i></code><i> Object</i>](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **language** | string | Country edition and UI language for Google News. Example: `\"English (United States)\"`. |\n| **time_range** | string | Filter news by recency. Allowed values: `Any time`, `Past hour`, `Past 24h`, `Past week`, `Past year`. |\n| **max_results** | integer | Maximum number of articles to scrape. If left blank, extracts all news since 2005-01-01. |\n\n• If `max_results` set ≤ 100 → no date filter is applied.\n• If `max_results` set > 100 → scraper breaks the span into daily windows and fetches news day by day.\n\n---\n\n### ⚠️ **Additional Notes**\n\n- Leaving **max_results** blank and **time_range** as `Any time` will pull every article back to 2005-01-01.\n    \n- Setting **max_results** > 100 enables automatic date-windowing to avoid huge single-query spans."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Google News Search Export (1)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n        \"language\": \"English (United States)\",\r\n        \"time_range\": \"Any time\",\r\n        \"max_results\": 100\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"name\": \"Google News Search Export (1)\",\n    \"no_line_breaks\": true,\n    \"params\": {\n        \"language\": \"English (United States)\",\n        \"time_range\": \"Any time\",\n        \"max_results\": 100\n    },\n    \"to_complete\": false,\n    \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Google News Search Export** crawler. Each record represents one news article.\n\n| **Field**            | Type            | Description                                                                                     |\n|----------------------|-----------------|-------------------------------------------------------------------------------------------------|\n| **id**               | integer         | Unique identifier for this result record.                                                      |\n| **object**           | string          | Always `\"result\"`.                                                                              |\n| **squid**            | string          | Hash ID of the squid that produced this result.                                                 |\n| **run**              | string          | Hash ID of the run during which this result was scraped.                                        |\n| **functions**        | object or null  | Reserved for any function-specific metadata (currently `null`).                                 |\n| **image**            | string (URL)    | URL of the article’s featured image, if available.                                              |\n| **native_id**        | integer         | Original identifier assigned by the news source.                                                |\n| **published_at**     | string (ISO)    | Publication timestamp of the article (e.g. `\"2025-07-03T13:03:07Z\"`).                            |\n| **scraping_time**    | string (ISO)    | Timestamp when this result was fetched (e.g. `\"2025-07-04T03:59:27.386Z\"`).                      |\n| **short_description**| string          | Brief summary or excerpt of the news article.                                                   |\n| **source**           | string          | Name of the news source or publisher.                                                           |\n| **title**            | string          | Headline or title of the news article.                                                          |\n| **url**              | string (URL)    | Direct link to the full article on the publisher’s site.                                        |\n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 100,\n    \"limit\": 10,\n    \"page\": 1,\n    \"total_pages\": 10,\n    \"result_from\": 1,\n    \"result_to\": 10,\n    \"data\": [\n        {\n            \"id\": 818292,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://wpcdn.us-midwest-1.vip.tn-cloud.net/www.charlottemagazine.com/content/uploads/2024/12/z/j/10-15-24-shecrab-eddies-0344-683x1024.jpg\",\n            \"native_id\": 818292,\n            \"published_at\": \"2024-12-02T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:31.056Z\",\n            \"short_description\": \"Alberto Toussaint is the mastermind behind the she-crab soup at Eddie's Place, the beloved restaurant on South Sharon Amity Road.\",\n            \"source\": \"Charlotte Magazine\",\n            \"title\": \"The Man Behind Eddie’s She-Crab Soup\",\n            \"url\": \"https://www.charlottemagazine.com/the-man-behind-eddies-she-crab-soup/\"\n        },\n        {\n            \"id\": 950111,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://npr.brightspotcdn.com/dims4/default/36daf29/2147483647/strip/true/crop/2560x1555+0+0/resize/880x535!/quality/90/?url=https%3A%2F%2Fyachatsnews.com%2Fwp-content%2Fuploads%2F2025%2F02%2FIMG_4823-scaled.jpg\",\n            \"native_id\": 950111,\n            \"published_at\": \"2025-02-14T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:31.875Z\",\n            \"short_description\": \"Oregon's commercial Dungeness crab catch is down so far this season but the price fishermen are getting for their catch is buoying the fleet's spreadsheets.\",\n            \"source\": \"NPR for Oregonians\",\n            \"title\": \"Dungeness crab haul is down this season for Oregon fleet, but strong prices making up for less volume\",\n            \"url\": \"https://www.klcc.org/economy-business/2025-02-14/dungeness-crab-haul-is-down-this-season-for-oregon-fleet-but-strong-prices-making-up-for-less-volume\"\n        },\n        {\n            \"id\": 818273,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://wildlife.ca.gov/Portals/0/Images/OCEO/News/2024CrabFishingZones.jpg?ver=0CicedxJqQOCIf7-Mm2NaA%3D%3D\",\n            \"native_id\": 818273,\n            \"published_at\": \"2024-12-20T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:32.121Z\",\n            \"short_description\": \"Commercial Dungeness Crab Fishery to Open Jan. 5 in Central California ... The California Department of Fish and Wildlife (CDFW) will open the...\",\n            \"source\": \"California Department of Fish and Wildlife (.gov)\",\n            \"title\": \"CDFW News | Commercial Dungeness Crab Fishery to Open Jan. 5 in Central California\",\n            \"url\": \"https://wildlife.ca.gov/News/Archive/commercial-dungeness-crab-fishery-to-open-jan-5-in-central-california\"\n        },\n        {\n            \"id\": 819176,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://www.southernliving.com/thmb/ZOb3fqtp40mQQYfSJffV6skKu5A=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/Screenshot2024-11-14at10.14.44AM-1ee7cfd2c6b54116b9e27b3f02e6afbe.png\",\n            \"native_id\": 819176,\n            \"published_at\": \"2024-12-06T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:32.287Z\",\n            \"short_description\": \"The Fancy-But-Foolproof Seafood Dish Everyone Requests At My Christmas Dinner ... It's way easier—and more special—than a roast...\",\n            \"source\": \"Southern Living\",\n            \"title\": \"The Fancy-But-Foolproof Seafood Dish Everyone Requests At My Christmas Dinner\",\n            \"url\": \"https://www.southernliving.com/crab-cakes-best-christmas-meal-8745341\"\n        },\n        {\n            \"id\": 818271,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://wildlife.ca.gov/Portals/0/Images/OCEO/News/2024CrabFishingZones.jpg?ver=0CicedxJqQOCIf7-Mm2NaA%3D%3D\",\n            \"native_id\": 818271,\n            \"published_at\": \"2024-12-09T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:32.403Z\",\n            \"short_description\": \"CDFW Director Bonham continued to delay the northern California commercial Dungeness crab season (PDF)(opens in new tab) for Mendocino, Humboldt...\",\n            \"source\": \"California Department of Fish and Wildlife (.gov)\",\n            \"title\": \"CDFW News | Recreational Dungeness Crab Fishery Open in Northern California, Continued Meat Quality and Whale Protection Delays for Commercial Fishery\",\n            \"url\": \"https://wildlife.ca.gov/News/Archive/recreational-dungeness-crab-fishery-open-in-northern-california-continued-meat-quality-and-whale-protection-delays-for-commercial-fishery\"\n        },\n        {\n            \"id\": 818281,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://www.fisheries.noaa.gov/s3//styles/original/s3/2024-08/750x500-red-king-crab-deck-afsc.jpg?itok=OjwF0I3z\",\n            \"native_id\": 818281,\n            \"published_at\": \"2025-01-02T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:32.865Z\",\n            \"short_description\": \"New research has revealed more genetic diversity across Alaska's red king crab populations than originally documented.\",\n            \"source\": \"NOAA Fisheries (.gov)\",\n            \"title\": \"Genetic Diversity in Alaska Red King Crab May Provide Resilience to Climate Change\",\n            \"url\": \"https://www.fisheries.noaa.gov/feature-story/genetic-diversity-alaska-red-king-crab-may-provide-resilience-climate-change\"\n        },\n        {\n            \"id\": 818280,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://wildlife.ca.gov/Portals/0/Images/OCEO/News/CDFWShieldResized.jpg?ver=DU1wutzwIHBXAC4pEx0ImQ%3D%3D\",\n            \"native_id\": 818280,\n            \"published_at\": \"2024-10-30T07:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:33.072Z\",\n            \"short_description\": \"Recreational Dungeness Crab Fishery Delayed in a Portion of Northern California State Waters Due to Public Health Hazard ... California Department...\",\n            \"source\": \"California Department of Fish and Wildlife (.gov)\",\n            \"title\": \"CDFW News | Recreational Dungeness Crab Fishery Delayed in a Portion of Northern California State Waters Due to Public Health Hazard\",\n            \"url\": \"https://wildlife.ca.gov/News/Archive/recreational-dungeness-crab-fishery-delayed-in-a-portion-of-northern-california-state-waters-due-to-public-health-hazard\"\n        },\n        {\n            \"id\": 818272,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://wildlife.ca.gov/Portals/0/Images/News/2023/crab%20zone%20map.png%20resize.png?ver=ajzQ8_6py7hueFNShfK7eQ%3D%3D\",\n            \"native_id\": 818272,\n            \"published_at\": \"2024-11-21T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:33.120Z\",\n            \"short_description\": \"The California Department of Fish and Wildlife (CDFW) is continuing the temporary recreational crab trap restriction from the...\",\n            \"source\": \"California Department of Fish and Wildlife (.gov)\",\n            \"title\": \"CDFW News | CDFW Continues Recreational Fishery Trap Restriction and Delays the Commercial Dungeness Crab Fishery Due to Meat Quality and Whale Entanglement Risk\",\n            \"url\": \"https://wildlife.ca.gov/News/Archive/cdfw-continues-recreational-fishery-trap-restriction-and-delays-the-commercial-dungeness-crab-fishery-due-to-meat-quality-and-whale-entanglement-risk\"\n        },\n        {\n            \"id\": 950098,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://umterps.com/images/2025/3/5/CrabFive25_1920_Cover.jpg?width=2000\",\n            \"native_id\": 950098,\n            \"published_at\": \"2025-03-07T08:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:33.397Z\",\n            \"short_description\": \"The rest are first-year starters in Maryland uniforms. Gillespie, a junior transfer from Belmont; Rice, a sophomore transfer from Virginia Tech;...\",\n            \"source\": \"University of Maryland Athletics\",\n            \"title\": \"The Crab Five\",\n            \"url\": \"https://umterps.com/news/2025/3/7/mens-basketball-the-crab-five.aspx\"\n        },\n        {\n            \"id\": 818275,\n            \"object\": \"result\",\n            \"squid\": \"daf6d92ae704469196a14891d8f4b3fd\",\n            \"run\": \"27d94c06df7e440d97def631c02261fa\",\n            \"functions\": null,\n            \"image\": \"https://wildlife.ca.gov/Portals/0/Images/OCEO/News/ARegionsCrabResize.jpg?ver=63xqeB70vJlFEPvtH_VKfg%3D%3D\",\n            \"native_id\": 818275,\n            \"published_at\": \"2024-10-25T07:00:00Z\",\n            \"scraping_time\": \"2025-07-04T03:59:33.444Z\",\n            \"short_description\": \"CA Recreational Dungeness Crab Season to Open with Trap Restriction While the Commercial Dungeness Crab Fishery is Delayed to Protect Whales...\",\n            \"source\": \"California Department of Fish and Wildlife (.gov)\",\n            \"title\": \"CDFW News | CA Recreational Dungeness Crab Season to Open with Trap Restriction While the Commercial Dungeness Crab Fishery is Delayed to Protect Whales from Entanglement\",\n            \"url\": \"https://wildlife.ca.gov/News/Archive/ca-recreational-dungeness-crab-season-to-open-with-trap-restriction-while-the-commercial-dungeness-crab-fishery-is-delayed-to-protect-whales-from-entanglem\"\n        }\n    ],\n    \"next\": \"https://api.lobstr.io/v1/results?squid=daf6d92ae704469196a14891d8f4b3fd&run=27d94c06df7e440d97def631c02261fa&page=2\",\n    \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

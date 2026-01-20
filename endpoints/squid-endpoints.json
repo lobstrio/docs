@@ -1,0 +1,548 @@
+
+{
+	"name": "Squid",
+	"item": [
+		{
+			"name": "Create squid",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"crawler\": \"{{crawler_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids"
+					]
+				},
+				"description": "This endpoint creates a new squid for a specified crawler by providing the crawler's hash ID."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <your_api_key>",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"crawler\": \"4734d096159ef05210e0e1677e8be823\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"0d982dd57cf74788a9cd5912ecb796a3\",\n    \"account\": [],\n    \"concurrency\": 1,\n    \"crawler\": \"4734d096159ef05210e0e1677e8be823\",\n    \"created_at\": \"2025-02-03T14:23:33Z\",\n    \"is_active\": true,\n    \"name\": \"Google Maps Search Export (15)\",\n    \"params\": {\n        \"max_results\": 200,\n        \"ratings\": \"Any rating\",\n        \"country\": \"United States\",\n        \"language\": \"English (United States)\"\n    },\n    \"schedule\": null,\n    \"to_complete\": false\n}"
+				},
+				{
+					"name": "Custom Name Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"crawler\": \"4734d096159ef05210e0e1677e8be823\",\r\n    \"name\": \"Squid with Custom Name\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"e86b29c032024b66aff529e1d43c2bd7\",\n    \"account\": [],\n    \"concurrency\": 1,\n    \"crawler\": \"4734d096159ef05210e0e1677e8be823\",\n    \"created_at\": \"2025-02-03T14:24:23Z\",\n    \"is_active\": true,\n    \"name\": \"Squid with Custom Name\",\n    \"params\": {\n        \"max_results\": 200,\n        \"ratings\": \"Any rating\",\n        \"country\": \"United States\",\n        \"language\": \"English (United States)\"\n    },\n    \"schedule\": null,\n    \"to_complete\": false\n}"
+				}
+			]
+		},
+		{
+			"name": "Update squid",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"my-cool-squid\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"no_line_breaks\": true,\r\n    \"to_complete\": false,\r\n    \"is_active\": true,\r\n    \"params\": {\r\n        \"max_results\": 199,\r\n        \"functions\": {\r\n            \"collect_contacts\": true,\r\n            \"details\": true,\r\n            \"images\": false\r\n        },\r\n        \"ratings\": \"Any rating\",\r\n        \"country\": \"United States\",\r\n        \"language\": \"English (United States)\"\r\n    },\r\n    \"run_notify\": \"on_success\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "This endpoint updates an existing squid's settings using its hash ID. Switch examples to see different settings update.\n\n## Squid Setting Parameters\n\nUse the following parameters to configure your Squid:\n\n| Parameter | Data Type | Description |\n| --- | --- | --- |\n| **name** | string | Name of the Squid. |\n| **concurrency** | integer | Number of concurrent tasks to execute. |\n| **is_active** | boolean | Set to `true` to activate the Squid, `false` to deactivate and prevent it from running. |\n| **export_unique_results** | boolean | Export only unique results to the export file (`true` or `false`). |\n| **no_line_breaks** | boolean | Remove line breaks (newlines) from exported file (`true` or `false`). |\n| **to_complete** | boolean | Stop the run after completing all tasks (`true`) or continue until credits are exhausted (`false`). |\n| **run_notify** | string | Notification preference:  <br>\\- `null`: No notification.  <br>\\- `on_success`: Notify upon successful completion.  <br>\\- `on_error`: Notify upon run errors. |\n| **params** | object | Crawler-specific parameters and settings. **See details below**. |\n| **accounts** | object | List of account IDs required by certain crawlers. |\n\nThe following parameters allow you to schedule your Squid run to launch automatically at a specific time.\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **cron_expression** | string | Cron expression defining the run schedule (e.g., `0 10 \\\\\\* \\\\\\* \\\\\\*` for 10:00 AM daily). |\n| **timezone** | string | Timezone identifier (e.g., `Europe/Paris`) for scheduling accuracy. |\n\n## Construction of `params` object\n\nWhen updating a squid’s settings, you often need to provide a `params` object. This object is typically derived from the crawler’s input. Below are the key points to understand when constructing `params`.\n\n### 1\\. Obtain Crawler Input\n\nFetch crawler details from:\n\n- `GET /v1/crawlers`\n    \n- `GET /v1/crawlers/:crawler_id`\n    \n\nThe response includes an `input` array detailing available parameters (`name`, `type`, `default`, `level`, etc.).\n\n### 2\\. Parameter Levels\n\nParameters have two levels:\n\n- **Task-Level (****`level: \"task\"`****)**: Do **not** include these in the final Squid-level `params` object.\n    \n- **Squid-Level (****`level: \"squid\"`****)**: Include these parameters in the final `params` object.\n    \n\n#### 3\\. Function Parameters\n\nBoolean parameters marked as `\"function\": true` may optionally be grouped within a nested structure called `functions` if you want to enable or disable specific features.\n\n``` json\n\"functions\": {\n    \"collect_contacts\": true,\n    \"details\": true,\n    \"images\": false\n}\n\n ```\n\n> **Key Point**: Only squid-level parameters appear in the final `params` object. Boolean function parameters can be grouped together if desired, and child parameters are included only if their parent is active. \n  \n\nFor further support, refer to your crawler-specific documentation."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"my-cool-squid\",\r\n    \"concurrency\": 2,\r\n    \"is_active\": true,\r\n    \"export_unique_results\": true,\r\n    \"no_line_breaks\": true,\r\n    \"to_complete\": false,\r\n    \"params\": {\r\n        \"max_results\": 199,\r\n        \"functions\": {\r\n            \"collect_contacts\": true,\r\n            \"details\": true,\r\n            \"images\": false\r\n        },\r\n        \"ratings\": \"Any rating\",\r\n        \"country\": \"United States\",\r\n        \"language\": \"English (United States)\",\r\n        \"extra_params\": {\r\n            \"use_params\": false\r\n        }\r\n    },\r\n    \"timezone\": \"Asia/Karachi\",\r\n    \"accounts\": null,\r\n    \"run_notify\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"name\": \"my-cool-squid\",\n    \"no_line_breaks\": true,\n    \"is_active\": true,\n    \"params\": {\n        \"max_results\": 199,\n        \"functions\": {\n            \"collect_contacts\": true,\n            \"details\": true,\n            \"images\": false\n        },\n        \"ratings\": \"Any rating\",\n        \"country\": \"United States\",\n        \"language\": \"English (United States)\"\n    },\n    \"to_complete\": false,\n    \"run_notify\": \"on_success\",\n    \"export_unique_results\": true\n}"
+				},
+				{
+					"name": "Schedule Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"cron_expression\": \"0 10 * * 1-5\",\r\n    \"timezone\": \"Asia/Karachi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"cron_expression\": \"0 10 * * 1-5\",\r\n    \"timezone\": \"Asia/Karachi\"\r\n}"
+				},
+				{
+					"name": "Delivery Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"{{email}}\",\r\n    \"notifications\": true,\r\n    \"ftp_fields\": {\r\n        \"host\": null,\r\n        \"port\": null,\r\n        \"password\": null,\r\n        \"username\": null,\r\n        \"directory\": null,\r\n        \"is_active\": false\r\n    },\r\n    \"google_sheet_fields\": {\r\n        \"url\": \"{{google_sheet_url}}\",\r\n        \"append\": false,\r\n        \"is_active\": true\r\n    },\r\n    \"s3_fields\": {\r\n        \"bucket\": null,\r\n        \"is_active\": false,\r\n        \"target_path\": null,\r\n        \"aws_access_key\": null,\r\n        \"aws_secret_key\": null\r\n    },\r\n    \"webhook_fields\": {\r\n        \"url\": null,\r\n        \"events\": {\r\n            \"Run.created\": false,\r\n            \"Run.success\": true,\r\n            \"Run.export_done\": false,\r\n            \"Run.ended_with_error\": false,\r\n            \"Run.unexpected_error\": false\r\n        },\r\n        \"is_active\": false,\r\n        \"retry\": false\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"email\": \"ijaz.urrahim@lobstr.io\",\n    \"notifications\": true,\n    \"notifications_activation_date\": \"2025-02-10T15:20:28.481036\",\n    \"google_sheet_fields\": {\n        \"url\": \"https://docs.google.com/spreadsheets/d/1ly9nwTs-hNaFCzWtSljevSf16chs5Nn0PIv_TpQSEhA/edit?usp=sharing\",\n        \"is_active\": true,\n        \"append\": false\n    },\n    \"ftp_fields\": {\n        \"host\": null,\n        \"port\": null,\n        \"password\": null,\n        \"username\": null,\n        \"directory\": null,\n        \"is_active\": false\n    },\n    \"s3_fields\": {\n        \"bucket\": null,\n        \"is_active\": false,\n        \"target_path\": null,\n        \"aws_access_key\": null,\n        \"aws_secret_key\": null\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "List squids",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/squids",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids"
+					]
+				},
+				"description": "This endpoint returns a paginated list of all squids belonging to the authenticated user."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 34,\n    \"limit\": 1,\n    \"page\": 1,\n    \"total_pages\": 34,\n    \"result_from\": 1,\n    \"result_to\": 2,\n    \"data\": [\n        {\n            \"id\": \"e86b29c032024b66aff529e1d43c2bd7\",\n            \"created_at\": \"2025-02-03T14:24:23Z\",\n            \"name\": \"Squid with Custom Name\",\n            \"is_ready\": false,\n            \"is_active\": true,\n            \"concurrency\": 1,\n            \"params\": {\n                \"country\": \"United States\",\n                \"ratings\": \"Any rating\",\n                \"language\": \"English (United States)\",\n                \"max_results\": 200\n            },\n            \"ip_strategy\": null,\n            \"email\": null,\n            \"schedule_time\": null,\n            \"no_line_breaks\": true,\n            \"export_runs\": true,\n            \"export_unique_results\": true,\n            \"notifications_activation_date\": \"2025-02-03T14:24:23Z\",\n            \"notifications\": false,\n            \"notifications_params\": {\n                \"run_notify\": null\n            },\n            \"to_complete\": false,\n            \"external_launch\": false,\n            \"deactivation_reason\": null,\n            \"message\": null,\n            \"google_sheet_fields\": {\n                \"url\": null,\n                \"append\": false,\n                \"is_active\": false\n            },\n            \"ftp_fields\": {\n                \"host\": null,\n                \"port\": null,\n                \"password\": null,\n                \"username\": null,\n                \"directory\": null,\n                \"is_active\": false\n            },\n            \"slack_fields\": {\n                \"token\": null,\n                \"is_active\": false,\n                \"channel_id\": null\n            },\n            \"webhook_fields\": {\n                \"url\": null,\n                \"events\": {\n                    \"Run.created\": false,\n                    \"Run.success\": true,\n                    \"Run.export_done\": false,\n                    \"Run.ended_with_error\": false,\n                    \"Run.unexpected_error\": false\n                },\n                \"is_active\": false\n            },\n            \"s3_fields\": {\n                \"bucket\": null,\n                \"is_active\": false,\n                \"target_path\": null,\n                \"aws_access_key\": null,\n                \"aws_secret_key\": null\n            },\n            \"schedule\": null,\n            \"icon\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj4NCiAgPGcgaWQ9ItCh0LPRgNGD0L/Qv9C40YDQvtCy0LDRgtGMXzMyMjIiIGRhdGEtbmFtZT0i0KHQs9GA0YPQv9C/0LjRgNC+0LLQsNGC0YwgMzIyMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTU1NDggMTMzNzMpIj4NCiAgICA8cmVjdCBpZD0i0J/RgNGP0LzQvtGD0LPQvtC70YzQvdC40LpfMjAxMiIgZGF0YS1uYW1lPSLQn9GA0Y/QvNC+0YPQs9C+0LvRjNC90LjQuiAyMDEyIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHJ4PSI1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTU1NDggLTEzMzczKSIgZmlsbD0iI2VhNDMzNSIvPg0KICAgIDxnIGlkPSJnb29nbGUtcGx1cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE1NTM4IC0xMzM2MykiPg0KICAgICAgPHBhdGggaWQ9ItCa0L7QvdGC0YPRgF8xMTI1NSIgZGF0YS1uYW1lPSLQmtC+0L3RgtGD0YAgMTEyNTUiIGQ9Ik0xNi41LDEwMC42NjZoNy4zNDZhOS4zMzksOS4zMzksMCwxLDEtMi41MzUtMTAuMDE0LDEuMDEyLDEuMDEyLDAsMCwwLDEuMzc2LDBsMi43LTIuNTM5YTEuMDA5LDEuMDA5LDAsMCwwLDAtMS40NjYsMTQuOTg3LDE0Ljk4NywwLDAsMC0xMC4wNDMtNC4xMThBMTUuMDQzLDE1LjA0MywwLDEsMCwzMC4wNjEsOTguNDA4Yy4wMTItLjEuMDE5LTMuNDUzLjAxOS0zLjQ1M0gxNi41YTEuMDA4LDEuMDA4LDAsMCwwLTEuMDA4LDEuMDA4djMuNjk0QTEuMDA4LDEuMDA4LDAsMCwwLDE2LjUsMTAwLjY2NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTgyLjUxOSkiIGZpbGw9IiNmZmYiLz4NCiAgICA8L2c+DQogIDwvZz4NCjwvc3ZnPg0K\",\n            \"crawler\": \"4734d096159ef05210e0e1677e8be823\",\n            \"module_has_issues\": false,\n            \"last_run_status\": null,\n            \"crawler_name\": \"Google Maps Search Export\",\n            \"total_runs\": 0,\n            \"next_launch_at\": null,\n            \"last_run\": null,\n            \"last_run_at\": null,\n            \"last_run_done_reason\": null,\n            \"last_run_done_reason_desc\": null,\n            \"last_run_is_done\": null,\n            \"is_public\": true\n        }\n    ],\n    \"next\": \"https://api.lobstr.io/v1/squids?limit=1&page=2\",\n    \"previous\": null\n}"
+				},
+				{
+					"name": "Search Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/squids?name=Google&limit=1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Google"
+								},
+								{
+									"key": "limit",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 13,\n    \"limit\": 1,\n    \"page\": 1,\n    \"total_pages\": 13,\n    \"result_from\": 1,\n    \"result_to\": 2,\n    \"data\": [\n        {\n            \"id\": \"0d982dd57cf74788a9cd5912ecb796a3\",\n            \"created_at\": \"2025-02-03T14:23:33Z\",\n            \"name\": \"Google Maps Search Export (15)\",\n            \"is_ready\": false,\n            \"is_active\": true,\n            \"concurrency\": 1,\n            \"params\": {\n                \"country\": \"United States\",\n                \"ratings\": \"Any rating\",\n                \"language\": \"English (United States)\",\n                \"max_results\": 200\n            },\n            \"ip_strategy\": null,\n            \"email\": null,\n            \"schedule_time\": null,\n            \"no_line_breaks\": true,\n            \"export_runs\": true,\n            \"export_unique_results\": true,\n            \"notifications_activation_date\": \"2025-02-03T14:23:33Z\",\n            \"notifications\": false,\n            \"notifications_params\": {\n                \"run_notify\": null\n            },\n            \"to_complete\": false,\n            \"external_launch\": false,\n            \"deactivation_reason\": null,\n            \"message\": null,\n            \"google_sheet_fields\": {\n                \"url\": null,\n                \"append\": false,\n                \"is_active\": false\n            },\n            \"ftp_fields\": {\n                \"host\": null,\n                \"port\": null,\n                \"password\": null,\n                \"username\": null,\n                \"directory\": null,\n                \"is_active\": false\n            },\n            \"slack_fields\": {\n                \"token\": null,\n                \"is_active\": false,\n                \"channel_id\": null\n            },\n            \"webhook_fields\": {\n                \"url\": null,\n                \"events\": {\n                    \"Run.created\": false,\n                    \"Run.success\": true,\n                    \"Run.export_done\": false,\n                    \"Run.ended_with_error\": false,\n                    \"Run.unexpected_error\": false\n                },\n                \"is_active\": false\n            },\n            \"s3_fields\": {\n                \"bucket\": null,\n                \"is_active\": false,\n                \"target_path\": null,\n                \"aws_access_key\": null,\n                \"aws_secret_key\": null\n            },\n            \"schedule\": null,\n            \"icon\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj4NCiAgPGcgaWQ9ItCh0LPRgNGD0L/Qv9C40YDQvtCy0LDRgtGMXzMyMjIiIGRhdGEtbmFtZT0i0KHQs9GA0YPQv9C/0LjRgNC+0LLQsNGC0YwgMzIyMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTU1NDggMTMzNzMpIj4NCiAgICA8cmVjdCBpZD0i0J/RgNGP0LzQvtGD0LPQvtC70YzQvdC40LpfMjAxMiIgZGF0YS1uYW1lPSLQn9GA0Y/QvNC+0YPQs9C+0LvRjNC90LjQuiAyMDEyIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHJ4PSI1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTU1NDggLTEzMzczKSIgZmlsbD0iI2VhNDMzNSIvPg0KICAgIDxnIGlkPSJnb29nbGUtcGx1cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE1NTM4IC0xMzM2MykiPg0KICAgICAgPHBhdGggaWQ9ItCa0L7QvdGC0YPRgF8xMTI1NSIgZGF0YS1uYW1lPSLQmtC+0L3RgtGD0YAgMTEyNTUiIGQ9Ik0xNi41LDEwMC42NjZoNy4zNDZhOS4zMzksOS4zMzksMCwxLDEtMi41MzUtMTAuMDE0LDEuMDEyLDEuMDEyLDAsMCwwLDEuMzc2LDBsMi43LTIuNTM5YTEuMDA5LDEuMDA5LDAsMCwwLDAtMS40NjYsMTQuOTg3LDE0Ljk4NywwLDAsMC0xMC4wNDMtNC4xMThBMTUuMDQzLDE1LjA0MywwLDEsMCwzMC4wNjEsOTguNDA4Yy4wMTItLjEuMDE5LTMuNDUzLjAxOS0zLjQ1M0gxNi41YTEuMDA4LDEuMDA4LDAsMCwwLTEuMDA4LDEuMDA4djMuNjk0QTEuMDA4LDEuMDA4LDAsMCwwLDE2LjUsMTAwLjY2NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTgyLjUxOSkiIGZpbGw9IiNmZmYiLz4NCiAgICA8L2c+DQogIDwvZz4NCjwvc3ZnPg0K\",\n            \"crawler\": \"4734d096159ef05210e0e1677e8be823\",\n            \"module_has_issues\": false,\n            \"last_run_status\": null,\n            \"crawler_name\": \"Google Maps Search Export\",\n            \"total_runs\": 0,\n            \"next_launch_at\": null,\n            \"last_run\": null,\n            \"last_run_at\": null,\n            \"last_run_done_reason\": null,\n            \"last_run_done_reason_desc\": null,\n            \"last_run_is_done\": null,\n            \"is_public\": true\n        }\n    ],\n    \"next\": \"https://api.lobstr.io/v1/squids?limit=1&name=Google&page=2\",\n    \"previous\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Get squid details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "This endpoint retrieves comprehensive details about a specific squid, including its configuration settings, operational status, integration options (like Google Sheets, FTP, Slack), run statistics, and associated crawler information, along with any export settings and execution history."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"c106a44a98044ef18acc59986ae10967\",\n    \"created_at\": \"2025-02-25T09:01:13.575329\",\n    \"name\": \"my-cool-squid\",\n    \"is_ready\": true,\n    \"is_active\": true,\n    \"concurrency\": 1,\n    \"params\": {\n        \"country\": \"United States\",\n        \"ratings\": \"Any rating\",\n        \"language\": \"English (United States)\",\n        \"max_results\": 20,\n        \"functions\": {\n            \"images\": false,\n            \"details\": false,\n            \"collect_contacts\": false\n        }\n    },\n    \"download_url\": \"https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/lobstrc106a44a98044ef18acc59986ae10967/eebce7802e7740979a0b8450de10c99e.csv.csv?response-content-disposition=attachment%3B%20filename%3Dmy-cool-squid_20250305_0927.csv&AWSAccessKeyId=AKIA3X7XNQGAHJ4R5SEQ&Signature=69cLV%2BLeMUYucLQrLTr069cyZYw%3D&Expires=1741771788\",\n    \"ip_strategy\": null,\n    \"email\": \"ijaz.urrahim@lobstr.io\",\n    \"schedule\": null,\n    \"schedule_time\": null,\n    \"no_line_breaks\": true,\n    \"export_runs\": true,\n    \"export_unique_results\": true,\n    \"notifications\": true,\n    \"notifications_params\": {\n        \"run_notify\": null\n    },\n    \"to_complete\": false,\n    \"external_launch\": false,\n    \"deactivation_reason\": null,\n    \"message\": \"Run is not running or pending while origin is worker\",\n    \"google_sheet_fields\": {\n        \"url\": \"https://docs.google.com/spreadsheets/d/1ly9nwTs-hNaFCzWtSljevSf16chs5Nn0PIv_TpQSEhA/edit?usp=sharing\",\n        \"append\": false,\n        \"is_active\": false\n    },\n    \"ftp_fields\": {\n        \"host\": \"localhost\",\n        \"port\": 22,\n        \"password\": null,\n        \"username\": null,\n        \"directory\": null,\n        \"is_active\": false\n    },\n    \"slack_fields\": {\n        \"token\": null,\n        \"is_active\": false,\n        \"channel_id\": null\n    },\n    \"webhook_fields\": {\n        \"url\": \"https://httpbin.org/post\",\n        \"retry\": false,\n        \"events\": {\n            \"Run.created\": false,\n            \"Run.success\": true,\n            \"Run.export_done\": false,\n            \"Run.ended_with_error\": false,\n            \"Run.unexpected_error\": false\n        },\n        \"is_active\": false,\n        \"activation_time\": \"02/26/2025, 15:57:26\"\n    },\n    \"s3_fields\": {\n        \"bucket\": null,\n        \"is_active\": false,\n        \"target_path\": null,\n        \"aws_access_key\": null,\n        \"aws_secret_key\": null\n    },\n    \"icon\": \"PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCIgdmlld0JveD0iMCAwIDUwIDUwIj4NCiAgPGcgaWQ9ItCh0LPRgNGD0L/Qv9C40YDQvtCy0LDRgtGMXzMyMjIiIGRhdGEtbmFtZT0i0KHQs9GA0YPQv9C/0LjRgNC+0LLQsNGC0YwgMzIyMiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTU1NDggMTMzNzMpIj4NCiAgICA8cmVjdCBpZD0i0J/RgNGP0LzQvtGD0LPQvtC70YzQvdC40LpfMjAxMiIgZGF0YS1uYW1lPSLQn9GA0Y/QvNC+0YPQs9C+0LvRjNC90LjQuiAyMDEyIiB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHJ4PSI1IiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMTU1NDggLTEzMzczKSIgZmlsbD0iI2VhNDMzNSIvPg0KICAgIDxnIGlkPSJnb29nbGUtcGx1cyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTE1NTM4IC0xMzM2MykiPg0KICAgICAgPHBhdGggaWQ9ItCa0L7QvdGC0YPRgF8xMTI1NSIgZGF0YS1uYW1lPSLQmtC+0L3RgtGD0YAgMTEyNTUiIGQ9Ik0xNi41LDEwMC42NjZoNy4zNDZhOS4zMzksOS4zMzksMCwxLDEtMi41MzUtMTAuMDE0LDEuMDEyLDEuMDEyLDAsMCwwLDEuMzc2LDBsMi43LTIuNTM5YTEuMDA5LDEuMDA5LDAsMCwwLDAtMS40NjYsMTQuOTg3LDE0Ljk4NywwLDAsMC0xMC4wNDMtNC4xMThBMTUuMDQzLDE1LjA0MywwLDEsMCwzMC4wNjEsOTguNDA4Yy4wMTItLjEuMDE5LTMuNDUzLjAxOS0zLjQ1M0gxNi41YTEuMDA4LDEuMDA4LDAsMCwwLTEuMDA4LDEuMDA4djMuNjk0QTEuMDA4LDEuMDA4LDAsMCwwLDE2LjUsMTAwLjY2NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDAgLTgyLjUxOSkiIGZpbGw9IiNmZmYiLz4NCiAgICA8L2c+DQogIDwvZz4NCjwvc3ZnPg0K\",\n    \"crawler\": \"4734d096159ef05210e0e1677e8be823\",\n    \"module_has_issues\": false,\n    \"last_run_status\": \"DONE\",\n    \"crawler_name\": \"Google Maps Search Export\",\n    \"total_runs\": 1,\n    \"next_launch_at\": null,\n    \"last_run\": \"eebce7802e7740979a0b8450de10c99e\",\n    \"last_run_at\": \"2025-03-05T09:27:17.012423\",\n    \"last_run_done_reason\": \"tasks_done\",\n    \"last_run_done_reason_desc\": null,\n    \"last_run_is_done\": true,\n    \"is_public\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Empty squid",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"type\": \"url\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}/empty",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}",
+						"empty"
+					]
+				},
+				"description": "This endpoint removes all tasks and their associated results from a specified squid, returning the number of deleted items while keeping the squid's configuration intact."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"type\": \"params\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}/empty",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}",
+								"empty"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"388d6d5e98134294ac612ec9f99dc5b1\",\n    \"object\": \"squid\",\n    \"emptied\": true,\n    \"deleted_count\": 1\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete squid",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "This endpoint permanently deletes a specified squid and all its associated data (tasks, results, and configurations) from the Lobstr."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"5b071952127e47d2adc8d684ff24dbd2\",\n    \"object\": \"squid\",\n    \"deleted\": true\n}"
+				}
+			]
+		}
+	],
+	"description": "A \"Squid\" is a container that groups together related tasks and configurations for a specific scraping/crawling operation."
+}

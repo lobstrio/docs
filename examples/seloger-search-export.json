@@ -1,0 +1,240 @@
+{
+	"name": "Seloger Search Export",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.seloger.com/list.htm?projects=2&places=%5B%7B%22subDivisions%22:%5B%2210%22%5D%7D%5D&mandatorycommodities=0&enterprise=1&qsVersion=1.0&m=search_refine-redirection-search_results\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.seloger.com/list.htm?projects=2&places=%5B%7B%22subDivisions%22:%5B%2210%22%5D%7D%5D&mandatorycommodities=0&enterprise=1&qsVersion=1.0&m=search_refine-redirection-search_results\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"fa0df9f38046ae68a04117ed96652005\",\n      \"created_at\": \"2025-07-17T08:55:52.537282\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.seloger.com/list.htm?projects=2&places=%5B%7B%22subDivisions%22:%5B%2210%22%5D%7D%5D&mandatorycommodities=0&enterprise=1&qsVersion=1.0&m=search_refine-redirection-search_results\"\n      },\n      \"module\": 13,\n      \"object\": \"task\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"SeLoger Search Export (1)\",\r\n  \"concurrency\": 5,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"functions\": {\r\n      \"annonce_details\": true\r\n    },\r\n    \"max_pages\": 4\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **SeLoger Search Export** crawler behaves — including pagination and optional detail‐page visits.\n\n➡️ These parameters are specific to the **SeLoger Search Export** crawler. _Refer to the_ [Constructing the `params` Object](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter                     | Type     | Description                                                                                                       |\n| ----------------------------- | -------- | ----------------------------------------------------------------------------------------------------------------- |\n| **max_pages**                 | integer  | Maximum number of search‐result pages to crawl (e.g., `4`).                                                        |\n| **functions.annonce_details** | boolean  | If `true`, visits each listing’s detail page to fetch the full description, geographic coordinates (lat/lng), and any extra attributes. |\n\n---\n\n### ⚠️ **Additional Notes**\n\n- Enabling **functions.annonce_details** will increase run time, as each listing requires an additional HTTP request.  \n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"SeLoger Search Export (1)\",\r\n  \"concurrency\": 5,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"functions\": {\r\n      \"annonce_details\": true\r\n    },\r\n    \"max_pages\": 4\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"SeLoger Search Export (1)\",\n  \"concurrency\": 5,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"functions\": {\n      \"annonce_details\": true\n    },\n    \"max_pages\": 4\n  }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **SeLoger Search Export** crawler.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **additional_pictures** | string | Comma-separated URLs of extra listing images beyond the main one. |\n| **address** | string | Town or locality name for the listing (e.g., “Buchères”). |\n| **agency_contact_name** | string | Name of the real-estate agency contact. |\n| **agency_has_email** | boolean | `true` if the agency’s email address is available. |\n| **agency_id** | integer | Internal SeLoger agency identifier. |\n| **agency_img_url** | string or null | URL of the agency’s logo image. |\n| **agency_link** | string or null | External link to the agency’s website, if provided. |\n| **agency_page** | string | URL of the agency’s SeLoger page. |\n| **agency_phone_number** | string | Contact phone number for the agency. |\n| **annonce_id** | integer | Unique listing identifier on SeLoger. |\n| **area** | number | Surface area in square meters (e.g., `180.147`). |\n| **bedrooms_count** | integer or null | Number of bedrooms, if specified. |\n| **business_unit** | integer | Internal code for the business unit. |\n| **contact_email** | boolean | `true` if a contact email is provided. |\n| **contact_is_private_seller** | boolean | `true` if the listing is by a private seller rather than an agency. |\n| **coownership_annual_charges** | number or null | Annual co-ownership charges, if applicable. |\n| **coownership_is_syndic_procedure** | boolean | `true` if the property is under syndic procedure. |\n| **coownership_number_of_lots** | integer or null | Total number of lots in the co-ownership. |\n| **description** | string | Full, unabridged listing description. |\n| **district** | string or null | District or arrondissement, if available. |\n| **dpe** | string or null | Energy Performance Diagnostic rating (e.g., “A”, “B”, etc.). |\n| **electricity_consumption** | string or null | Electricity consumption metric, if provided. |\n| **estate_type** | string | Type of property (e.g., “Local d'activités”). |\n| **estate_type_id** | integer | Numeric code for the estate type. |\n| **features** | string or null | Key features or amenities. |\n| **functions.annonce_details.filling_date** | string | Timestamp (`DD/MM/YYYY, HH:mm:ss Z`) when detail-page enrichment ran (if enabled). |\n| **gas_emissions** | string or null | Greenhouse gas emissions rating, if provided. |\n| **highlighting_level** | integer | Prominence level for the listing (higher = more featured). |\n| **insee_code** | string or null | INSEE code for French municipalities, if available. |\n| **is_exclusive** | boolean | `true` if this is an exclusive listing. |\n| **is_expired** | boolean | `true` if the listing is expired. |\n| **is_furnished** | boolean | `true` if the property is furnished. |\n| **last_scraping_time** | string (ISO) or null | When this listing was last scraped (before any enrichment). |\n| **latitude** | number | Geographic latitude of the property. |\n| **longitude** | number | Geographic longitude of the property. |\n| **main_picture** | string | URL of the main listing image. |\n| **monthly_price** | number | Monthly rent or price in euros. |\n| **native_id** | integer | Native numeric ID matching the `id` field. |\n| **nature** | integer | Transaction type code (e.g., `1` = rent, `2` = sale). |\n| **picture_count** | integer | Total number of pictures available. |\n| **pictures** | string | Comma-separated URLs of listing thumbnails. |\n| **postal_code** | string | Postal code of the listing (e.g., “10800”). |\n| **price** | number | Total listing price in euros. |\n| **price_per_meter** | number or null | Price per square meter. |\n| **publication_id** | string | Internal publication ID for this listing. |\n| **short_description** | string | A brief excerpt or summary of the listing. |\n| **tags** | string or null | Highlight tags (e.g., “180 m²”). |\n| **title** | string | Headline or title of the listing. |\n| **transaction_type** | integer | Numeric code for transaction type (e.g., sale vs. rent). |\n| **url** | string | Direct link to the listing on SeLoger. |\n| **video_url** | string or null | URL to any embedded video tour. |\n| **virtual_visit_url** | string or null | URL for a virtual 3D visit, if available. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 100,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 100,\n  \"data\": [\n    {\n      \"id\": 7779945,\n      \"object\": \"result\",\n      \"squid\": \"e23069fee2594ee0aed755be195b156c\",\n      \"run\": \"6ecdfb8a43c841d18502f045200196f7\",\n      \"additional_pictures\": \"https://mms.seloger.com/d/5/e/b/d5eba52c-5c9f-42a9-8439-4cb189707994.jpg?ci_seal=ab5ea286b35b1cab250a8fb8d94c0ec66cc21c92, https://mms.seloger.com/8/7/8/9/878976e0-4fe2-436e-b04a-8db5c93e5659.jpg?ci_seal=5eb9e845fbe4b81b6e71384f2fa8868c4b294093, https://mms.seloger.com/a/4/f/2/a4f215a4-b16d-404d-9f0d-eeb1ec63d63d.jpg?ci_seal=081395104cc93ff63c893e080b9c84c52e431523, https://mms.seloger.com/7/0/c/a/70ca138f-4932-4087-9ab4-0f41b8319e2e.jpg?ci_seal=523a7cdb3e865ee0fc4017fb2699f26c9f985b31\",\n      \"address\": \"Buchères\",\n      \"agency_contact_name\": \"JESSICA IMMO\",\n      \"agency_has_email\": true,\n      \"agency_id\": 519049,\n      \"agency_img_url\": null,\n      \"agency_link\": null,\n      \"agency_page\": \"https://www.seloger.com/professionnels/agences-immobilieres/troyes-10000/agence-141019/\",\n      \"agency_phone_number\": \"03 25 40 59 50\",\n      \"annonce_id\": 246281705,\n      \"area\": 180.14705882352942,\n      \"bedrooms_count\": null,\n      \"business_unit\": 1,\n      \"contact_email\": true,\n      \"contact_is_private_seller\": false,\n      \"coownership_annual_charges\": null,\n      \"coownership_is_syndic_procedure\": false,\n      \"coownership_number_of_lots\": null,\n      \"description\": \"SUR L'AXE PRINCIPAL DE BUCHÃRES, venez dÃ©couvrir cet entrepÃ´t de 180mÂ² de plain pied.\\nUne cave sur partie.\\nNon viabilisÃ©.\\nLe tout sur terrain de 1050mÂ² environ.\\n\\nMandat nÂ°557\\n*Honoraires charge vendeur\",\n      \"district\": null,\n      \"dpe\": null,\n      \"electricity_consumption\": null,\n      \"estate_type\": \"Local d'activités\",\n      \"estate_type_id\": 7,\n      \"features\": null,\n      \"functions\": {\n        \"annonce_details\": {\n          \"filling_date\": \"07/16/2025, 08:40:50 +0200\"\n        }\n      },\n      \"gas_emissions\": null,\n      \"ges\": null,\n      \"highlighting_level\": 3,\n      \"insee_code\": null,\n      \"is_exclusive\": false,\n      \"is_expired\": false,\n      \"is_furnished\": false,\n      \"is_redirected\": null,\n      \"last_scraping_time\": null,\n      \"latitude\": 48.22277,\n      \"longitude\": 4.09073,\n      \"main_picture\": \"https://mms.seloger.com/d/5/e/b/d5eba52c-5c9f-42a9-8439-4cb189707994.jpg?ci_seal=ab5ea286b35b1cab250a8fb8d94c0ec66cc21c92\",\n      \"monthly_price\": 508,\n      \"native_id\": 7779945,\n      \"nature\": 1,\n      \"picture_count\": 4,\n      \"pictures\": \"https://v.seloger.com/s/crop/341x256/visuels/1/p/y/k/1pykdcrug54shl96j2x1qifj585v7edesk9b113mo.jpg, https://v.seloger.com/s/crop/341x256/visuels/1/0/r/p/10rpsgxspye3nq1g8jrycg9h0yoy919dskv8bcp7k.jpg, https://v.seloger.com/s/crop/341x256/visuels/1/t/t/m/1ttmfu358aumxk6xk3y5hm5wwqrof1dowcsmuhajk.jpg, https://v.seloger.com/s/crop/341x256/visuels/0/c/k/z/0ckz88epwjj0t5il6vkwikk0sikuzgdxeqenmxti8.jpg\",\n      \"position\": null,\n      \"postal_code\": \"10800\",\n      \"price\": 98000,\n      \"price_decrease_percent\": null,\n      \"price_per_meter\": 544,\n      \"pricing_price_note\": null,\n      \"publication_id\": \"30519049\",\n      \"ref\": null,\n      \"rooms\": null,\n      \"scraping_time\": \"2025-07-16T10:04:14.545\",\n      \"short_description\": \"Local à vendre - SUR L'AXE PRINCIPAL DE BUCHÈRES, venez découvrir cet entrepôt de 180m² de plain pied.\\nUne cave sur partie.\\nNon viabilisé.\\nLe tout sur terrain de 1050m² environ.\\n\\nMandat n°557\\n*Honoraires charge vendeur\",\n      \"tags\": \"180 m²\",\n      \"title\": \"BUCHÃRES, ENTREPÃT DE 180MÂ² DE PLAIN PIED SUR 1050MÂ² DE TERRAIN\",\n      \"transaction_type\": 2,\n      \"url\": \"https://www.seloger.com/annonces/achat/local-commercial/bucheres-10/246281705.htm\",\n      \"video_url\": null,\n      \"virtual_visit_url\": null\n    }\n  ],\n  \"next\": \"https://api.lobstr.io/v1/results?squid=e23069fee2594ee0aed755be195b156c&run=6ecdfb8a43c841d18502f045200196f7&page=2&page_size=100\",\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

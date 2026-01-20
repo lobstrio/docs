@@ -1,0 +1,239 @@
+{
+	"name": "TripAdvisor Iter Restaurants",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.tripadvisor.fr/Restaurants-g187147-Paris_Ile_de_France.html\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.tripadvisor.fr/Restaurants-g187147-Paris_Ile_de_France.html\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"82367f24d9450b2222080eed91662968\",\n      \"created_at\": \"2025-07-17T09:06:47.287893\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.tripadvisor.fr/Restaurants-g187147-Paris_Ile_de_France.html\"\n      },\n      \"module\": 115,\n      \"object\": \"task\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"TripAdvisor Iter Restaurants (1)\",\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_results\": 3\r\n  },\r\n  \"to_complete\": false,\r\n  \"export_unique_results\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"TripAdvisor Iter Restaurants (1)\",\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_results\": 3\r\n  },\r\n  \"to_complete\": false,\r\n  \"export_unique_results\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"TripAdvisor Iter Restaurants (1)\",\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"max_results\": 3\n  },\n  \"to_complete\": false,\n  \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **TripAdvisor Restaurant Search Export** crawler. Each record represents one restaurant listing.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Unique identifier for this result record. |\n| **object** | string | Always `\"result\"`. |\n| **squid** | string | Hash ID of the squid that produced this result. |\n| **run** | string | Hash ID of the run during which this result was scraped. |\n| **full_address** | string | Complete address as listed on TripAdvisor, if available. |\n| **functions** | object or null | Reserved for function-specific metadata (currently `null`). |\n| **image_url** | string or null | URL of the restaurant’s main image or thumbnail. |\n| **internal_id** | string | TripAdvisor’s internal identifier for the restaurant. |\n| **is_claimed** | boolean | `true` if the business profile is claimed by the owner. |\n| **is_michelin** | boolean | `true` if the restaurant has a Michelin distinction. |\n| **lat** | number | Latitude coordinate of the restaurant. |\n| **lng** | number | Longitude coordinate of the restaurant. |\n| **mail** | string or null | Contact email address, if scraped from the listing. |\n| **menu** | string or null | URL to the restaurant’s menu on TripAdvisor, if provided. |\n| **name** | string | Name of the restaurant. |\n| **native_id** | integer | Native numeric ID matching the `id` field. |\n| **phone** | string or null | Contact phone number, if listed. |\n| **price** | string | Price range indicator (e.g., “€”, “€€-€€€”). |\n| **ratings** | integer | Total number of reviews or ratings the restaurant has received. |\n| **score** | number | Average rating score (e.g., 1.0–5.0). |\n| **scraping_time** | string (ISO) | Timestamp when this result was fetched (e.g., `\"2025-07-31T07:20:13.928Z\"`). |\n| **url** | string | Full URL to the restaurant’s TripAdvisor page. |\n| **website** | string or null | Official website URL of the restaurant, if listed. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 1,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 1,\n  \"data\": [\n    {\n        \"id\": 335315,\n        \"object\": \"result\",\n        \"squid\": \"c7ea965333d54a949a9e74ba62029098\",\n        \"run\": \"31679d8916d946848c3ba442a381e130\",\n        \"full_address\": \"\",\n        \"functions\": null,\n        \"image_url\": \"\",\n        \"internal_id\": \"d1109794\",\n        \"is_claimed\": false,\n        \"is_michelin\": false,\n        \"lat\": 48.84455,\n        \"lng\": 2.32037,\n        \"mail\": \"lescedresduliban@me.com\",\n        \"menu\": \"\",\n        \"name\": \"Les Cèdres Du Liban Paris\",\n        \"native_id\": 335315,\n        \"phone\": \"+33 1 42 22 35 18\",\n        \"price\": \"€€-€€€\",\n        \"ratings\": 1114,\n        \"score\": 5,\n        \"scraping_time\": \"2025-07-31T07:20:13.928Z\",\n        \"url\": \"https://www.tripadvisor.fr/Restaurant_Review-g187147-d1109794-Reviews-Les_Cedres_Du_Liban_Paris-Paris_Ile_de_France.html\",\n        \"website\": \"https://www.facebook.com/LesCedresDuLiban/\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

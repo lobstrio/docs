@@ -1,0 +1,239 @@
+{
+	"name": "PAP Search Export",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.pap.fr/annonce/vente-immobiliere-ain-01-g364\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.pap.fr/annonce/vente-immobiliere-ain-01-g364\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"82367f24d9450b2222080eed91662968\",\n      \"created_at\": \"2025-07-17T09:06:47.287893\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.pap.fr/annonce/vente-immobiliere-ain-01-g364\"\n      },\n      \"module\": 115,\n      \"object\": \"task\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"PAP Search Export (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_results\": 200\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"PAP Search Export (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_results\": 200\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"PAP Search Export (1)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"max_results\": 200\n  }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **PAP Search Export** crawler. Each record represents one property listing.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Unique identifier for this result record. |\n| **object** | string | Always `\"result\"`. |\n| **squid** | string | Hash ID of the squid that produced this result. |\n| **run** | string | Hash ID of the run during which this result was scraped. |\n| **bedrooms** | integer | Number of bedrooms in the property. |\n| **breadcrumb** | string or null | Navigation path or category breadcrumb, if available. |\n| **currency** | string | Currency unit for the `price` field (e.g., `\"euro\"`). |\n| **description** | string | Full textual description of the property. |\n| **energy** | string or null | Energy performance rating (e.g., `\"E\"`), if provided. |\n| **functions** | object or null | Reserved for function-specific metadata (currently `null`). |\n| **ges** | string or null | Greenhouse gas emissions rating (e.g., `\"B\"`), if provided. |\n| **image_urls** | string | Comma-separated list of listing image URLs. |\n| **internal_id** | string | PAP’s internal ID for this publication (as a string). |\n| **lat** | string | Latitude coordinate of the property. |\n| **lng** | string | Longitude coordinate of the property. |\n| **native_id** | integer | Native numeric ID matching the listing. |\n| **neighborhood** | string | Neighborhood or postal area (e.g., `\"Oyonnax (01100)\"`). |\n| **phone** | string | Contact phone number for inquiries. |\n| **price** | number | Listing price in the specified currency. |\n| **publication_date** | string (ISO) | Date when the listing was published (e.g., `\"2025-07-17T00:00:00Z\"`). |\n| **ref** | string | Internal reference code for the listing (e.g., `\"F77/2759\"`). |\n| **rooms** | integer | Total number of rooms (living spaces) in the property. |\n| **scraping_time** | string (ISO) | Timestamp when this result was fetched by the scraper. |\n| **size** | number or null | Property size or land area, if provided. |\n| **title** | string | Headline or title of the listing. |\n| **url** | string | Direct URL to view the full listing on PAP’s website. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 100,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 100,\n  \"data\": [\n    {\n        \"id\": 201385,\n        \"object\": \"result\",\n        \"squid\": \"c21d10b1466749489fa45424753a5700\",\n        \"run\": \"304ec62f79a64597936b9b9e566cb2e9\",\n        \"bedrooms\": 4,\n        \"breadcrumb\": null,\n        \"currency\": \"euro\",\n        \"description\": \"Maison de caractère avec vue panoramique – Un écrin de sérénité à Oyonnax Offrez-vous un cadre de vie exceptionnel avec cette maison de 152 m², idéalement perchée dans un quartier paisible d'Oyonnax. Son exposition Ouest et sa vue imprenable sur la plaine vous promettent des panoramas enchanteurs à chaque coucher de soleil. Un intérieur chaleureux et bien pensé Rez-de-chaussée : Dès l'entrée, laissez-vous séduire par une pièce de vie lumineuse de 36 m² avec Balcon de 19m², agrémentée d'une cuisine ouverte, parfaite pour partager de beaux moments. Un couloir dessert une chambre, une salle de douche et un WC indépendant. Étage : Deux grandes chambres, dont une avec balcon privé (4m²), une salle de bain avec baignoire et toilettes, et un grenier pour du rangement supplémentaire. Sous-sol : Un véritable cocon avec une suite parentale, dotée d'un dressing et d'une salle d'eau privative, une cave pour stocker vos précieuses bouteilles ou affaires, ainsi qu'une pièce supplémentaire comprenant une buanderie et donnant sur les extérieurs : la terrasse (48,5m²) et le jardin (132m²). Des équipements conçus pour votre confort Garage attenant pour un véhicule + abri sécurisé pour moto et vélos Chauffage optimisé : Poêle à granulés pour l'étage principal, radiateurs à inertie haut de gamme avec thermostats individuels sur les autres niveaux Maison connectée : Volets roulants centralisés, programmables et pilotables à distance Alliant charme, confort et modernité, cette maison est une véritable invitation à la douceur de vivre. Ne laissez pas passer cette opportunité ! Prenez le temps d'une visite virtuelle : https://drive.google.com/file/d/1TYGoScBItiJfhP8O1IMQJsx7_4GpokX8/view?usp=sharing Contactez-nous dès maintenant pour une visite !\",\n        \"energy\": \"E\",\n        \"functions\": null,\n        \"ges\": \"B\",\n        \"image_urls\": \"https://cdn.pap.fr/photos/pap/ef/57/ef576290ba15cb169754e888255de8a0/e-p1.jpg, https://cdn.pap.fr/photos/pap/6c/37/6c3786e856703f2091f411a66432d8b6/6-p1.jpg, https://cdn.pap.fr/photos/pap/1c/35/1c357e05f752d12abc5a3d30e17f84cb/1-p1.jpg, https://cdn.pap.fr/photos/pap/8f/71/8f71ce1b5dc184d8b9e538c7abc008e7/8-p1.jpg, https://cdn.pap.fr/photos/pap/69/11/6911a39cd7411f14b79eb2ce0d7f3fd0/6-p1.jpg, https://cdn.pap.fr/photos/pap/25/56/255623f22a5480b9a3d815cb9cf573c2/2-p1.jpg, https://cdn.pap.fr/photos/pap/32/98/3298ddbb41fff030a4c9eab88930fd42/3-p1.jpg, https://cdn.pap.fr/photos/pap/00/32/00321e5fda9143eadf2276d81bef18aa/0-p1.jpg, https://cdn.pap.fr/photos/pap/68/49/68491996e51592020a8e080c6a4edb1f/6-p1.jpg, https://cdn.pap.fr/photos/pap/e2/97/e297d9f7a62b4ac5416c79e0c3bc367f/e-p1.jpg, https://cdn.pap.fr/photos/pap/80/f6/80f6f8159ac1f37ae0963d6a89acf6d7/8-p1.jpg, https://cdn.pap.fr/photos/pap/d9/9e/d99e7349ef78782e24f2ad46f16cb627/d-p1.jpg\",\n        \"internal_id\": \"457702759\",\n        \"lat\": \"46.253456\",\n        \"lng\": \"5.648262\",\n        \"native_id\": 201385,\n        \"neighborhood\": \"Oyonnax (01100)\",\n        \"phone\": \"07 45 71 53 84\",\n        \"price\": 275000,\n        \"publication_date\": \"2025-07-17T00:00:00Z\",\n        \"ref\": \"F77/2759\",\n        \"rooms\": 6,\n        \"scraping_time\": \"2025-07-17T09:34:32.498Z\",\n        \"size\": null,\n        \"title\": \"Vente maison 152 m² Oyonnax (01100)\",\n        \"url\": \"https://www.pap.fr/annonces/maison-oyonnax-01100-r457702759\"\n    }\n  ],\n  \"next\": \"https://api.lobstr.io/v1/results?squid=e23069fee2594ee0aed755be195b156c&run=6ecdfb8a43c841d18502f045200196f7&page=2&page_size=100\",\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

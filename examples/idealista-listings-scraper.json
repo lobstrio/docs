@@ -1,0 +1,239 @@
+{
+	"name": "Idealista Iter Listings",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.idealista.com/en/venta-viviendas/vizcaya/\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.idealista.com/en/venta-viviendas/vizcaya/\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"82367f24d9450b2222080eed91662968\",\n      \"created_at\": \"2025-07-17T09:06:47.287893\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.idealista.com/en/venta-viviendas/vizcaya/\"\n      },\n      \"module\": 115,\n      \"object\": \"task\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Idealista Iter Listings (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_pages\": 100\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Idealista Iter Listings (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_pages\": 100\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"Idealista Iter Listings (1)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"max_pages\": 100\n  }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Idealista Iter Listings** crawler. Each record represents one property listing.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Unique identifier for this result. |\n| **object** | string | Always `\"result\"`. |\n| **squid** | string | Hash ID of the squid that produced this result. |\n| **run** | string | Hash ID of the run during which this result was scraped. |\n| **area** | number | Built area in square meters. |\n| **bedrooms** | integer | Number of bedrooms. |\n| **currency** | string | Currency symbol for the listing price. |\n| **description** | string | Short listing description. |\n| **floor** | string | Floor level (if provided). |\n| **functions** | object or null | Reserved for any function-specific metadata. |\n| **main_image** | string or null | URL of the primary listing image. |\n| **native_id** | integer | Internal listing identifier. |\n| **phone** | string | Contact phone number for the listing. |\n| **price** | number | Listing price in specified currency. |\n| **scraping_time** | string (ISO) | Timestamp when the listing was fetched. |\n| **title** | string | Listing title. |\n| **url** | string | Direct URL to the listing page. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 100,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 100,\n  \"data\": [\n    {\n        \"id\": 77153,\n        \"object\": \"result\",\n        \"squid\": \"cd75312523ed4ba88f71fc6c984823e2\",\n        \"run\": \"170fd6e6629f45b284bdeeee8fbb1c20\",\n        \"area\": 440,\n        \"bedrooms\": 5,\n        \"currency\": \"€\",\n        \"description\": \"IC2 Berango offers for sale EXCLUSIVELY, a spectacular villa in Berango, located in the Santa Ana area. This impressive property, built entirely in ashlar stone, has approximately 440 square meters built, distributed in 5 spacious bedrooms and 4 bathrooms. In impeccable condition, this villa is presented as a unique\",\n        \"floor\": \"\",\n        \"functions\": null,\n        \"main_image\": null,\n        \"native_id\": 77153,\n        \"phone\": \"+34946980112\",\n        \"price\": 1275000,\n        \"scraping_time\": \"2025-01-29T08:46:11.581Z\",\n        \"title\": \"Detached house in calle Jesus Maria Leizaola, Berango\",\n        \"url\": \"https://www.idealista.com/en/inmueble/104990102/\"\n    }\n  ],\n  \"next\": \"https://api.lobstr.io/v1/results?squid=e23069fee2594ee0aed755be195b156c&run=6ecdfb8a43c841d18502f045200196f7&page=2&page_size=100\",\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

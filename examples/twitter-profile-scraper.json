@@ -1,0 +1,218 @@
+{
+	"name": "Twitter Profile Scraper",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"screen_name\": \"elonmusk\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"screen_name\": \"elonmusk\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"0b1e3fd36e8249ec03220fb04b7fc71c\",\n            \"created_at\": \"2025-07-04T04:52:45.180627\",\n            \"is_active\": true,\n            \"params\": {\n                \"screen_name\": \"elonmusk\"\n            },\n            \"module\": 167,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Twitter Profile Scraper (2)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n        \"json\": true\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Twitter Profile Scraper** behaves — specifically whether to return parsed fields or the raw API response.\n\n➡️ These parameters are specific to the **Twitter Profile Scraper**. _Refer to the_ [Constructing the `params` Object](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter | Type    | Description                                                                                              |\n| --------- | ------- | -------------------------------------------------------------------------------------------------------- |\n| **json**  | boolean | If `true`, returns the complete raw JSON payload for the user profile, before any internal data parsing. |\n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Twitter Profile Scraper (2)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n        \"json\": true\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"name\": \"Twitter Profile Scraper (2)\",\n    \"no_line_breaks\": true,\n    \"params\": {\n        \"json\": true\n    },\n    \"to_complete\": false,\n    \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Twitter Profile Scraper**. Each record represents one user profile.\n\n| **Field**                                     | Type             | Description                                                                                             |\n|-----------------------------------------------|------------------|---------------------------------------------------------------------------------------------------------|\n| **id**                                        | integer          | Unique identifier for this result record.                                                              |\n| **object**                                    | string           | Always `\"result\"`.                                                                                      |\n| **squid**                                     | string           | Hash ID of the squid that produced this result.                                                         |\n| **run**                                       | string           | Hash ID of the run during which this result was scraped.                                                |\n| **_json**                                     | string (JSON)    | Raw JSON payload returned by Twitter’s API, before any parsing.                                         |\n| **affiliates_highlighted_label_description**   | string           | Text description for any highlighted affiliate label (e.g., “X”).                                       |\n| **affiliates_highlighted_label_user_label_type** | string         | Type of affiliate label (e.g., `BusinessLabel`).                                                        |\n| **bio**                                       | string           | User’s profile biography text.                                                                          |\n| **created_at**                                | string (ISO)     | Account creation timestamp (e.g., `\"2009-06-02T20:12:29Z\"`).                                             |\n| **creator_subscriptions_count**               | integer          | Number of subscriptions the user’s account has created (e.g., paid promoter subscriptions).             |\n| **favourites_count**                          | integer          | Total number of tweets this user has favorited.                                                        |\n| **followers_count**                           | integer          | Total number of followers.                                                                             |\n| **following_count**                           | integer          | Total number of accounts the user is following.                                                        |\n| **functions**                                 | object or null   | Reserved for future function metadata (currently `null`).                                              |\n| **internal_id**                               | string           | Twitter’s internal user identifier (the same as `rest_id`).                                            |\n| **is_blue_verified**                          | boolean          | `true` if the account is Blue Verified.                                                                |\n| **listed_count**                              | integer          | Number of public lists the user appears in.                                                            |\n| **location**                                  | string           | User-specified location field from their profile.                                                      |\n| **media_count**                               | integer          | Number of media items (images/videos) the user has tweeted.                                            |\n| **name**                                      | string           | Display name of the user (e.g., “Elon Musk”).                                                          |\n| **native_id**                                 | integer          | Native scraper identifier (often matches `id`).                                                        |\n| **normal_followers_count**                    | integer          | Follower count excluding special or proxy counts.                                                      |\n| **possibly_sensitive**                        | boolean          | `true` if the user’s content is potentially sensitive.                                                 |\n| **posts_count**                               | integer          | Total number of tweets (statuses) the user has posted.                                                 |\n| **profile_banner_url**                        | string (URL)     | URL of the user’s profile banner image.                                                                |\n| **profile_image_shape**                       | string           | Shape setting for the profile image (e.g., `Circle`).                                                  |\n| **profile_image_url_https**                   | string (URL)     | HTTPS URL of the user’s profile image.                                                                 |\n| **scraping_time**                             | string (ISO)     | Timestamp when this profile was fetched by the scraper.                                                |\n| **screen_name**                               | string           | User’s handle (without the `@`).                                                                       |\n| **super_follow_eligible**                     | boolean          | `true` if the user is eligible for Super Follows.                                                      |\n| **verification_info_reason_description_text** | string           | Explanation text for the account’s verification status.                                                |\n| **verified_since_msec**                       | string or integer| Millisecond timestamp (or offset) indicating when the account was verified.                            |\n| **website**                                   | string (URL)     | URL of the user’s personal or business website (if provided).                                          |\n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 1,\n    \"limit\": 10,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 1,\n    \"data\": [\n        {\n            \"id\": 1,\n            \"object\": \"result\",\n            \"squid\": \"b209052d2ca847469b5f9ec441b29b90\",\n            \"run\": \"c4fc6a0572b84e3d8d7cac7cb6187ddd\",\n            \"_json\": \"{\\\"__typename\\\": \\\"User\\\", \\\"id\\\": \\\"VXNlcjo0NDE5NjM5Nw==\\\", \\\"rest_id\\\": \\\"44196397\\\", \\\"affiliates_highlighted_label\\\": {\\\"label\\\": {\\\"url\\\": {\\\"url\\\": \\\"https://twitter.com/X\\\", \\\"urlType\\\": \\\"DeepLink\\\"}, \\\"badge\\\": {\\\"url\\\": \\\"https://pbs.twimg.com/profile_images/1683899100922511378/5lY42eHs_bigger.jpg\\\"}, \\\"description\\\": \\\"X\\\", \\\"userLabelType\\\": \\\"BusinessLabel\\\", \\\"userLabelDisplayType\\\": \\\"Badge\\\"}}, \\\"is_blue_verified\\\": true, \\\"profile_image_shape\\\": \\\"Circle\\\", \\\"legacy\\\": {\\\"created_at\\\": \\\"Tue Jun 02 20:12:29 +0000 2009\\\", \\\"default_profile\\\": false, \\\"default_profile_image\\\": false, \\\"description\\\": \\\"\\\", \\\"entities\\\": {\\\"description\\\": {\\\"urls\\\": []}}, \\\"fast_followers_count\\\": 0, \\\"favourites_count\\\": 153872, \\\"followers_count\\\": 221684730, \\\"friends_count\\\": 1149, \\\"has_custom_timelines\\\": true, \\\"is_translator\\\": false, \\\"listed_count\\\": 163209, \\\"location\\\": \\\"\\\", \\\"media_count\\\": 3939, \\\"name\\\": \\\"Elon Musk\\\", \\\"normal_followers_count\\\": 221684730, \\\"pinned_tweet_ids_str\\\": [], \\\"possibly_sensitive\\\": false, \\\"profile_banner_url\\\": \\\"https://pbs.twimg.com/profile_banners/44196397/1739948056\\\", \\\"profile_image_url_https\\\": \\\"https://pbs.twimg.com/profile_images/1936002956333080576/kqqe2iWO_normal.jpg\\\", \\\"profile_interstitial_type\\\": \\\"\\\", \\\"screen_name\\\": \\\"elonmusk\\\", \\\"statuses_count\\\": 80843, \\\"translator_type\\\": \\\"none\\\", \\\"verified\\\": false, \\\"withheld_in_countries\\\": []}, \\\"professional\\\": {\\\"rest_id\\\": \\\"1679729435447275522\\\", \\\"professional_type\\\": \\\"Creator\\\", \\\"category\\\": []}, \\\"tipjar_settings\\\": {\\\"is_enabled\\\": false, \\\"bandcamp_handle\\\": \\\"\\\", \\\"bitcoin_handle\\\": \\\"\\\", \\\"cash_app_handle\\\": \\\"\\\", \\\"ethereum_handle\\\": \\\"\\\", \\\"gofundme_handle\\\": \\\"\\\", \\\"patreon_handle\\\": \\\"\\\", \\\"pay_pal_handle\\\": \\\"\\\", \\\"venmo_handle\\\": \\\"\\\"}, \\\"legacy_extended_profile\\\": {}, \\\"is_profile_translatable\\\": false, \\\"has_hidden_subscriptions_on_profile\\\": true, \\\"verification_info\\\": {\\\"is_identity_verified\\\": false, \\\"reason\\\": {\\\"description\\\": {\\\"text\\\": \\\"Dieser Account ist verifiziert, weil es sich um einen verbundenen Account von @X auf X handelt. Mehr erfahren\\\", \\\"entities\\\": [{\\\"from_index\\\": 78, \\\"to_index\\\": 80, \\\"ref\\\": {\\\"url\\\": \\\"https://twitter.com/X\\\", \\\"url_type\\\": \\\"ExternalUrl\\\"}}, {\\\"from_index\\\": 96, \\\"to_index\\\": 109, \\\"ref\\\": {\\\"url\\\": \\\"https://help.twitter.com/en/rules-and-policies/profile-labels\\\", \\\"url_type\\\": \\\"ExternalUrl\\\"}}]}, \\\"verified_since_msec\\\": \\\"-156836000000000\\\", \\\"override_verified_year\\\": -3000}}, \\\"highlights_info\\\": {\\\"can_highlight_tweets\\\": true, \\\"highlighted_tweets\\\": \\\"657\\\"}, \\\"user_seed_tweet_count\\\": 0, \\\"business_account\\\": {}, \\\"creator_subscriptions_count\\\": 221}\",\n            \"affiliates_highlighted_label_description\": \"X\",\n            \"affiliates_highlighted_label_user_label_type\": \"BusinessLabel\",\n            \"bio\": \"\",\n            \"created_at\": \"2009-06-02T20:12:29Z\",\n            \"creator_subscriptions_count\": 221,\n            \"favourites_count\": 153872,\n            \"followers_count\": 221684730,\n            \"following_count\": 1149,\n            \"functions\": null,\n            \"internal_id\": \"44196397\",\n            \"is_blue_verified\": true,\n            \"listed_count\": 163209,\n            \"location\": \"\",\n            \"media_count\": 3939,\n            \"name\": \"Elon Musk\",\n            \"native_id\": 1,\n            \"normal_followers_count\": 221684730,\n            \"possibly_sensitive\": false,\n            \"posts_count\": 80843,\n            \"profile_banner_url\": \"https://pbs.twimg.com/profile_banners/44196397/1739948056\",\n            \"profile_image_shape\": \"Circle\",\n            \"profile_image_url_https\": \"https://pbs.twimg.com/profile_images/1936002956333080576/kqqe2iWO_normal.jpg\",\n            \"scraping_time\": \"2025-07-04T04:03:16.651Z\",\n            \"screen_name\": \"elonmusk\",\n            \"super_follow_eligible\": true,\n            \"verification_info_reason_description_text\": \"Dieser Account ist verifiziert, weil es sich um einen verbundenen Account von @X auf X handelt. Mehr erfahren\",\n            \"verified_since_msec\": \"-156836000000000\",\n            \"website\": \"http://TheAmericaPAC.org\"\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

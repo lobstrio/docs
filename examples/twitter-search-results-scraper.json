@@ -1,0 +1,229 @@
+{
+    "name": "Twitter Search Results Scraper",
+    "item": [
+        {
+            "name": "Add tasks",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://x.com/search?q=t.me%2F%20%22CA%22%20(private)&src=typed_query&f=top\"\r\n    }\r\n  ]\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/tasks",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "tasks"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token <api_key>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://x.com/search?q=t.me%2F%20%22CA%22%20(private)&src=typed_query&f=top\"\r\n    }\r\n  ]\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://api.lobstr.io/v1/tasks",
+                            "protocol": "https",
+                            "host": [
+                                "api",
+                                "lobstr",
+                                "io"
+                            ],
+                            "path": [
+                                "v1",
+                                "tasks"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"9fb224b5e2ce36942a74d1e94dd1cf14\",\n      \"created_at\": \"2025-07-07T09:53:32.017225\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://x.com/search?q=t.me%2F%20%22CA%22%20(private)&src=typed_query&f=top\"\n      },\n      \"module\": 178,\n      \"object\": \"task\"\n    }\n  ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "Update settings",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n  \"name\": \"Twitter Search Results Scraper (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_results\": 42\r\n  }\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/squids/{{squid_hash}}",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "squids",
+                        "{{squid_hash}}"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token <api_key>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"name\": \"Twitter Search Results Scraper (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"max_results\": 42\r\n  }\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+                            "protocol": "https",
+                            "host": [
+                                "api",
+                                "lobstr",
+                                "io"
+                            ],
+                            "path": [
+                                "v1",
+                                "squids",
+                                "<squid_hash>"
+                            ]
+                        }
+                    },
+                    "status": "Created",
+                    "code": 201,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n  \"name\": \"Twitter Search Results Scraper (1)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"max_results\": 42\n  }\n}"
+                }
+            ]
+        },
+        {
+            "name": "Get results",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "results"
+                    ],
+                    "query": [
+                        {
+                            "key": "squid",
+                            "value": "{{squid_hash}}"
+                        },
+                        {
+                            "key": "run",
+                            "value": "{{run_hash}}"
+                        }
+                    ]
+                },
+                "description": "These `result` objects include all fields documented in [Twitter User Tweets Scraper](#64334063-b1e3-44d4-ae58-56d4e96a340b) plus the following tweet-specific ones:\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **binded_media_description** | string or null | Twitter Card description if attached. |\n| **binded_media_domain** | string or null | Domain of the Twitter Card. |\n| **binded_media_thumbnail_url** | string or null | Thumbnail URL of the Twitter Card. |\n| **binded_media_title** | string or null | Title of the Twitter Card. |\n| **binded_media_url** | string or null | URL of the Twitter Card link. |\n| **media_0_thumbnail** … | string or null | Thumbnail URL for each attached media item (up to media_3). |\n| **media_0_type** … | string or null | Type of each attached media item (`photo`, `video`, etc.). |\n| **media_0_url** … | string or null | Direct URL for each attached media item. |"
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token <api_key>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>",
+                            "protocol": "https",
+                            "host": [
+                                "api",
+                                "lobstr",
+                                "io"
+                            ],
+                            "path": [
+                                "v1",
+                                "results"
+                            ],
+                            "query": [
+                                {
+                                    "key": "squid",
+                                    "value": "<squid_hash>"
+                                },
+                                {
+                                    "key": "run",
+                                    "value": "<run_hash>"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n    \"total_results\": 1,\n    \"limit\": 10,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 1,\n    \"data\": [\n        {\n            \"id\": 2726943,\n            \"object\": \"result\",\n            \"squid\": \"eecfecc500b040b88f6dd035d405f551\",\n            \"run\": \"10199b510e854623b50c51b693801fc6\",\n            \"binded_media_description\": null,\n            \"binded_media_domain\": null,\n            \"binded_media_thumbnail_url\": null,\n            \"binded_media_title\": null,\n            \"binded_media_url\": null,\n            \"bookmarks_count\": 2,\n            \"content\": \"I have got Pretty  holes  you know🤤 wanna taste? https://t.co/KYdCyzr0g0 so we can both have a private time!\\n#Prettypussy #Freshout #Horny #La #Ca #Texas #Missionary #Bdsm #Cumshot #Ass #Holes https://t.co/09S4kE45rN\",\n            \"functions\": null,\n            \"internal_unique_id\": \"1930101550329770319\",\n            \"is_quoted\": false,\n            \"is_retweeted\": false,\n            \"likes\": 5,\n            \"media_0_thumbnail\": \"https://pbs.twimg.com/media/GskZIamXwAAIZ5c.jpg\",\n            \"media_0_type\": \"photo\",\n            \"media_0_url\": \"https://pbs.twimg.com/media/GskZIamXwAAIZ5c.jpg\",\n            \"media_1_thumbnail\": null,\n            \"media_1_type\": null,\n            \"media_1_url\": null,\n            \"media_2_thumbnail\": null,\n            \"media_2_type\": null,\n            \"media_2_url\": null,\n            \"media_3_thumbnail\": null,\n            \"media_3_type\": null,\n            \"media_3_url\": null,\n            \"name\": \"Amira\",\n            \"native_id\": 2726943,\n            \"original_tweet_id\": null,\n            \"original_tweet_url\": null,\n            \"published_at\": \"2025-06-04T03:17:23Z\",\n            \"quote_count\": 0,\n            \"reply_count\": 0,\n            \"retweet_count\": 0,\n            \"scraping_time\": \"2025-06-05T09:12:26.537Z\",\n            \"tweet_url\": \"https://twitter.com/Pretty_Amiraa/status/1930101550329770319\",\n            \"user_id\": \"1587889611329736713\",\n            \"username\": \"Pretty_Amiraa\",\n            \"views_count\": 669\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,239 @@
+{
+	"name": "YouTube Channel Email Scraper",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.youtube.com/c/LerussefacileavecDiana\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.youtube.com/c/LerussefacileavecDiana\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"82367f24d9450b2222080eed91662968\",\n      \"created_at\": \"2025-07-17T09:06:47.287893\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.youtube.com/c/LerussefacileavecDiana\"\n      },\n      \"module\": 115,\n      \"object\": \"task\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"YouTube Channel Email Scraper (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"YouTube Channel Email Scraper (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {}\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"YouTube Channel Email Scraper (1)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {}\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "| **Field** | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Unique identifier for this result record. |\n| **object** | string | Always `\"result\"`. |\n| **squid** | string | Hash ID of the squid that produced this result. |\n| **run** | string | Hash ID of the run during which this result was scraped. |\n| **account_name** | string | Display name of the YouTube channel. |\n| **channel_id** | string | YouTube’s unique channel identifier (e.g., `UCybLjt4Vp59aSXVVcI2RS1w`). |\n| **slug** | string | URL‐friendly channel name segment (used in custom URLs). |\n| **creation_date** | string (ISO) | Timestamp when the channel was created (e.g., `\"2017-09-06T00:00:00Z\"`). |\n| **country** | string | Country associated with the channel (if provided). |\n| **about** | string | Full channel description (“About” section). |\n| **email** | string | Contact email address scraped from the channel’s About page. |\n| **facebook** | string | Facebook page URL, if listed. |\n| **instagram** | string | Instagram profile URL, if listed. |\n| **twitter** | string | Twitter profile URL, if listed. |\n| **other_links** | string | Comma-separated additional links (website, affiliate, social, etc.). |\n| **url** | string | Full URL to the channel page (e.g., `https://www.youtube.com/c/TechLegend`). |\n| **subscribers_count** | string | Subscriber count text (e.g., `\"108K subscribers\"`). |\n| **videos_count** | integer | Total number of videos published on the channel. |\n| **views_count** | integer | Aggregate view count across all videos. |\n| **native_id** | integer | Secondary identifier matching the internal system’s channel ID. |\n| **scraping_time** | string (ISO) | When this result was fetched by the scraper. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 100,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 100,\n  \"data\": [\n    {\n        \"id\": 47771,\n        \"object\": \"result\",\n        \"squid\": \"372558c06a004dbab527f731c0d095cf\",\n        \"run\": \"1edf08b8f753406287da8dbe1ff92bec\",\n        \"about\": \"👋 Welcome to our channel, where we provide comprehensive and insightful content on the latest and most advanced technology available in today's market across each category that we review. Our videos cover a broad range of tech products, meticulously reviewing them to help you make informed purchasing decisions. Additionally, we keep you updated with the latest tech updates. Join us as we explore and analyze the innovations that define our modern era.\\n\\n🔵 Sometimes, we feature promotional and educational footage from manufacturers and fellow creators. If you prefer not to have your video featured on our channel, please contact us via email. Thank you!\\n\\n📌 Contact Us: techlegendofficial@gmail.com\\n\\n🗒️ Amazon Affiliate Disclosure Notice: Tech Legend is a participant in the Amazon Services LLC Associates Program, an affiliate advertising program designed to provide a means for sites to earn advertising fees by advertising and linking to Amazon.com.\\n\\n❤️ Thank you for your continued support.\\n\",\n        \"account_name\": \"Tech Legend\",\n        \"channel_id\": \"UCybLjt4Vp59aSXVVcI2RS1w\",\n        \"country\": \"United States\",\n        \"creation_date\": \"2017-09-06T00:00:00Z\",\n        \"email\": \"techlegendofficial@gmail.com\",\n        \"facebook\": \"facebook.com/techlegendhq\",\n        \"functions\": null,\n        \"instagram\": \"instagram.com/techlegendhq\",\n        \"native_id\": 47771,\n        \"other_links\": \"techlegendofficial@gmail.com, youtube.com/channel/UCybLjt4Vp59aSXVVcI2RS1w?sub_confirmation=1, techlegend.us, twitch.tv/techlegendhq, pinterest.com/techlegendhq, reddit.com/user/techlegendhq, techlegend.tumblr.com, flickr.com/people/techlegend, amazon.com/shop/techlegend\",\n        \"scraping_time\": \"2025-07-11T17:45:19.416Z\",\n        \"slug\": \"TechLegend\",\n        \"subscribers_count\": \"108K subscribers\",\n        \"twitter\": \"twitter.com/TechLegendHQ\",\n        \"url\": \"https://www.youtube.com/c/TechLegend\",\n        \"videos_count\": 105,\n        \"views_count\": 1641373\n        }\n  ],\n  \"next\": \"https://api.lobstr.io/v1/results?squid=e23069fee2594ee0aed755be195b156c&run=6ecdfb8a43c841d18502f045200196f7&page=2&page_size=100\",\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

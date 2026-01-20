@@ -1,0 +1,240 @@
+{
+	"name": "Pages Jaunes Companies Search Export",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.pagesjaunes.fr/annuaire/paris-75/boulanger\"\r\n    }\r\n  ]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.pagesjaunes.fr/annuaire/paris-75/boulanger\"\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"82367f24d9450b2222080eed91662968\",\n      \"created_at\": \"2025-07-17T09:06:47.287893\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.pagesjaunes.fr/annuaire/paris-75/boulanger\"\n      },\n      \"module\": 115,\n      \"object\": \"task\"\n    }\n  ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Pages Jaunes Companies Search Export (2)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"functions\": {\r\n      \"results_details\": true,\r\n      \"collect_contacts\": true\r\n    },\r\n    \"max_pages\": 3\r\n  }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Pages Jaunes Companies Search Export** crawler behaves — including pagination, contact harvesting, and detailed listing enrichment.\n\n➡️ These parameters are specific to the **Pages Jaunes Companies Search Export** crawler. _Refer to the_ [Constructing the <code>params</code> Object](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **max_pages** | integer | Maximum number of result pages to crawl (e.g., `3`). |\n| **functions.collect_contacts** | boolean | If `true`, visits each business’s website to collect publicly available email addresses. |\n| **functions.results_details** | boolean | If `true`, visits each listing’s detail page to collect structured data: `siret`, `naf_code`, `shop_size`, `shop_type`, `siren`, `company_hq`, `company_creation_date`, `company_size`, `website`, `facebook`, and `instagram`. |\n\n---\n\n### ⚠️ **Additional Notes**\n\n- Enabling `functions.collect_contacts` or `functions.results_details` will increase run time due to extra HTTP requests per listing."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Pages Jaunes Companies Search Export (2)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"functions\": {\r\n      \"results_details\": true,\r\n      \"collect_contacts\": true\r\n    },\r\n    \"max_pages\": 3\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"squids",
+								"<squid_hash>"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n  \"name\": \"Pages Jaunes Companies Search Export (2)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {\n    \"functions\": {\n      \"results_details\": true,\n      \"collect_contacts\": true\n    },\n    \"max_pages\": 3\n  }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Pages Jaunes Companies Search Export** crawler.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **activity** | string | Search filter used (e.g., `\"magasins d'électroménager +2\"`). |\n| **additional_phone** | string | Secondary phone number, if available. |\n| **city** | string | City where the business is located. |\n| **company_creation_date** | string (ISO) | Company’s founding date (`YYYY-MM-DDThh:mm:ssZ`). |\n| **company_hq** | string | Address of the company headquarters, if provided. |\n| **company_size** | string | Company size category (e.g., `\"5000 à 9999 salariés\"`). |\n| **description** | string | Business description text. |\n| **email** | string | Contact email address, if collected. |\n| **facebook** | string or null | Facebook page URL, if listed. |\n| **full_address** | string | Complete street address (e.g., `\"30 boulevard Capucines 75009 Paris\"`). |\n| **functions.results_details.filling_date** | string | Timestamp when detail-page enrichment ran (`DD/MM/YYYY, HH:mm:ss Z`). |\n| **image_url** | string | URL of the business’s logo or main image. |\n| **instagram** | string or null | Instagram profile URL, if listed. |\n| **item_id** | string | Internal listing identifier. |\n| **naf_code** | string | NAF activity code (e.g., `\"4754Z\"`). |\n| **phone** | string | Primary phone number, if available. |\n| **ratings** | integer | Number of customer ratings. |\n| **score** | number | Average rating score (e.g., `1`). |\n| **shop_size** | string | Shop size category (e.g., `\"50 à 99 salariés\"`). |\n| **shop_type** | string | Establishment type (e.g., `\"Etablissement secondaire\"`). |\n| **siren** | string | Company SIREN number. |\n| **siret** | string | Company SIRET number. |\n| **tags** | string | Comma-separated service tags (e.g., `\"livraison à domicile, appareil de puériculture, …\"`). |\n| **title** | string | Business name or listing title (e.g., `\"Boulanger Opéra\"`). |\n| **url** | string | Direct URL to the listing on Pages Jaunes. |\n| **website** | string | Business website URL, if available. |\n| **zip_code** | string | Postal code for the listing (e.g., `\"75009\"`). |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "<squid_hash>"
+								},
+								{
+									"key": "run",
+									"value": "<run_hash>"
+								},
+								{
+									"key": "page_size",
+									"value": "2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [
+						{
+							"expires": "Invalid Date",
+							"domain": "",
+							"path": ""
+						}
+					],
+					"body": "{\n  \"total_results\": 1,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 1,\n  \"data\": [\n    {\n        \"id\": 2454,\n        \"object\": \"result\",\n        \"squid\": \"4a68464aef0a4067b161f64579278a58\",\n        \"run\": \"e13f5d4f74af4f4f89c5a4fc535a031e\",\n        \"activity\": \"magasins d'électroménager +2\",\n        \"additional_phone\": \"\",\n        \"city\": \"Paris\",\n        \"company_creation_date\": \"1988-03-24T00:00:00Z\",\n        \"company_hq\": \"\",\n        \"company_size\": \"5000 à 9999 salariés\",\n        \"description\": \"Bonjour et bienvenue dans votre magasin Boulanger ; espace convivial de découverte, de démonstration et de conseils. Retrouvez, dans votre magasin Boulanger, une large sélection de lave-linge, sè che-linge, lave-vaisselle, four, hotte, robot, aspirateur, TV, home-cinéma, PC, tablette, appareil photo, smartphone, et bien d'autres produits.Présentation des derni ères nouveautés, accompagnement : vos conseillers de vente sont à votre disposition pour vous faire vivre pleinement la Happy Technologie dans votre magasin Boulanger !Rendez-vous vite dans votre magasin d'électroménager et multimédia !\",\n        \"email\": \"\",\n        \"facebook\": null,\n        \"full_address\": \"30 boulevard Capucines 75009 Paris\",\n        \"functions\": {\n            \"results_details\": {\n            \"filling_date\": \"07/28/2025, 10:58:20 +0200\"\n            }\n        },\n        \"image_url\": \"/media/newdam/preset-thumbnail-logo-desktop/58/4c/30/00/00/50/00/dd/5c/fa/655f584c3000005000dd5cfa/655f584c3000008d08dd5cfb.jpg\",\n        \"instagram\": \"https://www.instagram.com/Boulangeropera/\",\n        \"item_id\": \"0001562094139200\",\n        \"naf_code\": \"4754Z\",\n        \"native_id\": 2454,\n        \"phone\": \"\",\n        \"ratings\": 0,\n        \"score\": 1,\n        \"scraping_time\": \"2025-07-28T08:58:20.896Z\",\n        \"shop_size\": \"50 à 99 salariés\",\n        \"shop_type\": \"Etablissement secondaire\",\n        \"siren\": \"347384570\",\n        \"siret\": \"34738457001969\",\n        \"tags\": \"livraison à domicile, appareil de puériculture, retrait en magasin, appareil de cuisson de plein air, plancha, appareil à raclette, appareil de rasage, friteuse\",\n        \"title\": \"Boulanger Opéra\",\n        \"url\": \"https://www.pagesjaunes.fr/pros/detail?code_etablissement=56209413&code_localite=L07505600&code_rubrique=307570#zoneHoraires\",\n        \"website\": \"https://www.boulanger.com/magasins/ile-de-france/paris/paris\",\n        \"zip_code\": \"75009\"\n    }\n  ],\n  \"next\": null,\n  \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

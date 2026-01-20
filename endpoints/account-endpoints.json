@@ -1,0 +1,512 @@
+
+{
+	"name": "Account",
+	"item": [
+		{
+			"name": "List accounts",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/accounts",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"accounts"
+					]
+				},
+				"description": "This endpoint retrieves a paginated list of all connected platform accounts (like Twitter, LinkedIn, Google) associated with the user."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/accounts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 2,\n    \"limit\": 50,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 3,\n    \"data\": [\n        {\n            \"id\": \"6e5f36d27502ec69fda745ec59ead509\",\n            \"object\": \"account\",\n            \"username\": \"MisterDebugger\",\n            \"created_at\": \"2025-02-11T08:28:14Z\",\n            \"last_synchronization_time\": \"2025-02-11T08:28:14Z\",\n            \"status\": \"200\",\n            \"status_code_info\": \"synchronized\",\n            \"status_code_description\": \"Success!\",\n            \"type\": \"facebook-sync\",\n            \"params\": {\n                \"default\": {},\n                \"user\": {}\n            },\n            \"updated_at\": null,\n            \"account_type_hash\": \"16f5b7f91e8fc533eab88be973273a02\",\n            \"squids\": [],\n            \"baseurl\": \"https://www.facebook.com\",\n            \"cookies\": [\n                {\n                    \"name\": \"c_user\",\n                    \"required\": true\n                },\n                {\n                    \"name\": \"xs\",\n                    \"required\": true\n                }\n            ],\n            \"icon\": \"<base64 imaged data>\"\n        },\n        {\n            \"id\": \"abfeb440ceccdfab974e8d261836c9d6\",\n            \"object\": \"account\",\n            \"username\": \"MisterDebugger\",\n            \"created_at\": \"2025-02-11T08:28:22Z\",\n            \"last_synchronization_time\": \"2025-02-11T08:28:22Z\",\n            \"status\": \"200\",\n            \"status_code_info\": \"synchronized\",\n            \"status_code_description\": \"Success!\",\n            \"type\": \"twitter-sync\",\n            \"params\": {\n                \"default\": {},\n                \"user\": {}\n            },\n            \"updated_at\": null,\n            \"account_type_hash\": \"9853173fc00a940a33d7a420c176ad3b\",\n            \"squids\": [],\n            \"baseurl\": \"https://x.com\",\n            \"cookies\": [\n                {\n                    \"name\": \"auth_token\",\n                    \"required\": true\n                },\n                {\n                    \"name\": \"ct0\",\n                    \"required\": true\n                }\n            ],\n            \"icon\": \"<base64 image data>\"\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "List account types",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/account_types",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"account_types"
+					]
+				},
+				"description": "Some crawlers require user authentication (like Facebook, LinkedIn) through cookies or session tokens. The `account_type` object describes the required credentials for such modules.\n\n## Account Type Fields\n\n| Field | Type | Description |\n| --- | --- | --- |\n| **id** | string | Unique identifier of the account type. |\n| **name** | string | The technical name of the account type (e.g., `facebook-sync`). |\n| **domain** | string | Name of the platform or website this account type connects to (e.g., `Facebook`). |\n| **baseurl** | string | The base URL for the platform's login or data-fetching endpoints. |\n| **cookies** | array | A list of cookie names required for authentication. Some cookies may be marked as required or optional. |\n\n## Notes\n\n- If the `cookies` array is **empty**, it means **all cookies from the user session are required** for authentication.\n    \n- Required cookies must be provided for the crawler to work. Missing cookies will result in authentication failure.\n    \n\n> For implementation, always verify the required cookies in the `cookies` array when preparing your account object for a run. \n  \n\n## Account Limits\n\nSome account types include a `params` object that defines limits or batch configurations for the crawler when authenticated. These values help control usage and message sending.\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **\\[attribute\\]** | object | Represents the daily limit for a specific attribute (e.g., `messages`, `profiles`, `searches`). |\n| **batch** | object | (Optional) Defines the maximum number of actions per launch based on the `attribute` (e.g., messages, profiles). |\n| **batch_hours** | object | (Optional) Defines the delay in hours between batch launches during the day. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/account_types",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"account_types"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 4,\n    \"limit\": 50,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 5,\n    \"data\": [\n        {\n            \"id\": \"16f5b7f91e8fc533eab88be973273a02\",\n            \"object\": \"account_type\",\n            \"name\": \"facebook-sync\",\n            \"icon\": \"<base64 image data>\",\n            \"domain\": \"Facebook\",\n            \"params\": {},\n            \"baseurl\": \"https://www.facebook.com\",\n            \"cookies\": [\n                {\n                    \"name\": \"c_user\",\n                    \"required\": true\n                },\n                {\n                    \"name\": \"xs\",\n                    \"required\": true\n                }\n            ]\n        },\n        {\n            \"id\": \"d2c3a71666ad6540a0164a63aa51a83d\",\n            \"object\": \"account_type\",\n            \"name\": \"leboncoin-sync\",\n            \"icon\": \"<base64 image data>\",\n            \"domain\": \"Leboncoin\",\n            \"params\": {\n                \"batch\": {\n                    \"max\": 8,\n                    \"default\": 8,\n                    \"attribute\": \"messages\",\n                    \"description\": \"Number of messages sent per launch\"\n                },\n                \"messages\": {\n                    \"max\": 20,\n                    \"default\": 20,\n                    \"description\": \"Maximum number of messages sent per day\"\n                },\n                \"batch_hours\": {\n                    \"max\": 2,\n                    \"default\": 1,\n                    \"description\": \"Hours between each launch during a day\"\n                }\n            },\n            \"baseurl\": \"https://auth.leboncoin.fr\",\n            \"cookies\": []\n        },\n        {\n            \"id\": \"cf67cafe03776e796f02a29f29ab2866\",\n            \"object\": \"account_type\",\n            \"name\": \"sales-nav-sync\",\n            \"icon\": \"<base64 image data>\",\n            \"domain\": \"Sales Navigator\",\n            \"params\": {\n                \"batch\": {\n                    \"max\": 20,\n                    \"default\": 20,\n                    \"attribute\": \"profiles\",\n                    \"description\": \"Number of profiles visited per launch\"\n                },\n                \"profiles\": {\n                    \"max\": 150,\n                    \"default\": 150,\n                    \"description\": \"Maximum number of profile requests per day\"\n                },\n                \"searches\": {\n                    \"max\": 200,\n                    \"default\": 200,\n                    \"description\": \"Maximum number of searches per day\"\n                },\n                \"batch_hours\": {\n                    \"max\": 2,\n                    \"default\": 2,\n                    \"description\": \"Hours between each launch during a day\"\n                }\n            },\n            \"baseurl\": \"https://www.linkedin.com\",\n            \"cookies\": [\n                {\n                    \"name\": \"li_at\",\n                    \"required\": true\n                },\n                {\n                    \"name\": \"JSESSIONID\",\n                    \"required\": true\n                },\n                {\n                    \"name\": \"li_a\",\n                    \"required\": true\n                }\n            ]\n        },\n        {\n            \"id\": \"9853173fc00a940a33d7a420c176ad3b\",\n            \"object\": \"account_type\",\n            \"name\": \"twitter-sync\",\n            \"icon\": \"<base64 image data>\",\n            \"domain\": \"Twitter\",\n            \"params\": {},\n            \"baseurl\": \"https://x.com\",\n            \"cookies\": [\n                {\n                    \"name\": \"auth_token\",\n                    \"required\": true\n                },\n                {\n                    \"name\": \"ct0\",\n                    \"required\": true\n                }\n            ]\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Get account details",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/accounts/{{account_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"accounts",
+						"{{account_hash}}"
+					]
+				},
+				"description": "This endpoint retrieves detailed information about a specific platform account using its hash ID."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/accounts/{{account_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								"{{account_hash}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 1,\n    \"limit\": 50,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 2,\n    \"data\": [\n        {\n            \"id\": \"d3e97f2cd33658f301bdbe807402ab30\",\n            \"object\": \"account\",\n            \"username\": \"hashamxcom\",\n            \"created_at\": \"2024-03-08T15:15:53Z\",\n            \"last_synchronization_time\": \"2024-12-16T10:28:43Z\",\n            \"status\": \"200\",\n            \"status_code_info\": \"synchronized\",\n            \"status_code_description\": \"Success!\",\n            \"type\": \"twitter-sync\",\n            \"params\": {\n                \"default\": {},\n                \"user\": {}\n            },\n            \"updated_at\": null,\n            \"account_type_hash\": \"9853173fc00a940a33d7a420c176ad3b\",\n            \"squids\": [\n                {\n                    \"name\": \"Twitter User Tweets Scraper (2)\",\n                    \"hash_value\": \"fcd3fff4053e444b8a98b3660bee8b03\"\n                }\n            ],\n            \"baseurl\": \"https://x.com\",\n            \"cookies\": [\n                {\n                    \"name\": \"auth_token\",\n                    \"required\": true\n                },\n                {\n                    \"name\": \"ct0\",\n                    \"required\": true\n                }\n            ],\n            \"icon\": \"<base64 image data>\"\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Sync account",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"type\": \"twitter-sync\",\r\n    \"cookies\": {\r\n        \"auth_token\": \"<cookie.auth_token>\",\r\n        \"ct0\": \"<cookie.ct0>\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/accounts/cookies",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"accounts",
+						"cookies"
+					]
+				},
+				"description": "This endpoint allows you to synchronize cookies for a specific platform account type. It accepts a JSON payload containing the account type and required cookie values, and returns a task id."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"type\": \"twitter-sync\",\r\n    \"cookies\": {\r\n        \"auth_token\": \"<cookie.auth_token>\",\r\n        \"ct0\": \"<cookie.ct0>\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/accounts/cookies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								"cookies"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"984e0a7996aeae956793b8967cd3e122\",\n    \"object\": \"synchronize-cookies\",\n    \"status_code\": 100,\n    \"status_text\": \"created\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Check sync status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/synchronize/{{sync_task_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"synchronize",
+						"{{sync_task_id}}"
+					]
+				},
+				"description": "This endpoint checks the synchronization status of a cookie update task using its hash ID."
+			},
+			"response": [
+				{
+					"name": "Example 1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "/synchronize/{{sync_task_id}}",
+							"path": [
+								"synchronize",
+								"{{sync_task_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"75bed0d425c4bc1912a17fe9fc4dd2a1\",\n    \"object\": \"synchronize-cookies\",\n    \"status_code\": 120,\n    \"status_text\": \"synchronizing\",\n    \"account_hash\": \"84efd37ebd21c0f232826b7763b403d3\"\n}"
+				},
+				{
+					"name": "Example 2",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/synchronize/{{task_id}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"synchronize",
+								"{{task_id}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"75bed0d425c4bc1912a17fe9fc4dd2a1\",\n    \"object\": \"synchronize-cookies\",\n    \"status_code\": 200,\n    \"status_text\": \"synchronized\",\n    \"account_hash\": \"84efd37ebd21c0f232826b7763b403d3\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Update account limits",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"account\": \"{{account_hash}}\",\r\n    \"type\": \"sales-nav-sync\",\r\n    \"params\": {\r\n        \"batch\": 20,\r\n        \"profiles\": 150,\r\n        \"searches\": 199,\r\n        \"batch_hours\": 2\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/accounts",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"accounts"
+					]
+				},
+				"description": "To update account-specific operational limits (like daily profile visits, search limits, or batch size), use the following format.\nThe `params` object contains the updated values for batch size, daily limits per action, or time gaps between batches.\n\n| Param Key       | Type    | Description                                                                                      |\n|-----------------|-------- |--------------------------------------------------------------------------------------------------|\n| **batch**       | integer | (Optional) Updated batch size per launch. Controls how many attributes action run per batch.                |\n| **batch_hours** | integer | (Optional) Delay in hours between each batch run.                                                 |\n| **[attribute]** | integer | (Optional) Daily limit for the specific attribute like `profiles`, `searches`, or `messages`.           |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"account\": \"{{account_hash}}\",\r\n    \"type\": \"sales-nav-sync\",\r\n    \"params\": {\r\n        \"batch\": 20,\r\n        \"profiles\": 150,\r\n        \"searches\": 199,\r\n        \"batch_hours\": 2\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/accounts",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts"
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"2372242060b59e03ac39f7691765bbf8\",\n    \"object\": \"account\",\n    \"username\": \"user@domain.com\",\n    \"created_at\": \"2022-06-16T05:26:31Z\",\n    \"last_synchronization_time\": \"2022-06-17T14:01:08Z\",\n    \"status\": \"429\",\n    \"status_code_info\": \"cookies_expired\",\n    \"status_code_description\": \"The cookies linked to this account are expired\",\n    \"type\": \"sales-nav-sync\",\n    \"params\": {\n        \"default\": {\n            \"batch\": {\n                \"max\": 20,\n                \"default\": 20,\n                \"attribute\": \"profiles\",\n                \"description\": \"Number of profiles visited per launch\"\n            },\n            \"profiles\": {\n                \"max\": 150,\n                \"default\": 150,\n                \"description\": \"Maximum number of profile requests per day\"\n            },\n            \"searches\": {\n                \"max\": 200,\n                \"default\": 200,\n                \"description\": \"Maximum number of searches per day\"\n            },\n            \"batch_hours\": {\n                \"max\": 2,\n                \"default\": 2,\n                \"description\": \"Hours between each launch during a day\"\n            }\n        },\n        \"user\": {\n            \"batch\": {\n                \"max\": 20,\n                \"current\": 0,\n                \"default\": 20,\n                \"attribute\": \"profiles\",\n                \"start_time\": null,\n                \"last_batch_at\": \"18/07/2022 21:47:09\"\n            },\n            \"profiles\": {\n                \"max\": 150,\n                \"value\": 0,\n                \"default\": 150,\n                \"timestamp\": 1716508800,\n                \"start_time\": null\n            },\n            \"searches\": {\n                \"max\": 199,\n                \"value\": 0,\n                \"default\": 200,\n                \"timestamp\": 1716508800,\n                \"start_time\": null\n            },\n            \"batch_hours\": {\n                \"max\": 2,\n                \"value\": 0,\n                \"default\": 2,\n                \"description\": \"Hours between each launch during a day\"\n            }\n        }\n    },\n    \"updated_at\": \"2025-03-20T11:49:01Z\",\n    \"account_type_hash\": \"cf67cafe03776e796f02a29f29ab2866\",\n    \"squids\": [],\n    \"baseurl\": \"https://www.linkedin.com\",\n    \"cookies\": [\n        {\n            \"name\": \"li_at\",\n            \"required\": true\n        },\n        {\n            \"name\": \"JSESSIONID\",\n            \"required\": true\n        },\n        {\n            \"name\": \"li_a\",\n            \"required\": true\n        }\n    ],\n    \"icon\": \"<base64 image data>\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Refresh cookies",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"account\": \"abfeb440ceccdfab974e8d261836c9d6\",\r\n    \"type\": \"twitter-sync\",\r\n    \"cookies\": {\r\n        \"auth_token\": \"<cookie.auth_token>\",\r\n        \"ct0\": \"<cookie.ct0>\"\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/accounts/cookies",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"accounts",
+						"cookies"
+					]
+				},
+				"description": "This endpoint updates and synchronizes cookies for an existing account using its account hash. It accepts a JSON payload containing the account identifier, account type, and new cookie values."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"account\": \"abfeb440ceccdfab974e8d261836c9d6\",\r\n    \"type\": \"twitter-sync\",\r\n    \"cookies\": {\r\n        \"auth_token\": \"<cookie.auth_token>\",\r\n        \"ct0\": \"<cookie.ct0>\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/accounts/cookies",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								"cookies"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"7966b678b6b63ef599deeea99cb2b219\",\n    \"object\": \"synchronize-cookies\",\n    \"status_code\": 100,\n    \"status_text\": \"created\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete account",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/accounts/{{account_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"accounts",
+						"{{account_hash}}"
+					]
+				},
+				"description": "This endpoint permanently removes a specific platform account using its hash ID."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/accounts/<account_hash>",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"accounts",
+								"<account_hash>"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"d3e97f2cd33658f301bdbe807402ab30\",\n    \"object\": \"account\",\n    \"deleted\": \"true\"\n}"
+				}
+			]
+		}
+	],
+	"description": "Platform-specific credentials used for authentication during scraping. Can be synchronized and shared across different squids as needed."
+}

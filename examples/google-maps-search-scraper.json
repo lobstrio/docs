@@ -1,0 +1,373 @@
+
+{
+	"name": "Google Maps Search Export",
+	"item": [
+		{
+			"name": "Add task urls",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.google.com/maps/search/restaurant/@43.3928346,5.2662584,14z8\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Use this format if you already have a direct Google Maps search or place URL.\n\n#### 🧾 Notes:\n\n* Only the `url` key is required.\n* URLs must match Google Maps search or place format.\n* Best for manual inputs or small-scale targeted searches."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.google.com/maps/search/restaurant/@43.3928346,5.2662584,14z8\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"4ed8a673a01ba193cc43476e60abc5c0\",\n            \"created_at\": \"2025-06-24T11:13:05.720012\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.google.com/maps/search/restaurant/@43.3928346,5.2662584,14z8\"\n            },\n            \"module\": 5,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Get geolocation",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/googlemaps/locations?country_code=US&region=California&city",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"googlemaps",
+						"locations"
+					],
+					"query": [
+						{
+							"key": "country_code",
+							"value": "US"
+						},
+						{
+							"key": "region",
+							"value": "California"
+						},
+						{
+							"key": "city",
+							"value": null
+						}
+					]
+				},
+				"description": "Use this endpoint to fetch valid **regions**, **districts**, and **cities** used in parameter-based tasks for the **Google Maps Search Export** crawler.\n\nThis is essential when constructing structured tasks (`is_params: true`) where accurate location inputs are required.\n\n### 🧾 **Query Parameters**\n\n| Parameter | Required | Description |\n| --- | --- | --- |\n| **country_code** | ✅ yes | ISO 2-letter country code (e.g., `US`, `FR`, `PK`). |\n| **region** | ⛔ conditional | Required when querying **districts** or **cities**. Leave empty to get **regions**. |\n| **district** | ❌ optional | Further narrows the city list within a region. |\n| **city** | ❌ optional | Used when retrieving a refined list of locations by district or postal grouping. |\n\n> The value you leave empty determines what the API returns: \n  \n\n### 📎 Use In Context\n\n- Use the returned values for `region`, `district`, and `city` in parameter-based tasks (`is_params: true`).\n    \n- Combine them with other task fields like `category` to generate accurate and valid search inputs.\n    \n- Refer to:\n    \n    - [Add task params](#f05ba17b-0663-4cab-b714-88de9c090838) for how these values fit into your tasks.\n        \n    - [Get crawler parameters](#f0170945-174a-433b-b24d-b35731e78f4e) for all accepted fields and formats."
+			},
+			"response": [
+				{
+					"name": "Example 1",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/googlemaps/locations?country_code=US&region=California&city",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"googlemaps",
+								"locations"
+							],
+							"query": [
+								{
+									"key": "country_code",
+									"value": "US"
+								},
+								{
+									"key": "region",
+									"value": "California"
+								},
+								{
+									"key": "city",
+									"value": null
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": null,
+					"cookie": [],
+					"body": "[\n    \"Acampo 95220\",\n    \"Acton 93510\",\n    \"Adelanto 92301\",\n    \"Adin 96006\",\n    \"Agoura Hills 91301\",\n    \"Agoura Hills 91376\",\n    \"Aguanga 92536\",\n    \"Ahwahnee 93601\",\n    \"Alameda 94501\",\n    \"Alameda 94502\",\n    \"Alamo 94507\",\n    \"Albany 94706\",\n    \"Albion 95410\",\n    \"Alderpoint 95511\",\n    \"Alhambra 91801\",\n    \"Alhambra 91802\",\n    \"Alhambra 91803\",\n    \"Alhambra 91804\",\n    \"Alhambra 91896\",\n    \"Alhambra 91899\",\n    \"Aliso Viejo 92656\",\n    \"Aliso Viejo 92698\",\n    \"...\"\n    // The list continues with more city and ZIP code pairs\n]"
+				}
+			]
+		},
+		{
+			"name": "Add task params",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"city\": \"Alpine 91901\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\",\r\n            \"region\": \"California\",\r\n            \"district\": \"San Diego\"\r\n        },\r\n        {\r\n            \"city\": \"Anaheim 92801\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\"\r\n        },\r\n        {\r\n            \"city\": \"Abbeville 36310\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\",\r\n            \"region\": \"Alabama\"\r\n        },\r\n        {\r\n            \"city\": \"Branch 70516\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\",\r\n            \"district\": \"Acadia\"\r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "Use this format to dynamically define search inputs using structured metadata like city, category, and country which can be obtained from [Geolocation Section](#2446c796-2263-4d38-b71e-ee9eb2729d42).\n\n#### 🧾 Notes:\n\n- **`city`** and **`category`** are **required**.\n    \n- **`country`**, `region`, and `district` are **optional**.\n    \n- Ideal for automation and scaling across regions."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"city\": \"Alpine 91901\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\",\r\n            \"region\": \"California\",\r\n            \"district\": \"San Diego\"\r\n        },\r\n        {\r\n            \"city\": \"Anaheim 92801\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\"\r\n        },\r\n        {\r\n            \"city\": \"Abbeville 36310\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\",\r\n            \"region\": \"Alabama\"\r\n        },\r\n        {\r\n            \"city\": \"Branch 70516\",\r\n            \"category\": \"restaurant\",\r\n            \"country\": \"United States\",\r\n            \"district\": \"Acadia\"\r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"c3113ec3820d0253e2130b23f5b01a74\",\n            \"created_at\": \"2025-06-24T11:11:30.222467\",\n            \"is_active\": true,\n            \"params\": {\n                \"city\": \"Alpine 91901\",\n                \"category\": \"restaurant\",\n                \"country\": \"United States\",\n                \"region\": \"California\",\n                \"district\": \"San Diego\"\n            },\n            \"module\": 5,\n            \"object\": \"task\"\n        },\n        {\n            \"id\": \"d3deeac80b3dff7be992bb7f5d4ce63d\",\n            \"created_at\": \"2025-06-24T11:11:30.222613\",\n            \"is_active\": true,\n            \"params\": {\n                \"city\": \"Anaheim 92801\",\n                \"category\": \"restaurant\",\n                \"country\": \"United States\"\n            },\n            \"module\": 5,\n            \"object\": \"task\"\n        },\n        {\n            \"id\": \"8d6664f083063fe7ea8baf530a73b671\",\n            \"created_at\": \"2025-06-24T11:11:30.222673\",\n            \"is_active\": true,\n            \"params\": {\n                \"city\": \"Abbeville 36310\",\n                \"category\": \"restaurant\",\n                \"country\": \"United States\",\n                \"region\": \"Alabama\"\n            },\n            \"module\": 5,\n            \"object\": \"task\"\n        },\n        {\n            \"id\": \"fda3eb3ff96dcf474d8f9b662bce8f61\",\n            \"created_at\": \"2025-06-24T11:11:30.222724\",\n            \"is_active\": true,\n            \"params\": {\n                \"city\": \"Branch 70516\",\n                \"category\": \"restaurant\",\n                \"country\": \"United States\",\n                \"district\": \"Acadia\"\n            },\n            \"module\": 5,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"name\": \"Google Maps Search Export (1)\",\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"country\": \"United States\",\r\n    \"ratings\": \"Any rating\",\r\n    \"language\": \"English (United States)\",\r\n    \"functions\": {\r\n      \"images\": true,\r\n      \"details\": true,\r\n      \"collect_contacts\": true\r\n    },\r\n    \"max_results\": 200\r\n  },\r\n  \"to_complete\": false,\r\n  \"export_unique_results\": true\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Google Maps Search Export** crawler behaves — including language, location context, filters, and optional data collection features.\n\n➡️ These parameters are specific to the **Google Maps Search Export** crawler. _Refer to the_ [Constructing the <code>params</code> Object](#) _section to understand how to format and apply them._\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **country** | string | Defines the regional context for search results. Example: `\"United States\"` returns results from a U.S.-based perspective. |\n| **ratings** | string | Filters places by rating threshold. Example: `\"Any rating\"`, `\"4.0+\"`, `\"2.5+\"`. |\n| **language** | string | Sets the language Google Maps uses to display place names, descriptions, and metadata. Example: `\"English (United States)\"`. |\n| **max_results** | integer | Maximum number of places to collect before the task ends. Example: `200`. |\n| **functions.collect_contacts** | boolean | If `true`: visits the business’s website (if available) to extract `email`, `facebook`, `instagram`, and `additional_phone`. |\n| **functions.images** | boolean | If `true`: collects all image URLs from the Google Place page. |\n| **functions.details** | boolean | If `true`: visits the Google Maps place page and collects additional metadata like `plus_code`, `poi`, `health`, and `last_opening_hours_updated_at`. |\n\n---\n\n### ⚠️ **Additional Notes**\n\n- Enabling `functions.collect_contacts`, `functions.images`, or `functions.details` **may incur additional credits**.\n    \n- The field `export_unique_results: true` avoids duplicate entries when multiple places appear more than once in search results."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"Google Maps Search Export (32)\",\r\n  \"no_line_breaks\": true,\r\n  \"params\": {\r\n    \"country\": \"United States\",\r\n    \"ratings\": \"Any rating\",\r\n    \"language\": \"English (United States)\",\r\n    \"functions\": {\r\n      \"images\": true,\r\n      \"details\": true,\r\n      \"collect_contacts\": true\r\n    },\r\n    \"max_results\": 200\r\n  },\r\n  \"to_complete\": false,\r\n  \"export_unique_results\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"name\": \"Google Maps Search Export (1)\",\n    \"no_line_breaks\": true,\n    \"params\": {\n        \"country\": \"United States\",\n        \"ratings\": \"Any rating\",\n        \"language\": \"English (United States)\",\n        \"functions\": {\n            \"images\": true,\n            \"details\": true,\n            \"collect_contacts\": true\n        },\n        \"max_results\": 200\n    },\n    \"to_complete\": false,\n    \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "Following are the result fields that are crawled by the **Google Maps Search Export**.\n\n| Name | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Native identifier for the place (same as `native_id`). |\n| **object** | string | Type of returned object (usually `\"result\"`). |\n| **squid** | string | Secondary unique identifier for internal tracking. |\n| **run** | string | Identifier for the scraping run this result belongs to. |\n| **about** | string / null | General about/description field (if available). |\n| **additional_phone** | string / null | Additional contact phone number. |\n| **address** | string | Full physical address of the place. |\n| **booking_link** | string | External booking URL, such as TheFork or other platforms. |\n| **category** | string | Business category (e.g., Restaurant, Hotel, etc.). |\n| **cid** | string | [Google Maps Customer ID](https://www.vendasta.com/blog/cid-number-google/). |\n| **city** | string | City where the place is located. |\n| **country_code** | string | ISO 2-letter country code. |\n| **country_name** | string | Full country name. |\n| **description** | string / null | Description of the place (if provided). |\n| **email** | string / null | Business contact email (if available). |\n| **facebook** | string / null | Facebook page link. |\n| **functions** | json object | Metadata about the scraping run or feature flags (e.g., `filling_date`). |\n| **has_owner** | boolean | Indicates if the place has a verified owner on Google. |\n| **health** | string / null | Health/sanitation inspection info (rarely present). |\n| **images** | string / null | Image list or gallery (structure may vary). |\n| **images_count** | integer | Number of images available. |\n| **instagram** | string / null | Instagram profile link. |\n| **is_permanently_closed** | boolean | Whether the place is permanently closed. |\n| **is_temporarily_closed** | boolean | Whether the place is temporarily closed. |\n| **last_opening_hours_updated_at** | string / null | Last time opening hours were updated. |\n| **lat** | float | Latitude of the place. |\n| **lng** | float | Longitude of the place. |\n| **main_image_url** | string | URL of the main cover image for the place. |\n| **match_filters** | boolean | Whether this result matches any filter applied during scraping. |\n| **menu** | string / null | Link to the place’s menu (if any). |\n| **name** | string | Name of the place. |\n| **native_id** | integer | Native identifier (same as `id`). |\n| **no_match_reasons** | string | Explanation if the result didn't match filters. |\n| **opening_hours** | string | Weekly opening hours in text format. |\n| **phone** | string | Primary business phone number. |\n| **plus_code** | string / null | Google Maps Plus Code (if available). |\n| **poi** | string / null | Point of Interest reference (rarely populated). |\n| **popular_times** | string | Popular visiting times (raw data string, may need parsing). |\n| **price** | string / null | Price level or range, if available. |\n| **ratings** | integer | Total number of user reviews/ratings. |\n| **score** | float | Average user rating (e.g., 4.8). |\n| **scraping_time** | timestamp | When this data was scraped. |\n| **url** | string | Full Google Maps URL to the place. |\n| **website** | string / null | Official website of the business. |\n| **zero_x** | string | Google Maps place unique hash. |\n| **zip_code** | string | ZIP/postal code. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 302,\n    \"limit\": 1,\n    \"page\": 1,\n    \"total_pages\": 31,\n    \"result_from\": 1,\n    \"result_to\": 1,\n    \"data\": [\n        {\n            \"id\": 12616007,\n            \"object\": \"result\",\n            \"squid\": \"040aafb93d3e41a093c797ebd01f828a\",\n            \"run\": \"fcd40d91f69547cc9b3a11c21764f136\",\n            \"about\": null,\n            \"additional_phone\": null,\n            \"address\": \"33 Av. Jean Mermoz, 13700 Marignane, France\",\n            \"booking_link\": \"https://thefork.fr/restaurant/le-baron-r832544?cc=18174-54f&rwg_token=ACgRB3fLMJP9WBtJbXG8WFmXmeeAT-mjQxiKcZk--9PcpHWJUv2paL_t8N1Ub3HXOI0caRDHcx9MauEXiSbWGnJbiGX6uYQoMThGGbWiDVnuLirUYxkiL-s%3D\",\n            \"category\": \"Restaurant\",\n            \"cid\": \"897477744848702604\",\n            \"city\": \"Marignane\",\n            \"country_code\": \"FR\",\n            \"country_name\": \"France\",\n            \"description\": null,\n            \"email\": null,\n            \"facebook\": null,\n            \"functions\": {\n                \"collect_contacts\": {\n                    \"filling_date\": \"05/20/2025, 15:52:39 +0200\"\n                }\n            },\n            \"has_owner\": true,\n            \"health\": null,\n            \"images\": null,\n            \"images_count\": 33,\n            \"instagram\": null,\n            \"is_permanently_closed\": false,\n            \"is_temporarily_closed\": false,\n            \"last_opening_hours_updated_at\": null,\n            \"lat\": 43.4182026,\n            \"lng\": 5.2139755,\n            \"main_image_url\": \"https://lh3.googleusercontent.com/gps-cs-s/AC9h4noEkd9flKjvV_C2tKnV4fvG8V29KthPW_YCHSVCyOAEMQQdJrtINPCEJDIigxYu6t502UJWEWUEorzweV5ETexlsMl-Jg0ruxX7epspYSBraYOMIjkUQOeBmBmgJTZGUuCTalE\",\n            \"match_filters\": true,\n            \"menu\": null,\n            \"name\": \"Le Baron Restaurant\",\n            \"native_id\": 12616007,\n            \"no_match_reasons\": \"\",\n            \"opening_hours\": \"Monday 8:30\\u202fAM–11\\u202fPM, Tuesday 8:30\\u202fAM–11\\u202fPM, Wednesday 8:30\\u202fAM–11\\u202fPM, Thursday 8:30\\u202fAM–11\\u202fPM, Friday 8:30\\u202fAM–11\\u202fPM, Saturday 8:30\\u202fAM–11\\u202fPM, Sunday 8:30\\u202fAM–11\\u202fPM\",\n            \"phone\": \"+33465940903\",\n            \"plus_code\": null,\n            \"poi\": null,\n            \"popular_times\": \"\",\n            \"price\": null,\n            \"ratings\": 81,\n            \"score\": 4.8,\n            \"scraping_time\": \"2025-06-23T09:40:17.812Z\",\n            \"url\": \"https://www.google.com/maps/place/Le%2BBaron%2BRestaurant/data=!4m6!3m5!1s0x12c9e7b046893a37:0xc747b40ff868c8c!8m2!3d43.4182!4d5.21398!19sChIJNzqJRrDnyRIRjIyG_0B7dAw?authuser=0&hl=en&rclk=1\",\n            \"website\": null,\n            \"zero_x\": \"0x12c9e7b046893a37:0xc747b40ff868c8c\",\n            \"zip_code\": \"13700\"\n        }\n    ],\n    \"next\": \"https://api.lobstr.io/v1/results?squid=040aafb93d3e41a093c797ebd01f828a&run=fcd40d91f69547cc9b3a11c21764f136&page=2\",\n    \"previous\": null\n}"
+				}
+			]
+		}
+	],
+	"description": "The **Google Maps Search Export** crawler supports **two types of task inputs**:\n\n1. **URL-based Tasks** (`is_params: false`)\n    \n2. **Parameter-based Tasks** (`is_params: true`)\n    \n\nUse either method depending on your data source, regional targeting needs, or scale of operation.\n\n➡️ Task keys and structure can be found in the [Get crawler parameters](#f0170945-174a-433b-b24d-b35731e78f4e) section.  \n➡️ Allowed values for location fields like `country`, `region`, and `district` are available in the [Get geolocation](#2446c796-2263-4d38-b71e-ee9eb2729d42) section.\n\n### 📌 **Task Key Summary**\n\n| Key                  | Type   | Required | `is_params` | Description                                         |\n| -------------------- | ------ | -------- | ----------- | --------------------------------------------------- |\n| `url`                | string | No       | false       | Google Maps search or place URL                     |\n| `city`               | string | Yes      | true        | City name and postal code (e.g., `\"Anaheim 92801\"`) |\n| `category`           | string | Yes      | true        | Business category (e.g., `\"restaurant\"`)            |\n| `country`            | string | No       | true        | Country (e.g., `\"United States\"`)                   |\n| `region`             | string | No       | true        | State or province                                   |\n| `district`           | string | No       | true        | County or local district                            |\n\n### 📚 **Additional References**\n\n* 📄 [Get crawler parameters](#f0170945-174a-433b-b24d-b35731e78f4e): for all supported task keys and their structure.\n* 🌍 [Get geolocation](#2446c796-2263-4d38-b71e-ee9eb2729d42): for retrieving valid values for `country`, `region`, `district`, and `city`.\n"
+}

@@ -1,0 +1,222 @@
+{
+    "name": "Google Maps Reviews Scraper",
+    "item": [
+        {
+            "name": "Add tasks",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://maps.google.com/?cid=1357935577401699828\" \r\n        },\r\n        {\r\n            \"url\": \"https://www.google.com/maps/place/La+Tour+d'Argent/@48.8499542,2.3524796,17z/data=!3m1!4b1!4m5!3m4!1s0x47e671e4b41c8a83:0x5bd4a63441a1398a!8m2!3d48.8499369!4d2.3547128\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/tasks",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "tasks"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{api_key}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://maps.google.com/?cid=1357935577401699828\" \r\n        },\r\n        {\r\n            \"url\": \"https://www.google.com/maps/place/La+Tour+d'Argent/@48.8499542,2.3524796,17z/data=!3m1!4b1!4m5!3m4!1s0x47e671e4b41c8a83:0x5bd4a63441a1398a!8m2!3d48.8499369!4d2.3547128\" \r\n        }\r\n    ],\r\n    \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/tasks",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "tasks"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"8c15009a391a79151873fe9451285e90\",\n            \"created_at\": \"2025-03-17T11:56:51.691986\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://maps.google.com/?cid=1357935577401699828\"\n            },\n            \"object\": \"task\"\n        },\n        {\n            \"id\": \"a6ed45088d82beef3d254679457b5eb6\",\n            \"created_at\": \"2025-03-17T11:56:51.692109\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.google.com/maps/place/La+Tour+d'Argent/@48.8499542,2.3524796,17z/data=!3m1!4b1!4m5!3m4!1s0x47e671e4b41c8a83:0x5bd4a63441a1398a!8m2!3d48.8499369!4d2.3547128\"\n            },\n            \"object\": \"task\"\n        }\n    ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "Update settings",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n    \"name\": \"Restaurants dataset (changed)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"no_line_breaks\": true,\r\n    \"to_complete\": false,\r\n    \"params\": {\r\n        \"sort_by\": \"newest\",\r\n        \"hours_back\": null,\r\n        \"max_results\": 20,\r\n        \"language\": \"English (United States)\",\r\n        \"functions\": {\r\n            \"short_link\": false\r\n        }\r\n    },\r\n    \"timezone\": \"Europe/Paris\",\r\n    \"run_notify\": \"on_success\"\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/squids/{{squid_hash}}",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "squids",
+                        "{{squid_hash}}"
+                    ]
+                },
+                "description": "These `params` control the behavior and filtering of the **Google Maps Reviews Scraper** crawler. Use them to define review extraction context, result limits, and data collection features.\n\n➡️ These parameters are specific to the **Google Maps Reviews Scraper** crawler. _Refer to the_ [<i>Constructing the </i><code><i>params</i></code><i> Object</i>](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to build these parameters and where to fetch possible values._\n\n| Parameter | Type | Description |\n| --- | --- | --- |\n| **sort_by** | string | Sort reviews by criteria: `newest`, `most relevant`, or `highest rating`. |\n| **hours_back** | integer | Limits reviews collected to those published within the specified number of hours (e.g., `24` for the last day). Set `null` for no limit. |\n| **max_results** | integer | Limits the total number of reviews collected. The task completes once this number is reached. |\n| **language** | string | Defines the language for extracted reviews (e.g., `English (United States)`). |\n| **functions.short_link** | boolean | `true`: Collects a shortened link to the review.  <br>`false`: Skips short link collection. |\n\n⚠️ **Additional Notes:**\n\n- Ensure appropriate parameter selection to optimize scraping efficiency and cost.\n    \n- **short_link**: Collecting short links may incur additional costs. Verify any additional charges associated with enabling this parameter."
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token {{api_key}}",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n    \"name\": \"Restaurants dataset (changed)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"no_line_breaks\": true,\r\n    \"to_complete\": false,\r\n    \"params\": {\r\n        \"sort_by\": \"newest\",\r\n        \"hours_back\": null,\r\n        \"max_results\": 20,\r\n        \"language\": \"English (United States)\",\r\n        \"functions\": {\r\n            \"short_link\": false\r\n        }\r\n    },\r\n    \"timezone\": \"Europe/Paris\",\r\n    \"run_notify\": \"on_success\"\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "{{base_url}}/squids/{{squid_hash}}",
+                            "host": [
+                                "{{base_url}}"
+                            ],
+                            "path": [
+                                "squids",
+                                "{{squid_hash}}"
+                            ]
+                        }
+                    },
+                    "status": "Created",
+                    "code": 201,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n    \"name\": \"Restaurants dataset (changed)\",\n    \"no_line_breaks\": true,\n    \"params\": {\n        \"sort_by\": \"newest\",\n        \"hours_back\": null,\n        \"max_results\": 20,\n        \"language\": \"English (United States)\",\n        \"functions\": {\n            \"short_link\": false\n        }\n    },\n    \"to_complete\": false,\n    \"run_notify\": \"on_success\",\n    \"export_unique_results\": true\n}"
+                }
+            ]
+        },
+        {
+            "name": "Get results",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "results"
+                    ],
+                    "query": [
+                        {
+                            "key": "squid",
+                            "value": "{{squid_hash}}"
+                        },
+                        {
+                            "key": "run",
+                            "value": "{{run_hash}}"
+                        }
+                    ]
+                },
+                "description": "Following are the result fields that are crawled by the **Google Maps Reviews Scraper**.\n\n| Name | Type | Description |\n| --- | --- | --- |\n| **id** | string | Unique identifier for the review result. |\n| **object** | string | Type of returned object. |\n| **squid** | string | Secondary unique identifier. |\n| **run** | string | Identifier related to the scraping run. |\n| **cid** | string | [Google Maps Customer ID](https://www.vendasta.com/blog/cid-number-google/). |\n| **functions** | json object | Details about the data filling/scraping process. |\n| **internal_review_id** | string | Internal unique ID for the review. |\n| **is_user_local_guide** | boolean | Indicates if reviewer is a Google Local Guide. |\n| **lang** | string | Language code of the original review. |\n| **native_id** | integer | Native identifier for the review source. |\n| **origin** | string | Source/origin of the review (e.g., Google). |\n| **original_text** | string | Original review text in the native language. |\n| **pictures** | string | URLs of any pictures included in the review. |\n| **place_address** | string | Address of the reviewed place. |\n| **place_average_score** | Float | Average rating of the reviewed place. |\n| **place_id** | string | Unique Google Maps Place ID. |\n| **place_name** | string | Name of the reviewed place. |\n| **published_at** | string | Relative time when the review was published. |\n| **published_at_datetime** | Timestamp | Exact datetime when the review was published. |\n| **response_from_owner** | string | Response provided by the owner (if any). |\n| **review_link** | string | Direct URL link to the detailed review. |\n| **score** | integer | Rating score given by the user. |\n| **scraping_time** | Timestamp | When the review data was scraped. |\n| **short_review_link** _(requires_ `functions.short_link` _\\= true)_ | string | Short URL link to the review _(⚠️ may incur additional costs)._ |\n| **text** | string | English-translated review text. |\n| **total_likes** | integer | Total number of likes for the review. |\n| **total_reviews** | integer | Total number of reviews for the reviewed place. |\n| **user_image_url** | string | URL of the user's profile image. |\n| **user_internal_id** | string | Internal ID of the reviewer. |\n| **user_link** | string | Link to the user's Google Maps profile. |\n| **user_name** | string | Name of the reviewer. |\n| **user_reviews_count** | integer | Total number of reviews posted by the reviewer. |\n| **visited_in** | string | Date when the user visited the reviewed place. |\n| **zero_x** | string | Google Maps location ID. |\n\n> **Pagination fields** (`total_results`, `limit`, `page`, `total_pages`, `result_from`, `result_to`, `next`, `previous`) are documented in the [Get results](https://docs.lobstr.io/#f65cf0b0-7c96-4ef2-8f63-5500010549b0)."
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token <api_key>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>",
+                            "protocol": "https",
+                            "host": [
+                                "api",
+                                "lobstr",
+                                "io"
+                            ],
+                            "path": [
+                                "v1",
+                                "results"
+                            ],
+                            "query": [
+                                {
+                                    "key": "squid",
+                                    "value": "<squid_hash>"
+                                },
+                                {
+                                    "key": "run",
+                                    "value": "<run_hash>"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n    \"total_results\": 40,\n    \"limit\": 10,\n    \"page\": 1,\n    \"total_pages\": 4,\n    \"result_from\": 1,\n    \"result_to\": 10,\n    \"data\": [\n        {\n            \"id\": \"6ab98eca1b26828a1a206be9d66db305\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:30:51 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnSURNNHVHeGxnRRAB\",\n            \"is_user_local_guide\": true,\n            \"lang\": \"fr\",\n            \"origin\": \"Google\",\n            \"original_text\": \"Tout est parfait L'accueil, les plats, le service ...et la vue exceptionnelle\",\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"a week ago\",\n            \"published_at_datetime\": \"2019-12-23T11:56:57.651Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURNNHVHeGxnRRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgIDM4uGxlgE%7CCgwIutC1vgYQ0ILOmQI%7C?hl=en\",\n            \"score\": 5,\n            \"scraping_time\": \"2025-03-22T13:18:45.227Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/uN1kgxZaTcWPwLUF7\",\n            \"text\": \"Everything is perfect\\nThe welcome, the dishes, the service...and the exceptional view\",\n            \"total_likes\": 0,\n            \"total_reviews\": 3224,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a/ACg8ocIxxh-yLJFGYrGeu2oel0kA4KCFJ7fXw7tzlbAM9vXBXBmX5w\",\n            \"user_internal_id\": \"112426712842562278044\",\n            \"user_link\": \"https://www.google.com/maps/contrib/112426712842562278044?hl=en\",\n            \"user_name\": \"Jacques LEWINER\",\n            \"user_reviews_count\": 4,\n            \"visited_in\": \"2025-03-22 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"4996c4df00ac7c7a05bc61ebf34e7a66\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:30:56 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChZDSUhNMG9nS0VJQ0FnTUNRdTZIdFZ3EAE\",\n            \"is_user_local_guide\": true,\n            \"lang\": \"\",\n            \"origin\": \"Google\",\n            \"original_text\": null,\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"2 weeks ago\",\n            \"published_at_datetime\": \"2025-03-07T10:53:47.640Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTUNRdTZIdFZ3EAE!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMCQu6HtVw%7CCgwIu6CrvgYQ6Ni6sQI%7C?hl=en\",\n            \"score\": 5,\n            \"scraping_time\": \"2025-03-22T13:18:49.270Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/Ft8xQroxizpBPzVu6\",\n            \"text\": null,\n            \"total_likes\": 0,\n            \"total_reviews\": 3224,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a/ACg8ocICxOn5C7mjFKcGBZTb3-5RB2uF_5yX89QjACkVR3S5QZ84DQ\",\n            \"user_internal_id\": \"117319343326405601847\",\n            \"user_link\": \"https://www.google.com/maps/contrib/117319343326405601847?hl=en\",\n            \"user_name\": \"José Fonseca\",\n            \"user_reviews_count\": 0,\n            \"visited_in\": \"2025-03-22 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"b1852af6ffe2c70ff0b964698a4fb83a\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:30:57 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnTUNRcFlfdHl3RRAB\",\n            \"is_user_local_guide\": false,\n            \"lang\": \"\",\n            \"origin\": \"Google\",\n            \"original_text\": null,\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"2 weeks ago\",\n            \"published_at_datetime\": \"2025-03-06T08:26:57.224Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUNRcFlfdHl3RRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMCQpY_tywE%7CCgsI0bilvgYQ6NWcaw%7C?hl=en\",\n            \"score\": 5,\n            \"scraping_time\": \"2025-03-22T13:18:50.037Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/JgBVSBagoR63q8EW7\",\n            \"text\": null,\n            \"total_likes\": 0,\n            \"total_reviews\": 3224,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a/ACg8ocLjCrRdu827cIoYrblJ4KtZbgezMsWph_MbE1pN7Ga7sUrHZQ\",\n            \"user_internal_id\": \"116939980340473135782\",\n            \"user_link\": \"https://www.google.com/maps/contrib/116939980340473135782?hl=en\",\n            \"user_name\": \"Puga Benoit\",\n            \"user_reviews_count\": 4,\n            \"visited_in\": \"2025-03-22 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"15cb390c26586293ce753c95d9027017\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:30:58 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnTUNReHRQYzJRRRAB\",\n            \"is_user_local_guide\": true,\n            \"lang\": \"fr\",\n            \"origin\": \"Google\",\n            \"original_text\": \"Le 3 mars, un dîner mémorable en famille à la Rôtisserie de la tour d’argent à Paris sur recommandation d’un habitué des lieux. Le service était impeccable, d’une bienveillance rare et aux petits soins, un grand merci à Houssine et Daniel. On recommande vivement et on reviendra.\",\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"2 weeks ago\",\n            \"published_at_datetime\": \"2025-03-03T23:18:46.893Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUNReHRQYzJRRRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMCQxtPc2QE%7CCgwI1vGYvgYQkLWWqgM%7C?hl=en\",\n            \"score\": 5,\n            \"scraping_time\": \"2025-03-22T13:18:50.914Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/ftErxAjwAmsMQmwz9\",\n            \"text\": \"On March 3, a memorable family dinner at the Rôtisserie de la tour d’argent in Paris on the recommendation of a regular. The service was impeccable, with rare kindness and great care, a big thank you to Houssine and Daniel. We highly recommend and we will come back.\",\n            \"total_likes\": 0,\n            \"total_reviews\": 3224,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a/ACg8ocJ63mi8KTIv5Dp3qo9nRzySMoh4aWFlhjnrIoVEECJYP1n6iw\",\n            \"user_internal_id\": \"116212483875672598336\",\n            \"user_link\": \"https://www.google.com/maps/contrib/116212483875672598336?hl=en\",\n            \"user_name\": \"Naciri Dina\",\n            \"user_reviews_count\": 1,\n            \"visited_in\": \"2025-03-22 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"e861209a6e04b368c6b86cb604a5a7f2\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:31:00 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnTUNRZ3FIR3NnRRAB\",\n            \"is_user_local_guide\": true,\n            \"lang\": \"\",\n            \"origin\": \"Google\",\n            \"original_text\": null,\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"2 weeks ago\",\n            \"published_at_datetime\": \"2025-03-03T06:41:23.674Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTUNRZ3FIR3NnRRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMCQgqHGsgE%7CCgwIk56VvgYQiPPfwQI%7C?hl=en\",\n            \"score\": 3,\n            \"scraping_time\": \"2025-03-22T13:18:51.692Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/g7ZC4aCsJL9BHEkY8\",\n            \"text\": null,\n            \"total_likes\": 0,\n            \"total_reviews\": 3224,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a-/ALV-UjW3usp-pNvuHagJ8zZ0m8jZwLGdwnLuGQ3Hxo3F9YENFWTg1RQl\",\n            \"user_internal_id\": \"109207713409405723753\",\n            \"user_link\": \"https://www.google.com/maps/contrib/109207713409405723753?hl=en\",\n            \"user_name\": \"philippe\",\n            \"user_reviews_count\": 11,\n            \"visited_in\": \"2025-03-22 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"0012866606dad27bbcda2db167042512\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:31:01 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnTURnbWNfbjBRRRAB\",\n            \"is_user_local_guide\": true,\n            \"lang\": \"\",\n            \"origin\": \"Google\",\n            \"original_text\": null,\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"3 weeks ago\",\n            \"published_at_datetime\": \"2025-02-25T22:13:26.419Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTURnbWNfbjBRRRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMDgmc_n0QE%7CCgwIhoH5vQYQgLyFyAE%7C?hl=en\",\n            \"score\": 4,\n            \"scraping_time\": \"2025-03-22T13:18:53.179Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/Aq3YXbPzXS6SQSLJ8\",\n            \"text\": null,\n            \"total_likes\": 0,\n            \"total_reviews\": 3224,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a-/ALV-UjUPcXfIOYgfbelkB9eOJNGTgZlO3IOyYPDgtFFS3QpVv9PsLxA\",\n            \"user_internal_id\": \"116810488087494847670\",\n            \"user_link\": \"https://www.google.com/maps/contrib/116810488087494847670?hl=en\",\n            \"user_name\": \"Bruno Van Geyseghem\",\n            \"user_reviews_count\": 4,\n            \"visited_in\": \"2025-02-22 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"86c4d5098f3850ea7c5d1bf8eae3eaa8\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:31:03 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnTURnbWMtQnhnRRAB\",\n            \"is_user_local_guide\": true,\n            \"lang\": \"fr\",\n            \"origin\": \"Google\",\n            \"original_text\": \"Un moment \\\"hors du temps\\\" , avec une vue magnifique sur la seine et les lumières de la nuit\",\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"3 weeks ago\",\n            \"published_at_datetime\": \"2025-02-25T22:13:13.876Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTURnbWMtQnhnRRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMDgmc-BxgE%7CCgwI-YD5vQYQqJyKogM%7C?hl=en\",\n            \"score\": 5,\n            \"scraping_time\": \"2025-03-21T04:05:15.028Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/C8fgTGxVEmT51nV86\",\n            \"text\": \"A “timeless” moment, with a magnificent view of the Seine and the lights of the night\",\n            \"total_likes\": 0,\n            \"total_reviews\": 3220,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a-/ALV-UjWJz9Gvv_uaQxAD1QZrY9-9z_BQ7QVkyoKnO-UhN5zQPlSr-g0D\",\n            \"user_internal_id\": \"116434799276390945214\",\n            \"user_link\": \"https://www.google.com/maps/contrib/116434799276390945214?hl=en\",\n            \"user_name\": \"Eric de planta (Mirabeau)\",\n            \"user_reviews_count\": 1,\n            \"visited_in\": \"2025-02-21 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"c73bb85613bbfe3fcdce9c72bb211057\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:31:04 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChZDSUhNMG9nS0VJQ0FnTURnaWMtcEJ3EAE\",\n            \"is_user_local_guide\": false,\n            \"lang\": \"fr\",\n            \"origin\": \"Google\",\n            \"original_text\": \"Excellente soirée. Nous n'avons jamais mangé un aussi bon canard.\",\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"3 weeks ago\",\n            \"published_at_datetime\": \"2025-02-25T17:33:19.998Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChZDSUhNMG9nS0VJQ0FnTURnaWMtcEJ3EAE!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMDgic-pBw%7CCgwI3_33vQYQiNiO3AM%7C?hl=en\",\n            \"score\": 5,\n            \"scraping_time\": \"2025-03-21T04:05:16.198Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/XAnpzUH1qUNrJPef6\",\n            \"text\": \"Excellent evening. We have never eaten such good duck.\",\n            \"total_likes\": 0,\n            \"total_reviews\": 3220,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a/ACg8ocLlVaOFdqchWbFWogslMSPk9Q2Eb_go6_u9nFw1_j1QJN3OWQ\",\n            \"user_internal_id\": \"104551560814451127484\",\n            \"user_link\": \"https://www.google.com/maps/contrib/104551560814451127484?hl=en\",\n            \"user_name\": \"Jean-Jacques Joset\",\n            \"user_reviews_count\": 1,\n            \"visited_in\": \"2025-02-21 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"087a9f7f0d9dacd4f049906b910d6edb\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:31:05 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnSURyaU9HOTJRRRAB\",\n            \"is_user_local_guide\": false,\n            \"lang\": \"en\",\n            \"origin\": \"Google\",\n            \"original_text\": \"It was 2nd visit since Jul 2024. Food and atmosphere were perfect. Service had been good until the last. Timing was servicing was a little disappointing. After the second dish came and the dishes were cleared, it took almost 30 minutes until the service asked if we would want dessert. We got to the dining table at 19:45, the second dish was finished 22:35 and the ask for desert came at 23:10.\",\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"3 weeks ago\",\n            \"published_at_datetime\": \"2024-07-13T12:33:53.816Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnSURyaU9HOTJRRRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgIDriOG92QE%7CCgsI4tX2vQYQsKivdQ%7C?hl=en\",\n            \"score\": 4,\n            \"scraping_time\": \"2025-03-21T04:05:17.609Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/4A5W7bmoDPWjBuks9\",\n            \"text\": \"It was 2nd visit since Jul 2024. Food and atmosphere were perfect. Service had been good until the last. Timing was servicing was a little disappointing. After the second dish came and the dishes were cleared, it took almost 30 minutes until the service asked if we would want dessert. We got to the dining table at 19:45, the second dish was finished 22:35 and the ask for desert came at 23:10.\",\n            \"total_likes\": 0,\n            \"total_reviews\": 3220,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a/ACg8ocKrXIRdrEBdaBEJPpNr2DlBUqDQsDCCUZGgdxTZKSD2FhcYTA\",\n            \"user_internal_id\": \"110850186550759780963\",\n            \"user_link\": \"https://www.google.com/maps/contrib/110850186550759780963?hl=en\",\n            \"user_name\": \"Yasuyuki Migita\",\n            \"user_reviews_count\": 1,\n            \"visited_in\": \"2025-02-21 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        },\n        {\n            \"id\": \"cdd9476f920b5d680a0c9cbb3ed5404f\",\n            \"object\": \"result\",\n            \"squid\": \"b6ab0f03b02e472a8e2ab0b16b4fdd0f\",\n            \"run\": \"c29f2f1464ec45d599b1b4f43595bf3a\",\n            \"cid\": \"6617096495883696522\",\n            \"functions\": {\n                \"short_link\": {\n                    \"filling_date\": \"03/18/2025, 20:31:07 +0200\"\n                }\n            },\n            \"internal_review_id\": \"ChdDSUhNMG9nS0VJQ0FnTURnNFkyemp3RRAB\",\n            \"is_user_local_guide\": false,\n            \"lang\": \"\",\n            \"origin\": \"Google\",\n            \"original_text\": null,\n            \"pictures\": \"\",\n            \"place_address\": \"19 Quai de la Tournelle, 75005 Paris\",\n            \"place_average_score\": 4.4,\n            \"place_id\": \"ChIJg4octORx5kcRijmhQTSm1Fs\",\n            \"place_name\": \"La Rôtisserie d'Argent\",\n            \"published_at\": \"3 weeks ago\",\n            \"published_at_datetime\": \"2025-02-25T09:48:03.798Z\",\n            \"response_from_owner\": \"\",\n            \"review_link\": \"https://www.google.com/maps/reviews/data=!4m8!14m7!1m6!2m5!1sChdDSUhNMG9nS0VJQ0FnTURnNFkyemp3RRAB!2m1!1s0x0:0x5bd4a63441a1398a!3m1!1s2@1:CIHM0ogKEICAgMDg4Y2zjwE%7CCgwI06P2vQYQsNX2_AI%7C?hl=en\",\n            \"score\": 5,\n            \"scraping_time\": \"2025-03-21T04:05:19.130Z\",\n            \"short_review_link\": \"https://maps.app.goo.gl/VJqndrAJEhVoNGHw5\",\n            \"text\": null,\n            \"total_likes\": 0,\n            \"total_reviews\": 3220,\n            \"user_image_url\": \"https://lh3.googleusercontent.com/a-/ALV-UjU1nNJBVbBy5ubDgqZ7qkzGmPQEutsCPhxCJ-EAaxE4PFbWgmk\",\n            \"user_internal_id\": \"100308384886869985463\",\n            \"user_link\": \"https://www.google.com/maps/contrib/100308384886869985463?hl=en\",\n            \"user_name\": \"christophe Kowal\",\n            \"user_reviews_count\": 4,\n            \"visited_in\": \"2025-02-21 00:00:00\",\n            \"zero_x\": \"0x0:0x5bd4a63441a1398a\"\n        }\n    ],\n    \"warning\": \"Export limit reached - only 30 results returned. Upgrade to premium to access the full dataset: https://app.lobstr.io/dashboard/pricing.\",\n    \"next\": \"https://api.lobstr.io/v1/results?squid=b6ab0f03b02e472a8e2ab0b16b4fdd0f&run=c29f2f1464ec45d599b1b4f43595bf3a\"\n}"
+                }
+            ]
+        }
+    ]
+}

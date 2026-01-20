@@ -1,0 +1,401 @@
+
+{
+	"name": "Task",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,14z\"\r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				},
+				"description": "This endpoint creates new tasks within a specified squid."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,14z\"\r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"c5e29d2aba8b77cdc56391e7405302de\",\n            \"created_at\": \"2025-02-10T14:19:32.916901\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,14z\"\n            },\n            \"module\": 5,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Upload tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "postman-cloud:///1efe8554-75ba-4fb0-852d-0b6adf442458"
+						},
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks/upload",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						"upload"
+					]
+				},
+				"description": "This endpoint allows you to upload a file (CSV/TSV) containing multiple tasks for a specific squid. The file should contain task parameters in columns. The response provides a task ID that can be used to check the upload status."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "postman-cloud:///1efe8554-75ba-4fb0-852d-0b6adf442458"
+								},
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks/upload",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"upload"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"427a7bfc54cf4ce483d83ba23425164b\",\n    \"object\": \"task_upload\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Check upload status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/tasks/upload/{{upload_task_id}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						"upload",
+						"{{upload_task_id}}"
+					]
+				},
+				"description": "This endpoint checks the status of the task upload operation using the task ID."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token <api_key>",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "https://api.lobstr.io/v1/tasks/upload/<upload_task_id>",
+							"protocol": "https",
+							"host": [
+								"api",
+								"lobstr",
+								"io"
+							],
+							"path": [
+								"v1",
+								"tasks",
+								"upload",
+								"<upload_task_id>"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"427a7bfc54cf4ce483d83ba23425164b\",\n    \"object\": \"task_upload\",\n    \"state\": \"SUCCESS\",\n    \"meta\": {\n        \"duplicates\": 0,\n        \"inserted\": 8,\n        \"invalid\": 0,\n        \"valid\": 8\n    }\n}"
+				}
+			]
+		},
+		{
+			"name": "Get task",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/tasks/{{task_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						"{{task_hash}}"
+					]
+				},
+				"description": "This endpoint retrieves detailed information about a specific task using its hash ID."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_hash}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"created_at\": \"2024-12-24T10:57:55.045567\",\n    \"is_active\": true,\n    \"params\": {\n        \"url\": \"https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,14z\"\n    },\n    \"module\": 5,\n    \"hash_value\": \"c5e29d2aba8b77cdc56391e7405302de\",\n    \"status\": {\n        \"status\": \"aborted\",\n        \"ended_at\": \"2025-02-04T10:26:52.310738\",\n        \"scraping_time\": \"2025-02-04T10:26:50.882873\",\n        \"is_done\": false,\n        \"has_errors\": null,\n        \"errors\": null,\n        \"error_date\": null,\n        \"started_at\": \"2025-02-04T10:25:47.278419\",\n        \"total_pages\": 1,\n        \"last_page\": 0,\n        \"is_active\": null,\n        \"last_result_date\": null,\n        \"last_result\": 40,\n        \"total_results\": 156,\n        \"squid\": null,\n        \"user\": null,\n        \"module\": null,\n        \"done_reason\": \"run_aborted\",\n        \"task_done_reason\": null,\n        \"export_done\": null,\n        \"export_date\": null,\n        \"meta_data\": null,\n        \"hash_value\": \"564cd9d6c6ed99ee6b9ac5f2fa04178e\"\n    },\n    \"object\": \"task\"\n}"
+				}
+			]
+		},
+		{
+			"name": "List tasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/tasks?squid={{squid_hash}}&type=url",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "type",
+							"value": "url"
+						}
+					]
+				},
+				"description": "This endpoint retrieves a list of tasks for a specific squid. It supports two query types:\n\n- `type=url`: Returns tasks with their URLs and basic information\n    \n- `type=params`: Returns tasks with their detailed parameters"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks?squid={{squid_hash}}&type=url",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "type",
+									"value": "url"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 2,\n    \"limit\": 50,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 3,\n    \"data\": [\n        {\n            \"id\": \"6b9d3afdf4e76df374915a50d7a495c4\",\n            \"created_at\": \"2025-03-05T09:24:49.581177\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,14z\"\n            },\n            \"object\": \"task\"\n        },\n        {\n            \"id\": \"f4afd73085bc45f7e74dd9a2157d9d6f\",\n            \"created_at\": \"2025-03-05T09:25:06.105130\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,17z\"\n            },\n            \"object\": \"task\"\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		},
+		{
+			"name": "Delete task",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/tasks/{{task_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks",
+						"{{task_hash}}"
+					]
+				},
+				"description": "This endpoint permanently deletes a specific task using its hash ID from the system."
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/tasks/{{task_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks",
+								"{{task_hash}}"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"id\": \"c5e29d2aba8b77cdc56391e7405302de\",\n    \"object\": \"task\",\n    \"deleted\": true\n}"
+				}
+			]
+		}
+	],
+	"description": "Individual scraping jobs within a squid that need to be executed. Contains specific parameters, URLs, and settings for a single scraping operation.\n\n**Note:** The accepted task input keys (e.g., `url`, `city`, `activity`) depend on the crawler used in your squid.\n\nTo view the valid keys for your crawler, refer to the [Get crawler parameters](#f0170945-174a-433b-b24d-b35731e78f4e) endpoint.\n\nOnly the keys listed under the `\"task\"` object are valid for this endpoint."
+}

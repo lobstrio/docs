@@ -1,0 +1,218 @@
+{
+	"name": "Leboncoin Listings Search Export",
+	"item": [
+		{
+			"name": "Add tasks",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/tasks",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"tasks"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tasks\": [\r\n        {\r\n            \"url\": \"https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2\" \r\n        }\r\n    ],\r\n    \"squid\": \"{{squid_hash}}\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/tasks",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"tasks"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"duplicated_count\": 0,\n    \"tasks\": [\n        {\n            \"id\": \"da0bbc8f5de0ffb8aa39d1d21bdf75d9\",\n            \"created_at\": \"2025-07-04T04:54:16.591101\",\n            \"is_active\": true,\n            \"params\": {\n                \"url\": \"https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2\"\n            },\n            \"module\": 88,\n            \"object\": \"task\"\n        }\n    ]\n}"
+				}
+			]
+		},
+		{
+			"name": "Update settings",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Leboncoin Listings Search Export (22)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n        \"max_date\": null,\r\n        \"max_pages\": 1,\r\n        \"hours_back\": null,\r\n        \"max_results\": 3,\r\n        \"online_shop\": true\r\n    }\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}/squids/{{squid_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"squids",
+						"{{squid_hash}}"
+					]
+				},
+				"description": "These `params` control how the **Leboncoin Listings Search Export** crawler behaves — including pagination, time or date cut-offs, total result limits, and optional shop URL retrieval.\n\n➡️ These parameters are specific to the **Leboncoin Listings Search Export** crawler. _Refer to the_ [Constructing the `params` Object](#13eb068f-2bae-4603-941e-9f36038fb379) _section to understand how to format and apply them._\n\n| Parameter      | Type               | Description                                                                                               |\n| -------------- | ------------------ | --------------------------------------------------------------------------------------------------------- |\n| **max_date**   | string (ISO) or null | Stop crawling once a listing older than this date (e.g., `\"2025-07-01\"`). Leave `null` for no date cutoff. |\n| **hours_back** | integer or null     | Collect only listings posted in the last _X_ hours (e.g., `24`). Leave `null` to disable hour-based filtering. |\n| **max_pages**  | integer            | How many result pages to crawl (e.g., `1` = first page only).                                             |\n| **max_results**| integer            | Total number of listings to collect before stopping (e.g., `3`).                                          |\n| **online_shop**| boolean            | If `true`, visits each listing’s pro seller page (if available) to extract the shop URL.                  |\n\n---\n\n### ⚠️ **Additional Notes**\n\n- If both **max_date** and **hours_back** are provided, the crawler will apply **hours_back** first.  \n- Leaving **max_date** and **hours_back** both `null` will crawl until **max_results** or **max_pages** is reached.  \n- Enabling **online_shop** may add extra requests per listing and increase total run time leading to consumption of extra credits. \n"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Leboncoin Listings Search Export (22)\",\r\n    \"concurrency\": 1,\r\n    \"export_unique_results\": true,\r\n    \"to_complete\": false,\r\n    \"no_line_breaks\": true,\r\n    \"params\": {\r\n        \"max_date\": null,\r\n        \"max_pages\": 1,\r\n        \"hours_back\": null,\r\n        \"max_results\": 3,\r\n        \"online_shop\": true\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/squids/{{squid_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"squids",
+								"{{squid_hash}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"name\": \"Leboncoin Listings Search Export (22)\",\n    \"no_line_breaks\": true,\n    \"params\": {\n        \"max_date\": null,\n        \"max_pages\": 1,\n        \"hours_back\": null,\n        \"max_results\": 3,\n        \"online_shop\": true\n    },\n    \"to_complete\": false,\n    \"export_unique_results\": true\n}"
+				}
+			]
+		},
+		{
+			"name": "Get results",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Token {{api_key}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+					"host": [
+						"{{base_url}}"
+					],
+					"path": [
+						"results"
+					],
+					"query": [
+						{
+							"key": "squid",
+							"value": "{{squid_hash}}"
+						},
+						{
+							"key": "run",
+							"value": "{{run_hash}}"
+						}
+					]
+				},
+				"description": "These `result` objects are returned by the **Leboncoin Listings Search Export** crawler. Each record represents one classified listing.\n\n| **Field** | Type | Description |\n| --- | --- | --- |\n| **id** | integer | Unique identifier for this result. |\n| **object** | string | Always \"result\". |\n| **squid** | string | Hash ID of the squid that produced this result. |\n| **run** | string | Hash ID of the run during which this result was scraped. |\n| **DPE** | string or null | Energy Performance Diagnostic (e.g., \"A\", \"B\", etc.), if available. |\n| **DPE_int** | integer or null | Numeric representation of the DPE. |\n| **DPE_string** | string or null | Full text description of the DPE rating. |\n| **GES** | string or null | Greenhouse Gas Emissions rating (e.g., \"A\", \"B\", etc.), if available. |\n| **GES_int** | integer or null | Numeric representation of the GES rating. |\n| **GES_string** | string or null | Full text description of the GES rating. |\n| **ad_type** | string | Type of ad, such as \"offer\" or \"search\". |\n| **annonce_id** | string | Listing ID assigned by Leboncoin. |\n| **api_key** | string | API key used for the request. |\n| **area** | string or null | Area size (e.g., in square meters), if specified. |\n| **booster** | boolean | `true` if the listing is boosted/promoted. |\n| **capacity** | string or null | Equipment capacity or similar metric, if applicable. |\n| **category_name** | string | Category of the listing (e.g., \"Manutention - Levage\"). |\n| **charges_included** | boolean or null | `true` if additional charges are included in the price. |\n| **city** | string | Name of the city where the listing is located. |\n| **city_label** | string | Formatted city label including postal code and area. |\n| **continuous_top_ads** | boolean | `true` if the ad is continuously featured at the top of listings. |\n| **currency** | string | Currency code used for the price (e.g., \"EUR\"). |\n| **custom_ref** | string or null | Custom reference provided by the user, if any. |\n| **department** | string | French department name. |\n| **description** | string | Full text description of the listing. |\n| **detailed_time** | string or null | Detailed timestamp or scheduling info, if available. |\n| **details** | object | Key–value map of structured listing attributes (e.g., “Surface habitable”, “Nombre de pièces”, “Mode de chauffage”, etc.). |\n| **district** | string or null | District or arrondissement, if specified. |\n| **expiration_date** | string (ISO) | Date and time when the listing expires. |\n| **first_publication_date** | string (ISO) | Timestamp when the listing was first published. |\n| **floor** | string or null | Floor number for real estate listings, if applicable. |\n| **functions** | object or null | Reserved for future function-specific metadata (currently null). |\n| **furnished** | boolean or null | `true` if the property is furnished. |\n| **gallery** | boolean | `true` if the listing includes a gallery of images. |\n| **has_online_shop** | boolean | `true` if a pro seller’s shop URL is available. |\n| **has_option** | boolean | `true` if the listing includes additional purchase or rental options. |\n| **has_phone** | boolean | `true` if a phone number is available. |\n| **has_swimming_pool** | boolean or null | `true` if the property includes a swimming pool. |\n| **is_active** | boolean or null | `true` if the listing is currently active. |\n| **is_boosted** | boolean | `true` if the listing is boost-promoted. |\n| **is_deactivated** | boolean or null | `true` if the listing has been deactivated. |\n| **is_detailed** | boolean or null | `true` if detailed listing information was fetched. |\n| **is_exclusive** | boolean or null | `true` if the listing is marked as exclusive. |\n| **is_mobile** | boolean or null | `true` if the listing was created via mobile. |\n| **land_plot_area** | string or null | Area of the land plot, if applicable. |\n| **last_publication_date** | string (ISO) | Timestamp of the last publication or update of the listing. |\n| **lat** | string | Latitude coordinate of the listing. |\n| **lng** | string | Longitude coordinate of the listing. |\n| **mail** | string or null | Contact email address, if provided. |\n| **more_details** | object | Extended metadata such as import flags, district IDs, old price, lease type, floor number, energy rate, inventory fees, and other vendor-specific fields. |\n| **native_id** | integer | Native numeric ID for the listing, often matches `id`. |\n| **no_salesmen** | boolean | `true` if the listing specifies “no salesmen” policy. |\n| **online_shop_url** | string or null | URL of the seller’s online shop, if available. |\n| **owner_name** | string | Name of the listing’s owner or seller. |\n| **owner_siren** | string or null | Seller’s SIREN identifier (French business registration number). |\n| **owner_store_id** | string | Identifier of the seller’s store. |\n| **owner_type** | string | Numeric code representing the seller type. |\n| **phone** | string or null | Phone number listed in the ad, if provided. |\n| **phone_from_user** | string or null | Phone number extracted from user input, if any. |\n| **photosup** | boolean | `true` if supplementary photos are provided. |\n| **picture** | string (URL) | URL of the primary listing image. |\n| **pictures** | string | Comma-separated URLs of all listing images. |\n| **postal_code** | string | Postal code for the listing’s location. |\n| **price** | integer | Listing price. |\n| **price_per_square_meter** | number or null | Price per square meter, if computed. |\n| **real_estate_type** | string or null | Type of real estate (e.g., apartment, house), if applicable. |\n| **ref** | string or null | Internal reference code, if any. |\n| **region** | string | Region name (e.g., \"Provence-Alpes-Côte d'Azur\"). |\n| **room_count** | integer or null | Number of rooms, if specified. |\n| **scraping_time** | string (ISO) | Timestamp when this listing was fetched by the scraper. |\n| **sleepingroom_count** | integer or null | Number of sleeping rooms, if specified. |\n| **source** | string | Data source for the listing (e.g., \"city\", \"pro\"). |\n| **square_metter_price** | number or null | Price per square meter computed for real estate listings. |\n| **status_code** | string or null | Status code of the listing (e.g., active, pending). |\n| **sub_toplist** | boolean | `true` if the ad appears in a secondary top-list position. |\n| **title** | string | Title or headline of the listing. |\n| **urgent** | boolean | `true` if the listing is marked as urgent. |\n| **url** | string (URL) | Direct link to the listing on leboncoin.fr. |\n| **user_id** | string | UUID of the user who posted the listing. |"
+			},
+			"response": [
+				{
+					"name": "Example",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Token {{api_key}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"results"
+							],
+							"query": [
+								{
+									"key": "squid",
+									"value": "{{squid_hash}}"
+								},
+								{
+									"key": "run",
+									"value": "{{run_hash}}"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"cookie": [],
+					"body": "{\n    \"total_results\": 3,\n    \"limit\": 10,\n    \"page\": 1,\n    \"total_pages\": 1,\n    \"result_from\": 1,\n    \"result_to\": 3,\n    \"data\": [\n        {\n            \"id\": 53557759,\n            \"object\": \"result\",\n            \"squid\": \"72d18e4c94534b829877bb7c092b1f80\",\n            \"run\": \"3ff48bb8ef19426e87fbb3e102dd4531\",\n            \"DPE\": null,\n            \"DPE_int\": null,\n            \"DPE_string\": null,\n            \"GES\": null,\n            \"GES_int\": null,\n            \"GES_string\": null,\n            \"ad_type\": \"offer\",\n            \"annonce_id\": \"3017342971\",\n            \"api_key\": \"54bb0281238b45a03f0ee695f73e704f\",\n            \"area\": null,\n            \"booster\": false,\n            \"capacity\": null,\n            \"category_name\": \"Équipements & Fournitures de bureau\",\n            \"charges_included\": null,\n            \"city\": \"Aix-en-Provence\",\n            \"city_label\": \"Aix-en-Provence 13100\",\n            \"continuous_top_ads\": false,\n            \"currency\": \"EUR\",\n            \"custom_ref\": null,\n            \"department\": \"Bouches-du-Rhône\",\n            \"description\": \"Cartable d'ordinateur (ou autre) noir avec bandoulière. Marque CASE LOGIC. Etat neuf\",\n            \"detailed_time\": null,\n            \"details\": {},\n            \"district\": null,\n            \"expiration_date\": \"2025-09-02T04:05:30Z\",\n            \"first_publication_date\": \"2025-07-04T04:05:30Z\",\n            \"floor\": null,\n            \"functions\": null,\n            \"furnished\": null,\n            \"gallery\": false,\n            \"has_online_shop\": false,\n            \"has_option\": false,\n            \"has_phone\": false,\n            \"has_swimming_pool\": null,\n            \"is_active\": null,\n            \"is_boosted\": false,\n            \"is_deactivated\": null,\n            \"is_detailed\": null,\n            \"is_exclusive\": null,\n            \"is_mobile\": null,\n            \"land_plot_area\": null,\n            \"last_publication_date\": \"2025-07-04T04:05:30Z\",\n            \"lat\": \"43.52638\",\n            \"lng\": \"5.44614\",\n            \"mail\": null,\n            \"more_details\": {\n                \"is_import\": \"false\",\n                \"shippable\": \"true\",\n                \"rating_count\": \"13\",\n                \"rating_score\": \"0.99\",\n                \"is_bundleable\": \"true\",\n                \"shipping_type\": \"mondial_relay\",\n                \"country_isocode3166\": \"FR\",\n                \"profile_picture_url\": \"https://img.leboncoin.fr/api/v1/tenants/9a6387a1-6259-4f2c-a887-7e67f23dd4cb/domains/20bda58f-d650-462e-a72a-a5a7ecf2bf88/buckets/21d2b0bc-e54c-4b64-a30b-89127b18b785/images/profile/pictures/default/62496c72-ca5c-5e0a-a557-1901be330d9d?rule=pp-small\",\n                \"purchase_cta_visible\": \"true\",\n                \"estimated_parcel_size\": \"M\",\n                \"estimated_parcel_weight\": \"1018\",\n                \"negotiation_cta_visible\": \"true\"\n            },\n            \"native_id\": 53557759,\n            \"no_salesmen\": true,\n            \"online_shop_url\": null,\n            \"owner_name\": \"EMMA\",\n            \"owner_siren\": null,\n            \"owner_store_id\": \"1095173\",\n            \"owner_type\": \"0\",\n            \"phone\": null,\n            \"phone_from_user\": null,\n            \"photosup\": false,\n            \"picture\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/62/5a/0d/625a0da7186ebe031324bf5533a39e698ce917e1.jpg?rule=ad-large\",\n            \"pictures\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/62/5a/0d/625a0da7186ebe031324bf5533a39e698ce917e1.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/9b/68/2b/9b682bcdbb9c02bbb8697e99908ae04098276f21.jpg?rule=ad-large\",\n            \"postal_code\": \"13100\",\n            \"price\": 5,\n            \"price_per_square_meter\": null,\n            \"real_estate_type\": null,\n            \"ref\": null,\n            \"region\": \"Provence-Alpes-Côte d'Azur\",\n            \"room_count\": null,\n            \"scraping_time\": \"2025-07-04T04:08:09.340Z\",\n            \"sleepingroom_count\": null,\n            \"source\": \"city\",\n            \"square_metter_price\": null,\n            \"status_code\": null,\n            \"sub_toplist\": false,\n            \"title\": \"Cartable\",\n            \"urgent\": false,\n            \"url\": \"https://www.leboncoin.fr/ad/equipements_fournitures_de_bureau/3017342971\",\n            \"user_id\": \"0464f5d3-e478-467f-bdfc-d081111e25ab\"\n        },\n        {\n            \"id\": 53557760,\n            \"object\": \"result\",\n            \"squid\": \"72d18e4c94534b829877bb7c092b1f80\",\n            \"run\": \"3ff48bb8ef19426e87fbb3e102dd4531\",\n            \"DPE\": null,\n            \"DPE_int\": null,\n            \"DPE_string\": null,\n            \"GES\": null,\n            \"GES_int\": null,\n            \"GES_string\": null,\n            \"ad_type\": \"offer\",\n            \"annonce_id\": \"3017342920\",\n            \"api_key\": \"54bb0281238b45a03f0ee695f73e704f\",\n            \"area\": null,\n            \"booster\": false,\n            \"capacity\": null,\n            \"category_name\": \"Ameublement\",\n            \"charges_included\": null,\n            \"city\": \"Aubagne\",\n            \"city_label\": \"Aubagne 13400\",\n            \"continuous_top_ads\": false,\n            \"currency\": \"EUR\",\n            \"custom_ref\": null,\n            \"department\": \"Bouches-du-Rhône\",\n            \"description\": \"Je vends chaise de bureau pour cause déménagement. \\nAcheté en 2023\",\n            \"detailed_time\": null,\n            \"details\": {\n                \"Type\": \"Coffre & malle\",\n                \"État\": \"Bon état\",\n                \"Pièce\": \"Bureau\",\n                \"Couleur\": \"Noir\",\n                \"Matière\": \"Tissu\"\n            },\n            \"district\": null,\n            \"expiration_date\": null,\n            \"first_publication_date\": \"2025-07-04T04:04:39Z\",\n            \"floor\": null,\n            \"functions\": null,\n            \"furnished\": null,\n            \"gallery\": false,\n            \"has_online_shop\": false,\n            \"has_option\": false,\n            \"has_phone\": false,\n            \"has_swimming_pool\": null,\n            \"is_active\": null,\n            \"is_boosted\": false,\n            \"is_deactivated\": null,\n            \"is_detailed\": null,\n            \"is_exclusive\": null,\n            \"is_mobile\": null,\n            \"land_plot_area\": null,\n            \"last_publication_date\": \"2025-07-04T04:04:39Z\",\n            \"lat\": \"43.29217\",\n            \"lng\": \"5.56868\",\n            \"mail\": null,\n            \"more_details\": {\n                \"condition\": \"Bon état\",\n                \"is_import\": \"false\",\n                \"shippable\": \"false\",\n                \"is_bundleable\": \"true\",\n                \"shipping_type\": \"face_to_face\",\n                \"furniture_type\": \"Coffre & malle\",\n                \"furniture_color\": \"Noir\",\n                \"furniture_material\": \"Tissu\",\n                \"country_isocode3166\": \"FR\",\n                \"profile_picture_url\": \"https://img.leboncoin.fr/api/v1/tenants/9a6387a1-6259-4f2c-a887-7e67f23dd4cb/domains/20bda58f-d650-462e-a72a-a5a7ecf2bf88/buckets/21d2b0bc-e54c-4b64-a30b-89127b18b785/images/profile/pictures/default/648650a9-aef4-5f3a-ade4-16c09574c3d7?rule=pp-small\",\n                \"purchase_cta_visible\": \"true\",\n                \"estimated_parcel_size\": \"L\",\n                \"estimated_parcel_weight\": \"40000\",\n                \"negotiation_cta_visible\": \"true\",\n                \"house_and_garden_furniture_room_type\": \"Bureau\"\n            },\n            \"native_id\": 53557760,\n            \"no_salesmen\": true,\n            \"online_shop_url\": null,\n            \"owner_name\": \"Kat\",\n            \"owner_siren\": null,\n            \"owner_store_id\": \"54941669\",\n            \"owner_type\": \"0\",\n            \"phone\": null,\n            \"phone_from_user\": null,\n            \"photosup\": false,\n            \"picture\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/d0/60/ec/d060ecb79ebd71ca5f0e8d8576db7ad8b09c9133.jpg?rule=ad-large\",\n            \"pictures\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/d0/60/ec/d060ecb79ebd71ca5f0e8d8576db7ad8b09c9133.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/ec/8c/a9/ec8ca9918e1c5d7e7db357dcaa3561adbda795b6.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/0f/b4/40/0fb440e01f513a76c411e741e8a46c91f9ab43ef.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/2a/d0/03/2ad003997988fa93a9827abe15574670e91fc1ed.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/90/cb/4d/90cb4dde4f892992e32a920411325d3c51f0a385.jpg?rule=ad-large\",\n            \"postal_code\": \"13400\",\n            \"price\": 20,\n            \"price_per_square_meter\": null,\n            \"real_estate_type\": null,\n            \"ref\": null,\n            \"region\": \"Provence-Alpes-Côte d'Azur\",\n            \"room_count\": null,\n            \"scraping_time\": \"2025-07-04T04:08:10.204Z\",\n            \"sleepingroom_count\": null,\n            \"source\": \"city\",\n            \"square_metter_price\": null,\n            \"status_code\": null,\n            \"sub_toplist\": false,\n            \"title\": \"Chaise de bureau\",\n            \"urgent\": false,\n            \"url\": \"https://www.leboncoin.fr/ad/ameublement/3017342920\",\n            \"user_id\": \"3545471a-a6a4-40d6-99d9-6eebb992add1\"\n        },\n        {\n            \"id\": 53557761,\n            \"object\": \"result\",\n            \"squid\": \"72d18e4c94534b829877bb7c092b1f80\",\n            \"run\": \"3ff48bb8ef19426e87fbb3e102dd4531\",\n            \"DPE\": null,\n            \"DPE_int\": null,\n            \"DPE_string\": null,\n            \"GES\": null,\n            \"GES_int\": null,\n            \"GES_string\": null,\n            \"ad_type\": \"offer\",\n            \"annonce_id\": \"3017342911\",\n            \"api_key\": \"54bb0281238b45a03f0ee695f73e704f\",\n            \"area\": null,\n            \"booster\": false,\n            \"capacity\": null,\n            \"category_name\": \"Manutention - Levage\",\n            \"charges_included\": null,\n            \"city\": \"Mollégès\",\n            \"city_label\": \"Mollégès 13940 -Gare\",\n            \"continuous_top_ads\": false,\n            \"currency\": \"EUR\",\n            \"custom_ref\": null,\n            \"department\": \"Bouches-du-Rhône\",\n            \"description\": \"fenwick L16 de 2015 , en bon état  avec 416 h . 3700 à débattre\",\n            \"detailed_time\": null,\n            \"details\": {},\n            \"district\": null,\n            \"expiration_date\": \"2025-09-02T04:04:39Z\",\n            \"first_publication_date\": \"2025-07-04T04:04:39Z\",\n            \"floor\": null,\n            \"functions\": null,\n            \"furnished\": null,\n            \"gallery\": false,\n            \"has_online_shop\": false,\n            \"has_option\": false,\n            \"has_phone\": true,\n            \"has_swimming_pool\": null,\n            \"is_active\": null,\n            \"is_boosted\": false,\n            \"is_deactivated\": null,\n            \"is_detailed\": null,\n            \"is_exclusive\": null,\n            \"is_mobile\": null,\n            \"land_plot_area\": null,\n            \"last_publication_date\": \"2025-07-04T04:04:39Z\",\n            \"lat\": \"43.78826\",\n            \"lng\": \"4.95349\",\n            \"mail\": null,\n            \"more_details\": {\n                \"is_import\": \"false\",\n                \"shippable\": \"false\",\n                \"country_isocode3166\": \"FR\",\n                \"profile_picture_url\": \"https://img.leboncoin.fr/api/v1/tenants/9a6387a1-6259-4f2c-a887-7e67f23dd4cb/domains/20bda58f-d650-462e-a72a-a5a7ecf2bf88/buckets/21d2b0bc-e54c-4b64-a30b-89127b18b785/images/profile/pictures/default/81bff1d9-7863-5d76-85af-154baef937c6?rule=pp-small\"\n            },\n            \"native_id\": 53557761,\n            \"no_salesmen\": true,\n            \"online_shop_url\": null,\n            \"owner_name\": \"philippe 26\",\n            \"owner_siren\": null,\n            \"owner_store_id\": \"19033890\",\n            \"owner_type\": \"0\",\n            \"phone\": null,\n            \"phone_from_user\": null,\n            \"photosup\": false,\n            \"picture\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/4c/ec/e7/4cece74088a141e80b8a166e9ca4778fbda205ad.jpg?rule=ad-large\",\n            \"pictures\": \"https://img.leboncoin.fr/api/v1/lbcpb1/images/4c/ec/e7/4cece74088a141e80b8a166e9ca4778fbda205ad.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/1f/36/97/1f369740d8ef72ee778aedbc83733d07ef6f18be.jpg?rule=ad-large, https://img.leboncoin.fr/api/v1/lbcpb1/images/11/45/05/11450580612aa6d6352a1dcc946b6d2928d9aa80.jpg?rule=ad-large\",\n            \"postal_code\": \"13940\",\n            \"price\": 3700,\n            \"price_per_square_meter\": null,\n            \"real_estate_type\": null,\n            \"ref\": null,\n            \"region\": \"Provence-Alpes-Côte d'Azur\",\n            \"room_count\": null,\n            \"scraping_time\": \"2025-07-04T04:08:10.865Z\",\n            \"sleepingroom_count\": null,\n            \"source\": \"city\",\n            \"square_metter_price\": null,\n            \"status_code\": null,\n            \"sub_toplist\": false,\n            \"title\": \"Gerbeur à vendre\",\n            \"urgent\": false,\n            \"url\": \"https://www.leboncoin.fr/ad/manutention_levage/3017342911\",\n            \"user_id\": \"72209e62-59cc-446d-a322-620c0f207e7c\"\n        }\n    ],\n    \"next\": null,\n    \"previous\": null\n}"
+				}
+			]
+		}
+	]
+}

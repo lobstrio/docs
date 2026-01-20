@@ -1,0 +1,239 @@
+{
+    "name": "Facebook Page Details Export",
+    "item": [
+        {
+            "name": "Add tasks",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n  \"squid\": \"{{squid_hash}}\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.facebook.com/pages/tri-phase-construction-llc/591768754194714/\"\r\n    }\r\n  ]\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/tasks",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "tasks"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token <api_key>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"squid\": \"<squid_hash>\",\r\n  \"tasks\": [\r\n    {\r\n      \"url\": \"https://www.facebook.com/pages/tri-phase-construction-llc/591768754194714/\"\r\n    }\r\n  ]\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://api.lobstr.io/v1/tasks",
+                            "protocol": "https",
+                            "host": [
+                                "api",
+                                "lobstr",
+                                "io"
+                            ],
+                            "path": [
+                                "v1",
+                                "tasks"
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n  \"duplicated_count\": 0,\n  \"tasks\": [\n    {\n      \"id\": \"82367f24d9450b2222080eed91662968\",\n      \"created_at\": \"2025-07-17T09:06:47.287893\",\n      \"is_active\": true,\n      \"params\": {\n        \"url\": \"https://www.facebook.com/pages/tri-phase-construction-llc/591768754194714/\"\n      },\n      \"module\": 115,\n      \"object\": \"task\"\n    }\n  ]\n}"
+                }
+            ]
+        },
+        {
+            "name": "Update settings",
+            "request": {
+                "method": "POST",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "body": {
+                    "mode": "raw",
+                    "raw": "{\r\n  \"name\": \"Facebook Page Details Export (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {}\r\n}",
+                    "options": {
+                        "raw": {
+                            "language": "json"
+                        }
+                    }
+                },
+                "url": {
+                    "raw": "{{base_url}}/squids/{{squid_hash}}",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "squids",
+                        "{{squid_hash}}"
+                    ]
+                }
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token <api_key>",
+                                "type": "text"
+                            }
+                        ],
+                        "body": {
+                            "mode": "raw",
+                            "raw": "{\r\n  \"name\": \"Facebook Page Details Export (1)\",\r\n  \"concurrency\": 1,\r\n  \"export_unique_results\": true,\r\n  \"to_complete\": false,\r\n  \"no_line_breaks\": true,\r\n  \"params\": {}\r\n}",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            }
+                        },
+                        "url": {
+                            "raw": "https://api.lobstr.io/v1/squids/<squid_hash>",
+                            "protocol": "https",
+                            "host": [
+                                "api",
+                                "lobstr",
+                                "io"
+                            ],
+                            "path": [
+                                "v1",
+                                "squids",
+                                "<squid_hash>"
+                            ]
+                        }
+                    },
+                    "status": "Created",
+                    "code": 201,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [],
+                    "body": "{\n  \"name\": \"Facebook Page Details Export (1)\",\n  \"concurrency\": 1,\n  \"export_unique_results\": true,\n  \"to_complete\": false,\n  \"no_line_breaks\": true,\n  \"params\": {}\n}"
+                }
+            ]
+        },
+        {
+            "name": "Get results",
+            "request": {
+                "method": "GET",
+                "header": [
+                    {
+                        "key": "Authorization",
+                        "value": "Token {{api_key}}",
+                        "type": "text"
+                    }
+                ],
+                "url": {
+                    "raw": "{{base_url}}/results?squid={{squid_hash}}&run={{run_hash}}",
+                    "host": [
+                        "{{base_url}}"
+                    ],
+                    "path": [
+                        "results"
+                    ],
+                    "query": [
+                        {
+                            "key": "squid",
+                            "value": "{{squid_hash}}"
+                        },
+                        {
+                            "key": "run",
+                            "value": "{{run_hash}}"
+                        }
+                    ]
+                },
+                "description": "These `result` objects are returned by the **Facebook Page Details Export** crawler.\n\n| **Field**          | Type            | Description                                                                                             |\n|--------------------|-----------------|---------------------------------------------------------------------------------------------------------|\n| **id**             | integer         | Unique identifier for this result record.                                                               |\n| **object**         | string          | Always \"result\".                                                                                         |\n| **squid**          | string          | Hash ID of the squid that produced this result.                                                         |\n| **run**            | string          | Hash ID of the run during which this result was fetched.                                                |\n| **about**          | string or null  | \"About\" section content of the Facebook page, if available.                                             |\n| **address**        | string or null  | Physical address of the business or page, if listed.                                                    |\n| **category**       | string          | Page category (e.g., \"Local Business\").                                                                 |\n| **email**          | string or null  | Contact email address scraped from the page’s About or Contact section.                                 |\n| **followers**      | string          | Number of page followers (text, e.g., \"4\").                                                              |\n| **functions**      | object or null  | Reserved for function-specific metadata (currently null).                                               |\n| **image_url**      | string          | URL of the page’s profile or cover image.                                                               |\n| **instagram**      | string or null  | Instagram profile URL if listed on the page.                                                           |\n| **internal_id**    | string          | Facebook’s internal page identifier.                                                                    |\n| **likes**          | string          | Number of page likes (text, e.g., \"4\").                                                                  |\n| **menu**           | string or null  | URL of the page’s menu or services section, if available.                                               |\n| **name**           | string          | Name of the Facebook page.                                                                              |\n| **native_id**      | integer         | Native scraper ID for the page (often same as `id`).                                                    |\n| **phone**          | string or null  | Contact phone number listed on the page.                                                                |\n| **price**          | string or null  | Price information if provided (rare for Facebook pages).                                                |\n| **reviews**        | integer         | Number of reviews the page has received.                                                                |\n| **score**          | number          | Average rating score (e.g., 0–5).                                                                        |\n| **scraping_time**  | string (ISO)    | Timestamp when this result was fetched (e.g., \"2025-05-02T08:17:12.353Z\").                              |\n| **slug**           | string          | URL path slug for the page (e.g., \"/pages/tri-phase-construction-llc/591768754194714/\").                 |\n| **status**         | string          | Scrape status of the page (e.g., \"valid_page\").                                                         |\n| **url**            | string          | Full URL to the Facebook page.                                                                          |\n| **visits**         | integer         | Number of page visits if available (e.g., view count).                                                  |\n| **wesbite**        | string or null  | Website URL scraped from the page’s About or Contact section (field misspelled “wesbite” in response).  |"
+            },
+            "response": [
+                {
+                    "name": "Example",
+                    "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                            {
+                                "key": "Authorization",
+                                "value": "Token <api_key>",
+                                "type": "text"
+                            }
+                        ],
+                        "url": {
+                            "raw": "https://api.lobstr.io/v1/results?squid=<squid_hash>&run=<run_hash>&page_size=2",
+                            "protocol": "https",
+                            "host": [
+                                "api",
+                                "lobstr",
+                                "io"
+                            ],
+                            "path": [
+                                "v1",
+                                "results"
+                            ],
+                            "query": [
+                                {
+                                    "key": "squid",
+                                    "value": "<squid_hash>"
+                                },
+                                {
+                                    "key": "run",
+                                    "value": "<run_hash>"
+                                },
+                                {
+                                    "key": "page_size",
+                                    "value": "2"
+                                }
+                            ]
+                        }
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "_postman_previewlanguage": "json",
+                    "cookie": [
+                        {
+                            "expires": "Invalid Date",
+                            "domain": "",
+                            "path": ""
+                        }
+                    ],
+                    "body": "{\n  \"total_results\": 100,\n  \"limit\": 100,\n  \"page\": 1,\n  \"total_pages\": 1,\n  \"result_from\": 1,\n  \"result_to\": 100,\n  \"data\": [\n    {\n        \"id\": 50017,\n        \"object\": \"result\",\n        \"squid\": \"05d966bcc86f48b6afca3de8a0a0dc5e\",\n        \"run\": \"401314a9bf2547c984a3c5d335273a56\",\n        \"about\": null,\n        \"address\": null,\n        \"category\": \"Local Business\",\n        \"email\": null,\n        \"followers\": \"4\",\n        \"functions\": null,\n        \"image_url\": \"https://scontent-fra3-2.xx.fbcdn.net/v/t39.30808-1/277765385_273602841641120_8532033317367517249_n.jpg?stp=c130.0.780.780a_cp0_dst-jpg_s80x80_tt6&_nc_cat=111&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=yr-ymVqNWAcQ7kNvwFn44aj&_nc_oc=Adk2V9JW0WCbJQDPDjwca8EL4UGWcx9MNi1iMJHQuLPbwz_D_ps1ZzNGtu-ynCVqXA0&_nc_zt=24&_nc_ht=scontent-fra3-2.xx&_nc_gid=M_cwBTTtfdRn-fTEnzyblw&oh=00_AfGbg48aQJSzzJOriFI05hN2ONQaloYFI7gvVCQbtqraZg&oe=681A4B1E\",\n        \"instagram\": null,\n        \"internal_id\": \"591768754194714\",\n        \"likes\": \"4\",\n        \"menu\": null,\n        \"name\": \"Tri-Phase Construction LLC.\",\n        \"native_id\": 50017,\n        \"phone\": null,\n        \"price\": null,\n        \"reviews\": 0,\n        \"score\": 0,\n        \"scraping_time\": \"2025-05-02T08:17:12.353Z\",\n        \"slug\": \"/pages/tri-phase-construction-llc/591768754194714/\",\n        \"status\": \"valid_page\",\n        \"url\": \"https://www.facebook.com/pages/tri-phase-construction-llc/591768754194714/\",\n        \"visits\": 0,\n        \"wesbite\": null\n    }\n  ],\n  \"next\": \"https://api.lobstr.io/v1/results?squid=e23069fee2594ee0aed755be195b156c&run=6ecdfb8a43c841d18502f045200196f7&page=2&page_size=100\",\n  \"previous\": null\n}"
+                }
+            ]
+        }
+    ]
+}
