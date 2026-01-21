@@ -580,6 +580,23 @@
               "slug": "examples/tripadvisor-restaurants-search-export/get-results"
             }
           ]
+        },
+        {
+          "title": "TikTok Top Ads Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/tiktok-top-ads-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/tiktok-top-ads-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/tiktok-top-ads-scraper/get-results"
+            }
+          ]
         }
       ]
     }
