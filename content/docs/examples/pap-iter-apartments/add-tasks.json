@@ -1,5 +1,5 @@
 {
-  "slug": "examples/pap-search-export/add-tasks",
+  "slug": "examples/pap-iter-apartments/add-tasks",
   "title": "Add Tasks",
   "description": "Add PAP.fr search URLs as tasks for scraping French real estate listings",
   "category": "Examples",
@@ -17,12 +17,25 @@
         "content": "Each task should contain a URL from a PAP.fr search results page. You can search for properties by location, type, and filters on PAP, then use those search URLs as tasks.",
         "table": {
           "columns": [
-            { "header": "Field", "key": "field" },
-            { "header": "Type", "key": "type" },
-            { "header": "Description", "key": "description" }
+            {
+              "header": "Field",
+              "key": "field"
+            },
+            {
+              "header": "Type",
+              "key": "type"
+            },
+            {
+              "header": "Description",
+              "key": "description"
+            }
           ],
           "rows": [
-            { "field": "url", "type": "string", "description": "PAP.fr search results page URL" }
+            {
+              "field": "url",
+              "type": "string",
+              "description": "PAP.fr search results page URL"
+            }
           ]
         }
       },
