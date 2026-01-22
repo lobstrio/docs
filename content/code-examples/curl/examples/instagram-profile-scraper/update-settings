@@ -1,0 +1,7 @@
+curl -X PATCH "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID" \
+  -H "Authorization: Token YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "max_results": 100,
+    "max_unique_results_per_run": 1000
+  }'

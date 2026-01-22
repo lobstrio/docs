@@ -1,0 +1,58 @@
+{
+  "slug": "examples/instagram-profile-scraper/update-settings",
+  "title": "Update Settings",
+  "description": "Configure the Instagram Profile Scraper settings",
+  "category": "Instagram Profile Scraper",
+  "metadata": {
+    "method": "PATCH",
+    "endpoint": "/v2/squid/{squid_id}",
+    "requiresAuth": true
+  },
+  "content": {
+    "introduction": "Configure your Instagram Profile Scraper settings. You can control the maximum number of profiles collected per task and across the entire run.",
+    "sections": {
+      "settings": {
+        "title": "Available Settings",
+        "columns": [
+          { "header": "Parameter", "key": "parameter" },
+          { "header": "Type", "key": "type" },
+          { "header": "Default", "key": "default" },
+          { "header": "Description", "key": "description" }
+        ],
+        "rows": [
+          { "parameter": "**max_results**", "type": "integer", "default": "unlimited", "description": "Maximum number of profiles to collect per task" },
+          { "parameter": "**max_unique_results_per_run**", "type": "integer", "default": "unlimited", "description": "Maximum number of unique results retrieved across all tasks in the entire run" }
+        ]
+      }
+    },
+    "parameters": [],
+    "headers": [
+      {
+        "key": "Authorization",
+        "value": "Token YOUR_API_KEY",
+        "required": true,
+        "description": "Your API authentication token"
+      },
+      {
+        "key": "Content-Type",
+        "value": "application/json",
+        "required": true,
+        "description": "Request body format"
+      }
+    ],
+    "proTips": [
+      {
+        "type": "note",
+        "content": "Leave limits empty or null for unlimited collection."
+      },
+      {
+        "type": "tip",
+        "content": "Use `max_unique_results_per_run` to set a hard cap on total profiles when processing large batches."
+      }
+    ]
+  },
+  "seo": {
+    "title": "Update Settings - Instagram Profile Scraper - Lobstr.io API",
+    "description": "Learn how to configure Instagram Profile Scraper settings using the Lobstr.io API."
+  }
+}

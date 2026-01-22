@@ -631,6 +631,23 @@
               "slug": "examples/instagram-reels-scraper/get-results"
             }
           ]
+        },
+        {
+          "title": "Instagram Profile Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/instagram-profile-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/instagram-profile-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/instagram-profile-scraper/get-results"
+            }
+          ]
         }
       ]
     }

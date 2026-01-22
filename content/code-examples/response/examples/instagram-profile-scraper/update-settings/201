@@ -1,0 +1,7 @@
+{
+  "id": "squid_xyz789",
+  "name": "Instagram Profile Scraper",
+  "max_results": 100,
+  "max_unique_results_per_run": 1000,
+  "updated_at": "2025-01-15T10:35:00Z"
+}
