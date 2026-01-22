@@ -1,7 +1,11 @@
 {
-  "id": "squid_xyz789",
-  "name": "Sales Navigator Companies Scraper",
-  "max_pages": 50,
-  "max_results": 1000,
-  "updated_at": "2025-01-15T10:35:00Z"
+  "name": "Sales Navigator Companies Scraper (1)",
+  "concurrency": 5,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "max_pages": 50,
+    "max_results": 1000
+  }
 }

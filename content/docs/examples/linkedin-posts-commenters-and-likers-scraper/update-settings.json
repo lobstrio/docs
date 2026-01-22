@@ -4,25 +4,42 @@
   "description": "Configure the LinkedIn Posts Commenters and Likers Scraper settings",
   "category": "LinkedIn Posts Commenters and Likers Scraper",
   "metadata": {
-    "method": "PATCH",
-    "endpoint": "/v2/squid/{squid_id}",
+    "method": "POST",
+    "endpoint": "/v1/squids/{squid_hash}",
     "requiresAuth": true
   },
   "content": {
-    "introduction": "Configure your LinkedIn Posts Commenters and Likers Scraper settings. Control which engagement types to scrape and enable email enrichment.",
+    "introduction": "Configure your LinkedIn Posts Commenters and Likers Scraper squid settings. Control which engagement types to scrape and enable email enrichment.",
     "sections": {
-      "settings": {
-        "title": "Available Settings",
+      "scraperParams": {
+        "title": "Scraper Parameters",
+        "content": "Set these parameters in the `params` object:",
         "columns": [
-          { "header": "Parameter", "key": "parameter" },
-          { "header": "Type", "key": "type" },
-          { "header": "Default", "key": "default" },
-          { "header": "Description", "key": "description" }
+          {"header": "Parameter", "key": "param"},
+          {"header": "Type", "key": "type"},
+          {"header": "Default", "key": "default"},
+          {"header": "Description", "key": "description"}
         ],
         "rows": [
-          { "parameter": "**scrape_comments**", "type": "boolean", "default": "true", "description": "Enable to scrape users who commented on the post" },
-          { "parameter": "**scrape_reactions**", "type": "boolean", "default": "true", "description": "Enable to scrape users who reacted (liked) the post" },
-          { "parameter": "**email**", "type": "boolean", "default": "false", "description": "Enable email enrichment to find email addresses" }
+          {"param": "**scrape_comments**", "type": "boolean", "default": "true", "description": "Enable to scrape users who commented on the post"},
+          {"param": "**scrape_reactions**", "type": "boolean", "default": "true", "description": "Enable to scrape users who reacted (liked) the post"},
+          {"param": "**email**", "type": "boolean", "default": "false", "description": "Enable email enrichment to find email addresses"}
+        ]
+      },
+      "squidSettings": {
+        "title": "Squid Settings",
+        "content": "Configure general squid settings:",
+        "columns": [
+          {"header": "Setting", "key": "setting"},
+          {"header": "Type", "key": "type"},
+          {"header": "Description", "key": "description"}
+        ],
+        "rows": [
+          {"setting": "**name**", "type": "string", "description": "Display name for your squid configuration"},
+          {"setting": "**concurrency**", "type": "integer", "description": "Number of parallel scraping threads (default: 1)"},
+          {"setting": "**export_unique_results**", "type": "boolean", "description": "Export only unique results (deduplicated)"},
+          {"setting": "**to_complete**", "type": "boolean", "description": "Run until all tasks complete"},
+          {"setting": "**no_line_breaks**", "type": "boolean", "description": "Remove line breaks from results"}
         ]
       },
       "emailEnrichment": {

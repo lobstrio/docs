@@ -1,7 +1,11 @@
 {
-  "id": "squid_xyz789",
-  "name": "Instagram Reels Scraper",
-  "max_results": 50,
-  "max_unique_results_per_run": 500,
-  "updated_at": "2025-01-15T10:35:00Z"
+  "name": "Instagram Reels Scraper (1)",
+  "concurrency": 5,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "max_results": 50,
+    "max_unique_results_per_run": 500
+  }
 }

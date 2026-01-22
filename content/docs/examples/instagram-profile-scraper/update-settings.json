@@ -4,24 +4,41 @@
   "description": "Configure the Instagram Profile Scraper settings",
   "category": "Instagram Profile Scraper",
   "metadata": {
-    "method": "PATCH",
-    "endpoint": "/v2/squid/{squid_id}",
+    "method": "POST",
+    "endpoint": "/v1/squids/{squid_hash}",
     "requiresAuth": true
   },
   "content": {
-    "introduction": "Configure your Instagram Profile Scraper settings. You can control the maximum number of profiles collected per task and across the entire run.",
+    "introduction": "Configure your Instagram Profile Scraper squid settings. Control the maximum number of profiles collected per task and across the entire run.",
     "sections": {
-      "settings": {
-        "title": "Available Settings",
+      "scraperParams": {
+        "title": "Scraper Parameters",
+        "content": "Set these parameters in the `params` object:",
         "columns": [
-          { "header": "Parameter", "key": "parameter" },
-          { "header": "Type", "key": "type" },
-          { "header": "Default", "key": "default" },
-          { "header": "Description", "key": "description" }
+          {"header": "Parameter", "key": "param"},
+          {"header": "Type", "key": "type"},
+          {"header": "Default", "key": "default"},
+          {"header": "Description", "key": "description"}
         ],
         "rows": [
-          { "parameter": "**max_results**", "type": "integer", "default": "unlimited", "description": "Maximum number of profiles to collect per task" },
-          { "parameter": "**max_unique_results_per_run**", "type": "integer", "default": "unlimited", "description": "Maximum number of unique results retrieved across all tasks in the entire run" }
+          {"param": "**max_results**", "type": "integer", "default": "unlimited", "description": "Maximum number of profiles to collect per task"},
+          {"param": "**max_unique_results_per_run**", "type": "integer", "default": "unlimited", "description": "Maximum number of unique results retrieved across all tasks in the entire run"}
+        ]
+      },
+      "squidSettings": {
+        "title": "Squid Settings",
+        "content": "Configure general squid settings:",
+        "columns": [
+          {"header": "Setting", "key": "setting"},
+          {"header": "Type", "key": "type"},
+          {"header": "Description", "key": "description"}
+        ],
+        "rows": [
+          {"setting": "**name**", "type": "string", "description": "Display name for your squid configuration"},
+          {"setting": "**concurrency**", "type": "integer", "description": "Number of parallel scraping threads (default: 1)"},
+          {"setting": "**export_unique_results**", "type": "boolean", "description": "Export only unique results (deduplicated)"},
+          {"setting": "**to_complete**", "type": "boolean", "description": "Run until all tasks complete"},
+          {"setting": "**no_line_breaks**", "type": "boolean", "description": "Remove line breaks from results"}
         ]
       }
     },

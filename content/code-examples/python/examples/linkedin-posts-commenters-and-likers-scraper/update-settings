@@ -1,18 +1,28 @@
 import requests
 
-API_TOKEN = "YOUR_API_TOKEN"
-SQUID_ID = "YOUR_SQUID_ID"
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
 
-url = f"https://api.lobstr.io/api/v2/squid/{SQUID_ID}"
-headers = {
-    "Authorization": f"Token {API_TOKEN}",
-    "Content-Type": "application/json"
-}
-data = {
-    "scrape_comments": True,
-    "scrape_reactions": True,
-    "email": False
+squid_id = "YOUR_SQUID_HASH"
+
+# Update squid settings
+payload = {
+    "name": "LinkedIn Posts Commenters and Likers Scraper (1)",
+    "concurrency": 5,
+    "export_unique_results": True,
+    "to_complete": False,
+    "no_line_breaks": True,
+    "params": {
+        "scrape_comments": True,    # Scrape users who commented
+        "scrape_reactions": True,   # Scrape users who reacted/liked
+        "email": False              # Disable email enrichment
+    }
 }
 
-response = requests.patch(url, headers=headers, json=data)
-print(response.json())
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json=payload
+)
+
+print(f"Settings updated: {response.json()['name']}")
