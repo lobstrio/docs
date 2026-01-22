@@ -648,6 +648,23 @@
               "slug": "examples/instagram-profile-scraper/get-results"
             }
           ]
+        },
+        {
+          "title": "Sales Navigator Companies Scraper",
+          "items": [
+            {
+              "title": "Add Tasks",
+              "slug": "examples/sales-navigator-companies-scraper/add-tasks"
+            },
+            {
+              "title": "Update Settings",
+              "slug": "examples/sales-navigator-companies-scraper/update-settings"
+            },
+            {
+              "title": "Get Results",
+              "slug": "examples/sales-navigator-companies-scraper/get-results"
+            }
+          ]
         }
       ]
     }

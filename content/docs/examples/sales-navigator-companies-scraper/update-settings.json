@@ -1,0 +1,63 @@
+{
+  "slug": "examples/sales-navigator-companies-scraper/update-settings",
+  "title": "Update Settings",
+  "description": "Configure the Sales Navigator Companies Scraper settings",
+  "category": "Sales Navigator Companies Scraper",
+  "metadata": {
+    "method": "PATCH",
+    "endpoint": "/v2/squid/{squid_id}",
+    "requiresAuth": true
+  },
+  "content": {
+    "introduction": "Configure your Sales Navigator Companies Scraper settings. Control pagination depth and result limits.",
+    "sections": {
+      "settings": {
+        "title": "Available Settings",
+        "columns": [
+          { "header": "Parameter", "key": "parameter" },
+          { "header": "Type", "key": "type" },
+          { "header": "Default", "key": "default" },
+          { "header": "Description", "key": "description" }
+        ],
+        "rows": [
+          { "parameter": "**max_pages**", "type": "integer", "default": "100", "description": "Maximum number of search result pages to scrape (max: 100)" },
+          { "parameter": "**max_results**", "type": "integer", "default": "unlimited", "description": "Maximum companies to collect per task (max: 5000)" },
+          { "parameter": "**max_unique_results_per_run**", "type": "integer", "default": "unlimited", "description": "Maximum unique results across all tasks in the run" }
+        ]
+      },
+      "pagination": {
+        "title": "Pagination",
+        "content": "Sales Navigator displays 25 companies per page. With `max_pages` set to 100 (default), you can collect up to 2,500 companies per search URL.\n\nFor larger datasets, use multiple search URLs with different filters."
+      }
+    },
+    "parameters": [],
+    "headers": [
+      {
+        "key": "Authorization",
+        "value": "Token YOUR_API_KEY",
+        "required": true,
+        "description": "Your API authentication token"
+      },
+      {
+        "key": "Content-Type",
+        "value": "application/json",
+        "required": true,
+        "description": "Request body format"
+      }
+    ],
+    "proTips": [
+      {
+        "type": "tip",
+        "content": "Set `max_pages` to a lower value if you only need companies from the first few pages of results."
+      },
+      {
+        "type": "note",
+        "content": "Credits are charged per company collected (1 credit per company)."
+      }
+    ]
+  },
+  "seo": {
+    "title": "Update Settings - Sales Navigator Companies Scraper - Lobstr.io API",
+    "description": "Learn how to configure Sales Navigator Companies Scraper settings using the Lobstr.io API."
+  }
+}
