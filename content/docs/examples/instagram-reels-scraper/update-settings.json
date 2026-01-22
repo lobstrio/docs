@@ -1,0 +1,66 @@
+{
+  "slug": "examples/instagram-reels-scraper/update-settings",
+  "title": "Update Settings",
+  "description": "Configure the Instagram Reels Scraper settings including result limits",
+  "category": "Instagram Reels Scraper",
+  "metadata": {
+    "method": "PATCH",
+    "endpoint": "/v2/squid/{squid_id}",
+    "requiresAuth": true
+  },
+  "content": {
+    "introduction": "Configure your Instagram Reels Scraper settings. You can control the maximum number of reels collected per task and across the entire run.",
+    "sections": {
+      "settings": {
+        "title": "Available Settings",
+        "columns": [
+          { "header": "Parameter", "key": "parameter" },
+          { "header": "Type", "key": "type" },
+          { "header": "Default", "key": "default" },
+          { "header": "Description", "key": "description" }
+        ],
+        "rows": [
+          { "parameter": "**max_results**", "type": "integer", "default": "unlimited", "description": "Maximum number of reels to collect per task (profile)" },
+          { "parameter": "**max_unique_results_per_run**", "type": "integer", "default": "unlimited", "description": "Maximum number of unique results retrieved across all tasks in the entire run" }
+        ]
+      },
+      "limitBehavior": {
+        "title": "Understanding Limits",
+        "content": "**max_results**: Limits reels collected from each profile URL. Useful when scraping multiple creator profiles.\n\n**max_unique_results_per_run**: Global limit across all tasks. The scraper stops once this total is reached, regardless of individual task limits."
+      }
+    },
+    "parameters": [],
+    "headers": [
+      {
+        "key": "Authorization",
+        "value": "Token YOUR_API_KEY",
+        "required": true,
+        "description": "Your API authentication token"
+      },
+      {
+        "key": "Content-Type",
+        "value": "application/json",
+        "required": true,
+        "description": "Request body format"
+      }
+    ],
+    "proTips": [
+      {
+        "type": "tip",
+        "content": "Set `max_results` to 50-100 when scraping multiple profiles to get a representative sample from each."
+      },
+      {
+        "type": "note",
+        "content": "Leave limits empty or null for unlimited collection."
+      },
+      {
+        "type": "warning",
+        "content": "Large profiles can have thousands of reels. Set appropriate limits to control costs and processing time."
+      }
+    ]
+  },
+  "seo": {
+    "title": "Update Settings - Instagram Reels Scraper - Lobstr.io API",
+    "description": "Learn how to configure Instagram Reels Scraper settings including result limits using the Lobstr.io API."
+  }
+}
