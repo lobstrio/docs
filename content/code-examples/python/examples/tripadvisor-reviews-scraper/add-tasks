@@ -13,7 +13,7 @@ response = requests.post(f"{BASE_URL}/tasks",
         "squid": squid_id,
         "tasks": [
             {"url": "https://www.tripadvisor.com/Hotel_Review-g60763-d208453-Reviews-Hilton_New_York_Times_Square-New_York_City_New_York.html"},
-            {"url": "https://www.tripadvisor.com/Restaurant_Review-g60763-d429315-Reviews-Le_Bernardin-New_York_City_New_York.html"}
+            {"url": "https://www.tripadvisor.com/Hotel_Review-g60763-d120461-Reviews-The_Knickerbocker-New_York_City_New_York.html"}
         ]
     }
 )

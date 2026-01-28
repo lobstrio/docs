@@ -17,11 +17,11 @@ response = requests.get(f"{BASE_URL}/results",
 )
 
 data = response.json()
-print(f"Total results: {data['count']}")
+print(f"Total results: {data['total_results']}")
 print(f"\nFirst review:")
 
-if data['results']:
-    review = data['results'][0]
+if data['data']:
+    review = data['data'][0]
     print(f"  Title: {review['title']}")
     print(f"  Rating: {review['rating']}/5 stars")
     print(f"  Reviewer: {review['user_name']}")
