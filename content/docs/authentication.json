@@ -9,7 +9,7 @@
     "requiresAuth": true
   },
   "content": {
-    "introduction": "All requests to the Lobstr.io API must include an `Authorization` header with your API token. You can obtain your **API token** from the [API menu](https://app.lobstr.io/dashboard/api) in your dashboard.\n\nThe authentication format follows the standard Token authentication scheme:\n\n```\nAuthorization: Token YOUR_API_KEY\n```\n\nOnce authenticated, you'll have access to all API endpoints based on your account's permission level and subscription plan.",
+    "introduction": "All requests to the Lobstr.io API must include an `Authorization` header with your API token. You can obtain your API token from the [API menu](https://app.lobstr.io/dashboard/api) in your dashboard.\n\nThe authentication format follows the standard Token authentication scheme:\n\n```\nAuthorization: Token YOUR_API_KEY\n```\n\nOnce authenticated, you'll have access to all API endpoints based on your account's permission level and subscription plan.",
     "parameters": [],
     "headers": [
       {

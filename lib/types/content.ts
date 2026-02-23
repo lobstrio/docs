@@ -202,6 +202,8 @@ export interface NavItem {
 export interface NavSubsection {
   title: string;
   items: NavItem[];
+  icon?: string;
+  iconHover?: string;
 }
 
 /**

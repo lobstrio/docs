@@ -29,7 +29,7 @@ export default function ProTip({ type, children }: ProTipProps) {
 
   return (
     <div className={`pro-tip border ${borderColor} ${bgColor}`}>
-      <div className="flex gap-5">
+      <div className="flex gap-[14px]">
         <div className="flex-shrink-0 mt-0.5">
           <img
             src={icon}
@@ -39,8 +39,8 @@ export default function ProTip({ type, children }: ProTipProps) {
         </div>
 
         <div className="flex-1">
-          <h4 className={`text-[17px] font-bold text-[#0a2540] leading-[1.29] mb-3`}>{title}</h4>
-          <div className="text-sm text-[#0a2540] opacity-70 leading-relaxed">
+          <h4 className={`text-[17px] font-bold leading-[1.29] mb-[13px]`}>{title}</h4>
+          <div className="text-sm opacity-70 leading-[1.64]">
             {children}
           </div>
         </div>

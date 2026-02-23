@@ -3,16 +3,16 @@ import { ParametersListProps } from "@/lib/types/docs.type";
 export default function ParametersList({ title, parameters }: ParametersListProps) {
   return (
     <div className="mb-8">
-      <h2 className="text-3xl font-bold mb-4">{title}</h2>
+      <h2 className="text-3xl font-bold mb-5">{title}</h2>
       <div className="space-y-4">
         {parameters.map((param, index) => (
           <div
             key={index}
-            className="bg-surface border border-border rounded-lg p-4"
+            className="bg-surface border border-border rounded-lg p-6"
           >
             <div className="flex items-start justify-between mb-2">
               <div>
-                <code className="text-base text-accent-red font-semibold">
+                <code className="text-base text-[#FF0000] font-semibold">
                   {param.name}
                 </code>
                 <span className="text-sm text-text-muted ml-2">

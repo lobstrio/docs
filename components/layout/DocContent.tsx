@@ -22,13 +22,13 @@ export default function DocContent({ content }: DocContentProps) {
 
     return `
       <div class="my-6 relative group">
-        <div class="absolute top-3 right-3 z-10">
-          <span class="inline-block px-2 py-1 text-xs font-medium uppercase bg-white text-[#0a2540] opacity-80 leading-[1.36] rounded border border-[#dde1ee]">
+        <div class="absolute top-[23px] right-5 z-10">
+          <span class="inline-block px-3.5 py-1.5 text-sm leading-[1.36] font-normal  uppercase bg-[#ffffff] opacity-80 leading-[1.36] rounded-lg border border-[#dde1ee]">
             ${lang}
           </span>
         </div>
-        <div class="bg-surface border border-border rounded-lg overflow-hidden">
-          <pre class="p-4 overflow-x-auto !text-sm"><code class="language-${lang}">${escapedCode}</code></pre>
+        <div class="bg-[#f2f5f9]/50 border border-[#dde1ee] rounded-lg overflow-hidden">
+          <pre class="p-6 overflow-x-auto !text-base leading-[1.19]"><code class="language-${lang}">${escapedCode}</code></pre>
         </div>
       </div>
     `;
@@ -36,7 +36,7 @@ export default function DocContent({ content }: DocContentProps) {
 
   renderer.codespan = (token: any) => {
     const code = token.text || token;
-    return `<code class="px-1.5 py-0.5 text-sm bg-[#0a25400d] border border-[#0a25401c] rounded text-[#0a2540] font-mono">${code}</code>`;
+    return `<code class="px-1.5 py-0.5 text-[18px] font-medium bg-[#0a25400d] border border-[#0a25401c] rounded font-mono">${code}</code>`;
   };
 
   const processIntroductionWithSections = (): { parts: (string | React.ReactNode)[]; renderedSections: Set<string> } => {
@@ -126,7 +126,7 @@ export default function DocContent({ content }: DocContentProps) {
             <span className={`badge ${methodBadgeClass}`}>
               {content.metadata.method}
             </span>
-            <code className="text-sm  bg-white px-3 pt-1 rounded border border-[#dee0ea] text-[#0a2540]">
+            <code className="text-base  bg-white px-3 pt-1 rounded border border-[#dee0ea] text-[#0a2540]">
               {content.metadata.endpoint}
             </code>
           </div> 
@@ -136,9 +136,9 @@ export default function DocContent({ content }: DocContentProps) {
           <CopyForLLMButton content={content} />
         </div>
       </div>
-        <h1 className="text-5xl leading-[1.33] font-black mb-5">{content.title}</h1>
+        <h1 className="text-5xl leading-[1.33] font-black mb-10">{content.title}</h1>
         <span className="text-[18px] text-[#0a2540] leading-[1.56] opacity-90">{content.description}</span>
-      <div className="text-lg leading-relaxed mb-8">
+      <div className="text-lg leading-relaxed mb-10">
         {contentParts.map((part, index) =>
           typeof part === 'string' ? (
             <div key={index} dangerouslySetInnerHTML={{ __html: part }} />
@@ -151,17 +151,17 @@ export default function DocContent({ content }: DocContentProps) {
       {content.content.headers.length > 0 && (
         <div className="mb-10">
           <h2 className="text-3xl font-bold mb-5">Headers</h2>
-          <div className="bg-[#f2f5f9] border border-[#dde1ee] rounded-lg overflow-hidden">
+          <div className="bg-[#f2f5f9]/50 border border-[#dde1ee] rounded-lg overflow-hidden">
             <table className="w-full">
               <thead>
                 <tr className="border-b-[2px] border-[#dde1ee]">
-                  <th className="text-left px-4 py-3 font-bold text-[#0a2540]">
+                  <th className="text-left px-6 pt-[13px] pb-[11px] font-bold leading-[1.31]">
                     Key
                   </th>
-                  <th className="text-left px-4 py-3 font-bold text-[#0a2540]">
+                  <th className="text-left px-6 pt-[13px] pb-[11px] font-bold leading-[1.31]">
                     Value
                   </th>
-                  <th className="text-left px-4 py-3 font-bold text-[#0a2540]">
+                  <th className="text-left px-6 pt-[13px] pb-[11px] font-bold leading-[1.31]">
                     Required
                   </th>
                 </tr>
@@ -172,20 +172,20 @@ export default function DocContent({ content }: DocContentProps) {
                     key={index}
                     className="border-b border-border last:border-0"
                   >
-                    <td className="px-4 py-3">
-                      <code className=" text-[#ff0000]">
+                    <td className="px-6 pt-[19px] pb-[20px] leading-[1.19]">
+                      <span className=" text-[#ff0000]">
                         {header.key}
-                      </code>
+                      </span>
                     </td>
-                    <td className="px-4 py-3">
-                      <code className="opacity-80 text-[#0a2540]">
+                    <td className="px-6 pt-[19px] pb-[20px] leading-[1.31]">
+                      <span className="opacity-80">
                         {header.value}
-                      </code>
+                      </span>
                     </td>
-                    <td className="px-4 py-3">
+                    <td className="px-6 pt-[19px] pb-[20px] leading-[1.31]">
                       <span
                         className={` ${
-                          header.required ? 'opacity-50 text-[#23be77]' : 'text-[#0a2540]'
+                          header.required ? 'font-semibold text-[#10b981]' : 'text-[#0a2540]'
                         }`}
                       >
                         {header.required ? 'Yes' : 'No'}
@@ -235,16 +235,16 @@ export default function DocContent({ content }: DocContentProps) {
 
       {content.content.parameters.length > 0 && (
         <div className="mb-8">
-          <h2 className="text-3xl font-bold mb-4">Parameters</h2>
+          <h2 className="text-3xl font-bold mb-5">Parameters</h2>
           <div className="space-y-4">
             {content.content.parameters.map((param, index) => (
               <div
                 key={index}
-                className="bg-surface border border-border rounded-lg p-4"
+                className="bg-surface border border-border rounded-lg p-6"
               >
                 <div className="flex items-start justify-between mb-2">
                   <div>
-                    <code className="text-base text-accent-red font-semibold">
+                    <code className="text-base text-[#FF0000] font-semibold">
                       {param.name}
                     </code>
                     <span className="text-sm text-text-muted ml-2">
@@ -286,7 +286,7 @@ export default function DocContent({ content }: DocContentProps) {
 
       {content.content.additionalNotes && (
         <div className="mt-8">
-          <h2 className="text-3xl font-bold mb-4">Additional Notes</h2>
+          <h2 className="text-3xl font-bold mb-5">Additional Notes</h2>
           <p className="text-text-secondary leading-relaxed">
             {content.content.additionalNotes}
           </p>

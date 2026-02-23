@@ -25,7 +25,7 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
 
   return (
     <div className="px-6 py-8 h-full flex flex-col">
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-4 border-b border-border">
+      <div className="flex flex-wrap items-center  gap-x-2 gap-y-1 mb-4 border-b border-border">
         {languages.map((lang, index) => (
           <button
             key={lang.language}
@@ -73,8 +73,8 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
 
       {
         responses.length > 0 && (
-         <div className="flex-1 overflow-y-auto overflow-x-hidden">
-            <div className="relative border border-[#e5e5eb] rounded-md">
+         <div className="flex-1 "> 
+            <div className="relative border border-[#e5e5eb] p-[0.5px] rounded-md">
               <div className="absolute top-3 right-3 z-10">
                 <CopyButton
                   text={showResponse ? activeResponse?.body || '' : activeLanguage?.code || ''}
@@ -83,14 +83,14 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
 
               {!showResponse && activeLanguage && (
                 <div
-                  className="overflow-hidden"
+                  className="overflow-auto code-scroll"
                   dangerouslySetInnerHTML={{ __html: activeLanguage.html }}
                 />
               )}
 
               {showResponse && activeResponse && (
                 <div
-                  className=""
+                  className="overflow-auto code-scroll"
                   dangerouslySetInnerHTML={{ __html: activeResponse.html }}
                 />
               )}
