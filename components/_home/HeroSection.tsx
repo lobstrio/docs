@@ -10,21 +10,21 @@ export default function HeroSection() {
           <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
             Get the data you need
           </h1>
-          <p className="text-xl text-text-secondary mb-8 leading-relaxed">
+          <p className="text-xl mb-8 leading-relaxed">
             The most powerful and easy-to-use data collection API.
             50+ ready-made crawlers, simple REST endpoints, structured JSON output.
           </p>
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               href="/docs/authentication"
-              className="inline-flex items-center gap-2 bg-accent-red hover:bg-red-600 text-white px-6 py-3 rounded-lg font-medium transition-colors"
+              className="inline-flex items-center gap-2 bg-[#ff0000] hover:bg-[#ff0000] text-white px-6 py-3 rounded-lg font-medium transition-colors"
             >
               Get Started
               <ArrowRight className="w-4 h-4" />
             </Link>
             <Link
               href="/docs/list-crawlers"
-              className="inline-flex items-center gap-2 text-text-secondary hover:text-text-primary px-6 py-3 rounded-lg font-medium transition-colors border border-border hover:border-text-muted"
+              className="inline-flex items-center gap-2  hover:text-text-primary px-6 py-3 rounded-lg font-medium transition-colors border border-border hover:border-text-muted"
             >
               Explore Crawlers
             </Link>

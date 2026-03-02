@@ -25,7 +25,7 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
 
   return (
     <div className="px-6 py-8 h-full flex flex-col">
-      <div className="flex flex-wrap items-center gap-x-2 gap-y-1 mb-4 border-b border-border">
+      <div className="flex flex-wrap items-center  gap-x-2 gap-y-1 mb-4 border-b border-border">
         {languages.map((lang, index) => (
           <button
             key={lang.language}
@@ -33,9 +33,9 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
               setActiveLanguageIndex(index);
               setShowResponse(false);
             }}
-            className={`px-4 py-2 text-base font-semibold border-b-2 transition-colors cursor-pointer ${!showResponse && activeLanguageIndex === index
+            className={`px-4 py-2 text-base hover:opacity-100  hover:text-[#f00] font-semibold border-b-2 transition-colors cursor-pointer ${!showResponse && activeLanguageIndex === index
                 ? 'border-[#ff0000] text-[#ff0000]'
-                : 'border-transparent opacity-40 text-[#0a2540] hover:text-text-red-500'
+                : 'border-transparent opacity-40 text-[#0a2540]'
               }`}
           >
             {lang.label}
@@ -46,7 +46,7 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
             onClick={() => setShowResponse(true)}
             className={`px-4 py-2 text-base font-semibold border-b-2 transition-colors cursor-pointer ${showResponse
                 ? 'border-[#ff0000] text-[#ff0000]'
-                : 'border-transparent opacity-40 text-[#0a2540] hover:text-text-red-500'
+                : 'border-transparent opacity-40 text-[#0a2540] hover:opacity-100 hover:text-[#f00]'
               }`}
           >
             Response
@@ -73,8 +73,8 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
 
       {
         responses.length > 0 && (
-         <div className="flex-1 overflow-y-auto overflow-x-hidden">
-            <div className="relative border border-[#e5e5eb] rounded-md">
+         <div className="flex-1 "> 
+            <div className="relative border border-[#e5e5eb] p-[0.5px] rounded-md">
               <div className="absolute top-3 right-3 z-10">
                 <CopyButton
                   text={showResponse ? activeResponse?.body || '' : activeLanguage?.code || ''}
@@ -83,14 +83,14 @@ export default function CodeColumn({ examples, highlightedCode }: CodeColumnProp
 
               {!showResponse && activeLanguage && (
                 <div
-                  className="overflow-hidden"
+                  className="overflow-auto code-scroll"
                   dangerouslySetInnerHTML={{ __html: activeLanguage.html }}
                 />
               )}
 
               {showResponse && activeResponse && (
                 <div
-                  className=""
+                  className="overflow-auto code-scroll"
                   dangerouslySetInnerHTML={{ __html: activeResponse.html }}
                 />
               )}

@@ -95,7 +95,7 @@ export default function CopyForLLMButton({ content }: CopyForLLMButtonProps) {
   return (
     <button
       onClick={handleCopy}
-      className="btn btn-primary flex items-center gap-2 cursor-pointer"
+      className="btn btn-primary flex items-center gap-2 min-w-[155px] cursor-pointer" 
       aria-label="Copy for LLM"
     >
       {copied ? (

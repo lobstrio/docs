@@ -214,6 +214,8 @@
       "subsections": [
         {
           "title": "Google Maps Reviews Scraper",
+          "icon": "/examples/google-map-review.svg",
+          "iconHover": "/examples/google-map-review-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -231,6 +233,8 @@
         },
         {
           "title": "Google Maps Leads Scraper",
+         "icon": "/examples/google-map-lead.svg",
+          "iconHover": "/examples/google-map-lead-hover.svg",
           "items": [
             {
               "title": "Add Task URLs",
@@ -256,6 +260,8 @@
         },
         {
           "title": "Google Search Scraper",
+          "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -277,6 +283,8 @@
         },
         {
           "title": "Google News Search Export",
+          "icon": "/examples/google-map-review.svg",
+          "iconHover": "/examples/google-map-review-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -294,6 +302,8 @@
         },
         {
           "title": "Twitter Profile Scraper",
+          "icon": "/examples/twitter-profile.svg",
+          "iconHover": "/examples/twitter-profile-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -311,6 +321,8 @@
         },
         {
           "title": "Twitter Search Results Scraper",
+         "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -328,6 +340,8 @@
         },
         {
           "title": "Twitter User Tweets Scraper",
+          "icon": "/examples/Twitter-user-tweets.svg",
+          "iconHover": "/examples/Twitter-user-tweets-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -345,6 +359,8 @@
         },
         {
           "title": "Leboncoin Listings Search Export",
+          "icon": "/examples/leboncoin-listings.svg",
+          "iconHover": "/examples/leboncoin-listings-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -362,6 +378,8 @@
         },
         {
           "title": "Leboncoin Listings & Phone Search Export",
+          "icon": "/examples/leboncoin-phone.svg",
+          "iconHover": "/examples/leboncoin-phone-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -379,6 +397,8 @@
         },
         {
           "title": "Leboncoin Auto Message Sender",
+         "icon": "/examples/Twitter-user-tweets.svg",
+          "iconHover": "/examples/Twitter-user-tweets-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -396,6 +416,8 @@
         },
         {
           "title": "Facebook Pages Search Export",
+          "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -413,6 +435,8 @@
         },
         {
           "title": "Facebook Page Details Export",
+          "icon": "/examples/fb-details.svg",
+          "iconHover": "/examples/fb-details-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -430,6 +454,8 @@
         },
         {
           "title": "Vinted Products Scraper",
+          "icon": "/examples/vinted-products.svg",
+          "iconHover": "/examples/vinted-products-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -447,6 +473,8 @@
         },
         {
           "title": "Sales Navigator Leads Scraper",
+           "icon": "/examples/sales-navigator.svg",
+          "iconHover": "/examples/sales-navigator-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -464,6 +492,8 @@
         },
         {
           "title": "SeLoger Search Export",
+             "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -481,6 +511,8 @@
         },
         {
           "title": "YouTube Channel Email Scraper",
+          "icon": "/examples/youtube-channel.svg",
+          "iconHover": "/examples/youtube-channel-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -498,6 +530,8 @@
         },
         {
           "title": "Yelp Search Export",
+             "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -515,6 +549,8 @@
         },
         {
           "title": "Idealista Listings Search Export",
+              "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -532,6 +568,8 @@
         },
         {
           "title": "PAP Search Export",
+              "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -549,6 +587,8 @@
         },
         {
           "title": "Pages Jaunes Companies Search Export",
+              "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -566,6 +606,8 @@
         },
         {
           "title": "TripAdvisor Restaurants Search Export",
+           "icon": "/examples/google-map-review.svg",
+          "iconHover": "/examples/google-map-review-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -583,6 +625,8 @@
         },
         {
           "title": "TripAdvisor Reviews Scraper",
+          "icon": "/examples/google-map-lead.svg",
+          "iconHover": "/examples/google-map-lead-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -600,6 +644,8 @@
         },
         {
           "title": "TikTok Top Ads Scraper",
+          "icon": "/examples/tiktok-ad.svg",
+          "iconHover": "/examples/tiktok-ad-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -617,6 +663,8 @@
         },
         {
           "title": "LinkedIn Profile Scraper",
+          "icon": "/examples/linkedin-job.svg",
+          "iconHover": "/examples/linkedin-job-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -634,6 +682,8 @@
         },
         {
           "title": "Instagram Reels Scraper",
+          "icon": "/examples/insta-reels.svg",
+          "iconHover": "/examples/insta-reels-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -651,6 +701,8 @@
         },
         {
           "title": "Instagram Profile Scraper",
+          "icon": "/examples/twitter-profile.svg",
+          "iconHover": "/examples/twitter-profile-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -668,6 +720,8 @@
         },
         {
           "title": "Instagram Posts Scraper",
+          "icon": "/examples/insta-post.svg",
+          "iconHover": "/examples/insta-post-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -685,6 +739,8 @@
         },
         {
           "title": "Sales Navigator Companies Scraper",
+          "icon": "/examples/google-map-review.svg",
+          "iconHover": "/examples/google-map-review-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -702,6 +758,8 @@
         },
         {
           "title": "LinkedIn Posts Commenters and Likers Scraper",
+          "icon": "/examples/linkedin-commenter.svg",
+          "iconHover": "/examples/linkedin-commenter-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -719,6 +777,8 @@
         },
         {
           "title": "LaCentrale Cars Scraper",
+          "icon": "/examples/la-centrale-cars.svg",
+          "iconHover": "/examples/la-centrale-cars-hover.svg",
           "items": [
             {
               "title": "Add Tasks",
@@ -736,6 +796,8 @@
         },
         {
           "title": "Bien'Ici Search Export",
+              "icon": "/examples/google-search.svg",
+          "iconHover": "/examples/google-search-hover.svg",
           "items": [
             {
               "title": "Add Tasks",

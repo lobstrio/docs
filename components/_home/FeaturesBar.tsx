@@ -7,8 +7,8 @@ export default function FeaturesBar() {
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
                     {FEATURES.map((item, i) => (
                         <div key={i} className="flex items-center gap-3">
-                            <item.icon className="w-5 h-5 text-accent-red flex-shrink-0" />
-                            <span className="text-sm text-text-secondary">{item.text}</span>
+                            <item.icon className="w-5 h-5 text-[#ff0000] flex-shrink-0" />
+                            <span className="text-sm">{item.text}</span>
                         </div>
                     ))}
                 </div>

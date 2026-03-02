@@ -6,6 +6,7 @@ import { useState, useEffect, useRef } from 'react';
 import { SidebarProps } from '@/lib/types/layout.type';
 import { ChevronDown, ChevronRight } from 'lucide-react';
 import { Navigation, NavSubsection } from '@/lib/types/content';
+import Image from 'next/image';
 
 function findActiveContext(navigation: Navigation, pathname: string) {
   const currentSlug = pathname.replace('/docs/', '');
@@ -80,7 +81,7 @@ export default function Sidebar({ navigation }: SidebarProps) {
           <li key={item.slug}>
             <Link
               href={`/docs/${item.slug}`}
-              className={`nav-item ${isActive ? 'nav-item-active' : 'opacity-60'}`}
+              className={`nav-item ${isActive ? 'nav-item-active' : ''}`}
             >
               {item.title}
               {item.badge && (
@@ -96,21 +97,41 @@ export default function Sidebar({ navigation }: SidebarProps) {
   );
 
   const renderSubsection = (sub: NavSubsection, parentTitle: string) => {
-    const key = `${parentTitle}:${sub.title}`;
+    const key = `${parentTitle}:${sub.title}`; 
     const isExpanded = expanded[key];
-
+    
     return (
-      <div key={sub.title} className="ml-2 mt-2">
+      <div key={sub.title} className="mt-5">
         <button
           onClick={() => toggle(key)}
-          className="flex items-center justify-between w-full text-[18px] font-medium text-text-secondary mb-1 hover:text-accent-red transition-colors text-left"
+          className="group flex items-center cursor-pointer justify-between w-full mb-1 hover:text-[#ff0000] transition-colors text-left"
         >
-          <span className="flex-1 text-left">{sub.title}</span>
-          {isExpanded ? (
+          {/* <span className="flex-1 text-left">{sub.title}</span> */}
+            <div className="flex items-center gap-2.5">
+    {sub.icon && sub.iconHover && (
+      <div className="relative w-[33px] h-[33px]">
+        <Image
+          src={sub.icon}
+          alt="icon"
+          fill
+          className="transition-opacity duration-200 group-hover:opacity-0"
+        />
+        <Image
+          src={sub.iconHover}
+          alt="icon hover"
+          fill
+          className="opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+        />
+      </div>
+    )}
+
+    <span className={`flex-1 text-left w-[202px] ${isExpanded ? "text-[16px]  font-semibold leading-[1.25] opacity-90" : "text-[16px] leading-[1.25] opacity-90"}`}>{sub.title}</span>
+  </div>
+          {/* {isExpanded ? (
             <ChevronDown className="w-3 h-3" />
           ) : (
             <ChevronRight className="w-3 h-3" />
-          )}
+          )} */}
         </button>
         {isExpanded && <div className="ml-2">{renderItems(sub.items)}</div>}
       </div>
@@ -119,19 +140,19 @@ export default function Sidebar({ navigation }: SidebarProps) {
 
   return (
     <div className="p-8">
-      <div className="flex items-center gap-2 mb-8">
+      <div className="flex items-center gap-2 mb-7.5">
         <a href="/">
-          <span className="text-[26px] font-bold text-red-500">lobstr.io</span>{" "}
-          <span className="text-text-muted text-[22px]">docs</span>
+          <span className="text-[26px] font-bold text-[#FF0000] leading-[1.08]">lobstr.io</span>{" "}
+          <span className="text-[22px] opacity-60 leading-[1.36]">docs</span>
         </a>
       </div>
 
-      <nav className="space-y-6">
+      <nav className="space-y-[25px]">
         {navigation.sections.map((section) => (
           <div key={section.title}>
             <button
               onClick={() => toggle(section.title)}
-              className="flex items-center justify-between w-full text-[18px] font-semibold text-text-primary mb-2 hover:text-accent-red transition-colors cursor-pointer"
+              className="flex items-center justify-between w-full text-[16px] leading-[1.31] mb-2 hover:text-[#ff0000] transition-colors cursor-pointer"
             >
               <span>{section.title}</span>
               {expanded[section.title] ? (
@@ -162,7 +183,7 @@ export default function Sidebar({ navigation }: SidebarProps) {
               href={link.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-[18px] text-[#696a73] hover:text-red-500 transition-colors"
+              className="block text-[18px] leading-[1.33] hover:text-[#ff0000] transition-colors"
             >
               {link.label}
             </a>

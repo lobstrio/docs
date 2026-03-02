@@ -6,8 +6,8 @@ export default function ApiReference() {
     <div className="bg-surface/50 border-y border-border">
       <div className="max-w-7xl mx-auto px-6 py-16">
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold mb-4">API Reference</h2>
-          <p className="text-text-secondary">
+          <h2 className="text-3xl font-bold mb-5">API Reference</h2>
+          <p>
             Everything you need to integrate Lobstr.io into your workflow
           </p>
         </div>
@@ -17,12 +17,12 @@ export default function ApiReference() {
             <Link
               key={item.slug}
               href={`/docs/${item.slug}`}
-              className="block p-5 bg-background border border-border rounded-xl hover:border-accent-red hover:shadow-lg transition-all group"
+              className="block p-5 bg-background border border-border rounded-xl hover:border-[#ff0000] hover:shadow-lg transition-all group"
             >
-              <h3 className="font-semibold group-hover:text-accent-red transition-colors mb-2">
+              <h3 className="font-semibold group-hover:text-[#ff0000] transition-colors mb-2">
                 {item.title}
               </h3>
-              <span className="text-sm text-text-muted">{item.desc}</span>
+              <span className="text-sm">{item.desc}</span>
             </Link>
           ))}
         </div>
