@@ -21,7 +21,7 @@ export default function ParametersList({ title, parameters }: ParametersListProp
               </div>
               <span
                 className={`badge text-xs ${
-                  param.required ? 'badge-get' : 'bg-surface'
+                  param.required ? 'badge-get' : 'badge-post'
                 }`}
               >
                 {param.required ? 'Required' : 'Optional'}
