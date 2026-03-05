@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import {
   loadDocContent,
@@ -10,6 +9,7 @@ import Sidebar from '@/components/layout/Sidebar';
 import DocContent from '@/components/layout/DocContent';
 import CodeColumn from '@/components/layout/CodeColumn';
 import { codeToHtml } from 'shiki';
+import Head from '@/app/head';
 
 interface PageProps {
   params: Promise<{ slug: string[] }>;
@@ -26,49 +26,13 @@ export async function generateStaticParams() {
 }
 
 /**
- * Generate metadata for SEO
- */
-export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const { slug } = await params;
-  // Join the slug array back into a path string
-  const slugPath = Array.isArray(slug) ? slug.join('/') : slug;
-  const slugTitle = slugPath.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
-
-  try {
-    const content = await loadDocContent(slugPath);
-
-    return {
-      title: `${slugTitle} | lobstr.io API Documentation`,
-      description: content.seo.description,
-      alternates: {
-        canonical: `https://docs.lobstr.io/docs/${slugPath}`,
-      },
-      openGraph: {
-        title: `${slugTitle} | lobstr.io API Documentation`,
-        description: content.seo.description,
-        type: 'article',
-      },
-      twitter: {
-        card: 'summary_large_image',
-        title: `${slugTitle} | lobstr.io API Documentation`,
-        description: content.seo.description,
-      },
-    };
-  } catch (error) {
-    return {
-      title: 'Page Not Found - Lobstr.io API Documentation',
-      description: 'The requested documentation page could not be found.',
-    };
-  }
-}
-
-/**
  * Dynamic documentation page
  */
 export default async function DocPage({ params }: PageProps) {
   const { slug } = await params;
   // Join the slug array back into a path string
   const slugPath = Array.isArray(slug) ? slug.join('/') : slug;
+  const slugTitle = slugPath.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
   try {
     const content = await loadDocContent(slugPath);
@@ -118,14 +82,24 @@ export default async function DocPage({ params }: PageProps) {
       languages: highlightedLanguages,
       responses: highlightedResponses,
     };
-
+    const siteUrl=process.env.NEXT_PUBLIC_SITE_URL
+    const metaImage=content.seo.image ? `${siteUrl}/${content.seo.image}` : `${siteUrl}/images/default-meta-image.png`
     return (
-      <ThreeColumnLayout
-        sidebar={<Sidebar navigation={navigation} />}
-        codeColumn={<CodeColumn examples={content.examples} highlightedCode={highlightedCode} />}
-      >
-        <DocContent content={content} />
-      </ThreeColumnLayout>
+      <>
+        <Head
+          title={`${slugTitle} | lobstr.io API Documentation`}
+          description={content.seo.description}
+          url={`${siteUrl}/docs/${slugPath}`}
+          type="article"
+          image={metaImage}
+        />
+        <ThreeColumnLayout
+          sidebar={<Sidebar navigation={navigation} />}
+          codeColumn={<CodeColumn examples={content.examples} highlightedCode={highlightedCode} />}
+        >
+          <DocContent content={content} />
+        </ThreeColumnLayout>
+      </>
     );
   } catch (error) {
     notFound();

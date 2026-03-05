@@ -36,6 +36,7 @@
   },
   "seo": {
     "title": "Authentication - lobstr.io API Documentation",
+    "image":"images/authentication-meta-img.png",
     "description": "Learn how to authenticate your API requests to lobstr.io using token-based authentication. Get your API key and start building."
   }
 }
