@@ -281,13 +281,21 @@ For POST endpoints, use an empty array: `"parameters": []`
 ```json
 "seo": {
   "title": "Add Tasks - Google Maps Reviews Scraper - Lobstr.io API",
-  "description": "Learn how to add Google Maps place URLs to scrape reviews using the Lobstr.io API."
+  "description": "Learn how to add Google Maps place URLs to scrape reviews using the Lobstr.io API.",
+  "image": "images/your-custom-meta-image.png"
 }
 ```
+
+| Field | Type | Required | Description |
+|-------|------|----------|-------------|
+| `title` | string | Yes | Page title for SEO |
+| `description` | string | Yes | Brief, keyword-rich description (150-160 characters) |
+| `image` | string | No | Custom OG/meta image path. Falls back to the site default meta image if omitted. |
 
 **Format:**
 - Title: `{Page Title} - {Scraper Name} - Lobstr.io API`
 - Description: Brief, keyword-rich description (150-160 characters)
+- Image (optional): Path relative to the public directory (e.g. `"images/authentication-meta-img.png"`). If not provided, the default site meta image is used automatically.
 
 ---
 

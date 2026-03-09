@@ -17,6 +17,22 @@ Official API documentation site for [lobstr.io](https://lobstr.io), a powerful p
 - Node.js 18+
 - npm or yarn
 
+### Environment Variables
+
+Create a `.env` file in the root of the project with the following variable:
+
+```env
+NEXT_PUBLIC_SITE_URL=base_url or domain
+e.g
+NEXT_PUBLIC_SITE_URL=http://51.159.28.162:3002/
+```
+
+| Variable | Description |
+|----------|-------------|
+| `NEXT_PUBLIC_SITE_URL` | The base URL of the site. Used for generating absolute URLs (e.g. OG/meta image URLs for SEO). |
+
+> The `.env` file is not committed to the repository. Make sure to create it locally before running the project.
+
 ### Installation
 
 ```bash
