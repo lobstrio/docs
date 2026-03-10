@@ -15,13 +15,13 @@ export default function CustomTable({ title, columns, rows }: CustomTableProps) 
                 const value = row[col.key];
                 const isHighlighted = typeof value === 'string' && value.startsWith('**');
                 return (
-                  <div key={colIndex} className="flex gap-2">
+                  <div key={colIndex} className="flex gap-2 flex-wrap lg:flex-nowrap">
                     {colIndex !== 0 && (
                       <div className="text-base leading-[1.31] font-semibold opacity-60 uppercase tracking-wider mb-[5px]">
                         {col.header}:
                       </div>
                     )}
-                    <div className={`text-base leading-[1.31] whitespace-nowrap ${col.semibold ? ' font-semibold' : ''}`}>
+                    <div className={`text-base leading-[1.31] min-w-0 break-words ${col.semibold ? ' font-semibold' : ''}`}>
                       {isHighlighted ? (
                         <span className="text-[#ff0000] text-base leading-[1.31] font-bold uppercase">
                           {((v) => v.trim() || v)((value as string).replace(/\*\*/g, ''))}

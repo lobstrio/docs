@@ -1,5 +1,6 @@
 import { Inter, Source_Sans_3 } from 'next/font/google';
 import './globals.css';
+import ScrollToTop from '@/components/layout/ScrollToTop';
 
 const inter = Inter({
   subsets: ['latin'],
@@ -20,7 +21,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${sourceSans3.variable}`}>
-      <body className="min-h-screen">{children}</body>
+      <body className="min-h-screen">
+        <ScrollToTop />
+        {children}
+      </body>
     </html>
   );
 }
