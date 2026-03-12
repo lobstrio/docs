@@ -230,7 +230,8 @@
 
   .nav-item {
     display: block;
-    padding: 0.5rem 0.75rem;
+    padding: 8px 19px 11px 19px;
+    opacity: 90%;
     border-radius: 7px;
     font-size: 16px;
     line-height: 1.31;

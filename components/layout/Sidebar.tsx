@@ -75,14 +75,15 @@ export default function Sidebar({ navigation }: SidebarProps) {
   };
 
   const renderItems = (items: { title: string; slug: string; badge?: string }[]) => (
-    <ul className="space-y-1">
-      {items.map((item) => {
+    <ul>
+      {items.map((item, index) => {
         const isActive = pathname === `/docs/${item.slug}`;
+        const isLast = index === items.length - 1;
         return (
           <li key={item.slug}>
             <Link
               href={`/docs/${item.slug}`}
-              className={`nav-item ${isActive ? 'nav-item-active' : ''}`}
+              className={`nav-item ${!isLast ? 'mb-1' : ''} ${isActive ? 'nav-item-active' : ''}`}
             >
               {item.title}
               {item.badge && (
@@ -98,43 +99,38 @@ export default function Sidebar({ navigation }: SidebarProps) {
   );
 
   const renderSubsection = (sub: NavSubsection, parentTitle: string) => {
-    const key = `${parentTitle}:${sub.title}`; 
+    const key = `${parentTitle}:${sub.title}`;
     const isExpanded = expanded[key];
-    
+
     return (
-      <div key={sub.title} className="mt-5">
+      <div key={sub.title} className='my-5'>
         <button
           onClick={() => toggle(key)}
-          className="group flex items-center cursor-pointer justify-between w-full mb-1 hover:text-[#ff0000] transition-colors text-left"
+          className="group flex items-center cursor-pointer justify-between w-full hover:text-[#ff0000] transition-colors text-left"
         >
           {/* <span className="flex-1 text-left">{sub.title}</span> */}
-            <div className="flex items-center gap-2.5">
-    {sub.icon && sub.iconHover && (
-      <div className="relative w-[33px] h-[33px]">
-        <Image
-          src={sub.icon}
-          alt="icon"
-          fill
-          className="transition-opacity duration-200 group-hover:opacity-0"
-        />
-        <Image
-          src={sub.iconHover}
-          alt="icon hover"
-          fill
-          className="opacity-0 transition-opacity duration-200 group-hover:opacity-100"
-        />
-      </div>
-    )}
+          <div className="flex items-center gap-2.5">
+            {sub.icon && sub.iconHover && (
+              <div className="relative w-[33px] h-[33px]">
+                <Image
+                  src={sub.icon}
+                  alt="icon"
+                  fill
+                  className="transition-opacity duration-200 group-hover:opacity-0"
+                />
+                <Image
+                  src={sub.iconHover}
+                  alt="icon hover"
+                  fill
+                  className="opacity-0 transition-opacity duration-200 group-hover:opacity-100"
+                />
+              </div>
+            )}
 
-    <span className={`flex-1 text-left w-[202px] ${isExpanded ? "text-[16px]  font-semibold leading-[1.25] opacity-90" : "text-[16px] leading-[1.25] opacity-90"}`}>{sub.title}</span>
-  </div>
-          {/* {isExpanded ? (
-            <ChevronDown className="w-3 h-3" />
-          ) : (
-            <ChevronRight className="w-3 h-3" />
-          )} */}
+            <span className={`flex-1 text-left w-[202px] ${isExpanded ? "text-[16px]  font-semibold leading-[1.25] opacity-90" : "text-[16px] leading-[1.25] opacity-90"}`}>{sub.title}</span>
+          </div>
         </button>
-        {isExpanded && <div className="ml-2">{renderItems(sub.items)}</div>}
+        {isExpanded && <div className="ml-11 mt-4.5 -mb-1">{renderItems(sub.items)}</div>}
       </div>
     );
   };
@@ -149,11 +145,11 @@ export default function Sidebar({ navigation }: SidebarProps) {
       </div>
 
       <nav className="space-y-[25px]">
-        {navigation.sections.map((section) => (
+        {navigation.sections.map((section, index) => (
           <div key={section.title}>
             <button
               onClick={() => toggle(section.title)}
-              className="flex items-center justify-between w-full text-[16px] leading-[1.31] mb-2 hover:text-[#ff0000] transition-colors cursor-pointer"
+              className={`flex items-center justify-between w-full text-[16px] leading-[1.31] hover:text-[#ff0000] transition-colors cursor-pointer ${index !== navigation.sections.length - 1 ? " mb-2" : ""}`}
             >
               <span>{section.title}</span>
               {expanded[section.title] ? (
