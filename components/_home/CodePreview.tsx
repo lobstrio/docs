@@ -1,17 +1,17 @@
-export default function CodePreview({ html }: { html: string }) {
+"use client";
+
+import CopyButton from "@/components/ui/CopyButton";
+
+export default function CodePreview({ html, rawCode }: { html: string; rawCode: string }) {
   return (
     <div className="md:sticky md:top-6">
-      <div className="bg-[#0d1117] rounded-xl border border-border overflow-hidden shadow-2xl">
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-white/10">
-          <div className="flex gap-1.5">
-            <div className="w-3 h-3 rounded-full bg-red-500/80" />
-            <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
-            <div className="w-3 h-3 rounded-full bg-green-500/80" />
-          </div>
-          <span className="text-xs text-white/50 ml-2">example.py</span>
+      <div className="bg-[#0a2540] rounded-xl h-[800px] flex flex-col overflow-hidden">
+        <div className="flex justify-between items-center gap-2 px-4 py-3 shrink-0">
+          <span className="leading-[2.06] text-[#fff] ml-2">example.py</span>
+          <CopyButton text={rawCode} variant="dark" className="ml-auto border !border-[#213447] !bg-[#213447]" />
         </div>
         <div
-          className="p-4 overflow-x-auto text-[13px] leading-relaxed [&_pre]:!bg-transparent [&_code]:!bg-transparent"
+          className="p-4 overflow-auto flex-1 text-[13px] leading-relaxed !bg-[#0a1b2b] [&_pre]:!bg-[#0a1b2b] [&_code]:!bg-[#0a1b2b]"
           dangerouslySetInnerHTML={{ __html: html }}
         />
       </div>
