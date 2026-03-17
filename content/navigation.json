@@ -40,6 +40,10 @@
         {
           "title": "Get Crawler Parameters",
           "slug": "get-crawler-parameters"
+        },
+        {
+          "title": "Get Crawler Attributes",
+          "slug": "get-crawler-attributes"
         }
       ]
     },
