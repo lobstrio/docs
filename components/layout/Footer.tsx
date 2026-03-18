@@ -13,7 +13,7 @@ const FOOTER_COLUMNS = [
   {
     label: 'SDK',
     links: [
-      { label: 'Python', href: 'https://github.com/lobstrio/lobstrio-sdk' },
+      { label: 'Python', href: 'https://pypi.org/project/lobstrio-sdk/' },
       // { label: 'Node.js', href: '/docs/authentication' },
       // { label: 'Go', href: '/docs/authentication' },
     ],
@@ -21,7 +21,7 @@ const FOOTER_COLUMNS = [
   {
     label: 'CLI',
     direct: true,
-    href: 'https://github.com/lobstrio/lobstrio-cli',
+    href: 'https://pypi.org/project/lobstrio/',
   },
 ];
 

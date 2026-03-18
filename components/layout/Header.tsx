@@ -16,7 +16,7 @@ const NAV_ITEMS = [
   {
     label: 'SDK',
     links: [
-      { label: 'Python', href: 'https://github.com/lobstrio/lobstrio-sdk' },      // { label: 'Node.js', href: '/docs/authentication' },
+      { label: 'Python', href: 'https://pypi.org/project/lobstrio-sdk/' },      // { label: 'Node.js', href: '/docs/authentication' },
       // { label: 'Go', href: '/docs/authentication' },
     ],
   },
@@ -24,7 +24,7 @@ const NAV_ITEMS = [
     label: 'CLI',
     direct: true,
     links: [
-      { label: 'Python', href: 'https://github.com/lobstrio/lobstrio-cli' },
+      { label: 'Python', href: 'https://pypi.org/project/lobstrio/' },
     ],
   },
 ];
