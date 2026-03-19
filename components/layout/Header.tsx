@@ -15,16 +15,16 @@ const NAV_ITEMS = [
   // },
   {
     label: 'SDK',
+    direct: true,
     links: [
-      { label: 'Python', href: 'https://pypi.org/project/lobstrio-sdk/' },      // { label: 'Node.js', href: '/docs/authentication' },
-      // { label: 'Go', href: '/docs/authentication' },
+      { label: 'Python SDK', href: '/docs/sdk' },
     ],
   },
   {
     label: 'CLI',
     direct: true,
     links: [
-      { label: 'Python', href: 'https://pypi.org/project/lobstrio/' },
+      { label: 'CLI', href: '/docs/cli' },
     ],
   },
 ];
