@@ -12,16 +12,13 @@ const FOOTER_COLUMNS = [
   // },
   {
     label: 'SDK',
-    links: [
-      { label: 'Python', href: 'https://pypi.org/project/lobstrio-sdk/' },
-      // { label: 'Node.js', href: '/docs/authentication' },
-      // { label: 'Go', href: '/docs/authentication' },
-    ],
+    direct: true,
+    href: '/docs/sdk',
   },
   {
     label: 'CLI',
     direct: true,
-    href: 'https://pypi.org/project/lobstrio/',
+    href: '/docs/cli',
   },
   {
     label: 'MCP',
@@ -72,7 +69,7 @@ export default function Footer() {
                     {col.label}
                   </p>
                   <ul className="flex flex-col gap-2">
-                    {col?.links && col.links.map((link) => (
+                    {'links' in col && (col.links as Array<{label: string; href: string; external?: boolean}>)?.map((link) => (
                       <li key={link.label}>
                         {'external' in link && link.external ? (
                           <a
