@@ -204,16 +204,26 @@ async function handleToolCall(name: string, args: Record<string, unknown>): Prom
     case 'search_docs': {
       const query = args.query as string;
       const limit = Math.min((args.limit as number) ?? 10, 50);
-      const q = query.toLowerCase();
       const index = await getDocsIndex();
+      const words = query.toLowerCase().split(/\s+/).filter((w) => w.length > 1);
       const scored = index
         .map((doc) => {
           let score = 0;
-          if (doc.title.toLowerCase().includes(q)) score += 10;
-          if (doc.endpoint.toLowerCase().includes(q)) score += 8;
-          if (doc.description.toLowerCase().includes(q)) score += 5;
-          if (doc.category.toLowerCase().includes(q)) score += 3;
-          if (doc.introduction.toLowerCase().includes(q)) score += 1;
+          const title = doc.title.toLowerCase();
+          const endpoint = doc.endpoint.toLowerCase();
+          const desc = doc.description.toLowerCase();
+          const cat = doc.category.toLowerCase();
+          const subcat = doc.subcategory.toLowerCase();
+          const intro = doc.introduction.toLowerCase();
+          const slug = doc.slug.toLowerCase();
+          for (const w of words) {
+            if (title.includes(w)) score += 10;
+            if (slug.includes(w)) score += 8;
+            if (endpoint.includes(w)) score += 6;
+            if (desc.includes(w)) score += 4;
+            if (cat.includes(w) || subcat.includes(w)) score += 3;
+            if (intro.includes(w)) score += 1;
+          }
           return { doc, score };
         })
         .filter((r) => r.score > 0)
