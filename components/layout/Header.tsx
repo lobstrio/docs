@@ -27,6 +27,13 @@ const NAV_ITEMS = [
       { label: 'Python', href: 'https://pypi.org/project/lobstrio/' },
     ],
   },
+  {
+    label: 'MCP',
+    direct: true,
+    links: [
+      { label: 'MCP Server', href: '/docs/mcp' },
+    ],
+  },
 ];
 
 export default function Header() {
