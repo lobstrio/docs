@@ -34,18 +34,24 @@ export const HOW_IT_WORKS = [
     },
     {
         step: 3,
+        title: 'Configure settings',
+        desc: 'Set country, language, and result limits.',
+        link: '/docs/update-squid',
+    },
+    {
+        step: 4,
         title: 'Add tasks',
         desc: 'URLs or parameters via API or CSV.',
         link: '/docs/add-tasks',
     },
     {
-        step: 4,
+        step: 5,
         title: 'Start the run',
         desc: 'Launch and monitor progress.',
         link: '/docs/start-run',
     },
     {
-        step: 5,
+        step: 6,
         title: 'Get results',
         desc: 'Retrieve structured JSON or auto delivery.',
         link: '/docs/get-results',
