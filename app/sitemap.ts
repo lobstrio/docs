@@ -1,8 +1,6 @@
 import { MetadataRoute } from 'next';
 import { getAllDocSlugs } from '@/lib/content/content-loader';
 
-export const dynamic = 'force-static';
-
 const BASE_URL = 'https://docs.lobstr.io';
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
