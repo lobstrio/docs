@@ -106,14 +106,23 @@ export default function Header() {
                     )}
                   </>
                 ) : item.direct && item.links ? (
-                  <a
-                    href={item.links[0].href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="font-semibold leading-[1.31] opacity-90 hover:opacity-100"
-                  >
-                    {item.label}
-                  </a>
+                  item.links[0].href.startsWith('/') ? (
+                    <Link
+                      href={item.links[0].href}
+                      className="font-semibold leading-[1.31] opacity-90 hover:opacity-100"
+                    >
+                      {item.label}
+                    </Link>
+                  ) : (
+                    <a
+                      href={item.links[0].href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-semibold leading-[1.31] opacity-90 hover:opacity-100"
+                    >
+                      {item.label}
+                    </a>
+                  )
                 ) : (
                   <span className="font-semibold leading-[1.31] opacity-90 hover:opacity-100 cursor-pointer">
                     {item.label}
@@ -188,15 +197,25 @@ export default function Header() {
                   )}
                 </>
               ) : item.direct && item.links ? (
-                <a
-                  href={item.links[0].href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  onClick={() => setMenuOpen(false)}
-                  className="font-semibold leading-[1.31] opacity-90"
-                >
-                  {item.label}
-                </a>
+                item.links[0].href.startsWith('/') ? (
+                  <Link
+                    href={item.links[0].href}
+                    onClick={() => setMenuOpen(false)}
+                    className="font-semibold leading-[1.31] opacity-90"
+                  >
+                    {item.label}
+                  </Link>
+                ) : (
+                  <a
+                    href={item.links[0].href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setMenuOpen(false)}
+                    className="font-semibold leading-[1.31] opacity-90"
+                  >
+                    {item.label}
+                  </a>
+                )
               ) : (
                 <span className="font-semibold leading-[1.31] opacity-90 cursor-pointer">
                   {item.label}
