@@ -3,7 +3,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Package, Zap, RefreshCw, Lock, Layers, ArrowRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { codeToHtml } from 'shiki';
+import CodeBlock from '@/components/ui/CodeBlock';
 
 export const metadata: Metadata = {
   title: 'Python SDK - lobstr.io API Documentation',
@@ -17,15 +17,61 @@ const FEATURES = [
   { icon: Lock, title: 'Auto Auth', description: 'Token resolved from explicit param, LOBSTR_TOKEN env, or ~/.config/lobstr/config.toml.' },
 ];
 
-const RESOURCES = [
-  { name: 'client.me() / client.balance()', description: 'User profile and credit balance' },
-  { name: 'client.crawlers.*', description: 'List, get, params, attributes' },
-  { name: 'client.squids.*', description: 'Create, list, get, update, empty, delete' },
-  { name: 'client.tasks.*', description: 'Add, list, get, upload (CSV/TSV), delete' },
-  { name: 'client.runs.*', description: 'Start, list, get, stats, tasks, abort, download, wait' },
-  { name: 'client.results.*', description: 'List with auto-pagination' },
-  { name: 'client.accounts.*', description: 'List, get, types, sync, sync_status, update, delete' },
-  { name: 'client.delivery.*', description: 'Email, Google Sheet, S3, webhook, SFTP + test methods' },
+const API_REFERENCE = [
+  { group: 'User', methods: [
+    { sdk: 'client.me()', endpoint: 'GET /v1/me', slug: 'user-me' },
+    { sdk: 'client.balance()', endpoint: 'GET /v1/user/balance', slug: 'get-balance' },
+  ]},
+  { group: 'Crawlers', methods: [
+    { sdk: 'client.crawlers.list()', endpoint: 'GET /v1/crawlers', slug: 'list-crawlers' },
+    { sdk: 'client.crawlers.get(hash)', endpoint: 'GET /v1/crawlers/{hash}', slug: 'get-crawler-details' },
+    { sdk: 'client.crawlers.params(hash)', endpoint: 'GET /v1/crawlers/{hash}/params', slug: 'get-crawler-parameters' },
+    { sdk: 'client.crawlers.attributes(hash)', endpoint: 'GET /v1/crawlers/{hash}/attributes', slug: 'get-crawler-attributes' },
+  ]},
+  { group: 'Squids', methods: [
+    { sdk: 'client.squids.create(crawler, name)', endpoint: 'POST /v1/squids', slug: 'create-squid' },
+    { sdk: 'client.squids.list()', endpoint: 'GET /v1/squids', slug: 'list-squids' },
+    { sdk: 'client.squids.get(hash)', endpoint: 'GET /v1/squids/{hash}', slug: 'get-squid-details' },
+    { sdk: 'client.squids.update(hash, ...)', endpoint: 'POST /v1/squids/{hash}', slug: 'update-squid' },
+    { sdk: 'client.squids.empty(hash)', endpoint: 'POST /v1/squids/{hash}/empty', slug: 'empty-squid' },
+    { sdk: 'client.squids.delete(hash)', endpoint: 'DELETE /v1/squids/{hash}', slug: 'delete-squid' },
+  ]},
+  { group: 'Tasks', methods: [
+    { sdk: 'client.tasks.add(squid, tasks)', endpoint: 'POST /v1/tasks', slug: 'add-tasks' },
+    { sdk: 'client.tasks.list(squid)', endpoint: 'GET /v1/tasks', slug: 'list-tasks' },
+    { sdk: 'client.tasks.get(hash)', endpoint: 'GET /v1/tasks/{hash}', slug: 'get-task' },
+    { sdk: 'client.tasks.upload(squid, file)', endpoint: 'POST /v1/tasks/upload', slug: 'upload-tasks' },
+    { sdk: 'client.tasks.upload_status(id)', endpoint: 'GET /v1/tasks/upload/{id}', slug: 'check-upload-status' },
+    { sdk: 'client.tasks.delete(hash)', endpoint: 'DELETE /v1/tasks/{hash}', slug: 'delete-task' },
+  ]},
+  { group: 'Runs', methods: [
+    { sdk: 'client.runs.start(squid)', endpoint: 'POST /v1/runs', slug: 'start-run' },
+    { sdk: 'client.runs.list(squid)', endpoint: 'GET /v1/runs', slug: 'list-runs' },
+    { sdk: 'client.runs.get(hash)', endpoint: 'GET /v1/runs/{hash}', slug: 'get-run' },
+    { sdk: 'client.runs.stats(hash)', endpoint: 'GET /v1/runs/{hash}/stats', slug: 'get-run-stats' },
+    { sdk: 'client.runs.tasks(hash)', endpoint: 'GET /v1/runtasks', slug: 'get-run-tasks' },
+    { sdk: 'client.runs.abort(hash)', endpoint: 'POST /v1/runs/{hash}/abort', slug: 'abort-run' },
+    { sdk: 'client.runs.download(hash)', endpoint: 'GET /v1/runs/{hash}/download', slug: 'download-run' },
+    { sdk: 'client.runs.wait(hash)', endpoint: 'Polls GET /v1/runs/{hash}', slug: 'get-run' },
+  ]},
+  { group: 'Results', methods: [
+    { sdk: 'client.results.list(run)', endpoint: 'GET /v1/results', slug: 'get-results' },
+    { sdk: 'client.results.iter(run)', endpoint: 'GET /v1/results (paginated)', slug: 'get-results' },
+  ]},
+  { group: 'Accounts', methods: [
+    { sdk: 'client.accounts.list()', endpoint: 'GET /v1/accounts', slug: 'list-accounts' },
+    { sdk: 'client.accounts.get(hash)', endpoint: 'GET /v1/accounts/{hash}', slug: 'get-account-details' },
+    { sdk: 'client.accounts.types()', endpoint: 'GET /v1/accounts/types', slug: 'list-account-types' },
+    { sdk: 'client.accounts.sync(type, cookies)', endpoint: 'POST /v1/synchronize', slug: 'sync-account' },
+    { sdk: 'client.accounts.delete(hash)', endpoint: 'DELETE /v1/accounts/{hash}', slug: 'delete-account' },
+  ]},
+  { group: 'Delivery', methods: [
+    { sdk: 'client.delivery.email(squid, ...)', endpoint: 'POST /v1/delivery', slug: 'configure-email-delivery' },
+    { sdk: 'client.delivery.google_sheet(squid, ...)', endpoint: 'POST /v1/delivery', slug: 'configure-google-sheet-delivery' },
+    { sdk: 'client.delivery.s3(squid, ...)', endpoint: 'POST /v1/delivery', slug: 'configure-s3-delivery' },
+    { sdk: 'client.delivery.webhook(squid, ...)', endpoint: 'POST /v1/delivery', slug: 'configure-webhook-delivery' },
+    { sdk: 'client.delivery.sftp(squid, ...)', endpoint: 'POST /v1/delivery', slug: 'configure-sftp-delivery' },
+  ]},
 ];
 
 const INSTALL_CODE = 'pip install lobstrio-sdk';
@@ -68,17 +114,6 @@ async def main():
 
 asyncio.run(main())`;
 
-// Safe: html generated by Shiki at build time from hardcoded code strings, not user input
-async function CodeBlock({ code, lang }: { code: string; lang: string }) {
-  const html = await codeToHtml(code, { lang, theme: 'github-light' });
-  return (
-    <div
-      className="[&>pre]:!bg-[#F6F8FA] [&>pre]:!p-5 [&>pre]:!m-0 [&>pre]:!rounded-b-lg [&>pre]:!text-[13px] [&>pre]:!leading-relaxed [&>pre]:!overflow-x-auto [&_code]:!text-[13px]"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
-}
-
 export default async function SdkPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -114,7 +149,7 @@ export default async function SdkPage() {
           <h2 className="text-[28px] font-bold text-[#0A2540] mb-6">Installation</h2>
           <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
             <div className="px-5 py-3 bg-[#F9FAFB] border-b border-[#E5E7EB] text-sm font-semibold text-[#0A2540]">Terminal</div>
-            <CodeBlock code={INSTALL_CODE} lang="bash" />
+            <CodeBlock code={INSTALL_CODE} language="bash" theme="light" showCopy showLabel={false} />
           </div>
           <p className="text-sm text-[#0A2540]/50 mt-3">Requires Python 3.10+. Only dependency: httpx.</p>
         </div>
@@ -150,39 +185,48 @@ export default async function SdkPage() {
           <p className="text-[#0A2540]/60 mb-6">Full workflow: create squid, add tasks, run, get results.</p>
           <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
             <div className="px-5 py-3 bg-[#F9FAFB] border-b border-[#E5E7EB] text-sm font-semibold text-[#0A2540]">Python</div>
-            <CodeBlock code={QUICK_START} lang="python" />
+            <CodeBlock code={QUICK_START} language="python" theme="light" showCopy showLabel={false} />
           </div>
 
           <h3 className="text-lg font-bold text-[#0A2540] mt-10 mb-4">Async Client</h3>
           <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
             <div className="px-5 py-3 bg-[#F9FAFB] border-b border-[#E5E7EB] text-sm font-semibold text-[#0A2540]">Python (async)</div>
-            <CodeBlock code={ASYNC_EXAMPLE} lang="python" />
+            <CodeBlock code={ASYNC_EXAMPLE} language="python" theme="light" showCopy showLabel={false} />
           </div>
         </div>
       </section>
 
-      {/* Resources */}
+      {/* API Reference */}
       <section className="border-b border-[#E5E7EB]">
         <div className="max-w-4xl mx-auto px-6 py-16">
-          <h2 className="text-[28px] font-bold text-[#0A2540] mb-2">API Resources</h2>
-          <p className="text-[#0A2540]/60 mb-10">Full coverage of every lobstr.io API endpoint.</p>
-          <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
-            <table className="w-full text-sm">
-              <thead>
-                <tr className="bg-[#F9FAFB] border-b border-[#E5E7EB]">
-                  <th className="text-left px-5 py-3 font-semibold text-[#0A2540]">Resource</th>
-                  <th className="text-left px-5 py-3 font-semibold text-[#0A2540]">Methods</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#E5E7EB]">
-                {RESOURCES.map((r) => (
-                  <tr key={r.name}>
-                    <td className="px-5 py-3 font-mono text-[13px] text-[#FF0000]">{r.name}</td>
-                    <td className="px-5 py-3 text-[#0A2540]/70">{r.description}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <h2 className="text-[28px] font-bold text-[#0A2540] mb-2">API Reference</h2>
+          <p className="text-[#0A2540]/60 mb-10">Every SDK method mapped to its API endpoint.</p>
+          <div className="space-y-6">
+            {API_REFERENCE.map((group) => (
+              <div key={group.group} className="border border-[#E5E7EB] rounded-lg overflow-hidden">
+                <div className="px-5 py-3 bg-[#F9FAFB] border-b border-[#E5E7EB] text-sm font-semibold text-[#0A2540]">{group.group}</div>
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b border-[#E5E7EB]">
+                      <th className="text-left px-5 py-2.5 text-xs font-semibold text-[#0A2540]/50 uppercase tracking-wider">SDK Method</th>
+                      <th className="text-left px-5 py-2.5 text-xs font-semibold text-[#0A2540]/50 uppercase tracking-wider">API Endpoint</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-[#E5E7EB]">
+                    {group.methods.map((m) => (
+                      <tr key={m.sdk} className="hover:bg-[#F9FAFB] transition">
+                        <td className="px-5 py-2.5 font-mono text-[13px] text-[#0A2540]">{m.sdk}</td>
+                        <td className="px-5 py-2.5">
+                          <Link href={`/docs/${m.slug}`} className="font-mono text-[13px] text-[#FF0000] hover:underline">
+                            {m.endpoint}
+                          </Link>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            ))}
           </div>
           <div className="mt-10 text-center">
             <Link href="/docs/authentication" className="inline-flex items-center gap-2 text-sm font-semibold text-[#FF0000] hover:underline">
