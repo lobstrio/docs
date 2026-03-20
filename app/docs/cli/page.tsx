@@ -3,7 +3,7 @@ import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import { Terminal, Zap, Download, Settings, Globe, ArrowRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
-import { codeToHtml } from 'shiki';
+import CodeBlock from '@/components/ui/CodeBlock';
 
 export const metadata: Metadata = {
   title: 'CLI - lobstr.io API Documentation',
@@ -53,17 +53,6 @@ lobstr results get SQUID_ID --format csv -o results.csv
 # Check who you are
 lobstr whoami`;
 
-// Safe: Shiki generates trusted HTML at build time from hardcoded code strings only
-async function CodeBlock({ code, lang }: { code: string; lang: string }) {
-  const html = await codeToHtml(code, { lang, theme: 'github-light' });
-  return (
-    <div
-      className="[&>pre]:!bg-[#F6F8FA] [&>pre]:!p-5 [&>pre]:!m-0 [&>pre]:!rounded-b-lg [&>pre]:!text-[13px] [&>pre]:!leading-relaxed [&>pre]:!overflow-x-auto [&_code]:!text-[13px]"
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  );
-}
-
 export default async function CliPage() {
   return (
     <div className="min-h-screen bg-white">
@@ -99,7 +88,7 @@ export default async function CliPage() {
           <h2 className="text-[28px] font-bold text-[#0A2540] mb-6">Installation</h2>
           <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
             <div className="px-5 py-3 bg-[#F9FAFB] border-b border-[#E5E7EB] text-sm font-semibold text-[#0A2540]">Terminal</div>
-            <CodeBlock code={INSTALL_CODE} lang="bash" />
+            <CodeBlock code={INSTALL_CODE} language="bash" theme="light" showCopy showLabel={false} />
           </div>
           <p className="text-sm text-[#0A2540]/50 mt-3">Requires Python 3.10+. Installs the <code className="text-[13px] bg-[#F6F8FA] px-1.5 py-0.5 rounded border border-[#E5E7EB]">lobstr</code> command.</p>
         </div>
@@ -135,13 +124,13 @@ export default async function CliPage() {
           <p className="text-[#0A2540]/60 mb-6">The <code className="text-[13px] bg-[#F6F8FA] px-1.5 py-0.5 rounded border border-[#E5E7EB] font-mono">go</code> command does everything in one shot.</p>
           <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
             <div className="px-5 py-3 bg-[#F9FAFB] border-b border-[#E5E7EB] text-sm font-semibold text-[#0A2540]">Terminal</div>
-            <CodeBlock code={GO_EXAMPLES} lang="bash" />
+            <CodeBlock code={GO_EXAMPLES} language="bash" theme="light" showCopy showLabel={false} />
           </div>
 
           <h3 className="text-lg font-bold text-[#0A2540] mt-10 mb-4">Step-by-Step Workflow</h3>
           <div className="border border-[#E5E7EB] rounded-lg overflow-hidden">
             <div className="px-5 py-3 bg-[#F9FAFB] border-b border-[#E5E7EB] text-sm font-semibold text-[#0A2540]">Terminal</div>
-            <CodeBlock code={WORKFLOW_EXAMPLE} lang="bash" />
+            <CodeBlock code={WORKFLOW_EXAMPLE} language="bash" theme="light" showCopy showLabel={false} />
           </div>
         </div>
       </section>

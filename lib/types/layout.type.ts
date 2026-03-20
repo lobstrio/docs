@@ -61,4 +61,7 @@ export interface CodeBlockProps {
   code: string;
   language: string;
   showLineNumbers?: boolean;
+  theme?: 'dark' | 'light';
+  showCopy?: boolean;
+  showLabel?: boolean;
 }
