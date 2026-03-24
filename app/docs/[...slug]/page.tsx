@@ -82,7 +82,7 @@ export default async function DocPage({ params }: PageProps) {
       languages: highlightedLanguages,
       responses: highlightedResponses,
     };
-    const siteUrl=process.env.NEXT_PUBLIC_SITE_URL
+    const siteUrl=process.env.NEXT_PUBLIC_SITE_URL || '';
     const metaImage=content.seo.image ? `${siteUrl}/${content.seo.image}` : `${siteUrl}/images/default-meta-image.png`
     return (
       <>
