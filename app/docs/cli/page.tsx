@@ -73,7 +73,7 @@ export default async function CliPage() {
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
             <a href="#quickstart" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FF0000] text-white rounded-lg font-semibold text-sm hover:bg-[#E60000] transition">
-              Quick Start <ArrowRight className="w-4 h-4" />
+              Quick start <ArrowRight className="w-4 h-4" />
             </a>
             <a href="https://pypi.org/project/lobstrio/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 px-5 py-2.5 text-[#FF0000] hover:text-white rounded-lg font-semibold text-sm border border-[#FF0000] hover:bg-[#FF0000] transition">
               PyPI <ExternalLink className="w-3.5 h-3.5" />

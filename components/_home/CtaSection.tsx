@@ -17,7 +17,7 @@ export default function CtaSection() {
             href="/docs/authentication"
             className="inline-flex items-center gap-2 leading-[1.31] bg-[#ff0000] hover:bg-[#ff0000] text-white px-5 py-3.5 rounded-lg font-semibold"
           >
-            Get Started
+            Get started
             <ChevronDown className={`w-4 h-4 -rotate-90`} />
           </Link>
         </div>

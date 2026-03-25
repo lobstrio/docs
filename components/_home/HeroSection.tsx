@@ -18,14 +18,14 @@ export default function HeroSection() {
               href="/docs/authentication"
               className="inline-flex items-center gap-2 leading-[1.31] bg-[#ff0000] hover:bg-[#ff0000] text-white px-5 py-3.5 rounded-lg font-semibold"
             >
-              Get Started
+              Get started
                <ChevronDown className={`w-4 h-4 -rotate-90`} />
             </Link>
             <Link
               href="/docs/list-crawlers"
               className="inline-flex items-center gap-2 leading-[1.31] text-[#ff0000]  hover:text-[#fff] px-5 py-3.5 rounded-lg font-semibold border border-[#FF0000] hover:bg-[#ff0000]"
             >
-              Explore Crawlers
+              Explore crawlers
             </Link>
           </div>
         </div>

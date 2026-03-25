@@ -118,10 +118,10 @@ export default async function McpPage() {
           </p>
           <div className="mt-8 flex items-center justify-center gap-4">
             <a href="#setup" className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#FF0000] text-white rounded-lg font-semibold text-sm hover:bg-[#E60000] transition">
-              Get Started <ArrowRight className="w-4 h-4" />
+              Get started <ArrowRight className="w-4 h-4" />
             </a>
             <a href="#tools" className="inline-flex items-center gap-2 px-5 py-2.5 text-[#FF0000] hover:text-white rounded-lg font-semibold text-sm border border-[#FF0000] hover:bg-[#FF0000] transition">
-              View Tools
+              View tools
             </a>
           </div>
         </div>
