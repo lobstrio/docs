@@ -91,18 +91,13 @@
       "commonParams": {
         "title": "Common Parameters",
         "content": "The `params` object contains crawler-specific settings. Most crawlers share these common parameters:",
-        "columns": [
-          {"header": "Parameter", "key": "param"},
-          {"header": "Type", "key": "type"},
-          {"header": "Description", "key": "description"}
-        ],
-        "rows": [
-          {"param": "**max_results**", "type": "integer", "description": "Maximum results per task. null = unlimited."},
-          {"param": "**max_unique_results_per_run**", "type": "integer", "description": "Maximum unique results across all tasks in a run. null = unlimited."},
-          {"param": "**fetch_since**", "type": "string", "description": "Stop scraping when items older than this threshold are reached. Accepts a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD`)."},
-          {"param": "**hours_back**", "type": "integer", "description": "Deprecated — stop scraping when items older than N hours are reached. Use `fetch_since` instead."},
-          {"param": "**max_date**", "type": "string", "description": "Deprecated — stop scraping when items older than this date are reached. Use `fetch_since` instead."},
-          {"param": "**functions**", "type": "object", "description": "Optional add-on features. Each key is a boolean toggle. Enabling incurs extra credits per row."}
+        "fields": [
+          {"path": "params.max_results", "type": "integer", "description": "Maximum results per task. null = unlimited.", "example": "200"},
+          {"path": "params.max_unique_results_per_run", "type": "integer", "description": "Maximum unique results across all tasks in a run. null = unlimited.", "example": "null"},
+          {"path": "params.fetch_since", "type": "string", "description": "Stop scraping when items older than this threshold are reached. Accepts a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD).", "example": "\"7d\""},
+          {"path": "params.hours_back", "type": "integer", "description": "Deprecated — stop scraping when items older than N hours are reached. Use fetch_since instead.", "example": "null"},
+          {"path": "params.max_date", "type": "string", "description": "Deprecated — stop scraping when items older than this date are reached. Use fetch_since instead.", "example": "null"},
+          {"path": "params.functions", "type": "object", "description": "Optional add-on features. Each key is a boolean toggle. Enabling incurs extra credits per row.", "example": "{\"details\": true}"}
         ]
       },
       "runStatusFields": {
