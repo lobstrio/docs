@@ -9,7 +9,7 @@
     "requiresAuth": true
   },
   "content": {
-    "introduction": "This endpoint retrieves detailed information about a specific crawler using its hash ID. It helps you understand each crawler's availability, cost, parameters, and potential issues before using it.\n\n{{RENDER:commonParameters}}",
+    "introduction": "This endpoint retrieves detailed information about a specific crawler using its hash ID. It helps you understand each crawler's availability, cost, parameters, and potential issues before using it.",
     "sections": {
       "responseFields": {
         "title": "Response Field Explanations",
@@ -134,18 +134,6 @@
             "example": "\"\""
           }
         ]
-      },
-      "commonParameters": {
-        "title": "Common Parameters",
-        "content": "Most crawlers share a set of common squid-level parameters returned in the `input` array. These control run behavior across all crawlers that support them:",
-        "fields": [
-          {"path": "max_results", "type": "integer", "description": "Maximum results per task. Leave null for unlimited.", "example": "200"},
-          {"path": "max_unique_results_per_run", "type": "integer", "description": "Maximum unique results across all tasks in a run. Leave null for unlimited.", "example": "null"},
-          {"path": "fetch_since", "type": "string", "description": "Stop scraping when items older than this threshold are reached. Accepts a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD).", "example": "\"7d\""},
-          {"path": "hours_back", "type": "integer", "description": "Deprecated — stop scraping when items older than N hours are reached. Use fetch_since instead.", "example": "null"},
-          {"path": "max_date", "type": "string", "description": "Deprecated — stop scraping when items older than this date are reached. Use fetch_since instead.", "example": "null"},
-          {"path": "functions", "type": "object", "description": "Optional add-on features (e.g. email enrichment, image collection). Each key is a function name with a boolean value. Enabling a function incurs extra credits per row.", "example": "{\"details\": true}"}
-        ]
       }
     },
     "parameters": [
@@ -187,10 +175,6 @@
       {
         "type": "tip",
         "content": "Use the 'result' array to know exactly what fields will be returned in your data. This helps you plan your data processing pipeline."
-      },
-      {
-        "type": "note",
-        "content": "Use `fetch_since` to stop scraping when older items are reached. It supports both relative durations (24h, 7d, 2w) and absolute dates (YYYY-MM-DD). Replaces the older `hours_back` and `max_date` parameters."
       }
     ]
   },
