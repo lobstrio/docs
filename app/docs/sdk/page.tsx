@@ -242,7 +242,7 @@ export default function SdkPage() {
       </section>
 
       {/* Quick Start */}
-      <section id="quickstart" className="-mx-12 border-b border-[#dde1ee]">
+      <section id="quickstart" className="border-b border-[#dde1ee]">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-20">
           <h2 className="text-[40px] font-bold leading-[0.98] text-center mb-2.5">Quick Start</h2>
           <p className="text-[#111827b3] text-base text-center leading-[1.75] mb-10.5">Full workflow: create squid, add tasks, run, get results.</p>
