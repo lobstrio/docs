@@ -229,7 +229,7 @@ export default function SdkPage() {
           <p className="text-[#111827b3] text-base text-center leading-[1.75] mb-10.5">Everything you need to integrate lobstr.io into your Python applications.</p>
           <div className="grid md:grid-cols-2 gap-5">
             {FEATURES.map((f) => (
-              <div key={f.title} className="border border-[#E5E7EB] rounded-lg px-6 py-5 hover:border-[#FF0000]/30 hover:shadow-[8px_8px_13px_0_rgba(33,52,71,0.07)] transition group">
+              <div key={f.title} className="border bg-[#fff] border-[#E5E7EB] rounded-lg px-6 py-5 hover:border-[#FF0000]/30 hover:shadow-[8px_8px_13px_0_rgba(33,52,71,0.07)] transition group">
                 <div className="w-[42px] h-[42px] rounded-lg bg-[#fff0f0] flex items-center justify-center mb-4.5 ">
                   <Image src={f.iconSrc} alt="" className="w-6 h-6" width={18} height={18} />
                 </div>
