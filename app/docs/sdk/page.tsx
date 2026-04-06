@@ -1,14 +1,13 @@
 import { Metadata } from 'next';
-import { ArrowRight, ExternalLink, AlertCircle } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { codeToHtml } from 'shiki';
 import CodeBlock from '@/components/ui/CodeBlock';
 import CopyButton from '@/components/ui/CopyButton';
 import SdkQuickStartTabs from '@/components/ui/SdkQuickStartTabs';
-import ThreeColumnLayout from '@/components/layout/ThreeColumnLayout';
-import { getMethodBadgeClass } from '@/lib/utils/code-generator';
 import FeaturesBar from '@/components/_home/FeaturesBar';
+import HeroButton from '@/components/ui/HeroButton';
 
 export const metadata: Metadata = {
   title: 'Python SDK - lobstr.io API Documentation',
@@ -209,13 +208,13 @@ export default async function SdkPage() {
 
           {/* Badge */}
           <div className="w-full flex justify-center mb-3.5">
-            <div className="px-2 py-1 rounded-lg border border-[#ff7f7f] bg-[#FEF2F2] text-red-600 text-sm font-semibold">
+            <div className="px-2 py-1 rounded-lg border border-[#ff7f7f] bg-[#FEF2F2] text-[#ff0000] font-semibold">
               Python SDK
             </div>
           </div>
 
           {/* Headline */}
-          <h1 className="text-5xl md:text-[64px] font-black text-[#0a2540] leading-[1.2] md:leading-[78px]">
+          <h1 className="text-5xl md:text-[64px] font-black text-[#0a2540] leading-[1.2] md:leading-[78px]max-w-[768px]">
             Automate web{' '}
             <span className="text-red-600">scraping</span>
             <br />
@@ -223,27 +222,19 @@ export default async function SdkPage() {
           </h1>
 
           {/* Subheading */}
-          <p className="text-lg text-[rgba(17,24,39,0.7)] leading-8 max-w-[659px] py-10">
+          <p className="text-lg text-[#111827]/70 leading-8 max-w-[659px] py-10">
             Official Python SDK for the lobstr.io API. Typed models, sync &amp; async clients,
             auto-pagination, and full API coverage — one dependency (httpx).
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap items-center justify-center gap-4">
-            <a
-              href="#quickstart"
-              className="inline-flex items-center gap-3 bg-[#E60000] text-white text-base font-bold px-6 py-3 rounded-lg hover:bg-[#E60000] transition-colors"
-            >
-              Quick Start
-              <svg width="7" height="10" viewBox="0 0 8 12" fill="none" aria-hidden="true">
-                <path d="M1 1l6 5-6 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </a>
+            <HeroButton label="Quick start" href="#quickstart" />
             <a
               href="https://pypi.org/project/lobstrio-sdk/"
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 border border-[#ff0000] text-[#ff0000] text-base font-semibold px-6 py-3 rounded-lg hover:bg-[#ff0000] transition-colors"
+              className="inline-flex items-center gap-2 border border-[#ff0000] text-[#ff0000]  font-semibold px-6 py-3 rounded-lg hover:bg-[#ff0000] hover:text-[#fff] transition-colors"
             >
               View on PyPI
               <ExternalLink className="w-4 h-4" />
@@ -263,7 +254,7 @@ export default async function SdkPage() {
         <div className="max-w-4xl mx-auto">
           <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Features</p>
           <h2 className="text-[40px] font-black text-center leading-[39px] my-4">Features</h2>
-          <p className="text-[#111827b3] text-base text-center leading-[28px] mb-16">Everything you need to integrate lobstr.io into your Python applications.</p>
+          <p className="text-[#111827]/70 text-base text-center leading-[28px] mb-16">Everything you need to integrate lobstr.io into your Python applications.</p>
           <div className="grid md:grid-cols-2 gap-5">
             {FEATURES.map((f) => (
               <div key={f.title} className="bg-white rounded-[10px] px-[25px] py-[21px] flex flex-col gap-[18px] items-start transition-shadow border border-[#e5e7eb] hover:border-red-300/50 hover:shadow-[8px_8px_13px_0px_rgba(33,52,71,0.05)]">
@@ -271,7 +262,7 @@ export default async function SdkPage() {
                   <Image src={f.iconSrc} alt="" width={24} height={24} />
                 </div>
                 <h3 className="font-bold text-xl text-[#0a2540]">{f.title}</h3>
-                <p className="text-base leading-[1.63] text-[#111827]/60">{renderDescription(f.description)}</p>
+                <p className="text-base leading-[26px] text-[#111827]/70">{renderDescription(f.description)}</p>
               </div>
             ))}
           </div>
@@ -282,7 +273,7 @@ export default async function SdkPage() {
       <section className="border-b border-[#dee0ea]">
         <div className="max-w-4xl mx-auto px-6 py-10 md:py-[80px]">
           <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">How it works</p>
-          <h2 className="text-[40px] font-black text-center leading-[39px] my-4">Up and running in 30 seconds</h2>
+          <h2 className="text-[40px] font-black text-center leading-[39px] mt-4 mb-16">Up and running in 30 seconds</h2>
 
           <div className="flex flex-col md:flex-row gap-10 md:items-start">
             {/* Steps */}
@@ -293,13 +284,13 @@ export default async function SdkPage() {
                     <span className="flex-shrink-0 w-7.5 h-7.5 rounded-lg bg-[#fff0f0] text-[#FF0000] text-[13px] font-bold flex items-center justify-center">{step.n}</span>
                     <h3 className="text-[18px] font-bold text-[#111827] leading-[1.56]">{step.title}</h3>
                   </div>
-                  <p className="ml-10 text-[#111827b3] leading-[1.75]">{step.desc}</p>
+                  <p className="ml-10 text-[#111827]/70 leading-[1.75]">{step.desc}</p>
                 </div>
               ))}
             </div>
 
             {/* Code preview */}
-            <div className="w-full md:flex-1 rounded-lg overflow-hidden flex flex-col mt-[35px]">
+            <div className="w-full md:flex-1 rounded-lg overflow-hidden flex flex-col mt-7.5">
               <div className="bg-[#0a2540] px-5 py-3 h-10 flex items-center gap-1.5">
                 <span className="rounded-full" style={{ width: 11, height: 11, backgroundColor: 'rgba(255,255,255,0.18)' }} />
                 <span className="rounded-full" style={{ width: 11, height: 11, backgroundColor: 'rgba(255,255,255,0.18)' }} />
@@ -323,7 +314,6 @@ export default async function SdkPage() {
       </section>
 
       {/* Install */}
-      {/* Install */}
       <section id="installation" className="border-b bg-[#f8fafc] border-[#dee0ea]">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
           <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Setup</p>
@@ -340,12 +330,12 @@ export default async function SdkPage() {
 
           <div className="flex items-center justify-between mt-4 overflow-x-auto gap-4 pb-1">
             <div className="flex items-center gap-2 shrink-0">
-              <span className="text-[#0a254099]">PyPI</span>
+              <span className="text-[#0A2540]/60">PyPI</span>
               <a href="https://pypi.org/project/lobstrio-sdk/" target="_blank" rel="noopener noreferrer" className="text-[14px] text-[#0A2540] border border-[#dde1ee] rounded-md px-3.5 py-2 hover:border-[#FF0000]/40 transition bg-white whitespace-nowrap">pypi.org/project/lobstrio-sdk</a>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {['Python 3.10+', 'No key to browse', 'Cross-platform'].map((badge) => (
-                <span key={badge} className="flex items-center gap-1.5 text-[13px] font-semibold text-[#0A2540] border border-[#dde1ee] rounded-md px-3.5 py-2 bg-white whitespace-nowrap">
+                <span key={badge} className="flex items-center gap-1.5 text-sm font-semibold text-[#0A2540] border border-[#dde1ee] rounded-md px-3.5 py-2 bg-white whitespace-nowrap">
                   <img src="/images/check-red-icon.svg" alt="" className="w-3 h-3 shrink-0" /> {badge}
                 </span>
               ))}
@@ -357,8 +347,8 @@ export default async function SdkPage() {
       {/* Quick Start */}
       <section id="quickstart" className="border-b border-[#dee0ea]">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
-          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Quick Start</p>
-          <h2 className="text-[40px] font-black text-center leading-[39px] my-4">What will you scrape?</h2>
+          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Reference</p>
+          <h2 className="text-[40px] font-black text-center leading-[39px] my-4">Quick Start</h2>
           <p className="text-[#111827b3] text-base text-center leading-[28px] mb-16">Full workflow: create squid, add tasks, run, get results.</p>
           <SdkQuickStartTabs
             quickstartHtml={quickstartHtml}
@@ -449,7 +439,7 @@ export default async function SdkPage() {
                       </Link>
                     </div>
                     {/* Description */}
-                    <div className="sm:w-[29%] px-[10px] py-[15px] flex items-center">
+                    <div className="sm:w-[29%] px-[10px] py-[15px] flex items-center whitespace-pre">
                       <p className="text-[14px] text-[rgba(10,37,64,0.7)] leading-[21px]">{m.description}</p>
                     </div>
                   </div>
@@ -462,7 +452,7 @@ export default async function SdkPage() {
             <h3 className="text-[24px] font-bold text-white mb-4">Explore the full API documentation</h3>
             <p className="text-[#ffffffb3] mb-7.5 mx-auto">Reuse the same CTA treatment from the cleaner reference page to keep docs pages visually consistent.</p>
             <Link href="/docs/authentication" className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF0000] hover:bg-[#cc0000] text-white text-sm font-bold rounded-lg transition">
-              Open API docs
+              Open API docs <ExternalLink className="w-4 h-4" />
             </Link>
           </div>
         </div>

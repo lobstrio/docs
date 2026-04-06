@@ -1,5 +1,5 @@
 import { Metadata } from 'next';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink } from 'lucide-react';
 import Link from 'next/link';
 import McpSetupTabs from './McpSetupTabs';
 import HeroButton from '@/components/ui/HeroButton';
@@ -106,21 +106,21 @@ export default async function McpPage() {
     <div className="min-h-screen bg-white">
       {/* Hero */}
       <section className="border-b border-[#dee0ea]">
-        <div className="max-w-4xl mx-auto px-6 py-[80px] text-center">
+        <div className="max-w-4xl mx-auto px-6 py-10 md:py-[80px] text-center">
           <div className="inline-flex items-center px-2 py-1 rounded-lg border border-[#FF7F7F] bg-[#FFF2F2] text-[#FF0000] text-sm mb-3.5">
             Model Context Protocol
           </div>
-          <h1 className="text-[64px] font-[900] text-[#0A2540] leading-[1.22] tracking-normal text-center mb-10">
+          <h1 className="text-[40px] md:text-[64px] font-[900] text-[#0A2540] leading-[1.22] tracking-normal text-center mb-10">
             Give your AI access <br /> to <span className="text-[#FF0000]">lobstr.io</span> in seconds
           </h1>
           <p className="text-[18px] font-normal text-[#0A2540]/70 max-w-2xl mx-auto leading-[1.78] tracking-normal text-center mb-10">
             Let your AI assistant search documentation, retrieve code examples, and explore scraper configurations — all through the MCP protocol. No API key required.
           </p>
-          <div className="mt-8 flex items-center justify-center gap-4">
+          <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
             <HeroButton label="Get started" href="#tools"  />
 
-            <a href="#tools" className="inline-flex items-center gap-2 px-5 py-2.5 text-[#FF0000] hover:text-white rounded-lg font-semibold text-[18px] border border-[#FF0000] hover:bg-[#FF0000] transition">
-              View tools
+            <a href="#tools" className="inline-flex items-center gap-2 px-5 py-2.5 text-[#FF0000] hover:text-white rounded-lg font-semibold text-lg border border-[#FF0000] hover:bg-[#FF0000] transition">
+              View tools <ExternalLink className="w-4 h-4" />
             </a>
           </div>
         </div>
@@ -190,7 +190,11 @@ export default async function McpPage() {
             {/* Terminal preview */}
             <div className="rounded-lg overflow-hidden h-full flex flex-col">
               {/* Header */}
-              <div className="bg-[#0a2540] px-5 py-3 h-10" />
+              <div className="bg-[#0a2540] px-5 py-3 h-10 flex items-center gap-1.5">
+                <span className="rounded-full" style={{ width: 11, height: 11, backgroundColor: 'rgba(255,255,255,0.18)' }} />
+                <span className="rounded-full" style={{ width: 11, height: 11, backgroundColor: 'rgba(255,255,255,0.18)' }} />
+                <span className="rounded-full" style={{ width: 11, height: 11, backgroundColor: 'rgba(255,255,255,0.18)' }} />
+              </div>
               {/* Body */}
               <div className="bg-[#0a1b2b] px-6 py-4 text-[13px] font-mono flex-1 flex flex-col gap-5 justify-center">
                 <div className="space-y-5">
@@ -275,9 +279,9 @@ export default async function McpPage() {
 
           <div className="mt-15 rounded-xl bg-[#0A2540] px-7.5 py-10 text-center">
             <h3 className="text-[24px] font-bold text-white mb-4">Explore the full API documentation</h3>
-            <p className="text-[#ffffffb3] mb-7.5 mx-auto">Full API specs, request schemas, and code examples — everything your AI needs to build with lobstr.io.</p>
+            <p className="text-[#ffffffb3] mb-7.5 mx-auto">Reuse the same CTA treatment from the cleaner reference page to keep docs pages visually consistent.</p>
             <Link href="/docs/authentication" className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF0000] hover:bg-[#cc0000] text-white text-sm font-bold rounded-lg transition">
-              Open API docs
+              Open API docs <ExternalLink className="w-4 h-4" />
             </Link>
           </div>
         </div>

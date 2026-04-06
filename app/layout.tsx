@@ -27,7 +27,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${inter.variable} ${sourceSans3.variable} ${jetbrainsMono.variable}`}>
-      <body className="min-h-screen overflow-x-hidden">
+      <body className="min-h-screen">
         <ScrollToTop />
         {children}
       </body>

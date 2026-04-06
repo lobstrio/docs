@@ -125,15 +125,15 @@ export default async function CliPage() {
           <div className="inline-flex items-center gap-2 px-2 py-1 rounded-lg border border-[#FF7F7F] bg-[#FEF2F2] text-[#FF0000] text-sm  mb-6">
             Command Line Interface
           </div>
-          <h1 className="text-[40px] md:text-[64px] font-[900] text-[#0A2540] leading-[1.1] tracking-normal text-center mb-10">
+          <h1 className="text-[40px] md:text-[64px] font-[900] text-[#0A2540] leading-[1.2] md:leading-[78px] tracking-normal text-center mb-10">
             Run <span className="text-[#ff0000]">scrapers</span> from<br />your terminal
           </h1>
-          <p className="text-[18px] font-normal text-[#0A2540]/70 max-w-2xl mx-auto leading-[1.78] tracking-normal text-center">
+          <p className="text-[18px] font-normal text-[#111827]/70 max-w-2xl mx-auto leading-[1.78] tracking-normal text-center">
             Install the lobstr CLI, browse 50+ crawlers, and start scraping Google Maps, LinkedIn, or any platform — without ever touching the UI
           </p>
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <HeroButton label="Quick start" href="#quickstart" />
-            <a href="https://pypi.org/project/lobstrio/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 h-[50px] px-[26px] rounded-lg font-semibold text-[18px] text-[#FF0000] border border-[#FF0000] hover:bg-[#FF0000] hover:text-white transition whitespace-nowrap">View on PyPI <ExternalLink className="w-4 h-4" /></a>
+            <a href="https://pypi.org/project/lobstrio/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center justify-center gap-1.5 h-[50px] px-[26px] rounded-lg font-semibold text-lg text-[#FF0000] border border-[#FF0000] hover:bg-[#FF0000] hover:text-white transition whitespace-nowrap">View on PyPI <ExternalLink className="w-4 h-4" /></a>
           </div>
         </div>
       </section>
@@ -148,15 +148,15 @@ export default async function CliPage() {
         {/* Features */}
       <section id="features" className="border-b border-[#dde1ee]">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
-          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[0.79] tracking-[1px] uppercase">Features</p>
-          <h2 className="text-[40px] font-bold text-center leading-[0.98] mb-4">Full control from your terminal</h2>
-          <p className="text-[#111827b3] text-base text-center leading-[1.75] mb-[64px]">Everything you need to scrape at scale — no UI, no browser, no problem</p>
+          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Features</p>
+          <h2 className="text-[40px] font-black text-center leading-[39px] mb-4">Full control from your terminal</h2>
+          <p className="text-[#111827]/70 text-base text-center leading-[28px] mb-16">Everything you need to scrape at scale — no UI, no browser, no problem</p>
           <div className="grid md:grid-cols-2 gap-5">
             {FEATURES.map((f) => (
               <div key={f.title} className="border bg-[#fff] border-[#E5E7EB] rounded-lg p-[25px] hover:border-[#FF0000]/30 hover:shadow-[8px_8px_13px_0_rgba(33,52,71,0.07)] transition group">
-                <span className="inline-block px-[9px] text-[12px] font-semibold rounded-[8px] bg-[#fff0f0] leading-[2.17] text-[#FF0000] mb-[18px] uppercase">{f.tag}</span>
+                <span className="inline-block px-[9px] text-[12px] font-semibold rounded-[8px] bg-[#fff0f0] leading-[26px] text-[#FF0000] mb-[18px] uppercase">{f.tag}</span>
                 <h3 className="font-semibold text-[18px]">{f.title}</h3>
-                <p className="text-base mt-2 leading-[1.63] text-[#111827]/60">{f.description}</p>
+                <p className="text-base mt-2 leading-[26px] text-[#0A2540]/70">{f.description}</p>
               </div>
             ))}
           </div>
@@ -166,10 +166,10 @@ export default async function CliPage() {
       {/* How it works */}
       <section className="border-b border-[#dee0ea]">
         <div className="max-w-4xl mx-auto px-6 py-10 md:py-[80px]">
-          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[0.79] tracking-[1px] uppercase">How it works</p>
-          <h2 className="text-[40px] font-bold text-center leading-[0.98] mb-9">Up and running in 30 seconds</h2>
+          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">How it works</p>
+          <h2 className="text-[40px] font-black text-center leading-[39px] mb-16">Up and running in 30 seconds</h2>
 
-          <div className="flex flex-col md:flex-row gap-10 md:items-center">
+          <div className="flex flex-col md:flex-row gap-10">
             {/* Steps */}
             <div className="w-full md:flex-shrink-0 md:w-[366px] space-y-0">
               {[
@@ -200,7 +200,7 @@ export default async function CliPage() {
             </div>
 
             {/* Terminal preview */}
-            <div className="w-full md:flex-1 md:w-[367px] rounded-lg overflow-hidden flex flex-col">
+            <div className="w-full md:flex-1 md:w-[367px] rounded-lg overflow-hidden flex flex-col mt-7.5 md:h-[410px]">
               {/* Header */}
                <div className="bg-[#0a2540] px-5 py-3 h-10 flex items-center gap-1.5">
                 <span className="rounded-full" style={{ width: 11, height: 11, backgroundColor: 'rgba(255,255,255,0.18)' }} />
@@ -223,10 +223,15 @@ export default async function CliPage() {
                 <p className="text-[#ffffffb3] whitespace-pre-wrap">leads.csv ────────────────────────────────────────</p>
                 <div className="space-y-2">
                   <p className="text-[#4adb98]">──────── ✓ squid created ✓ 200 tasks added ✓ run</p>
-                  <div className='h-2.5 overflow-hidden flex items-center'>
 
-                  <p className="text-white whitespace-pre-wrap leading-[1em]"><span className="text-[#4adb98]">started </span><span style={{ fontSize: 12, verticalAlign: 'middle' }}>███████████████████░░░░░░░░░░</span> 67% ✓ download</p>
-                  </div>
+              <div className='flex items-center gap-1 text-white text-[14px]'>
+                <span className="text-[#4adb98]">started</span>
+                <div className='h-[13px] overflow-hidden flex items-center'>
+                  <span style={{ fontSize: 12 }}>███████████████████░░░░░░░░░░</span>
+                </div>
+                <span>67% ✓ download</span>
+              </div>
+               
                 </div>
                 <p className="text-[#ffffffb3] whitespace-pre-wrap">complete ─────────────────────────────────────────</p>
                 <p className="whitespace-pre-wrap text-[#ffffffb3]">──────── <span className="text-[#79b8ff]">Saved</span> <span className="text-white">leads.csv (1 204 rows)</span></p>
@@ -239,9 +244,9 @@ export default async function CliPage() {
       {/* Install */}
       <section id="installation" className="border-b bg-[#f8fafc] border-[#dee0ea]">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
-          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[0.79] tracking-[1px] uppercase">Setup</p>
-          <h2 className="text-[40px] font-bold text-center leading-[0.98] mb-4">Connect in one step</h2>
-          <p className="text-[#111827b3] text-base text-center leading-[1.75] mb-[64px]">Requires Python 3.10+. No API key needed to browse crawlers. Add your token to run scraping jobs.</p>
+          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Setup</p>
+          <h2 className="text-[40px] font-black text-center leading-[39px] mb-4">Connect in one step</h2>
+          <p className="text-[#111827]/70 text-base text-center leading-[28px] mb-16">Requires Python 3.10+. No API key needed to browse crawlers. Add your token to run scraping jobs.</p>
 
           <div className="bg-[#0a2540] rounded-xl overflow-hidden">
             <div className="flex justify-between items-center gap-2 px-4 py-3">
@@ -272,9 +277,9 @@ export default async function CliPage() {
       {/* Quick Start */}
       <section id="quickstart" className="border-b border-[#dee0ea]">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
-          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[0.79] tracking-[1px] uppercase">Quick Start</p>
-          <h2 className="text-[40px] font-bold text-center leading-[0.98] mb-4">What will you scrape?</h2>
-          <p className="text-[#111827b3] text-base text-center leading-[1.75] mb-[64px]">Full workflow: create squid, add tasks, run, get results</p>
+          <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Quick Start</p>
+          <h2 className="text-[40px] font-black text-center leading-[39px] mb-4">What will you scrape?</h2>
+          <p className="text-[#111827]/70 text-base text-center leading-[28px] mb-16">Full workflow: create squid, add tasks, run, get results</p>
           <QuickStartTabs goHtml={goHtml} workflowHtml={workflowHtml} goCode={GO_EXAMPLES} workflowCode={WORKFLOW_EXAMPLE} />
         </div>
       </section>
@@ -282,11 +287,11 @@ export default async function CliPage() {
       {/* Commands */}
       <section className="border-b border-[#dee0ea]">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
-        <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[0.79] tracking-[1px] uppercase">Reference</p>
-          <h2 className="text-[40px] font-bold text-center leading-[0.98] mb-4">Command Reference</h2>
-          <p className="text-[#111827b3] text-base text-center leading-[1.75] mb-[64px]">All available commands grouped by resource.</p>
+        <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Reference</p>
+          <h2 className="text-[40px] font-black text-center leading-[39px] mb-4">Command Reference</h2>
+          <p className="text-[#111827]/70 text-base text-center leading-[28px] mb-16">All available commands grouped by resource.</p>
           <div className="border border-[#E5E7EB] rounded-lg overflow-x-auto">
-            <div className="flex items-stretch bg-[#f0f4f8] border-b border-[#E5E7EB]">
+            <div className="hidden sm:flex items-stretch bg-[#f0f4f8] border-b border-[#E5E7EB]">
               <span className="w-[48%] px-4 py-[11.5px] flex items-center text-[#11182799] font-semibold leading-[1.31]">Command</span>
               <span className="w-[35%] px-4 py-[11.5px] flex items-center leading-[1.31] text-[#11182799] font-semibold">Description</span>
             </div>
@@ -295,8 +300,8 @@ export default async function CliPage() {
                 <div className="px-4 py-2.5 bg-[#f9fafb] border-b border-[#E5E7EB] text-[13px] font-bold tracking-[0.65px]">{g.group}</div>
                 <div className="divide-y divide-[#E5E7EB]">
                   {g.cmds.map((item) => (
-                    <div key={item.cmd} className="flex items-stretch">
-                      <span className="w-[48%] px-2.5 py-[15px] flex items-center">
+                    <div key={item.cmd} className="flex flex-col sm:flex-row sm:items-stretch">
+                      <span className="w-full sm:w-[48%] px-2.5 py-[15px] flex items-center border-b sm:border-b-0 border-[#E5E7EB]">
                         <span
                           className="inline-block text-[12px] text-[#0a2540] font-normal leading-[1.5] px-2 py-0.5 rounded-[4px] border border-[#dee0ea] bg-[#f2f5f9] whitespace-nowrap"
                           style={{ fontFamily: 'var(--font-jetbrains-mono)' }}
@@ -304,7 +309,7 @@ export default async function CliPage() {
                           lobstr {item.cmd}
                         </span>
                       </span>
-                      <span className="w-[35%] px-2.5 py-[15px] flex items-center text-[14px] leading-[1.5] text-[#6B7280]">{item.description}</span>
+                      <span className="w-full sm:w-[35%] px-2.5 py-[15px] flex items-center text-[14px] leading-[1.5] text-[#6B7280]">{item.description}</span>
                     </div>
                   ))}
                 </div>
@@ -315,7 +320,7 @@ export default async function CliPage() {
             <h3 className="text-[24px] font-bold text-white mb-4">Explore the full API documentation</h3>
             <p className="text-[#ffffffb3] mb-7.5 mx-auto">Reuse the same CTA treatment from the cleaner reference page to keep docs pages visually consistent.</p>
             <Link href="/docs/authentication" className="inline-flex items-center gap-2 px-6 py-3 bg-[#FF0000] hover:bg-[#cc0000] text-white text-sm font-bold rounded-lg transition">
-              Open API docs
+              Open API docs <ExternalLink className="w-4 h-4" />
             </Link>
           </div>
         </div>
