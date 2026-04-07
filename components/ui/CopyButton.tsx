@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { useState } from 'react';
 import { CopyButtonProps } from '@/lib/types/layout.type';
+import { copyToClipboard } from '@/lib/utils/clipboard';
 
 export default function CopyButton({ text, className = '', variant = 'light' }: CopyButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -10,23 +11,7 @@ export default function CopyButton({ text, className = '', variant = 'light' }: 
   const [hovered, setHovered] = useState(false);
 
   const handleCopy = async () => {
-    const formattedContent = text;
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(formattedContent);
-    } else {
-      let textArea = document.createElement("textarea");
-      textArea.value = formattedContent;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-999999px";
-      textArea.style.top = "-999999px";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      // @ts-ignore
-      document.execCommand("copy");
-      textArea.remove();
-    }
-
+    await copyToClipboard(text);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

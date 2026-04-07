@@ -3,7 +3,7 @@ import { API_REFERENCE } from './Home.dto';
 
 export default function ApiReference() {
   return (
-    <div className=" border-y border-[#dde1ee]">
+    <div>
       <div className="max-w-7xl mx-auto px-6 md:px-0 py-[70px]">
         <div className="text-center mb-[60px]">
           <h2 className="text-[40px] font-bold leading-[1.58] mb-4">API Reference</h2>

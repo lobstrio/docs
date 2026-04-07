@@ -3,7 +3,7 @@ import { ArrowRight, ChevronDown } from 'lucide-react';
 
 export default function HeroSection() {
   return (
-    <div className="bg-[#fff] border-b border-[#dde1ee]">
+    <div className="bg-[#fff]">
       <div className="max-w-7xl mx-auto px-6 md:px-0 pt-24 pb-[120px]">
         <div className="text-center mx-auto">
           <h1 className="text-[40px] sm:text-[60px] lg:text-[80px] font-black leading-[1.29]">

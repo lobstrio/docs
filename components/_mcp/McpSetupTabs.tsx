@@ -1,7 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import McpCopyButton from './McpCopyButton';
+import { ExternalLink } from 'lucide-react';
+import McpCopyButton from '@/components/_mcp/McpCopyButton';
+
+function ExternalLinkIcon() {
+  return <ExternalLink className="w-3.5 h-3.5 shrink-0" />;
+}
 
 interface Platform {
   name: string;
@@ -51,11 +56,11 @@ export default function McpSetupTabs({ platforms, mcpUrl }: { platforms: Platfor
       </div>
 
       {/* Server URL bar */}
-      <div className="mt-5.5 flex items-center gap-3 overflow-x-auto">
+      <div className="mt-5.5 flex items-center gap-3 ">
         <span className="text-[16px] font-normal text-[#0A2540]/60 shrink-0">Server URL</span>
-        <code className="text-[14px] font-mono text-[#0A2540] bg-white px-[14px] py-2 rounded-[8px] border border-[#DDE1EE] shrink-0">
+        <a href={mcpUrl} target="_blank" rel="noopener noreferrer" className="text-[14px] text-[#0A2540] bg-white px-[14px] py-2 rounded-[8px] border border-[#DDE1EE] shrink-0 hover:border-[#FF0000]/40 transition" style={{ fontFamily: 'var(--font-jetbrains-mono)' }}>
           {mcpUrl}
-        </code>
+        </a>
         <div className="flex gap-2 ml-auto shrink-0">
           {['Public endpoint', 'No API key', 'OAuth not required'].map((label) => (
             <span

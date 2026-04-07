@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Bot, Check } from 'lucide-react';
 import { CopyForLLMButtonProps } from '@/lib/types/layout.type';
+import { copyToClipboard } from '@/lib/utils/clipboard';
 
 export default function CopyForLLMButton({ content }: CopyForLLMButtonProps) {
   const [copied, setCopied] = useState(false);
@@ -68,24 +69,7 @@ export default function CopyForLLMButton({ content }: CopyForLLMButtonProps) {
   };
 
   const handleCopy = async () => {
-    const formattedContent = formatForLLM();
-
-    if (navigator.clipboard && window.isSecureContext) {
-      await navigator.clipboard.writeText(formattedContent);
-    } else {
-      let textArea = document.createElement("textarea");
-      textArea.value = formattedContent;
-      textArea.style.position = "fixed";
-      textArea.style.left = "-999999px";
-      textArea.style.top = "-999999px";
-      document.body.appendChild(textArea);
-      textArea.focus();
-      textArea.select();
-      // @ts-ignore
-      document.execCommand("copy");
-      textArea.remove();
-    }
-
+    await copyToClipboard(formatForLLM());
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };

@@ -46,7 +46,7 @@ export interface BodyField {
   type: string;
   required: boolean;
   description: string;
-  example?: any;
+  example?: string | number | boolean;
 }
 
 /**

@@ -2,24 +2,14 @@
 
 import { useState } from 'react';
 import { Copy, Check } from 'lucide-react';
+import { copyToClipboard } from '@/lib/utils/clipboard';
 
 export default function McpCopyButton({ text, dark }: { text: string; dark?: boolean }) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async () => {
     try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(text);
-      } else {
-        const el = document.createElement('textarea');
-        el.value = text;
-        el.style.position = 'fixed';
-        el.style.opacity = '0';
-        document.body.appendChild(el);
-        el.select();
-        document.execCommand('copy');
-        document.body.removeChild(el);
-      }
+      await copyToClipboard(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     } catch {}

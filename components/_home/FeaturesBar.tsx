@@ -14,7 +14,7 @@ type FeaturesBarProps = {
 
 export default function FeaturesBar({ features = FEATURES }: FeaturesBarProps) {
     return (
-        <div className="border-b border-[#dde1ee] bg-[#f8fafc]">
+        <div className="border-y border-[#dde1ee] bg-[#f8fafc]">
             <div className="max-w-7xl mx-auto px-6 md:px-0 py-7.5">
                 <div className="grid grid-cols-2 sm:flex sm:flex-wrap sm:justify-between items-center gap-6 sm:gap-10">
                     {features.map((item, i) => (

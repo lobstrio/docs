@@ -1,5 +1,8 @@
 import { ApiHeader, BodyField, HttpMethod } from '../types/content';
 
+const API_BASE_URL = 'https://api.lobstr.io';
+const HAS_BODY_METHODS: HttpMethod[] = ['POST', 'PUT', 'PATCH'];
+
 /**
  * Generate cURL command from endpoint data
  */
@@ -9,17 +12,14 @@ export function generateCurlExample(
   headers: ApiHeader[],
   body?: BodyField[]
 ): string {
-  const url = `https://api.lobstr.io${endpoint}`;
+  const url = `${API_BASE_URL}${endpoint}`;
   let curl = `curl -X ${method} "${url}"`;
 
   // Add headers
   if (headers.length > 0) {
     curl += ' \\\n';
     headers.forEach((header, index) => {
-      const value = header.value.includes('YOUR_API_KEY')
-        ? header.value
-        : header.value;
-      curl += `  -H "${header.key}: ${value}"`;
+      curl += `  -H "${header.key}: ${header.value}"`;
       if (index < headers.length - 1 || body) {
         curl += ' \\\n';
       }
@@ -27,8 +27,8 @@ export function generateCurlExample(
   }
 
   // Add body for POST/PUT/PATCH requests
-  if (body && body.length > 0 && ['POST', 'PUT', 'PATCH'].includes(method)) {
-    const bodyObj: Record<string, any> = {};
+  if (body && body.length > 0 && HAS_BODY_METHODS.includes(method)) {
+    const bodyObj: Record<string, unknown> = {};
     body.forEach((field) => {
       bodyObj[field.name] = field.example || `<${field.type}>`;
     });
@@ -47,21 +47,18 @@ export function generatePythonExample(
   headers: ApiHeader[],
   body?: BodyField[]
 ): string {
-  const url = `https://api.lobstr.io${endpoint}`;
+  const url = `${API_BASE_URL}${endpoint}`;
   let python = 'import requests\n\n';
 
   // Add headers
   python += 'headers = {\n';
   headers.forEach((header) => {
-    const value = header.value.includes('YOUR_API_KEY')
-      ? header.value
-      : header.value;
-    python += `    "${header.key}": "${value}",\n`;
+    python += `    "${header.key}": "${header.value}",\n`;
   });
   python += '}\n\n';
 
   // Add body for POST/PUT/PATCH requests
-  if (body && body.length > 0 && ['POST', 'PUT', 'PATCH'].includes(method)) {
+  if (body && body.length > 0 && HAS_BODY_METHODS.includes(method)) {
     python += 'data = {\n';
     body.forEach((field) => {
       const example = field.example
@@ -80,7 +77,7 @@ export function generatePythonExample(
   python += `    "${url}",\n`;
   python += `    headers=headers`;
 
-  if (body && body.length > 0 && ['POST', 'PUT', 'PATCH'].includes(method)) {
+  if (body && body.length > 0 && HAS_BODY_METHODS.includes(method)) {
     python += ',\n    json=data';
   }
 
@@ -93,7 +90,7 @@ export function generatePythonExample(
 /**
  * Format JSON response for display
  */
-export function formatJsonResponse(data: any): string {
+export function formatJsonResponse(data: unknown): string {
   return JSON.stringify(data, null, 2);
 }
 
