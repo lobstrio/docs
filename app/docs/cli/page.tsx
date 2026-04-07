@@ -259,7 +259,7 @@ export default async function CliPage() {
           <div className="flex items-center justify-between mt-4 overflow-x-auto gap-4 pb-1">
             <div className="flex items-center gap-2 shrink-0">
               <span className="text-[#0a254099]">PyPI</span>
-              <a href="https://pypi.org/project/lobstrio/" target="_blank" rel="noopener noreferrer" className="text-[14px] text-[#0A2540] border border-[#dde1ee] rounded-md px-3.5 py-2 hover:border-[#FF0000]/40 transition bg-white whitespace-nowrap">pypi.org/project/lobstrio</a>
+              <a href="https://pypi.org/project/lobstrio/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-[#0A2540] border border-[#dde1ee] rounded-md px-3.5 py-2 hover:border-[#FF0000]/40 transition bg-white whitespace-nowrap">pypi.org/project/lobstrio <ExternalLink className="w-3.5 h-3.5 shrink-0" /></a>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {['Python 3.10+', 'No key to browse', 'Cross-platform'].map((badge) => (
@@ -285,7 +285,7 @@ export default async function CliPage() {
       </section>
 
       {/* Commands */}
-      <section className="border-b border-[#dee0ea]">
+      <section>
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
         <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Reference</p>
           <h2 className="text-[40px] font-black text-center leading-[39px] mb-4">Command Reference</h2>
@@ -295,8 +295,8 @@ export default async function CliPage() {
               <span className="w-[48%] px-4 py-[11.5px] flex items-center text-[#11182799] font-semibold leading-[1.31]">Command</span>
               <span className="w-[35%] px-4 py-[11.5px] flex items-center leading-[1.31] text-[#11182799] font-semibold">Description</span>
             </div>
-            {COMMANDS.map((g) => (
-              <div key={g.group} className="border-t border-[#E5E7EB] first:border-t-0">
+            {COMMANDS.map((g, i) => (
+              <div key={g.group} className={i === 0 ? '' : 'border-t border-[#E5E7EB]'}>
                 <div className="px-4 py-2.5 bg-[#f9fafb] border-b border-[#E5E7EB] text-[13px] font-bold tracking-[0.65px]">{g.group}</div>
                 <div className="divide-y divide-[#E5E7EB]">
                   {g.cmds.map((item) => (

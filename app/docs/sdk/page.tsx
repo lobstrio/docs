@@ -203,7 +203,7 @@ export default async function SdkPage() {
   return (
     <>
       {/* Hero */}
-      <section className="py-16 md:py-20 px-4 sm:px-6">
+      <section className="py-16 md:py-20 px-4 sm:px-6 border-b border-[#dde1ee]">
         <div className="max-w-4xl mx-auto flex flex-col items-center text-center">
 
           {/* Badge */}
@@ -250,7 +250,7 @@ export default async function SdkPage() {
       </section>
 
       {/* Features */}
-      <section id="features" className="border-y border-[#dde1ee] py-16 md:py-20 px-4 sm:px-6">
+      <section id="features" className="border-b border-[#dde1ee] py-16 md:py-20 px-4 sm:px-6">
         <div className="max-w-4xl mx-auto">
           <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Features</p>
           <h2 className="text-[40px] font-black text-center leading-[39px] my-4">Features</h2>
@@ -259,7 +259,7 @@ export default async function SdkPage() {
             {FEATURES.map((f) => (
               <div key={f.title} className="bg-white rounded-[10px] px-[25px] py-[21px] flex flex-col gap-[18px] items-start transition-shadow border border-[#e5e7eb] hover:border-red-300/50 hover:shadow-[8px_8px_13px_0px_rgba(33,52,71,0.05)]">
                 <div className="w-[42px] h-[42px] rounded-lg bg-[#fff0f0] flex items-center justify-center shrink-0">
-                  <Image src={f.iconSrc} alt="" width={24} height={24} />
+                  <Image src={f.iconSrc} alt="" width={60} height={60} className='w-[23px] h-[23px]' />
                 </div>
                 <h3 className="font-bold text-xl text-[#0a2540]">{f.title}</h3>
                 <p className="text-base leading-[26px] text-[#111827]/70">{renderDescription(f.description)}</p>
@@ -331,7 +331,7 @@ export default async function SdkPage() {
           <div className="flex items-center justify-between mt-4 overflow-x-auto gap-4 pb-1">
             <div className="flex items-center gap-2 shrink-0">
               <span className="text-[#0A2540]/60">PyPI</span>
-              <a href="https://pypi.org/project/lobstrio-sdk/" target="_blank" rel="noopener noreferrer" className="text-[14px] text-[#0A2540] border border-[#dde1ee] rounded-md px-3.5 py-2 hover:border-[#FF0000]/40 transition bg-white whitespace-nowrap">pypi.org/project/lobstrio-sdk</a>
+              <a href="https://pypi.org/project/lobstrio-sdk/" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 text-[14px] text-[#0A2540] border border-[#dde1ee] rounded-md px-3.5 py-2 hover:border-[#FF0000]/40 transition bg-white whitespace-nowrap">pypi.org/project/lobstrio-sdk <ExternalLink className="w-3.5 h-3.5 shrink-0" /></a>
             </div>
             <div className="flex items-center gap-2 shrink-0">
               {['Python 3.10+', 'No key to browse', 'Cross-platform'].map((badge) => (
@@ -360,7 +360,7 @@ export default async function SdkPage() {
       </section>
 
       {/* API Reference */}
-      <section id="api-reference" className="border-b border-[#dee0ea]">
+      <section id="api-reference">
         <div className="max-w-4xl mx-auto px-6 md:px-0 py-10 md:py-[80px]">
           <p className="text-[14px] font-semibold text-[#FF0000] text-center mb-4 leading-[11px] tracking-[1px] uppercase">Reference</p>
           <h2 className="text-[40px] font-black text-center leading-[39px] my-4">API Reference</h2>
@@ -387,8 +387,8 @@ export default async function SdkPage() {
             {API_REFERENCE.map((group) => (
               <div key={group.group}>
                 <div
-                  className="bg-[#f9fafb] px-4 py-[10px] text-[13px] font-bold text-[#0a2540] tracking-[0.65px] uppercase"
-                  style={{ borderBottom: '0.8px solid #e5e7eb', borderTop: '0.8px solid #e5e7eb' }}
+                  className="bg-[#f9fafb] px-4 py-[10px] text-[13px] font-bold border-b border-[#e5e7eb] text-[#0a2540] tracking-[0.65px] uppercase"
+                  // style={{ borderBottom: '0.8px solid #e5e7eb'}}
                 >
                   {group.group}
                 </div>
