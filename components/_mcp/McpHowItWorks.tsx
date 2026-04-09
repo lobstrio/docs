@@ -6,11 +6,11 @@ import { MCP_STEPS } from './data';
 export default function McpHowItWorks() {
   return (
     <section className="border-b border-[#dee0ea]">
-      <div className="max-w-4xl mx-auto px-6 py-[80px]">
+      <div className="max-w-4xl mx-auto px-6 md:px-0 py-[80px]">
         <SectionHeader variant="compact" label="How it works" title="Up and running in 30 seconds" titleClassName="mb-16" />
 
-        <div className="grid md:grid-cols-2 gap-16 items-stretch">
-          <StepsColumn steps={MCP_STEPS} variant="compact" />
+        <div className="grid md:grid-cols-2 gap-10 items-stretch">
+          <StepsColumn steps={MCP_STEPS} variant="cards" />
 
           <div className="rounded-lg overflow-hidden h-full flex flex-col">
             <TerminalHeader />
