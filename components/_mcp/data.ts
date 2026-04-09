@@ -1,10 +1,10 @@
 import type { Step } from '@/components/_docs/StepsColumn';
 
 export const MCP_BAR_FEATURES = [
-  { iconSrc: '/images/zap_icon.svg', text: '6 Tools' },
+  { iconSrc: '/images/tools-icon.svg', text: '6 Tools' },
   { iconSrc: '/images/layer_icon.svg', text: '31 Scrapers' },
-  { iconSrc: '/images/refresh_icon.svg', text: 'Auth None' },
-  { iconSrc: '/images/lock_icon.svg', text: 'HTTP transport' },
+  { iconSrc: '/images/auth-icon.svg', text: 'Auth None' },
+  { iconSrc: '/images/http-icon.svg', text: 'HTTP transport' },
 ];
 
 export const MCP_TOOLS = [

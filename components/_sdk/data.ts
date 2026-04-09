@@ -15,9 +15,9 @@ export const SDK_FEATURES = [
 ];
 
 export const SDK_STEPS: Step[] = [
-  { n: 1, title: 'Install the package', desc: "One command, zero setup. lobstrio-sdk installs everything you need. Requires Python 3.10+. Only dependency: httpx." },
-  { n: 2, title: 'Configure your API token', desc: 'Get your token from the lobstr.io dashboard and set LOBSTR_TOKEN in your environment — or pass it directly to LobstrClient.' },
-  { n: 3, title: 'Run and collect results', desc: 'Create a squid, add tasks, start a run, and iterate results — all in Python. Use the async client for concurrent workflows.' },
+  { n: 1, title: 'Install the package', desc: "One command, zero setup. lobstrio-mcp installs everything you need to connect Claude or Cursor to your lobstr.io account." },
+  { n: 2, title: 'Configure your API token', desc: 'Get your token from the lobstr.io dashboard and set LOBSTR_TOKEN in your environment or MCP config.' },
+  { n: 3, title: 'Connect to Claude or Cursor', desc: 'Add the server to your MCP config and start asking questions about your squids, crawlers, and tasks.' },
 ];
 
 export const SDK_INSTALL_CODE = 'pip install lobstrio-sdk';

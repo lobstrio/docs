@@ -1,10 +1,10 @@
 import type { Step } from '@/components/_docs/StepsColumn';
 
 export const CLI_BAR_FEATURES = [
-  { iconSrc: '/images/zap_icon.svg', text: '5 Command Groups' },
+  { iconSrc: '/images/command-icon.svg', text: '5 Command Groups' },
   { iconSrc: '/images/layer_icon.svg', text: '50+ Crawlers' },
-  { iconSrc: '/images/refresh_icon.svg', text: 'Python 3.10+' },
-  { iconSrc: '/images/lock_icon.svg', text: 'CSV & JSON Export' },
+  { iconSrc: '/images/python-icon.svg', text: 'Python 3.10+' },
+  { iconSrc: '/images/svg-json-icon.svg', text: 'CSV & JSON Export' },
 ];
 
 export const CLI_FEATURES = [

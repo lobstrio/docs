@@ -32,6 +32,10 @@
     border-color: var(--color-border);
   }
 
+  section {
+    cursor: default;
+  }
+
   body {
     background-color: var(--color-background);
     color: var(--color-text-primary);
