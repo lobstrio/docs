@@ -10,6 +10,6 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "params": {
       "scrape_comments": true,
       "scrape_reactions": true,
-      "email": false
+      "email_enrichment": false
     }
   }'

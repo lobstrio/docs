@@ -64,7 +64,7 @@
             "description": "Language for extracted reviews"
           },
           {
-            "param": "**functions.short_link**",
+            "param": "**functions.get_short_review_link**",
             "type": "boolean",
             "default": "false",
             "description": "Collect shortened review links (additional costs may apply)"
@@ -143,7 +143,11 @@
       },
       {
         "type": "warning",
-        "content": "Enabling `functions.short_link` may incur additional costs. Only enable if you need shortened URLs."
+        "content": "Enabling `functions.get_short_review_link` may incur additional costs. Only enable if you need shortened URLs."
+      },
+      {
+        "type": "note",
+        "content": "**Backward compatibility:** The old function name `short_link` is still accepted but deprecated. Migrate to `get_short_review_link`."
       },
       {
         "type": "note",

@@ -7,6 +7,6 @@
   "params": {
     "scrape_comments": true,
     "scrape_reactions": true,
-    "email": false
+    "email_enrichment": false
   }
 }

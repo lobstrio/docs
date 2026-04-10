@@ -405,7 +405,7 @@
             "example": "null"
           },
           {
-            "path": "functions.annonce_details.filling_date",
+            "path": "functions.get_annonce_details.filling_date",
             "type": "string",
             "description": "When detail enrichment ran",
             "example": "\"07/16/2025, 08:40:50 +0200\""
@@ -454,7 +454,7 @@
     "proTips": [
       {
         "type": "tip",
-        "content": "Use `latitude` and `longitude` fields (available when `annonce_details` is enabled) to plot properties on a map."
+        "content": "Use `latitude` and `longitude` fields (available when `get_annonce_details` is enabled) to plot properties on a map."
       },
       {
         "type": "tip",

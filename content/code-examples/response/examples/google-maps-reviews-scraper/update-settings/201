@@ -7,7 +7,7 @@
     "max_results": 20,
     "language": "English (United States)",
     "functions": {
-      "short_link": false
+      "get_short_review_link": false
     }
   },
   "to_complete": false,

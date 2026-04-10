@@ -11,9 +11,9 @@
     "language": "English (United States)",
     "max_results": 20,
     "functions": {
-      "images": false,
-      "details": false,
-      "collect_contacts": false
+      "fetch_business_images": false,
+      "collect_business_details": false,
+      "extract_emails_from_website": false
     }
   },
   "download_url": "https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/lobstrc106a44a98044ef18acc59986ae10967/eebce7802e7740979a0b8450de10c99e.csv.csv?...",

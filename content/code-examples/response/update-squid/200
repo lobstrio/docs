@@ -5,9 +5,9 @@
   "params": {
     "max_results": 150,
     "functions": {
-      "collect_contacts": true,
-      "details": true,
-      "images": false
+      "extract_emails_from_website": true,
+      "collect_business_details": true,
+      "fetch_business_images": false
     },
     "ratings": "4.0+",
     "country": "United States",

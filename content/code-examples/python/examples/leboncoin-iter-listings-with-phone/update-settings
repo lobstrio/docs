@@ -18,7 +18,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
         "params": {
             "fetch_since": None,
             "functions": {
-                "phone": True  # Enable phone number extraction
+                "get_phone_numbers": True  # Enable phone number extraction
             },
             "max_pages": 99,
             "fetch_since": None,

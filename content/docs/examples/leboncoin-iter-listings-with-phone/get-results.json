@@ -28,7 +28,7 @@
             "example": "true"
           },
           {
-            "path": "functions.phone.filling_date",
+            "path": "functions.get_phone_numbers.filling_date",
             "type": "string",
             "description": "When the phone was extracted",
             "example": "\"07/04/2025, 06:08:09 +0200\""
@@ -227,7 +227,7 @@
     "proTips": [
       {
         "type": "tip",
-        "content": "The `phone` field is only populated when `functions.phone` is enabled and the seller has phone contact enabled."
+        "content": "The `phone` field is only populated when `functions.get_phone_numbers` is enabled and the seller has phone contact enabled."
       },
       {
         "type": "tip",

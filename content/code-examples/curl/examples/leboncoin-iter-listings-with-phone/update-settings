@@ -9,7 +9,7 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "no_line_breaks": true,
     "params": {
       "functions": {
-        "phone": true
+        "get_phone_numbers": true
       },
       "max_pages": 99,
       "fetch_since": null,

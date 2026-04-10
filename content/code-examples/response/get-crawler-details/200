@@ -43,11 +43,11 @@
       "description": "Google Maps restricts search results to a maximum of 200. To access a larger dataset, consider utilizing our URL generator."
     },
     {
-      "name": "collect_contacts",
+      "name": "extract_emails_from_website",
       "type": "boolean",
       "level": "squid",
       "default": true,
-      "display": "Collect Emails",
+      "display": "Extract Emails From Website",
       "function": true,
       "priority": 3,
       "required": false,
@@ -56,11 +56,11 @@
       "credits_per_function": 10
     },
     {
-      "name": "details",
+      "name": "collect_business_details",
       "type": "boolean",
       "level": "squid",
       "default": false,
-      "display": "Collect Details",
+      "display": "Collect Business Details",
       "function": true,
       "priority": 1,
       "required": false,

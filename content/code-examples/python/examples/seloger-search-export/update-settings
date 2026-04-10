@@ -15,7 +15,7 @@ payload = {
     "no_line_breaks": True,
     "params": {
         "functions": {
-            "annonce_details": True  # Fetch full descriptions and coordinates
+            "get_annonce_details": True  # Fetch full descriptions and coordinates
         },
         "max_pages": 4  # Limit to 4 pages of results
     }

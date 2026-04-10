@@ -6,7 +6,7 @@
   "no_line_breaks": true,
   "params": {
     "functions": {
-      "annonce_details": true
+      "get_annonce_details": true
     },
     "max_pages": 4
   }

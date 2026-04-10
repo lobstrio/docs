@@ -16,7 +16,7 @@ payload = {
     "params": {
         "scrape_comments": True,    # Scrape users who commented
         "scrape_reactions": True,   # Scrape users who reacted/liked
-        "email": False              # Disable email enrichment
+        "email_enrichment": False              # Disable email enrichment
     }
 }
 

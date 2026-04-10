@@ -22,7 +22,7 @@
       "facebook": null,
       "full_address": "30 boulevard Capucines 75009 Paris",
       "functions": {
-        "results_details": {
+        "collect_additional_details": {
           "filling_date": "07/28/2025, 10:58:20 +0200"
         }
       },
