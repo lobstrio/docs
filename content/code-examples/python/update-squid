@@ -13,9 +13,9 @@ payload = {
     "params": {
         "max_results": 150,
         "functions": {
-            "collect_contacts": True,
-            "details": True,
-            "images": False
+            "extract_emails_from_website": True,
+            "collect_business_details": True,
+            "fetch_business_images": False
         },
         "ratings": "4.0+",
         "country": "United States",

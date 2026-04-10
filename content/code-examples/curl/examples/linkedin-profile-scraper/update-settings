@@ -3,6 +3,6 @@ curl -X PATCH "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID" \
   -H "Content-Type: application/json" \
   -d '{
     "settings": {
-      "email": true
+      "email_enrichment": true
     }
   }'

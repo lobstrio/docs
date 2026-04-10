@@ -91,7 +91,7 @@
           {
             "path": "email",
             "type": "string",
-            "description": "Contact email address (if collect_contacts enabled)",
+            "description": "Contact email address (if collect_emails_from_website enabled)",
             "example": "\"contact@example.com\""
           },
           {
@@ -206,13 +206,13 @@
             "path": "functions",
             "type": "object|null",
             "description": "Function execution metadata including filling_date",
-            "example": "{\"results_details\": {\"filling_date\": \"07/28/2025, 10:58:20 +0200\"}}"
+            "example": "{\"collect_additional_details\": {\"filling_date\": \"07/28/2025, 10:58:20 +0200\"}}"
           }
         ]
       },
       "businessRegistration": {
         "title": "French Business Registration Numbers",
-        "content": "The scraper collects official French business identifiers when `functions.results_details` is enabled:",
+        "content": "The scraper collects official French business identifiers when `functions.collect_additional_details` is enabled:",
         "list": [
           "**SIRET** (14 digits): Unique identifier for each business establishment",
           "**SIREN** (9 digits): Company-level registration number (first 9 digits of SIRET)",

@@ -10,6 +10,6 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "params": {
       "max_pages": 50,
       "fetch_since": "7d",
-      "annonce_details": true
+      "get_listing_details": true
     }
   }'

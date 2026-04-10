@@ -98,7 +98,7 @@
       },
       {
         "type": "note",
-        "content": "Phone extraction requires enabling `functions.phone` in the settings and incurs extra credits."
+        "content": "Phone extraction requires enabling `functions.get_phone_numbers` in the settings and incurs extra credits."
       }
     ]
   },

@@ -70,17 +70,17 @@
         ],
         "rows": [
           {
-            "func": "**collect_contacts**",
+            "func": "**extract_emails_from_website**",
             "type": "boolean",
             "description": "Visit business website to extract email, Facebook, Instagram, and additional phone"
           },
           {
-            "func": "**images**",
+            "func": "**fetch_business_images**",
             "type": "boolean",
             "description": "Collect all image URLs from the Google Place page"
           },
           {
-            "func": "**details**",
+            "func": "**collect_business_details**",
             "type": "boolean",
             "description": "Collect additional metadata like plus_code, poi, health, and last_opening_hours_updated_at"
           }
@@ -105,7 +105,11 @@
     "proTips": [
       {
         "type": "warning",
-        "content": "Enabling `collect_contacts`, `images`, or `details` may incur additional credits."
+        "content": "Enabling `extract_emails_from_website`, `fetch_business_images`, or `collect_business_details` may incur additional credits."
+      },
+      {
+        "type": "note",
+        "content": "**Backward compatibility:** The old function names `collect_contacts`, `images`, and `details` are still accepted but deprecated. Migrate to the new names listed above."
       },
       {
         "type": "tip",

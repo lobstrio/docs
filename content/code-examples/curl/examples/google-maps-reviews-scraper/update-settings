@@ -13,7 +13,7 @@ curl -X POST "https://api.lobstr.io/v1/squids/b6ab0f03b02e472a8e2ab0b16b4fdd0f" 
       "max_results": 20,
       "language": "English (United States)",
       "functions": {
-        "short_link": false
+        "get_short_review_link": false
       }
     }
   }'

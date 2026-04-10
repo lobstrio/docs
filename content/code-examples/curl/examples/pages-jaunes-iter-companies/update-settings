@@ -9,8 +9,8 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "no_line_breaks": true,
     "params": {
       "functions": {
-        "results_details": true,
-        "collect_contacts": true
+        "collect_additional_details": true,
+        "collect_emails_from_website": true
       },
       "max_pages": 3
     }

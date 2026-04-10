@@ -105,17 +105,17 @@
       "is_params": false
     },
     "functions": {
-      "images": {
+      "fetch_business_images": {
         "sort": 1,
         "default": false,
         "credits_per_function": 10
       },
-      "details": {
+      "collect_business_details": {
         "sort": 0,
         "default": false,
         "credits_per_function": 10
       },
-      "collect_contacts": {
+      "extract_emails_from_website": {
         "sort": 2,
         "default": true,
         "credits_per_function": 10

@@ -21,7 +21,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
             "max_results": 20,
             "language": "English (United States)",
             "functions": {
-                "short_link": False
+                "get_short_review_link": False
             }
         }
     }

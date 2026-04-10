@@ -150,7 +150,7 @@
           {
             "path": "short_review_link",
             "type": "string",
-            "description": "Shortened URL (requires functions.short_link = true)",
+            "description": "Shortened URL (requires functions.get_short_review_link = true)",
             "example": "\"https://maps.app.goo.gl/...\""
           },
           {

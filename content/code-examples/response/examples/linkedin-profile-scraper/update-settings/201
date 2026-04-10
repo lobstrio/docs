@@ -2,7 +2,7 @@
   "id": "YOUR_SQUID_ID",
   "crawler": "linkedin-profile-scraper",
   "settings": {
-    "email": true
+    "email_enrichment": true
   },
   "updated_at": "2024-01-15T10:35:00Z"
 }

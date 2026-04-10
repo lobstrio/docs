@@ -9,7 +9,7 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "to_complete": false,
     "params": {
       "functions": {
-        "email": true
+        "email_enrichment": true
       },
       "profiles_per_page": 25,
       "max_pages": 100,

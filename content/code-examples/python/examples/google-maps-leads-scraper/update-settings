@@ -17,9 +17,9 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
             "ratings": "Any rating",
             "language": "English (United States)",
             "functions": {
-                "images": True,
-                "details": True,
-                "collect_contacts": True
+                "fetch_business_images": True,
+                "collect_business_details": True,
+                "extract_emails_from_website": True
             },
             "max_results": 200
         },

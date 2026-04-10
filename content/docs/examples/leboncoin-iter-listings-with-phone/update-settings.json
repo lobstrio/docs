@@ -34,7 +34,7 @@
         ],
         "rows": [
           {
-            "param": "**functions.phone**",
+            "param": "**functions.get_phone_numbers**",
             "type": "boolean",
             "default": "false",
             "description": "Extract phone numbers from listings (incurs extra credits per listing)"
@@ -165,7 +165,7 @@
     "proTips": [
       {
         "type": "warning",
-        "content": "Enabling `functions.phone` adds extra requests per listing, significantly increasing run time and credit usage."
+        "content": "Enabling `functions.get_phone_numbers` adds extra requests per listing, significantly increasing run time and credit usage."
       },
       {
         "type": "tip",
@@ -174,6 +174,10 @@
       {
         "type": "note",
         "content": "Phone numbers are only available when the seller has enabled phone contact on their listing."
+      },
+      {
+        "type": "note",
+        "content": "**Backward compatibility:** The old function name `phone` is still accepted but deprecated. Migrate to `get_phone_numbers`."
       }
     ]
   },

@@ -15,7 +15,7 @@ payload = {
     "to_complete": False,
     "params": {
         "functions": {
-            "email": True  # Enable email enrichment (extra credits)
+            "email_enrichment": True  # Enable email enrichment (extra credits)
         },
         "profiles_per_page": 25,  # Max: 25
         "max_pages": 100,         # Max: 100

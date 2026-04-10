@@ -182,8 +182,8 @@
         ]
       },
       "detailFields": {
-        "title": "Detailed Information (requires annonce_details)",
-        "content": "These fields are only populated when `annonce_details` is enabled.",
+        "title": "Detailed Information (requires get_listing_details)",
+        "content": "These fields are only populated when `get_listing_details` is enabled.",
         "fields": [
           {
             "path": "equipment_list",

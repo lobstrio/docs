@@ -34,7 +34,7 @@
         ],
         "rows": [
           {
-            "param": "**functions.email**",
+            "param": "**functions.email_enrichment**",
             "type": "boolean",
             "default": "false",
             "description": "Enable email enrichment using lobstr.io's service (incurs extra credits)"
@@ -123,7 +123,7 @@
     "proTips": [
       {
         "type": "warning",
-        "content": "Enabling `functions.email` incurs additional credit costs for email enrichment."
+        "content": "Enabling `functions.email_enrichment` incurs additional credit costs for email enrichment."
       },
       {
         "type": "tip",
@@ -132,6 +132,10 @@
       {
         "type": "note",
         "content": "Sales Navigator limits search results to 2,500 leads. Use more specific filters to access different lead segments."
+      },
+      {
+        "type": "note",
+        "content": "**Backward compatibility:** The old function name `email` is still accepted but deprecated. Migrate to `email_enrichment`."
       }
     ]
   },

@@ -236,7 +236,7 @@
       },
       {
         "type": "note",
-        "content": "Fields like `email`, `facebook`, `instagram` are only populated if `functions.collect_contacts` is enabled."
+        "content": "Fields like `email`, `facebook`, `instagram` are only populated if `functions.extract_emails_from_website` is enabled."
       }
     ]
   },

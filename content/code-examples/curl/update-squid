@@ -8,9 +8,9 @@ curl -X POST "https://api.lobstr.io/v1/squids/e86b29c032024b66aff529e1d43c2bd7" 
     "params": {
       "max_results": 150,
       "functions": {
-        "collect_contacts": true,
-        "details": true,
-        "images": false
+        "extract_emails_from_website": true,
+        "collect_business_details": true,
+        "fetch_business_images": false
       },
       "ratings": "4.0+",
       "country": "United States",

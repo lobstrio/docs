@@ -40,7 +40,7 @@
             "description": "Maximum number of search result pages to crawl"
           },
           {
-            "param": "**functions.annonce_details**",
+            "param": "**functions.get_annonce_details**",
             "type": "boolean",
             "default": "false",
             "description": "Visit each listing's detail page to fetch full description, coordinates (lat/lng), and extra attributes"
@@ -111,15 +111,19 @@
     "proTips": [
       {
         "type": "tip",
-        "content": "Enable `functions.annonce_details` to get full property descriptions and exact GPS coordinates."
+        "content": "Enable `functions.get_annonce_details` to get full property descriptions and exact GPS coordinates."
       },
       {
         "type": "warning",
-        "content": "Enabling `annonce_details` increases run time as each listing requires an additional HTTP request."
+        "content": "Enabling `get_annonce_details` increases run time as each listing requires an additional HTTP request."
       },
       {
         "type": "note",
         "content": "Use `max_pages` to limit the scope of large searches and control credit usage."
+      },
+      {
+        "type": "note",
+        "content": "**Backward compatibility:** The old function name `annonce_details` is still accepted but deprecated. Migrate to `get_annonce_details`."
       }
     ]
   },

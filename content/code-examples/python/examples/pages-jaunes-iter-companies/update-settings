@@ -17,8 +17,8 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
         "no_line_breaks": True,
         "params": {
             "functions": {
-                "results_details": True,  # Collect SIRET, SIREN, NAF codes
-                "collect_contacts": True   # Collect email addresses
+                "collect_additional_details": True,  # Collect SIRET, SIREN, NAF codes
+                "collect_emails_from_website": True   # Collect email addresses
             },
             "max_pages": 3
         }
@@ -28,5 +28,5 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
 data = response.json()
 print(f"Squid updated: {data['name']}")
 print(f"Max pages: {data['params']['max_pages']}")
-print(f"Results details: {data['params']['functions']['results_details']}")
-print(f"Collect contacts: {data['params']['functions']['collect_contacts']}")
+print(f"Collect additional details: {data['params']['functions']['collect_additional_details']}")
+print(f"Collect emails from website: {data['params']['functions']['collect_emails_from_website']}")

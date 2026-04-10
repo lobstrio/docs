@@ -16,7 +16,7 @@ payload = {
     "params": {
         "max_pages": 50,           # Limit pages to scrape
         "fetch_since": "7d",          # Only listings from last 24 hours
-        "annonce_details": True    # Fetch detailed listing info
+        "get_listing_details": True    # Fetch detailed listing info
     }
 }
 

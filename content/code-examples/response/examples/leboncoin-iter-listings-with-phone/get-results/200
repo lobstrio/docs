@@ -37,7 +37,7 @@
       },
       "first_publication_date": "2025-03-01T09:32:00Z",
       "functions": {
-        "phone": {
+        "get_phone_numbers": {
           "filling_date": "07/04/2025, 06:16:21 +0200"
         }
       },

@@ -64,7 +64,7 @@
             "description": "Deprecated — use `fetch_since` instead"
           },
           {
-            "param": "**annonce_details**",
+            "param": "**get_listing_details**",
             "type": "boolean",
             "default": "true",
             "description": "Fetch detailed listing info (equipment, seller details)"
@@ -118,7 +118,7 @@
       },
       "detailsOption": {
         "title": "Listing Details Option",
-        "content": "When `annonce_details` is enabled, the scraper visits each listing page to extract:\n\n- Full equipment list and options\n- Seller details (address, company info)\n- Technical specifications (CO2, power, fuel consumption)\n- Vehicle history links\n\n**Pricing:** 4 credits per listing when details are enabled."
+        "content": "When `get_listing_details` is enabled, the scraper visits each listing page to extract:\n\n- Full equipment list and options\n- Seller details (address, company info)\n- Technical specifications (CO2, power, fuel consumption)\n- Vehicle history links\n\n**Pricing:** 4 credits per listing when details are enabled."
       },
       "hoursBack": {
         "title": "Hours Back Filter",
@@ -143,15 +143,19 @@
     "proTips": [
       {
         "type": "tip",
-        "content": "Set `annonce_details: false` if you only need basic listing data to reduce costs."
+        "content": "Set `get_listing_details: false` if you only need basic listing data to reduce costs."
       },
       {
         "type": "warning",
-        "content": "Enabling `annonce_details` costs 4 additional credits per listing. Plan accordingly for large scrapes."
+        "content": "Enabling `get_listing_details` costs 4 additional credits per listing. Plan accordingly for large scrapes."
       },
       {
         "type": "tip",
         "content": "Use `fetch_since: 12` for twice-daily monitoring to catch new listings without duplicates."
+      },
+      {
+        "type": "note",
+        "content": "**Backward compatibility:** The old parameter name `annonce_details` is still accepted but deprecated. Migrate to `get_listing_details`."
       }
     ]
   },

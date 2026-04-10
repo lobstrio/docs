@@ -4,7 +4,7 @@
   "params": {
     "fetch_since": null,
     "functions": {
-      "phone": true
+      "get_phone_numbers": true
     },
     "max_pages": 99,
     "fetch_since": null,

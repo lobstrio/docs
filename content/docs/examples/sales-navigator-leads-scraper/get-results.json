@@ -96,7 +96,7 @@
           {
             "path": "email",
             "type": "string | null",
-            "description": "Enriched email address (if functions.email enabled)",
+            "description": "Enriched email address (if functions.email_enrichment enabled)",
             "example": "\"john.smith@example.com\""
           },
           {
@@ -232,7 +232,7 @@
         "content": "Additional enrichment and scraping metadata:",
         "fields": [
           {
-            "path": "functions.email.filling_date",
+            "path": "functions.email_enrichment.filling_date",
             "type": "string",
             "description": "When email enrichment was performed",
             "example": "\"06/20/2025, 12:16:58 +0200\""
@@ -303,7 +303,7 @@
       },
       {
         "type": "tip",
-        "content": "The `email` field is only populated when `functions.email` is enabled in settings."
+        "content": "The `email` field is only populated when `functions.email_enrichment` is enabled in settings."
       },
       {
         "type": "note",

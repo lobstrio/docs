@@ -10,7 +10,7 @@ headers = {
 }
 data = {
     "settings": {
-        "email": True
+        "email_enrichment": True
     }
 }
 

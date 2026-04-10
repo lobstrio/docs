@@ -37,7 +37,7 @@
       "estate_type_id": 7,
       "features": null,
       "functions": {
-        "annonce_details": {
+        "get_annonce_details": {
           "filling_date": "07/16/2025, 08:40:50 +0200"
         }
       },
