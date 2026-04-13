@@ -94,7 +94,7 @@
         "fields": [
           {"path": "params.max_results", "type": "integer", "description": "Maximum results per task. null = unlimited.", "example": "200"},
           {"path": "params.max_unique_results_per_run", "type": "integer", "description": "Maximum unique results across all tasks in a run. null = unlimited.", "example": "null"},
-          {"path": "params.fetch_since", "type": "string", "description": "Stop scraping when items older than this threshold are reached. Accepts a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD).", "example": "\"7d\""},
+          {"path": "params.fetch_since", "type": "string", "description": "Stop scraping when items older than this threshold are reached. Accepts a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM).", "example": "\"7d\""},
           {"path": "params.hours_back", "type": "integer", "description": "Deprecated — stop scraping when items older than N hours are reached. Use fetch_since instead.", "example": "null"},
           {"path": "params.max_date", "type": "string", "description": "Deprecated — stop scraping when items older than this date are reached. Use fetch_since instead.", "example": "null"},
           {"path": "params.functions", "type": "object", "description": "Optional add-on features. Each key is a boolean toggle. Enabling incurs extra credits per row.", "example": "{\"details\": true}"}
@@ -286,7 +286,7 @@
       },
       {
         "type": "note",
-        "content": "Use `fetch_since` to stop scraping when older items are reached. It supports both relative durations (24h, 7d, 2w) and absolute dates (YYYY-MM-DD). Replaces the older `hours_back` and `max_date` parameters."
+        "content": "Use `fetch_since` to stop scraping when older items are reached. It supports both relative durations (24h, 7d, 2w) and absolute dates (YYYY-MM-DD HH:MM). Replaces the older `hours_back` and `max_date` parameters."
       }
     ]
   },
