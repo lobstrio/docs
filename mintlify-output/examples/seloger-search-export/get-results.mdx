@@ -1,0 +1,260 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from SeLoger Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **SeLoger Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="address" type="string">
+  Full address of the property. Example: `Issy-les-Moulineaux`
+</ResponseField>
+
+<ResponseField name="is_furnished" type="boolean">
+  Whether the property is furnished. Example: `false`
+</ResponseField>
+
+<ResponseField name="agency_contact_name" type="string">
+  Name of the agency contact person. Example: `GEMALIA IMMOBILIER`
+</ResponseField>
+
+<ResponseField name="agency_has_email" type="boolean">
+  Whether the agency has a listed email address. Example: `true`
+</ResponseField>
+
+<ResponseField name="agency_id" type="integer">
+  Unique identifier for the agency on SeLoger. Example: `440227`
+</ResponseField>
+
+<ResponseField name="agency_img_url" type="string">
+  URL of the agency's logo or profile image. Example: `https://v.seloger.com/s/width/150/logos/0/z/x/0/0zx09bbylr0bhqsjhjdfui8t37znwvg2nyozrq5s6.jpg`
+</ResponseField>
+
+<ResponseField name="agency_link" type="string">
+  URL to the agency's profile page on SeLoger. Example: `http://www.gemalia.fr/`
+</ResponseField>
+
+<ResponseField name="agency_page" type="string">
+  URL to the agency's listings page on SeLoger. Example: `https://www.seloger.com/professionnels/agences-immobilieres/saint-maur-des-fosses-94100/agence-24353/`
+</ResponseField>
+
+<ResponseField name="agency_phone_number" type="string">
+  Phone number of the agency. Example: `06 08 16 60 22`
+</ResponseField>
+
+<ResponseField name="annonce_id" type="integer">
+  Unique identifier for the listing on SeLoger. Example: `228317007`
+</ResponseField>
+
+<ResponseField name="area" type="float">
+  Living surface area of the property in square metres. Example: `85.0`
+</ResponseField>
+
+<ResponseField name="business_unit" type="integer">
+  Business unit or brand within the SeLoger group. Example: `1`
+</ResponseField>
+
+<ResponseField name="collected_at" type="timestamp">
+  Date and time this listing was scraped. Example: `20/03/2026 07:59`
+</ResponseField>
+
+<ResponseField name="district" type="string">
+  District or neighborhood of the property. Example: `Chemins des Vignes`
+</ResponseField>
+
+<ResponseField name="estate_type" type="string">
+  Type of property (e.g. apartment, house, land). Example: `Appartement`
+</ResponseField>
+
+<ResponseField name="estate_type_id" type="integer">
+  Internal identifier for the property type. Example: `1`
+</ResponseField>
+
+<ResponseField name="is_exclusive" type="boolean">
+  Whether the listing is an exclusive mandate on SeLoger. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_expired" type="boolean">
+  Whether the listing has expired on SeLoger. Example: `false`
+</ResponseField>
+
+<ResponseField name="monthly_price" type="integer">
+  Monthly rental price (for rental listings). Example: `3056`
+</ResponseField>
+
+<ResponseField name="native_id" type="integer">
+  Native SeLoger identifier for the listing. Example: `30440227`
+</ResponseField>
+
+<ResponseField name="nature" type="integer">
+  Nature or category of the real estate transaction. Example: `1`
+</ResponseField>
+
+<ResponseField name="pictures" type="string">
+  List of property photo URLs. Example: `https://v.seloger.com/s/crop/341x256/visuels/1/e/p/x/1epxz2k12bzzwgw41dwm9wwszojxzph451esiey4z.jpg, https://v.seloger.com/s/crop/341x256/visuels/1/j/1/c/1j1canrp4t6rva0z51irnohff9wuxwt23btnwq4pf.jpg, https://v.seloger.com/s/crop/341x256/visuels/0/b/8/f/0b8f3yzgk7hk3gu5kd2vfrb09fhlc0uixzoakxf0z.jpg, https://v.seloger.com/s/crop/341x256/visuels/1/5/z/1/15z1jdk5hdb1n3e1xszdylitifp5d2smcfa03f49b.jpg, https://v.seloger.com/s/crop/341x256/visuels/0/p/5/x/0p5xuawv6mwznffgf1gcx01wkwiowut9pvh10vpee.jpg`
+</ResponseField>
+
+<ResponseField name="picture_count" type="integer">
+  Total number of photos in the listing. Example: `33`
+</ResponseField>
+
+<ResponseField name="position" type="integer">
+  Position of the listing in the search results
+</ResponseField>
+
+<ResponseField name="postal_code" type="string">
+  French postal code of the property location. Example: `92130`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listed price of the property. Example: `600000`
+</ResponseField>
+
+<ResponseField name="price_per_meter" type="integer">
+  Price per square metre. Example: `7059`
+</ResponseField>
+
+<ResponseField name="pricing_price_note" type="string">
+  Additional pricing note or label (e.g. fees included)
+</ResponseField>
+
+<ResponseField name="publication_id" type="integer">
+  Unique publication identifier for the listing. Example: `30440227`
+</ResponseField>
+
+<ResponseField name="dpe" type="string">
+  Energy Performance Diagnostic (DPE) class of the property (A to G). Example: `E`
+</ResponseField>
+
+<ResponseField name="electricity_consumption" type="integer">
+  Electricity consumption figure from the DPE. Example: `314`
+</ResponseField>
+
+<ResponseField name="ges" type="string">
+  Greenhouse gas emissions (GES) class of the property (A to G). Example: `B`
+</ResponseField>
+
+<ResponseField name="gas_emissions" type="integer">
+  Gas emissions value from the GES diagnostic. Example: `10`
+</ResponseField>
+
+<ResponseField name="features" type="string">
+  Features and attributes of the property. Example: `Dispo le 30/04/2025, 2 terrasses, Jardin, Exposition Nord/Sud, Sans vis-à-vis, Calme, Belle vue, Cave, Interphone, Cuisine séparée, Salle de bain (baignoire), Salle d'eau (douche), Toilettes, Toilettes séparées, Salle à manger 15 m², Placards / rangements, Parquet, Chauffage : radiateur`
+</ResponseField>
+
+<ResponseField name="rooms" type="integer">
+  Total number of rooms in the property. Example: `5`
+</ResponseField>
+
+<ResponseField name="short_description" type="string">
+  Short description or tagline of the listing on SeLoger. Example: `Appartement à vendre - Appartement/maison duplex 85m² rez de jardin avec 2 terrasses intérieures - face au jardin botanique - endroit très arboré - cuisine américaine avec salle à manger - salon - buanderie - salle de bain - bureau - wc au rez de chaussée - A l'étage suite parentale avec salle d'eau, une chambre et un espace jeu ou télé.`
+</ResponseField>
+
+<ResponseField name="tags" type="string">
+  Tags or labels associated with the listing on SeLoger. Example: `5 pièces, 3 chambres, 85 m², Étage 0/3, Terrasse, Jardin`
+</ResponseField>
+
+<ResponseField name="transaction_type" type="string">
+  Type of transaction (sale or rental). Example: `2`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on SeLoger. Example: `https://www.seloger.com/annonces/achat/appartement/issy-les-moulineaux-92/chemins-des-vignes/228317007.htm`
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  URL of the property video tour. Example: `https://youtu.be/_gBRTO5yrRc?si=drgHQqjmrzHiWJKZ`
+</ResponseField>
+
+<ResponseField name="virtual_visit_url" type="string">
+  URL to the virtual visit or 3D tour of the property
+</ResponseField>
+
+<ResponseField name="latitude" type="float">
+  Latitude coordinate of the property. Example: `48.817728`
+</ResponseField>
+
+<ResponseField name="longitude" type="float">
+  Longitude coordinate of the property. Example: `2.255243`
+</ResponseField>
+
+<ResponseField name="coownership_annual_charges" type="integer">
+  Annual co-ownership charges (charges de copropriété). Example: `2300`
+</ResponseField>
+
+<ResponseField name="coownership_number_of_lots" type="integer">
+  Number of lots in the co-ownership building. Example: `6`
+</ResponseField>
+
+<ResponseField name="coownership_is_syndic_procedure" type="boolean">
+  Whether the co-ownership has an ongoing legal syndic procedure. Example: `false`
+</ResponseField>
+
+<ResponseField name="additional_pictures" type="string">
+  Additional property photos beyond the main listing photos. Example: `https://v.seloger.com/s/cdn/x/visuels/1/e/p/x/1epxz2k12bzzwgw41dwm9wwszojxzph451esiey4z.jpg, https://v.seloger.com/s/cdn/x/visuels/1/j/1/c/1j1canrp4t6rva0z51irnohff9wuxwt23btnwq4pf.jpg, https://v.seloger.com/s/cdn/x/visuels/0/b/8/f/0b8f3yzgk7hk3gu5kd2vfrb09fhlc0uixzoakxf0z.jpg, https://v.seloger.com/s/cdn/x/visuels/1/5/z/1/15z1jdk5hdb1n3e1xszdylitifp5d2smcfa03f49b.jpg, https://v.seloger.com/s/cdn/x/visuels/0/p/5/x/0p5xuawv6mwznffgf1gcx01wkwiowut9pvh10vpee.jpg`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the property listing on SeLoger. Example: `Vente Appartement 5 pièces Issy-les-Moulineaux - Appartement F5/T5/5 pièces 85 m²`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full description text of the listing on SeLoger. Example: `Appartement/maison duplex 85m² rez de jardin avec 2 terrasses intérieures - face au jardin botanique - endroit très arboré - cuisine américaine avec salle à manger - salon - buanderie - salle de bain - bureau - wc au rez de chaussée - A l'étage suite parentale (chambre avec salle d'eau) une chambre et un espace jeu ou télé - cagibis extérieurs - video disponible`
+</ResponseField>
+
+<ResponseField name="ref" type="string">
+  Agency or seller reference number for the listing. Example: `5p issy les moulineaux jardin botanique`
+</ResponseField>
+
+<ResponseField name="bedrooms_count" type="integer">
+  Number of bedrooms in the property. Example: `3`
+</ResponseField>
+
+<ResponseField name="main_picture" type="string">
+  URL of the main listing photo. Example: `https://v.seloger.com/s/crop/414x414/visuels/1/e/p/x/1epxz2k12bzzwgw41dwm9wwszojxzph451esiey4z.jpg`
+</ResponseField>
+
+<ResponseField name="insee_code" type="integer">
+  French INSEE geographic code for the municipality
+</ResponseField>
+
+<ResponseField name="highlighting_level" type="integer">
+  Level of paid highlighting or promotion on SeLoger. Example: `1`
+</ResponseField>
+
+<ResponseField name="price_decrease_percent" type="string">
+  Percentage by which the price has been reduced
+</ResponseField>
+
+<ResponseField name="is_redirected" type="boolean">
+  Whether the listing URL is redirected to another page
+</ResponseField>
+
+<ResponseField name="contact_email" type="boolean">
+  Contact email address for the listing. Example: `true`
+</ResponseField>
+
+<ResponseField name="contact_is_private_seller" type="boolean">
+  Whether the seller is a private individual (not an agency). Example: `false`
+</ResponseField>

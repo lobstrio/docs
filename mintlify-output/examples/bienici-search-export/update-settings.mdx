@@ -1,0 +1,131 @@
+---
+title: "Update Settings"
+description: "Configure Bien'Ici Search Export scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your Bien'Ici Search Export squid settings. Control pagination limits, filter by posting date, and manage sponsored listings collection.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **max_results** | integer | 50 | Maximum number of results to collect per search URL (max: 2400) |
+| **max_pages** | integer | 100 | Last page the crawler will visit during a run |
+| **max_unique_results_per_run** | integer | null | Maximum unique results retrieved across all tasks in a run. Leave empty for unlimited |
+| **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `modification_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM) |
+| **hours_back** | integer | null | Deprecated — use `fetch_since` instead |
+| **collect_ads** | boolean | false | If false, will NOT collect sponsored listings |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping threads (default: 1, max: 20) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Tip>
+  Use `fetch_since` to only collect recently modified listings - perfect for monitoring new properties in your target area.
+</Tip>
+
+<Warning>
+  Setting `max_results` too high may increase run time and credit usage. Start with smaller values and increase as needed.
+</Warning>
+
+<Note>
+  The `collect_ads` parameter controls whether sponsored/promoted listings are included in results. Set to `true` if you want to analyze advertising patterns.
+</Note>
+
+<Tip>
+  Enable `export_unique_results` to automatically deduplicate listings that appear in multiple search results.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Bien'\''Ici Search Export (1)",
+    "concurrency": 5,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "max_results": 100,
+      "max_pages": 10,
+      "fetch_since": "7d",
+      "collect_ads": false
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update squid settings with filtering options
+payload = {
+    "name": "Bien'Ici Search Export (1)",
+    "concurrency": 5,
+    "export_unique_results": True,
+    "to_complete": False,
+    "no_line_breaks": True,
+    "params": {
+        "max_results": 100,      # Max results per search URL
+        "max_pages": 10,         # Limit pages to crawl
+        "fetch_since": "7d",        # Only items from last 7 days
+        "collect_ads": False     # Skip sponsored listings
+    }
+}
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json=payload
+)
+
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Bien'Ici Search Export (1)",
+  "concurrency": 5,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "max_results": 100,
+    "max_pages": 10,
+    "fetch_since": "7d",
+    "collect_ads": false
+  }
+}
+```

@@ -1,0 +1,101 @@
+---
+title: "Add Tasks"
+description: "Add TripAdvisor restaurant search URLs as tasks for scraping restaurant listings"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add TripAdvisor restaurant search URLs to your squid for scraping restaurant listings. The scraper extracts restaurant details including ratings, reviews, contact information, price ranges, location coordinates, and Michelin status from TripAdvisor's restaurant directory.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Task Format
+
+Each task should contain a URL from a TripAdvisor restaurant search results page. Search for restaurants by location on TripAdvisor, then use those search URLs as tasks.
+
+## Supported URL Formats
+
+The scraper supports TripAdvisor restaurant search URLs from various regional domains:
+
+<Tip>
+  Apply filters on TripAdvisor (cuisine type, price range, ratings) before copying the URL to get more targeted restaurant results.
+</Tip>
+
+<Note>
+  TripAdvisor uses location IDs (g-codes) in URLs. Each city or region has a unique g-code that you can find by searching on the website.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.tripadvisor.fr/Restaurants-g187147-Paris_Ile_de_France.html"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add TripAdvisor restaurant search URLs as tasks
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": "https://www.tripadvisor.fr/Restaurants-g187147-Paris_Ile_de_France.html"},
+            {"url": "https://www.tripadvisor.com/Restaurants-g60763-New_York_City_New_York.html"}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+
+for task in data["tasks"]:
+    print(f"  Task ID: {task['id']}")
+    print(f"  URL: {task['params']['url']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "82367f24d9450b2222080eed91662968",
+      "created_at": "2025-07-17T09:06:47.287893",
+      "is_active": true,
+      "params": {
+        "url": "https://www.tripadvisor.fr/Restaurants-g187147-Paris_Ile_de_France.html"
+      },
+      "module": 115,
+      "object": "task"
+    }
+  ]
+}
+```

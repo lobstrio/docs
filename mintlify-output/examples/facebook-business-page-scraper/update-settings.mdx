@@ -1,0 +1,27 @@
+---
+title: "Update Settings"
+description: "Configure settings for your Facebook Business Page Scraper squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **Facebook Business Page Scraper** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+<Note>
+  Use `GET /v1/crawlers/facebook-business-page-scraper/params` to retrieve available settings for this crawler.
+</Note>

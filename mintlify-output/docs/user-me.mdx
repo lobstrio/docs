@@ -1,0 +1,129 @@
+---
+title: "Get User Profile"
+description: "Retrieve authenticated user's profile data including personal details, account status, and subscription information"
+api: "GET https://api.lobstr.io/v1/me"
+---
+
+This endpoint returns the authenticated user's complete profile data in a single API call. Use it to verify authentication, retrieve user details, and check account status.
+
+This is typically the first endpoint you'll call after authentication to confirm your credentials are working correctly.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string">
+  Content type of the request. Value: `application/json`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Unique user identifier. Example: `"user_abc123xyz789"`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  User's email address. Example: `"user@example.com"`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  User's full name. Example: `"John Doe"`
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  User's username. Example: `"johndoe"`
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether the user's email has been verified. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_active" type="boolean">
+  Whether the user account is active. Example: `true`
+</ResponseField>
+
+<ResponseField name="subscription_plan" type="string">
+  Current subscription plan (free, basic, pro, enterprise). Example: `"pro"`
+</ResponseField>
+
+<ResponseField name="subscription_status" type="string">
+  Status of the subscription (active, cancelled, expired, trial). Example: `"active"`
+</ResponseField>
+
+<ResponseField name="max_concurrency" type="integer">
+  Maximum number of concurrent operations allowed. Example: `20`
+</ResponseField>
+
+<ResponseField name="max_squids" type="integer">
+  Maximum number of squids allowed. Example: `100`
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Timestamp when the account was created. Example: `"2023-06-15T10:30:00Z"`
+</ResponseField>
+
+<ResponseField name="last_login" type="string">
+  Timestamp of the user's last login. Example: `"2024-01-20T08:45:00Z"`
+</ResponseField>
+
+<Tip>
+  Use this endpoint to verify your authentication is working before making other API calls. A successful response means your API key is valid.
+</Tip>
+
+<Note>
+  The response includes rate limit information in the headers. Check the `X-RateLimit-Remaining` header to monitor your API usage.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/me" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json"
+```
+
+```python Python
+import requests
+
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json",
+}
+
+response = requests.get(
+    "https://api.lobstr.io/v1/me",
+    headers=headers
+)
+
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": 12345,
+  "email": "user@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "is_active": true,
+  "is_verified": true,
+  "date_joined": "2024-01-15T10:30:00Z",
+  "last_login": "2025-01-08T14:20:00Z",
+  "subscription": {
+    "plan": "Professional",
+    "status": "active",
+    "expires_at": "2025-12-31T23:59:59Z"
+  },
+  "quotas": {
+    "api_calls_remaining": 9750,
+    "api_calls_limit": 10000,
+    "data_points_remaining": 485000,
+    "data_points_limit": 500000
+  }
+}
+```

@@ -1,0 +1,103 @@
+---
+title: "Add Tasks"
+description: "Add Leboncoin search URLs to scrape listings"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Leboncoin search result pages to scrape by providing search URLs. The scraper will extract all classified listings from the specified search pages.
+
+Leboncoin search URLs can include filters for region, department, category, and page number. You can copy search URLs directly from the Leboncoin website after applying your desired filters.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Leboncoin Listings Search Export crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Leboncoin search URL (e.g., `https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/`) |
+
+<Tip>
+  Apply filters on Leboncoin first, then copy the URL. All filter parameters (region, category, price range) will be preserved.
+</Tip>
+
+<Note>
+  You can include page numbers in URLs (e.g., `/p-2`) to start from a specific page.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tasks": [
+      {
+        "url": "https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2"
+      }
+    ],
+    "squid": "YOUR_SQUID_HASH"
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Leboncoin search URLs to scrape
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "tasks": [
+            {"url": "https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2"}
+        ],
+        "squid": squid_id
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "da0bbc8f5de0ffb8aa39d1d21bdf75d9",
+      "created_at": "2025-07-04T04:54:16.591101",
+      "is_active": true,
+      "params": {
+        "url": "https://www.leboncoin.fr/annonces/offres/provence_alpes_cote_d_azur/bouches_du_rhone/p-2"
+      },
+      "module": 88,
+      "object": "task"
+    }
+  ]
+}
+```

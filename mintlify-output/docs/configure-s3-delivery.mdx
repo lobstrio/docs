@@ -1,0 +1,157 @@
+---
+title: "Configure Amazon S3 Delivery"
+description: "Export squid run results directly to an AWS S3 bucket"
+api: "POST https://api.lobstr.io/v1/delivery?squid={squid_hash}"
+---
+
+Configure Amazon S3 delivery to export run results directly to an AWS S3 bucket. Results will be automatically uploaded to your specified bucket and path when runs complete.
+
+## Authentication Options
+
+You can authenticate with S3 in two ways:
+
+1. **AWS Credentials**: Provide `aws_access_key` and `aws_secret_key` in the request
+2. **Bucket Policy**: If you don't provide credentials, ensure your bucket policy allows public WRITE permissions
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  The unique identifier (hash) of the squid for which to configure S3 delivery. Example: `c106a44a98044ef18acc59986ae10967`
+</ParamField>
+
+## Request Body
+
+<ParamField body="s3_fields.bucket" type="string" required>
+  Name of the S3 bucket where data will be stored. Example: `"my-bucket"`
+</ParamField>
+
+<ParamField body="s3_fields.is_active" type="boolean" required>
+  Set to true to enable S3 delivery, false to disable. Example: `true`
+</ParamField>
+
+<ParamField body="s3_fields.target_path" type="string" required>
+  Folder path inside the bucket where results will be saved. Example: `"exports"`
+</ParamField>
+
+<ParamField body="s3_fields.aws_access_key" type="string">
+  (Optional) AWS Access Key for authentication. If not provided, bucket must have public WRITE permissions. Example: `"AKIAIOSFODNN7EXAMPLE"`
+</ParamField>
+
+<ParamField body="s3_fields.aws_secret_key" type="string">
+  (Optional) AWS Secret Key for authentication. If not provided, bucket must have public WRITE permissions. Example: `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="s3_fields.bucket" type="string">
+  S3 bucket name. Example: `"my-bucket"`
+</ResponseField>
+
+<ResponseField name="s3_fields.is_active" type="boolean">
+  Whether S3 delivery is active. Example: `true`
+</ResponseField>
+
+<ResponseField name="s3_fields.target_path" type="string">
+  Target folder path in bucket. Example: `"exports"`
+</ResponseField>
+
+<ResponseField name="s3_fields.aws_access_key" type="string">
+  AWS Access Key (returned if provided). Example: `"AKIAIOSFODNN7EXAMPLE"`
+</ResponseField>
+
+<ResponseField name="s3_fields.aws_secret_key" type="string">
+  AWS Secret Key (returned if provided). Example: `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"`
+</ResponseField>
+
+<Warning>
+  If you don't provide AWS credentials, your bucket policy MUST allow public WRITE permissions for Lobstr to upload files.
+</Warning>
+
+<Tip>
+  For better security, provide AWS credentials instead of making your bucket publicly writable. Use IAM users with limited permissions.
+</Tip>
+
+<Note>
+  The target_path creates a folder structure in your bucket. Results will be uploaded to s3://bucket/target_path/filename.csv
+</Note>
+
+<Tip>
+  Use the Test S3 endpoint to verify your bucket permissions and credentials before activating automatic delivery.
+</Tip>
+
+<Warning>
+  AWS credentials are stored and returned in API responses. Ensure you're using HTTPS and handle responses securely.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/delivery?squid=YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "s3_fields": {
+      "bucket": "my-bucket",
+      "is_active": true,
+      "target_path": "exports",
+      "aws_access_key": "your_access_key",
+      "aws_secret_key": "your_secret_key"
+    }
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/delivery"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+params = {
+    "squid": "YOUR_SQUID_HASH"
+}
+payload = {
+    "s3_fields": {
+        "bucket": "my-bucket",
+        "is_active": True,
+        "target_path": "exports",
+        "aws_access_key": "your_access_key",
+        "aws_secret_key": "your_secret_key"
+    }
+}
+
+response = requests.post(url, headers=headers, params=params, json=payload)
+result = response.json()
+
+print("Amazon S3 delivery configured successfully!")
+print(f"Bucket: {result['s3_fields']['bucket']}")
+print(f"Target path: {result['s3_fields']['target_path']}")
+print(f"Active: {result['s3_fields']['is_active']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "s3_fields": {
+    "bucket": "my-bucket",
+    "is_active": true,
+    "target_path": "exports",
+    "aws_access_key": "your_access_key",
+    "aws_secret_key": "your_secret_key"
+  }
+}
+```

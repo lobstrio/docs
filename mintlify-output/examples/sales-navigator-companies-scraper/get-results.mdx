@@ -1,0 +1,68 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Sales Navigator Companies Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Sales Navigator Companies Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="company_name" type="string">
+  Name of the company as listed on LinkedIn Sales Navigator. Example: `Tesla`
+</ResponseField>
+
+<ResponseField name="company_id" type="integer">
+  Unique LinkedIn identifier for the company. Example: `15564`
+</ResponseField>
+
+<ResponseField name="company_url" type="string">
+  LinkedIn company page URL. Example: `https://www.linkedin.com/sales/company/15564`
+</ResponseField>
+
+<ResponseField name="company_picture" type="string">
+  URL of the company's LinkedIn logo or profile image. Example: `https://media.licdn.com/dms/image/v2/C4D0BAQHUcu98SZ2TVw/company-logo_400_400/company-logo_400_400/0/1630576446368/tesla_motors_logo?e=1775692800&v=beta&t=Us0zonMvyG5zEfLxKeZlk6JOmvV8tGtBIyHjJdWmBUc`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Company description from the LinkedIn company page. Example: `Tesla is accelerating the world’s transition to sustainable abundance. To achieve our mission, we’re building a world powered by solar, enabled by battery storage and transported by electric vehicles.
+
+We’re committed to hiring and developing top talent from around the world for any given discipline. Headquartered in Texas, we operate six huge, vertically integrated factories across three continents. With over 100,000 employees, our teams take a first-principles approach to designing, building, selling and servicing our products in-house.
+
+Our world-class teams operate with a non-conventional philosophy of inter-disciplinary collaboration. Each member of the team is expected to challenge and to be challenged, to create, and to innovate. We’re tackling the world’s most difficult and important problems—and we wouldn’t succeed without our shared passion for making the world a better place.`
+</ResponseField>
+
+<ResponseField name="employee_count_range" type="string">
+  Company size by number of employees (e.g. 51–200, 1001–5000). Example: `10,001+ employees`
+</ResponseField>
+
+<ResponseField name="employee_display_count" type="integer">
+  Employee count as displayed on the LinkedIn company page. Example: `83K+`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Industry the company operates in. Example: `Motor Vehicle Manufacturing`
+</ResponseField>
+
+<ResponseField name="is_saved" type="boolean">
+  Whether the company is saved as a lead in LinkedIn Sales Navigator. Example: `false`
+</ResponseField>

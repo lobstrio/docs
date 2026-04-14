@@ -1,0 +1,145 @@
+---
+title: "Add Tasks"
+description: "Create new tasks within a specified squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+This endpoint creates new tasks within a specified squid. Tasks define the specific scraping jobs to be executed, such as URLs to scrape or search parameters.
+
+**Note:** The accepted task input keys (e.g., `url`, `city`, `activity`) depend on the crawler used in your squid. Use the Get Crawler Parameters endpoint to discover valid keys for your crawler.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+<ParamField body="squid" type="string" required>
+  The hash ID of the squid to add tasks to. Example: `"a1b2c3d4e5f6g7h8i9j0"`
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects. Each task contains parameters specific to the crawler. Example: `[{"url": "https://example.com"}]`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="duplicated_count" type="integer">
+  Number of tasks that were duplicates and not added. Example: `0`
+</ResponseField>
+
+<ResponseField name="tasks" type="array">
+  Array of created task objects. Example: `[...]`
+</ResponseField>
+
+<ResponseField name="tasks[].id" type="string">
+  Unique task identifier. Example: `"c5e29d2aba8b77cdc56391e7405302de"`
+</ResponseField>
+
+<ResponseField name="tasks[].created_at" type="string">
+  Task creation timestamp (ISO 8601). Example: `"2025-02-10T14:19:32.916901"`
+</ResponseField>
+
+<ResponseField name="tasks[].is_active" type="boolean">
+  Whether the task is active and ready to run. Example: `true`
+</ResponseField>
+
+<ResponseField name="tasks[].params" type="object">
+  Task parameters (URL, search terms, etc.). Example: `{"url": "..."}`
+</ResponseField>
+
+<ResponseField name="tasks[].object" type="string">
+  Always "task". Example: `"task"`
+</ResponseField>
+
+<Tip>
+  Use the Get Crawler Parameters endpoint to discover which task keys are valid for your specific crawler.
+</Tip>
+
+<Note>
+  Duplicate tasks (same parameters) are automatically detected and not added. Check duplicated_count in the response.
+</Note>
+
+<Warning>
+  Task parameters vary by crawler. Using invalid keys will result in task creation failure.
+</Warning>
+
+<Tip>
+  For bulk task creation, consider using the Upload Tasks endpoint with a CSV file instead.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "a1b2c3d4e5f6g7h8i9j0",
+    "tasks": [
+      {"url": "https://www.linkedin.com/in/johndoe"},
+      {"url": "https://www.linkedin.com/in/janedoe"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/tasks"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+
+# Define tasks to add to the squid
+payload = {
+    "squid": "a1b2c3d4e5f6g7h8i9j0",
+    "tasks": [
+        {"url": "https://www.linkedin.com/in/johndoe"},
+        {"url": "https://www.linkedin.com/in/janedoe"}
+    ]
+}
+
+response = requests.post(url, headers=headers, json=payload)
+data = response.json()
+
+print(f"Added {data['inserted']} tasks")
+print(f"Duplicates skipped: {data['duplicates']}")
+
+# Display created task hashes
+for task_hash in data['task_hashes']:
+    print(f"  - {task_hash}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "inserted": 2,
+  "duplicates": 0,
+  "task_hashes": [
+    "6b9d3afdf4e76df374915a50d7a495c4",
+    "c5e29d2aba8b77cdc56391e7405302de"
+  ],
+  "object": "task_list"
+}
+```
+
+```json 400
+{
+  "error": {
+    "message": "Invalid task parameters. Each task must contain required fields for the crawler.",
+    "type": "validation_error",
+    "param": "tasks"
+  }
+}
+```

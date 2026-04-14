@@ -1,0 +1,224 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Google Maps Leads Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Google Maps Leads Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="match_filters" type="boolean">
+  Whether the result passed your geo and category filters. Example: `true`
+</ResponseField>
+
+<ResponseField name="no_match_reasons" type="string">
+  Reasons why the result did not match your filters
+</ResponseField>
+
+<ResponseField name="zero_x" type="string">
+  Internal Google Maps hex identifier for the business. Example: `0x30e29f5331420fff:0x40714ec1d130200a`
+</ResponseField>
+
+<ResponseField name="cid" type="string">
+  Google Maps unique numeric business identifier (CID). Example: `4643579285140938762`
+</ResponseField>
+
+<ResponseField name="place_id" type="string">
+  Google Places API unique identifier for the business. Example: `ChIJ_w9CMVOf4jARCiAw0cFOcUA`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct Google Maps URL to the business listing. Example: `https://www.google.com/maps?cid=4643579285140938762`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Business name as listed on Google Maps. Example: `The Mesh Bangkok Sukhumvit 22`
+</ResponseField>
+
+<ResponseField name="address" type="string">
+  Full formatted address of the business. Example: `30 Sukhumvit Alley 22, Khwaeng Khlong Toei, Khlong Toei, Bangkok 10110`
+</ResponseField>
+
+<ResponseField name="country_name" type="string">
+  Country where the business is located. Example: `Thailand`
+</ResponseField>
+
+<ResponseField name="country_code" type="string">
+  ISO 2-letter country code. Example: `TH`
+</ResponseField>
+
+<ResponseField name="zip_code" type="string">
+  Postal or ZIP code of the business. Example: `10110`
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City where the business is located. Example: `Khlong Toei`
+</ResponseField>
+
+<ResponseField name="lat" type="float">
+  Latitude coordinate of the business. Example: `13.7296173`
+</ResponseField>
+
+<ResponseField name="lng" type="float">
+  Longitude coordinate of the business. Example: `100.5650145`
+</ResponseField>
+
+<ResponseField name="ratings" type="integer">
+  Total number of Google reviews. Example: `56`
+</ResponseField>
+
+<ResponseField name="score" type="float">
+  Average star rating out of 5. Example: `4.8`
+</ResponseField>
+
+<ResponseField name="category" type="text">
+  Primary business category on Google Maps. Example: `Bar, Restaurant, Sports bar`
+</ResponseField>
+
+<ResponseField name="main_image_url" type="string">
+  URL of the business's main cover image
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Primary phone number of the business. Example: `+6622620000`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Business website URL. Example: `https://www.themeshbangkoksukhumvit22.com/`
+</ResponseField>
+
+<ResponseField name="menu" type="text">
+  Link to the business menu. Example: `https://shorturl.at/JJPdY`
+</ResponseField>
+
+<ResponseField name="plus_code" type="string">
+  Google Plus Code short address. Example: `PHH8+R2 Bangkok`
+</ResponseField>
+
+<ResponseField name="is_temporarily_closed" type="boolean">
+  Whether the business is temporarily closed. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_permanently_closed" type="boolean">
+  Whether the business is permanently closed. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_owner" type="boolean">
+  Whether the listing has a verified owner on Google Maps. Example: `true`
+</ResponseField>
+
+<ResponseField name="opening_hours" type="text">
+  Weekly opening hours schedule. Example: `Monday: 6 AM–1 AM, Tuesday: 6 AM–1 AM, Wednesday: 6 AM–1 AM, Thursday: 6 AM–1 AM, Friday: 6 AM–1 AM, Saturday: 6 AM–1 AM, Sunday: 6 AM–1 AM`
+</ResponseField>
+
+<ResponseField name="poi" type="text">
+  Points of interest and amenity tags listed on the business. Example: `Outdoor seating, Takeaway, Dine-in, Delivery (no), Great beer selection, Great cocktails, Live music, Live performances, Sport, Solo dining, Wheelchair-accessible car park, Wheelchair-accessible entrance, Wheelchair-accessible seating, Assistive hearing loop (no), Alcohol, Beer, Cocktails, Food, Food at bar, Happy-hour drinks, Spirits, Wine, Seating, Table service, Toilet, Wi-Fi, Casual, Cosy, Trendy, Groups, LGBTQ+ friendly, Tourists, Transgender safe space, Accepts reservations, Credit cards, Debit cards, NFC mobile payments, Free parking lot, On-site parking`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Editorial or business-provided description from Google Maps
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Price range indicator (e.g. €, ££, $$$)
+</ResponseField>
+
+<ResponseField name="last_opening_hours_updated_at" type="string">
+  When the opening hours were last confirmed or updated. Example: `2026-02-28`
+</ResponseField>
+
+<ResponseField name="images_count" type="integer">
+  Total number of images on the Google Maps listing. Example: `223`
+</ResponseField>
+
+<ResponseField name="images" type="json">
+  List of all business image URLs. Example: `['https://lh3.googleusercontent.com/p/AF1QipMJGL4SUHrk012w95hubI9iiBHjRBIdo_JhTTf4=w203-h135-k-no', 'https://lh3.googleusercontent.com/gps-cs-s/AHVAwersyBIZuM31K0lIkj2MprffMbJbLi-KNIvW3H4ImbuE6HFjzv-kpZjLRuhIHiFR0jZTqrIOYuPhmCsuZ4AB90i-m-PJwalWyRmCdrcByR98rD4qe9TIJCO6AW5FvDVhdEmVubuoqKBGlBGt=w203-h360-k-no', 'https://lh3.googleusercontent.com/gps-cs-s/AHVAwepLZcxTIYOCVWAFGuq4eqD42U4K_9XpR0CHbL5uInMdYzWoHQCsEK0usvXdn1slJC-Tljb5tQqWh-jfg6bUWgjhhZy52kraloIZJGY4mLfeaDfpb-gjpO0CzdGRAivc_x-m7S4ow1-GwIFN=w236-h100-k-no']`
+</ResponseField>
+
+<ResponseField name="health" type="boolean">
+  Health and safety attributes of the business. Example: `false`
+</ResponseField>
+
+<ResponseField name="about" type="text">
+  Short summary about the business from Google Maps
+</ResponseField>
+
+<ResponseField name="crowd" type="string">
+  Crowd and inclusivity attributes (e.g. LGBTQ+ friendly). Example: `Groups, LGBTQ+ friendly, Tourists, Transgender safe space`
+</ResponseField>
+
+<ResponseField name="amenities" type="string">
+  Available amenities at the business
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address found on the business website. Example: `marriottdpo@marriott.com,privacy@marriott.com,themesh@fourpoints.com`
+</ResponseField>
+
+<ResponseField name="email_status" type="string">
+  Validation status of the extracted email address. Example: `invalid,valid,valid,invalid,valid,valid,invalid`
+</ResponseField>
+
+<ResponseField name="email_verified_at" type="string">
+  Date and time the email address was verified. Example: `2026-02-28T01:19:47+00:00`
+</ResponseField>
+
+<ResponseField name="facebook" type="string">
+  Facebook profile URL found on the business website. Example: `https://www.facebook.com/marriottbonvoy, https://www.facebook.com/themeshbangkoksukhumivit22`
+</ResponseField>
+
+<ResponseField name="instagram" type="string">
+  Instagram profile URL found on the business website. Example: `https://www.instagram.com/themeshbangkok, https://www.instagram.com/marriottbonvoy`
+</ResponseField>
+
+<ResponseField name="linkedin" type="string">
+  LinkedIn company page URL found on the business website. Example: `https://www.linkedin.com/in/anthony-capuano-a68390bb, https://www.linkedin.com/company/marriott-international`
+</ResponseField>
+
+<ResponseField name="twitter" type="string">
+  Twitter/X profile URL found on the business website. Example: `https://twitter.com/marriottbonvoy`
+</ResponseField>
+
+<ResponseField name="additional_phone" type="string">
+  Secondary phone number found on the business website. Example: `+6622620000`
+</ResponseField>
+
+<ResponseField name="reviews_per_score_1" type="integer">
+  Number of 1-star reviews. Example: `1`
+</ResponseField>
+
+<ResponseField name="reviews_per_score_2" type="integer">
+  Number of 2-star reviews. Example: `1`
+</ResponseField>
+
+<ResponseField name="reviews_per_score_3" type="integer">
+  Number of 3-star reviews. Example: `1`
+</ResponseField>
+
+<ResponseField name="reviews_per_score_4" type="integer">
+  Number of 4-star reviews. Example: `5`
+</ResponseField>
+
+<ResponseField name="reviews_per_score_5" type="integer">
+  Number of 5-star reviews. Example: `48`
+</ResponseField>

@@ -1,0 +1,102 @@
+---
+title: "Add Task URLs"
+description: "Add Google Maps search URLs to scrape places from"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Use this format if you already have a direct Google Maps search or place URL. This is best for manual inputs or small-scale targeted searches.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## URL Format
+
+**Google Maps search URL:**
+`https://www.google.com/maps/search/restaurant/@43.3928346,5.2662584,14z`
+
+The URL contains the search query and coordinates for the search area.
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the google-maps-leads-scraper crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+<Tip>
+  Only the `url` key is required in each task object.
+</Tip>
+
+<Note>
+  URLs must match Google Maps search or place format.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tasks": [
+      {
+        "url": "https://www.google.com/maps/search/restaurant/@43.3928346,5.2662584,14z"
+      }
+    ],
+    "squid": "YOUR_SQUID_HASH"
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add URL-based tasks
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": "https://www.google.com/maps/search/restaurant/@43.3928346,5.2662584,14z"}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicated: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "4ed8a673a01ba193cc43476e60abc5c0",
+      "created_at": "2025-06-24T11:13:05.720012",
+      "is_active": true,
+      "params": {
+        "url": "https://www.google.com/maps/search/restaurant/@43.3928346,5.2662584,14z"
+      },
+      "module": 5,
+      "object": "task"
+    }
+  ]
+}
+```

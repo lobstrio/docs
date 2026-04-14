@@ -1,0 +1,94 @@
+---
+title: "Update Settings"
+description: "Configure the LinkedIn Profile Scraper settings including email enrichment"
+api: "PATCH https://api.lobstr.io/v2/squid/{squid_id}"
+---
+
+Configure your LinkedIn Profile Scraper settings. The main configurable option is email enrichment, which uses lobstr.io's enrichment service to find email addresses for the profiles you scrape.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Available Settings
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **email_enrichment** | boolean | true | Enable email enrichment to find email addresses for profiles |
+
+## Email Enrichment
+
+When email enrichment is enabled, lobstr.io will attempt to find the email address associated with each LinkedIn profile.
+
+**Pricing:** 9 credits per profile enriched. No email found = 0 credits charged.
+
+The enrichment service returns:
+- `email`: The discovered email address (if found)
+- `email_status`: Validation status of the email (valid, invalid, catch-all, etc.)
+
+<Warning>
+  Email enrichment costs 9 credits per profile where an email is found. Profiles without a found email are not charged. **Backward compatibility:** The old function name `email` is still accepted but deprecated. Migrate to `email_enrichment`.
+</Warning>
+
+<Tip>
+  If you don't need email addresses, disable enrichment to reduce costs: set `email_enrichment` to `false`.
+</Tip>
+
+<Note>
+  Email enrichment is enabled by default. Make sure to disable it before running if you don't need email data.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X PATCH "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID" \
+  -H "Authorization: Token YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "settings": {
+      "email_enrichment": true
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_TOKEN = "YOUR_API_TOKEN"
+SQUID_ID = "YOUR_SQUID_ID"
+
+url = f"https://api.lobstr.io/api/v2/squid/{SQUID_ID}"
+headers = {
+    "Authorization": f"Token {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+data = {
+    "settings": {
+        "email_enrichment": True
+    }
+}
+
+response = requests.patch(url, headers=headers, json=data)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "id": "YOUR_SQUID_ID",
+  "crawler": "linkedin-profile-scraper",
+  "settings": {
+    "email_enrichment": true
+  },
+  "updated_at": "2024-01-15T10:35:00Z"
+}
+```

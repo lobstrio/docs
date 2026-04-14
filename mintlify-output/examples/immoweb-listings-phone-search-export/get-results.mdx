@@ -1,0 +1,212 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Immoweb Listings & Phones Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Immoweb Listings & Phones Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="internal_id" type="integer">
+  Unique identifier for the listing on Immoweb. Example: `10181065`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on Immoweb. Example: `https://www.immoweb.be/fr/annonce/10181065`
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Property type (e.g. APARTMENT, HOUSE). Example: `APARTMENT`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the listing. Example: `Appartement 2 chambres`
+</ResponseField>
+
+<ResponseField name="bedroom_count" type="integer">
+  Number of bedrooms. Example: `2`
+</ResponseField>
+
+<ResponseField name="locality" type="string">
+  Locality/city of the property. Example: `Evere`
+</ResponseField>
+
+<ResponseField name="postal_code" type="integer">
+  Postal code of the property location. Example: `1140`
+</ResponseField>
+
+<ResponseField name="street" type="string">
+  Street name of the property. Example: `Rue Edouard Dekoster`
+</ResponseField>
+
+<ResponseField name="number" type="string">
+  Street number of the property. Example: `64`
+</ResponseField>
+
+<ResponseField name="box" type="string">
+  Box/unit number. Example: `40`
+</ResponseField>
+
+<ResponseField name="floor" type="integer">
+  Floor level of the property. Example: `1`
+</ResponseField>
+
+<ResponseField name="lat" type="float">
+  Latitude coordinate of the property. Example: `50.8782927`
+</ResponseField>
+
+<ResponseField name="lng" type="float">
+  Longitude coordinate of the property. Example: `4.4040975`
+</ResponseField>
+
+<ResponseField name="habitable_surface" type="integer">
+  Habitable surface area in square meters. Example: `70`
+</ResponseField>
+
+<ResponseField name="land_surface" type="integer">
+  Land surface area in square meters. Example: `0`
+</ResponseField>
+
+<ResponseField name="price_type" type="string">
+  Type of price (e.g. residential_sale, residential_rent). Example: `residential_sale`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listed price of the property. Example: `200000`
+</ResponseField>
+
+<ResponseField name="bathroom_count" type="integer">
+  Number of bathrooms. Example: `1`
+</ResponseField>
+
+<ResponseField name="creation_date" type="datetime">
+  Date the listing was created on Immoweb. Example: `2022-10-19`
+</ResponseField>
+
+<ResponseField name="expiration_date" type="datetime">
+  Date the listing expires on Immoweb. Example: `2023-02-27`
+</ResponseField>
+
+<ResponseField name="last_modification_date" type="datetime">
+  Date the listing was last modified. Example: `2022-10-19`
+</ResponseField>
+
+<ResponseField name="agency_type" type="string">
+  Type of agency (e.g. AGENCY, OWNER). Example: `AGENCY`
+</ResponseField>
+
+<ResponseField name="agency_email" type="string">
+  Email address of the agency. Example: `contact@agency.be`
+</ResponseField>
+
+<ResponseField name="agency_phone" type="string">
+  Phone number of the agency. Example: `+32 2 123 45 67`
+</ResponseField>
+
+<ResponseField name="agency_mobile" type="string">
+  Mobile phone number of the agency. Example: `+32 478 15 73 6`
+</ResponseField>
+
+<ResponseField name="agency_name" type="string">
+  Name of the agency. Example: `OM-IMMO SPRL`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full property description text. Example: `Magnifique appartement lumineux...`
+</ResponseField>
+
+<ResponseField name="picture" type="string">
+  URL of the main listing picture. Example: `https://media-resize.immowebstatic.be/classifieds/.../736x736/image.jpg`
+</ResponseField>
+
+<ResponseField name="pictures" type="text">
+  Comma-separated list of all picture URLs. Example: `https://media-resize.immowebstatic.be/classifieds/.../736x736/img1.jpg, https://...`
+</ResponseField>
+
+<ResponseField name="transaction_type" type="string">
+  Transaction type (FOR_SALE, FOR_RENT). Example: `FOR_SALE`
+</ResponseField>
+
+<ResponseField name="country" type="string">
+  Country of the property. Example: `Belgique`
+</ResponseField>
+
+<ResponseField name="region" type="string">
+  Region of the property. Example: `Bruxelles`
+</ResponseField>
+
+<ResponseField name="province" type="string">
+  Province of the property. Example: `Bruxelles`
+</ResponseField>
+
+<ResponseField name="building_condition" type="string">
+  Building condition (AS_NEW, GOOD, TO_RENOVATE, etc.). Example: `AS_NEW`
+</ResponseField>
+
+<ResponseField name="facade_count" type="integer">
+  Number of facades. Example: `2`
+</ResponseField>
+
+<ResponseField name="floor_count" type="integer">
+  Number of floors in the building. Example: `6`
+</ResponseField>
+
+<ResponseField name="construction_year" type="integer">
+  Year the building was constructed. Example: `1950`
+</ResponseField>
+
+<ResponseField name="has_lift" type="boolean">
+  Whether the building has an elevator. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_terrace" type="boolean">
+  Whether the property has a terrace. Example: `true`
+</ResponseField>
+
+<ResponseField name="terrace_surface" type="integer">
+  Terrace surface area in square meters. Example: `15`
+</ResponseField>
+
+<ResponseField name="has_garden" type="boolean">
+  Whether the property has a garden. Example: `false`
+</ResponseField>
+
+<ResponseField name="garden_surface" type="integer">
+  Garden surface area in square meters. Example: `100`
+</ResponseField>
+
+<ResponseField name="epc_score" type="string">
+  Energy Performance Certificate score. Example: `C`
+</ResponseField>
+
+<ResponseField name="heating_type" type="string">
+  Heating type (GAS, ELECTRIC, OIL, etc.). Example: `GAS`
+</ResponseField>
+
+<ResponseField name="is_furnished" type="boolean">
+  Whether the property is furnished. Example: `false`
+</ResponseField>
+
+<ResponseField name="external_reference" type="string">
+  External reference number from the agency. Example: `REF-12345`
+</ResponseField>

@@ -1,0 +1,97 @@
+---
+title: "Update Settings"
+description: "Configure the Idealista Listings Scraper parameters and options"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your Idealista Listings Scraper squid settings to control pagination and scraping behavior. Adjust the maximum pages to scrape based on your needs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+The following parameters can be configured in the `params` object:
+
+## General Settings
+
+Standard squid settings that apply to all scrapers:
+
+<Tip>
+  Idealista typically shows 30 listings per page. Setting max_pages to 100 can yield up to 3,000 listings per search URL.
+</Tip>
+
+<Note>
+  Keep concurrency at 1 for Idealista to avoid rate limiting issues.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Idealista Iter Listings (1)",
+    "concurrency": 1,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "max_pages": 100
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Configure scraper settings
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Idealista Iter Listings (1)",
+        "concurrency": 1,
+        "export_unique_results": True,
+        "to_complete": False,
+        "no_line_breaks": True,
+        "params": {
+            "max_pages": 100
+        }
+    }
+)
+
+data = response.json()
+print(f"Squid updated: {data['name']}")
+print(f"Max pages: {data['params']['max_pages']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Idealista Iter Listings (1)",
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "max_pages": 100
+  }
+}
+```

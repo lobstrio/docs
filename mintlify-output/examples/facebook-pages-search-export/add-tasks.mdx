@@ -1,0 +1,106 @@
+---
+title: "Add Tasks"
+description: "Add Facebook Pages search URLs to scrape"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Facebook Pages search URLs to scrape business pages. The scraper extracts page information including contact details, follower counts, and social links.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Facebook Pages Search Export crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Facebook Pages search URL (e.g., `https://www.facebook.com/search/pages?q=coffee%20shop`) |
+
+<Tip>
+  Perform your search on Facebook first, then copy the URL to preserve all search parameters.
+</Tip>
+
+<Note>
+  Facebook Pages search URLs follow the format: `https://www.facebook.com/search/pages?q=YOUR_SEARCH_QUERY` where the query should be URL-encoded.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.facebook.com/search/pages?q=coffee%20shop"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+from urllib.parse import quote
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Build Facebook Pages search URL
+search_query = quote("coffee shop")
+search_url = f"https://www.facebook.com/search/pages?q={search_query}"
+
+# Add Facebook Pages search task
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": search_url}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "82367f24d9450b2222080eed91662968",
+      "created_at": "2025-07-17T09:06:47.287893",
+      "is_active": true,
+      "params": {
+        "url": "https://www.facebook.com/search/pages?q=coffee%20shop"
+      },
+      "module": 115,
+      "object": "task"
+    }
+  ]
+}
+```

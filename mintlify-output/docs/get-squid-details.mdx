@@ -1,0 +1,314 @@
+---
+title: "Get Squid Details"
+description: "Retrieve comprehensive details about a specific squid including configuration, status, and integrations"
+api: "GET https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+This endpoint retrieves comprehensive details about a specific squid, including its configuration settings, operational status, integration options, run statistics, and associated crawler information.
+
+### Core Information Fields
+
+<ResponseField name="id" type="string">
+  Unique identifier for the squid. Example: `"c106a44a98044ef18acc59986ae10967"`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the squid. Example: `"Google Maps (1)"`
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Timestamp when the squid was created. Example: `"2024-01-15T10:30:00Z"`
+</ResponseField>
+
+<ResponseField name="is_active" type="boolean">
+  Whether the squid is active and can run. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_ready" type="boolean">
+  Whether the squid has tasks and is ready to run. Example: `true`
+</ResponseField>
+
+<ResponseField name="crawler" type="string">
+  Unique identifier of the associated crawler. Example: `"4734d096159ef05210e0e1677e8be823"`
+</ResponseField>
+
+<ResponseField name="crawler_name" type="string">
+  Display name of the crawler. Example: `"Google Maps Search Export"`
+</ResponseField>
+
+<ResponseField name="icon" type="string">
+  URL to the crawler's icon image. Example: `"https://cdn.lobstr.io/icons/google-maps.png"`
+</ResponseField>
+
+<ResponseField name="concurrency" type="integer">
+  Number of concurrent tasks the squid runs. Example: `2`
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  Crawler-specific parameter configuration object. Example: `{}`
+</ResponseField>
+
+<ResponseField name="to_complete" type="boolean">
+  Whether to stop after completing all tasks. Example: `false`
+</ResponseField>
+
+<ResponseField name="message" type="string">
+  Important operational information or error messages. Example: `""`
+</ResponseField>
+
+### Common Parameters
+
+The `params` object contains crawler-specific settings. Most crawlers share these common parameters:
+
+<ResponseField name="params.max_results" type="integer">
+  Maximum results per task. null = unlimited. Example: `200`
+</ResponseField>
+
+<ResponseField name="params.max_unique_results_per_run" type="integer">
+  Maximum unique results across all tasks in a run. null = unlimited. Example: `null`
+</ResponseField>
+
+<ResponseField name="params.fetch_since" type="string">
+  Stop scraping when items older than this threshold are reached. Accepts a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM). Example: `"7d"`
+</ResponseField>
+
+<ResponseField name="params.hours_back" type="integer">
+  Deprecated — stop scraping when items older than N hours are reached. Use fetch_since instead. Example: `null`
+</ResponseField>
+
+<ResponseField name="params.max_date" type="string">
+  Deprecated — stop scraping when items older than this date are reached. Use fetch_since instead. Example: `null`
+</ResponseField>
+
+<ResponseField name="params.functions" type="object">
+  Optional add-on features. Each key is a boolean toggle. Enabling incurs extra credits per row. Example: `{"details": true}`
+</ResponseField>
+
+### Run Status & History Fields
+
+<ResponseField name="last_run_status" type="string">
+  Current status of the most recent run (DONE, RUNNING, ERROR, etc.). Example: `"DONE"`
+</ResponseField>
+
+<ResponseField name="last_run" type="string">
+  ID of the most recent run. Example: `"abc123"`
+</ResponseField>
+
+<ResponseField name="last_run_at" type="string">
+  Timestamp of the last execution. Example: `"2024-01-20T15:45:00Z"`
+</ResponseField>
+
+<ResponseField name="last_run_done_reason" type="string">
+  Why the run ended (tasks_done, credits_exhausted, user_stopped, error). Example: `"tasks_done"`
+</ResponseField>
+
+<ResponseField name="total_runs" type="integer">
+  Total number of runs executed for this squid. Example: `5`
+</ResponseField>
+
+<ResponseField name="next_launch_at" type="string | null">
+  Scheduled time for next run (null if not scheduled). Example: `"2024-01-21T10:00:00Z"`
+</ResponseField>
+
+### Export & Download Fields
+
+<ResponseField name="download_url" type="string | null">
+  Temporary signed URL to download latest results (expires after a time period). Example: `null`
+</ResponseField>
+
+<ResponseField name="export_runs" type="boolean">
+  Whether to export runs. Example: `true`
+</ResponseField>
+
+<ResponseField name="export_unique_results" type="boolean">
+  Only export unique results, removing duplicates. Example: `true`
+</ResponseField>
+
+<ResponseField name="no_line_breaks" type="boolean">
+  Remove newlines from exported data. Example: `false`
+</ResponseField>
+
+### Integration Configuration Fields
+
+<ResponseField name="google_sheet_fields" type="object | null">
+  Google Sheets integration configuration (null if not configured). Contains is_active flag. Example: `null`
+</ResponseField>
+
+<ResponseField name="ftp_fields" type="object | null">
+  SFTP delivery settings (null if not configured). Contains is_active flag. Example: `null`
+</ResponseField>
+
+<ResponseField name="s3_fields" type="object | null">
+  Amazon S3 export configuration (null if not configured). Contains is_active flag. Example: `null`
+</ResponseField>
+
+<ResponseField name="webhook_fields" type="object | null">
+  Webhook notifications setup (null if not configured). Contains is_active flag. Example: `null`
+</ResponseField>
+
+<ResponseField name="slack_fields" type="object | null">
+  Slack integration settings (null if not configured). Contains is_active flag. Example: `null`
+</ResponseField>
+
+### Scheduling Fields
+
+<ResponseField name="schedule" type="object | null">
+  Cron schedule object with expression and timezone (null if not scheduled). Example: `null`
+</ResponseField>
+
+<ResponseField name="schedule_time" type="string">
+  Next scheduled execution time in human-readable format. Example: `"Daily at 10:00 AM"`
+</ResponseField>
+
+### Notification Fields
+
+<ResponseField name="email" type="string">
+  Email address for notifications. Example: `"user@example.com"`
+</ResponseField>
+
+<ResponseField name="notifications" type="boolean">
+  Whether notifications are enabled. Example: `true`
+</ResponseField>
+
+<ResponseField name="notifications_params" type="object">
+  Notification configuration object containing run_notify setting (on_success, on_error, or null). Example: `{"run_notify": "on_success"}`
+</ResponseField>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid_hash" type="string" required>
+  The unique identifier (hash) of the squid. Example: `c106a44a98044ef18acc59986ae10967`
+</ParamField>
+
+<Tip>
+  Check 'is_ready' before starting a run. If false, you need to add tasks to the squid first.
+</Tip>
+
+<Note>
+  The 'message' field contains important operational information or error messages. Check this if a squid isn't behaving as expected.
+</Note>
+
+<Warning>
+  The 'download_url' is a temporary signed URL that expires. Download results promptly or generate a new URL by re-fetching squid details.
+</Warning>
+
+<Tip>
+  Use 'last_run_done_reason' to understand why a run stopped. Common reasons: tasks_done, credits_exhausted, user_stopped, error.
+</Tip>
+
+<Tip>
+  Integration fields (google_sheet_fields, etc.) show 'is_active: true' if enabled. Configure these to automate result delivery.
+</Tip>
+
+<Note>
+  Use `fetch_since` to stop scraping when older items are reached. It supports both relative durations (24h, 7d, 2w) and absolute dates (YYYY-MM-DD HH:MM). Replaces the older `hours_back` and `max_date` parameters.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/squids/c106a44a98044ef18acc59986ae10967" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+squid_id = "c106a44a98044ef18acc59986ae10967"
+url = f"https://api.lobstr.io/v1/squids/{squid_id}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+squid = response.json()
+
+print(f"Squid: {squid['name']}")
+print(f"Status: {'Active' if squid['is_active'] else 'Inactive'}")
+print(f"Ready: {squid['is_ready']}")
+print(f"\nRun Statistics:")
+print(f"  Total Runs: {squid['total_runs']}")
+print(f"  Last Status: {squid['last_run_status']}")
+print(f"  Last Run At: {squid['last_run_at']}")
+
+if squid.get('download_url'):
+    print(f"\nDownload URL available: {squid['download_url'][:50]}...")
+
+print(f"\nIntegrations:")
+print(f"  Google Sheets: {squid['google_sheet_fields']['is_active']}")
+print(f"  FTP: {squid['ftp_fields']['is_active']}")
+print(f"  S3: {squid['s3_fields']['is_active']}")
+print(f"  Webhook: {squid['webhook_fields']['is_active']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "c106a44a98044ef18acc59986ae10967",
+  "created_at": "2025-02-25T09:01:13.575329",
+  "name": "my-cool-squid",
+  "is_ready": true,
+  "is_active": true,
+  "concurrency": 1,
+  "params": {
+    "country": "United States",
+    "ratings": "Any rating",
+    "language": "English (United States)",
+    "max_results": 20,
+    "functions": {
+      "fetch_business_images": false,
+      "collect_business_details": false,
+      "extract_emails_from_website": false
+    }
+  },
+  "download_url": "https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/lobstrc106a44a98044ef18acc59986ae10967/eebce7802e7740979a0b8450de10c99e.csv.csv?...",
+  "email": "user@example.com",
+  "schedule": null,
+  "schedule_time": null,
+  "no_line_breaks": true,
+  "export_runs": true,
+  "export_unique_results": true,
+  "notifications": true,
+  "notifications_params": {
+    "run_notify": null
+  },
+  "to_complete": false,
+  "google_sheet_fields": {
+    "url": "https://docs.google.com/spreadsheets/d/...",
+    "append": false,
+    "is_active": false
+  },
+  "ftp_fields": {
+    "host": "localhost",
+    "port": 22,
+    "is_active": false
+  },
+  "s3_fields": {
+    "bucket": null,
+    "is_active": false
+  },
+  "webhook_fields": {
+    "url": "https://example.com/webhook",
+    "is_active": false
+  },
+  "crawler": "4734d096159ef05210e0e1677e8be823",
+  "crawler_name": "Google Maps Search Export",
+  "last_run_status": "DONE",
+  "total_runs": 1,
+  "next_launch_at": null,
+  "last_run": "eebce7802e7740979a0b8450de10c99e",
+  "last_run_at": "2025-03-05T09:27:17.012423",
+  "last_run_done_reason": "tasks_done",
+  "last_run_is_done": true,
+  "is_public": true
+}
+```

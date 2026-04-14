@@ -1,0 +1,88 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Google Search Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Google Search Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="title" type="string">
+  Title of the search result page. Example: `Coffee`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  URL of the search result. Example: `https://en.wikipedia.org/wiki/Coffee`
+</ResponseField>
+
+<ResponseField name="displayed_url" type="string">
+  URL as displayed in the Google search result (may differ from actual URL). Example: `https://en.wikipedia.org › wiki › Coffee`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Meta description or snippet shown in the Google search result. Example: `Coffee is a beverage brewed from roasted, ground coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily ...`
+</ResponseField>
+
+<ResponseField name="snippet_segments" type="json">
+  Individual text segments of the Google search snippet
+</ResponseField>
+
+<ResponseField name="question" type="string">
+  Question text from a People Also Ask entry. Example: `What is the 15-15-15 coffee rule?`
+</ResponseField>
+
+<ResponseField name="answer" type="string">
+  Answer text from a People Also Ask entry
+</ResponseField>
+
+<ResponseField name="is_question_answer" type="boolean">
+  Whether this result is a People Also Ask (Q&A) entry. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_related_query" type="boolean">
+  Whether this result is a related search query suggestion. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_organic" type="boolean">
+  Whether this is an unpaid organic search result. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_paid" type="boolean">
+  Whether this is a paid advertisement in Google search results. Example: `false`
+</ResponseField>
+
+<ResponseField name="total_results" type="string">
+  Total number of search results Google reports for the query. Example: `3190000000`
+</ResponseField>
+
+<ResponseField name="date" type="date">
+  Publication or indexing date shown in the Google search result
+</ResponseField>
+
+<ResponseField name="emphasized_keywords" type="string">
+  Keywords Google highlights in the search snippet. Example: `coffee`
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Search results page number (1 = first page of results). Example: `1`
+</ResponseField>

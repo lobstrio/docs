@@ -1,0 +1,129 @@
+---
+title: "Update Settings"
+description: "Configure the LinkedIn Posts Commenters and Likers Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your LinkedIn Posts Commenters and Likers Scraper squid settings. Control which engagement types to scrape and enable email enrichment.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **scrape_comments** | boolean | true | Enable to scrape users who commented on the post |
+| **scrape_reactions** | boolean | true | Enable to scrape users who reacted (liked) the post |
+| **email** | boolean | false | Enable email enrichment to find email addresses |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping threads (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+## Email Enrichment
+
+When email enrichment is enabled, lobstr.io will attempt to find email addresses for each profile.
+
+**Pricing:** 9 credits per profile where an email is found. No email found = 0 credits charged.
+
+Enriched emails include validation status: `valid`, `invalid`, `catch-all`, etc.
+
+<Tip>
+  Set `scrape_comments` to true only if you want users who engaged deeply with the content.
+</Tip>
+
+<Warning>
+  Email enrichment costs 9 credits per profile where an email is found. Disable if you don't need emails.
+</Warning>
+
+<Note>
+  Commenters often have higher intent than passive likers - filter accordingly for outreach campaigns.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "LinkedIn Posts Commenters and Likers Scraper (1)",
+    "concurrency": 5,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "scrape_comments": true,
+      "scrape_reactions": true,
+      "email_enrichment": false
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update squid settings
+payload = {
+    "name": "LinkedIn Posts Commenters and Likers Scraper (1)",
+    "concurrency": 5,
+    "export_unique_results": True,
+    "to_complete": False,
+    "no_line_breaks": True,
+    "params": {
+        "scrape_comments": True,    # Scrape users who commented
+        "scrape_reactions": True,   # Scrape users who reacted/liked
+        "email_enrichment": False              # Disable email enrichment
+    }
+}
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json=payload
+)
+
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "LinkedIn Posts Commenters and Likers Scraper (1)",
+  "concurrency": 5,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "scrape_comments": true,
+    "scrape_reactions": true,
+    "email_enrichment": false
+  }
+}
+```

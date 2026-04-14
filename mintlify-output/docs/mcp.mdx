@@ -1,0 +1,98 @@
+---
+title: "MCP Server"
+description: "Connect AI assistants to lobstr.io API documentation using the Model Context Protocol (MCP). Search docs, get code examples, and explore scrapers programmatically."
+---
+
+The lobstr.io MCP server exposes all API documentation to AI assistants. No authentication required.
+
+**Endpoint:** `https://docs.lobstr.io/api/mcp`
+
+<CardGroup cols={4}>
+  <Card title="6 Tools" icon="wrench">
+    Full documentation access via structured MCP tools.
+  </Card>
+  <Card title="31 Scrapers" icon="layer-group">
+    All scraper examples with parameters and result fields.
+  </Card>
+  <Card title="No Auth" icon="unlock">
+    Public endpoint — no API key needed to query the docs.
+  </Card>
+  <Card title="HTTP Transport" icon="globe">
+    Standard HTTP transport, compatible with all MCP clients.
+  </Card>
+</CardGroup>
+
+## Setup
+
+<CodeGroup>
+```bash Claude Code
+claude mcp add lobstrio-docs \
+  --transport http \
+  https://docs.lobstr.io/api/mcp
+```
+
+```json Claude Desktop
+{
+  "mcpServers": {
+    "lobstrio-docs": {
+      "type": "http",
+      "url": "https://docs.lobstr.io/api/mcp"
+    }
+  }
+}
+```
+
+```json Cursor (.cursor/mcp.json)
+{
+  "mcpServers": {
+    "lobstrio-docs": {
+      "type": "http",
+      "url": "https://docs.lobstr.io/api/mcp"
+    }
+  }
+}
+```
+
+```bash Any MCP Client
+curl -X POST https://docs.lobstr.io/api/mcp \
+  -H "Content-Type: application/json" \
+  -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+      "name": "search_docs",
+      "arguments": { "query": "squid", "limit": 2 }
+    },
+    "id": 1
+  }'
+```
+</CodeGroup>
+
+## Tools
+
+| Tool | Tag | Description |
+|---|---|---|
+| `list_docs` | Navigation | Browse all core API documentation pages with category filtering and pagination. |
+| `list_examples` | Examples | View all 31 scrapers with example documentation and their available endpoints. |
+| `get_doc` | Reference | Get full endpoint documentation including request body, response fields, and code examples. |
+| `search_docs` | Search | Keyword search across all documentation — titles, descriptions, and endpoint paths. |
+| `get_code_example` | Code | Get cURL, Python, or API response examples for any endpoint. |
+| `get_navigation` | Structure | Get the full sidebar navigation structure showing how docs are organized. |
+
+## Example Prompts
+
+Once connected, ask your AI assistant:
+
+- *"How do I create a squid and start scraping Google Maps?"*
+- *"Show me the Python code for adding tasks to a scraper"*
+- *"What parameters does the LinkedIn Profile Scraper accept?"*
+- *"List all delivery configuration options (email, S3, webhook)"*
+- *"How do I handle rate limiting in the lobstr.io API?"*
+
+## JSON-RPC Methods
+
+| Method | Description |
+|---|---|
+| `initialize` | Handshake — returns server info and capabilities |
+| `tools/list` | List all available tools with input schemas |
+| `tools/call` | Execute a tool with arguments |

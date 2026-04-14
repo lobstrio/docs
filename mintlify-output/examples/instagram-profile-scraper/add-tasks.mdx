@@ -1,0 +1,88 @@
+---
+title: "Add Tasks"
+description: "Add Instagram profile URLs or usernames to scrape using the lobstr.io API"
+api: "POST https://api.lobstr.io/v2/squid/{squid_id}/task"
+---
+
+Add Instagram profiles as tasks to your squid. You can provide either a full profile URL or just the username.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Supported Input Formats
+
+**Profile URL:**
+
+`https://www.instagram.com/username/`
+
+`https://instagram.com/username`
+
+**Username only:**
+
+`leomessi`
+
+`cristiano`
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Instagram Profile URL or Username to scrape profile information from |
+
+<Tip>
+  You can use just the username without the full URL - the scraper will resolve it automatically.
+</Tip>
+
+<Note>
+  Private profiles will return limited data. Only public profile information is accessible.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID/task" \
+  -H "Authorization: Token YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://www.instagram.com/leomessi/"
+  }'
+```
+
+```python Python
+import requests
+
+API_TOKEN = "YOUR_API_TOKEN"
+SQUID_ID = "YOUR_SQUID_ID"
+
+url = f"https://api.lobstr.io/api/v2/squid/{SQUID_ID}/task"
+headers = {
+    "Authorization": f"Token {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+data = {
+    "url": "https://www.instagram.com/leomessi/"
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "task_abc123def456",
+  "status": "pending",
+  "created_at": "2025-01-15T10:30:00Z",
+  "url": "https://www.instagram.com/leomessi/"
+}
+```

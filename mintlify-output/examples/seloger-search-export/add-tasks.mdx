@@ -1,0 +1,106 @@
+---
+title: "Add Tasks"
+description: "Add SeLoger search URLs to scrape real estate listings"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add SeLoger search URLs to scrape French real estate listings. The scraper extracts property details including pricing, area, location, agency information, and energy ratings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the SeLoger Search Export crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | SeLoger search URL (e.g., `https://www.seloger.com/list.htm?projects=2&places=...`) |
+
+<Tip>
+  Perform your search on SeLoger.com first, apply all filters (location, property type, price range), then copy the URL to preserve all parameters.
+</Tip>
+
+<Note>
+  SeLoger is a French real estate platform - URLs contain encoded location and filter parameters.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.seloger.com/list.htm?projects=2&places=%5B%7B%22subDivisions%22:%5B%2210%22%5D%7D%5D&mandatorycommodities=0&enterprise=1&qsVersion=1.0"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add SeLoger search URLs
+# Copy the URL directly from SeLoger after applying filters
+payload = {
+    "squid": squid_id,
+    "tasks": [
+        {
+            "url": "https://www.seloger.com/list.htm?projects=2&places=%5B%7B%22subDivisions%22:%5B%2210%22%5D%7D%5D&mandatorycommodities=0&enterprise=1&qsVersion=1.0"
+        }
+    ]
+}
+
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json=payload
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "fa0df9f38046ae68a04117ed96652005",
+      "created_at": "2025-07-17T08:55:52.537282",
+      "is_active": true,
+      "params": {
+        "url": "https://www.seloger.com/list.htm?projects=2&places=%5B%7B%22subDivisions%22:%5B%2210%22%5D%7D%5D&mandatorycommodities=0&enterprise=1&qsVersion=1.0"
+      },
+      "module": 13,
+      "object": "task"
+    }
+  ]
+}
+```

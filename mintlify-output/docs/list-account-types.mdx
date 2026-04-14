@@ -1,0 +1,176 @@
+---
+title: "List Account Types"
+description: "Retrieve available platform account types and their authentication requirements"
+api: "GET https://api.lobstr.io/v1/account_types"
+---
+
+Some crawlers require user authentication (like Facebook, LinkedIn) through cookies or session tokens. The `account_type` object describes the required credentials for such modules.
+
+### Account Type Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| **id** | string | Unique identifier of the account type |
+| **name** | string | The technical name of the account type (e.g., facebook-sync) |
+| **domain** | string | Name of the platform or website this account type connects to (e.g., Facebook) |
+| **baseurl** | string | The base URL for the platform's login or data-fetching endpoints |
+| **cookies** | array | A list of cookie names required for authentication. Some cookies may be marked as required or optional |
+
+## Notes
+
+- If the `cookies` array is **empty**, it means **all cookies from the user session are required** for authentication.
+- Required cookies must be provided for the crawler to work. Missing cookies will result in authentication failure.
+
+> For implementation, always verify the required cookies in the `cookies` array when preparing your account object for a run.
+
+## Account Limits
+
+Some account types include a `params` object that defines limits or batch configurations for the crawler when authenticated. These values help control usage and message sending.
+
+### Account Limit Parameters
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| **[attribute]** | object | Represents the daily limit for a specific attribute (e.g., messages, profiles, searches) |
+| **batch** | object | (Optional) Defines the maximum number of actions per launch based on the attribute (e.g., messages, profiles) |
+| **batch_hours** | object | (Optional) Defines the delay in hours between batch launches during the day |
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<Tip>
+  Use this endpoint to discover which platforms support authenticated scraping and what credentials they require.
+</Tip>
+
+<Note>
+  Account types with empty cookies arrays require all session cookies. Use browser dev tools to extract the full cookie set.
+</Note>
+
+<Warning>
+  Pay attention to the params object for rate limits. Exceeding these limits may result in account suspension on the target platform.
+</Warning>
+
+<Tip>
+  The batch and batch_hours parameters help you avoid triggering anti-bot measures by spacing out requests throughout the day.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/account_types" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/account_types"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+
+print(f"Available account types: {data['total_results']}\n")
+
+# Display account types and their required cookies
+for account_type in data['data']:
+    print(f"Platform: {account_type['domain']}")
+    print(f"   Type: {account_type['name']}")
+    print(f"   Base URL: {account_type['baseurl']}")
+
+    if account_type['cookies']:
+        cookie_names = [c['name'] for c in account_type['cookies']]
+        print(f"   Required cookies: {', '.join(cookie_names)}")
+    else:
+        print("   Required cookies: All session cookies")
+
+    if account_type['params']:
+        print(f"   Has rate limits: Yes")
+    print()
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 4,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 5,
+  "data": [
+    {
+      "id": "16f5b7f91e8fc533eab88be973273a02",
+      "object": "account_type",
+      "name": "facebook-sync",
+      "icon": "<base64 image data>",
+      "domain": "Facebook",
+      "params": {},
+      "baseurl": "https://www.facebook.com",
+      "cookies": [
+        {"name": "c_user", "required": true},
+        {"name": "xs", "required": true}
+      ]
+    },
+    {
+      "id": "cf67cafe03776e796f02a29f29ab2866",
+      "object": "account_type",
+      "name": "sales-nav-sync",
+      "icon": "<base64 image data>",
+      "domain": "Sales Navigator",
+      "params": {
+        "batch": {
+          "max": 20,
+          "default": 20,
+          "attribute": "profiles",
+          "description": "Number of profiles visited per launch"
+        },
+        "profiles": {
+          "max": 150,
+          "default": 150,
+          "description": "Maximum number of profile requests per day"
+        },
+        "searches": {
+          "max": 200,
+          "default": 200,
+          "description": "Maximum number of searches per day"
+        },
+        "batch_hours": {
+          "max": 2,
+          "default": 2,
+          "description": "Hours between each launch during a day"
+        }
+      },
+      "baseurl": "https://www.linkedin.com",
+      "cookies": [
+        {"name": "li_at", "required": true},
+        {"name": "JSESSIONID", "required": true},
+        {"name": "li_a", "required": true}
+      ]
+    },
+    {
+      "id": "9853173fc00a940a33d7a420c176ad3b",
+      "object": "account_type",
+      "name": "twitter-sync",
+      "icon": "<base64 image data>",
+      "domain": "Twitter",
+      "params": {},
+      "baseurl": "https://x.com",
+      "cookies": [
+        {"name": "auth_token", "required": true},
+        {"name": "ct0", "required": true}
+      ]
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

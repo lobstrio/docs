@@ -1,0 +1,113 @@
+---
+title: "Configure Email Delivery"
+description: "Set up email notifications for squid run completions"
+api: "POST https://api.lobstr.io/v1/delivery?squid={squid_hash}"
+---
+
+Configure email delivery to receive notifications when your squid runs complete. You can choose to receive immediate notifications or attach results for later use.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  The unique identifier (hash) of the squid for which to configure email delivery. Example: `c106a44a98044ef18acc59986ae10967`
+</ParamField>
+
+## Request Body
+
+<ParamField body="email" type="string" required>
+  The email address to receive notifications. Example: `"user@example.com"`
+</ParamField>
+
+<ParamField body="notifications" type="boolean" required>
+  Set to true to send email immediately upon completion, or false to attach it for later use. Example: `true`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="email" type="string">
+  The configured email address. Example: `"user@example.com"`
+</ResponseField>
+
+<ResponseField name="notifications" type="boolean">
+  Whether immediate notifications are enabled. Example: `true`
+</ResponseField>
+
+<ResponseField name="notifications_activation_date" type="string">
+  ISO timestamp when notifications were activated. Example: `"2025-02-26T15:48:48.538226"`
+</ResponseField>
+
+<Tip>
+  Set notifications to false if you want to manage email delivery manually rather than receiving automatic notifications.
+</Tip>
+
+<Note>
+  The notifications_activation_date is automatically set when you enable notifications for the first time.
+</Note>
+
+<Warning>
+  Make sure the email address is valid and can receive emails. Invalid addresses will cause delivery failures.
+</Warning>
+
+<Tip>
+  Use the Test Email endpoint to verify your email configuration before activating notifications.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/delivery?squid=YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "email": "user@example.com",
+    "notifications": true
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/delivery"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+params = {
+    "squid": "YOUR_SQUID_HASH"
+}
+payload = {
+    "email": "user@example.com",
+    "notifications": True
+}
+
+response = requests.post(url, headers=headers, params=params, json=payload)
+result = response.json()
+
+print("Email delivery configured successfully!")
+print(f"Email: {result['email']}")
+print(f"Notifications: {result['notifications']}")
+if 'notifications_activation_date' in result:
+    print(f"Activated on: {result['notifications_activation_date']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "email": "user@example.com",
+  "notifications": true,
+  "notifications_activation_date": "2025-02-26T15:48:48.538226"
+}
+```

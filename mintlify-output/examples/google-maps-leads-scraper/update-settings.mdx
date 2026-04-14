@@ -1,0 +1,135 @@
+---
+title: "Update Settings"
+description: "Configure the Google Maps Leads Scraper parameters"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure the scraper parameters to control how places are collected. These settings include language, location context, filters, and optional data collection features.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| **country** | string | Regional context for search results (e.g., `United States`) |
+| **ratings** | string | Filter by rating threshold: `Any rating`, `4.0+`, `2.5+` |
+| **language** | string | Language for place names and metadata (e.g., `English (United States)`) |
+| **max_results** | integer | Maximum places to collect before task ends |
+
+## Optional Functions
+
+Enable these in the `params.functions` object:
+
+| Function | Type | Description |
+| --- | --- | --- |
+| **extract_emails_from_website** | boolean | Visit business website to extract email, Facebook, Instagram, and additional phone |
+| **fetch_business_images** | boolean | Collect all image URLs from the Google Place page |
+| **collect_business_details** | boolean | Collect additional metadata like plus_code, poi, health, and last_opening_hours_updated_at |
+
+<Warning>
+  Enabling `extract_emails_from_website`, `fetch_business_images`, or `collect_business_details` may incur additional credits.
+</Warning>
+
+<Note>
+  **Backward compatibility:** The old function names `collect_contacts`, `images`, and `details` are still accepted but deprecated. Migrate to the new names listed above.
+</Note>
+
+<Tip>
+  Set `export_unique_results: true` to avoid duplicate entries when places appear multiple times in search results.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Google Maps Search Export",
+    "no_line_breaks": true,
+    "params": {
+      "country": "United States",
+      "ratings": "Any rating",
+      "language": "English (United States)",
+      "functions": {
+        "fetch_business_images": true,
+        "collect_business_details": true,
+        "extract_emails_from_website": true
+      },
+      "max_results": 200
+    },
+    "to_complete": false,
+    "export_unique_results": true
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update scraper settings
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Google Maps Search Export",
+        "no_line_breaks": True,
+        "params": {
+            "country": "United States",
+            "ratings": "Any rating",
+            "language": "English (United States)",
+            "functions": {
+                "fetch_business_images": True,
+                "collect_business_details": True,
+                "extract_emails_from_website": True
+            },
+            "max_results": 200
+        },
+        "to_complete": False,
+        "export_unique_results": True
+    }
+)
+
+data = response.json()
+print(f"Updated: {data['name']}")
+print(f"Max results: {data['params']['max_results']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Google Maps Search Export",
+  "no_line_breaks": true,
+  "params": {
+    "country": "United States",
+    "ratings": "Any rating",
+    "language": "English (United States)",
+    "functions": {
+      "fetch_business_images": true,
+      "collect_business_details": true,
+      "extract_emails_from_website": true
+    },
+    "max_results": 200
+  },
+  "to_complete": false,
+  "export_unique_results": true
+}
+```

@@ -1,0 +1,194 @@
+---
+title: "List Runs"
+description: "Retrieve a paginated list of all runs for a specific squid"
+api: "GET https://api.lobstr.io/v1/runs"
+---
+
+This endpoint retrieves a paginated list of all runs for a specific squid. Use this to view run history and track past executions.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | The squid hash ID to list runs for |
+| **page** | integer | No | Page number for pagination. Default: 1 |
+| **limit** | integer | No | Results per page. Default: 50, Max: 100 |
+
+## Response Field Explanations
+
+<ResponseField name="total_results" type="integer">
+  Total number of runs. Example: `4`
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  Maximum results per page. Example: `50`
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page number. Example: `1`
+</ResponseField>
+
+<ResponseField name="total_pages" type="integer">
+  Total number of pages. Example: `1`
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of run objects. Example: `[...]`
+</ResponseField>
+
+<ResponseField name="data[].id" type="string">
+  Unique run identifier. Example: `"381cfbb47e474782857ddc035298b6f3"`
+</ResponseField>
+
+<ResponseField name="data[].status" type="string">
+  Current run status. Example: `"done"`
+</ResponseField>
+
+<ResponseField name="data[].is_done" type="boolean">
+  Whether the run has completed. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].total_results" type="integer">
+  Number of results collected. Example: `156`
+</ResponseField>
+
+<ResponseField name="data[].duration" type="float">
+  Run duration in seconds. Example: `3.1849`
+</ResponseField>
+
+<ResponseField name="data[].credit_used" type="float">
+  Credits consumed. Example: `3.1849`
+</ResponseField>
+
+<ResponseField name="data[].done_reason" type="string | null">
+  Reason for completion. Example: `"tasks_done"`
+</ResponseField>
+
+<ResponseField name="next" type="string | null">
+  URL for next page (null if last page). Example: `null`
+</ResponseField>
+
+<ResponseField name="previous" type="string | null">
+  URL for previous page (null if first page). Example: `null`
+</ResponseField>
+
+<Tip>
+  Use this endpoint to monitor all past and current runs for a squid.
+</Tip>
+
+<Note>
+  Runs are returned in reverse chronological order (newest first).
+</Note>
+
+<Tip>
+  Check is_done to quickly filter completed vs. active runs.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/runs?squid=b6c56d18cb0046949461ba9ca278e8ad&page=1&limit=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/runs"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+params = {
+    "squid": "b6c56d18cb0046949461ba9ca278e8ad",
+    "page": 1,
+    "limit": 50
+}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+
+print(f"Total runs: {data['total_results']}")
+print(f"Page {data['page']} of {data['total_pages']}\n")
+
+for run in data['data']:
+    status_icon = "✓" if run['is_done'] else "⟳"
+    print(f"{status_icon} Run: {run['id']}")
+    print(f"   Status: {run['status']}")
+    print(f"   Results: {run['total_results']}")
+    print(f"   Credits: {run['credit_used']}")
+    print(f"   Reason: {run['done_reason']}")
+    print()
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 4,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 4,
+  "data": [
+    {
+      "id": "381cfbb47e474782857ddc035298b6f3",
+      "object": "run",
+      "squid": "b6c56d18cb0046949461ba9ca278e8ad",
+      "is_done": true,
+      "started_at": "2025-02-04T10:25:13Z",
+      "total_results": 156,
+      "total_unique_results": 156,
+      "next_launch_at": null,
+      "ended_at": "2025-02-04T10:25:21Z",
+      "duration": 8.0415,
+      "credit_used": 8.0415,
+      "origin": "user",
+      "force_launch": false,
+      "status": "done",
+      "export_done": true,
+      "export_count": 1,
+      "export_time": "2025-02-04T10:25:25Z",
+      "email_done": null,
+      "email_time": null,
+      "created_at": "2025-02-04T10:25:13Z",
+      "done_reason": "tasks_done",
+      "done_reason_desc": null
+    },
+    {
+      "id": "3aa75b3f05c144f6a87f8397e229024e",
+      "object": "run",
+      "squid": "b6c56d18cb0046949461ba9ca278e8ad",
+      "is_done": true,
+      "started_at": "2025-01-29T09:53:27Z",
+      "total_results": 0,
+      "total_unique_results": 0,
+      "next_launch_at": null,
+      "ended_at": "2025-01-29T09:53:33Z",
+      "duration": 0.0466,
+      "credit_used": 0.0466,
+      "origin": "user",
+      "force_launch": false,
+      "status": "done",
+      "export_done": true,
+      "export_count": 1,
+      "export_time": "2025-01-29T09:53:37Z",
+      "email_done": null,
+      "email_time": null,
+      "created_at": "2025-01-29T09:53:27Z",
+      "done_reason": "tasks_done",
+      "done_reason_desc": null
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

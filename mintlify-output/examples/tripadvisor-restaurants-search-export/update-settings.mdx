@@ -1,0 +1,94 @@
+---
+title: "Update Settings"
+description: "Configure the TripAdvisor Restaurants Scraper parameters and options"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your TripAdvisor Restaurants Scraper squid settings to control the maximum number of restaurants to scrape per search. Adjust settings based on your data collection needs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+The following parameters can be configured in the `params` object:
+
+## General Settings
+
+Standard squid settings that apply to all scrapers:
+
+<Tip>
+  Start with a smaller max_results value (e.g., 50) to test your search before scaling up for larger data collection.
+</Tip>
+
+<Note>
+  TripAdvisor results include both claimed and unclaimed business profiles. Claimed profiles tend to have more complete information.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "TripAdvisor Iter Restaurants (1)",
+    "no_line_breaks": true,
+    "params": {
+      "max_results": 100
+    },
+    "to_complete": false,
+    "export_unique_results": true
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Configure scraper settings
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "TripAdvisor Iter Restaurants (1)",
+        "no_line_breaks": True,
+        "params": {
+            "max_results": 100
+        },
+        "to_complete": False,
+        "export_unique_results": True
+    }
+)
+
+data = response.json()
+print(f"Squid updated: {data['name']}")
+print(f"Max results: {data['params']['max_results']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "TripAdvisor Iter Restaurants (1)",
+  "no_line_breaks": true,
+  "params": {
+    "max_results": 100
+  },
+  "to_complete": false,
+  "export_unique_results": true
+}
+```

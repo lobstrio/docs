@@ -1,0 +1,92 @@
+---
+title: "Download Run"
+description: "Get a temporary download URL for run results"
+api: "GET https://api.lobstr.io/v1/runs/{run_hash}/download"
+---
+
+This endpoint generates a temporary download URL for the results of a specific run. The URL provides direct access to the exported data file.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="run_hash" type="string" required>
+  The unique identifier (hash) of the run to download. Example: `300e9c5c127d421c90f431478d9a2cfb`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="s3" type="string">
+  Temporary signed URL to download the results file (CSV format). Example: `"https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/..."`
+</ResponseField>
+
+<Warning>
+  Download URLs are temporary and expire after a short period. Generate a new URL if the link expires.
+</Warning>
+
+<Note>
+  The run must have export_done: true before a download URL can be generated.
+</Note>
+
+<Tip>
+  For automated workflows, consider using delivery configurations (Email, S3, SFTP, Webhook) instead of manual downloads.
+</Tip>
+
+<Tip>
+  Results are exported in CSV format by default.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/runs/300e9c5c127d421c90f431478d9a2cfb/download" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+run_hash = "300e9c5c127d421c90f431478d9a2cfb"
+url = f"https://api.lobstr.io/v1/runs/{run_hash}/download"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+# Get the download URL
+response = requests.get(url, headers=headers)
+data = response.json()
+
+download_url = data['s3']
+print(f"Download URL: {download_url}")
+
+# Download the file
+file_response = requests.get(download_url)
+with open("results.csv", "wb") as f:
+    f.write(file_response.content)
+
+print("Results saved to results.csv")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "s3": "https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/lobstrc106a44a98044ef18acc59986ae10967/eebce7802e7740979a0b8450de10c99e.csv?response-content-disposition=attachment%3B%20filename%3Dmy-cool-squid_20250305_0927.csv&AWSAccessKeyId=AKIA3X7XNQGAHJ4R5SEQ&Signature=9CB7fDmysbdySN9a%2F7b9DDa6zhg%3D&Expires=1741771664"
+}
+```
+
+```json 404
+{
+  "error": {
+    "message": "Run not found or export not ready",
+    "type": "not_found_error",
+    "param": "run_hash"
+  }
+}
+```

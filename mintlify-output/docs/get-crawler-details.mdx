@@ -1,0 +1,271 @@
+---
+title: "Get Crawler Details"
+description: "Retrieve detailed information about a specific crawler including input parameters and output fields"
+api: "GET https://api.lobstr.io/v1/crawlers/{crawler_hash}"
+---
+
+This endpoint retrieves detailed information about a specific crawler using its hash ID. It helps you understand each crawler's availability, cost, parameters, and potential issues before using it.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string">
+  Content type of the request. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="crawler_hash" type="string" required>
+  The unique identifier (hash/id) of the crawler. Example: `4734d096159ef05210e0e1677e8be823`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Unique identifier for the crawler. Example: `"c106a44a98044ef18acc59986ae10967"`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Human-readable name (e.g., "Google Maps Search Export"). Example: `"Google Maps (1)"`
+</ResponseField>
+
+<ResponseField name="slug" type="string">
+  URL-friendly identifier. Example: `""`
+</ResponseField>
+
+<ResponseField name="is_public" type="boolean">
+  Whether the crawler is publicly accessible. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_available" type="boolean">
+  Whether the crawler is available for runs (false if paused). Example: `true`
+</ResponseField>
+
+<ResponseField name="is_premium" type="boolean">
+  Requires premium subscription or extra credits. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_issues" type="boolean">
+  Currently experiencing issues (runs paused until fixed). Example: `false`
+</ResponseField>
+
+<ResponseField name="account" type="object | null">
+  Required account sync details (null if no authentication needed). Example: `null`
+</ResponseField>
+
+<ResponseField name="input" type="array">
+  Array of configurable parameters (task-level and squid-level). Example: `[]`
+</ResponseField>
+
+<ResponseField name="result" type="array">
+  Array of output field names this crawler collects. Example: `[]`
+</ResponseField>
+
+## Understanding Input Parameters
+
+<ResponseField name="input[].level" type="string">
+  Parameter level: "task" (per URL/task) or "squid" (overall run behavior). Example: `""`
+</ResponseField>
+
+<ResponseField name="input[].is_params" type="string">
+  For task-level: true indicates this parameter is used per task submission. Example: `""`
+</ResponseField>
+
+<ResponseField name="input[].is_details" type="string">
+  For squid-level: true indicates this controls overall behavior or features. Example: `""`
+</ResponseField>
+
+<ResponseField name="input[].function" type="string">
+  If true, this is an optional add-on feature with extra credit costs. Example: `""`
+</ResponseField>
+
+<ResponseField name="input[].credits_per_function" type="string">
+  Extra credits charged per row when this optional function is enabled. Example: `""`
+</ResponseField>
+
+<ResponseField name="input[].name" type="string">
+  Parameter name to use when configuring the crawler. Example: `"Google Maps (1)"`
+</ResponseField>
+
+<ResponseField name="input[].type" type="string">
+  Data type of the parameter (string, int, boolean, etc.). Example: `""`
+</ResponseField>
+
+<ResponseField name="input[].required" type="string">
+  Whether this parameter is mandatory. Example: `""`
+</ResponseField>
+
+<ResponseField name="input[].default" type="string">
+  Default value if parameter is not provided. Example: `""`
+</ResponseField>
+
+<Tip>
+  Check the 'has_issues' flag before creating tasks. If true, the crawler is experiencing problems and runs are paused.
+</Tip>
+
+<Note>
+  Parameters with 'function: true' are optional add-ons that cost extra credits per row (specified in 'credits_per_function').
+</Note>
+
+<Warning>
+  Some crawlers require account synchronization (see 'account' field). You'll need to sync cookies before running these crawlers.
+</Warning>
+
+<Tip>
+  Use the 'result' array to know exactly what fields will be returned in your data. This helps you plan your data processing pipeline.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/crawlers/4734d096159ef05210e0e1677e8be823" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+crawler_id = "4734d096159ef05210e0e1677e8be823"
+url = f"https://api.lobstr.io/v1/crawlers/{crawler_id}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+crawler = response.json()
+
+print(f"Crawler: {crawler['name']}")
+print(f"Status: {'Available' if crawler['is_available'] else 'Unavailable'}")
+print(f"Has Issues: {crawler['has_issues']}")
+print(f"Credits per row: {crawler['credits_per_row']}\n")
+
+# Display task-level inputs
+print("Task-level parameters:")
+task_inputs = [i for i in crawler['input'] if i['level'] == 'task']
+for param in task_inputs:
+    req = "Required" if param['required'] else "Optional"
+    print(f"  - {param['name']} ({param['type']}) - {req}")
+
+# Display squid-level inputs with functions
+print("\nSquid-level parameters:")
+squid_inputs = [i for i in crawler['input'] if i['level'] == 'squid']
+for param in squid_inputs:
+    cost = f" (+{param['credits_per_function']} credits)" if param.get('function') else ""
+    print(f"  - {param['name']}{cost}")
+
+# Display output fields
+print(f"\nOutput fields ({len(crawler['result'])} total):")
+print(", ".join(crawler['result'][:10]) + "...")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "4734d096159ef05210e0e1677e8be823",
+  "object": "crawler",
+  "account": null,
+  "name": "Google Maps Search Export",
+  "slug": "google-maps-search-export",
+  "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
+  "is_public": true,
+  "is_available": true,
+  "is_premium": false,
+  "has_issues": false,
+  "input": [
+    {
+      "name": "url",
+      "type": "string",
+      "level": "task",
+      "regex": "http(.*)google(.*)/maps/(search|place)(.*)",
+      "default": null,
+      "example": "https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,14z",
+      "required": false,
+      "is_details": false,
+      "description": "A string representing the Google Maps Search URL, containing all establishments the crawler will collect."
+    },
+    {
+      "name": "activity",
+      "type": "string",
+      "level": "task",
+      "value": "restaurant",
+      "example": "restaurant",
+      "required": false,
+      "is_params": true,
+      "description": "The activity of the search location."
+    },
+    {
+      "max": 200,
+      "name": "max_results",
+      "type": "int",
+      "level": "squid",
+      "default": 200,
+      "example": 200,
+      "required": false,
+      "is_details": true,
+      "description": "Google Maps restricts search results to a maximum of 200. To access a larger dataset, consider utilizing our URL generator."
+    },
+    {
+      "name": "extract_emails_from_website",
+      "type": "boolean",
+      "level": "squid",
+      "default": true,
+      "display": "Extract Emails From Website",
+      "function": true,
+      "priority": 3,
+      "required": false,
+      "is_details": true,
+      "description": "Extract email addresses from the business's website.",
+      "credits_per_function": 10
+    },
+    {
+      "name": "collect_business_details",
+      "type": "boolean",
+      "level": "squid",
+      "default": false,
+      "display": "Collect Business Details",
+      "function": true,
+      "priority": 1,
+      "required": false,
+      "is_details": true,
+      "description": "Extract attributes like plus_code, poi, health, and last_opening_hours_updated_at.",
+      "credits_per_function": 10
+    }
+  ],
+  "result": [
+    "zero_x",
+    "cid",
+    "url",
+    "name",
+    "address",
+    "country_name",
+    "country_code",
+    "zip_code",
+    "city",
+    "lat",
+    "lng",
+    "ratings",
+    "score",
+    "category",
+    "main_image_url",
+    "phone",
+    "website",
+    "menu",
+    "plus_code",
+    "is_temporarily_closed",
+    "is_permanently_closed",
+    "has_owner",
+    "opening_hours",
+    "email",
+    "facebook",
+    "instagram"
+  ],
+  "max_concurrency": 20,
+  "credits_per_row": 2
+}
+```

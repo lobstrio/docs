@@ -1,0 +1,359 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Sales Navigator Leads Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Sales Navigator Leads Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="id" type="string">
+  Unique internal identifier for the record. Example: `21e281488adf43086782b731d9c19e0b`
+</ResponseField>
+
+<ResponseField name="collected_at" type="timestamp">
+  Date and time this record was scraped. Example: `2026-03-19 10:36:09.000000+00`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the company this person works at. Example: `Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders`
+</ResponseField>
+
+<ResponseField name="company_id" type="string">
+  LinkedIn unique identifier for the company. Example: `796142`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address found or enriched for this person. Example: `fm@gugin.com`
+</ResponseField>
+
+<ResponseField name="email_status" type="string">
+  Validation status of the email address (e.g. valid, risky, invalid). Example: `valid`
+</ResponseField>
+
+<ResponseField name="mobile_phone" type="string">
+  Mobile phone number found or enriched for this person
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  First name of the LinkedIn member. Example: `Dr. Finn`
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  Last name of the LinkedIn member. Example: `Majlergaard`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Location as shown on the LinkedIn profile. Example: `Greater Nice Metropolitan Area`
+</ResponseField>
+
+<ResponseField name="position" type="string">
+  Position of this person in the Sales Navigator search results. Example: `Founder and CEO`
+</ResponseField>
+
+<ResponseField name="years_in_position" type="int">
+  Number of years the person has been in their current role. Example: `22`
+</ResponseField>
+
+<ResponseField name="years_in_company" type="int">
+  Number of years the person has been at their current company. Example: `22`
+</ResponseField>
+
+<ResponseField name="months_in_position" type="int">
+  Number of months the person has been in their current role. Example: `10`
+</ResponseField>
+
+<ResponseField name="sales_navigator_profile_url" type="string">
+  URL to the person's LinkedIn Sales Navigator profile. Example: `https://www.linkedin.com/sales/people/ACwAAAAFQjgBtNxy28alABzs_jj2meNVjFO0AUs,NAME_SEARCH,nwRo`
+</ResponseField>
+
+<ResponseField name="picture_url" type="string">
+  URL of the person's LinkedIn profile picture. Example: `https://media.licdn.com/dms/image/v2/D4D03AQEwqlTdXSN6Rg/profile-displayphoto-shrink_800_800/B4DZQ7HXczHUAo-/0/1736158574857?e=1762387200&v=beta&t=4l7DbJzZ1VDT8WePPQDs99CHAFe-Y34zzihrZehJEIw`
+</ResponseField>
+
+<ResponseField name="started_on" type="timestamp">
+  Start date of the person's current position. Example: `2002-11-30 23:00:00+00`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Industry the person works in. Example: `Higher Education`
+</ResponseField>
+
+<ResponseField name="headline" type="string">
+  Professional headline shown on the LinkedIn profile. Example: `Author of: The Dangerous AI Gamble in Education🍀 I/we help organisations develop winning company culture 🍀 I/we Gugin train leaders to become culturally and emotionally intelligent 🍀Professor 🍀 keynote speaker`
+</ResponseField>
+
+<ResponseField name="summary" type="string">
+  About or summary text from the LinkedIn profile. Example: `Founder and CEO @ Gugin | Creating Winning Corporate Cultures
+
+I am the person you come to when your organisation is falling apart because of a toxic workplace culture. Our Gugin team have saved organisations (and leaders) for more than 20 years.
+
+I am the person you come to when you need a zip to tie two organisations together after a merger or acquisition
+
+I am the person you come to when you want a really thought-provoking speech on leadership for your next event or conference.`
+</ResponseField>
+
+<ResponseField name="connections" type="integer">
+  Number of LinkedIn connections. Example: `500`
+</ResponseField>
+
+<ResponseField name="linkedin_profile_url" type="string">
+  URL to the person's public LinkedIn profile. Example: `https://www.linkedin.com/in/ACwAAAAFQjgBtNxy28alABzs_jj2meNVjFO0AUs`
+</ResponseField>
+
+<ResponseField name="job_seeker" type="boolean">
+  Whether the person has indicated they are open to new opportunities. Example: `false`
+</ResponseField>
+
+<ResponseField name="person_id" type="string">
+  Unique LinkedIn Sales Navigator identifier for this person. Example: `344632`
+</ResponseField>
+
+<ResponseField name="degree" type="integer">
+  Degree of connection between this person and the scraping account (1st, 2nd, 3rd). Example: `2nd`
+</ResponseField>
+
+<ResponseField name="company_industry" type="string">
+  Industry sector of the company this person works at. Example: `Business Consulting and Services`
+</ResponseField>
+
+<ResponseField name="is_open" type="boolean">
+  Whether the profile has LinkedIn OpenLink enabled (accepts InMail from anyone). Example: `false`
+</ResponseField>
+
+<ResponseField name="is_saved" type="boolean">
+  Whether this lead is saved in LinkedIn Sales Navigator. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_premium" type="boolean">
+  Whether this person has LinkedIn Premium. Example: `false`
+</ResponseField>
+
+<ResponseField name="match_filters" type="boolean">
+  Whether this result matched all the applied Sales Navigator search filters. Example: `true`
+</ResponseField>
+
+<ResponseField name="no_match_reason" type="string">
+  Reason this result did not match the applied Sales Navigator filters
+</ResponseField>
+
+<ResponseField name="seniority" type="string">
+  Seniority level of the person's current position (e.g. Director, Manager, Entry). Example: `CXO, Senior`
+</ResponseField>
+
+<ResponseField name="position_id" type="string">
+  Unique identifier for this position. Example: `344632796142`
+</ResponseField>
+
+<ResponseField name="new" type="boolean">
+  Whether this is a newly added position. Example: `false`
+</ResponseField>
+
+<ResponseField name="current" type="boolean">
+  Whether this is the current active position. Example: `true`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Company name for this position. Example: `Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders`
+</ResponseField>
+
+<ResponseField name="company_id" type="string">
+  LinkedIn company identifier for this position. Example: `796142`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Description of responsibilities in this position
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Location of this position. Example: `Nice, Provence-Alpes-Côte d'Azur, France`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Job title for this position. Example: `Founder and CEO`
+</ResponseField>
+
+<ResponseField name="started_on" type="timestamp">
+  Start date of this position. Example: `2002-12-01 00:00:00+00`
+</ResponseField>
+
+<ResponseField name="ended_on" type="timestamp">
+  End date of this position (null if current)
+</ResponseField>
+
+<ResponseField name="period" type="float">
+  Duration of this position in years. Example: `22.83`
+</ResponseField>
+
+<ResponseField name="education_id" type="string">
+  Unique identifier for this education entry
+</ResponseField>
+
+<ResponseField name="school" type="string">
+  Name of the educational institution. Example: `DBA (Doctor of Business Administration)`
+</ResponseField>
+
+<ResponseField name="degree" type="string">
+  Degree or qualification obtained. Example: `Doctor of Business Administration`
+</ResponseField>
+
+<ResponseField name="fields_of_study" type="string">
+  Fields or subjects studied. Example: `Business Administration`
+</ResponseField>
+
+<ResponseField name="started_on" type="datetime">
+  Start date of this education. Example: `2005-01-01`
+</ResponseField>
+
+<ResponseField name="ended_on" type="datetime">
+  End date of this education. Example: `2010-01-01`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Category type of the website (e.g. COMPANY, PERSONAL). Example: `COMPANY`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Website URL. Example: `https://gugin.com`
+</ResponseField>
+
+<ResponseField name="company_id" type="integer">
+  LinkedIn company identifier. Example: `796142`
+</ResponseField>
+
+<ResponseField name="elapsed" type="float">
+  Time elapsed since last company data update
+</ResponseField>
+
+<ResponseField name="formatted_revenue_amount" type="float">
+  Revenue amount formatted for display. Example: `1.0`
+</ResponseField>
+
+<ResponseField name="formatted_revenue_unit" type="string">
+  Unit of formatted revenue (e.g. millions, billions). Example: `mil`
+</ResponseField>
+
+<ResponseField name="formatted_revenue_currency_code" type="string">
+  Currency code for formatted revenue. Example: `USD`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Company description. Example: `Gugins core competence is to help companies around the world taking advantage of cultural diversity. 2/3 of all M&A's fail to meet their objectives due to cultural clashes.
+
+This is what we do:
+- Cultural due diligence
+- Post merger integration
+- Damage control after failed M&A's
+- Develop and deploy cultural intelligence
+- Develop internationalisation strategies
+- Develop and carry out global management training on cross-cultural management
+- Coaching of senior executive management teams`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Company industry. Example: `Business Consulting and Services`
+</ResponseField>
+
+<ResponseField name="employees_count" type="integer">
+  Total number of employees
+</ResponseField>
+
+<ResponseField name="revenue_amount" type="integer">
+  Raw revenue amount
+</ResponseField>
+
+<ResponseField name="revenue_currency_code" type="string">
+  Currency code for revenue. Example: `USD`
+</ResponseField>
+
+<ResponseField name="flagship_url" type="string">
+  URL to the company's LinkedIn flagship page. Example: `https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Company LinkedIn URL. Example: `https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/`
+</ResponseField>
+
+<ResponseField name="domain" type="string">
+  Company website domain. Example: `gugin.com`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Company website URL. Example: `https://gugin.com`
+</ResponseField>
+
+<ResponseField name="employees_count_range" type="string">
+  Employee count range (e.g. 1001-5000). Example: `11-50`
+</ResponseField>
+
+<ResponseField name="hq_country" type="string">
+  Country of company headquarters. Example: `France`
+</ResponseField>
+
+<ResponseField name="hq_geographical_area" type="string">
+  Geographical area of company headquarters. Example: `Provence-Alpes-Côte d'Azur`
+</ResponseField>
+
+<ResponseField name="hq_city" type="string">
+  City of company headquarters. Example: `Nice`
+</ResponseField>
+
+<ResponseField name="hq_postal_code" type="string">
+  Postal code of company headquarters
+</ResponseField>
+
+<ResponseField name="hq_address" type="string">
+  Street address of company headquarters
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Company name. Example: `Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Company location. Example: `Nice, Provence-Alpes-Côte d'Azur, France`
+</ResponseField>
+
+<ResponseField name="was_not_available" type="boolean">
+  Whether company data was unavailable at scrape time. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_detailed" type="boolean">
+  Whether detailed company data was collected. Example: `true`
+</ResponseField>
+
+<ResponseField name="detailed_time" type="datetime">
+  Timestamp when detailed data was collected
+</ResponseField>
+
+<ResponseField name="last_scraping_time" type="datetime">
+  Timestamp of the last scraping
+</ResponseField>
+
+<ResponseField name="no_company_found" type="boolean">
+  Whether the company was not found on LinkedIn. Example: `false`
+</ResponseField>
+
+<ResponseField name="no_employees_details" type="boolean">
+  Whether employee details were unavailable. Example: `true`
+</ResponseField>

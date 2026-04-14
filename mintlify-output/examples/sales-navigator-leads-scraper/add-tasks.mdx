@@ -1,0 +1,112 @@
+---
+title: "Add Tasks"
+description: "Add LinkedIn Sales Navigator search URLs to scrape lead profiles"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add LinkedIn Sales Navigator search URLs to scrape lead profiles. This scraper requires a linked Sales Navigator account to access the data.
+
+Copy the search URL directly from Sales Navigator after applying your filters (company size, seniority level, industry, location, etc.). The scraper will paginate through the search results automatically.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Sales Navigator Leads Scraper crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Sales Navigator people search URL (e.g., `https://www.linkedin.com/sales/search/people?query=...`) |
+
+<Tip>
+  Apply filters in Sales Navigator first, then copy the URL. All filter parameters will be preserved.
+</Tip>
+
+<Note>
+  This scraper requires a linked Sales Navigator account. Ensure your account is properly connected before running.
+</Note>
+
+<Tip>
+  You can use saved searches in Sales Navigator and copy their URLs as tasks.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.linkedin.com/sales/search/people?query=(filters:List((type:SENIORITY_LEVEL,values:List((id:300,text:Vice%20President)))))"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Sales Navigator search URLs
+# Copy the URL directly from Sales Navigator after applying filters
+payload = {
+    "squid": squid_id,
+    "tasks": [
+        {
+            "url": "https://www.linkedin.com/sales/search/people?query=(filters:List((type:SENIORITY_LEVEL,values:List((id:300,text:Vice%20President)))))"
+        }
+    ]
+}
+
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json=payload
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "1995ef75ed06f21b514298b31caa8139",
+      "created_at": "2025-07-07T10:04:54.651445",
+      "is_active": true,
+      "params": {
+        "url": "https://www.linkedin.com/sales/search/people?query=(filters:List((type:SENIORITY_LEVEL,values:List((id:300,text:Vice%20President)))))"
+      },
+      "module": 2,
+      "object": "task"
+    }
+  ]
+}
+```

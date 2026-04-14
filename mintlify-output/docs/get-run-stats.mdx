@@ -1,0 +1,169 @@
+---
+title: "Get Run Stats"
+description: "Retrieve detailed statistics about a specific run"
+api: "GET https://api.lobstr.io/v1/runs/{run_hash}/stats"
+---
+
+This endpoint retrieves detailed real-time statistics about a specific run, including progress information, estimated time remaining, and task completion status.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="run_hash" type="string" required>
+  The unique identifier (hash) of the run. Example: `300e9c5c127d421c90f431478d9a2cfb`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  The run's unique identifier. Example: `"300e9c5c127d421c90f431478d9a2cfb"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "run". Example: `"run"`
+</ResponseField>
+
+<ResponseField name="duration" type="string">
+  Human-readable duration (HH:MM:SS format). Example: `"0:00:15.175532"`
+</ResponseField>
+
+<ResponseField name="started_at" type="string">
+  When the run started. Example: `"2025-02-10T14:30:55"`
+</ResponseField>
+
+<ResponseField name="ended_at" type="string | null">
+  When the run ended (null if still running). Example: `"2025-02-10T14:31:10"`
+</ResponseField>
+
+<ResponseField name="is_done" type="boolean">
+  Whether the run has completed. Example: `true`
+</ResponseField>
+
+<ResponseField name="percent_done" type="string">
+  Completion percentage. Example: `"100%"`
+</ResponseField>
+
+<ResponseField name="eta" type="string">
+  Estimated time remaining ("∞" if unknown). Example: `"∞"`
+</ResponseField>
+
+<ResponseField name="total_tasks" type="integer">
+  Total number of tasks in the run. Example: `10`
+</ResponseField>
+
+<ResponseField name="total_tasks_done" type="integer">
+  Number of tasks completed. Example: `10`
+</ResponseField>
+
+<ResponseField name="total_tasks_left" type="integer">
+  Number of tasks remaining. Example: `0`
+</ResponseField>
+
+<ResponseField name="total_results" type="integer">
+  Total results collected in this run. Example: `6`
+</ResponseField>
+
+<ResponseField name="results_total" type="integer">
+  Expected total results (if known). Example: `138`
+</ResponseField>
+
+<ResponseField name="results_done" type="integer">
+  Results collected so far. Example: `6`
+</ResponseField>
+
+<ResponseField name="current_task" type="string">
+  Currently executing task (empty if none). Example: `""`
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  Last update timestamp. Example: `"2025-02-10T14:31:10"`
+</ResponseField>
+
+<Tip>
+  Poll this endpoint periodically to display real-time progress in your application.
+</Tip>
+
+<Note>
+  The eta field provides an estimate but may show "∞" for runs with unpredictable completion times.
+</Note>
+
+<Tip>
+  Use percent_done for progress bars and total_tasks_left to show remaining work.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/runs/300e9c5c127d421c90f431478d9a2cfb/stats" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+import time
+
+run_hash = "300e9c5c127d421c90f431478d9a2cfb"
+url = f"https://api.lobstr.io/v1/runs/{run_hash}/stats"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+# Poll for progress updates
+while True:
+    response = requests.get(url, headers=headers)
+    stats = response.json()
+
+    print(f"Progress: {stats['percent_done']}")
+    print(f"Tasks: {stats['total_tasks_done']}/{stats['total_tasks']} completed")
+    print(f"Results: {stats['results_done']}/{stats['results_total']}")
+    print(f"Duration: {stats['duration']}")
+    print(f"ETA: {stats['eta']}")
+    print("---")
+
+    if stats['is_done']:
+        print("Run completed!")
+        break
+
+    time.sleep(5)  # Poll every 5 seconds
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "300e9c5c127d421c90f431478d9a2cfb",
+  "object": "run",
+  "duration": "0:00:15.175532",
+  "ended_at": "2025-02-10T14:31:10",
+  "eta": "∞",
+  "is_done": true,
+  "percent_done": "100%",
+  "started_at": "2025-02-10T14:30:55",
+  "total_requests": null,
+  "total_results": 6,
+  "total_tasks": 10,
+  "total_tasks_done": 10,
+  "total_tasks_left": 0,
+  "current_task": "",
+  "results_total": 138,
+  "results_done": 6,
+  "updated_at": "2025-02-10T14:31:10"
+}
+```
+
+```json 404
+{
+  "error": {
+    "message": "Run not found",
+    "type": "not_found_error",
+    "param": "run_hash"
+  }
+}
+```

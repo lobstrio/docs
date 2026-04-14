@@ -1,0 +1,151 @@
+---
+title: "Test Delivery Configuration"
+description: "Verify delivery configurations before activating them"
+api: "POST https://api.lobstr.io/v1/delivery/test-{route}"
+---
+
+Test endpoints allow you to verify your delivery configurations work correctly before activating automatic delivery. Each delivery method has its own test endpoint.
+
+### Available Test Endpoints
+
+| Endpoint | Route | Purpose |
+| --- | --- | --- |
+| **Test Email** | /v1/delivery/test-email | Verify email address can receive notifications |
+| **Test Google Sheet** | /v1/delivery/test-googlesheet | Verify sheet permissions and accessibility |
+| **Test Webhook** | /v1/delivery/test-webhook | Verify webhook endpoint is reachable and responding |
+| **Test Amazon S3** | /v1/delivery/test-s3 | Verify S3 bucket permissions and credentials |
+| **Test SFTP** | /v1/delivery/test-sftp | Verify SFTP server connectivity and credentials |
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="route" type="string" required>
+  The delivery method to test: 'email', 'googlesheet', 'webhook', 's3', or 'sftp'. Example: `email`
+</ParamField>
+
+## Test Email - Request Body
+
+<ParamField body="email" type="string" required>
+  Email address to test. Example: `"user@example.com"`
+</ParamField>
+
+## Test Google Sheet - Request Body
+
+<ParamField body="url" type="string" required>
+  Google Sheet URL to test permissions. Example: `"https://docs.google.com/spreadsheets/d/1ly9nwTs-hNaFCzWtSljevSf16chs5Nn0PIv_TpQSEhA/edit?usp=sharing"`
+</ParamField>
+
+## Test Webhook - Request Body
+
+<ParamField body="url" type="string" required>
+  Webhook endpoint URL to test. Example: `"https://your-webhook.com/endpoint"`
+</ParamField>
+
+## Test Amazon S3 - Request Body
+
+<ParamField body="bucket" type="string" required>
+  S3 bucket name to test. Example: `"my-bucket"`
+</ParamField>
+
+<ParamField body="aws_access_key" type="string">
+  (Optional) AWS Access Key for authentication. Example: `"AKIAIOSFODNN7EXAMPLE"`
+</ParamField>
+
+<ParamField body="aws_secret_key" type="string">
+  (Optional) AWS Secret Key for authentication. Example: `"wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"`
+</ParamField>
+
+## Test SFTP - Request Body
+
+<ParamField body="host" type="string" required>
+  SFTP server hostname or IP. Example: `"sftp.example.com"`
+</ParamField>
+
+<ParamField body="port" type="integer" required>
+  SFTP server port. Example: `22`
+</ParamField>
+
+<ParamField body="username" type="string" required>
+  SFTP username. Example: `"user"`
+</ParamField>
+
+<ParamField body="password" type="string" required>
+  SFTP password. Example: `"password"`
+</ParamField>
+
+<ParamField body="directory" type="string" required>
+  Target directory path. Example: `"/upload/path"`
+</ParamField>
+
+<Tip>
+  Always test your delivery configuration before activating automatic delivery to catch permission or connectivity issues early.
+</Tip>
+
+<Note>
+  Test endpoints do not require a squid parameter - they only verify that your credentials and endpoints work.
+</Note>
+
+<Warning>
+  A successful test response (success: true) means the configuration is valid, but doesn't guarantee future deliveries will succeed if permissions change.
+</Warning>
+
+<Tip>
+  For webhook tests, check the status_code field to ensure your endpoint returns 200/201/202 as expected.
+</Tip>
+
+<Note>
+  Test endpoints use the same validation logic as the actual delivery system, so a successful test is a reliable indicator.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/delivery/test-webhook" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://your-webhook.com/endpoint"
+  }'
+```
+
+```python Python
+import requests
+
+# Test webhook endpoint
+url = "https://api.lobstr.io/v1/delivery/test-webhook"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+payload = {
+    "url": "https://your-webhook.com/endpoint"
+}
+
+response = requests.post(url, headers=headers, json=payload)
+result = response.json()
+
+print("Webhook test completed!")
+print(f"Success: {result['success']}")
+if 'status_code' in result:
+    print(f"Status code: {result['status_code']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "success": true,
+  "status_code": 200
+}
+```

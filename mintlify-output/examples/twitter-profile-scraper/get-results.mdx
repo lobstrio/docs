@@ -1,0 +1,133 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Twitter Profile Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Twitter Profile Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="internal_id" type="string">
+  Unique internal Twitter/X identifier for the account. Example: `1720665183188922368`
+</ResponseField>
+
+<ResponseField name="is_blue_verified" type="boolean">
+  Whether the account has a Twitter Blue (X Premium) verified checkmark. Example: `true`
+</ResponseField>
+
+<ResponseField name="profile_image_shape" type="string">
+  Shape of the profile image displayed on Twitter/X (e.g. circle, square). Example: `Square`
+</ResponseField>
+
+<ResponseField name="affiliates_highlighted_label_description" type="string">
+  Description of the affiliate or organization label shown on the profile. Example: `xAI`
+</ResponseField>
+
+<ResponseField name="affiliates_highlighted_label_user_label_type" type="string">
+  Type of affiliate or organization label displayed on the profile. Example: `BusinessLabel`
+</ResponseField>
+
+<ResponseField name="created_at" type="datetime">
+  Date the Twitter/X account was created. Example: `2023-11-04T03:52:34+00:00`
+</ResponseField>
+
+<ResponseField name="favourites_count" type="integer">
+  Total number of tweets this account has liked. Example: `79`
+</ResponseField>
+
+<ResponseField name="followers_count" type="integer">
+  Total number of followers of this Twitter/X account. Example: `6434825`
+</ResponseField>
+
+<ResponseField name="following_count" type="integer">
+  Total number of accounts this profile follows. Example: `3`
+</ResponseField>
+
+<ResponseField name="listed_count" type="integer">
+  Number of public Twitter/X lists this account is included in. Example: `5064`
+</ResponseField>
+
+<ResponseField name="bio" type="string">
+  Bio text shown on the Twitter/X profile. Example: `https://t.co/fqNKQSiLQB
+@grok it`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Location shown on the Twitter/X profile. Example: `wherever you are`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Website URL linked on the Twitter/X profile. Example: `https://grok.com`
+</ResponseField>
+
+<ResponseField name="media_count" type="integer">
+  Total number of media items (photos and videos) posted by this account. Example: `2693370`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the Twitter/X account. Example: `Grok`
+</ResponseField>
+
+<ResponseField name="normal_followers_count" type="integer">
+  Number of followers excluding Twitter Blue subscribers. Example: `6434825`
+</ResponseField>
+
+<ResponseField name="possibly_sensitive" type="boolean">
+  Whether the account's content is flagged as possibly sensitive. Example: `false`
+</ResponseField>
+
+<ResponseField name="profile_banner_url" type="string">
+  URL of the account's profile banner or header image. Example: `https://pbs.twimg.com/profile_banners/1720665183188922368/1740213586`
+</ResponseField>
+
+<ResponseField name="profile_image_url_https" type="string">
+  URL of the account's profile picture. Example: `https://pbs.twimg.com/profile_images/1893219113717342208/Vgg2hEPa_normal.jpg`
+</ResponseField>
+
+<ResponseField name="screen_name" type="string">
+  Twitter/X handle of the account (without the @ symbol). Example: `grok`
+</ResponseField>
+
+<ResponseField name="posts_count" type="integer">
+  Total number of tweets published by this account. Example: `56218804`
+</ResponseField>
+
+<ResponseField name="super_follow_eligible" type="boolean">
+  Whether the account is eligible for Twitter Super Follows monetization. Example: `false`
+</ResponseField>
+
+<ResponseField name="verification_info_reason_description_text" type="string">
+  Reason the account is verified (e.g. government, company, notable). Example: `Denne kontoen er verifisert fordi den er tilknyttet @xai på X. Les mer`
+</ResponseField>
+
+<ResponseField name="creator_subscriptions_count" type="integer">
+  Number of subscribers to this account's paid creator content. Example: `0`
+</ResponseField>
+
+<ResponseField name="verified_since_msec" type="string">
+  Unix timestamp in milliseconds of when the account was verified. Example: `1699406829926`
+</ResponseField>
+
+<ResponseField name="_json" type="text">
+  Raw JSON profile data returned by the Twitter/X API
+</ResponseField>

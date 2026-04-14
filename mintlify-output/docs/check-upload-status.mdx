@@ -1,0 +1,143 @@
+---
+title: "Check Upload Status"
+description: "Monitor the status of a task upload operation"
+api: "GET https://api.lobstr.io/v1/tasks/upload/{upload_task_id}"
+---
+
+This endpoint checks the status of a task upload operation using the upload task ID returned from the Upload Tasks endpoint.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="upload_task_id" type="string" required>
+  The upload task ID returned from Upload Tasks endpoint. Example: `427a7bfc54cf4ce483d83ba23425164b`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Upload task identifier. Example: `"427a7bfc54cf4ce483d83ba23425164b"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "task_upload". Example: `"task_upload"`
+</ResponseField>
+
+<ResponseField name="state" type="string">
+  Current upload state (PENDING, PROGRESS, SUCCESS, FAILURE). Example: `"SUCCESS"`
+</ResponseField>
+
+<ResponseField name="meta.duplicates" type="integer">
+  Number of duplicate tasks skipped. Example: `0`
+</ResponseField>
+
+<ResponseField name="meta.inserted" type="integer">
+  Number of tasks successfully inserted. Example: `8`
+</ResponseField>
+
+<ResponseField name="meta.invalid" type="integer">
+  Number of invalid rows in the file. Example: `0`
+</ResponseField>
+
+<ResponseField name="meta.valid" type="integer">
+  Number of valid rows processed. Example: `8`
+</ResponseField>
+
+## State Values
+
+| State | Description |
+| --- | --- |
+| **PENDING** | Upload task is queued and waiting to start |
+| **PROGRESS** | File is being processed |
+| **SUCCESS** | Upload completed successfully |
+| **FAILURE** | Upload failed due to an error |
+
+<Tip>
+  Poll this endpoint periodically until state is SUCCESS or FAILURE before running your squid.
+</Tip>
+
+<Note>
+  Check meta.invalid to identify how many rows had issues. Review your CSV format if this number is high.
+</Note>
+
+<Warning>
+  Don't start a squid run until the upload state is SUCCESS, or you may miss tasks.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/tasks/upload/427a7bfc54cf4ce483d83ba23425164b" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+import time
+
+url = "https://api.lobstr.io/v1/tasks/upload/427a7bfc54cf4ce483d83ba23425164b"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+# Poll until upload completes
+while True:
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    state = data['state']
+    print(f"Upload state: {state}")
+
+    if state == "SUCCESS":
+        print(f"Inserted: {data['meta']['inserted']} tasks")
+        print(f"Duplicates: {data['meta']['duplicates']}")
+        print(f"Invalid rows: {data['meta']['invalid']}")
+        break
+    elif state == "FAILURE":
+        print("Upload failed!")
+        break
+    else:
+        time.sleep(2)  # Wait before polling again
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "427a7bfc54cf4ce483d83ba23425164b",
+  "object": "task_upload",
+  "state": "SUCCESS",
+  "meta": {
+    "duplicates": 0,
+    "inserted": 8,
+    "invalid": 0,
+    "valid": 8
+  }
+}
+```
+
+```json 202
+{
+  "id": "427a7bfc54cf4ce483d83ba23425164b",
+  "object": "task_upload",
+  "state": "PROGRESS",
+  "meta": null
+}
+```
+
+```json 404
+{
+  "error": {
+    "message": "Upload task not found",
+    "type": "not_found_error",
+    "param": "upload_task_id"
+  }
+}
+```

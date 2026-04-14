@@ -1,0 +1,93 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Linkedin Posts Commenters and Likers Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Linkedin Posts Commenters and Likers Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="profile_url" type="string">
+  Direct URL to the LinkedIn profile of the person who commented or liked. Example: `https://www.linkedin.com/in/jonathan-sardo`
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  First name of the LinkedIn member. Example: `Jonathan`
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  Last name of the LinkedIn member. Example: `SARDO`
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Full name of the LinkedIn member. Example: `Jonathan SARDO`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address found or enriched for this LinkedIn member. Example: `jonathan.sardo@uccellolabs.com`
+</ResponseField>
+
+<ResponseField name="email_status" type="string">
+  Validation status of the email address (e.g. valid, risky, invalid). Example: `valid`
+</ResponseField>
+
+<ResponseField name="post_url" type="string">
+  URL of the LinkedIn post being analyzed. Example: `https://www.linkedin.com/posts/ramzib_une-nouvelle-trend-arrive-sur-les-r%C3%A9seaux-activity-7419012050967748609-UkSj`
+</ResponseField>
+
+<ResponseField name="has_commented" type="boolean">
+  Whether this person commented on the post. Example: `true`
+</ResponseField>
+
+<ResponseField name="comment" type="string">
+  Text content of the comment left on the LinkedIn post. Example: `Je partage pas l'image car elle fait peur 😂
+
+Mais voilà ses arguments :
+
+Dans un monde où une IA prendrait le contrôle, les profils comme le tien ne seraient ni éliminés, ni ignorés.
+Ils seraient neutralisés symboliquement : contenus, mais observés.`
+</ResponseField>
+
+<ResponseField name="comment_url" type="string">
+  Direct URL to the comment on the LinkedIn post. Example: `https://www.linkedin.com/feed/update/urn:li:activity:7419012050967748609?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7419012050967748609%2C7419056809266618368%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287419056809266618368%2Curn%3Ali%3Aactivity%3A7419012050967748609%29`
+</ResponseField>
+
+<ResponseField name="has_liked" type="boolean">
+  Whether this person liked or reacted to the post. Example: `false`
+</ResponseField>
+
+<ResponseField name="reaction_type" type="string">
+  Type of reaction left on the post (e.g. Like, Celebrate, Support, Insightful)
+</ResponseField>
+
+<ResponseField name="result_type" type="string">
+  Whether this entry is a commenter or a liker. Example: `comment`
+</ResponseField>
+
+<ResponseField name="functions" type="json">
+  Additional enrichment functions enabled for this record. Example: `[]`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Timestamp when this record was scraped. Example: `2026-03-19T11:34:43Z`
+</ResponseField>

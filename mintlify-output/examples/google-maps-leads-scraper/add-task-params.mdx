@@ -1,0 +1,142 @@
+---
+title: "Add Task Params"
+description: "Add structured search tasks using city, category, and location parameters"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Use this format to dynamically define search inputs using structured metadata like city, category, and country. Location values can be obtained from the Get Geolocation endpoint. This method is ideal for automation and scaling across regions.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Task Parameters
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **city** | string | Yes | City name with postal code (e.g., `Alpine 91901`) |
+| **category** | string | Yes | Business category to search (e.g., `restaurant`) |
+| **country** | string | No | Country name (e.g., `United States`) |
+| **region** | string | No | State or province (e.g., `California`) |
+| **district** | string | No | County or local district (e.g., `San Diego`) |
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the google-maps-leads-scraper crawler |
+| **tasks** | array | Yes | Array of task objects with location parameters |
+
+<Tip>
+  Use the Get Geolocation endpoint to fetch valid values for city, region, and district.
+</Tip>
+
+<Note>
+  The `city` field must include the postal code (e.g., `Anaheim 92801`).
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tasks": [
+      {
+        "city": "Alpine 91901",
+        "category": "restaurant",
+        "country": "United States",
+        "region": "California",
+        "district": "San Diego"
+      },
+      {
+        "city": "Anaheim 92801",
+        "category": "restaurant",
+        "country": "United States"
+      }
+    ],
+    "squid": "YOUR_SQUID_HASH"
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add parameter-based tasks
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {
+                "city": "Alpine 91901",
+                "category": "restaurant",
+                "country": "United States",
+                "region": "California",
+                "district": "San Diego"
+            },
+            {
+                "city": "Anaheim 92801",
+                "category": "restaurant",
+                "country": "United States"
+            }
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+for task in data["tasks"]:
+    print(f"  {task['id']}: {task['params']['city']} - {task['params']['category']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "c3113ec3820d0253e2130b23f5b01a74",
+      "created_at": "2025-06-24T11:11:30.222467",
+      "is_active": true,
+      "params": {
+        "city": "Alpine 91901",
+        "category": "restaurant",
+        "country": "United States",
+        "region": "California",
+        "district": "San Diego"
+      },
+      "module": 5,
+      "object": "task"
+    },
+    {
+      "id": "d3deeac80b3dff7be992bb7f5d4ce63d",
+      "created_at": "2025-06-24T11:11:30.222613",
+      "is_active": true,
+      "params": {
+        "city": "Anaheim 92801",
+        "category": "restaurant",
+        "country": "United States"
+      },
+      "module": 5,
+      "object": "task"
+    }
+  ]
+}
+```

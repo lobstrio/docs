@@ -1,0 +1,188 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Instagram Reels Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Instagram Reels Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="reel_id" type="string">
+  Unique identifier for the Instagram reel. Example: `3650696636256953349`
+</ResponseField>
+
+<ResponseField name="shortcode" type="string">
+  Shortcode used in the reel URL (e.g. instagram.com/reel/[shortcode]). Example: `DKp4T-azyQF`
+</ResponseField>
+
+<ResponseField name="reel_url" type="string">
+  Direct URL to the Instagram reel. Example: `https://www.instagram.com/reel/DKp4T-azyQF/`
+</ResponseField>
+
+<ResponseField name="owner_username" type="string">
+  Instagram username of the reel author. Example: `mia_momsy`
+</ResponseField>
+
+<ResponseField name="owner_full_name" type="string">
+  Display name of the reel author on Instagram. Example: `Mia B`
+</ResponseField>
+
+<ResponseField name="owner_id" type="string">
+  Unique Instagram identifier of the reel author. Example: `63666136412`
+</ResponseField>
+
+<ResponseField name="likes_count" type="integer">
+  Number of likes the reel received. Example: `12760`
+</ResponseField>
+
+<ResponseField name="comments_count" type="integer">
+  Number of comments on the reel. Example: `84`
+</ResponseField>
+
+<ResponseField name="views_count" type="integer">
+  Total number of views the reel has accumulated. Example: `358030`
+</ResponseField>
+
+<ResponseField name="hashtags" type="string">
+  List of hashtags used in the reel caption. Example: `MacaroozMoments, PicnicWithMyMini, SweetestBond, macarooz, costco, mommyandme, macpops, sweet, decoration, picnic, picnicideas`
+</ResponseField>
+
+<ResponseField name="mentions" type="string">
+  Instagram accounts mentioned in the reel caption. Example: `macarooz`
+</ResponseField>
+
+<ResponseField name="tagged_users" type="json">
+  Instagram users tagged in the reel. Example: `[{'id': '1312299431', 'username': 'macarooz', 'full_name': 'Macarooz®', 'is_verified': True, 'profile_pic_url': 'https://scontent-sea5-1.cdninstagram.com/v/t51.2885-19/206341770_571610920891491_4020524377560378841_n.jpg'}]`
+</ResponseField>
+
+<ResponseField name="product_type" type="string">
+  Instagram product type (e.g. CLIPS). Example: `clips`
+</ResponseField>
+
+<ResponseField name="timestamp" type="datetime">
+  Unix timestamp of when the reel was published. Example: `2025-06-08T19:12:15+00:00`
+</ResponseField>
+
+<ResponseField name="caption" type="string">
+  Caption text of the reel. Example: `Sunshine, snuggles & yellow mac pops 💛🍋 A little mommy & me picnic never looked so sweet
+
+@macarooz mac pops are at COSTCO now! Go grab yours! 💕
+
+#MacaroozMoments #PicnicWithMyMini #SweetestBond #macarooz #costco #mommyandme #macpops #sweet #decoration #picnic #picnicideas`
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  Direct URL to the reel video file. Example: `https://scontent-sea5-1.cdninstagram.com/o1/v/t2/f2/m367/AQMmxqutkTZA2QUIaPBLi68o1kI6GUiSzPRdvqQsEQDQKm5j12ie-8Xrtq4R-BjuabXoN7scoeVCtMThpD0vOJR_vNNXyRhPy4kOjQ8.mp4`
+</ResponseField>
+
+<ResponseField name="display_url" type="string">
+  URL of the reel's cover or thumbnail image. Example: `https://scontent-sea5-1.cdninstagram.com/v/t51.2885-15/503516494_17911972110120413_6769091293526442063_n.jpg`
+</ResponseField>
+
+<ResponseField name="video_duration_seconds" type="float">
+  Duration of the reel video in seconds. Example: `29`
+</ResponseField>
+
+<ResponseField name="music_info" type="json">
+  Details of the music track used in the reel. Example: `{'audio_id': '2048642388993989', 'song_name': 'Original audio', 'artist_name': 'mia_momsy', 'is_explicit': False, 'is_trending': False, 'should_mute_audio': False, 'uses_original_audio': True, 'should_mute_audio_reason': ''}`
+</ResponseField>
+
+<ResponseField name="location_id" type="string">
+  Internal identifier for the location tagged in the reel. Example: `212983635`
+</ResponseField>
+
+<ResponseField name="location_name" type="string">
+  Name of the location tagged in the reel. Example: `San Diego, California`
+</ResponseField>
+
+<ResponseField name="is_sponsored" type="boolean">
+  Whether the reel is marked as a sponsored post. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_pinned" type="boolean">
+  Whether the reel is pinned to the top of the author's Instagram profile. Example: `false`
+</ResponseField>
+
+<ResponseField name="comments_disabled" type="boolean">
+  Whether comments are disabled on the reel. Example: `false`
+</ResponseField>
+
+<ResponseField name="like_and_view_counts_disabled" type="boolean">
+  Whether like and view counts are hidden on the reel. Example: `false`
+</ResponseField>
+
+<ResponseField name="can_viewer_reshare" type="boolean">
+  Whether the current viewer is allowed to reshare the reel. Example: `true`
+</ResponseField>
+
+<ResponseField name="co_authors" type="json">
+  Instagram accounts listed as co-authors of the reel. Example: `['macarooz']`
+</ResponseField>
+
+<ResponseField name="media_dimensions" type="string">
+  Width and height of the reel video in pixels. Example: `1080x1920`
+</ResponseField>
+
+<ResponseField name="functions" type="json">
+  Additional enrichment functions enabled for this record. Example: `{}`
+</ResponseField>
+
+<ResponseField name="comment1" type="json">
+  Text content of the 1st comment on the reel. Example: `{'text': "It looks very delicious, and the fact that it's gluten-free is great. Wishing you a fun time 😍", 'user': 'dygu.ylldrm', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment2" type="json">
+  Text content of the 2nd comment on the reel. Example: `{'text': 'This is absolutely adorable! The sunshine, those sweet snuggles, and the mac pops — total picnic goals!😍', 'user': 'daisy.diarys', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment3" type="json">
+  Text content of the 3rd comment on the reel. Example: `{'text': '🍰🥂 Totally adding them to my summer bucket list', 'user': 'chloecollabs', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment4" type="json">
+  Text content of the 4th comment on the reel. Example: `{'text': 'In every costco😮😍😍 I will try on my next shopping🙌', 'user': 'ugc_nazz', 'replies_count': 0}`
+</ResponseField>
+
+<ResponseField name="comment5" type="json">
+  Text content of the 5th comment on the reel. Example: `{'text': "Ohh, these are my son's absolute favorites enjoy! They look so delicious!😍😍😍", 'user': 'lifestylegizem', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment6" type="json">
+  Text content of the 6th comment on the reel. Example: `{'text': 'Okay but why does this look like the softest cake ever?! 😍', 'user': 'cansuchloe', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment7" type="json">
+  Text content of the 7th comment on the reel. Example: `{'text': 'Looks great outdoors 🙌 I want to try it right away 😍😍', 'user': 'kadriyekacagan', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment8" type="json">
+  Text content of the 8th comment on the reel. Example: `{'text': 'So adorable!!', 'user': 'theglutenfreetravelers', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment9" type="json">
+  Text content of the 9th comment on the reel. Example: `{'text': "I haven't try it before. Absolutely perfect 👏", 'user': 'es_erensenar', 'replies_count': 1}`
+</ResponseField>
+
+<ResponseField name="comment10" type="json">
+  Text content of the 10th comment on the reel. Example: `{'text': 'Wow the atmosphere is amazing ❤️ I love Mac pop, I will definitely try it 🥰❤️', 'user': 'amerikadabirturkanne', 'replies_count': 1}`
+</ResponseField>

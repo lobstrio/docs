@@ -1,0 +1,76 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Facebook Pages Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Facebook Pages Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the Facebook page. Example: `https://www.facebook.com/gagnantgagnantbarajeux`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Name of the Facebook page. Example: `Bar à jeux Bordeaux : Gagnant Gagnant`
+</ResponseField>
+
+<ResponseField name="slug" type="string">
+  URL slug of the Facebook page (e.g. used in facebook.com/slug). Example: `gagnantgagnantbarajeux`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Category of the Facebook page (e.g. Restaurant, Brand). Example: `Bar`
+</ResponseField>
+
+<ResponseField name="map_url" type="string">
+  Map link for the Facebook page's location. Example: `https://maps.google.com/maps?q=39+quai+de+bacalan%2C+Bordeaux%2C+France`
+</ResponseField>
+
+<ResponseField name="address" type="text">
+  Full address of the Facebook page's location. Example: `39 quai de bacalan, Bordeaux, France, 33300`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Phone number listed on the Facebook page. Example: `06 28 32 57 39`
+</ResponseField>
+
+<ResponseField name="likes" type="int">
+  Total number of likes on the Facebook page. Example: `576`
+</ResponseField>
+
+<ResponseField name="followers" type="int">
+  Total number of followers of the Facebook page. Example: `576`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address listed on the Facebook page. Example: `barajeuxbordeaux@gmail.com`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Website URL linked to the Facebook page. Example: `https://gg33.fr/le-bar-a-jeux/`
+</ResponseField>
+
+<ResponseField name="instagram" type="string">
+  Instagram profile URL linked to the Facebook page. Example: `https://www.instagram.com/gagnant_gagnant`
+</ResponseField>

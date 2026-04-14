@@ -1,0 +1,218 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from a squid or specific run"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+This endpoint retrieves a paginated list of results (scraped data) produced by a squid. You can query results for an entire squid or filter to a specific run and/or task.
+
+**Important:** You must supply either the `squid` hash OR a specific `run` hash — not both.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | One of* | Hash of the squid. Returns all results across all runs if `run` is omitted |
+| **run** | string | One of* | Hash of the run. Returns results from that single execution only |
+| **task** | string | No | Hash of a specific task. Filters results to just that task |
+| **page** | integer | No | Page number to fetch (1-indexed). Default: 1 |
+| **page_size** | integer | No | Number of results per page. Default: 50, Max: 100 |
+
+## Response Field Explanations
+
+<ResponseField name="total_results" type="integer">
+  Total number of result records available. Example: `156`
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  The page_size requested (or default). Example: `50`
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page number. Example: `1`
+</ResponseField>
+
+<ResponseField name="total_pages" type="integer">
+  Total number of pages available. Example: `4`
+</ResponseField>
+
+<ResponseField name="result_from" type="integer">
+  1-based index of the first record in this page. Example: `1`
+</ResponseField>
+
+<ResponseField name="result_to" type="integer">
+  1-based index of the last record in this page. Example: `50`
+</ResponseField>
+
+<ResponseField name="next" type="string | null">
+  Full URL to fetch the next page (null if last page). Example: `"https://api.lobstr.io/v1/results?squid=...&page=2"`
+</ResponseField>
+
+<ResponseField name="previous" type="string | null">
+  Full URL to fetch the previous page (null if first page). Example: `null`
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of result objects. Schema varies by crawler type. Example: `[...]`
+</ResponseField>
+
+<ResponseField name="data[].id" type="string">
+  Unique result identifier. Example: `"b4af52b85c45661828d61980c167054b"`
+</ResponseField>
+
+<ResponseField name="data[].object" type="string">
+  Always "result". Example: `"result"`
+</ResponseField>
+
+<ResponseField name="data[].squid" type="string">
+  Squid that produced this result. Example: `"b6c56d18cb0046949461ba9ca278e8ad"`
+</ResponseField>
+
+<ResponseField name="data[].run" type="string">
+  Run that produced this result. Example: `"300e9c5c127d421c90f431478d9a2cfb"`
+</ResponseField>
+
+<ResponseField name="data[].scraping_time" type="string">
+  When this result was scraped (ISO 8601). Example: `"2025-02-10T14:31:05.487Z"`
+</ResponseField>
+
+## Result Data Schema
+
+The fields within each result object depend on the crawler used. For example, a Google Maps crawler returns fields like `name`, `address`, `phone`, `website`, `ratings`, `score`, etc., while a LinkedIn crawler returns different fields.
+
+Use the Get Crawler Details endpoint to understand what fields your specific crawler returns.
+
+<Tip>
+  Use the `next` URL to automatically paginate through all results until it returns null.
+</Tip>
+
+<Note>
+  Result schemas vary by crawler. The fields returned depend on what data the crawler extracts.
+</Note>
+
+<Warning>
+  You must provide either `squid` OR `run` — providing both or neither will result in an error.
+</Warning>
+
+<Tip>
+  For large result sets, increase page_size to 100 to reduce the number of API calls needed.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=b6c56d18cb0046949461ba9ca278e8ad&page=1&page_size=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/results"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+params = {
+    "squid": "b6c56d18cb0046949461ba9ca278e8ad",
+    # OR use "run": "run_hash" to get results from a specific run
+    "page": 1,
+    "page_size": 50
+}
+
+# Fetch all results with pagination
+all_results = []
+
+while True:
+    response = requests.get(url, headers=headers, params=params)
+    data = response.json()
+
+    all_results.extend(data['data'])
+    print(f"Fetched page {data['page']} of {data['total_pages']}")
+
+    if data['next'] is None:
+        break
+
+    # Use the next URL directly for subsequent requests
+    url = data['next']
+    params = {}  # Clear params as they're in the URL
+
+print(f"\nTotal results collected: {len(all_results)}")
+
+# Process results
+for result in all_results[:5]:  # Show first 5
+    print(f"- {result.get('name', 'N/A')}: {result.get('address', 'N/A')}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 156,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 4,
+  "result_from": 1,
+  "result_to": 50,
+  "data": [
+    {
+      "id": "b4af52b85c45661828d61980c167054b",
+      "object": "result",
+      "squid": "b6c56d18cb0046949461ba9ca278e8ad",
+      "run": "300e9c5c127d421c90f431478d9a2cfb",
+      "name": "1860 Le Palais",
+      "address": "9 La Canebière Vieux Port, 13001 Marseille, France",
+      "phone": "+33491995484",
+      "website": "https://www.1860lepalais.fr/",
+      "category": "French restaurant, Brunch restaurant, Mediterranean restaurant",
+      "score": 4.4,
+      "ratings": 1220,
+      "lat": 43.2960548,
+      "lng": 5.3751573,
+      "city": "Marseille",
+      "country": "France",
+      "zip_code": "13001",
+      "opening_hours": "Monday 9 AM–10:30 PM, Tuesday 9 AM–10:30 PM...",
+      "scraping_time": "2025-02-10T14:31:05.487Z"
+    },
+    {
+      "id": "ec2348622e01fa0ed43e7c73b43665a1",
+      "object": "result",
+      "squid": "b6c56d18cb0046949461ba9ca278e8ad",
+      "run": "300e9c5c127d421c90f431478d9a2cfb",
+      "name": "Wood la cantine gourmande",
+      "address": "8 Rue de la Guirlande, 13002 Marseille, France",
+      "phone": "+33491919342",
+      "website": "https://woodlacantinegourmande.fr/",
+      "category": "French restaurant, Mediterranean restaurant",
+      "score": 4.7,
+      "ratings": 726,
+      "lat": 43.296790699999995,
+      "lng": 5.3704969,
+      "city": "Marseille",
+      "country": "France",
+      "zip_code": "13002",
+      "scraping_time": "2025-02-10T14:31:06.104Z"
+    }
+  ],
+  "next": "https://api.lobstr.io/v1/results?squid=b6c56d18cb0046949461ba9ca278e8ad&page=2&page_size=50",
+  "previous": null
+}
+```
+
+```json 400
+{
+  "error": {
+    "message": "You must provide either 'squid' or 'run' parameter, not both or neither",
+    "type": "validation_error",
+    "param": "squid,run"
+  }
+}
+```

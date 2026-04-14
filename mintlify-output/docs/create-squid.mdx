@@ -1,0 +1,148 @@
+---
+title: "Create Squid"
+description: "Create a new squid container for a specific crawler to organize and run scraping tasks"
+api: "POST https://api.lobstr.io/v1/squids"
+---
+
+This endpoint creates a new squid for a specified crawler by providing the crawler's hash ID. A squid is a container that groups together related tasks and configurations for a specific scraping operation.
+
+## What is a Squid?
+
+A squid acts as a project workspace for your scraping tasks:
+- **Groups tasks**: All URLs or items you want to scrape with the same crawler
+- **Stores configuration**: Crawler parameters, concurrency settings, delivery options
+- **Manages runs**: Tracks execution history and results
+- **Enables scheduling**: Set up automated recurring scrapes
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+<ParamField body="crawler" type="string" required>
+  The unique ID (hash) of the crawler to use for this squid. Example: `"4734d096159ef05210e0e1677e8be823"`
+</ParamField>
+
+<ParamField body="name" type="string">
+  Custom name for the squid. If not provided, an auto-generated name will be used. Example: `"My Google Maps Scraper"`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Unique squid identifier. Example: `"c106a44a98044ef18acc59986ae10967"`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Squid name (auto-generated as "Crawler Name (N)" if not provided). Example: `"Google Maps (1)"`
+</ResponseField>
+
+<ResponseField name="crawler" type="string">
+  ID of the associated crawler. Example: `"4734d096159ef05210e0e1677e8be823"`
+</ResponseField>
+
+<ResponseField name="is_active" type="boolean">
+  Whether the squid is active and can run. Example: `true`
+</ResponseField>
+
+<ResponseField name="concurrency" type="integer">
+  Number of concurrent tasks (default: 1). Example: `1`
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  Squid-level parameters with default values from crawler. Example: `{}`
+</ResponseField>
+
+<ResponseField name="schedule" type="object | null">
+  Cron schedule configuration (null if not scheduled). Example: `null`
+</ResponseField>
+
+<ResponseField name="to_complete" type="boolean">
+  Whether to stop after all tasks complete (false = run continuously). Example: `false`
+</ResponseField>
+
+<Tip>
+  After creating a squid, you can update its parameters and settings using the Update Squid endpoint before adding tasks.
+</Tip>
+
+<Note>
+  The squid automatically inherits default parameters from the crawler. Check the response 'params' field to see what defaults were applied.
+</Note>
+
+<Tip>
+  Custom names help organize multiple squids using the same crawler. Without a custom name, squids are numbered sequentially.
+</Tip>
+
+<Warning>
+  Make sure to get the crawler ID from the List Crawlers endpoint first. Using an invalid crawler ID will result in an error.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "crawler": "4734d096159ef05210e0e1677e8be823",
+    "name": "My Google Maps Scraper"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/squids"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+payload = {
+    "crawler": "4734d096159ef05210e0e1677e8be823",
+    "name": "My Google Maps Scraper"
+}
+
+response = requests.post(url, headers=headers, json=payload)
+squid = response.json()
+
+print(f"Squid created successfully!")
+print(f"ID: {squid['id']}")
+print(f"Name: {squid['name']}")
+print(f"Crawler: {squid['crawler']}")
+print(f"Is Active: {squid['is_active']}")
+print(f"Concurrency: {squid['concurrency']}")
+print(f"\nDefault Parameters:")
+for key, value in squid['params'].items():
+    print(f"  {key}: {value}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "e86b29c032024b66aff529e1d43c2bd7",
+  "account": [],
+  "concurrency": 1,
+  "crawler": "4734d096159ef05210e0e1677e8be823",
+  "created_at": "2025-02-03T14:24:23Z",
+  "is_active": true,
+  "name": "My Google Maps Scraper",
+  "params": {
+    "max_results": 200,
+    "ratings": "Any rating",
+    "country": "United States",
+    "language": "English (United States)"
+  },
+  "schedule": null,
+  "to_complete": false
+}
+```

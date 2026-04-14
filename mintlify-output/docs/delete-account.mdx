@@ -1,0 +1,108 @@
+---
+title: "Delete Account"
+description: "Permanently remove a platform account from your Lobstr account"
+api: "DELETE https://api.lobstr.io/v1/accounts/{account_hash}"
+---
+
+This endpoint permanently removes a specific platform account using its hash ID. All associated cookies and configurations will be deleted.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="account_hash" type="string" required>
+  The unique identifier (hash) of the account to delete. Example: `d3e97f2cd33658f301bdbe807402ab30`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  The deleted account's identifier. Example: `"d3e97f2cd33658f301bdbe807402ab30"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "account". Example: `"account"`
+</ResponseField>
+
+<ResponseField name="deleted" type="string">
+  Confirmation of deletion (always "true" on success). Example: `"true"`
+</ResponseField>
+
+<Warning>
+  This action is permanent and cannot be undone. Make sure no active squids are using this account before deletion.
+</Warning>
+
+<Tip>
+  Use Get Account Details first to check the squids array and see which squids depend on this account.
+</Tip>
+
+<Note>
+  Deleting an account does not affect your squids, but they will fail to run if they require this account for authentication.
+</Note>
+
+<Warning>
+  If you're experiencing cookie issues, use Refresh Cookies instead of deleting and re-creating the account.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X DELETE "https://api.lobstr.io/v1/accounts/d3e97f2cd33658f301bdbe807402ab30" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+account_hash = "d3e97f2cd33658f301bdbe807402ab30"
+
+url = f"https://api.lobstr.io/v1/accounts/{account_hash}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+# First, check if any squids are using this account
+details_response = requests.get(url, headers=headers)
+account = details_response.json()['data'][0]
+
+if account['squids']:
+    print("Warning: The following squids are using this account:")
+    for squid in account['squids']:
+        print(f"   - {squid['name']}")
+    print("\nDeleting will cause these squids to fail.")
+    confirm = input("Continue? (y/n): ")
+    if confirm.lower() != 'y':
+        print("Cancelled.")
+        exit()
+
+# Delete the account
+response = requests.delete(url, headers=headers)
+data = response.json()
+
+if data.get('deleted') == 'true':
+    print(f"✓ Account {data['id']} deleted successfully")
+else:
+    print(f"✗ Failed to delete account")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "d3e97f2cd33658f301bdbe807402ab30",
+  "object": "account",
+  "deleted": "true"
+}
+```
+
+```json 404
+{
+  "detail": "Account not found."
+}
+```

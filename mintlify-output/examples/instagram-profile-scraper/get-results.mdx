@@ -1,0 +1,215 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Instagram Profile Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Instagram Profile Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="profile_url" type="string">
+  Direct URL to the Instagram profile. Example: `https://www.instagram.com/rap/`
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  Instagram username of the account. Example: `rap`
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Display name of the Instagram account. Example: `RapTV`
+</ResponseField>
+
+<ResponseField name="biography" type="string">
+  Bio text shown on the Instagram profile page. Example: `What's Next in Hip Hop & Culture‼️
+🔋 a @lowbattery brand
+🌐 @bars @concert @drip
+⬇️Purchase RapTV's "What A Time" Zine`
+</ResponseField>
+
+<ResponseField name="profile_pic_url" type="string">
+  URL of the account's Instagram profile picture. Example: `https://scontent-sea1-1.cdninstagram.com/v/t51.2885-19/606497536_18573290305036669_6922238950325835238_n.jpg?stp=dst-jpg_s320x320_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1&_nc_oc=Q6cZ2QGLXYrAma8EncSqcOiqKIcHKbxVivwPqYwx_xj92YylT2fDFMMKI-V3K1wfaUNhtvQ&_nc_ohc=2lxJXKMwDVIQ7kNvwGOIvuK&_nc_gid=GbO4qzpMwEDC4wLEu3EOeQ&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Afobuv01_l-OtINPJ-wg-xxgJlqZyMUEyjk5yy9AZcqefQ&oe=6962A8EB&_nc_sid=8b3546`
+</ResponseField>
+
+<ResponseField name="profile_id" type="bigint">
+  Unique internal identifier for the Instagram account. Example: `1459940668`
+</ResponseField>
+
+<ResponseField name="fbid" type="bigint">
+  Internal Facebook/Meta identifier linked to the Instagram account. Example: `17841401100062811`
+</ResponseField>
+
+<ResponseField name="followers_count" type="integer">
+  Total number of Instagram followers. Example: `12747786`
+</ResponseField>
+
+<ResponseField name="follows_count" type="integer">
+  Total number of accounts this profile follows. Example: `1607`
+</ResponseField>
+
+<ResponseField name="posts_count" type="integer">
+  Total number of posts published by this account. Example: `55976`
+</ResponseField>
+
+<ResponseField name="is_private" type="boolean">
+  Whether the Instagram account is set to private. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether the account has a verified badge on Instagram. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_business_account" type="boolean">
+  Whether the account is registered as an Instagram Business account. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_professional_account" type="boolean">
+  Whether the account is registered as a Professional (Creator or Business) account. Example: `true`
+</ResponseField>
+
+<ResponseField name="joined_recently" type="boolean">
+  Whether the account was created recently on Instagram. Example: `false`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Category or niche of the account (e.g. Public Figure, Artist, Restaurant). Example: `Media/news company`
+</ResponseField>
+
+<ResponseField name="business_email" type="string">
+  Email address listed on the Instagram business profile
+</ResponseField>
+
+<ResponseField name="business_phone_number" type="string">
+  Phone number listed on the Instagram business profile
+</ResponseField>
+
+<ResponseField name="business_contact_method" type="string">
+  Preferred contact method configured on the Instagram business profile. Example: `UNKNOWN`
+</ResponseField>
+
+<ResponseField name="external_url_1" type="json">
+  First external link listed in the Instagram profile bio. Example: `{'url': 'https://linkin.bio/raptv', 'title': '', 'lynx_url': 'https://l.instagram.com/?u=https%3A%2F%2Flinkin.bio%2Fraptv&e=AT1y8V__CJ3AzWE2k-FOtdtu84FoBDS37Q5xu8e2Qwu26y5gfDH6fPjwXDM3yPFOg1_2j4HyXudJsgN_Ss8YZ0ZBXMeMZKkP', 'link_type': 'external'}`
+</ResponseField>
+
+<ResponseField name="external_url_2" type="json">
+  Second external link listed in the Instagram profile bio. Example: `{'url': 'http://whatatimezine.com', 'title': 'RapTV Zine', 'lynx_url': 'https://l.instagram.com/?u=http%3A%2F%2Fwhatatimezine.com%2F&e=AT3B5UMx3zD_egGreWtkNTBf8Ns1ylMOeK6w9F3TuIJjOZdXssF9nDM2MpEkBAs6H8FL9ACXPzGtY2mjq5e1lBPPCYmRh3RG', 'link_type': 'external'}`
+</ResponseField>
+
+<ResponseField name="external_url_3" type="json">
+  Third external link listed in the Instagram profile bio. Example: `{'url': 'https://teamwater.org/', 'title': 'Team Water', 'lynx_url': 'https://l.instagram.com/?u=https%3A%2F%2Fteamwater.org%2F&e=AT2j42otjhH4ej8VjauY1AwMkA7Enhrkkib8Fi8SqcfWMorigPVsTSohy1Wm6VHBVA684itOmoP6u2O4DTSw0Od7yBj6zz6H', 'link_type': 'external'}`
+</ResponseField>
+
+<ResponseField name="all_external_urls" type="json">
+  All external links listed in the Instagram profile bio. Example: `[{'url': 'https://linkin.bio/raptv', 'title': '', 'lynx_url': 'https://l.instagram.com/?u=https%3A%2F%2Flinkin.bio%2Fraptv&e=AT1y8V__CJ3AzWE2k-FOtdtu84FoBDS37Q5xu8e2Qwu26y5gfDH6fPjwXDM3yPFOg1_2j4HyXudJsgN_Ss8YZ0ZBXMeMZKkP', 'link_type': 'external'}, {'url': 'http://whatatimezine.com', 'title': 'RapTV Zine', 'lynx_url': 'https://l.instagram.com/?u=http%3A%2F%2Fwhatatimezine.com%2F&e=AT3B5UMx3zD_egGreWtkNTBf8Ns1ylMOeK6w9F3TuIJjOZdXssF9nDM2MpEkBAs6H8FL9ACXPzGtY2mjq5e1lBPPCYmRh3RG', 'link_type': 'external'}, {'url': 'https://teamwater.org/', 'title': 'Team Water', 'lynx_url': 'https://l.instagram.com/?u=https%3A%2F%2Fteamwater.org%2F&e=AT2j42otjhH4ej8VjauY1AwMkA7Enhrkkib8Fi8SqcfWMorigPVsTSohy1Wm6VHBVA684itOmoP6u2O4DTSw0Od7yBj6zz6H', 'link_type': 'external'}]`
+</ResponseField>
+
+<ResponseField name="highlight_reel_count" type="integer">
+  Total number of story highlight reels on the profile. Example: `9`
+</ResponseField>
+
+<ResponseField name="igtv_video_count" type="integer">
+  Total number of IGTV videos published by this account. Example: `73`
+</ResponseField>
+
+<ResponseField name="has_channel" type="boolean">
+  Whether the account has a linked broadcast channel on Instagram. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_clips" type="boolean">
+  Whether the account has Instagram Clips (Reels) content. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_guides" type="boolean">
+  Whether the account has Instagram Guides. Example: `false`
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_1" type="json">
+  URL of the 1st most recent IGTV video. Example: `{'id': '2990969497965202326', 'url': 'https://www.instagram.com/reel/CmCDulcPouW/', 'likes': 53671, 'title': '', 'views': 270959, 'caption': "#SauceWalka met his biggest fan‼👀 Walka met a fan who he deeply impacted. How do y'all feel about this⁉🤔", 'comments': 458, 'duration': 87.466, 'location': None, 'posted_at': 1670771399, 'shortcode': 'CmCDulcPouW', 'thumbnail_url': 'https://scontent-sea5-1.cdninstagram.com/v/t51.2885-15/319123546_157570383298762_6241505073778244047_n.jpg?stp=c0.135.1080.1080a_dst-jpg_e35_s640x640_sh0.08_tt6&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_cat=110&_nc_oc=Q6cZ2QGLXYrAma8EncSqcOiqKIcHKbxVivwPqYwx_xj92YylT2fDFMMKI-V3K1wfaUNhtvQ&_nc_ohc=lp6CmfKnNQ0Q7kNvwFzF7Db&_nc_gid=GbO4qzpMwEDC4wLEu3EOeQ&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfqYcgvDGdlW_F8QBaiI5mFbVF1xX2nWGKMQzvWJC_3tyQ&oe=6962C607&_nc_sid=8b3546'}`
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_2" type="json">
+  URL of the 2nd most recent IGTV video. Example: `{'id': '2893228810109674349', 'url': 'https://www.instagram.com/reel/Cgm0EYYg2Nt/', 'likes': 94409, 'title': '', 'views': 498586, 'caption': "#DJKhaled trying to hit the Mega Millions for the $1 Billion cash prize. Did y'all cop a ticket⁉️ Follow @BARS for behind the scenes content‼️", 'comments': 698, 'duration': 24.7, 'location': None, 'posted_at': 1659119853, 'shortcode': 'Cgm0EYYg2Nt', 'thumbnail_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/296164237_591475512329436_3321149571347964908_n.jpg?stp=c0.89.720.720a_dst-jpg_e15_s640x640_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2QGLXYrAma8EncSqcOiqKIcHKbxVivwPqYwx_xj92YylT2fDFMMKI-V3K1wfaUNhtvQ&_nc_ohc=HyQoqdl3TdMQ7kNvwGuat83&_nc_gid=GbO4qzpMwEDC4wLEu3EOeQ&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfoHCA3EKBDke63AjLJrvy-vx8d30TB2Coq5jcNOP8o10g&oe=6962AB6D&_nc_sid=8b3546'}`
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_3" type="json">
+  URL of the 3rd most recent IGTV video. Example: `{'id': '2893131765138890716', 'url': 'https://www.instagram.com/reel/CgmeAMNgJ_c/', 'likes': 215238, 'title': '', 'views': 915592, 'caption': 'Will Smith just released a 5 minute video addressing him slapping Chris Rock, as well as apologizing to him and his family‼️😳', 'comments': 1610, 'duration': 50.366, 'location': None, 'posted_at': 1659108234, 'shortcode': 'CgmeAMNgJ_c', 'thumbnail_url': 'https://scontent-sea5-1.cdninstagram.com/v/t51.2885-15/296436953_3345570412396450_1515402937347091776_n.jpg?stp=c0.89.720.720a_dst-jpg_e15_s640x640_tt6&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_cat=110&_nc_oc=Q6cZ2QGLXYrAma8EncSqcOiqKIcHKbxVivwPqYwx_xj92YylT2fDFMMKI-V3K1wfaUNhtvQ&_nc_ohc=aH7BIxYEE-0Q7kNvwHOWlsc&_nc_gid=GbO4qzpMwEDC4wLEu3EOeQ&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_Afp5Oa4gBnJH62Oe4W3grJHD7jWOJQ-Z2Qjq2LRE6LSRcw&oe=6962DDDD&_nc_sid=8b3546'}`
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_4" type="json">
+  URL of the 4th most recent IGTV video. Example: `{'id': '2892870456929653049', 'url': 'https://www.instagram.com/reel/Cglilp-g5E5/', 'likes': 52183, 'title': '', 'views': 284444, 'caption': "#Drake kicking off his October World Weekend concert. Y'all rockin with it⁉️ Follow @concert for more‼️ 🎥 @complexcanada", 'comments': 274, 'duration': 56.366, 'location': None, 'posted_at': 1659077276, 'shortcode': 'Cglilp-g5E5', 'thumbnail_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/295911941_722017562193368_4950961007415968397_n.jpg?stp=c0.89.720.720a_dst-jpg_e15_s640x640_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=108&_nc_oc=Q6cZ2QGLXYrAma8EncSqcOiqKIcHKbxVivwPqYwx_xj92YylT2fDFMMKI-V3K1wfaUNhtvQ&_nc_ohc=HDeXsVapBBwQ7kNvwEgm58o&_nc_gid=GbO4qzpMwEDC4wLEu3EOeQ&edm=AOQ1c0wBAAAA&ccb=7-5&oh=00_AfqhhjUn-99-pPay_mtQ9OZi-JlWz58vJv3tC0OI5KgxuA&oe=6962B740&_nc_sid=8b3546'}`
+</ResponseField>
+
+<ResponseField name="latest_post_1" type="json">
+  URL of the 1st most recent post. Example: `{'id': '3781759654318683349', 'url': 'https://www.instagram.com/p/DR7gl51kbTV/', 'type': 'GraphSidecar', 'likes': 66646, 'views': None, 'caption': 'The #RapTV Power Rankings for November 2025 have been revealed‼️🔥 Click the link in bio to see why these artists made the cut 👀', 'comments': 650, 'is_video': False, 'location': None, 'posted_at': 1765040903, 'shortcode': 'DR7gl51kbTV', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/591164148_18569581537036669_7700805801646043012_n.jpg?stp=dst-jpg_e35_p1080x1080_sh0.08_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=101', 'media_count': 3, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_2" type="json">
+  URL of the 2nd most recent post. Example: `{'id': '3781084211714274896', 'url': 'https://www.instagram.com/p/DR5HA65ETZQ/', 'type': 'GraphSidecar', 'likes': 44670, 'views': None, 'caption': "Hit the link in bio to find out more about our Next-Up Class of 2025‼️ Y'all rockin' with any of them already⁉️", 'comments': 707, 'is_video': False, 'location': None, 'posted_at': 1764960384, 'shortcode': 'DR5HA65ETZQ', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1350}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/591144857_18569396479036669_6331524991528286918_n.jpg?stp=dst-jpg_e15_fr_p1080x1080_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=101', 'media_count': 18, 'product_type': None, 'tagged_users': [{'id': '3259531369', 'username': 'paymeskrilla', 'full_name': 'Skrilla🦴🐾🦴🐾', 'is_verified': True}, {'id': '7499114046', 'username': 'hurricane.wisdom', 'full_name': 'Wisdom🐢🇳🇬', 'is_verified': True}]}`
+</ResponseField>
+
+<ResponseField name="latest_post_3" type="json">
+  URL of the 3rd most recent post. Example: `{'id': '3744292296867999545', 'url': 'https://www.instagram.com/p/DP2ZgGCDG85/', 'type': 'GraphVideo', 'likes': 541957, 'views': 3056279, 'caption': 'KODAK BLACK MEDIA DAY EP 1‼️ Full freestyle @ link in bio 🎙️', 'comments': 13675, 'is_video': True, 'location': None, 'posted_at': 1760574556, 'shortcode': 'DP2ZgGCDG85', 'audio_info': {'audio_id': '1525594238568663', 'song_name': 'Original audio', 'artist_name': 'rap', 'uses_original_audio': True}, 'dimensions': {'width': 640, 'height': 1136}, 'display_url': 'https://scontent-sea5-1.cdninstagram.com/v/t51.2885-15/566773246_1340921630964055_2651647205854198667_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-sea5-1.cdninstagram.com&_nc_cat=107', 'media_count': None, 'product_type': 'clips', 'tagged_users': [{'id': '192197495', 'username': 'kodakblack', 'full_name': 'Bill Russell', 'is_verified': True}]}`
+</ResponseField>
+
+<ResponseField name="latest_post_4" type="json">
+  URL of the 4th most recent post. Example: `{'id': '3803885781283408912', 'url': 'https://www.instagram.com/p/DTKHfbXjowQ/', 'type': 'GraphSidecar', 'likes': 23457, 'views': None, 'caption': "We got two highly anticipated albums dropping this month‼️💿 Which one are y'all most excited for⁉️🤔 'BULLY' by #Ye OR 'DON'T BE DUMB' by #ASAPRocky Let us know down below‼️👇", 'comments': 413, 'is_video': False, 'location': None, 'posted_at': 1767678543, 'shortcode': 'DTKHfbXjowQ', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/610800578_18575383822036669_370893365218059988_n.jpg?stp=dst-jpg_e15_fr_p1080x1080_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': 3, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_5" type="json">
+  URL of the 5th most recent post. Example: `{'id': '3803871417327293855', 'url': 'https://www.instagram.com/p/DTKEOZ5DhWf/', 'type': 'GraphSidecar', 'likes': 46127, 'views': None, 'caption': "#Rakai is now unbanned on Twitch and he celebrated by being uncuffed by the police‼️🚨 Y'all happy to see Rakai back⁉️🤔", 'comments': 290, 'is_video': False, 'location': None, 'posted_at': 1767676830, 'shortcode': 'DTKEOZ5DhWf', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/609252800_18575380657036669_7913948580798256570_n.jpg?stp=dst-jpg_e35_p1080x1080_sh0.08_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': 2, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_6" type="json">
+  URL of the 6th most recent post. Example: `{'id': '3803836179947474913', 'url': 'https://www.instagram.com/p/DTJ8NohjE_h/', 'type': 'GraphSidecar', 'likes': 20362, 'views': None, 'caption': 'Mugshots from #ASAPRocky\'s "Punk Rocky" video‼️🎥', 'comments': 96, 'is_video': False, 'location': None, 'posted_at': 1767672630, 'shortcode': 'DTJ8NohjE_h', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/611342679_18575373289036669_125946305517673975_n.jpg?stp=dst-jpg_e35_p1080x1080_sh0.08_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': 10, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_7" type="json">
+  URL of the 7th most recent post. Example: `{'id': '3803789983816098876', 'url': 'https://www.instagram.com/p/DTJxtZBjCQ8/', 'type': 'GraphSidecar', 'likes': 21184, 'views': None, 'caption': "#Ye has earned over 60 BILLION STREAMS on Spotify‼️🤯 He is now the 4th most streamed rapper of all time on the platform 🔥 What Ye album have y'all streamed the most⁉️🤔 📸: @timmy.ty", 'comments': 197, 'is_video': False, 'location': None, 'posted_at': 1767667123, 'shortcode': 'DTJxtZBjCQ8', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/610712728_18575364046036669_6623987188310692834_n.jpg?stp=dst-jpg_e15_fr_p1080x1080_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': 8, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_8" type="json">
+  URL of the 8th most recent post. Example: `{'id': '3803760123928907245', 'url': 'https://www.instagram.com/p/DTJq631lA3t/', 'type': 'GraphSidecar', 'likes': 41045, 'views': None, 'caption': "Lil Durk's murder-for-hire trial has been delayed until the spring. On Monday (Jan. 5), Judge Michael W. Fitzgerald approved a request to continue the trial, which had been set to begin on Jan. 20. The trial for Lil Durk and his five co-defendants is now scheduled to start on May 4, with a pretrial conference set for April 13.", 'comments': 625, 'is_video': False, 'location': None, 'posted_at': 1767663563, 'shortcode': 'DTJq631lA3t', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/611616486_18575357614036669_7266703784068993426_n.jpg?stp=dst-jpg_e15_fr_p1080x1080_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': 5, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_9" type="json">
+  URL of the 9th most recent post. Example: `{'id': '3803736848142182312', 'url': 'https://www.instagram.com/p/DTJloKklCeo/', 'type': 'GraphSidecar', 'likes': 31972, 'views': None, 'caption': "#KyrieIrving bought #LaRussell's album for $11,000‼️🤯 LaRussell spoke on him waking up and seeing Kyrie's purchase of $11k and he also got a call for Kyrie giving him his flowers🙏 Y'all rockin' with this⁉️🤔", 'comments': 173, 'is_video': False, 'location': None, 'posted_at': 1767660789, 'shortcode': 'DTJloKklCeo', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/611249600_18575352745036669_3312886124186420117_n.jpg?stp=dst-jpg_e15_fr_p1080x1080_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': 3, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_10" type="json">
+  URL of the 10th most recent post. Example: `{'id': '3803703253754789563', 'url': 'https://www.instagram.com/p/DTJd_TXDT67/', 'type': 'GraphVideo', 'likes': 13415, 'views': 64782, 'caption': '#ASAPRocky dropped his first single from \'DON\'T BE DUMB\' called "Punk Rocky"‼️🔥 Y\'all rockin\' with the visuals⁉️🤔', 'comments': 240, 'is_video': True, 'location': None, 'posted_at': 1767656794, 'shortcode': 'DTJd_TXDT67', 'audio_info': {'audio_id': '728255996960884', 'song_name': 'Punk Rocky', 'artist_name': 'A$AP Rocky', 'uses_original_audio': False}, 'dimensions': {'width': 750, 'height': 1333}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/610835983_18575382973036669_6434301582458044265_n.jpg?stp=dst-jpg_e15_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=101', 'media_count': None, 'product_type': 'clips', 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_11" type="json">
+  URL of the 11th most recent post. Example: `{'id': '3803681281365293389', 'url': 'https://www.instagram.com/p/DTJY_j-lLlN/', 'type': 'GraphImage', 'likes': 52009, 'views': None, 'caption': 'A new study shows that women tend to pack almost twice as much as they need, bringing around 60 clothing items for a week-long trip when only about 34 are actually used‼️👀 According to a survey conducted by a travel insurance company, 72% of female travelers admit they overpack. Nearly two-thirds say they struggle to zip their suitcases, and 58% end up going over airline weight limits.', 'comments': 235, 'is_video': False, 'location': None, 'posted_at': 1767654164, 'shortcode': 'DTJY_j-lLlN', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1346}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/611208025_18575338294036669_1164335797954634545_n.jpg?stp=dst-jpg_e35_p1080x1080_sh0.08_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': None, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="latest_post_12" type="json">
+  URL of the 12th most recent post. Example: `{'id': '3803615212940314915', 'url': 'https://www.instagram.com/p/DTJJ-I9lEkj/', 'type': 'GraphSidecar', 'likes': 66770, 'views': None, 'caption': '➡️Swipe to see the inspiration behind A$AP Rocky\'s new single art‼️ Rocky\'s cover art for "Punk Rocky" is seemingly inspired by PaRappa The Rappa, a classic PS1 game. PaRappa the Rapper is a rhythm game in which the main character, PaRappa, must make his way through each of the game\'s six stages by rapping. Rocky parallels the iconic game\'s cover in his new cover art. Y\'all rockin\' with it⁉️', 'comments': 295, 'is_video': False, 'location': None, 'posted_at': 1767646288, 'shortcode': 'DTJJ-I9lEkj', 'audio_info': None, 'dimensions': {'width': 1080, 'height': 1080}, 'display_url': 'https://scontent-sea1-1.cdninstagram.com/v/t51.2885-15/612182407_18575318113036669_3435325046338182668_n.jpg?stp=dst-jpg_e35_s1080x1080_sh0.08_tt6&_nc_ht=scontent-sea1-1.cdninstagram.com&_nc_cat=1', 'media_count': 2, 'product_type': None, 'tagged_users': None}`
+</ResponseField>
+
+<ResponseField name="related_profiles" type="json">
+  Instagram accounts suggested as similar to this profile. Example: `[{'username': 'complexmusic', 'full_name': 'Complex Music'}, {'username': 'xxl', 'full_name': 'XXL'}, {'username': 'rollingloud', 'full_name': 'Rolling Loud'}, {'username': 'nojumper', 'full_name': 'No Jumper 🏀'}, {'username': 'domislivenews', 'full_name': 'DomIsLive NEWS'}, {'username': 'concert', 'full_name': 'Concert'}, {'username': 'liluzivert', 'full_name': 'Lil Uzi Vert'}, {'username': 'rapcaviar', 'full_name': 'RapCaviar'}, {'username': 'liltecca', 'full_name': 'tec'}, {'username': 'rapdirect', 'full_name': 'Rap Direct'}, {'username': 'chieffkeeffsossa', 'full_name': 'Chief Keef'}, {'username': 'asaprocky', 'full_name': 'A$AP ROCKY'}, {'username': 'redbull', 'full_name': 'Red Bull'}, {'username': 'hotnewhiphop', 'full_name': 'HotNewHipHop®'}, {'username': 'champagnepapi', 'full_name': 'champagnepapi'}, {'username': 'akademiks', 'full_name': 'DJ Akademiks'}, {'username': 'spotify', 'full_name': 'Spotify'}, {'username': 'travisscott', 'full_name': 'flame'}, {'username': 'lyricalemonade', 'full_name': 'Lyrical Lemonade'}, {'username': '21savage', 'full_name': ''}, {'username': 'genius', 'full_name': 'Genius'}, {'username': 'rapmusic', 'full_name': 'RapMusic'}, {'username': 'hotfreestyle', 'full_name': 'Hot Freestyle'}, {'username': 'hiphop', 'full_name': 'HipHop'}, {'username': 'dontoliver', 'full_name': 'DON TOLIVER'}]`
+</ResponseField>
+
+<ResponseField name="functions" type="json">
+  Additional enrichment functions enabled for this record. Example: `{}`
+</ResponseField>

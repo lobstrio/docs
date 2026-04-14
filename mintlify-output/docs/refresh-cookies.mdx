@@ -1,0 +1,152 @@
+---
+title: "Refresh Cookies"
+description: "Update and re-synchronize cookies for an existing account"
+api: "POST https://api.lobstr.io/v1/accounts/cookies"
+---
+
+This endpoint updates and synchronizes cookies for an existing account using its account hash. Use this when your account cookies have expired or need to be refreshed.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+<ParamField body="account" type="string" required>
+  Existing account hash to update. Example: `"abfeb440ceccdfab974e8d261836c9d6"`
+</ParamField>
+
+<ParamField body="type" type="string" required>
+  Account type identifier. Example: `"twitter-sync"`
+</ParamField>
+
+<ParamField body="cookies" type="object" required>
+  Object containing updated cookie name-value pairs. Example: `{"auth_token": "...", "ct0": "..."}`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Synchronization task identifier. Example: `"7966b678b6b63ef599deeea99cb2b219"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "synchronize-cookies". Example: `"synchronize-cookies"`
+</ResponseField>
+
+<ResponseField name="status_code" type="integer">
+  Task status code (100 = created). Example: `100`
+</ResponseField>
+
+<ResponseField name="status_text" type="string">
+  Human-readable status. Example: `"created"`
+</ResponseField>
+
+<Warning>
+  Refresh cookies immediately when you notice status_code_info showing 'cookies_expired' in List Accounts or Get Account Details.
+</Warning>
+
+<Tip>
+  Use the returned task ID with Check Sync Status to monitor the refresh process.
+</Tip>
+
+<Note>
+  Refreshing cookies preserves all account settings and limits. You don't need to reconfigure the account after refresh.
+</Note>
+
+<Tip>
+  Set up monitoring to check account status regularly and automate cookie refresh when needed.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/accounts/cookies" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "account": "abfeb440ceccdfab974e8d261836c9d6",
+    "type": "twitter-sync",
+    "cookies": {
+      "auth_token": "<cookie.auth_token>",
+      "ct0": "<cookie.ct0>"
+    }
+  }'
+```
+
+```python Python
+import requests
+import time
+
+url = "https://api.lobstr.io/v1/accounts/cookies"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+
+# Refresh cookies for an existing Twitter account
+payload = {
+    "account": "abfeb440ceccdfab974e8d261836c9d6",  # Existing account hash
+    "type": "twitter-sync",
+    "cookies": {
+        "auth_token": "<cookie.auth_token>",
+        "ct0": "<cookie.ct0>"
+    }
+}
+
+response = requests.post(url, headers=headers, json=payload)
+data = response.json()
+
+print(f"Refresh task created: {data['id']}")
+print(f"Status: {data['status_text']}")
+
+# Poll for completion
+task_id = data['id']
+while True:
+    status_response = requests.get(
+        f"https://api.lobstr.io/v1/synchronize/{task_id}",
+        headers=headers
+    )
+    status = status_response.json()
+
+    if status['status_code'] == 200:
+        print(f"\n✓ Cookies refreshed successfully!")
+        break
+    elif status['status_code'] >= 400:
+        print(f"\n✗ Failed: {status['status_text']}")
+        break
+
+    print(f"Status: {status['status_text']}...")
+    time.sleep(2)
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "7966b678b6b63ef599deeea99cb2b219",
+  "object": "synchronize-cookies",
+  "status_code": 100,
+  "status_text": "created"
+}
+```
+
+```json 400
+{
+  "detail": "Invalid cookies or account type mismatch."
+}
+```
+
+```json 404
+{
+  "detail": "Account not found."
+}
+```

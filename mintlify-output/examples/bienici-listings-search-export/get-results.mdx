@@ -1,0 +1,408 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Bien'Ici Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Bien'Ici Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on Bienici. Example: `https://www.bienici.com/annonce/vente/antibes/appartement/3pieces/apimo-7410861`
+</ResponseField>
+
+<ResponseField name="modification_date" type="datetime">
+  Date the listing was last modified. Example: `2022-09-23T09:03:11.123Z`
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City where the property is located. Example: `Antibes`
+</ResponseField>
+
+<ResponseField name="postal_code" type="string">
+  Postal code of the property. Example: `06600`
+</ResponseField>
+
+<ResponseField name="listing_id" type="string">
+  Unique identifier for the listing on Bienici. Example: `apimo-7410861`
+</ResponseField>
+
+<ResponseField name="ad_type" type="string">
+  Type of ad (sale or rental). Example: `buy`
+</ResponseField>
+
+<ResponseField name="property_type" type="string">
+  Type of property (apartment, house, land, etc.). Example: `flat`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the listing. Example: `3 PIÈCES PROCHE PLACE DE GAULLE`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full description text of the listing. Example: `Idéalement situé au centre d'Antibes...`
+</ResponseField>
+
+<ResponseField name="publication_date" type="datetime">
+  Date the listing was first published. Example: `2022-09-21T13:54:51.302Z`
+</ResponseField>
+
+<ResponseField name="reference" type="string">
+  Seller's or agency's internal reference number. Example: `7410861`
+</ResponseField>
+
+<ResponseField name="new_property" type="boolean">
+  Whether the property is newly built. Example: `false`
+</ResponseField>
+
+<ResponseField name="year_of_construction" type="integer">
+  Year the property was constructed. Example: `1980`
+</ResponseField>
+
+<ResponseField name="price" type="float">
+  Listed price of the property. Example: `267000`
+</ResponseField>
+
+<ResponseField name="price_without_fees" type="float">
+  Price excluding agency fees. Example: `260000`
+</ResponseField>
+
+<ResponseField name="surface_area" type="float">
+  Living surface area in square meters. Example: `53`
+</ResponseField>
+
+<ResponseField name="land_surface_area" type="float">
+  Total land surface area in square meters. Example: `250`
+</ResponseField>
+
+<ResponseField name="rooms_quantity" type="integer">
+  Total number of rooms. Example: `3`
+</ResponseField>
+
+<ResponseField name="bedrooms_quantity" type="integer">
+  Number of bedrooms. Example: `2`
+</ResponseField>
+
+<ResponseField name="floor_quantity" type="integer">
+  Total number of floors in the building. Example: `4`
+</ResponseField>
+
+<ResponseField name="floor" type="integer">
+  Floor number where the property is located. Example: `1`
+</ResponseField>
+
+<ResponseField name="bathrooms_quantity" type="integer">
+  Number of bathrooms. Example: `1`
+</ResponseField>
+
+<ResponseField name="shower_rooms_quantity" type="integer">
+  Number of shower rooms. Example: `1`
+</ResponseField>
+
+<ResponseField name="toilet_quantity" type="integer">
+  Number of toilets. Example: `2`
+</ResponseField>
+
+<ResponseField name="terraces_quantity" type="integer">
+  Number of terraces. Example: `1`
+</ResponseField>
+
+<ResponseField name="parking_places_quantity" type="integer">
+  Number of parking spaces. Example: `1`
+</ResponseField>
+
+<ResponseField name="has_cellar" type="boolean">
+  Whether the property includes a cellar. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_alarm" type="boolean">
+  Whether the property has an alarm system. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_fireplace" type="boolean">
+  Whether the property has a fireplace. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_garage" type="boolean">
+  Whether the property includes a garage. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_parking" type="boolean">
+  Whether the property includes parking. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_elevator" type="boolean">
+  Whether the building has an elevator. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_intercom" type="boolean">
+  Whether the building has an intercom. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_door_code" type="boolean">
+  Whether the building has a door code entry. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_videophone" type="boolean">
+  Whether the building has a video intercom. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_air_conditioning" type="boolean">
+  Whether the property has air conditioning. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_garden" type="boolean">
+  Whether the property includes a garden. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_pool" type="boolean">
+  Whether the property includes a swimming pool. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_balcony" type="boolean">
+  Whether the property has a balcony. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_terrace" type="boolean">
+  Whether the property has a terrace. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_disabled_people_friendly" type="boolean">
+  Whether the property is accessible for disabled people. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_calm" type="boolean">
+  Whether the property is described as calm or quiet. Example: `true`
+</ResponseField>
+
+<ResponseField name="work_to_do" type="boolean">
+  Whether renovation work is needed. Example: `false`
+</ResponseField>
+
+<ResponseField name="exposition" type="string">
+  Cardinal orientation of the property (e.g. South, East). Example: `Sud-Ouest`
+</ResponseField>
+
+<ResponseField name="energy_value" type="float">
+  Energy consumption value in kWh/m²/year. Example: `279`
+</ResponseField>
+
+<ResponseField name="greenhouse_gaz_value" type="float">
+  Greenhouse gas emissions value in kg CO2/m²/year. Example: `9`
+</ResponseField>
+
+<ResponseField name="energy_classification" type="string">
+  Energy efficiency class (A to G). Example: `E`
+</ResponseField>
+
+<ResponseField name="greenhouse_gaz_classification" type="string">
+  Greenhouse gas emissions class (A to G). Example: `B`
+</ResponseField>
+
+<ResponseField name="energy_performance_diagnostic_date" type="string">
+  Date of the energy performance diagnostic. Example: `2022-09-21`
+</ResponseField>
+
+<ResponseField name="max_energy_consumption" type="float">
+  Maximum energy consumption estimate. Example: `2900`
+</ResponseField>
+
+<ResponseField name="min_energy_consumption" type="float">
+  Minimum energy consumption estimate. Example: `2100`
+</ResponseField>
+
+<ResponseField name="use_july_2021_energy_performance_diagnostic" type="boolean">
+  Whether the July 2021 DPE regulation applies. Example: `true`
+</ResponseField>
+
+<ResponseField name="heating" type="string">
+  Type of heating system (e.g. gas, electric, collective). Example: `radiateur électrique individuel`
+</ResponseField>
+
+<ResponseField name="is_exclusive_sale_mandate" type="boolean">
+  Whether the agency has an exclusive sale mandate. Example: `false`
+</ResponseField>
+
+<ResponseField name="fees_charged_to" type="string">
+  Who bears the agency fees (buyer or seller). Example: `purchaser`
+</ResponseField>
+
+<ResponseField name="agency_fee_url" type="string">
+  URL to the agency's fee schedule. Example: `https://api.apimo.pro/document_agency/`
+</ResponseField>
+
+<ResponseField name="agency_fee_percentage" type="float">
+  Agency fee as a percentage of the sale price. Example: `3.5`
+</ResponseField>
+
+<ResponseField name="ad_created_by_pro" type="boolean">
+  Whether the ad was created by a professional agency. Example: `true`
+</ResponseField>
+
+<ResponseField name="transaction_type" type="string">
+  Type of transaction (sale, rental, etc.). Example: `buy`
+</ResponseField>
+
+<ResponseField name="price_per_square_meter" type="float">
+  Price per square meter. Example: `5037.74`
+</ResponseField>
+
+<ResponseField name="account_type" type="string">
+  Type of account that posted the listing (private or pro). Example: `agency`
+</ResponseField>
+
+<ResponseField name="account_display_name" type="string">
+  Display name of the seller or agency. Example: `APIMO Agency`
+</ResponseField>
+
+<ResponseField name="customer_id" type="string">
+  Unique identifier of the seller or agency account. Example: `apimo-customer-123`
+</ResponseField>
+
+<ResponseField name="department_code" type="string">
+  French department code of the property location. Example: `06`
+</ResponseField>
+
+<ResponseField name="district" type="json">
+  District or neighborhood of the property. Example: `{'name': 'Antibes', 'code_insee': '06004'}`
+</ResponseField>
+
+<ResponseField name="address_known" type="boolean">
+  Whether the exact address is known. Example: `false`
+</ResponseField>
+
+<ResponseField name="blur_info" type="json">
+  Information about location blurring applied to the listing. Example: `{'type': 'cityOrArrondissement'}`
+</ResponseField>
+
+<ResponseField name="optical_fiber_status" type="string">
+  Optical fiber availability status at the property. Example: `deploye`
+</ResponseField>
+
+<ResponseField name="charging_stations" type="json">
+  Whether the property has electric vehicle charging stations. Example: `{'providers': []}`
+</ResponseField>
+
+<ResponseField name="photos" type="json">
+  List of photo URLs for the listing. Example: `[]`
+</ResponseField>
+
+<ResponseField name="with_3d_model" type="boolean">
+  Whether a 3D model is available for the listing. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_3d_highlighted" type="boolean">
+  Whether the 3D model is featured prominently. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_lot_with_360" type="boolean">
+  Whether a 360° virtual tour is available. Example: `false`
+</ResponseField>
+
+<ResponseField name="need_virtual_tour" type="boolean">
+  Whether a virtual tour is requested. Example: `false`
+</ResponseField>
+
+<ResponseField name="related_ads_ids" type="json">
+  IDs of related listings. Example: `[]`
+</ResponseField>
+
+<ResponseField name="is_bien_ici_exclusive" type="boolean">
+  Whether the listing is exclusive to Bienici. Example: `false`
+</ResponseField>
+
+<ResponseField name="end_of_promoted_as_exclusive" type="integer">
+  End date of the exclusive promotion period. Example: `0`
+</ResponseField>
+
+<ResponseField name="relevance_bonus" type="integer">
+  Relevance score boost applied to the listing. Example: `5`
+</ResponseField>
+
+<ResponseField name="price_has_decreased" type="boolean">
+  Whether the listing price has been reduced. Example: `false`
+</ResponseField>
+
+<ResponseField name="reduced_vat" type="boolean">
+  Whether a reduced VAT rate applies to the property. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_in_condominium" type="boolean">
+  Whether the property is part of a condominium. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_condominium_in_procedure" type="boolean">
+  Whether the condominium has ongoing legal proceedings. Example: `false`
+</ResponseField>
+
+<ResponseField name="status" type="json">
+  Current status of the listing (active, sold, rented, etc.). Example: `{'onTheMarket': True}`
+</ResponseField>
+
+<ResponseField name="threshold_date" type="datetime">
+  Threshold date used for DPE classification rules. Example: `2025-08-17T00:00:00.000Z`
+</ResponseField>
+
+<ResponseField name="display_district_name" type="boolean">
+  Whether the district name is displayed on the listing. Example: `true`
+</ResponseField>
+
+<ResponseField name="display_insurance_estimation" type="boolean">
+  Whether an insurance estimate is displayed. Example: `true`
+</ResponseField>
+
+<ResponseField name="highlight_mail_contact" type="boolean">
+  Whether email contact is highlighted on the listing. Example: `false`
+</ResponseField>
+
+<ResponseField name="nothing_behind_form" type="boolean">
+  Whether there is no gated content behind the contact form. Example: `false`
+</ResponseField>
+
+<ResponseField name="pdf_behind_form" type="boolean">
+  Whether a PDF is available behind the contact form. Example: `false`
+</ResponseField>
+
+<ResponseField name="phone_displays" type="json">
+  Number of times the phone number has been revealed. Example: `[]`
+</ResponseField>
+
+<ResponseField name="description_text_length" type="integer">
+  Character length of the listing description. Example: `92`
+</ResponseField>
+
+<ResponseField name="has_georisques_mention" type="boolean">
+  Whether the listing includes a geo-risks mention. Example: `false`
+</ResponseField>
+
+<ResponseField name="postal_code_for_search_filters" type="string">
+  Postal code used for search filter matching. Example: `06600`
+</ResponseField>
+
+<ResponseField name="user_relative_data" type="json">
+  User-specific data relative to the listing (e.g. saved, contacted). Example: `{}`
+</ResponseField>
+
+<ResponseField name="photo_watermark_alias" type="string">
+  Alias used for watermarking listing photos. Example: `apimo-watermark`
+</ResponseField>

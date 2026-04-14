@@ -1,0 +1,40 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Leboncoin Listing Status Checker"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Leboncoin Listing Status Checker** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Leboncoin listing URL that was checked. Example: `https://www.leboncoin.fr/ad/voitures/3172676206`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Listing status: active or deactivated. Example: `active`
+</ResponseField>
+
+<ResponseField name="status_code" type="integer">
+  HTTP status code returned by Leboncoin. Example: `200`
+</ResponseField>

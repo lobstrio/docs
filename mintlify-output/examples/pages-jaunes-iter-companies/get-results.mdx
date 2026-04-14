@@ -1,0 +1,132 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Pages Jaunes Companies Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Pages Jaunes Companies Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="item_id" type="string">
+  Unique identifier for the business on PagesJaunes. Example: `50819340`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Business name as listed on PagesJaunes. Example: `Story Vannes`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the business listing on PagesJaunes. Example: `https://www.pagesjaunes.fr/pros/50819340#zoneHoraires`
+</ResponseField>
+
+<ResponseField name="score" type="float">
+  Average customer rating of the business on PagesJaunes. Example: `4.7`
+</ResponseField>
+
+<ResponseField name="ratings" type="integer">
+  Total number of customer reviews on PagesJaunes. Example: `282`
+</ResponseField>
+
+<ResponseField name="full_address" type="string">
+  Full formatted address of the business. Example: `Zac De Luscanen 9 avenue Louis de Cadoudal 56880 Ploeren`
+</ResponseField>
+
+<ResponseField name="zip_code" type="string">
+  Postal code of the business location. Example: `56880`
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City where the business is located. Example: `Ploeren`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Business description or tagline as shown on PagesJaunes. Example: `Avez-vous besoin d'un magasin pour meubler et décorer votre maison ? Notre magasin vous propose les dernières tendances de l'ameublement et de la décoration, des exclusivités innovantes et colorées. Vous trouverez un large choix de meubles pour salon, mobilier design, literie, relaxation et chambre. Nous fabriquons et installons également des dressings.`
+</ResponseField>
+
+<ResponseField name="tags" type="string">
+  Tags or keywords associated with the business on PagesJaunes. Example: `vitrine, livraison sur toute la France, meuble de salon, livraison à domicile, dressing, montage à domicile, canapé cuir, literie`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  URL of the business's main image on PagesJaunes. Example: `https://www.pagesjaunes.fr/media/newdam/preset-thumbnail-logo-desktop/be/9e/30/00/00/90/d7/46/a6/d3/6994be9e30000090d746a6d3/6994be9e30000090d746a6d4.jpg`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Primary phone number of the business. Example: `02 97 63 87 80`
+</ResponseField>
+
+<ResponseField name="siret" type="string">
+  French company SIRET number (14-digit unique identifier). Example: `48489335900014`
+</ResponseField>
+
+<ResponseField name="naf_code" type="string">
+  French NAF/APE activity code identifying the business sector. Example: `4759A`
+</ResponseField>
+
+<ResponseField name="shop_size" type="string">
+  Size category of the business location. Example: `3 à 5 salariés`
+</ResponseField>
+
+<ResponseField name="shop_type" type="string">
+  Type or format of the business (e.g. chain store, independent). Example: `Siège`
+</ResponseField>
+
+<ResponseField name="siren" type="int">
+  French company SIREN number (9-digit identifier). Example: `484893359`
+</ResponseField>
+
+<ResponseField name="activity" type="string">
+  Main activity or trade of the business. Example: `magasins de meubles`
+</ResponseField>
+
+<ResponseField name="company_hq" type="string">
+  Location of the company headquarters
+</ResponseField>
+
+<ResponseField name="company_creation_date" type="datetime">
+  Date the company was founded. Example: `2005-10-31T23:00:00+00:00`
+</ResponseField>
+
+<ResponseField name="company_size" type="string">
+  Company size by number of employees (e.g. 1–10, 50–200). Example: `3 à 5 salariés`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Business website URL. Example: `https://www.story.fr/magasins/meuble-vannes-story/`
+</ResponseField>
+
+<ResponseField name="facebook" type="string">
+  Facebook page URL of the business. Example: `https://www.facebook.com/story.francereseau`
+</ResponseField>
+
+<ResponseField name="instagram" type="string">
+  Instagram profile URL of the business. Example: `https://www.instagram.com/storyvannes/`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address of the business. Example: `story.vannes@story.fr`
+</ResponseField>
+
+<ResponseField name="additional_phone" type="string">
+  Secondary or alternative phone number of the business. Example: `0297638780`
+</ResponseField>

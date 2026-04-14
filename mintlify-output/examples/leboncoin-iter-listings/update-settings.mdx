@@ -1,0 +1,126 @@
+---
+title: "Update Settings"
+description: "Configure scraper settings for Leboncoin Listings Search Export"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your squid settings for the Leboncoin Listings Search Export scraper. Control pagination, time filters, and optional shop URL extraction.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **max_date** | string (ISO) | null | null | Deprecated — use `fetch_since` instead |
+| **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `last_publication_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM) |
+| **hours_back** | integer | null | null | Deprecated — use `fetch_since` instead |
+| **max_pages** | integer | null | Maximum number of result pages to crawl |
+| **max_results** | integer | null | Total number of listings to collect before stopping |
+| **online_shop** | boolean | false | Extract seller's shop URL (incurs extra requests/credits) |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping workers (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Tip>
+  Use `fetch_since` to monitor new listings - set to `24` to only collect listings from the last day.
+</Tip>
+
+<Warning>
+  Enabling `online_shop` adds extra requests per listing and increases credit consumption.
+</Warning>
+
+<Note>
+  If both `fetch_since` and `fetch_since` are set, `fetch_since` takes priority.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Leboncoin Listings Search Export (22)",
+    "concurrency": 1,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "max_pages": 1,
+      "fetch_since": null,
+      "max_results": 3,
+      "online_shop": true
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update scraper settings
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Leboncoin Listings Search Export (22)",
+        "concurrency": 1,
+        "export_unique_results": True,
+        "to_complete": False,
+        "no_line_breaks": True,
+        "params": {
+            "fetch_since": None,      # No date cutoff
+            "max_pages": 1,        # First page only
+            "fetch_since": None,    # No time filter
+            "max_results": 3,      # Limit to 3 listings
+            "online_shop": True    # Extract seller shop URLs
+        }
+    }
+)
+
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Leboncoin Listings Search Export (22)",
+  "no_line_breaks": true,
+  "params": {
+    "fetch_since": null,
+    "max_pages": 1,
+    "fetch_since": null,
+    "max_results": 3,
+    "online_shop": true
+  },
+  "to_complete": false,
+  "export_unique_results": true
+}
+```

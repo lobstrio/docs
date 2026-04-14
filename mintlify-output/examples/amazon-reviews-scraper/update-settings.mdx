@@ -1,0 +1,73 @@
+---
+title: "Update Settings"
+description: "Configure settings for your Amazon Reviews Scraper squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **Amazon Reviews Scraper** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+## Settings Fields
+
+<ParamField body="params.account" type="amazon-sync" required>
+
+</ParamField>
+
+<ParamField body="params.sort_by" type="string">
+  Allowed values: `recent`, `top_reviews`. Default: `recent`.
+</ParamField>
+
+<ParamField body="params.hours_back" type="int">
+
+</ParamField>
+
+<ParamField body="params.media_type" type="string">
+  Allowed values: `text_image_video`, `image_and_video_only`. Default: `text_image_video`.
+</ParamField>
+
+<ParamField body="params.fetch_since" type="fetch_since">
+
+</ParamField>
+
+<ParamField body="params.format_type" type="string">
+  Allowed values: `all_variants`, `current_format`. Default: `all_variants`.
+</ParamField>
+
+<ParamField body="params.max_results" type="integer" required>
+  Default: `100`.
+</ParamField>
+
+<ParamField body="params.reviewer_type" type="string">
+  Allowed values: `all_reviewers`, `verified_purchase_only`. Default: `all_reviewers`.
+</ParamField>
+
+<ParamField body="params.filter_by_star" type="string">
+  Allowed values: `all_stars`, `five_star`, `four_star`, `three_star`, `two_star`, `one_star`, `positive`, `critical`. Default: `all_stars`.
+</ParamField>
+
+<ParamField body="params.filter_by_keyword" type="string">
+
+</ParamField>
+
+<ParamField body="params.scrape_max_reviews" type="boolean">
+  Default: `False`.
+</ParamField>
+
+<ParamField body="params.max_unique_results_per_run" type="int">
+
+</ParamField>

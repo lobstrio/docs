@@ -1,0 +1,101 @@
+---
+title: "Add Tasks"
+description: "Add Twitter profile scraping tasks by screen name"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Twitter profiles to scrape by providing their screen names (usernames). Each task will retrieve detailed profile information for the specified user.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Twitter Profile Scraper |
+| **tasks** | array | Yes | Array of task objects, each containing a `screen_name` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **screen_name** | string | Yes | Twitter username without the @ symbol (e.g., `elonmusk`) |
+
+<Tip>
+  You can add multiple screen names in a single request to scrape several profiles at once.
+</Tip>
+
+<Note>
+  The screen_name should not include the @ symbol - use `elonmusk` not `@elonmusk`.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tasks": [
+      {
+        "screen_name": "elonmusk"
+      }
+    ],
+    "squid": "YOUR_SQUID_HASH"
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Twitter profiles to scrape
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "tasks": [
+            {"screen_name": "elonmusk"}
+        ],
+        "squid": squid_id
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "0b1e3fd36e8249ec03220fb04b7fc71c",
+      "created_at": "2025-07-04T04:52:45.180627",
+      "is_active": true,
+      "params": {
+        "screen_name": "elonmusk"
+      },
+      "module": 167,
+      "object": "task"
+    }
+  ]
+}
+```

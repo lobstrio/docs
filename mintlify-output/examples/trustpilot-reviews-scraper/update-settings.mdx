@@ -1,0 +1,73 @@
+---
+title: "Update Settings"
+description: "Configure settings for your Trustpilot Reviews Scraper squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **Trustpilot Reviews Scraper** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+## Settings Fields
+
+<ParamField body="params.stars" type="string">
+  Allowed values: `all`, `1`, `2`, `3`, `4`, `5`. Default: `all`.
+</ParamField>
+
+<ParamField body="params.search" type="string">
+
+</ParamField>
+
+<ParamField body="params.topics" type="string">
+
+</ParamField>
+
+<ParamField body="params.replies" type="boolean">
+  Default: `False`.
+</ParamField>
+
+<ParamField body="params.sort_by" type="string">
+  Allowed values: `recency`, `relevance`. Default: `recency`.
+</ParamField>
+
+<ParamField body="params.language" type="string">
+  Allowed values: `All languages`, `Arabic`, `Chinese (Simplified)`, `Chinese (Traditional)`, `Danish`, `Dutch`, `English`, `Finnish`, `French`, `German`, `Greek`, `Hebrew`, `Indonesian`, `Italian`, `Japanese`, `Korean`, `Norwegian`, `Polish`, `Portuguese`, `Russian`, `Spanish`, `Swedish`, `Thai`, `Turkish`, `Vietnamese`. Default: `All languages`.
+</ParamField>
+
+<ParamField body="params.verified" type="boolean">
+  Default: `False`.
+</ParamField>
+
+<ParamField body="params.hours_back" type="int">
+
+</ParamField>
+
+<ParamField body="params.start_page" type="int">
+  Default: `1`.
+</ParamField>
+
+<ParamField body="params.fetch_since" type="fetch_since">
+
+</ParamField>
+
+<ParamField body="params.max_results" type="int">
+  Default: `200`.
+</ParamField>
+
+<ParamField body="params.max_unique_results_per_run" type="int">
+
+</ParamField>

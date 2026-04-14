@@ -1,0 +1,216 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from AutoScout24 Listings Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **AutoScout24 Listings Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="listing_id" type="string">
+  Unique identifier for the vehicle listing on AutoScout24. Example: `22c73c4a-a00e-4efd-bfdf-c331d650a421`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the vehicle listing on AutoScout24. Example: `https://www.autoscout24.com/offers/toyota-land-cruiser-2-8l-diesel-48v-executive-lager-diesel-grey-22c73c4a-a00e-4efd-bfdf-c331d650a421`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Full listing title as shown on AutoScout24. Example: `2,8l Diesel 48V Executive LAGER`
+</ResponseField>
+
+<ResponseField name="subtitle" type="string">
+  Secondary subtitle or short vehicle summary on AutoScout24. Example: `2,8l Diesel 48V Executive LAGER`
+</ResponseField>
+
+<ResponseField name="make" type="string">
+  Vehicle manufacturer or brand (e.g. BMW, Volkswagen). Example: `Toyota`
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  Vehicle model name. Example: `Land Cruiser`
+</ResponseField>
+
+<ResponseField name="price" type="int">
+  Listed price of the vehicle. Example: `79950`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  ISO 3-letter currency code of the listed price. Example: `EUR`
+</ResponseField>
+
+<ResponseField name="mileage" type="int">
+  Odometer reading of the vehicle. Example: `5000`
+</ResponseField>
+
+<ResponseField name="fuel_type" type="string">
+  Type of fuel the vehicle uses (e.g. Petrol, Diesel, Electric). Example: `Diesel`
+</ResponseField>
+
+<ResponseField name="first_registration" type="string">
+  Date of the vehicle's first registration. Example: `12/2025`
+</ResponseField>
+
+<ResponseField name="power" type="string">
+  Engine power including value and unit (e.g. 150 kW / 204 hp). Example: `151 kW (205 hp)`
+</ResponseField>
+
+<ResponseField name="seller_type" type="string">
+  Type of seller (private individual or professional dealer). Example: `Dealer`
+</ResponseField>
+
+<ResponseField name="seller_name" type="string">
+  Name of the individual or dealership selling the vehicle. Example: `Autohaus Geschw.Schneider GmbH`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Location of the seller or vehicle on AutoScout24. Example: `Aalen`
+</ResponseField>
+
+<ResponseField name="postal_code" type="string">
+  Postal code of the seller's location. Example: `73431`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full description text provided by the seller. Example: `Getriebe Automatik Technik Allrad Bordcomputer Sperrdifferential Partikelfilter Volldigitales Kombiinstrument Assistenten Totwinkel-Assistent Müdigkeitserkennung Verkehrszeichenerkennung Regensensor Fernlichtassistent Lichtsensor Notbremsassistent Berganfahrassistent Bergabfahrassistent Spurhalteassistent Abstandsregeltempomat Abstands-/Kollisionswarner Komfort Servolenkung Zentralverriegelung Elektrischer Fensterheber Lederausstattung Sitzheizung Elektrische Aussenspiegel Tempomat Multifunktionslenkrad Keyless Go Startfunktion Elektrische Sitze Innenspiegel autom. abblendbar Mittelarmlehne Innenraumfilter Lenksaeule einstellbar ParkDistanceControl vorne und hinten Elektrische Heckklappe Beheizbare Frontscheibe klimatisierte Sitze Keyless Entry Ambientebeleuchtung Lordosenstütze Lederlenkrad Geschwindigkeitsbegrenzungsanlage Klimaautomatik-3-Zonen Funkfernbedienung Sicht LED-Hauptscheinwerfer LED-Tagfahrlicht 360 Grad Kamera LED-Rueckleuchten Nebelscheinwerfer Scheinwerferregulierung Scheinwerferreinigung Privacyverglasung Sicherheit ABS Airbag Beifahrer-Airbag Wegfahrsperre Seitenairbags Alarmanlage ESP Antriebsschlupfregelung Reifendruckkontrolle Traktionskontrolle Kopfairbag Knieairbag Notrufsystem Pannenkit Notrad Airbag hinten Entertainment Navigationssystem Radio Telefonvorbereitung USB-Anschluss Bluetooth Freisprecheinrichtung Apple CarPlay Android Auto Sprachsteuerung DAB Touchscreen Induktionsladen für Smartphones Umwelt Grüne Umweltplakette Qualität Garantie Nichtraucherfahrzeug Sonstiges Metallic Alufelgen Dachreling Lenkradheizung Sommerreifen Gepäckraumabtrennung`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Contact phone number of the seller. Example: `+497361930114`
+</ResponseField>
+
+<ResponseField name="price_label" type="string">
+  Formatted price label shown on the listing (e.g. Fixed price, Negotiable)
+</ResponseField>
+
+<ResponseField name="gearbox" type="string">
+  Type of gearbox (e.g. Manual, Automatic). Example: `Automatic`
+</ResponseField>
+
+<ResponseField name="body_type" type="string">
+  Body style of the vehicle (e.g. Sedan, SUV, Hatchback, Convertible). Example: `SUV/Off-Road/Pick-Up`
+</ResponseField>
+
+<ResponseField name="doors" type="int">
+  Number of doors on the vehicle. Example: `5`
+</ResponseField>
+
+<ResponseField name="seats" type="int">
+  Number of seats in the vehicle. Example: `5`
+</ResponseField>
+
+<ResponseField name="displacement_cc" type="int">
+  Engine displacement in cubic centimetres (cc). Example: `2755`
+</ResponseField>
+
+<ResponseField name="cylinders" type="int">
+  Number of engine cylinders. Example: `4`
+</ResponseField>
+
+<ResponseField name="weight_kg" type="int">
+  Unladen weight of the vehicle in kilograms
+</ResponseField>
+
+<ResponseField name="emission_class" type="string">
+  European emission standard class of the vehicle (e.g. Euro 6). Example: `Euro 6d`
+</ResponseField>
+
+<ResponseField name="emissions_sticker" type="string">
+  German emissions sticker (Umweltplakette) category. Example: `4 (Green)`
+</ResponseField>
+
+<ResponseField name="fuel_consumption" type="string">
+  Fuel consumption figures (e.g. combined, city, highway)
+</ResponseField>
+
+<ResponseField name="drivetrain" type="string">
+  Drivetrain configuration (e.g. Front-wheel drive, All-wheel drive). Example: `4WD`
+</ResponseField>
+
+<ResponseField name="number_of_previous_owners" type="int">
+  Number of previous registered owners of the vehicle. Example: `1`
+</ResponseField>
+
+<ResponseField name="general_inspection" type="string">
+  Status of the vehicle's technical inspection (e.g. TÜV in Germany). Example: `11/2028`
+</ResponseField>
+
+<ResponseField name="last_service" type="string">
+  Date of the vehicle's last service or maintenance
+</ResponseField>
+
+<ResponseField name="production_date" type="string">
+  Production or manufacture date of the vehicle
+</ResponseField>
+
+<ResponseField name="equipment" type="json">
+  List of standard and optional equipment included with the vehicle. Example: `['360° camera', 'Air conditioning', 'Armrest', 'Automatic climate control, 3 zones', 'Cruise control', 'Electric tailgate', 'Electrical side mirrors', 'Electrically adjustable seats', 'Electrically heated windshield', 'Heated steering wheel', 'Hill Holder', 'Keyless central door lock', 'Leather seats', 'Leather steering wheel', 'Light sensor', 'Lumbar support', 'Multi-function steering wheel', 'Navigation system', 'Park Distance Control', 'Parking assist system camera', 'Parking assist system sensors front', 'Parking assist system sensors rear', 'Power windows', 'Rain sensor', 'Seat heating', 'Seat ventilation', 'Tinted windows', 'Android Auto', 'Apple CarPlay', 'Bluetooth', 'Digital cockpit', 'Digital radio', 'Hands-free equipment', 'Induction charging for smartphones', 'On-board computer', 'Radio', 'USB', 'ABS', 'Adaptive Cruise Control', 'Alarm system', 'Bi-Xenon headlights', 'Blind spot monitor', 'Central door lock', 'Central door lock with remote control', 'Daytime running lights', 'Distance warning system', 'Driver drowsiness detection', 'Driver-side airbag', 'Electronic stability control', 'Emergency brake assistant', 'Emergency system', 'Fog lights', 'Full-LED headlights', 'Head airbag', 'High beam assist', 'Immobilizer', 'Lane departure warning system', 'LED Daytime Running Lights', 'LED Headlights', 'Passenger-side airbag', 'Power steering', 'Rear airbag', 'Side airbag', 'Speed limit control system', 'Tire pressure monitoring system', 'Traction control', 'Traffic sign recognition', 'Xenon headlights', 'Alloy wheels', 'Ambient lighting', 'Automatically dimming interior mirror', 'Cargo barrier', 'Emergency tyre', 'Emergency tyre repair kit', 'Headlight washer system', 'Particle filter', 'Roof rack', 'Summer tyres', 'Touch screen', 'Voice Control']`
+</ResponseField>
+
+<ResponseField name="colour" type="string">
+  Exterior colour of the vehicle. Example: `Grey`
+</ResponseField>
+
+<ResponseField name="manufacturer_colour" type="string">
+  Official colour name used by the manufacturer. Example: `Dark grey`
+</ResponseField>
+
+<ResponseField name="paint" type="string">
+  Type of paint finish (e.g. Metallic, Solid, Pearl). Example: `Metallic`
+</ResponseField>
+
+<ResponseField name="upholstery" type="string">
+  Type of interior upholstery (e.g. Leather, Fabric, Alcantara). Example: `Full leather`
+</ResponseField>
+
+<ResponseField name="upholstery_colour" type="string">
+  Colour of the interior upholstery. Example: `Black`
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  Version or trim level of the vehicle. Example: `2,8l Diesel 48V Executive LAGER`
+</ResponseField>
+
+<ResponseField name="image_urls" type="json">
+  List of all vehicle image URLs from the listing. Example: `['https://prod.pictures.autoscout24.net/listing-images/22c73c4a-a00e-4efd-bfdf-c331d650a421_f740629d-2f21-4368-9477-27f443e6ee95.jpg/1920x1080.webp', 'https://prod.pictures.autoscout24.net/listing-images/22c73c4a-a00e-4efd-bfdf-c331d650a421_32e930da-99a2-4d00-a82d-66ee49356683.jpg/1920x1080.webp']`
+</ResponseField>
+
+<ResponseField name="image_count" type="int">
+  Total number of images in the listing. Example: `9`
+</ResponseField>
+
+<ResponseField name="vehicle_type" type="string">
+  Category of vehicle (e.g. Car, Motorcycle, Truck, Van). Example: `Car`
+</ResponseField>
+
+<ResponseField name="listing_country" type="string">
+  Country where the vehicle is listed for sale. Example: `DE`
+</ResponseField>
+
+<ResponseField name="position" type="int">
+  Position of the listing in the search results. Example: `4`
+</ResponseField>
+
+<ResponseField name="first_online_date" type="datetime">
+  Date the listing was first published on AutoScout24. Example: `2026-03-22T13:00:19+00:00`
+</ResponseField>

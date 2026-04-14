@@ -1,0 +1,134 @@
+---
+title: "Update Settings"
+description: "Configure Leboncoin Auto Message Sender settings and message template"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your Leboncoin Auto Message Sender settings including the message template with dynamic variables that are replaced with listing-specific values.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Message Parameters
+
+Configure the message content and targeting:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **message** | string | — | Template for the message sent to sellers. Supports dynamic variables (see below) |
+| **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `last_publication_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM) |
+| **hours_back** | integer | null | null | Deprecated — use `fetch_since` instead |
+| **max_results** | integer | null | null | Maximum number of listings to process before stopping |
+| **max_unique_results_per_run** | integer | null | null | Maximum unique results across all tasks in a single run |
+
+## Message Template Variables
+
+The message parameter supports dynamic variables that are replaced with listing-specific values:
+
+| Variable | Description |
+| --- | --- |
+| **#title#** | The listing title (e.g., "Appartement 3 pièces 88 m²") |
+| **#pseudo#** | The seller's display name/pseudonym |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel message sending threads (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Tip>
+  Example message template: "Hello #pseudo#,\n\nI am interested in your listing: #title#.\n\nPlease contact me via Leboncoin messaging.\n\nThank you!"
+</Tip>
+
+<Warning>
+  Keep concurrency low (1-2) to avoid rate limiting from Leboncoin.
+</Warning>
+
+<Note>
+  The same message will not be sent twice to the same listing (duplicate detection via message_hash).
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Leboncoin Auto Message Sender (4)",
+    "concurrency": 1,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "message": "Hello #pseudo#,\n\nI want to enquire about #title#.",
+      "fetch_since": 1,
+      "max_results": 3,
+      "max_unique_results_per_run": 10
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Configure message template and settings
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Leboncoin Auto Message Sender (4)",
+        "concurrency": 1,
+        "export_unique_results": True,
+        "to_complete": False,
+        "no_line_breaks": True,
+        "params": {
+            # Message template with dynamic variables
+            "message": "Hello #pseudo#,\n\nI want to enquire about #title#.",
+            "fetch_since": 1,           # Only listings from last hour
+            "max_results": 3,          # Process max 3 listings
+            "max_unique_results_per_run": 10  # Max 10 per run
+        }
+    }
+)
+
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Leboncoin Auto Message Sender (4)",
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "message": "Hello #pseudo#,\n\nI want to enquire about #title#.",
+    "max_unique_results_per_run": 20,
+    "fetch_since": 1,
+    "max_results": 3
+  }
+}
+```

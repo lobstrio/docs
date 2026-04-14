@@ -1,0 +1,113 @@
+---
+title: "Update Settings"
+description: "Configure the TripAdvisor Reviews Scraper parameters including filters for language, ratings, and date range"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your TripAdvisor Reviews Scraper squid settings to control review collection limits and apply filters by language, rating, and recency. These settings help you target specific review types and optimize credit usage.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+The following parameters can be configured in the `params` object:
+
+## General Settings
+
+Standard squid settings that apply to all scrapers:
+
+<Tip>
+  Use the language and ratings filters to collect only high-quality reviews in your target language, reducing noise and credit consumption.
+</Tip>
+
+<Tip>
+  Set fetch_since to null for all reviews, or specify a number of hours (e.g., 168 for one week) to monitor only recent reviews.
+</Tip>
+
+<Note>
+  Reviews include subratings (Value, Rooms, Location, Cleanliness, Service, Sleep Quality) for hotels, providing detailed insights beyond the overall rating.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "TripAdvisor Reviews - NYC Hotels",
+    "params": {
+      "max_results": 100,
+      "language": "English",
+      "ratings": "5",
+      "fetch_since": null
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_hash = "YOUR_SQUID_HASH"
+
+# Update TripAdvisor Reviews Scraper settings
+response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
+    headers=headers,
+    json={
+        "name": "TripAdvisor Reviews - NYC Hotels",
+        "params": {
+            "max_results": 100,
+            "language": "English",
+            "ratings": "5",
+            "fetch_since": None  # Set to None for all reviews, or specify hours (e.g., 168 for last week)
+        }
+    }
+)
+
+data = response.json()
+print(f"Squid updated: {data['name']}")
+print(f"Max results per task: {data['params']['max_results']}")
+print(f"Language filter: {data['params']['language']}")
+print(f"Rating filter: {data['params']['ratings']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "id": "c7ea965333d54a949a9e74ba62029098",
+  "name": "TripAdvisor Reviews - NYC Hotels",
+  "crawler": {
+    "id": 132,
+    "name": "TripAdvisor Reviews Scraper",
+    "slug": "tripadvisor-reviews-scraper"
+  },
+  "params": {
+    "max_results": 100,
+    "language": "English",
+    "ratings": "5",
+    "fetch_since": null
+  },
+  "concurrency": 5,
+  "export_unique_results": true,
+  "to_complete": true,
+  "no_line_breaks": false,
+  "status": "idle",
+  "created_at": "2025-01-20T10:15:00.000000",
+  "updated_at": "2025-01-27T14:35:00.000000"
+}
+```

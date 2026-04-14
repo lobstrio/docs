@@ -1,0 +1,104 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from PAP Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **PAP Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="internal_id" type="string">
+  Unique identifier for the listing on PAP (Particulier à Particulier). Example: `460201580`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on PAP. Example: `https://www.pap.fr/annonces/maison-bourg-en-bresse-01000-r460201580`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the property listing on PAP. Example: `Vente maison 122 m² Bourg-En-Bresse (01000)`
+</ResponseField>
+
+<ResponseField name="breadcrumb" type="string">
+  Breadcrumb navigation path indicating the listing's category and location on PAP
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listed price of the property
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency of the listed price
+</ResponseField>
+
+<ResponseField name="ref" type="string">
+  PAP reference number for the listing. Example: `G02/1580`
+</ResponseField>
+
+<ResponseField name="publication_date" type="datetime">
+  Date the listing was published on PAP. Example: `2026-03-20`
+</ResponseField>
+
+<ResponseField name="image_urls" type="string">
+  List of property image URLs from the listing. Example: `https://cdn.pap.fr/photos/pap/84/e6/84e6846cf2588b1ddd8c4422e93eb447/8-p1.jpg, https://cdn.pap.fr/photos/pap/8e/96/8e96e04a6f71b9d765f776a622bfc7a8/8-p1.jpg, https://cdn.pap.fr/photos/pap/ac/b6/acb6e93116c4f857f08d4110ad95ca99/a-p1.jpg, https://cdn.pap.fr/photos/pap/36/59/36592cba805e27d997e3be34489a9133/3-p1.jpg, https://cdn.pap.fr/photos/pap/e2/ae/e2ae8afbecf9b31e4139ecbb8d578158/e-p1.jpg, https://cdn.pap.fr/photos/pap/9d/b7/9db7715952cd1b323d0246c6d867a84b/9-p1.jpg`
+</ResponseField>
+
+<ResponseField name="rooms" type="integer">
+  Total number of rooms in the property. Example: `5`
+</ResponseField>
+
+<ResponseField name="bedrooms" type="integer">
+  Number of bedrooms in the property. Example: `3`
+</ResponseField>
+
+<ResponseField name="size" type="integer">
+  Living surface area of the property in square metres
+</ResponseField>
+
+<ResponseField name="neighborhood" type="string">
+  Neighborhood or locality where the property is located. Example: `Bourg-en-Bresse (01000)`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full description text provided by the seller on PAP. Example: `Maison à vendre dans le quartier des Vennes en face de l'école des Vennes de 100 m² avec un appartement indépendant en dessous de 22 m² indépendant. La maison à 3 chambres de 11 à 13 m² chacune + une cuisine de 13 m² avec cuisine incorporée une grande salle a manger salon avec beau parquet de 41 m² avec accès sur balcon de 7 m² avec volet roulant électrique. Salle de bain de 5 m² refaites à neuf avec douche italienne de juillet 2025 aménagée qui peut convenir pour personne âgée... / wc séparé. Grande cave sous presque toute la maison avec plusieurs pièces qui peuvent très bien être aménagées comme pièces de vie même si la hauteur ne permet pas que ces dernières soient considérées comme des pièces de vie mais aucun souci pour les aménager comme tel si besoin, elles sont pourvue de plusieurs placards de rangements...`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Contact phone number of the seller. Example: `06 12 02 24 61`
+</ResponseField>
+
+<ResponseField name="energy" type="string">
+  Energy performance class of the property (DPE rating, e.g. A to G). Example: `E`
+</ResponseField>
+
+<ResponseField name="ges" type="string">
+  Greenhouse gas emissions class of the property (GES rating, e.g. A to G). Example: `E`
+</ResponseField>
+
+<ResponseField name="lat" type="string">
+  Latitude coordinate of the property. Example: `46.189715`
+</ResponseField>
+
+<ResponseField name="lng" type="string">
+  Longitude coordinate of the property. Example: `5.228885`
+</ResponseField>

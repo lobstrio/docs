@@ -1,0 +1,132 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Twitter Followers & Following Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Twitter Followers & Following Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="internal_unique_id" type="string">
+  Unique identifier combining user_id and relationship_type. Example: `769922298715537408_following`
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Unique Twitter/X identifier for the account. Example: `769922298715537408`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the Twitter/X account. Example: `Elon Musk`
+</ResponseField>
+
+<ResponseField name="screen_name" type="string">
+  Twitter/X handle of the account (without the @ symbol). Example: `elonmusk`
+</ResponseField>
+
+<ResponseField name="profile_url" type="string">
+  Direct URL to the Twitter/X profile. Example: `https://x.com/elonmusk`
+</ResponseField>
+
+<ResponseField name="bio" type="string">
+  Profile bio/description text. Example: `Tech entrepreneur`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Location shown on the Twitter/X profile. Example: `San Francisco, CA`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Website URL linked on the Twitter/X profile. Example: `https://example.com`
+</ResponseField>
+
+<ResponseField name="followers_count" type="integer">
+  Total number of followers of this Twitter/X account. Example: `180000000`
+</ResponseField>
+
+<ResponseField name="following_count" type="integer">
+  Total number of accounts this profile follows. Example: `500`
+</ResponseField>
+
+<ResponseField name="tweets_count" type="integer">
+  Total number of tweets/posts published by this account. Example: `50000`
+</ResponseField>
+
+<ResponseField name="media_count" type="integer">
+  Total number of media items (photos and videos) posted by this account. Example: `1200`
+</ResponseField>
+
+<ResponseField name="likes_count" type="integer">
+  Total number of tweets this account has liked. Example: `30000`
+</ResponseField>
+
+<ResponseField name="listed_count" type="integer">
+  Number of public Twitter/X lists this account is included in. Example: `5000`
+</ResponseField>
+
+<ResponseField name="created_at" type="datetime">
+  Date the Twitter/X account was created. Example: `2016-08-24T10:00:00+00:00`
+</ResponseField>
+
+<ResponseField name="profile_image_url" type="string">
+  URL of the account's profile picture. Example: `https://pbs.twimg.com/profile_images/12345/photo_normal.jpg`
+</ResponseField>
+
+<ResponseField name="profile_banner_url" type="string">
+  URL of the account's profile banner/header image. Example: `https://pbs.twimg.com/profile_banners/12345/1234567890`
+</ResponseField>
+
+<ResponseField name="is_blue_verified" type="boolean">
+  Whether the account has a Twitter Blue (X Premium) verified checkmark. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether the account has a legacy verified checkmark. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_protected" type="boolean">
+  Whether the account's tweets are protected (private). Example: `false`
+</ResponseField>
+
+<ResponseField name="possibly_sensitive" type="boolean">
+  Whether the account's content is flagged as possibly sensitive. Example: `false`
+</ResponseField>
+
+<ResponseField name="profile_image_shape" type="string">
+  Shape of the profile image displayed on Twitter/X (e.g. Circle, Square). Example: `Circle`
+</ResponseField>
+
+<ResponseField name="professional_type" type="string">
+  Professional account type (e.g. Creator, Business). Example: `Creator`
+</ResponseField>
+
+<ResponseField name="professional_category" type="string">
+  Professional category label shown on the profile. Example: `Author`
+</ResponseField>
+
+<ResponseField name="relationship_type" type="string">
+  Whether this user is a 'follower' or 'following' of the scraped account. Example: `following`
+</ResponseField>
+
+<ResponseField name="_json" type="json">
+  Raw JSON user data returned by the Twitter/X API
+</ResponseField>

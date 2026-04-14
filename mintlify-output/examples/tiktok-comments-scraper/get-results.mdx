@@ -1,0 +1,114 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TikTok Comments Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TikTok Comments Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="unique_id" type="string">
+  Unique identifier for the TikTok comment. Example: `sinzels`
+</ResponseField>
+
+<ResponseField name="nickname" type="string">
+  TikTok display name of the comment author. Example: `Sinzels`
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  Full text content of the TikTok comment. Example: `UPDATE 2025;
+Bella Poarch: 69.9M
+Leah halton: 64M`
+</ResponseField>
+
+<ResponseField name="has_image" type="boolean">
+  Whether the comment contains an image or sticker. Example: `false`
+</ResponseField>
+
+<ResponseField name="like_count" type="integer">
+  Number of likes the comment received. Example: `7418`
+</ResponseField>
+
+<ResponseField name="reply_count" type="integer">
+  Number of replies to this comment. Example: `91`
+</ResponseField>
+
+<ResponseField name="liked_by_author" type="boolean">
+  Whether the video creator liked this comment. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_author" type="boolean">
+  Whether the commenter is the video creator. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_reply" type="boolean">
+  Whether this is a reply to another comment. Example: `false`
+</ResponseField>
+
+<ResponseField name="replied_by_author" type="boolean">
+  Whether the video creator replied to this comment. Example: `false`
+</ResponseField>
+
+<ResponseField name="created_at" type="datetime">
+  Date and time the comment was posted. Example: `2025-04-16T13:25:57Z`
+</ResponseField>
+
+<ResponseField name="comment_id" type="string">
+  Unique TikTok identifier for the comment. Example: `7493901624780276486`
+</ResponseField>
+
+<ResponseField name="video_id" type="string">
+  Unique identifier for the TikTok video this comment belongs to. Example: `6862153058223197445`
+</ResponseField>
+
+<ResponseField name="reply_to" type="string">
+  Username of the account this comment is replying to
+</ResponseField>
+
+<ResponseField name="thread_id" type="string">
+  Identifier of the comment thread this reply belongs to
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Unique TikTok identifier of the comment author. Example: `7257306630806356997`
+</ResponseField>
+
+<ResponseField name="is_pinned" type="boolean">
+  Whether the comment is pinned to the top of the video. Example: `false`
+</ResponseField>
+
+<ResponseField name="image" type="string">
+  URL of the image or sticker attached to the comment
+</ResponseField>
+
+<ResponseField name="avatar" type="string">
+  URL of the comment author's TikTok profile picture. Example: `https://p16-common-sign.tiktokcdn-eu.com/tos-alisg-avt-0068/6e61cfab75c399e7a58459442d607463~tplv-tiktokx-cropcenter:100:100.jpg?dr=10399&refresh_token=1aa12fef&x-expires=1774080000&x-signature=LM4Kos6ABLQMbiGzx6uR3FBKCPU%3D&t=4d5b0474&ps=13740610&shp=30310797&shcp=ff37627b&idc=no1a`
+</ResponseField>
+
+<ResponseField name="input_video_url" type="string">
+  URL of the TikTok video provided as scraper input. Example: `https://www.tiktok.com/@bellapoarch/video/6862153058223197445`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Timestamp when the comment was scraped. Example: `2026-03-20T16:47:36Z`
+</ResponseField>

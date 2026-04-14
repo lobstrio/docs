@@ -1,0 +1,92 @@
+---
+title: "Add Tasks"
+description: "Add Instagram reel URLs or profile URLs to scrape reels using the lobstr.io API"
+api: "POST https://api.lobstr.io/v2/squid/{squid_id}/task"
+---
+
+Add Instagram URLs as tasks to your squid. You can provide either a direct reel URL to scrape a specific reel, or a profile URL to collect all reels from that profile.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Supported URL Formats
+
+**Direct Reel URL:**
+
+`https://www.instagram.com/reel/ABC123xyz/`
+
+**Profile URL (collects all reels from profile):**
+
+`https://www.instagram.com/username/`
+
+**Post URL:**
+
+`https://www.instagram.com/p/ABC123xyz/`
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Instagram Reel URL or Profile URL. If a profile URL is given, the scraper will collect reels from that profile. |
+
+<Tip>
+  Use profile URLs to bulk collect all reels from a creator's account in one task.
+</Tip>
+
+<Note>
+  When scraping a profile, use `max_results` setting to limit how many reels are collected per profile.
+</Note>
+
+<Tip>
+  Both `instagram.com` and `www.instagram.com` URL formats are supported.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID/task" \
+  -H "Authorization: Token YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://www.instagram.com/leomessi/"
+  }'
+```
+
+```python Python
+import requests
+
+API_TOKEN = "YOUR_API_TOKEN"
+SQUID_ID = "YOUR_SQUID_ID"
+
+url = f"https://api.lobstr.io/api/v2/squid/{SQUID_ID}/task"
+headers = {
+    "Authorization": f"Token {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+data = {
+    "url": "https://www.instagram.com/leomessi/"
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "task_abc123def456",
+  "status": "pending",
+  "created_at": "2025-01-15T10:30:00Z",
+  "url": "https://www.instagram.com/leomessi/"
+}
+```

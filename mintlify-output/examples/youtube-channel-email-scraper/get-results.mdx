@@ -1,0 +1,105 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from YouTube Channel Email Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **YouTube Channel Email Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="channel_id" type="string">
+  Unique YouTube channel identifier. Example: `UCmYFWvTSYR7nTUsxGYMowMg`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address found on the YouTube channel or linked website. Example: `dianalarusse@yandex.ru`
+</ResponseField>
+
+<ResponseField name="videos_count" type="string">
+  Total number of videos published on the channel. Example: `1,611 videos`
+</ResponseField>
+
+<ResponseField name="account_name" type="string">
+  YouTube channel display name. Example: `Le russe facile avec Diana`
+</ResponseField>
+
+<ResponseField name="views_count" type="int">
+  Total number of views across all channel videos. Example: `33761771`
+</ResponseField>
+
+<ResponseField name="subscribers_count" type="string">
+  Total number of channel subscribers. Example: `183K`
+</ResponseField>
+
+<ResponseField name="creation_date" type="datetime">
+  Date the YouTube channel was created. Example: `2017-02-16`
+</ResponseField>
+
+<ResponseField name="country" type="string">
+  Country associated with the YouTube channel. Example: `France`
+</ResponseField>
+
+<ResponseField name="instagram" type="string">
+  Instagram profile URL found on the YouTube channel. Example: `https://www.instagram.com/russe_facile_avec_diana/`
+</ResponseField>
+
+<ResponseField name="twitter" type="string">
+  Twitter/X profile URL found on the YouTube channel
+</ResponseField>
+
+<ResponseField name="facebook" type="string">
+  Facebook page URL found on the YouTube channel. Example: `https://www.facebook.com/LeRusseFacileAvecDiana/`
+</ResponseField>
+
+<ResponseField name="about" type="text">
+  About text from the YouTube channel's About tab. Example: `Vidéos sur la Russie et cours de russe même pour les « nuls en langues » 😉
+
+Je m'appelle Diana et je suis une Russe native et professeur certifié de russe, de français et d'allemand. J'ai aidé des milliers de personnes à apprendre ma langue natale. Et je peux vous aider à le faire 👍
+
+Je base mes cours sur les principes de la psychologie positive pour que vous associez l'apprentissage du russe à quelque chose d'agréable et cela vous donne envie de continuer sans vous ennuyer.
+
+J'espère que nous allons passer de bons moments ensemble !
+
+Pour progresser plus rapidement en russe: https://russe-facile-avec-diana.teachable.com
+
+Pour me contacter:
+https://www.facebook.com/LeRusseAvecDiana/
+
+dianalarusse@yandex.ru`
+</ResponseField>
+
+<ResponseField name="slug" type="string">
+  URL slug or handle of the YouTube channel (e.g. @channelname). Example: `LerussefacileavecDiana`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the YouTube channel. Example: `https://www.youtube.com/@LerussefacileavecDiana`
+</ResponseField>
+
+<ResponseField name="avatar_url" type="string">
+  URL of the channel's avatar or profile picture. Example: `https://yt3.googleusercontent.com/ytc/AIdro_lHG5KkuRZ80KItJH-v9LuueXEsf4Oz2jboUw9591vG73A=s900-c-k-c0x00ffffff-no-rj`
+</ResponseField>
+
+<ResponseField name="other_links" type="string">
+  Other external links listed in the YouTube channel's About section. Example: `https://russe-facile-avec-diana.teachable.com/, https://www.paypal.me/dianarussie, https://www.tiktok.com/@russe_facile_avec_diana`
+</ResponseField>

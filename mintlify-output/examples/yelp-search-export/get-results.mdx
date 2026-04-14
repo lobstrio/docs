@@ -1,0 +1,104 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Yelp Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Yelp Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the business listing on Yelp. Example: `https://www.yelp.com/biz/vega-vitality-back-bay-boston-2?osq=Spa`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Business name as listed on Yelp. Example: `Vega Vitality Back Bay`
+</ResponseField>
+
+<ResponseField name="reviews" type="integer">
+  Total number of customer reviews on Yelp. Example: `97`
+</ResponseField>
+
+<ResponseField name="score" type="integer">
+  Average Yelp rating out of 5. Example: `4.8`
+</ResponseField>
+
+<ResponseField name="is_closed" type="boolean">
+  Whether the business is permanently closed on Yelp. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_claimed" type="boolean">
+  Whether the business has claimed its Yelp listing. Example: `true`
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Price range indicator on Yelp (e.g. $, $$, $$$). Example: `$$`
+</ResponseField>
+
+<ResponseField name="categories" type="string">
+  Business categories on Yelp (e.g. Italian, Pizza). Example: `Medical Spas, Skin Care, Dermatologists`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Business website URL. Example: `http://vegavitality.com`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Primary phone number of the business. Example: `(617) 658-3421`
+</ResponseField>
+
+<ResponseField name="website_menu" type="string">
+  URL to the business's menu on its own website. Example: `https://vegavitality.com/pricing/`
+</ResponseField>
+
+<ResponseField name="yelp_menu" type="string">
+  URL to the business's menu page on Yelp
+</ResponseField>
+
+<ResponseField name="address" type="string">
+  Full formatted address of the business. Example: `551 Boylston St, Fl 4, Boston, MA 02116`
+</ResponseField>
+
+<ResponseField name="lat" type="float">
+  Latitude coordinate of the business. Example: `42.350756`
+</ResponseField>
+
+<ResponseField name="lng" type="float">
+  Longitude coordinate of the business. Example: `-71.076037`
+</ResponseField>
+
+<ResponseField name="amenities" type="string">
+  Amenities and features offered by the business as listed on Yelp. Example: `By appointment only, Wheelchair accessible, Accessible parking near entrance, ADA-compliant main entrance, No steps or stairs, Accepts credit cards, Garage parking, Street parking, Free Wi-Fi, Women-owned, Bike parking`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address of the business. Example: `info@vegavitality.com`
+</ResponseField>
+
+<ResponseField name="advertiser_status" type="boolean">
+  Whether the business is an advertiser on Yelp. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_sponsored" type="boolean">
+  Whether the listing appears as a sponsored result on Yelp. Example: `false`
+</ResponseField>

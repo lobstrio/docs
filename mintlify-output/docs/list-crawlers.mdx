@@ -1,0 +1,235 @@
+---
+title: "List Crawlers"
+description: "Retrieve a list of all available crawlers and their capabilities"
+api: "GET https://api.lobstr.io/v1/crawlers"
+---
+
+This endpoint returns a paginated list of all available crawlers on the lobstr.io platform. Each crawler is designed to extract specific types of data from different sources.
+
+Use this endpoint to discover which crawlers are available for your data collection needs before creating squids or adding tasks.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string">
+  Content type of the request. Value: `application/json`
+</ParamField>
+
+## Response Structure
+
+<ResponseField name="total_results" type="integer">
+  Total number of crawlers available. Example: `25`
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  Number of results per page. Example: `50`
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page number. Example: `1`
+</ResponseField>
+
+<ResponseField name="total_pages" type="integer">
+  Total number of pages available. Example: `1`
+</ResponseField>
+
+<ResponseField name="result_from" type="integer">
+  Starting index of results in current page. Example: `1`
+</ResponseField>
+
+<ResponseField name="result_to" type="integer">
+  Ending index of results in current page. Example: `25`
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of crawler objects with comprehensive details
+</ResponseField>
+
+<ResponseField name="next" type="string | null">
+  Full URL to the next page (null if on last page). Example: `null`
+</ResponseField>
+
+<ResponseField name="previous" type="string | null">
+  Full URL to the previous page (null if on first page). Example: `null`
+</ResponseField>
+
+## Crawler Object Fields
+
+<ResponseField name="data[].id" type="string">
+  Unique identifier (hash) for the crawler. Example: `"4734d096159ef05210e0e1677e8be823"`
+</ResponseField>
+
+<ResponseField name="data[].name" type="string">
+  Human-readable name of the crawler. Example: `"Google Maps Search Export"`
+</ResponseField>
+
+<ResponseField name="data[].slug" type="string">
+  URL-friendly identifier. Example: `"google-maps-search-export"`
+</ResponseField>
+
+<ResponseField name="data[].is_public" type="boolean">
+  Whether the crawler is publicly available. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].is_available" type="boolean">
+  Whether the crawler is currently available for use (false if paused). Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].is_premium" type="boolean">
+  Requires premium subscription or extra credits. Example: `false`
+</ResponseField>
+
+<ResponseField name="data[].has_issues" type="boolean">
+  Currently experiencing issues (runs paused until fixed). Example: `false`
+</ResponseField>
+
+<ResponseField name="data[].max_concurrency" type="integer">
+  Maximum number of concurrent tasks allowed for this crawler. Example: `20`
+</ResponseField>
+
+<ResponseField name="data[].credits_per_row" type="number">
+  Credits charged per result row. Example: `0.5`
+</ResponseField>
+
+<ResponseField name="data[].account" type="object | null">
+  Required account sync details (null if no authentication needed). Example: `null`
+</ResponseField>
+
+<ResponseField name="data[].icon" type="string">
+  Base64-encoded SVG icon for UI display. Example: `"data:image/svg+xml;base64,PHN2ZyB4bWxucz..."`
+</ResponseField>
+
+<Tip>
+  Cache the list of crawlers locally as it doesn't change frequently. This reduces unnecessary API calls and improves your application's performance.
+</Tip>
+
+<Note>
+  Each crawler has a unique hash identifier that you'll use when creating squids or configuring data collection tasks.
+</Note>
+
+<Tip>
+  Check the crawler parameters endpoint to see what configuration options are available for each crawler before starting your scraping operations.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/crawlers" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/crawlers"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+
+print(f"Total crawlers: {data['total_results']}")
+print(f"Showing {data['result_from']}-{data['result_to']}\n")
+
+# Display available crawlers
+for crawler in data['data']:
+    status = "✓" if crawler['is_available'] else "✗"
+    premium = " [PREMIUM]" if crawler['is_premium'] else ""
+    print(f"{status} {crawler['name']}{premium}")
+    print(f"   ID: {crawler['id']}")
+    print(f"   Credits: {crawler['credits_per_row']} per row")
+    print()
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 24,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 24,
+  "data": [
+    {
+      "id": "6c5227261fbbd3430f926d409f4c44bf",
+      "object": "crawler",
+      "account": null,
+      "name": "Twitter Profile Scraper",
+      "slug": "twitter-profile-scraper",
+      "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
+      "is_public": true,
+      "is_available": true,
+      "is_premium": false,
+      "has_issues": false,
+      "max_concurrency": 20,
+      "credits_per_row": 2
+    },
+    {
+      "id": "c47dfc2beba9fdc2472d3b3321b06b66",
+      "object": "crawler",
+      "account": {
+        "type": "facebook-sync",
+        "baseurl": "https://www.facebook.com",
+        "cookies": [
+          {
+            "name": "c_user",
+            "required": true
+          },
+          {
+            "name": "xs",
+            "required": true
+          }
+        ],
+        "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+"
+      },
+      "name": "Facebook Pages Search Export",
+      "slug": "facebook-pages-search-export",
+      "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
+      "is_public": true,
+      "is_available": true,
+      "is_premium": false,
+      "has_issues": false,
+      "max_concurrency": 20,
+      "credits_per_row": 20
+    },
+    {
+      "id": "a1d243d3824a1ac773414416eb80362d",
+      "object": "crawler",
+      "account": {
+        "type": "sales-nav-sync",
+        "baseurl": "https://www.linkedin.com",
+        "cookies": [
+          {
+            "name": "li_at",
+            "required": true
+          },
+          {
+            "name": "JSESSIONID",
+            "required": true
+          }
+        ],
+        "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+"
+      },
+      "name": "Sales Navigator Leads Scraper",
+      "slug": "sales-navigator-leads-scraper",
+      "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
+      "is_public": true,
+      "is_available": true,
+      "is_premium": false,
+      "has_issues": false,
+      "max_concurrency": 10,
+      "credits_per_row": 3
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

@@ -1,0 +1,193 @@
+---
+title: "Get Account Details"
+description: "Retrieve detailed information about a specific platform account"
+api: "GET https://api.lobstr.io/v1/accounts/{account_hash}"
+---
+
+This endpoint retrieves detailed information about a specific platform account using its hash ID.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="account_hash" type="string" required>
+  The unique identifier (hash) of the account. Example: `d3e97f2cd33658f301bdbe807402ab30`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Unique account identifier. Example: `"d3e97f2cd33658f301bdbe807402ab30"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "account". Example: `"account"`
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  Platform username. Example: `"hashamxcom"`
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Account creation timestamp (ISO 8601). Example: `"2024-03-08T15:15:53Z"`
+</ResponseField>
+
+<ResponseField name="last_synchronization_time" type="string">
+  Last successful sync timestamp. Example: `"2024-12-16T10:28:43Z"`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  HTTP status code indicating account health. Example: `"200"`
+</ResponseField>
+
+<ResponseField name="status_code_info" type="string">
+  Status information keyword. Example: `"synchronized"`
+</ResponseField>
+
+<ResponseField name="status_code_description" type="string">
+  Human-readable status message. Example: `"Success!"`
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Account type identifier. Example: `"twitter-sync"`
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  Account parameters with default and user-specific settings. Example: `{"default": {}, "user": {}}`
+</ResponseField>
+
+<ResponseField name="updated_at" type="string | null">
+  Last update timestamp. Example: `null`
+</ResponseField>
+
+<ResponseField name="account_type_hash" type="string">
+  Reference to account type definition. Example: `"9853173fc00a940a33d7a420c176ad3b"`
+</ResponseField>
+
+<ResponseField name="squids" type="array">
+  Array of squids currently using this account. Example: `[{"name": "Twitter Scraper", "hash_value": "fcd3..."}]`
+</ResponseField>
+
+<ResponseField name="baseurl" type="string">
+  Platform base URL. Example: `"https://x.com"`
+</ResponseField>
+
+<ResponseField name="cookies" type="array">
+  Required cookie specifications. Example: `[{"name": "auth_token", "required": true}]`
+</ResponseField>
+
+<ResponseField name="icon" type="string">
+  Base64 encoded platform icon. Example: `"<base64 image data>"`
+</ResponseField>
+
+<Tip>
+  Check the squids array to see which squids are using this account before deleting or updating it.
+</Tip>
+
+<Warning>
+  Monitor the status field regularly. A status of 429 or 401 indicates cookie expiration and requires re-synchronization.
+</Warning>
+
+<Note>
+  The params object contains both default limits and current user-configured values, useful for understanding account usage.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/accounts/d3e97f2cd33658f301bdbe807402ab30" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+account_hash = "d3e97f2cd33658f301bdbe807402ab30"
+
+url = f"https://api.lobstr.io/v1/accounts/{account_hash}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+
+account = data['data'][0]
+
+print(f"Account: {account['username']}")
+print(f"Platform: {account['type']}")
+print(f"Status: {account['status_code_info']}")
+print(f"Last sync: {account['last_synchronization_time']}")
+
+# Check which squids use this account
+if account['squids']:
+    print(f"\nSquids using this account:")
+    for squid in account['squids']:
+        print(f"   - {squid['name']} ({squid['hash_value']})")
+else:
+    print("\nNo squids using this account")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 2,
+  "data": [
+    {
+      "id": "d3e97f2cd33658f301bdbe807402ab30",
+      "object": "account",
+      "username": "hashamxcom",
+      "created_at": "2024-03-08T15:15:53Z",
+      "last_synchronization_time": "2024-12-16T10:28:43Z",
+      "status": "200",
+      "status_code_info": "synchronized",
+      "status_code_description": "Success!",
+      "type": "twitter-sync",
+      "params": {
+        "default": {},
+        "user": {}
+      },
+      "updated_at": null,
+      "account_type_hash": "9853173fc00a940a33d7a420c176ad3b",
+      "squids": [
+        {
+          "name": "Twitter User Tweets Scraper (2)",
+          "hash_value": "fcd3fff4053e444b8a98b3660bee8b03"
+        }
+      ],
+      "baseurl": "https://x.com",
+      "cookies": [
+        {"name": "auth_token", "required": true},
+        {"name": "ct0", "required": true}
+      ],
+      "icon": "<base64 image data>"
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```
+
+```json 401
+{
+  "detail": "Invalid token."
+}
+```
+
+```json 404
+{
+  "detail": "Not found."
+}
+```

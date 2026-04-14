@@ -1,0 +1,96 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Instagram Post Comments Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Instagram Post Comments Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="comment_id" type="string">
+  Unique identifier for the Instagram comment. Example: `18397500988178795`
+</ResponseField>
+
+<ResponseField name="comment_url" type="string">
+  Direct URL to the comment on Instagram. Example: `https://www.instagram.com/p/DDIJAfeyemG/c/18397500988178795`
+</ResponseField>
+
+<ResponseField name="post_url" type="string">
+  URL of the Instagram post this comment belongs to. Example: `https://www.instagram.com/reel/DDIJAfeyemG`
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  Full text content of the comment. Example: `I LOVE INSTAGRAM #instagram`
+</ResponseField>
+
+<ResponseField name="giphy_media_info" type="json">
+  Details of a Giphy GIF or sticker attached to the comment
+</ResponseField>
+
+<ResponseField name="owner_username" type="string">
+  Instagram username of the comment author. Example: `mohsinjamindar07`
+</ResponseField>
+
+<ResponseField name="owner_full_name" type="string">
+  Display name of the comment author on Instagram. Example: `Mohsin Jamindar`
+</ResponseField>
+
+<ResponseField name="owner_id" type="string">
+  Unique Instagram identifier of the comment author. Example: `40564582835`
+</ResponseField>
+
+<ResponseField name="owner_profile_pic_url" type="string">
+  URL of the comment author's Instagram profile picture. Example: `https://scontent-iad3-2.cdninstagram.com/v/t51.2885-19/455119162_509085271605404.jpg`
+</ResponseField>
+
+<ResponseField name="owner_is_verified" type="boolean">
+  Whether the comment author has a verified badge on Instagram. Example: `false`
+</ResponseField>
+
+<ResponseField name="owner_is_private" type="boolean">
+  Whether the comment author's Instagram account is set to private. Example: `false`
+</ResponseField>
+
+<ResponseField name="timestamp" type="datetime">
+  Unix timestamp of when the comment was posted. Example: `2026-02-15T06:27:58.000Z`
+</ResponseField>
+
+<ResponseField name="likes_count" type="integer">
+  Number of likes the comment received. Example: `0`
+</ResponseField>
+
+<ResponseField name="replies_count" type="integer">
+  Number of replies to this comment. Example: `0`
+</ResponseField>
+
+<ResponseField name="owner_profile_url" type="string">
+  URL of the comment author's Instagram profile. Example: `https://instagram.com/sai_jonov`
+</ResponseField>
+
+<ResponseField name="is_child_comment" type="boolean">
+  Whether this is a reply to another comment (nested comment). Example: `false`
+</ResponseField>
+
+<ResponseField name="parent_comment_id" type="string">
+  Unique identifier of the parent comment this is a reply to
+</ResponseField>

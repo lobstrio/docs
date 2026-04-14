@@ -1,0 +1,108 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Facebook Business Page Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Facebook Business Page Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the Facebook page. Example: `https://www.facebook.com/nocommentpau`
+</ResponseField>
+
+<ResponseField name="internal_id" type="string">
+  Internal platform identifier for the Facebook page. Example: `100063521350725`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Name of the Facebook page. Example: `No Comment Pau`
+</ResponseField>
+
+<ResponseField name="slug" type="string">
+  URL slug of the Facebook page (e.g. used in facebook.com/slug). Example: `nocommentpau`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  URL of the Facebook page's profile picture. Example: `https://scontent-arn2-1.xx.fbcdn.net/v/t39.30808-1/305969088_514545647339476_1479009747142197002_n.jpg?stp=dst-jpg_s200x200_tt6&_nc_cat=106&ccb=1-7&_nc_sid=2d3e12&_nc_ohc=wbDXCjTyDL0Q7kNvwH5JYnv&_nc_oc=AdmzXtKRvkHLqrkixm0NSUYOzt6H8GocBfUDf8qkJur4vYPsYgQT9sRxnp8PkFRhA9o&_nc_zt=24&_nc_ht=scontent-arn2-1.xx&_nc_gid=pIklvIxjpHdjpcgKR-p9eQ&_nc_ss=8&oh=00_Afyb_NxP5U7IKQFtCCoCRfKRKqqnKN6Ip2bObUiy_NQffw&oe=69C0A25B`
+</ResponseField>
+
+<ResponseField name="likes" type="string">
+  Total number of likes on the Facebook page. Example: `0`
+</ResponseField>
+
+<ResponseField name="followers" type="string">
+  Total number of followers of the Facebook page. Example: `15`
+</ResponseField>
+
+<ResponseField name="visits" type="integer">
+  Number of check-ins or visits reported on the Facebook page. Example: `0`
+</ResponseField>
+
+<ResponseField name="wesbite" type="string">
+  Website URL listed on the Facebook page. Example: `nocommentpau.fr`
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Price range listed on the Facebook page. Example: `$$`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Category of the Facebook page (e.g. Restaurant, Brand, Public Figure). Example: `Restaurant`
+</ResponseField>
+
+<ResponseField name="menu" type="string">
+  Link to the menu listed on the Facebook page
+</ResponseField>
+
+<ResponseField name="instagram" type="string">
+  Instagram profile URL linked to the Facebook page
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address listed on the Facebook page. Example: `bonjour@nocommentpau.fr`
+</ResponseField>
+
+<ResponseField name="address" type="string">
+  Full address listed on the Facebook page. Example: `5 rue Alfred de Lassence, Pau, France`
+</ResponseField>
+
+<ResponseField name="about" type="string">
+  About text from the Facebook page's About section. Example: `NO COMMENT un véritable lieu d’épicuriens 🤩`
+</ResponseField>
+
+<ResponseField name="reviews" type="integer">
+  Customer reviews and rating summary on the Facebook page. Example: `0`
+</ResponseField>
+
+<ResponseField name="score" type="integer">
+  Average rating of the Facebook page
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current operational status of the Facebook page. Example: `valid_page`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Phone number listed on the Facebook page. Example: `+33 5 59 83 76 80`
+</ResponseField>

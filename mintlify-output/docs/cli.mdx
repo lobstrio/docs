@@ -1,0 +1,116 @@
+---
+title: "CLI"
+description: "Command-line interface for the lobstr.io API. Run scrapers, manage squids, download results — all from your terminal."
+---
+
+## Installation
+
+```bash
+pip install lobstrio
+```
+
+Requires Python 3.10+.
+
+<CardGroup cols={4}>
+  <Card title="lobstr go" icon="terminal">
+    Combines create, configure, add tasks, run, and download into a single command.
+  </Card>
+  <Card title="50+ Crawlers" icon="layer-group">
+    Search and explore every crawler by slug before running.
+  </Card>
+  <Card title="CSV & JSON Export" icon="file-export">
+    Download results with a live progress bar while runs complete in the background.
+  </Card>
+  <Card title="Webhooks & Cloud" icon="cloud">
+    Configure delivery to email, Google Sheets, S3, SFTP, or webhook from the terminal.
+  </Card>
+</CardGroup>
+
+## Quick Start
+
+<CodeGroup>
+```bash lobstr go
+# Scrape Google Maps in one command
+lobstr go google-maps-leads-scraper \
+  "https://google.com/maps/search/restaurants+paris" \
+  -o leads.csv
+
+# Keyword-based search
+lobstr go google-search-scraper "pizza delivery" --key keyword
+
+# With parameters and concurrency
+lobstr go google-maps-leads-scraper url1 url2 \
+  --param max_results=200 --concurrency 3
+
+# Don't download, just kick off
+lobstr go twitter-profile-scraper @elonmusk --no-download
+```
+
+```bash Step by step
+lobstr crawlers search "google maps"
+lobstr squid create google-maps-leads-scraper --name "Paris Restaurants"
+lobstr task add SQUID_ID "https://google.com/maps/search/restaurants+paris"
+lobstr run start SQUID_ID --wait
+lobstr results get SQUID_ID --format csv -o results.csv
+
+# Check who you are
+lobstr whoami
+```
+</CodeGroup>
+
+## Command Reference
+
+### Crawlers
+
+| Command | Description |
+|---|---|
+| `crawlers ls` | List all available crawlers |
+| `crawlers search <query>` | Search crawlers by keyword |
+| `crawlers show <slug>` | Get crawler details by slug |
+| `crawlers params <slug>` | Get supported parameters for a crawler |
+| `crawlers attrs <slug>` | Get output attributes for a crawler |
+
+### Squids
+
+| Command | Description |
+|---|---|
+| `squid create <crawler> --name "My Scraper"` | Create a new squid for a crawler |
+| `squid ls` | List all squids in your account |
+| `squid show <id>` | Get squid details by ID |
+| `squid update <id> --param key=value` | Update squid settings or parameters |
+| `squid empty <id>` | Remove all tasks from a squid |
+| `squid rm <id>` | Permanently delete a squid |
+
+### Tasks
+
+| Command | Description |
+|---|---|
+| `task add <squid> <url1> <url2> ...` | Add one or more task URLs to a squid |
+| `task upload <squid> <file.csv>` | Bulk upload tasks from a CSV file |
+| `task ls <squid>` | List tasks for a squid |
+| `task rm <id>` | Delete a task by ID |
+
+### Runs
+
+| Command | Description |
+|---|---|
+| `run start <squid> --wait` | Start a new run and optionally wait for completion |
+| `run ls <squid>` | List all runs for a squid |
+| `run show <id>` | Get run details by ID |
+| `run stats <id>` | Get statistics for a run |
+| `run abort <id>` | Abort an in-progress run |
+| `run download <id> -o results.csv` | Download run results to a file |
+
+### Results
+
+| Command | Description |
+|---|---|
+| `results get <squid> --format csv -o data.csv` | Get results for a squid and export to file |
+
+### Delivery
+
+| Command | Description |
+|---|---|
+| `delivery email <squid> --email user@example.com` | Configure email delivery for a squid |
+| `delivery webhook <squid> --url https://...` | Configure webhook delivery for a squid |
+| `delivery s3 <squid> --bucket my-bucket` | Configure Amazon S3 delivery for a squid |

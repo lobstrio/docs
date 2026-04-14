@@ -1,0 +1,119 @@
+---
+title: "Update Settings"
+description: "Configure the Pages Jaunes Companies Search Export scraper parameters and enrichment options"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your Pages Jaunes Companies Search Export squid settings to control pagination and enable detailed company information enrichment. Enable functions to collect email addresses, social media profiles, and official business registration numbers.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+The following parameters can be configured in the `params` object:
+
+## Function Details
+
+When `functions.collect_additional_details` is enabled, the scraper collects additional structured data:
+
+## General Settings
+
+Standard squid settings that apply to all scrapers:
+
+<Warning>
+  Enabling `functions.collect_emails_from_website` or `functions.collect_additional_details` increases run time due to additional HTTP requests per listing.
+</Warning>
+
+<Tip>
+  SIRET numbers are valuable for B2B verification and can be used to look up official company information in French government databases.
+</Tip>
+
+<Note>
+  **Backward compatibility:** The old function names `collect_contacts` and `results_details` are still accepted but deprecated. Migrate to `collect_emails_from_website` and `collect_additional_details` respectively.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Pages Jaunes Companies Search Export (2)",
+    "concurrency": 1,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "functions": {
+        "collect_additional_details": true,
+        "collect_emails_from_website": true
+      },
+      "max_pages": 3
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Configure scraper with enrichment functions
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Pages Jaunes Companies Search Export (2)",
+        "concurrency": 1,
+        "export_unique_results": True,
+        "to_complete": False,
+        "no_line_breaks": True,
+        "params": {
+            "functions": {
+                "collect_additional_details": True,  # Collect SIRET, SIREN, NAF codes
+                "collect_emails_from_website": True   # Collect email addresses
+            },
+            "max_pages": 3
+        }
+    }
+)
+
+data = response.json()
+print(f"Squid updated: {data['name']}")
+print(f"Max pages: {data['params']['max_pages']}")
+print(f"Collect additional details: {data['params']['functions']['collect_additional_details']}")
+print(f"Collect emails from website: {data['params']['functions']['collect_emails_from_website']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Pages Jaunes Companies Search Export (2)",
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "functions": {
+      "collect_additional_details": true,
+      "collect_emails_from_website": true
+    },
+    "max_pages": 3
+  }
+}
+```

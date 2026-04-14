@@ -1,0 +1,146 @@
+---
+title: "Sync Account"
+description: "Synchronize cookies for a platform account to enable authenticated scraping"
+api: "POST https://api.lobstr.io/v1/accounts/cookies"
+---
+
+This endpoint allows you to synchronize cookies for a specific platform account type. It accepts a JSON payload containing the account type and required cookie values, and returns a task ID to track the synchronization process.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+<ParamField body="type" type="string" required>
+  Account type identifier (e.g., twitter-sync, facebook-sync). Example: `"twitter-sync"`
+</ParamField>
+
+<ParamField body="cookies" type="object" required>
+  Object containing required cookie name-value pairs. Example: `{"auth_token": "...", "ct0": "..."}`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Synchronization task identifier. Example: `"984e0a7996aeae956793b8967cd3e122"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "synchronize-cookies". Example: `"synchronize-cookies"`
+</ResponseField>
+
+<ResponseField name="status_code" type="integer">
+  Task status code (100 = created). Example: `100`
+</ResponseField>
+
+<ResponseField name="status_text" type="string">
+  Human-readable status. Example: `"created"`
+</ResponseField>
+
+<Tip>
+  Use browser developer tools to extract cookies. Open DevTools → Application → Cookies, and copy the required cookie values.
+</Tip>
+
+<Note>
+  The returned task ID can be used with the Check Sync Status endpoint to monitor synchronization progress.
+</Note>
+
+<Warning>
+  Ensure cookies are fresh and valid. Expired or invalid cookies will result in synchronization failure.
+</Warning>
+
+<Tip>
+  Use List Account Types endpoint first to discover which cookies are required for each platform.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/accounts/cookies" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "twitter-sync",
+    "cookies": {
+      "auth_token": "<cookie.auth_token>",
+      "ct0": "<cookie.ct0>"
+    }
+  }'
+```
+
+```python Python
+import requests
+import time
+
+url = "https://api.lobstr.io/v1/accounts/cookies"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+
+# Synchronize Twitter cookies
+payload = {
+    "type": "twitter-sync",
+    "cookies": {
+        "auth_token": "<cookie.auth_token>",
+        "ct0": "<cookie.ct0>"
+    }
+}
+
+response = requests.post(url, headers=headers, json=payload)
+data = response.json()
+
+print(f"Sync task created: {data['id']}")
+print(f"Status: {data['status_text']}")
+
+# Poll for completion
+task_id = data['id']
+while True:
+    status_response = requests.get(
+        f"https://api.lobstr.io/v1/synchronize/{task_id}",
+        headers=headers
+    )
+    status = status_response.json()
+
+    if status['status_code'] == 200:
+        print(f"\n✓ Synchronized! Account hash: {status['account_hash']}")
+        break
+    elif status['status_code'] >= 400:
+        print(f"\n✗ Failed: {status['status_text']}")
+        break
+
+    print(f"Status: {status['status_text']}...")
+    time.sleep(2)
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "984e0a7996aeae956793b8967cd3e122",
+  "object": "synchronize-cookies",
+  "status_code": 100,
+  "status_text": "created"
+}
+```
+
+```json 400
+{
+  "detail": "Invalid account type or missing required cookies."
+}
+```
+
+```json 401
+{
+  "detail": "Invalid token."
+}
+```

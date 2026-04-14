@@ -1,0 +1,96 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TripAdvisor Restaurants Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TripAdvisor Restaurants Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the restaurant listing on TripAdvisor. Example: `https://www.tripadvisor.fr/Restaurant_Review-g187147-d12182791-Reviews-Restaurant_La_Pie_Noir-Paris_Ile_de_France.html`
+</ResponseField>
+
+<ResponseField name="internal_id" type="string">
+  Unique internal identifier for the restaurant on TripAdvisor. Example: `d12182791`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Name of the restaurant as listed on TripAdvisor. Example: `Restaurant La Pie Noir`
+</ResponseField>
+
+<ResponseField name="score" type="float">
+  Average TripAdvisor rating out of 5. Example: `4.7`
+</ResponseField>
+
+<ResponseField name="ratings" type="int">
+  Total number of customer reviews on TripAdvisor. Example: `665`
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Price range indicator (e.g. $, $$, $$$). Example: `€€-€€€`
+</ResponseField>
+
+<ResponseField name="features" type="string">
+  Cuisine types and dining features listed on TripAdvisor. Example: `Française, Européenne`
+</ResponseField>
+
+<ResponseField name="full_address" type="string">
+  Full formatted address of the restaurant. Example: `5 Rue de la Montagne Sainte Genevieve, Paris, Île-de-France, 75005, FR`
+</ResponseField>
+
+<ResponseField name="lat" type="float">
+  Latitude coordinate of the restaurant. Example: `48.849335`
+</ResponseField>
+
+<ResponseField name="lng" type="float">
+  Longitude coordinate of the restaurant. Example: `2.34875`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Contact phone number of the restaurant. Example: `+33 1 43 54 08 99`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Official website URL of the restaurant
+</ResponseField>
+
+<ResponseField name="menu" type="text">
+  URL to the restaurant's menu on TripAdvisor or its website
+</ResponseField>
+
+<ResponseField name="mail" type="string">
+  Email address of the restaurant. Example: `restaurant.lapienoir.bzh@gmail.com`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  URL of the restaurant's main cover image on TripAdvisor. Example: `https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/7a/08/cf/side-view-from-the-street.jpg`
+</ResponseField>
+
+<ResponseField name="is_claimed" type="boolean">
+  Whether the restaurant has claimed its TripAdvisor listing. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_michelin" type="boolean">
+  Whether the restaurant appears in the Michelin Guide. Example: `false`
+</ResponseField>

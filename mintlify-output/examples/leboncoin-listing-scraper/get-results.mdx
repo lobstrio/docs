@@ -1,0 +1,75 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Leboncoin Listing Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Leboncoin Listing Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="annonce_id" type="string">
+  Unique identifier for the listing on Leboncoin. Example: `3062366535`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the listing. Example: `Lot de 7 plats en inox de différentes tailles`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listed price of the item. Example: `18`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on Leboncoin. Example: `https://www.leboncoin.fr/ad/arts_de_la_table/3062366535`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full description text of the listing. Example: `7 plats en inox,4 peuvent aller sur l'induction a feu doux,,
+Détails 3 légumiers ronds,22,23,28 cm diamètre.
+1 plat rond 30 cm , 2 plats ovales34/23 cm, 1 grand ovale 41/28. Livraison uniquement par mondial Relay ou enlever sur Caen Vaucelle.
+Poids total 4 kg.`
+</ResponseField>
+
+<ResponseField name="has_phone" type="boolean">
+  Whether a phone number is available for this listing. Example: `false`
+</ResponseField>
+
+<ResponseField name="phone" type="text">
+  Phone number of the seller
+</ResponseField>
+
+<ResponseField name="owner_type" type="string">
+  Type of seller (private individual or professional). Example: `private`
+</ResponseField>
+
+<ResponseField name="owner_name" type="string">
+  Name of the seller. Example: `gonne`
+</ResponseField>
+
+<ResponseField name="owner_id" type="string">
+  Unique identifier of the seller on Leboncoin. Example: `89fb67be-e718-4bf4-b217-a809002f48c7`
+</ResponseField>
+
+<ResponseField name="store_id" type="string">
+  Store identifier for professional sellers. Example: `4616769`
+</ResponseField>

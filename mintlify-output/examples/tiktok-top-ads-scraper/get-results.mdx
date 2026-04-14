@@ -1,0 +1,164 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TikTok Top Ads Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TikTok Top Ads Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="internal_id" type="string">
+  Unique TikTok internal identifier for the ad. Example: `7183244447446040577`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the ad listing in TikTok Ads Library. Example: `https://ads.tiktok.com/business/creativecenter/topads/7183244447446040577`
+</ResponseField>
+
+<ResponseField name="ad_title" type="string">
+  Title or headline of the TikTok advertisement. Example: `Omg Top War is SOOO fun!!`
+</ResponseField>
+
+<ResponseField name="brand_name" type="string">
+  Name of the brand running the ad. Example: `Top War: Battle Game`
+</ResponseField>
+
+<ResponseField name="cost" type="integer">
+  Relative cost or spend level indicator of the ad. Example: `2`
+</ResponseField>
+
+<ResponseField name="ctr" type="float">
+  Click-through rate (CTR) of the ad. Example: `0.16`
+</ResponseField>
+
+<ResponseField name="favorite" type="boolean">
+  Whether the ad is bookmarked in TikTok Ads Library. Example: `false`
+</ResponseField>
+
+<ResponseField name="industry_key" type="string">
+  Internal key for the ad's industry category. Example: `label_25310000000`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Industry category the ad belongs to. Example: `Strategy`
+</ResponseField>
+
+<ResponseField name="is_search" type="boolean">
+  Whether this ad was returned via a search in TikTok Ads Library. Example: `false`
+</ResponseField>
+
+<ResponseField name="like" type="integer">
+  Number of likes the ad video received. Example: `1316378`
+</ResponseField>
+
+<ResponseField name="objective_key" type="string">
+  Internal key for the campaign objective. Example: `campaign_objective_app_install`
+</ResponseField>
+
+<ResponseField name="objective" type="string">
+  Campaign objective (e.g. App Installs, Traffic, Conversions). Example: `App Installs`
+</ResponseField>
+
+<ResponseField name="tag" type="integer">
+  Category tag assigned to the ad in TikTok Ads Library. Example: `3`
+</ResponseField>
+
+<ResponseField name="video_info_vid" type="string">
+  Internal TikTok identifier for the ad video. Example: `v0911dg40001cen4er3c77ubsnsedsp0`
+</ResponseField>
+
+<ResponseField name="video_info_duration" type="float">
+  Duration of the ad video in seconds. Example: `34.368`
+</ResponseField>
+
+<ResponseField name="video_info_cover" type="string">
+  URL of the ad video's thumbnail image. Example: `https://p16-sign-va.tiktokcdn.com/tos-maliva-v-2c3654-us/486619c74ee8418fba7fa56e4ca774ad~tplv-noop.image?dr=18692&refresh_token=9e8e25b8&x-expires=1769020412&x-signature=jNdfeXCC98Xb3JPjqjh0CiqPEtg%3D&t=9276707c&ps=14f1eb3e&shp=9e36835a&shcp=317596d8&idc=my`
+</ResponseField>
+
+<ResponseField name="video_info_video_url_720p" type="string">
+  URL of the ad video file at 720p resolution. Example: `https://v16m-default.tiktokcdn.com/9afb882c10114d99b9b0186102ce930a/69711bfc/video/tos/maliva/tos-maliva-v-2c3654-us/oskBSNsbfKpj8BEvQdTk1m5nQDdRJ2gflHrcIa/?a=0&bti=NTU4QDM1NGA%3D&ch=0&cr=0&dr=0&lr=tiktok_business&cd=0%7C0%7C0%7C0&cv=1&br=4390&bt=2195&cs=0&ds=3&ft=cApXJCz7ThWHcWX01GZmo0P&mime_type=video_mp4&qs=0&rc=OjNlOmc6Njg5OTQ0Njs7Z0BpM3ZocWU6ZnU3aDQzN2c0M0AyLzNgL18yNTExMzZgL2JgYSNtYXBwcjQwYmtgLS1kLjZzcw%3D%3D&vvpl=1&l=202601212032587548419764747B268087&btag=e00088000`
+</ResponseField>
+
+<ResponseField name="video_info_video_url_540p" type="string">
+  URL of the ad video file at 540p resolution. Example: `https://v16m-default.tiktokcdn.com/0d3b90a85935bd1edad867f6de9bf21f/69711bfc/video/tos/maliva/tos-maliva-v-2c3654-us/ooRHdsQQJXE8kDkmfn15vrbfVdnDBBNINgSjlK/?a=0&bti=NTU4QDM1NGA%3D&ch=0&cr=0&dr=0&lr=tiktok_business&cd=0%7C0%7C0%7C0&cv=1&br=3180&bt=1590&cs=0&ds=6&ft=cApXJCz7ThWHcWX01GZmo0P&mime_type=video_mp4&qs=0&rc=NTY1ZWY2aTs4NTVoZWk8O0BpM3ZocWU6ZnU3aDQzN2c0M0A2Nl9iYWNfNWAxLy1gMy8wYSNtYXBwcjQwYmtgLS1kLjZzcw%3D%3D&vvpl=1&l=202601212032587548419764747B268087&btag=e00088000`
+</ResponseField>
+
+<ResponseField name="video_info_width" type="integer">
+  Width of the ad video in pixels. Example: `720`
+</ResponseField>
+
+<ResponseField name="video_info_height" type="integer">
+  Height of the ad video in pixels. Example: `1280`
+</ResponseField>
+
+<ResponseField name="keywords" type="string">
+  Keywords associated with the ad in TikTok Ads Library
+</ResponseField>
+
+<ResponseField name="landing_page" type="string">
+  URL of the landing page the ad directs users to
+</ResponseField>
+
+<ResponseField name="share" type="integer">
+  Number of times the ad video was shared
+</ResponseField>
+
+<ResponseField name="source" type="string">
+  Platform where the ad is served (e.g. TikTok)
+</ResponseField>
+
+<ResponseField name="comment" type="integer">
+  Number of comments on the ad video
+</ResponseField>
+
+<ResponseField name="country_code" type="json">
+  ISO 2-letter country code of the ad's target region
+</ResponseField>
+
+<ResponseField name="has_summary" type="boolean">
+  Whether the ad has a summary section in TikTok Ads Library
+</ResponseField>
+
+<ResponseField name="highlight_text" type="string">
+  Highlight or badge label shown on the ad in TikTok Ads Library
+</ResponseField>
+
+<ResponseField name="objectives" type="json">
+  List of campaign objectives associated with the ad
+</ResponseField>
+
+<ResponseField name="pattern_label" type="json">
+  Creative pattern label categorizing the ad's visual format
+</ResponseField>
+
+<ResponseField name="source_key" type="integer">
+  Internal key identifying the ad source
+</ResponseField>
+
+<ResponseField name="voice_over" type="boolean">
+  Whether the ad video includes a voice-over track
+</ResponseField>
+
+<ResponseField name="detail_raw" type="json">
+  Raw detail data returned by the TikTok Ads Library API
+</ResponseField>

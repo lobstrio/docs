@@ -1,0 +1,132 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Trustpilot Reviews Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Trustpilot Reviews Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="review_url" type="string">
+  Direct URL to the review on Trustpilot. Example: `69bf54852955c39180813cb8`
+</ResponseField>
+
+<ResponseField name="author_name" type="string">
+  Display name of the reviewer. Example: `Kockey`
+</ResponseField>
+
+<ResponseField name="author_id" type="string">
+  Unique identifier of the reviewer on Trustpilot. Example: `5dfce3a5b14ccfc746f29fc9`
+</ResponseField>
+
+<ResponseField name="author_image" type="string">
+  URL of the reviewer's profile picture. Example: `https://user-images.trustpilot.com/5dfce3a5b14ccfc746f29fc9/73x73.png`
+</ResponseField>
+
+<ResponseField name="date_published" type="datetime">
+  Date the review was published. Example: `2026-03-22T04:31:33.000Z`
+</ResponseField>
+
+<ResponseField name="review_headline" type="string">
+  Title or headline of the review. Example: `I was so impressed with the service…`
+</ResponseField>
+
+<ResponseField name="review_body" type="text">
+  Full text content of the review. Example: `I was so impressed with the service read the reviews 10 times and they were correct this process was easy with fast approval and funding my credit cards payments were sent in 2 days and balance in my account in 2 days. I was so impressed that I even open a checking account with lending club. I'm thankful that they didn't play games when they said approved in just a few minutes they meant it they didn't change their mind are lie approved meant just that no hoops to jump through. I'm so thankful and will definitely be a long term customer. Customer service was great and very informative I'm just blown away with how smooth everything went thank you lending club you guys rock`
+</ResponseField>
+
+<ResponseField name="review_language" type="string">
+  Language the review was written in. Example: `en`
+</ResponseField>
+
+<ResponseField name="rating_value" type="integer">
+  Star rating given by the reviewer (1 to 5). Example: `5`
+</ResponseField>
+
+<ResponseField name="verification_level" type="string">
+  Level of verification applied to the review. Example: `not-verified`
+</ResponseField>
+
+<ResponseField name="number_of_reviews" type="integer">
+  Total number of reviews the author has written. Example: `7`
+</ResponseField>
+
+<ResponseField name="consumer_country_code" type="string">
+  Country code of the reviewer. Example: `US`
+</ResponseField>
+
+<ResponseField name="experience_date" type="datetime">
+  Date of the experience being reviewed. Example: `2026-03-18T00:00:00.000Z`
+</ResponseField>
+
+<ResponseField name="likes" type="integer">
+  Number of likes the review has received. Example: `0`
+</ResponseField>
+
+<ResponseField name="report" type="text">
+  Number of times the review has been reported
+</ResponseField>
+
+<ResponseField name="review_source" type="string">
+  Source or platform where the review originated. Example: `Organic`
+</ResponseField>
+
+<ResponseField name="is_author_verified" type="boolean">
+  Whether the reviewer's identity has been verified. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_review_verified" type="boolean">
+  Whether the review has been verified by Trustpilot. Example: `false`
+</ResponseField>
+
+<ResponseField name="owner_reply" type="text">
+  Response text from the business owner
+</ResponseField>
+
+<ResponseField name="owner_reply_date" type="datetime">
+  Date the business owner replied to the review
+</ResponseField>
+
+<ResponseField name="updated_date" type="datetime">
+  Date the review was last updated
+</ResponseField>
+
+<ResponseField name="consumer_reviews_on_domain" type="integer">
+  Number of reviews the author has left for this domain. Example: `1`
+</ResponseField>
+
+<ResponseField name="reviews_count" type="integer">
+  Total number of reviews for the business. Example: `11194`
+</ResponseField>
+
+<ResponseField name="trust_score" type="float">
+  Trustpilot TrustScore of the business. Example: `4.7`
+</ResponseField>
+
+<ResponseField name="stars" type="float">
+  Star rating category of the business (e.g. Excellent, Great). Example: `4.5`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Timestamp when the review was scraped. Example: `2026-03-22T12:57:40Z`
+</ResponseField>

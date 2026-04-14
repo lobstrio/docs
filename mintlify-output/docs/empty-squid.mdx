@@ -1,0 +1,123 @@
+---
+title: "Empty Squid"
+description: "Remove all tasks and results from a squid while keeping its configuration intact"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}/empty"
+---
+
+This endpoint removes all tasks and their associated results from a specified squid, returning the number of deleted items while keeping the squid's configuration intact.
+
+## What Gets Deleted
+
+Depending on the `type` parameter:
+- **url**: Removes all URL-based tasks and their results
+- **params**: Removes all parameter-based tasks and their results
+
+The squid itself remains with all its settings (name, parameters, integrations, schedule) preserved. This is useful when you want to:
+- Clear old tasks before adding new ones
+- Reset a squid without losing its configuration
+- Remove tasks that are no longer needed
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid_hash" type="string" required>
+  The unique identifier (hash) of the squid to empty. Example: `388d6d5e98134294ac612ec9f99dc5b1`
+</ParamField>
+
+## Request Body
+
+<ParamField body="type" type="string" required>
+  Type of tasks to remove: 'url' for URL-based tasks or 'params' for parameter-based tasks. Example: `"url"`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Squid identifier. Example: `"388d6d5e98134294ac612ec9f99dc5b1"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "squid". Example: `"squid"`
+</ResponseField>
+
+<ResponseField name="emptied" type="boolean">
+  Boolean indicating success. Example: `true`
+</ResponseField>
+
+<ResponseField name="deleted_count" type="integer">
+  Number of tasks deleted. Example: `150`
+</ResponseField>
+
+<Warning>
+  This action is irreversible. All tasks and results of the specified type will be permanently deleted.
+</Warning>
+
+<Tip>
+  Use this before re-importing tasks to avoid duplicates. Empty the squid, then add fresh tasks.
+</Tip>
+
+<Note>
+  The squid's configuration (parameters, integrations, schedule) is preserved. Only tasks and results are removed.
+</Note>
+
+<Tip>
+  Check the 'deleted_count' in the response to verify how many tasks were removed.
+</Tip>
+
+<Warning>
+  If a run is currently active, stop it before emptying the squid to avoid conflicts.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/388d6d5e98134294ac612ec9f99dc5b1/empty" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "url"
+  }'
+```
+
+```python Python
+import requests
+
+squid_id = "388d6d5e98134294ac612ec9f99dc5b1"
+url = f"https://api.lobstr.io/v1/squids/{squid_id}/empty"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+payload = {
+    "type": "url"  # or "params" for parameter-based tasks
+}
+
+response = requests.post(url, headers=headers, json=payload)
+result = response.json()
+
+print(f"Squid emptied: {result['emptied']}")
+print(f"Tasks deleted: {result['deleted_count']}")
+print(f"Squid ID: {result['id']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "388d6d5e98134294ac612ec9f99dc5b1",
+  "object": "squid",
+  "emptied": true,
+  "deleted_count": 1
+}
+```

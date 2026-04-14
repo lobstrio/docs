@@ -1,0 +1,265 @@
+---
+title: "List Squids"
+description: "Retrieve a paginated list of all your squids with filtering and search capabilities"
+api: "GET https://api.lobstr.io/v1/squids"
+---
+
+This endpoint returns a paginated list of all squids belonging to the authenticated user. You can search by name and control pagination with query parameters.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="name" type="string">
+  Filter squids by name (case-insensitive partial match). Example: `Google`
+</ParamField>
+
+<ParamField query="limit" type="integer">
+  Number of results per page. Example: `10`
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number for pagination. Example: `2`
+</ParamField>
+
+## Response Structure
+
+<ResponseField name="total_results" type="integer">
+  Total number of squids matching the query. Example: `15`
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  Number of results per page. Example: `50`
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page number. Example: `1`
+</ResponseField>
+
+<ResponseField name="total_pages" type="integer">
+  Total number of pages available. Example: `1`
+</ResponseField>
+
+<ResponseField name="result_from" type="integer">
+  Starting index of results in current page. Example: `1`
+</ResponseField>
+
+<ResponseField name="result_to" type="integer">
+  Ending index of results in current page. Example: `15`
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of squid objects with comprehensive details
+</ResponseField>
+
+<ResponseField name="next" type="string | null">
+  Full URL to the next page (null if on last page). Example: `null`
+</ResponseField>
+
+<ResponseField name="previous" type="string | null">
+  Full URL to the previous page (null if on first page). Example: `null`
+</ResponseField>
+
+## Squid Object Fields
+
+<ResponseField name="data[].id" type="string">
+  Unique squid identifier. Example: `"c106a44a98044ef18acc59986ae10967"`
+</ResponseField>
+
+<ResponseField name="data[].name" type="string">
+  Display name of the squid. Example: `"Google Maps (1)"`
+</ResponseField>
+
+<ResponseField name="data[].created_at" type="string">
+  Timestamp when the squid was created. Example: `"2024-01-15T10:30:00Z"`
+</ResponseField>
+
+<ResponseField name="data[].is_active" type="boolean">
+  Whether the squid is active and can run. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].is_ready" type="boolean">
+  Whether the squid has tasks and is ready to run. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].crawler" type="string">
+  Unique identifier of the associated crawler. Example: `"4734d096159ef05210e0e1677e8be823"`
+</ResponseField>
+
+<ResponseField name="data[].crawler_name" type="string">
+  Display name of the crawler. Example: `"Google Maps Search Export"`
+</ResponseField>
+
+<ResponseField name="data[].icon" type="string">
+  URL to the crawler's icon image. Example: `"https://cdn.lobstr.io/icons/google-maps.png"`
+</ResponseField>
+
+<ResponseField name="data[].is_public" type="boolean">
+  Whether the crawler is publicly available. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].concurrency" type="integer">
+  Number of concurrent tasks the squid runs. Example: `2`
+</ResponseField>
+
+<ResponseField name="data[].params" type="object">
+  Crawler-specific parameter configuration object. Example: `{"language": "en"}`
+</ResponseField>
+
+<ResponseField name="data[].to_complete" type="boolean">
+  Whether to stop after completing all tasks. Example: `false`
+</ResponseField>
+
+<ResponseField name="data[].export_unique_results" type="boolean">
+  Whether to export only unique results. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].no_line_breaks" type="boolean">
+  Whether to remove line breaks from exported data. Example: `false`
+</ResponseField>
+
+<ResponseField name="data[].last_run_status" type="string">
+  Status of the most recent run (completed, running, error, etc.). Example: `"DONE"`
+</ResponseField>
+
+<ResponseField name="data[].last_run_at" type="string">
+  Timestamp of the most recent run. Example: `"2024-01-20T15:45:00Z"`
+</ResponseField>
+
+<ResponseField name="data[].total_runs" type="integer">
+  Total number of times the squid has been executed. Example: `5`
+</ResponseField>
+
+<ResponseField name="data[].next_launch_at" type="string | null">
+  Scheduled time for the next automated run (null if not scheduled). Example: `"2024-01-21T10:00:00Z"`
+</ResponseField>
+
+<ResponseField name="data[].google_sheet_fields" type="object | null">
+  Google Sheets integration configuration (null if not configured). Example: `null`
+</ResponseField>
+
+<ResponseField name="data[].ftp_fields" type="object | null">
+  FTP integration configuration (null if not configured). Example: `null`
+</ResponseField>
+
+<ResponseField name="data[].s3_fields" type="object | null">
+  AWS S3 integration configuration (null if not configured). Example: `null`
+</ResponseField>
+
+<ResponseField name="data[].webhook_fields" type="object | null">
+  Webhook integration configuration (null if not configured). Example: `null`
+</ResponseField>
+
+<ResponseField name="data[].schedule" type="string | null">
+  Cron expression for scheduled runs (null if not scheduled). Example: `"0 10 * * *"`
+</ResponseField>
+
+<ResponseField name="data[].schedule_time" type="string">
+  Human-readable schedule description. Example: `"Daily at 10:00 AM"`
+</ResponseField>
+
+<ResponseField name="data[].download_url" type="string | null">
+  Temporary signed URL to download results (null if no results available). Example: `"https://storage.lobstr.io/downloads/xyz123..."`
+</ResponseField>
+
+<Tip>
+  Use the 'name' query parameter to quickly find squids. It performs a case-insensitive partial match on squid names.
+</Tip>
+
+<Note>
+  The 'next' and 'previous' fields contain full URLs for easy pagination. Use them directly to navigate through pages.
+</Note>
+
+<Tip>
+  Check 'last_run_status' to see if a squid has completed, is running, or encountered errors. Useful for monitoring multiple squids.
+</Tip>
+
+<Warning>
+  Squids with 'is_ready: false' haven't been configured with tasks yet. Add tasks before starting a run.
+</Warning>
+
+<Tip>
+  The 'download_url' field provides a temporary signed URL to download results. URLs expire after a certain time period.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/squids?name=Google&limit=10&page=1" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/squids"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+params = {
+    "name": "Google",
+    "limit": 10,
+    "page": 1
+}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+
+print(f"Total squids found: {data['total_results']}")
+print(f"Page {data['page']} of {data['total_pages']}\n")
+
+for squid in data['data']:
+    status = "Active" if squid['is_active'] else "Inactive"
+    print(f"{squid['name']} ({status})")
+    print(f"  ID: {squid['id']}")
+    print(f"  Crawler: {squid['crawler_name']}")
+    print(f"  Total Runs: {squid['total_runs']}")
+    print(f"  Last Status: {squid['last_run_status'] or 'Never run'}\n")
+
+if data['next']:
+    print(f"Next page: {data['next']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 34,
+  "limit": 10,
+  "page": 1,
+  "total_pages": 4,
+  "result_from": 1,
+  "result_to": 10,
+  "data": [
+    {
+      "id": "e86b29c032024b66aff529e1d43c2bd7",
+      "created_at": "2025-02-03T14:24:23Z",
+      "name": "My Google Maps Scraper",
+      "is_ready": true,
+      "is_active": true,
+      "concurrency": 2,
+      "params": {
+        "country": "United States",
+        "ratings": "4.0+",
+        "language": "English (United States)",
+        "max_results": 150
+      },
+      "crawler": "4734d096159ef05210e0e1677e8be823",
+      "crawler_name": "Google Maps Search Export",
+      "last_run_status": "DONE",
+      "total_runs": 5,
+      "last_run_at": "2025-03-05T09:27:17.012423",
+      "next_launch_at": null,
+      "is_public": true
+    }
+  ],
+  "next": "https://api.lobstr.io/v1/squids?limit=10&page=2",
+  "previous": null
+}
+```

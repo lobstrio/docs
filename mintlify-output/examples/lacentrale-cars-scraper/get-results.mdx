@@ -1,0 +1,352 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from LaCentrale Cars Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **LaCentrale Cars Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="reference" type="string">
+  Reference identifier. Example: `E118586883`
+</ResponseField>
+
+<ResponseField name="listing_url" type="string">
+  Listing URL. Example: `https://www.lacentrale.fr/auto-occasion-annonce-69118586883.html`
+</ResponseField>
+
+<ResponseField name="price" type="float">
+  Price. Example: `154990.0`
+</ResponseField>
+
+<ResponseField name="financing_teasing_price" type="float">
+  Teaser financing price
+</ResponseField>
+
+<ResponseField name="photo_url" type="string">
+  Photo URL. Example: `https://image-annonce.lacentrale.fr/1096x829/E118586883_STANDARD_0.jpg`
+</ResponseField>
+
+<ResponseField name="photo_urls_mobile" type="json">
+  Mobile photo URLs. Example: `['https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_0.jpg?format=webp&size=285x214&watermark=lc&signature=639071adacd9528c215e8872ccb22969a1a7e6ac2b3a853bb4d2d935', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_1.jpg?format=webp&size=140x105&watermark=lc&signature=a7aec3d26decefda5cf888170c580e86bd6bcca67f2d779a39eddf4d', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_2.jpg?format=webp&size=140x105&watermark=lc&signature=a7aec3d26decefda5cf888170c580e86bd6bcca67f2d779a39eddf4d']`
+</ResponseField>
+
+<ResponseField name="pictures_count" type="int">
+  Number of pictures. Example: `17`
+</ResponseField>
+
+<ResponseField name="pictures_count_date" type="string">
+  Date of picture count update. Example: `2026-03-21T14:56:09`
+</ResponseField>
+
+<ResponseField name="make" type="string">
+  Vehicle make or brand. Example: `PORSCHE`
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  Vehicle model. Example: `911`
+</ResponseField>
+
+<ResponseField name="detailed_model" type="string">
+  Detailed model name. Example: `PORSCHE 911 TYPE 992`
+</ResponseField>
+
+<ResponseField name="commercial_name" type="string">
+  Commercial name. Example: `911 TYPE 992`
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  Vehicle version or trim. Example: `(992) COUPE 3.0 385 CARRERA BVA7`
+</ResponseField>
+
+<ResponseField name="trim_level" type="string">
+  Trim level. Example: `CARRERA`
+</ResponseField>
+
+<ResponseField name="motorization" type="string">
+  Engine or motorization type. Example: `3.0 385`
+</ResponseField>
+
+<ResponseField name="year" type="int">
+  Vehicle year. Example: `2024`
+</ResponseField>
+
+<ResponseField name="mileage" type="int">
+  Vehicle mileage. Example: `10930`
+</ResponseField>
+
+<ResponseField name="energy" type="string">
+  Energy or fuel type. Example: `ESSENCE`
+</ResponseField>
+
+<ResponseField name="gearbox" type="string">
+  Gearbox type. Example: `AUTO`
+</ResponseField>
+
+<ResponseField name="doors" type="int">
+  Number of doors. Example: `2`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Category. Example: `COUPE`
+</ResponseField>
+
+<ResponseField name="family" type="string">
+  Vehicle family or range. Example: `AUTO`
+</ResponseField>
+
+<ResponseField name="external_color" type="string">
+  Exterior colour. Example: `gris`
+</ResponseField>
+
+<ResponseField name="customer_type" type="string">
+  Customer type. Example: `PRO`
+</ResponseField>
+
+<ResponseField name="customer_reference" type="string">
+  Customer reference. Example: `C060750`
+</ResponseField>
+
+<ResponseField name="customer_family_code" type="string">
+  Customer family code. Example: `INTERMEDIAIRE`
+</ResponseField>
+
+<ResponseField name="contact_name" type="string">
+  Contact person name. Example: `MOTORSPORT BY TB`
+</ResponseField>
+
+<ResponseField name="display_phone" type="string">
+  Displayed phone number. Example: `33451127621`
+</ResponseField>
+
+<ResponseField name="country" type="string">
+  Country. Example: `FR`
+</ResponseField>
+
+<ResponseField name="visit_place" type="string">
+  Place visited. Example: `06`
+</ResponseField>
+
+<ResponseField name="distance_km" type="float">
+  Distance in kilometres
+</ResponseField>
+
+<ResponseField name="delivery_is_active" type="boolean">
+  Whether delivery is available. Example: `true`
+</ResponseField>
+
+<ResponseField name="delivery_available_prices" type="json">
+  Available delivery price options. Example: `[0, 100, 200, 300, 500]`
+</ResponseField>
+
+<ResponseField name="is_deliverable" type="boolean">
+  Whether item can be delivered. Example: `false`
+</ResponseField>
+
+<ResponseField name="delivery_price" type="float">
+  Delivery price
+</ResponseField>
+
+<ResponseField name="is_new" type="boolean">
+  Whether item is new. Example: `true`
+</ResponseField>
+
+<ResponseField name="pictures_360_exterieur" type="boolean">
+  360° exterior photos. Example: `false`
+</ResponseField>
+
+<ResponseField name="pictures_photosphere" type="boolean">
+  Photosphere images. Example: `false`
+</ResponseField>
+
+<ResponseField name="all_photos" type="json">
+  All photo URLs. Example: `['https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_0.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_1.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_10.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_11.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_2.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_3.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_12.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_4.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_9.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_5.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_6.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_7.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_13.jpg?fit=inside&format=webp&lastUpdated=1774104969&size=1096x829&signature=b23a53dca5f7fcf80bfa584cab3fddd7e753a04fdd4f46e3908225af', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_8.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_14.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_15.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb', 'https://pictures.lacentrale.fr/classifieds/E118586883_STANDARD_16.jpg?fit=inside&format=webp&lastUpdated=1774104968&size=1096x829&signature=3e4537d3acd8c3cc01c95f419c1a3a9706acbe80ac1b609fa95aa8bb']`
+</ResponseField>
+
+<ResponseField name="autoviza" type="boolean">
+  Vehicle history check status. Example: `false`
+</ResponseField>
+
+<ResponseField name="good_deal_badge" type="string">
+  Whether listing has a good deal badge. Example: `BAD_DEAL`
+</ResponseField>
+
+<ResponseField name="manufacturer_warranty_duration" type="int">
+  Manufacturer warranty duration. Example: `1`
+</ResponseField>
+
+<ResponseField name="publication_options" type="json">
+  Publication display options. Example: `['CALLTRACKING', 'PHOTO_360', 'PHOTO_LISTING', 'PHOTO_WEB', 'WEB_IMMEDIAT', 'DELIVERY', 'STRENGTHS', 'MULTI_PHOTOS']`
+</ResponseField>
+
+<ResponseField name="first_online_date" type="datetime">
+  Date first listed online. Example: `2026-03-20T23:00:00+00:00`
+</ResponseField>
+
+<ResponseField name="last_update" type="string">
+  Last update date. Example: `2026-03-22T11:01:13`
+</ResponseField>
+
+<ResponseField name="score" type="float">
+  Listing quality or relevance score on La Centrale. Example: `639.93634`
+</ResponseField>
+
+<ResponseField name="request_date" type="datetime">
+  Request date. Example: `2026-03-23T05:43:55.979536+00:00`
+</ResponseField>
+
+<ResponseField name="equipment_list" type="json">
+  List of equipment. Example: `['Volant cuir', 'Antipatinage', 'Ordinateur de bord', 'Alarme', 'ABS', 'Bluetooth', 'Régulateur de vitesse', '4 roues directrices', 'Aide parking', 'Airbag frontal', 'Anti démarrage', 'ASR', 'Becquet', 'Caméra de recul', "Carnet d'entretien", 'Carte main libre', 'Climatisation automatique', 'Climatisation automatique multi zone', 'Contrôle de pression des pneus', 'Détecteur de pluie', 'Différentiel autobloquant', 'Direction assistée', 'FAP', 'Fermeture électrique', 'Frein de parking automatique', 'Jantes alu', 'Non fumeur', 'Pack cuir', 'Pack sport', 'Peinture métallisée', 'Prise audio USB', 'Projecteurs bi-xénon', 'Projecteurs xénon', 'Sièges électriques', 'Suspension sport', 'Système audio BOSE', 'Système audio MP3', 'Système Start & Stop', 'Vitres électriques', 'Pack accent noir(e)', 'Siège chauffant av', '6 litre(s) 390 kw turbo catalyseur', 'Pavillon carbone', 'Rétroviseur ext noir(e) peint', 'Sellerie : cuir partiel', 'Lunette ar. chauffant(e)/dégivrant(e)', 'Système audio porsche cdr avec ecran tactile couleur (radio/lecteur cd)', 'Equipement int. enjoliveur façade de commande carbone', 'Cadran couleur', 'Pack suppl. intérieur: ar. cuir', 'Volant de direction (sport 3 branches)', 'Levier de sélection et poignée de frein à main alcantara', '6 litre(s) 254 kw catalyseur', 'Sticker / bandes décoratives numéro de course', 'Suppression sièges ar', 'Restylage fb (option interne)', 'Vitrage teinté(e)', 'Voie élargie sur train ar', 'Système de pédales et repose pied en aluminium', 'Habillages de bas de caisse peint', 'capote électrique', 'avec monogramme individual', 'Mode de transmission traction intégrale permanente', 'Equipement int. enjoliveur façade de commande peint', 'Étriers de frein jaune peint', '8 litre(s) 478 kw turbo catalyseur', 'Equipement int. enjoliveur façade de commande cuir', 'Support à boissons embout cuir', "Combiné d'instruments avec fond argent", 'Chassis/suspensions surbaissé(e)', 'Arceau de sécurité noir(e)', "Déflecteur d'air électrique", 'Monogramme porsche peint', '0 litre(s) 368 kw catalyseur', 'Spoiler av. couleur caisse', 'Boîte de vitesses 6 rapports sport', 'Pack intérieur coutures dans une couleur différente', 'Cadran compte tours', 'Essuie vitres avec capteur de pluie', 'Monte charge train av', 'sport chrono chronomètre', 'Volant de direction (sport/cuir', 'Rétroviseur ext rabattable électriquement', "Système d'airbag crânien (airbag curtain)", 'Volant de direction chauffant(e)/dégivrant(e) (gt sport / race tex) avec multifonctions et palettes changement vitesse', 'Garniture de pavillon race tex', 'Pré équipement vehicle tracking system', 'Sièges sport av', 'recouvrements cuir', '6 litre(s) 305 kw catalyseur', 'Norme de dépollution euro 6d temp', 'Volant de direction (cuir 3 branches) avec palettes changement vitesse', '8 litre(s) 368 kw turbo catalyseur', 'Volant de direction chauffant(e)/dégivrant(e) (gt sport / cuir) avec multifonctions et palettes changement vitesse', 'Ceintures de sécurité couleur', 'Système audio porsche cdr 24 (radio/lecteur cd)', 'filtre à pollen', '6 litre(s) 340 kw turbo catalyseur', 'embout noir(e)', 'Supports isofix pour siège enfant sur siège ar', 'décor peint', 'Adaptatif sièges sport compr. réglage de siège 18 directions et pack memoire', 'Rétroviseur int cuir', 'Interface universelle audio', 'Console centrale ar cuir', 'Porsche stability management (psm)', '6 litre(s) 355 kw turbo catalyseur', 'Déflecteur spoiler av. couleur caisse', "appuis d'aile noir(e)", '3 branches) avec multifonctions', 'Siège av gauche et rétroviseur ext avec fonction mémoire (mémoire conducteur)', "Système d'assistance de conduite: assistant maintien de trajectoire", 'clignotants LED', 'Equipement int. cuir / sport tex', 'Monogramme série peint', 'Volant de direction chauffant(e)/dégivrant(e) (microfibre race tex) avec multifonctions', 'Moyeu volant de direction et levier de sélection cuir lisse', '8 litre(s) 300 kw catalyseur', 'Chassis/suspensions pour sport automobile réglable', 'Clés véhicule couleur caisse peint compr. étui cuir', "Miroir de courtoisie à l'ar éclairé(e)", 'Levier de sélection aluminium', 'Protecteurs de bas de marche noir(e)', '0 litre(s) 331 kw catalyseur', 'Construction allégée et insonorisant vitrage', 'Equipement int. cuir / race tex', 'Monogramme 911 couleurs chrome', 'lamelles cuir', 'Étriers de frein noir(e) anodisé', 'Volant de direction (alcantara 3 branches) avec palettes changement vitesse', 'Dispositif de freinage céramique (porsche ceramic composite brake', '8 litre(s) 320 kw catalyseur', 'Jantes alliage léger (argent', '0 litre(s) 353 kw turbo catalyseur', 'Pack sport chrono avec porsche design subsecond montre', 'Pack suppl. intérieur: panneau de porte cuir', 'Sièges sport dossiers cuir', 'Mode de transmission transmission intégrale', 'pccb)', 'Moyeu volant de direction cuir', 'Targa', '8 litre(s) 261 kw catalyseur', 'Volant de direction chauffant(e)/dégivrant(e) (cuir) avec multifonctions', 'Gt3 rs', "Éclairage ambiant orienté vers l'arrière", "Système d'airbag crânien porsche side impact protection system (posip)", '7 litre(s) 405 kw turbo catalyseur', 'Gt2 rs', 'Projecteur principal led compr. porsche dynamic light système (pdls)', 'compr. porsche dynamic light système plus (pdls+)', '8 litre(s) 294 kw catalyseur', 'Pack design sport noir(e)', "Système d'assistance de conduite: système d'aide au stationnement av et ar compr. caméra aide au recul et surround view", '6 litre(s) 471 kw)', 'Aile av carbone couleur caisse', 'Garniture de pavillon alcantara', 'Étriers de frein noir(e) (brillant)', "Régulateur du couple d'inertie du moteur (msr)", 'Sièges baquet av', '0 litre(s) 309 kw catalyseur', 'Arceaux targa platinum éclat soyeux', 'Moteur 3', 'Surtapis avec bordure cuir', 'Rétroviseur ext cache de rétroviseur peint', 'Aéro kit turbo', 'Protection volumétrique (système infrarouge)', 'Arceau de sécurité / cage', 'Système de freinage renforcé(e)', 'Volant de direction (gt sport cuir) avec palettes changement vitesse', 'Colonne de direction (volant de direction) réglable(s)', "Déflecteur d'air lat sideblade carbone", 'Direction assistée à commande électronique (servotronic)', 'Garniture de pavillon tissu', 'Appuie têtes av avec porsche', 'Carrosserie: 2 portes', 'Hybride 398 kw (moteur 3', 'Moteur électrique 41 kw (transmission hybride)', 'Pack touring', 'embout inox', '8 litre(s) 446 kw turbo catalyseur', 'couvercle compartiment/vide poches cuir avec monogramme spécifique et coutures couleur contrastante', 'Protecteurs de bas de marche (carbone) éclairé(e)', "Système d'assistance de conduite: assistance au démarrage en côte (hill holder)", 'Porsche active suspension management (pasm)', '0 litre(s) 290 kw turbo catalyseur', 'Cde vocale pour pcm', 'Chassis/suspension sport surbaissé(e) (20 mm)', 'Étoiles de jantes peint (de couleur différente)', 'Bouchon de réservoir finition/aspect alu', 'Embout sortie de ceinture pied milieu cuir', 'Pack intérieur: bois', '8 litre(s) 390 kw turbo catalyseur', 'Rétroviseur ext couverture carbone (sport design)', 'Éclairage diurne led 4 points', "Cadre/encadrement combiné d'instruments finition/aspect alu", 'Enjoliveurs de vitre aluminium', 'Pack suppl. intérieur: façade de commande et panneau de porte cuir', '6 litre(s) 357 kw)', 'Equipement int. cuir alcantara', 'Moteur 4', 'Spoiler ar. couleur caisse', 'Protecteurs de bas de marche (aluminium dark silver) éclairé(e)', 'Levier de sélection des rapports enjoliveur finition/aspect alu', "Eclaireur de plancher à l'ar", "Cadre/encadrement combiné d'instruments cuir", 'Ceinture de sécurité à 6 points coté passager', 'Monogramme 911 noir(e)', 'Volant de direction (gt sport / race tex) avec multifonctions et palettes changement vitesse', 'Volant de direction avec palettes changement vitesse (vareq suppl. pour volant de direction)', 'cache peint', 'Projecteur principal led compr. porsche dynamic light système plus (pdls+)', 'compte tours', 'Colonne de direction (volant de direction) à réglages électriques', 'Pare soleil avec miroir(s) (éclairé(e))', 'Equipement int. cuir brillant', 'Sticker / bandes décoratives lat', 'E gaz', 'Kit de réparation des pneumatiques', 'métallisé peint)', 'Sièges sport plus dossiers cuir avec dans une couleur différente coutures', '0 litre(s) 386 kw catalyseur', 'Réception radio digital(e) (dab+)', 'Airbag lat av', 'Sièges baquet sport av', 'Siège baquet av gauche', 'décor cuir', 'Volant de direction (gt sport alcantara / race tex) avec palettes changement vitesse', 'brossé)', 'coutures en couleur contrastante argent)', 'Projecteurs bi xénon compr. porsche dynamic light système (pdls)', 'Sièges baquets allégés av', 'Projecteurs légers', 'coutures dans/en/au couleur contrastante)', 'Protecteurs de bas de marche (inox) éclairé(e)', 'Jantes alliage léger (métallisé peint)', 'Sellerie : alcantara / simili cuir', "Grille d'entrée d'air peint", 'éclairé(e) (aluminium noir(e)', 'Boîte de vitesses 7 rapports boîte automatique à double embrayage (pdk)', 'Feux de brouillard ar', 'Sound package plus', 'Norme de dépollution euro 6e', 'Pack suppl. intérieur: façade de commande cuir', '0 litre(s) 383 kw catalyseur', 'Éclairage directionnel', 'de couleur différente', 'Moyeu volant de direction avec coutures de couleur différente (de couleur différente)', '6 litre(s) 331 kw turbo catalyseur', 'Rétroviseur ext peint', 'Enjoliveurs de vitre noir(e) (brillant)', 'Essuie vitre ar.', '8 litre(s) 383 kw turbo catalyseur', 'Volant de direction (cuir lisse/sport', 'Pack clubsport', 'Sièges ar (2 places assises) dossiers ar rabattable', 'Airbag tête epaules av (thoraxbag)', 'Direction assistée plus (asservie à la vitesse)', '8 litre(s) 412 kw turbo catalyseur', 'Batterie légère (lithium ion)', '6 litre(s) 456 kw turbo catalyseur', 'étendu sellerie cuir', "Ionisateur d'air", 'embout av carbone', 'Rétroviseur ext à réglage électrique et dégivrant', 'Repose pied finition/aspect sport', 'compr. porsche dynamic light système (pdls)', 'Levier de sélection cuir', 'Pack intérieur: cuir', 'padm)', 'Dossier ar deux parties', 'Siège av gauche à réglages électriques (avec memory)', 'Panneau de porte construction allégée', 'Sport touche', 'matelassé(e) (vareq suppl. vers volant de direction)', 'Mode de transmission roues ar motrices', "Pot d'échappement sport", 'Porsche torque vectoring (ptv)', 'Rétroviseur ext à réglages électriques', 'Automatique freins différentiel (abd)', 'Moyeux caches porsche couleur', 'Rétroviseur ext partie inférieure peint (sport design)', 'Pare brise avec antenne', '0 litre(s) 283 kw turbo catalyseur', 'Equipement int. cuir nature', 'Porsche torque vectoring plus (ptv plus)', 'Pack memory conducteur', 'Embout sport finition/aspect 4 embouts', '3. feu stop', 'Habillages de bas de caisse couleur caisse design sport', 'Equipement int. microfibre race tex', '0 litre(s) 272 kw catalyseur', 'surteinté', 'Sièges sport plus dossiers peint', 'Dossier ar fractionné (40:20:40)', '6 litre(s) 353 kw turbo catalyseur', 'Habillage de colonne de direction cuir avec dans une couleur différente coutures', 'Lave phares (lave projecteurs)', 'Arceaux targa noir(e)', 'Pare soleil race tex', 'Couvercle boite à fusibles cuir', 'Commande de capote manuel(le)', 'Chargeur à induction pour smartphone (charge sans fil)', 'Hardtop (cabriolet)', '4 litre(s) 257 kw catalyseur', "Equipement int. diffuseurs d'air cuir", 'Pare brise avec bandeau pare soleil supérieur(e)', 'Porsche design subsecond montre', 'Dynamique support moteur (porsche active drivetrain mount', 'Siège baquet av droit', 'Equipement int. équipement de série / race tex', 'Porsche management de traction (ptm)', 'Sellerie : cuir / alcantara', 'feux à LED', 'Pack éclairage int / pack design lumière', 'Blocage transversal essieu ar mécanique', 'Pré équipement téléphone/téléphone mobile avec interface bluetooth', 'Rétroviseur ext partie inférieure couleur caisse et pied de rétroviseur noir(e) (finition brillante) peint', 'Boîte de vitesses 7 rapports sport boîte automatique à double embrayage (pdk)', 'Porsche communications management (pcm) compr. online module de navigation', 'Supports isofix pour siège enfant sur siège passager', '8 litre(s) 316 kw catalyseur', 'Vehicle tracking system (pvts)', 'Allumage automatique pour feux de croisement', 'lamelles finition/aspect alu', '6 litre(s) 280 kw catalyseur', 'Habillage de bas de caisse int. cuir', 'Habillage av. sport design', 'Partie inf ar sport design peint (noir(e))', '6 litre(s) 239 kw catalyseur', 'Pare soleil cuir', 'tons cuir de série', "système d'appel d'urgence", 'Gt3 cup', '2 directions)', 'Pack sport léger', 'Jantes alliage léger (gris', '4 directions)', '0 litre(s) 375 kw catalyseur', 'Sièges sport électrique (14 directions) compr. pack memoire', 'Afficheur multifonctions / ordinateur de bord', 'Services online mobile android auto', 'Dispositif antivol pour roues (écrous antivol)', 'Phares à matrice de led compr. porsche dynamic light système plus (pdls+)', 'Appuie têtes av et ar avec porsche', 'Attaché case cuir', 'Levier de sélection alcantara / race tex', 'Éclairage ambiant garniture de pavillon', 'Pack accent argent', 'Rétroviseur ext sport design', 'Réservoir à carburant: 64 litre(s)', "Combiné d'instruments avec fond noir(e)", "Système d'assistance de conduite: système d'aide au stationnement avec caméra aide au recul", 'Siège ventilé av', 'Pack intérieur: diamar dark silver', 'Monogramme indication de version lat', 'Feux ar. non teinté / glace aspect lisse', 'noir(e)', 'Bouchon de réservoir exclusive design', '(d+g)', 'Verrouillage centralisé avec cde radio à distance', 'Boîte de vitesses 8 rapports boîte automatique à double embrayage (pdk)', 'Equipement int. cuir / tissu', 'Sièges sport plus (à réglages électriques', 'Surtapis heritage design', 'Étriers de frein rouge peint', 'Porsche communications management (pcm) compr. dvd module de navigation (étendu)', '8 litre(s) 515 kw turbo catalyseur', 'Peinture unie', '8 litre(s) 331 kw catalyseur', '8 litre(s) 427 kw turbo catalyseur', 'Bandes décoratives sport automobile', '8 litre(s) 350 kw catalyseur', '8 litre(s) 283 kw catalyseur', 'bi ton', 'Hybride 523 kw (moteur 3', 'Glace triangulaire carbone', 'Boîte automatique tiptronic (5 rapports)', 'Patère dossier cuir', 'Moyeux avec fermeture centrale', 'Pack design heritage', '8 litre(s) 397 kw turbo catalyseur', 'Système de pédales et repose pied dans finition/aspect sport', 'Système audio porsche cdr 30 (radio/lecteur cd)', 'Chassis/suspension sport (pasm) à commande électronique', 'Système audio porsche cdr 31 (radio/lecteur cd)', 'paldao', 'Rétroviseur ext asphérique', 'Norme de dépollution euro 5', 'Accès confort (sans clé déverrouillage de porte)', 'Equipement int. enjoliveur façade de commande finition/aspect alu']`
+</ResponseField>
+
+<ResponseField name="all_characteristics" type="json">
+  All listing characteristics. Example: `{'vehicle': {'co2': {'combined': 233, 'reliable': False, 'ecoBonusMalus': 0}, 'make': 'PORSCHE', 'cubic': 2981, 'label': '(992) COUPE 3.0 385 CARRERA BVA7', 'model': '911', 'packs': [{'name': 'Pack intérieur Aluminium brossé'}, {'name': 'Pack intérieur Carbone'}, {'name': 'Pack intérieur peint'}], 'energy': 'ESSENCE', 'length': 4519, 'critair': {'standardMet': 'EURO6', 'critairLevel': '1', 'isConversionAllowance': False}, 'gearbox': 'AUTOMATIQUE', 'options': [{'name': 'Intérieur cuir'}, {'name': 'Intérieur tout cuir'}, {'name': 'Peinture spéciale'}], 'category': 'COUPE', 'powerDin': 385, 'standard': 'WLTP', 'nbOfDoors': 2, 'equipments': [{'label': 'Volant cuir', 'category': 'Intérieur'}, {'label': 'Antipatinage', 'category': 'Sécurité'}, {'label': 'Ordinateur de bord', 'category': 'Intérieur'}, {'label': 'Alarme', 'category': 'Antivol'}, {'label': 'ABS', 'category': 'Sécurité'}, {'label': 'Bluetooth', 'category': 'Intérieur'}, {'label': 'Régulateur de vitesse', 'category': 'Intérieur'}, {'label': '4 roues directrices', 'category': 'Exterieur et chassis'}, {'label': 'Aide parking', 'category': 'Exterieur et chassis'}, {'label': 'Airbag frontal', 'category': 'Securite'}, {'label': 'Anti démarrage', 'category': 'Antivol'}, {'label': 'ASR', 'category': 'Securite'}, {'label': 'Becquet', 'category': 'Exterieur et chassis'}, {'label': 'Caméra de recul', 'category': 'Interieur'}, {'label': "Carnet d'entretien", 'category': 'Autre'}, {'label': 'Carte main libre', 'category': 'Interieur'}, {'label': 'Climatisation automatique', 'category': 'Interieur'}, {'label': 'Climatisation automatique multi zone', 'category': 'Interieur'}, {'label': 'Contrôle de pression des pneus', 'category': 'Securite'}, {'label': 'Détecteur de pluie', 'category': 'Securite'}, {'label': 'Différentiel autobloquant', 'category': 'Exterieur et chassis'}, {'label': 'Direction assistée', 'category': 'Interieur'}, {'label': 'FAP', 'category': 'Autre'}, {'label': 'Fermeture électrique', 'category': 'Interieur'}, {'label': 'Frein de parking automatique', 'category': 'Exterieur et chassis'}, {'label': 'Jantes alu', 'category': 'Exterieur et chassis'}, {'label': 'Non fumeur', 'category': 'Autre'}, {'label': 'Pack cuir', 'category': 'Interieur'}, {'label': 'Pack sport', 'category': 'Exterieur et chassis'}, {'label': 'Peinture métallisée', 'category': 'Exterieur et chassis'}, {'label': 'Prise audio USB', 'category': 'Interieur'}, {'label': 'Projecteurs bi-xénon', 'category': 'Exterieur et chassis'}, {'label': 'Projecteurs xénon', 'category': 'Exterieur et chassis'}, {'label': 'Sièges électriques', 'category': 'Interieur'}, {'label': 'Suspension sport', 'category': 'Exterieur et chassis'}, {'label': 'Système audio BOSE', 'category': 'Interieur'}, {'label': 'Système audio MP3', 'category': 'Interieur'}, {'label': 'Système Start & Stop', 'category': 'Autre'}, {'label': 'Vitres électriques', 'category': 'Interieur'}, {'label': 'Pack accent noir(e)', 'category': 'Autre'}, {'label': 'Siège chauffant av', 'category': 'Autre'}, {'label': '6 litre(s) 390 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Pavillon carbone', 'category': 'Autre'}, {'label': 'Rétroviseur ext noir(e) peint', 'category': 'Autre'}, {'label': 'Sellerie : cuir partiel', 'category': 'Autre'}, {'label': 'Lunette ar. chauffant(e)/dégivrant(e)', 'category': 'Autre'}, {'label': 'Système audio porsche cdr avec ecran tactile couleur (radio/lecteur cd)', 'category': 'Autre'}, {'label': 'Equipement int. enjoliveur façade de commande carbone', 'category': 'Autre'}, {'label': 'Cadran couleur', 'category': 'Autre'}, {'label': 'Pack suppl. intérieur: ar. cuir', 'category': 'Autre'}, {'label': 'Volant de direction (sport 3 branches)', 'category': 'Autre'}, {'label': 'Levier de sélection et poignée de frein à main alcantara', 'category': 'Autre'}, {'label': '6 litre(s) 254 kw catalyseur', 'category': 'Autre'}, {'label': 'Sticker / bandes décoratives numéro de course', 'category': 'Autre'}, {'label': 'Suppression sièges ar', 'category': 'Autre'}, {'label': 'Restylage fb (option interne)', 'category': 'Autre'}, {'label': 'Vitrage teinté(e)', 'category': 'Autre'}, {'label': 'Voie élargie sur train ar', 'category': 'Autre'}, {'label': 'Système de pédales et repose pied en aluminium', 'category': 'Autre'}, {'label': 'Habillages de bas de caisse peint', 'category': 'Autre'}, {'label': 'capote électrique', 'category': 'Autre'}, {'label': 'avec monogramme individual', 'category': 'Autre'}, {'label': 'Mode de transmission traction intégrale permanente', 'category': 'Autre'}, {'label': 'Equipement int. enjoliveur façade de commande peint', 'category': 'Autre'}, {'label': 'Étriers de frein jaune peint', 'category': 'Autre'}, {'label': '8 litre(s) 478 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Equipement int. enjoliveur façade de commande cuir', 'category': 'Autre'}, {'label': 'Support à boissons embout cuir', 'category': 'Autre'}, {'label': "Combiné d'instruments avec fond argent", 'category': 'Autre'}, {'label': 'Chassis/suspensions surbaissé(e)', 'category': 'Autre'}, {'label': 'Arceau de sécurité noir(e)', 'category': 'Autre'}, {'label': "Déflecteur d'air électrique", 'category': 'Autre'}, {'label': 'Monogramme porsche peint', 'category': 'Autre'}, {'label': '0 litre(s) 368 kw catalyseur', 'category': 'Autre'}, {'label': 'Spoiler av. couleur caisse', 'category': 'Autre'}, {'label': 'Boîte de vitesses 6 rapports sport', 'category': 'Autre'}, {'label': 'Pack intérieur coutures dans une couleur différente', 'category': 'Autre'}, {'label': 'Cadran compte tours', 'category': 'Autre'}, {'label': 'Essuie vitres avec capteur de pluie', 'category': 'Autre'}, {'label': 'Monte charge train av', 'category': 'Autre'}, {'label': 'sport chrono chronomètre', 'category': 'Autre'}, {'label': 'Volant de direction (sport/cuir', 'category': 'Autre'}, {'label': 'Rétroviseur ext rabattable électriquement', 'category': 'Autre'}, {'label': "Système d'airbag crânien (airbag curtain)", 'category': 'Autre'}, {'label': 'Volant de direction chauffant(e)/dégivrant(e) (gt sport / race tex) avec multifonctions et palettes changement vitesse', 'category': 'Autre'}, {'label': 'Garniture de pavillon race tex', 'category': 'Autre'}, {'label': 'Pré équipement vehicle tracking system', 'category': 'Autre'}, {'label': 'Sièges sport av', 'category': 'Autre'}, {'label': 'recouvrements cuir', 'category': 'Autre'}, {'label': '6 litre(s) 305 kw catalyseur', 'category': 'Autre'}, {'label': 'Norme de dépollution euro 6d temp', 'category': 'Autre'}, {'label': 'Volant de direction (cuir 3 branches) avec palettes changement vitesse', 'category': 'Autre'}, {'label': '8 litre(s) 368 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Volant de direction chauffant(e)/dégivrant(e) (gt sport / cuir) avec multifonctions et palettes changement vitesse', 'category': 'Autre'}, {'label': 'Ceintures de sécurité couleur', 'category': 'Autre'}, {'label': 'Système audio porsche cdr 24 (radio/lecteur cd)', 'category': 'Autre'}, {'label': 'filtre à pollen', 'category': 'Autre'}, {'label': '6 litre(s) 340 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'embout noir(e)', 'category': 'Autre'}, {'label': 'Supports isofix pour siège enfant sur siège ar', 'category': 'Autre'}, {'label': 'décor peint', 'category': 'Autre'}, {'label': 'Adaptatif sièges sport compr. réglage de siège 18 directions et pack memoire', 'category': 'Autre'}, {'label': 'Rétroviseur int cuir', 'category': 'Autre'}, {'label': 'Interface universelle audio', 'category': 'Autre'}, {'label': 'Console centrale ar cuir', 'category': 'Autre'}, {'label': 'Porsche stability management (psm)', 'category': 'Autre'}, {'label': '6 litre(s) 355 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Déflecteur spoiler av. couleur caisse', 'category': 'Autre'}, {'label': "appuis d'aile noir(e)", 'category': 'Autre'}, {'label': '3 branches) avec multifonctions', 'category': 'Autre'}, {'label': 'Siège av gauche et rétroviseur ext avec fonction mémoire (mémoire conducteur)', 'category': 'Autre'}, {'label': "Système d'assistance de conduite: assistant maintien de trajectoire", 'category': 'Autre'}, {'label': 'clignotants LED', 'category': 'Autre'}, {'label': 'Equipement int. cuir / sport tex', 'category': 'Autre'}, {'label': 'Monogramme série peint', 'category': 'Autre'}, {'label': 'Volant de direction chauffant(e)/dégivrant(e) (microfibre race tex) avec multifonctions', 'category': 'Autre'}, {'label': 'Moyeu volant de direction et levier de sélection cuir lisse', 'category': 'Autre'}, {'label': '8 litre(s) 300 kw catalyseur', 'category': 'Autre'}, {'label': 'Chassis/suspensions pour sport automobile réglable', 'category': 'Autre'}, {'label': 'Clés véhicule couleur caisse peint compr. étui cuir', 'category': 'Autre'}, {'label': "Miroir de courtoisie à l'ar éclairé(e)", 'category': 'Autre'}, {'label': 'Levier de sélection aluminium', 'category': 'Autre'}, {'label': 'Protecteurs de bas de marche noir(e)', 'category': 'Autre'}, {'label': '0 litre(s) 331 kw catalyseur', 'category': 'Autre'}, {'label': 'Construction allégée et insonorisant vitrage', 'category': 'Autre'}, {'label': 'Equipement int. cuir / race tex', 'category': 'Autre'}, {'label': 'Monogramme 911 couleurs chrome', 'category': 'Autre'}, {'label': 'lamelles cuir', 'category': 'Autre'}, {'label': 'Étriers de frein noir(e) anodisé', 'category': 'Autre'}, {'label': 'Volant de direction (alcantara 3 branches) avec palettes changement vitesse', 'category': 'Autre'}, {'label': 'Dispositif de freinage céramique (porsche ceramic composite brake', 'category': 'Autre'}, {'label': '8 litre(s) 320 kw catalyseur', 'category': 'Autre'}, {'label': 'Jantes alliage léger (argent', 'category': 'Autre'}, {'label': '0 litre(s) 353 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Pack sport chrono avec porsche design subsecond montre', 'category': 'Autre'}, {'label': 'Pack suppl. intérieur: panneau de porte cuir', 'category': 'Autre'}, {'label': 'Sièges sport dossiers cuir', 'category': 'Autre'}, {'label': 'Mode de transmission transmission intégrale', 'category': 'Autre'}, {'label': 'pccb)', 'category': 'Autre'}, {'label': 'Moyeu volant de direction cuir', 'category': 'Autre'}, {'label': 'Targa', 'category': 'Autre'}, {'label': '8 litre(s) 261 kw catalyseur', 'category': 'Autre'}, {'label': 'Volant de direction chauffant(e)/dégivrant(e) (cuir) avec multifonctions', 'category': 'Autre'}, {'label': 'Gt3 rs', 'category': 'Autre'}, {'label': "Éclairage ambiant orienté vers l'arrière", 'category': 'Autre'}, {'label': "Système d'airbag crânien porsche side impact protection system (posip)", 'category': 'Autre'}, {'label': '7 litre(s) 405 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Gt2 rs', 'category': 'Autre'}, {'label': 'Projecteur principal led compr. porsche dynamic light système (pdls)', 'category': 'Autre'}, {'label': 'compr. porsche dynamic light système plus (pdls+)', 'category': 'Autre'}, {'label': '8 litre(s) 294 kw catalyseur', 'category': 'Autre'}, {'label': 'Pack design sport noir(e)', 'category': 'Autre'}, {'label': "Système d'assistance de conduite: système d'aide au stationnement av et ar compr. caméra aide au recul et surround view", 'category': 'Autre'}, {'label': '6 litre(s) 471 kw)', 'category': 'Autre'}, {'label': 'Aile av carbone couleur caisse', 'category': 'Autre'}, {'label': 'Garniture de pavillon alcantara', 'category': 'Autre'}, {'label': 'Étriers de frein noir(e) (brillant)', 'category': 'Autre'}, {'label': "Régulateur du couple d'inertie du moteur (msr)", 'category': 'Autre'}, {'label': 'Sièges baquet av', 'category': 'Autre'}, {'label': '0 litre(s) 309 kw catalyseur', 'category': 'Autre'}, {'label': 'Arceaux targa platinum éclat soyeux', 'category': 'Autre'}, {'label': 'Moteur 3', 'category': 'Autre'}, {'label': 'Surtapis avec bordure cuir', 'category': 'Autre'}, {'label': 'Rétroviseur ext cache de rétroviseur peint', 'category': 'Autre'}, {'label': 'Aéro kit turbo', 'category': 'Autre'}, {'label': 'Protection volumétrique (système infrarouge)', 'category': 'Autre'}, {'label': 'Arceau de sécurité / cage', 'category': 'Autre'}, {'label': 'Système de freinage renforcé(e)', 'category': 'Autre'}, {'label': 'Volant de direction (gt sport cuir) avec palettes changement vitesse', 'category': 'Autre'}, {'label': 'Colonne de direction (volant de direction) réglable(s)', 'category': 'Autre'}, {'label': "Déflecteur d'air lat sideblade carbone", 'category': 'Autre'}, {'label': 'Direction assistée à commande électronique (servotronic)', 'category': 'Autre'}, {'label': 'Garniture de pavillon tissu', 'category': 'Autre'}, {'label': 'Appuie têtes av avec porsche', 'category': 'Autre'}, {'label': 'Carrosserie: 2 portes', 'category': 'Autre'}, {'label': 'Hybride 398 kw (moteur 3', 'category': 'Autre'}, {'label': 'Moteur électrique 41 kw (transmission hybride)', 'category': 'Autre'}, {'label': 'Pack touring', 'category': 'Autre'}, {'label': 'embout inox', 'category': 'Autre'}, {'label': '8 litre(s) 446 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'couvercle compartiment/vide poches cuir avec monogramme spécifique et coutures couleur contrastante', 'category': 'Autre'}, {'label': 'Protecteurs de bas de marche (carbone) éclairé(e)', 'category': 'Autre'}, {'label': "Système d'assistance de conduite: assistance au démarrage en côte (hill holder)", 'category': 'Autre'}, {'label': 'Porsche active suspension management (pasm)', 'category': 'Autre'}, {'label': '0 litre(s) 290 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Cde vocale pour pcm', 'category': 'Autre'}, {'label': 'Chassis/suspension sport surbaissé(e) (20 mm)', 'category': 'Autre'}, {'label': 'Étoiles de jantes peint (de couleur différente)', 'category': 'Autre'}, {'label': 'Bouchon de réservoir finition/aspect alu', 'category': 'Autre'}, {'label': 'Embout sortie de ceinture pied milieu cuir', 'category': 'Autre'}, {'label': 'Pack intérieur: bois', 'category': 'Autre'}, {'label': '8 litre(s) 390 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Rétroviseur ext couverture carbone (sport design)', 'category': 'Autre'}, {'label': 'Éclairage diurne led 4 points', 'category': 'Autre'}, {'label': "Cadre/encadrement combiné d'instruments finition/aspect alu", 'category': 'Autre'}, {'label': 'Enjoliveurs de vitre aluminium', 'category': 'Autre'}, {'label': 'Pack suppl. intérieur: façade de commande et panneau de porte cuir', 'category': 'Autre'}, {'label': '6 litre(s) 357 kw)', 'category': 'Autre'}, {'label': 'Equipement int. cuir alcantara', 'category': 'Autre'}, {'label': 'Moteur 4', 'category': 'Autre'}, {'label': 'Spoiler ar. couleur caisse', 'category': 'Autre'}, {'label': 'Protecteurs de bas de marche (aluminium dark silver) éclairé(e)', 'category': 'Autre'}, {'label': 'Levier de sélection des rapports enjoliveur finition/aspect alu', 'category': 'Autre'}, {'label': "Eclaireur de plancher à l'ar", 'category': 'Autre'}, {'label': "Cadre/encadrement combiné d'instruments cuir", 'category': 'Autre'}, {'label': 'Ceinture de sécurité à 6 points coté passager', 'category': 'Autre'}, {'label': 'Monogramme 911 noir(e)', 'category': 'Autre'}, {'label': 'Volant de direction (gt sport / race tex) avec multifonctions et palettes changement vitesse', 'category': 'Autre'}, {'label': 'Volant de direction avec palettes changement vitesse (vareq suppl. pour volant de direction)', 'category': 'Autre'}, {'label': 'cache peint', 'category': 'Autre'}, {'label': 'Projecteur principal led compr. porsche dynamic light système plus (pdls+)', 'category': 'Autre'}, {'label': 'compte tours', 'category': 'Autre'}, {'label': 'Colonne de direction (volant de direction) à réglages électriques', 'category': 'Autre'}, {'label': 'Pare soleil avec miroir(s) (éclairé(e))', 'category': 'Autre'}, {'label': 'Equipement int. cuir brillant', 'category': 'Autre'}, {'label': 'Sticker / bandes décoratives lat', 'category': 'Autre'}, {'label': 'E gaz', 'category': 'Autre'}, {'label': 'Kit de réparation des pneumatiques', 'category': 'Autre'}, {'label': 'métallisé peint)', 'category': 'Autre'}, {'label': 'Sièges sport plus dossiers cuir avec dans une couleur différente coutures', 'category': 'Autre'}, {'label': '0 litre(s) 386 kw catalyseur', 'category': 'Autre'}, {'label': 'Réception radio digital(e) (dab+)', 'category': 'Autre'}, {'label': 'Airbag lat av', 'category': 'Autre'}, {'label': 'Sièges baquet sport av', 'category': 'Autre'}, {'label': 'Siège baquet av gauche', 'category': 'Autre'}, {'label': 'décor cuir', 'category': 'Autre'}, {'label': 'Volant de direction (gt sport alcantara / race tex) avec palettes changement vitesse', 'category': 'Autre'}, {'label': 'brossé)', 'category': 'Autre'}, {'label': 'coutures en couleur contrastante argent)', 'category': 'Autre'}, {'label': 'Projecteurs bi xénon compr. porsche dynamic light système (pdls)', 'category': 'Autre'}, {'label': 'Sièges baquets allégés av', 'category': 'Autre'}, {'label': 'Projecteurs légers', 'category': 'Autre'}, {'label': 'coutures dans/en/au couleur contrastante)', 'category': 'Autre'}, {'label': 'Protecteurs de bas de marche (inox) éclairé(e)', 'category': 'Autre'}, {'label': 'Jantes alliage léger (métallisé peint)', 'category': 'Autre'}, {'label': 'Sellerie : alcantara / simili cuir', 'category': 'Autre'}, {'label': "Grille d'entrée d'air peint", 'category': 'Autre'}, {'label': 'éclairé(e) (aluminium noir(e)', 'category': 'Autre'}, {'label': 'Boîte de vitesses 7 rapports boîte automatique à double embrayage (pdk)', 'category': 'Autre'}, {'label': 'Feux de brouillard ar', 'category': 'Autre'}, {'label': 'Sound package plus', 'category': 'Autre'}, {'label': 'Norme de dépollution euro 6e', 'category': 'Autre'}, {'label': 'Pack suppl. intérieur: façade de commande cuir', 'category': 'Autre'}, {'label': '0 litre(s) 383 kw catalyseur', 'category': 'Autre'}, {'label': 'Éclairage directionnel', 'category': 'Autre'}, {'label': 'de couleur différente', 'category': 'Autre'}, {'label': 'Moyeu volant de direction avec coutures de couleur différente (de couleur différente)', 'category': 'Autre'}, {'label': '6 litre(s) 331 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Rétroviseur ext peint', 'category': 'Autre'}, {'label': 'Enjoliveurs de vitre noir(e) (brillant)', 'category': 'Autre'}, {'label': 'Essuie vitre ar.', 'category': 'Autre'}, {'label': '8 litre(s) 383 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Volant de direction (cuir lisse/sport', 'category': 'Autre'}, {'label': 'Pack clubsport', 'category': 'Autre'}, {'label': 'Sièges ar (2 places assises) dossiers ar rabattable', 'category': 'Autre'}, {'label': 'Airbag tête epaules av (thoraxbag)', 'category': 'Autre'}, {'label': 'Direction assistée plus (asservie à la vitesse)', 'category': 'Autre'}, {'label': '8 litre(s) 412 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Batterie légère (lithium ion)', 'category': 'Autre'}, {'label': '6 litre(s) 456 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'étendu sellerie cuir', 'category': 'Autre'}, {'label': "Ionisateur d'air", 'category': 'Autre'}, {'label': 'embout av carbone', 'category': 'Autre'}, {'label': 'Rétroviseur ext à réglage électrique et dégivrant', 'category': 'Autre'}, {'label': 'Repose pied finition/aspect sport', 'category': 'Autre'}, {'label': 'compr. porsche dynamic light système (pdls)', 'category': 'Autre'}, {'label': 'Levier de sélection cuir', 'category': 'Autre'}, {'label': 'Pack intérieur: cuir', 'category': 'Autre'}, {'label': 'padm)', 'category': 'Autre'}, {'label': 'Dossier ar deux parties', 'category': 'Autre'}, {'label': 'Siège av gauche à réglages électriques (avec memory)', 'category': 'Autre'}, {'label': 'Panneau de porte construction allégée', 'category': 'Autre'}, {'label': 'Sport touche', 'category': 'Autre'}, {'label': 'matelassé(e) (vareq suppl. vers volant de direction)', 'category': 'Autre'}, {'label': 'Mode de transmission roues ar motrices', 'category': 'Autre'}, {'label': "Pot d'échappement sport", 'category': 'Autre'}, {'label': 'Porsche torque vectoring (ptv)', 'category': 'Autre'}, {'label': 'Rétroviseur ext à réglages électriques', 'category': 'Autre'}, {'label': 'Automatique freins différentiel (abd)', 'category': 'Autre'}, {'label': 'Moyeux caches porsche couleur', 'category': 'Autre'}, {'label': 'Rétroviseur ext partie inférieure peint (sport design)', 'category': 'Autre'}, {'label': 'Pare brise avec antenne', 'category': 'Autre'}, {'label': '0 litre(s) 283 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Equipement int. cuir nature', 'category': 'Autre'}, {'label': 'Porsche torque vectoring plus (ptv plus)', 'category': 'Autre'}, {'label': 'Pack memory conducteur', 'category': 'Autre'}, {'label': 'Embout sport finition/aspect 4 embouts', 'category': 'Autre'}, {'label': '3. feu stop', 'category': 'Autre'}, {'label': 'Habillages de bas de caisse couleur caisse design sport', 'category': 'Autre'}, {'label': 'Equipement int. microfibre race tex', 'category': 'Autre'}, {'label': '0 litre(s) 272 kw catalyseur', 'category': 'Autre'}, {'label': 'surteinté', 'category': 'Autre'}, {'label': 'Sièges sport plus dossiers peint', 'category': 'Autre'}, {'label': 'Dossier ar fractionné (40:20:40)', 'category': 'Autre'}, {'label': '6 litre(s) 353 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Habillage de colonne de direction cuir avec dans une couleur différente coutures', 'category': 'Autre'}, {'label': 'Lave phares (lave projecteurs)', 'category': 'Autre'}, {'label': 'Arceaux targa noir(e)', 'category': 'Autre'}, {'label': 'Pare soleil race tex', 'category': 'Autre'}, {'label': 'Couvercle boite à fusibles cuir', 'category': 'Autre'}, {'label': 'Commande de capote manuel(le)', 'category': 'Autre'}, {'label': 'Chargeur à induction pour smartphone (charge sans fil)', 'category': 'Autre'}, {'label': 'Hardtop (cabriolet)', 'category': 'Autre'}, {'label': '4 litre(s) 257 kw catalyseur', 'category': 'Autre'}, {'label': "Equipement int. diffuseurs d'air cuir", 'category': 'Autre'}, {'label': 'Pare brise avec bandeau pare soleil supérieur(e)', 'category': 'Autre'}, {'label': 'Porsche design subsecond montre', 'category': 'Autre'}, {'label': 'Dynamique support moteur (porsche active drivetrain mount', 'category': 'Autre'}, {'label': 'Siège baquet av droit', 'category': 'Autre'}, {'label': 'Equipement int. équipement de série / race tex', 'category': 'Autre'}, {'label': 'Porsche management de traction (ptm)', 'category': 'Autre'}, {'label': 'Sellerie : cuir / alcantara', 'category': 'Autre'}, {'label': 'feux à LED', 'category': 'Autre'}, {'label': 'Pack éclairage int / pack design lumière', 'category': 'Autre'}, {'label': 'Blocage transversal essieu ar mécanique', 'category': 'Autre'}, {'label': 'Pré équipement téléphone/téléphone mobile avec interface bluetooth', 'category': 'Autre'}, {'label': 'Rétroviseur ext partie inférieure couleur caisse et pied de rétroviseur noir(e) (finition brillante) peint', 'category': 'Autre'}, {'label': 'Boîte de vitesses 7 rapports sport boîte automatique à double embrayage (pdk)', 'category': 'Autre'}, {'label': 'Porsche communications management (pcm) compr. online module de navigation', 'category': 'Autre'}, {'label': 'Supports isofix pour siège enfant sur siège passager', 'category': 'Autre'}, {'label': '8 litre(s) 316 kw catalyseur', 'category': 'Autre'}, {'label': 'Vehicle tracking system (pvts)', 'category': 'Autre'}, {'label': 'Allumage automatique pour feux de croisement', 'category': 'Autre'}, {'label': 'lamelles finition/aspect alu', 'category': 'Autre'}, {'label': '6 litre(s) 280 kw catalyseur', 'category': 'Autre'}, {'label': 'Habillage de bas de caisse int. cuir', 'category': 'Autre'}, {'label': 'Habillage av. sport design', 'category': 'Autre'}, {'label': 'Partie inf ar sport design peint (noir(e))', 'category': 'Autre'}, {'label': '6 litre(s) 239 kw catalyseur', 'category': 'Autre'}, {'label': 'Pare soleil cuir', 'category': 'Autre'}, {'label': 'tons cuir de série', 'category': 'Autre'}, {'label': "système d'appel d'urgence", 'category': 'Autre'}, {'label': 'Gt3 cup', 'category': 'Autre'}, {'label': '2 directions)', 'category': 'Autre'}, {'label': 'Pack sport léger', 'category': 'Autre'}, {'label': 'Jantes alliage léger (gris', 'category': 'Autre'}, {'label': '4 directions)', 'category': 'Autre'}, {'label': '0 litre(s) 375 kw catalyseur', 'category': 'Autre'}, {'label': 'Sièges sport électrique (14 directions) compr. pack memoire', 'category': 'Autre'}, {'label': 'Afficheur multifonctions / ordinateur de bord', 'category': 'Autre'}, {'label': 'Services online mobile android auto', 'category': 'Autre'}, {'label': 'Dispositif antivol pour roues (écrous antivol)', 'category': 'Autre'}, {'label': 'Phares à matrice de led compr. porsche dynamic light système plus (pdls+)', 'category': 'Autre'}, {'label': 'Appuie têtes av et ar avec porsche', 'category': 'Autre'}, {'label': 'Attaché case cuir', 'category': 'Autre'}, {'label': 'Levier de sélection alcantara / race tex', 'category': 'Autre'}, {'label': 'Éclairage ambiant garniture de pavillon', 'category': 'Autre'}, {'label': 'Pack accent argent', 'category': 'Autre'}, {'label': 'Rétroviseur ext sport design', 'category': 'Autre'}, {'label': 'Réservoir à carburant: 64 litre(s)', 'category': 'Autre'}, {'label': "Combiné d'instruments avec fond noir(e)", 'category': 'Autre'}, {'label': "Système d'assistance de conduite: système d'aide au stationnement avec caméra aide au recul", 'category': 'Autre'}, {'label': 'Siège ventilé av', 'category': 'Autre'}, {'label': 'Pack intérieur: diamar dark silver', 'category': 'Autre'}, {'label': 'Monogramme indication de version lat', 'category': 'Autre'}, {'label': 'Feux ar. non teinté / glace aspect lisse', 'category': 'Autre'}, {'label': 'noir(e)', 'category': 'Autre'}, {'label': 'Bouchon de réservoir exclusive design', 'category': 'Autre'}, {'label': '(d+g)', 'category': 'Autre'}, {'label': 'Verrouillage centralisé avec cde radio à distance', 'category': 'Autre'}, {'label': 'Boîte de vitesses 8 rapports boîte automatique à double embrayage (pdk)', 'category': 'Autre'}, {'label': 'Equipement int. cuir / tissu', 'category': 'Autre'}, {'label': 'Sièges sport plus (à réglages électriques', 'category': 'Autre'}, {'label': 'Surtapis heritage design', 'category': 'Autre'}, {'label': 'Étriers de frein rouge peint', 'category': 'Autre'}, {'label': 'Porsche communications management (pcm) compr. dvd module de navigation (étendu)', 'category': 'Autre'}, {'label': '8 litre(s) 515 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Peinture unie', 'category': 'Autre'}, {'label': '8 litre(s) 331 kw catalyseur', 'category': 'Autre'}, {'label': '8 litre(s) 427 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Bandes décoratives sport automobile', 'category': 'Autre'}, {'label': '8 litre(s) 350 kw catalyseur', 'category': 'Autre'}, {'label': '8 litre(s) 283 kw catalyseur', 'category': 'Autre'}, {'label': 'bi ton', 'category': 'Autre'}, {'label': 'Hybride 523 kw (moteur 3', 'category': 'Autre'}, {'label': 'Glace triangulaire carbone', 'category': 'Autre'}, {'label': 'Boîte automatique tiptronic (5 rapports)', 'category': 'Autre'}, {'label': 'Patère dossier cuir', 'category': 'Autre'}, {'label': 'Moyeux avec fermeture centrale', 'category': 'Autre'}, {'label': 'Pack design heritage', 'category': 'Autre'}, {'label': '8 litre(s) 397 kw turbo catalyseur', 'category': 'Autre'}, {'label': 'Système de pédales et repose pied dans finition/aspect sport', 'category': 'Autre'}, {'label': 'Système audio porsche cdr 30 (radio/lecteur cd)', 'category': 'Autre'}, {'label': 'Chassis/suspension sport (pasm) à commande électronique', 'category': 'Autre'}, {'label': 'Système audio porsche cdr 31 (radio/lecteur cd)', 'category': 'Autre'}, {'label': 'paldao', 'category': 'Autre'}, {'label': 'Rétroviseur ext asphérique', 'category': 'Autre'}, {'label': 'Norme de dépollution euro 5', 'category': 'Autre'}, {'label': 'Accès confort (sans clé déverrouillage de porte)', 'category': 'Autre'}, {'label': 'Equipement int. enjoliveur façade de commande finition/aspect alu', 'category': 'Autre'}], 'consumption': {'combined': 10.3, 'reliable': False}, 'externalColor': 'gris', 'internalColor': 'cuir', 'maxTrunkVolume': 132, 'commercialModel': '911', 'seatingCapacity': 4, 'firstTrafficDate': '2024-10-07', 'fiscalHorsePower': 27}, 'classified': {'year': '2024', 'price': 154990, 'title': 'PORSCHE 911 TYPE 992', 'status': 'ONLINE', 'mileage': 10930, 'zipCode': '06800', 'firstHand': True, 'mappingId': 'MDQ1MTEyNzYyMQ==', 'reference': 'E118586883', 'visitPlace': '06', 'description': {}, 'customerType': 'PRO', 'mileageBadge': 'MEDIUM_MILEAGE', 'referencePro': '16', 'goodDealBadge': 'BAD_DEAL', 'averageMileage': 11151, 'priceVariation': {'prices': {'current': 154990, 'history': [154990, 154990], 'initial': 154990, 'isDropping': False, 'percentage': 0, 'isPriceCrossed': False}, 'isAgeCapped': False, 'displayedAge': 2}, 'refinedQuotation': 126805, 'reliabilityIndex': 3, 'customerReference': 'C060750', 'ownerCorrelationId': 'C060750', 'publicationEndDate': '2999-01-01T00:00:00Z', 'constructorWarranty': {'endDate': '2026-10-06', 'duration': 24}}}`
+</ResponseField>
+
+<ResponseField name="options_list" type="json">
+  List of vehicle options. Example: `['Intérieur cuir', 'Intérieur tout cuir', 'Peinture spéciale']`
+</ResponseField>
+
+<ResponseField name="seller_address" type="string">
+  Seller's address. Example: `38 CHEMIN DU VALLON DES VAUX, CAGNES-SUR-MER`
+</ResponseField>
+
+<ResponseField name="seller_postal_code" type="string">
+  Seller's postal code. Example: `06800`
+</ResponseField>
+
+<ResponseField name="seller_name" type="string">
+  Seller name. Example: `MOTORSPORT BY TB`
+</ResponseField>
+
+<ResponseField name="seller_category" type="string">
+  Seller category. Example: `INTERMEDIAIRE`
+</ResponseField>
+
+<ResponseField name="seller_company_creation_date" type="datetime">
+  Seller company founding date. Example: `2026-03-11T15:43:25+00:00`
+</ResponseField>
+
+<ResponseField name="is_verified_seller" type="boolean">
+  Whether seller is verified. Example: `false`
+</ResponseField>
+
+<ResponseField name="seller_comment" type="string">
+  Seller's comment or description
+</ResponseField>
+
+<ResponseField name="vehicle_rating_link" type="string">
+  Vehicle rating page link. Example: `/cote-auto-porsche-911-(992)+coupe+3.0+385+carrera+bva7-2024.html?km=10930&price=154990&zip-code=06800&version-id=26428228&modelCom=911+type+992&ref=69118586883&quotation=126805&trustIndex=3`
+</ResponseField>
+
+<ResponseField name="autoviza_history_link" type="string">
+  Vehicle history report link
+</ResponseField>
+
+<ResponseField name="technical_specifications_link" type="string">
+  Technical specifications page link. Example: `/fiche-technique-voiture-porsche-911-(992)+coupe+3.0+385+carrera+bva7-2024.html?version-id=26428228&modelCom=911+type+992`
+</ResponseField>
+
+<ResponseField name="co2_emissions" type="float">
+  CO2 emissions. Example: `233.0`
+</ResponseField>
+
+<ResponseField name="fiscal_power" type="float">
+  Fiscal horsepower rating. Example: `27.0`
+</ResponseField>
+
+<ResponseField name="engine_power_hp" type="float">
+  Engine power in horsepower. Example: `385.0`
+</ResponseField>
+
+<ResponseField name="number_of_seats" type="int">
+  Number of seats. Example: `4`
+</ResponseField>
+
+<ResponseField name="cylinder_capacity" type="float">
+  Engine cylinder capacity. Example: `2981.0`
+</ResponseField>
+
+<ResponseField name="battery_consumption" type="float">
+  Battery consumption rate
+</ResponseField>
+
+<ResponseField name="battery_capacity" type="float">
+  Battery capacity in kWh
+</ResponseField>
+
+<ResponseField name="electric_range" type="int">
+  Electric range in km
+</ResponseField>
+
+<ResponseField name="is_plug_in_hybrid" type="boolean">
+  Whether vehicle is a plug-in hybrid
+</ResponseField>
+
+<ResponseField name="vehicle_length" type="int">
+  Vehicle length. Example: `4519`
+</ResponseField>
+
+<ResponseField name="max_trunk_volume" type="int">
+  Maximum trunk volume in litres. Example: `132`
+</ResponseField>
+
+<ResponseField name="first_traffic_date" type="date">
+  First registration date. Example: `2024-10-06`
+</ResponseField>
+
+<ResponseField name="critair_level" type="string">
+  French Crit'Air pollution sticker level. Example: `1`
+</ResponseField>
+
+<ResponseField name="euro_standard" type="string">
+  Euro emissions standard. Example: `EURO6`
+</ResponseField>
+
+<ResponseField name="price_variation" type="json">
+  Price variation or change. Example: `{'prices': {'current': 154990, 'history': [154990, 154990], 'initial': 154990, 'isDropping': False, 'percentage': 0, 'isPriceCrossed': False}, 'isAgeCapped': False, 'displayedAge': 2}`
+</ResponseField>
+
+<ResponseField name="average_mileage_for_year" type="int">
+  Average expected mileage for the year. Example: `11151`
+</ResponseField>
+
+<ResponseField name="warranty_months" type="int">
+  Warranty duration in months. Example: `24`
+</ResponseField>
+
+<ResponseField name="warranty_end_date" type="date">
+  Warranty end date. Example: `2026-10-05`
+</ResponseField>
+
+<ResponseField name="is_first_hand" type="boolean">
+  Whether vehicle has had only one owner. Example: `true`
+</ResponseField>
+
+<ResponseField name="number_of_owners" type="int">
+  Number of previous owners
+</ResponseField>
+
+<ResponseField name="mapping_id" type="string">
+  Mapping identifier. Example: `MDQ1MTEyNzYyMQ==`
+</ResponseField>

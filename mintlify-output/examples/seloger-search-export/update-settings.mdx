@@ -1,0 +1,127 @@
+---
+title: "Update Settings"
+description: "Configure SeLoger Search Export scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your SeLoger Search Export squid settings. Control pagination and enable detail page enrichment to get full descriptions and geographic coordinates.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **max_pages** | integer | null | Maximum number of search result pages to crawl |
+| **functions.get_annonce_details** | boolean | false | Visit each listing's detail page to fetch full description, coordinates (lat/lng), and extra attributes |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping threads (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Tip>
+  Enable `functions.get_annonce_details` to get full property descriptions and exact GPS coordinates.
+</Tip>
+
+<Warning>
+  Enabling `get_annonce_details` increases run time as each listing requires an additional HTTP request.
+</Warning>
+
+<Note>
+  Use `max_pages` to limit the scope of large searches and control credit usage.
+</Note>
+
+<Note>
+  **Backward compatibility:** The old function name `annonce_details` is still accepted but deprecated. Migrate to `get_annonce_details`.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "SeLoger Search Export (1)",
+    "concurrency": 5,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "functions": {
+        "get_annonce_details": true
+      },
+      "max_pages": 4
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update squid settings with detail page enrichment
+payload = {
+    "name": "SeLoger Search Export (1)",
+    "concurrency": 5,
+    "export_unique_results": True,
+    "to_complete": False,
+    "no_line_breaks": True,
+    "params": {
+        "functions": {
+            "get_annonce_details": True  # Fetch full descriptions and coordinates
+        },
+        "max_pages": 4  # Limit to 4 pages of results
+    }
+}
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json=payload
+)
+
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "SeLoger Search Export (1)",
+  "concurrency": 5,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "functions": {
+      "get_annonce_details": true
+    },
+    "max_pages": 4
+  }
+}
+```

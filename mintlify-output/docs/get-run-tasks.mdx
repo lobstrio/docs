@@ -1,0 +1,164 @@
+---
+title: "Get Run Tasks"
+description: "Retrieve a list of all tasks executed within a specific run"
+api: "GET https://api.lobstr.io/v1/runtasks"
+---
+
+This endpoint retrieves a paginated list of all tasks executed within a specific run, including their individual status, results, and parameters.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| **run** | string | Yes | The run hash ID to get tasks for |
+| **page** | integer | No | Page number for pagination. Default: 1 |
+| **limit** | integer | No | Results per page. Default: 50, Max: 100 |
+
+## Response Field Explanations
+
+<ResponseField name="total_results" type="integer">
+  Total number of run tasks. Example: `1`
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of run task objects. Example: `[...]`
+</ResponseField>
+
+<ResponseField name="data[].id" type="string">
+  Unique run task identifier. Example: `"1262f6f99dac7dffb05a513fff0ded77"`
+</ResponseField>
+
+<ResponseField name="data[].object" type="string">
+  Always "runtask". Example: `"runtask"`
+</ResponseField>
+
+<ResponseField name="data[].task" type="string">
+  Original task identifier. Example: `"d30334cd8d21ab16048c5e2e7136a9f1"`
+</ResponseField>
+
+<ResponseField name="data[].run" type="string">
+  Parent run identifier. Example: `"300e9c5c127d421c90f431478d9a2cfb"`
+</ResponseField>
+
+<ResponseField name="data[].status" type="string">
+  Task execution status (completed, aborted, error, etc.). Example: `"aborted"`
+</ResponseField>
+
+<ResponseField name="data[].params" type="object">
+  Task parameters. Example: `{"url": "https://..."}`
+</ResponseField>
+
+<ResponseField name="data[].started_at" type="string">
+  When task execution started. Example: `"2025-02-10T14:30:58Z"`
+</ResponseField>
+
+<ResponseField name="data[].ended_at" type="string">
+  When task execution ended. Example: `"2025-02-10T14:31:10Z"`
+</ResponseField>
+
+<ResponseField name="data[].total_results" type="integer">
+  Total results expected from this task. Example: `138`
+</ResponseField>
+
+<ResponseField name="data[].last_result" type="integer">
+  Number of results actually collected. Example: `6`
+</ResponseField>
+
+<ResponseField name="data[].total_pages" type="integer">
+  Total pages processed. Example: `1`
+</ResponseField>
+
+<ResponseField name="data[].done_reason" type="string">
+  Reason for task completion. Example: `"run_aborted"`
+</ResponseField>
+
+<Tip>
+  Use this endpoint to debug which specific tasks failed or were incomplete in a run.
+</Tip>
+
+<Note>
+  The done_reason field on individual tasks can differ from the overall run's done_reason.
+</Note>
+
+<Tip>
+  Compare total_results vs last_result to see if a task collected all expected data.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/runtasks?run=300e9c5c127d421c90f431478d9a2cfb&page=1&limit=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/runtasks"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+params = {
+    "run": "300e9c5c127d421c90f431478d9a2cfb",
+    "page": 1,
+    "limit": 50
+}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+
+print(f"Total tasks in run: {data['total_results']}\n")
+
+for task in data['data']:
+    status_icon = "✓" if task['status'] == "completed" else "✗"
+    print(f"{status_icon} Task: {task['id']}")
+    print(f"   Status: {task['status']}")
+    print(f"   Results: {task['last_result']}/{task['total_results']}")
+    print(f"   Done Reason: {task['done_reason']}")
+    print(f"   Params: {task['params']}")
+    print()
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "object": "runtask",
+      "id": "1262f6f99dac7dffb05a513fff0ded77",
+      "started_at": "2025-02-10T14:30:58Z",
+      "ended_at": "2025-02-10T14:31:10Z",
+      "total_results": 138,
+      "last_result": 6,
+      "total_pages": 1,
+      "done_reason": "run_aborted",
+      "last_page": 0,
+      "status": "aborted",
+      "run": "300e9c5c127d421c90f431478d9a2cfb",
+      "task": "d30334cd8d21ab16048c5e2e7136a9f1",
+      "params": {
+        "url": "https://www.google.com/maps/search/restaurant/@43.2928346,5.3662584,17z"
+      },
+      "last_collection_at": "2025-02-10T14:31:10Z",
+      "done_reason_desc": null
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

@@ -1,0 +1,86 @@
+---
+title: "Add Tasks"
+description: "Add Sales Navigator company search URLs to scrape using the lobstr.io API"
+api: "POST https://api.lobstr.io/v2/squid/{squid_id}/task"
+---
+
+Add Sales Navigator company search URLs as tasks to your squid. The scraper will export all companies matching your search filters.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## URL Format
+
+Use Sales Navigator company search URLs with your desired filters:
+
+`https://www.linkedin.com/sales/search/company?query=(keywords:technology)`
+
+Build your search in Sales Navigator with all desired filters, then copy the URL from your browser.
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Sales Navigator Companies Search URL containing your search filters |
+
+<Tip>
+  Build your search in Sales Navigator first, apply all filters, then copy the URL to ensure accurate results.
+</Tip>
+
+<Warning>
+  This scraper requires a linked Sales Navigator account. Connect your account in lobstr.io settings first.
+</Warning>
+
+<Note>
+  Each search URL can return up to 2,500 companies (100 pages × 25 results per page).
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID/task" \
+  -H "Authorization: Token YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "url": "https://www.linkedin.com/sales/search/company?query=(keywords:technology)"
+  }'
+```
+
+```python Python
+import requests
+
+API_TOKEN = "YOUR_API_TOKEN"
+SQUID_ID = "YOUR_SQUID_ID"
+
+url = f"https://api.lobstr.io/api/v2/squid/{SQUID_ID}/task"
+headers = {
+    "Authorization": f"Token {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+data = {
+    "url": "https://www.linkedin.com/sales/search/company?query=(keywords:technology)"
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "task_abc123def456",
+  "status": "pending",
+  "created_at": "2025-01-15T10:30:00Z",
+  "url": "https://www.linkedin.com/sales/search/company?query=(keywords:technology)"
+}
+```

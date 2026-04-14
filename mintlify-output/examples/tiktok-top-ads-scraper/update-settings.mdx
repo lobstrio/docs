@@ -1,0 +1,114 @@
+---
+title: "Update Settings"
+description: "Configure the TikTok Top Ads Scraper parameters"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure the scraper parameters to control how TikTok ads are filtered and sorted. These settings determine region, industry, objective, and other filtering criteria.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **region** | string | World | Specify a predetermined region for your search (e.g., `United States`, `France`, `Germany`) |
+| **industry** | string | All industries | Filter by industry (e.g., `Beauty & Personal Care`, `Games`, `E-Commerce (Non-app)`) |
+| **objective** | string | All objectives | Campaign objective filter: `Conversions`, `Lead Generation`, `Traffic`, `Video Views`, etc. |
+| **like** | string | All likes | Filter by engagement percentile: `Top 1~20%`, `Top 21~40%`, etc. |
+| **time_range** | string | Last 7 days | Ad publication period: `Last 7 days`, `Last 30 days`, `Last 180 days` |
+| **sort_by** | string | For You | Sorting option: `For You`, `Reach`, `CTY`, `2s Views Rate`, `6s Views Rate` |
+
+## Available Regions
+
+World, Argentina, Australia, Austria, Bahrain, Belarus, Belgium, Brazil, Cambodia, Canada, Chile, Colombia, Czechia, Denmark, Ecuador, Egypt, Finland, France, Germany, Greece, Hungary, Indonesia, Iraq, Ireland, Israel, Italy, Japan, Jordan, Kazakhstan, Kuwait, Lebanon, Malaysia, Mexico, Morocco, Netherlands, New Zealand, Norway, Oman, Pakistan, Peru, Philippines, Poland, Portugal, Qatar, Romania, Saudi Arabia, Singapore, South Africa, South Korea, Spain, Sweden, Switzerland, Taiwan, Thailand, Turkey, United Arab Emirates, United Kingdom, United States, Uruguay, Vietnam
+
+## Available Industries
+
+All industries, App Installs, Apparel & Accessories, Appliances, Apps, Baby, Kids & Maternity, Beauty & Personal Care, Business Services, E-Commerce (Non-app), Education, Financial Services, Food & Beverage, Games, Health, Home Improvement, Household Products, Life Services, News & Entertainment, Pets, Sports & Outdoor, Tech & Electronics, Travel, Vehicle & Transportation
+
+<Tip>
+  Use `sort_by: Reach` to find ads with the highest audience reach for competitive analysis.
+</Tip>
+
+<Tip>
+  Filter by `like: Top 1~20%` to see only the most engaging ads.
+</Tip>
+
+<Note>
+  Combining industry and objective filters helps narrow down ads most relevant to your use case.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X PATCH "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID" \
+  -H "Authorization: Token YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "settings": {
+      "region": "United States",
+      "industry": "Beauty & Personal Care",
+      "objective": "Conversions",
+      "like": "Top 1~20%",
+      "time_range": "Last 30 days",
+      "sort_by": "Reach"
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_TOKEN = "YOUR_API_TOKEN"
+SQUID_ID = "YOUR_SQUID_ID"
+
+url = f"https://api.lobstr.io/api/v2/squid/{SQUID_ID}"
+headers = {
+    "Authorization": f"Token {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+data = {
+    "settings": {
+        "region": "United States",
+        "industry": "Beauty & Personal Care",
+        "objective": "Conversions",
+        "like": "Top 1~20%",
+        "time_range": "Last 30 days",
+        "sort_by": "Reach"
+    }
+}
+
+response = requests.patch(url, headers=headers, json=data)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "id": "YOUR_SQUID_ID",
+  "crawler": "tiktok-top-ads-scraper",
+  "settings": {
+    "region": "United States",
+    "industry": "Beauty & Personal Care",
+    "objective": "Conversions",
+    "like": "Top 1~20%",
+    "time_range": "Last 30 days",
+    "sort_by": "Reach"
+  },
+  "updated_at": "2024-01-15T10:35:00Z"
+}
+```

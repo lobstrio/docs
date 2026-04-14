@@ -1,0 +1,223 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TripAdvisor Reviews Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TripAdvisor Reviews Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="review_id" type="string">
+  Review identifier. Example: `1052053091`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the review on TripAdvisor. Example: `https://www.tripadvisor.com/ShowUserReviews-g60763-d208453-r1052053091-Hilton_New_York_Times_Square-New_York_City_New_York.html`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title or headline of the review. Example: `Excellent hotel`
+</ResponseField>
+
+<ResponseField name="rating" type="integer">
+  Rating score. Example: `5`
+</ResponseField>
+
+<ResponseField name="travel_date" type="string">
+  Travel or visit date. Example: `2026-02`
+</ResponseField>
+
+<ResponseField name="published_date" type="datatime">
+  Publication date. Example: `2026-03-05`
+</ResponseField>
+
+<ResponseField name="created_date" type="string">
+  Creation date. Example: `2026-03-05`
+</ResponseField>
+
+<ResponseField name="text" type="text">
+  Text content. Example: `Hotel with excellent location, perfectly connected by metro and therefore ideal for getting around the city easily. The rooms are clean, tidy and very comfortable, with a really breathtaking view.
+
+The breakfast is rich and of great quality, with a wide choice of both continental products and English breakfast, all nice and well presented.
+
+Special thanks go to the breakfast staff, Ciro and Francisco, who stood out for their professionalism, kindness and friendliness. They made the experience even more enjoyable, showing great attention to me and my friends.
+
+Thank you very much to Ciro and Francisco!`
+</ResponseField>
+
+<ResponseField name="trip_type" type="string">
+  Type of trip (solo, family, business, couple). Example: `FRIENDS`
+</ResponseField>
+
+<ResponseField name="helpful_votes" type="integer">
+  Number of helpful votes. Example: `0`
+</ResponseField>
+
+<ResponseField name="publish_platform" type="string">
+  Platform where content was published. Example: `MOBILE`
+</ResponseField>
+
+<ResponseField name="room_tip" type="text">
+  Reviewer's tip about the room
+</ResponseField>
+
+<ResponseField name="lang" type="string">
+  Language code. Example: `en`
+</ResponseField>
+
+<ResponseField name="original_language" type="string">
+  Original language. Example: `it`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current status of the review on TripAdvisor. Example: `PUBLISHED`
+</ResponseField>
+
+<ResponseField name="subratings" type="json">
+  Detailed sub-category ratings
+</ResponseField>
+
+<ResponseField name="photos" type="json">
+  List of photo URLs
+</ResponseField>
+
+<ResponseField name="photo_ids" type="json">
+  List of photo IDs attached to the review
+</ResponseField>
+
+<ResponseField name="translation_type" type="string">
+  Type of translation applied to the review content. Example: `MACHINE`
+</ResponseField>
+
+<ResponseField name="mt_provider_id" type="integer">
+  Machine translation provider identifier. Example: `10`
+</ResponseField>
+
+<ResponseField name="product_name" type="string">
+  Name of the product or experience being reviewed. Example: `Hilton New York Times Square`
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Unique identifier of the reviewer on TripAdvisor. Example: `49137FAFD99CA18EC8122D6D5E16D5B1`
+</ResponseField>
+
+<ResponseField name="user_name" type="string">
+  Full name of the reviewer. Example: `Giovanni`
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  Username/handle of the reviewer on TripAdvisor. Example: `GiovanniMaro`
+</ResponseField>
+
+<ResponseField name="is_user_verified" type="boolean">
+  Whether user is verified. Example: `false`
+</ResponseField>
+
+<ResponseField name="user_location" type="string">
+  User's stated location. Example: `Sicily, Italy`
+</ResponseField>
+
+<ResponseField name="user_location_id" type="integer">
+  User location identifier. Example: `187886`
+</ResponseField>
+
+<ResponseField name="user_location_name" type="string">
+  User location name. Example: `Sicily`
+</ResponseField>
+
+<ResponseField name="user_total_contributions" type="integer">
+  Total number of contributions (reviews, photos) by the reviewer. Example: `4`
+</ResponseField>
+
+<ResponseField name="user_helpful_votes" type="integer">
+  Number of helpful votes received by the reviewer. Example: `0`
+</ResponseField>
+
+<ResponseField name="user_avatar_id" type="string">
+  Identifier of the reviewer's avatar image. Example: `452386603`
+</ResponseField>
+
+<ResponseField name="user_avatar_photo_sizes" type="json">
+  Available sizes for the reviewer's avatar photo. Example: `[{'url': 'https://dynamic-media-cdn.tripadvisor.com/media/photo-o/1a/f6/df/2b/default-avatar-2020-39.jpg', 'width': 1200, 'height': 1200}]`
+</ResponseField>
+
+<ResponseField name="user_profile_link" type="string">
+  URL to the reviewer's TripAdvisor profile. Example: `https://www.tripadvisor.com/Profile/GiovanniMaro`
+</ResponseField>
+
+<ResponseField name="owner_response_id" type="string">
+  Unique identifier of the business owner's response. Example: `1052223597`
+</ResponseField>
+
+<ResponseField name="owner_response_text" type="text">
+  Text of the business owner's reply to the review. Example: `Dear Giovanni,
+It was a pleasure having you stay with us, and we're delighted to hear that your visit left such a positive impression. Our location in the heart of the area makes exploring the city easy, and it's wonderful to know our accommodations provided the comfort, cleanliness, and memorable views that helped make your stay special. We're also glad you enjoyed starting your day with our breakfast, and your kind recognition of Ciro and Francisco will mean so much to them. Their professionalism, warmth, and attentive service reflect the hospitality we strive to provide every day. Thank you for choosing to stay with us and for taking a moment to share your experience. We would love the opportunity to welcome you back to Hilton Times Square whenever your travels bring you this way again.`
+</ResponseField>
+
+<ResponseField name="owner_response_lang" type="string">
+  Language of owner's response. Example: `en`
+</ResponseField>
+
+<ResponseField name="owner_response_published_date" type="string">
+  Date the business owner's response was published. Example: `2026-03-07`
+</ResponseField>
+
+<ResponseField name="responder" type="string">
+  Name or identifier of the person who responded on behalf of the business. Example: `Front Desk`
+</ResponseField>
+
+<ResponseField name="owner_connection_to_subject" type="string">
+  Owner's connection type to the listing. Example: `General Manager`
+</ResponseField>
+
+<ResponseField name="place_id" type="string">
+  Place identifier. Example: `208453`
+</ResponseField>
+
+<ResponseField name="place_name" type="string">
+  Place name. Example: `Hilton New York Times Square`
+</ResponseField>
+
+<ResponseField name="place_type" type="string">
+  Type of place. Example: `ACCOMMODATION`
+</ResponseField>
+
+<ResponseField name="place_category" type="string">
+  Category of the reviewed place (e.g. restaurant, hotel). Example: `HOTEL`
+</ResponseField>
+
+<ResponseField name="place_total_reviews" type="integer">
+  Total number of reviews for the reviewed place. Example: `8935`
+</ResponseField>
+
+<ResponseField name="place_web_url" type="string">
+  TripAdvisor URL of the reviewed place. Example: `https://www.tripadvisor.com/Hotel_Review-g60763-d208453-Reviews-Hilton_New_York_Times_Square-New_York_City_New_York.html`
+</ResponseField>
+
+<ResponseField name="alert_status" type="boolean">
+  Alert or notification status. Example: `false`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Timestamp when the review was scraped. Example: `2026-03-21T20:39:38Z`
+</ResponseField>

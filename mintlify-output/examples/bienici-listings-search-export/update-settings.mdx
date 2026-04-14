@@ -1,0 +1,49 @@
+---
+title: "Update Settings"
+description: "Configure settings for your Bien'Ici Search Export squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **Bien'Ici Search Export** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+## Settings Fields
+
+<ParamField body="params.max_pages" type="integer">
+  Default: `100`.
+</ParamField>
+
+<ParamField body="params.hours_back" type="integer">
+
+</ParamField>
+
+<ParamField body="params.collect_ads" type="boolean" required>
+  Default: `False`.
+</ParamField>
+
+<ParamField body="params.fetch_since" type="fetch_since">
+
+</ParamField>
+
+<ParamField body="params.max_results" type="integer">
+  Default: `50`.
+</ParamField>
+
+<ParamField body="params.max_unique_results_per_run" type="int">
+
+</ParamField>

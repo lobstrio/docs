@@ -1,0 +1,172 @@
+---
+title: "Get Task"
+description: "Retrieve detailed information about a specific task"
+api: "GET https://api.lobstr.io/v1/tasks/{task_hash}"
+---
+
+This endpoint retrieves detailed information about a specific task using its hash ID, including its current status, parameters, and execution history.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="task_hash" type="string" required>
+  The unique identifier (hash) of the task. Example: `c5e29d2aba8b77cdc56391e7405302de`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="hash_value" type="string">
+  Unique task identifier. Example: `"c5e29d2aba8b77cdc56391e7405302de"`
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Task creation timestamp (ISO 8601). Example: `"2024-12-24T10:57:55.045567"`
+</ResponseField>
+
+<ResponseField name="is_active" type="boolean">
+  Whether the task is active. Example: `true`
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  Task parameters (URL, search terms, etc.). Example: `{"url": "https://..."}`
+</ResponseField>
+
+<ResponseField name="module" type="integer">
+  Internal module identifier. Example: `5`
+</ResponseField>
+
+<ResponseField name="status" type="object">
+  Detailed execution status information. Example: `{...}`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "task". Example: `"task"`
+</ResponseField>
+
+## Status Object Fields
+
+<ResponseField name="status.status" type="string">
+  Current task status (pending, running, completed, aborted, failed). Example: `"completed"`
+</ResponseField>
+
+<ResponseField name="status.started_at" type="string">
+  When task execution started. Example: `"2025-02-04T10:25:47.278419"`
+</ResponseField>
+
+<ResponseField name="status.ended_at" type="string">
+  When task execution ended. Example: `"2025-02-04T10:26:52.310738"`
+</ResponseField>
+
+<ResponseField name="status.is_done" type="boolean">
+  Whether the task has completed. Example: `true`
+</ResponseField>
+
+<ResponseField name="status.total_results" type="integer">
+  Total number of results scraped. Example: `156`
+</ResponseField>
+
+<ResponseField name="status.total_pages" type="integer">
+  Total pages processed. Example: `1`
+</ResponseField>
+
+<ResponseField name="status.done_reason" type="string">
+  Reason for task completion (completed, run_aborted, error, etc.). Example: `"completed"`
+</ResponseField>
+
+<ResponseField name="status.has_errors" type="boolean">
+  Whether errors occurred during execution. Example: `false`
+</ResponseField>
+
+<ResponseField name="status.errors" type="string | null">
+  Error details if any occurred. Example: `null`
+</ResponseField>
+
+<Tip>
+  Use the status.total_results field to track how much data has been collected for this task.
+</Tip>
+
+<Note>
+  The done_reason field helps identify why a task stopped - whether it completed normally, was aborted, or encountered errors.
+</Note>
+
+<Warning>
+  Tasks with status 'aborted' may have partial results. Check total_results to see what was collected.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/tasks/c5e29d2aba8b77cdc56391e7405302de" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/tasks/c5e29d2aba8b77cdc56391e7405302de"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+task = response.json()
+
+print(f"Task ID: {task['hash_value']}")
+print(f"Created: {task['created_at']}")
+print(f"Active: {task['is_active']}")
+print(f"Parameters: {task['params']}")
+
+# Check execution status
+status = task['status']
+print(f"\nExecution Status: {status['status']}")
+print(f"Results collected: {status['total_results']}")
+print(f"Pages processed: {status['total_pages']}")
+
+if status['is_done']:
+    print(f"Completion reason: {status['done_reason']}")
+    if status['has_errors']:
+        print(f"Errors: {status['errors']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "hash_value": "c5e29d2aba8b77cdc56391e7405302de",
+  "created_at": "2024-12-24T10:57:55.045567",
+  "is_active": true,
+  "params": {
+    "url": "https://www.linkedin.com/in/johndoe"
+  },
+  "module": 5,
+  "status": {
+    "status": "completed",
+    "started_at": "2025-02-04T10:25:47.278419",
+    "ended_at": "2025-02-04T10:26:52.310738",
+    "is_done": true,
+    "total_results": 156,
+    "total_pages": 1,
+    "done_reason": "completed",
+    "has_errors": false,
+    "errors": null
+  },
+  "object": "task"
+}
+```
+
+```json 404
+{
+  "error": {
+    "message": "Task not found",
+    "type": "not_found_error",
+    "param": "task_hash"
+  }
+}
+```

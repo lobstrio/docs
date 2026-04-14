@@ -1,0 +1,77 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Leboncoin Auto Message Sender"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Leboncoin Auto Message Sender** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="id" type="int">
+  Unique internal identifier for the message record. Example: `1`
+</ResponseField>
+
+<ResponseField name="annonce_id" type="string">
+  Unique identifier for the Leboncoin listing this message was sent to. Example: `3165893393`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on Leboncoin. Example: `https://www.leboncoin.fr/ad/ventes_immobilieres/3165893393`
+</ResponseField>
+
+<ResponseField name="message" type="text">
+  Text content of the message sent to the seller. Example: `Hello toutong972,
+
+Je viens de voir votre article qui porte le nom:
+Terrain à vendre Plassac 970M2
+
+L'offre m'intéresse?
+Est-ce que vous pouvez me recontacter via la messagerie leboncoin?
+
+A très vite,
+Sasha`
+</ResponseField>
+
+<ResponseField name="message_hash" type="string">
+  Internal hash used to uniquely identify this message
+</ResponseField>
+
+<ResponseField name="is_deactivated" type="boolean">
+  Whether the seller's Leboncoin account has been deactivated. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_sent" type="boolean">
+  Whether the message was successfully sent. Example: `false`
+</ResponseField>
+
+<ResponseField name="was_already_sent" type="boolean">
+  Whether this message was already sent in a previous run. Example: `false`
+</ResponseField>
+
+<ResponseField name="last_publication_date" type="datetime">
+  Last publication date of the associated listing. Example: `2026-03-21T21:10:58+00:00`
+</ResponseField>
+
+<ResponseField name="hash_value" type="string">
+  Internal hash used to deduplicate messages across runs. Example: `1679091c5a880faf6fb5e6087eb1b2dc`
+</ResponseField>

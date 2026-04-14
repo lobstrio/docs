@@ -1,0 +1,184 @@
+---
+title: "Get Crawler Attributes"
+description: "Retrieve the list of output attributes (result fields) for a specific crawler"
+api: "GET https://api.lobstr.io/v1/crawlers/{crawler_hash}/attributes"
+---
+
+This endpoint returns all output attributes (result fields) for a specific crawler. Each attribute describes a field that may appear in your scraping results, along with its data type, an example value, and the function it belongs to.
+
+This is useful for understanding the shape of data a crawler produces before you start scraping, or for building dynamic result parsers.
+
+### Attribute Fields
+
+<ResponseField name="name" type="string">
+  The field name as it appears in result objects. Example: `"name"`
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Data type of the field (string, integer, float, boolean, text, json). Example: `"string"`
+</ResponseField>
+
+<ResponseField name="example" type="any">
+  Example value for the field. May be null for optional fields. Example: `"Blues Billard Club"`
+</ResponseField>
+
+<ResponseField name="function" type="string">
+  The crawler function this attribute belongs to. Example: `"Export Local Businesses"`
+</ResponseField>
+
+<ResponseField name="is_main" type="boolean">
+  Whether this attribute is included by default (true) or requires enabling a function (false). Example: `true`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Human-readable description of what this field contains. Example: `"Business name as listed on Google Maps"`
+</ResponseField>
+
+## Main vs Function Attributes
+
+Attributes are divided into two categories:
+- **Main attributes** (`is_main: true`): Always included in results by default.
+- **Function attributes** (`is_main: false`): Only included when their parent function is enabled on your squid (e.g., "Collect Business Details", "Extract Emails from Website").
+
+## Headers
+
+<ParamField header="Content-Type" type="string">
+  Content type of the request. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="crawler_hash" type="string" required>
+  The unique identifier (hash/id) of the crawler. Example: `4734d096159ef05210e0e1677e8be823`
+</ParamField>
+
+<Tip>
+  This is a public endpoint — no authentication is required.
+</Tip>
+
+<Note>
+  Attributes with is_main: false only appear in results when their parent function is enabled on your squid. Check the function field to see which add-on controls each attribute.
+</Note>
+
+<Tip>
+  Use the type field to build typed parsers for your results. Supported types are: string, integer, float, boolean, text (long string), and json (structured data).
+</Tip>
+
+<Tip>
+  Combine this endpoint with Get Crawler Parameters to fully understand both the inputs and outputs of any crawler before integrating it.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/crawlers/4734d096159ef05210e0e1677e8be823/attributes"
+```
+
+```python Python
+import requests
+
+crawler_id = "4734d096159ef05210e0e1677e8be823"
+url = f"https://api.lobstr.io/v1/crawlers/{crawler_id}/attributes"
+
+response = requests.get(url)
+attributes = response.json()
+
+# Display all attributes grouped by function
+functions = {}
+for attr in attributes['data']:
+    func = attr['function']
+    if func not in functions:
+        functions[func] = []
+    functions[func].append(attr)
+
+for func_name, attrs in functions.items():
+    print(f"\n=== {func_name} ===")
+    for attr in attrs:
+        main_tag = " [main]" if attr['is_main'] else " [optional]"
+        example = f" (e.g. {attr['example']})" if attr['example'] is not None else ""
+        print(f"  {attr['name']} ({attr['type']}){main_tag}{example}")
+        print(f"    {attr['description']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "data": [
+    {
+      "name": "match_filters",
+      "type": "boolean",
+      "example": false,
+      "function": "Export Local Businesses",
+      "is_main": true,
+      "description": "Whether the result passed your geo and category filters"
+    },
+    {
+      "name": "name",
+      "type": "string",
+      "example": "Blues Billard Club",
+      "function": "Export Local Businesses",
+      "is_main": true,
+      "description": "Business name as listed on Google Maps"
+    },
+    {
+      "name": "address",
+      "type": "string",
+      "example": "06110 Le Cannet, France",
+      "function": "Export Local Businesses",
+      "is_main": true,
+      "description": "Full formatted address of the business"
+    },
+    {
+      "name": "phone",
+      "type": "string",
+      "example": "+33493611118",
+      "function": "Export Local Businesses",
+      "is_main": true,
+      "description": "Primary phone number of the business"
+    },
+    {
+      "name": "website",
+      "type": "string",
+      "example": "http://www.example.com/",
+      "function": "Export Local Businesses",
+      "is_main": true,
+      "description": "Business website URL"
+    },
+    {
+      "name": "score",
+      "type": "float",
+      "example": 3.5,
+      "function": "Export Local Businesses",
+      "is_main": true,
+      "description": "Average star rating out of 5"
+    },
+    {
+      "name": "category",
+      "type": "text",
+      "example": "Fishing charter",
+      "function": "Export Local Businesses",
+      "is_main": true,
+      "description": "Primary business category on Google Maps"
+    },
+    {
+      "name": "email",
+      "type": "string",
+      "example": "info@lobstr.io",
+      "function": "Extract Emails from Website",
+      "is_main": false,
+      "description": "Email address found on the business website"
+    },
+    {
+      "name": "email_status",
+      "type": "string",
+      "example": "valid",
+      "function": "Extract Emails from Website",
+      "is_main": false,
+      "description": "Validation status of the extracted email address"
+    }
+  ]
+}
+```

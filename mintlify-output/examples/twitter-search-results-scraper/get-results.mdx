@@ -1,0 +1,169 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Twitter Search Results Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Twitter Search Results Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="internal_unique_id" type="string">
+  Unique internal identifier for the tweet. Example: `1886958273636507688`
+</ResponseField>
+
+<ResponseField name="tweet_url" type="string">
+  Direct URL to the tweet on Twitter/X. Example: `https://twitter.com/ultrabogotano/status/1886958273636507688`
+</ResponseField>
+
+<ResponseField name="original_tweet_url" type="string">
+  URL of the original tweet (populated if this is a retweet or quote tweet)
+</ResponseField>
+
+<ResponseField name="original_tweet_id" type="string">
+  Unique identifier of the original tweet (for retweets and quote tweets). Example: `1884600403884380413`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Display name of the tweet author. Example: `Surfer Calavera`
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Unique internal Twitter/X identifier of the tweet author. Example: `277545465`
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  Twitter/X handle of the author (without the @ symbol). Example: `ultrabogotano`
+</ResponseField>
+
+<ResponseField name="published_at" type="datetime">
+  Date and time the tweet was published. Example: `2025-02-05T02:01:25+00:00`
+</ResponseField>
+
+<ResponseField name="content" type="string">
+  Full text content of the tweet. Example: `Sigan usando todos los sufijos numéricos que quieran, @Tigo_Colombia. Yo les sigo respondiendo como se merecen ya que no han sido capaces de borrar mi número de su base de datos.
+@sicsuper https://t.co/qedLjpDMAC`
+</ResponseField>
+
+<ResponseField name="views_count" type="integer">
+  Total number of times the tweet has been viewed. Example: `343`
+</ResponseField>
+
+<ResponseField name="retweet_count" type="integer">
+  Number of times the tweet has been retweeted. Example: `0`
+</ResponseField>
+
+<ResponseField name="likes" type="integer">
+  Number of likes the tweet received. Example: `1`
+</ResponseField>
+
+<ResponseField name="quote_count" type="integer">
+  Number of times the tweet has been quoted. Example: `0`
+</ResponseField>
+
+<ResponseField name="reply_count" type="integer">
+  Number of replies to the tweet. Example: `1`
+</ResponseField>
+
+<ResponseField name="bookmarks_count" type="integer">
+  Number of times the tweet has been bookmarked. Example: `1`
+</ResponseField>
+
+<ResponseField name="media_0_thumbnail" type="string">
+  Thumbnail URL of the 1st media item in the tweet (0-indexed). Example: `https://pbs.twimg.com/media/Gi_SiztWMAEoLZd.jpg`
+</ResponseField>
+
+<ResponseField name="media_0_type" type="string">
+  Type of the 1st media item (e.g. photo, video, animated_gif). Example: `photo`
+</ResponseField>
+
+<ResponseField name="media_0_url" type="string">
+  URL of the 1st media item in the tweet. Example: `https://pbs.twimg.com/media/Gi_SiztWMAEoLZd.jpg`
+</ResponseField>
+
+<ResponseField name="media_1_thumbnail" type="string">
+  Thumbnail URL of the 2nd media item attached to the tweet. Example: `https://pbs.twimg.com/media/Gi_SizvXoAAbRzD.jpg`
+</ResponseField>
+
+<ResponseField name="media_1_type" type="string">
+  Type of the 2nd media item (e.g. photo, video). Example: `photo`
+</ResponseField>
+
+<ResponseField name="media_1_url" type="string">
+  URL of the 2nd media item attached to the tweet. Example: `https://pbs.twimg.com/media/Gi_SizvXoAAbRzD.jpg`
+</ResponseField>
+
+<ResponseField name="media_2_thumbnail" type="string">
+  Thumbnail URL of the 3rd media item attached to the tweet. Example: `https://pbs.twimg.com/media/Gi_SizqWUAAerP8.jpg`
+</ResponseField>
+
+<ResponseField name="media_2_type" type="string">
+  Type of the 3rd media item (e.g. photo, video). Example: `photo`
+</ResponseField>
+
+<ResponseField name="media_2_url" type="string">
+  URL of the 3rd media item attached to the tweet. Example: `https://pbs.twimg.com/media/Gi_SizqWUAAerP8.jpg`
+</ResponseField>
+
+<ResponseField name="media_3_thumbnail" type="string">
+  Thumbnail URL of the 4th media item attached to the tweet
+</ResponseField>
+
+<ResponseField name="media_3_type" type="string">
+  Type of the 4th media item (e.g. photo, video)
+</ResponseField>
+
+<ResponseField name="media_3_url" type="string">
+  URL of the 4th media item attached to the tweet
+</ResponseField>
+
+<ResponseField name="binded_media_url" type="string">
+  URL of a linked media card (e.g. article preview) embedded in the tweet
+</ResponseField>
+
+<ResponseField name="binded_media_domain" type="string">
+  Domain of the linked media card embedded in the tweet
+</ResponseField>
+
+<ResponseField name="binded_media_thumbnail_url" type="string">
+  Thumbnail image URL of the linked media card
+</ResponseField>
+
+<ResponseField name="binded_media_title" type="string">
+  Title of the linked media card embedded in the tweet
+</ResponseField>
+
+<ResponseField name="binded_media_description" type="string">
+  Description text of the linked media card
+</ResponseField>
+
+<ResponseField name="is_reply" type="boolean">
+  Whether this tweet is a reply to another tweet. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_retweeted" type="boolean">
+  Whether this tweet is a retweet of another tweet. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_quoted" type="boolean">
+  Whether this tweet quotes another tweet. Example: `true`
+</ResponseField>

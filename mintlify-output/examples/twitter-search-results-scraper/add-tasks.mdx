@@ -1,0 +1,118 @@
+---
+title: "Add Tasks"
+description: "Add Twitter search scraping tasks by providing search URLs"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Twitter search results to scrape by providing search URLs from X.com (Twitter). The scraper will extract tweets matching your search query.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Twitter Search Results Scraper |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Twitter search URL (e.g., `https://x.com/search?q=keyword&src=typed_query&f=top`) |
+
+## Search URL Parameters
+
+Twitter search URLs support various filters via query parameters:
+
+| Parameter | Description |
+| --- | --- |
+| **q** | Search query (URL encoded) |
+| **f=top** | Show top results |
+| **f=live** | Show latest results |
+| **f=user** | Show people results |
+| **f=image** | Show image results |
+| **f=video** | Show video results |
+
+<Tip>
+  Perform your search on Twitter/X first, apply filters, then copy the URL to preserve all search parameters.
+</Tip>
+
+<Tip>
+  Use `f=live` to get the most recent tweets matching your query.
+</Tip>
+
+<Note>
+  Advanced search operators like `from:username`, `since:2024-01-01`, and `filter:media` are supported in the query.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://x.com/search?q=artificial%20intelligence&src=typed_query&f=top"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Twitter search URLs to scrape
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": "https://x.com/search?q=artificial%20intelligence&src=typed_query&f=top"}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "9fb224b5e2ce36942a74d1e94dd1cf14",
+      "created_at": "2025-07-07T09:53:32.017225",
+      "is_active": true,
+      "params": {
+        "url": "https://x.com/search?q=artificial%20intelligence&src=typed_query&f=top"
+      },
+      "module": 178,
+      "object": "task"
+    }
+  ]
+}
+```

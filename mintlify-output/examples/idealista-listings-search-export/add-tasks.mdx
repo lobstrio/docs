@@ -1,0 +1,101 @@
+---
+title: "Add Tasks"
+description: "Add Idealista search URLs as tasks for scraping property listings"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Idealista search URLs to your squid for scraping Spanish property listings. The scraper extracts real estate listings including price, area, bedrooms, contact information, and listing details from Idealista.com search results.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Task Format
+
+Each task should contain a URL from an Idealista search results page. You can search for properties by location, type, and other filters on Idealista, then use those search URLs as tasks.
+
+## Supported URL Formats
+
+The scraper supports Idealista search URLs from various property categories:
+
+<Tip>
+  Apply filters on Idealista (price range, property type, number of bedrooms) before copying the URL to get more targeted results.
+</Tip>
+
+<Note>
+  Idealista uses different language subdomains. The scraper works with /en/ (English), /es/ (Spanish), and other language versions.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.idealista.com/en/venta-viviendas/vizcaya/"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Idealista search URLs as tasks
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": "https://www.idealista.com/en/venta-viviendas/vizcaya/"},
+            {"url": "https://www.idealista.com/en/venta-viviendas/madrid/"}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+
+for task in data["tasks"]:
+    print(f"  Task ID: {task['id']}")
+    print(f"  URL: {task['params']['url']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "82367f24d9450b2222080eed91662968",
+      "created_at": "2025-07-17T09:06:47.287893",
+      "is_active": true,
+      "params": {
+        "url": "https://www.idealista.com/en/venta-viviendas/vizcaya/"
+      },
+      "module": 115,
+      "object": "task"
+    }
+  ]
+}
+```

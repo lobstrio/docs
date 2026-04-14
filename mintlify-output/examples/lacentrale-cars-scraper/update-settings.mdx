@@ -1,0 +1,145 @@
+---
+title: "Update Settings"
+description: "Configure the LaCentrale Cars Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your LaCentrale Cars Scraper squid settings. Control pagination, result limits, time filters, and whether to fetch detailed listing information.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **max_pages** | integer | 347 | Maximum pages to scrape per task (max: 347) |
+| **max_results** | integer | unlimited | Maximum results per task |
+| **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks |
+| **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `first_online_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM) |
+| **hours_back** | integer | null | Deprecated — use `fetch_since` instead |
+| **get_listing_details** | boolean | true | Fetch detailed listing info (equipment, seller details) |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping threads (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+## Listing Details Option
+
+When `get_listing_details` is enabled, the scraper visits each listing page to extract:
+
+- Full equipment list and options
+- Seller details (address, company info)
+- Technical specifications (CO2, power, fuel consumption)
+- Vehicle history links
+
+**Pricing:** 4 credits per listing when details are enabled.
+
+## Hours Back Filter
+
+Use `hours_back` to monitor new inventory. For example, setting `hours_back: 24` will stop scraping when it reaches listings older than 24 hours (based on `first_online_date`).
+
+Perfect for daily monitoring of new car listings.
+
+<Tip>
+  Set `get_listing_details: false` if you only need basic listing data to reduce costs.
+</Tip>
+
+<Warning>
+  Enabling `get_listing_details` costs 4 additional credits per listing. Plan accordingly for large scrapes.
+</Warning>
+
+<Tip>
+  Use `fetch_since: 12` for twice-daily monitoring to catch new listings without duplicates.
+</Tip>
+
+<Note>
+  **Backward compatibility:** The old parameter name `annonce_details` is still accepted but deprecated. Migrate to `get_listing_details`.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "LaCentrale Cars Scraper (1)",
+    "concurrency": 5,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "max_pages": 50,
+      "fetch_since": "7d",
+      "get_listing_details": true
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update squid settings
+payload = {
+    "name": "LaCentrale Cars Scraper (1)",
+    "concurrency": 5,
+    "export_unique_results": True,
+    "to_complete": False,
+    "no_line_breaks": True,
+    "params": {
+        "max_pages": 50,           # Limit pages to scrape
+        "fetch_since": "7d",          # Only listings from last 24 hours
+        "get_listing_details": True    # Fetch detailed listing info
+    }
+}
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json=payload
+)
+
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "LaCentrale Cars Scraper (1)",
+  "concurrency": 5,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "max_pages": 50,
+    "fetch_since": "7d",
+    "get_listing_details": true
+  }
+}
+```

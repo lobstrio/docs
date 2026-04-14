@@ -1,0 +1,362 @@
+---
+title: "Get Results"
+description: "Retrieve scraped Leboncoin listings with details and seller information"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped classified listings from Leboncoin including pricing, location, seller details, and property-specific fields like DPE/GES ratings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from. Example: `72d18e4c94534b829877bb7c092b1f80`
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional). Example: `3ff48bb8ef19426e87fbb3e102dd4531`
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+<ParamField query="page_size" type="integer">
+  Results per page (default: 50, max: 100). Example: `50`
+</ParamField>
+
+## Listing Information
+
+Core listing details:
+
+<ResponseField name="id" type="integer">
+  Unique result identifier. Example: `53557759`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "result". Example: `"result"`
+</ResponseField>
+
+<ResponseField name="squid" type="string">
+  Squid that produced this result. Example: `"72d18e4c94534b829877bb7c092b1f80"`
+</ResponseField>
+
+<ResponseField name="run" type="string">
+  Run that produced this result. Example: `"3ff48bb8ef19426e87fbb3e102dd4531"`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Listing title/headline. Example: `"Chaise de bureau"`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full listing description. Example: `"Je vends chaise de bureau..."`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listing price. Example: `20`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency code. Example: `"EUR"`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing. Example: `"https://www.leboncoin.fr/ad/..."`
+</ResponseField>
+
+<ResponseField name="annonce_id" type="string">
+  Leboncoin listing ID. Example: `"3017342920"`
+</ResponseField>
+
+<ResponseField name="category_name" type="string">
+  Category of the listing. Example: `"Ameublement"`
+</ResponseField>
+
+<ResponseField name="ad_type" type="string">
+  Type of ad (offer/search). Example: `"offer"`
+</ResponseField>
+
+## Location Information
+
+Geographic details:
+
+<ResponseField name="city" type="string">
+  City name. Example: `"Aix-en-Provence"`
+</ResponseField>
+
+<ResponseField name="city_label" type="string">
+  City with postal code. Example: `"Aix-en-Provence 13100"`
+</ResponseField>
+
+<ResponseField name="postal_code" type="string">
+  Postal code. Example: `"13100"`
+</ResponseField>
+
+<ResponseField name="department" type="string">
+  French department. Example: `"Bouches-du-Rhône"`
+</ResponseField>
+
+<ResponseField name="region" type="string">
+  Region name. Example: `"Provence-Alpes-Côte d'Azur"`
+</ResponseField>
+
+<ResponseField name="lat" type="string">
+  Latitude coordinate. Example: `"43.52638"`
+</ResponseField>
+
+<ResponseField name="lng" type="string">
+  Longitude coordinate. Example: `"5.44614"`
+</ResponseField>
+
+## Seller Information
+
+Details about the seller:
+
+<ResponseField name="owner_name" type="string">
+  Seller's display name. Example: `"EMMA"`
+</ResponseField>
+
+<ResponseField name="owner_type" type="string">
+  Seller type code. Example: `"0"`
+</ResponseField>
+
+<ResponseField name="owner_store_id" type="string">
+  Seller's store ID. Example: `"1095173"`
+</ResponseField>
+
+<ResponseField name="owner_siren" type="string | null">
+  Business SIREN number. Example: `null`
+</ResponseField>
+
+<ResponseField name="has_phone" type="boolean">
+  Whether phone is available. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_online_shop" type="boolean">
+  Whether seller has shop URL. Example: `false`
+</ResponseField>
+
+<ResponseField name="online_shop_url" type="string | null">
+  Seller's shop URL. Example: `null`
+</ResponseField>
+
+## Real Estate Fields
+
+Property-specific fields (when applicable):
+
+<ResponseField name="DPE" type="string | null">
+  Energy Performance rating (A-G). Example: `"C"`
+</ResponseField>
+
+<ResponseField name="DPE_int" type="integer | null">
+  Numeric DPE value. Example: `3`
+</ResponseField>
+
+<ResponseField name="GES" type="string | null">
+  Greenhouse Gas rating (A-G). Example: `"B"`
+</ResponseField>
+
+<ResponseField name="GES_int" type="integer | null">
+  Numeric GES value. Example: `2`
+</ResponseField>
+
+<ResponseField name="area" type="string | null">
+  Property area (sqm). Example: `"75"`
+</ResponseField>
+
+<ResponseField name="room_count" type="integer | null">
+  Number of rooms. Example: `3`
+</ResponseField>
+
+<ResponseField name="real_estate_type" type="string | null">
+  Property type. Example: `"apartment"`
+</ResponseField>
+
+<ResponseField name="furnished" type="boolean | null">
+  Whether furnished. Example: `false`
+</ResponseField>
+
+<ResponseField name="price_per_square_meter" type="number | null">
+  Price per sqm. Example: `4500.5`
+</ResponseField>
+
+## Media & Status
+
+Images and listing status:
+
+<ResponseField name="picture" type="string">
+  Primary image URL. Example: `"https://img.leboncoin.fr/..."`
+</ResponseField>
+
+<ResponseField name="pictures" type="string">
+  Comma-separated image URLs. Example: `"url1, url2, url3"`
+</ResponseField>
+
+<ResponseField name="first_publication_date" type="string">
+  When first published (ISO). Example: `"2025-07-04T04:05:30Z"`
+</ResponseField>
+
+<ResponseField name="last_publication_date" type="string">
+  When last updated (ISO). Example: `"2025-07-04T04:05:30Z"`
+</ResponseField>
+
+<ResponseField name="urgent" type="boolean">
+  Marked as urgent. Example: `false`
+</ResponseField>
+
+<ResponseField name="booster" type="boolean">
+  Listing is boosted. Example: `false`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="string">
+  When scraped (ISO). Example: `"2025-07-04T04:08:09.340Z"`
+</ResponseField>
+
+<Tip>
+  The `details` object contains structured attributes that vary by category (furniture type, condition, color, etc.).
+</Tip>
+
+<Tip>
+  Use `first_publication_date` to filter for new listings when processing results.
+</Tip>
+
+<Note>
+  DPE/GES fields are only populated for real estate listings.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&run=YOUR_RUN_HASH" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+run_id = "YOUR_RUN_HASH"
+
+# Get Leboncoin listings
+response = requests.get(f"{BASE_URL}/results",
+    headers=headers,
+    params={"squid": squid_id, "run": run_id}
+)
+
+data = response.json()
+print(f"Total listings: {data['total_results']}")
+
+for listing in data["data"]:
+    print(f"\n{listing['title']}")
+    print(f"  Price: {listing['price']} {listing['currency']}")
+    print(f"  Category: {listing['category_name']}")
+    print(f"  Location: {listing['city_label']}, {listing['department']}")
+    print(f"  Seller: {listing['owner_name']}")
+    print(f"  URL: {listing['url']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 3,
+  "limit": 10,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 3,
+  "data": [
+    {
+      "id": 53557759,
+      "object": "result",
+      "squid": "72d18e4c94534b829877bb7c092b1f80",
+      "run": "3ff48bb8ef19426e87fbb3e102dd4531",
+      "DPE": null,
+      "GES": null,
+      "ad_type": "offer",
+      "annonce_id": "3017342971",
+      "area": null,
+      "booster": false,
+      "category_name": "Équipements & Fournitures de bureau",
+      "city": "Aix-en-Provence",
+      "city_label": "Aix-en-Provence 13100",
+      "currency": "EUR",
+      "department": "Bouches-du-Rhône",
+      "description": "Cartable d'ordinateur (ou autre) noir avec bandoulière. Marque CASE LOGIC. Etat neuf",
+      "details": {},
+      "expiration_date": "2025-09-02T04:05:30Z",
+      "first_publication_date": "2025-07-04T04:05:30Z",
+      "functions": null,
+      "gallery": false,
+      "has_online_shop": false,
+      "has_phone": false,
+      "is_boosted": false,
+      "lat": "43.52638",
+      "lng": "5.44614",
+      "native_id": 53557759,
+      "no_salesmen": true,
+      "online_shop_url": null,
+      "owner_name": "EMMA",
+      "owner_store_id": "1095173",
+      "owner_type": "0",
+      "picture": "https://img.leboncoin.fr/api/v1/lbcpb1/images/62/5a/0d/625a0da7186ebe031324bf5533a39e698ce917e1.jpg?rule=ad-large",
+      "pictures": "https://img.leboncoin.fr/api/v1/lbcpb1/images/62/5a/0d/625a0da7186ebe031324bf5533a39e698ce917e1.jpg?rule=ad-large",
+      "postal_code": "13100",
+      "price": 5,
+      "region": "Provence-Alpes-Côte d'Azur",
+      "scraping_time": "2025-07-04T04:08:09.340Z",
+      "title": "Cartable",
+      "urgent": false,
+      "url": "https://www.leboncoin.fr/ad/equipements_fournitures_de_bureau/3017342971",
+      "user_id": "0464f5d3-e478-467f-bdfc-d081111e25ab"
+    },
+    {
+      "id": 53557760,
+      "object": "result",
+      "squid": "72d18e4c94534b829877bb7c092b1f80",
+      "run": "3ff48bb8ef19426e87fbb3e102dd4531",
+      "ad_type": "offer",
+      "annonce_id": "3017342920",
+      "category_name": "Ameublement",
+      "city": "Aubagne",
+      "city_label": "Aubagne 13400",
+      "currency": "EUR",
+      "department": "Bouches-du-Rhône",
+      "description": "Je vends chaise de bureau pour cause déménagement. Acheté en 2023",
+      "details": {
+        "Type": "Coffre & malle",
+        "État": "Bon état",
+        "Pièce": "Bureau",
+        "Couleur": "Noir",
+        "Matière": "Tissu"
+      },
+      "first_publication_date": "2025-07-04T04:04:39Z",
+      "has_online_shop": false,
+      "lat": "43.29217",
+      "lng": "5.56868",
+      "owner_name": "Kat",
+      "picture": "https://img.leboncoin.fr/api/v1/lbcpb1/images/d0/60/ec/d060ecb79ebd71ca5f0e8d8576db7ad8b09c9133.jpg?rule=ad-large",
+      "postal_code": "13400",
+      "price": 20,
+      "region": "Provence-Alpes-Côte d'Azur",
+      "scraping_time": "2025-07-04T04:08:10.204Z",
+      "title": "Chaise de bureau",
+      "url": "https://www.leboncoin.fr/ad/ameublement/3017342920"
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

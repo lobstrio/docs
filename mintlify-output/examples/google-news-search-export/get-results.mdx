@@ -1,0 +1,52 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Google News Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Google News Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="title" type="string">
+  Headline of the news article. Example: `A robust future? Why Brazil's 'bitter' coffee is thriving as the climate crisis hits global crops`
+</ResponseField>
+
+<ResponseField name="short_description" type="string">
+  Short summary or excerpt of the article as shown in Google News. Example: `Long seen as the poor relation to arabica, small growers in the Amazon are rebooting robusta's bitter reputation, which can thrive in higher...`
+</ResponseField>
+
+<ResponseField name="published_at" type="datetime">
+  Date the article was published. Example: `2026-03-18 13:12:00`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the news article. Example: `https://www.theguardian.com/global-development/2026/mar/18/a-robust-future-why-brazils-bitter-coffee-is-thriving-as-the-climate-crisis-hits-global-crops`
+</ResponseField>
+
+<ResponseField name="source" type="string">
+  Name of the news source or publisher. Example: `The Guardian`
+</ResponseField>
+
+<ResponseField name="image" type="string">
+  URL of the article's thumbnail or cover image. Example: `https://i.guim.co.uk/img/media/47c48e5316362bd18c7904f551dd75ebde952c63/0_0_7008_4672/master/7008.jpg?width=465&dpr=1&s=none&crop=none`
+</ResponseField>

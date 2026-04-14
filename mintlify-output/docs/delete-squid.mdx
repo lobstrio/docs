@@ -1,0 +1,98 @@
+---
+title: "Delete Squid"
+description: "Permanently delete a squid and all its associated data from your account"
+api: "DELETE https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+This endpoint permanently deletes a specified squid and all its associated data (tasks, results, and configurations) from lobstr.io.
+
+## What Gets Deleted
+
+When you delete a squid, the following are permanently removed:
+- The squid itself and all its settings
+- All tasks (URLs and parameters)
+- All results and run history
+- All configuration (parameters, integrations, schedule)
+- Any pending or active runs
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid_hash" type="string" required>
+  The unique identifier (hash) of the squid to delete. Example: `5b071952127e47d2adc8d684ff24dbd2`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  The deleted squid's identifier. Example: `"5b071952127e47d2adc8d684ff24dbd2"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "squid". Example: `"squid"`
+</ResponseField>
+
+<ResponseField name="deleted" type="boolean">
+  Boolean confirming deletion (always true on success). Example: `true`
+</ResponseField>
+
+<Warning>
+  This action is permanent and cannot be undone. Make sure you've downloaded any important results before deleting.
+</Warning>
+
+<Tip>
+  If you just want to pause a squid temporarily, set 'is_active: false' using Update Squid instead of deleting it.
+</Tip>
+
+<Note>
+  Deleting a squid does not affect your credits or billing. Any credits spent on runs remain consumed.
+</Note>
+
+<Tip>
+  Use the Empty Squid endpoint if you want to clear tasks but keep the squid configuration for future use.
+</Tip>
+
+<Warning>
+  If a run is currently active, the deletion will stop the run and then delete the squid. Any partial results will be lost.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X DELETE "https://api.lobstr.io/v1/squids/5b071952127e47d2adc8d684ff24dbd2" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+squid_id = "5b071952127e47d2adc8d684ff24dbd2"
+url = f"https://api.lobstr.io/v1/squids/{squid_id}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.delete(url, headers=headers)
+result = response.json()
+
+print(f"Squid deleted: {result['deleted']}")
+print(f"Squid ID: {result['id']}")
+print("All associated tasks, results, and configurations have been permanently removed.")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "5b071952127e47d2adc8d684ff24dbd2",
+  "object": "squid",
+  "deleted": true
+}
+```

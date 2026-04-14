@@ -1,0 +1,86 @@
+---
+title: "Add Tasks"
+description: "Add keyword search tasks to extract top ads from TikTok"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add keyword-based search tasks to your squid. The scraper will extract top performing ads from TikTok's Creative Center based on your search terms.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the tiktok-top-ads-scraper crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `keyword` field |
+
+## Task Fields
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **keyword** | string | Yes | Search term you want to get TikTok Ads from (e.g., "fitness", "skincare", "cooking") |
+
+<Tip>
+  Use specific keywords related to your industry or niche for more relevant ad results.
+</Tip>
+
+<Tip>
+  You can add multiple keywords in a single request to analyze ads across different topics.
+</Tip>
+
+<Note>
+  Results are retrieved from TikTok's Creative Center Top Ads library.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/api/v2/squid/YOUR_SQUID_ID/task" \
+  -H "Authorization: Token YOUR_API_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "keyword": "fitness"
+  }'
+```
+
+```python Python
+import requests
+
+API_TOKEN = "YOUR_API_TOKEN"
+SQUID_ID = "YOUR_SQUID_ID"
+
+url = f"https://api.lobstr.io/api/v2/squid/{SQUID_ID}/task"
+headers = {
+    "Authorization": f"Token {API_TOKEN}",
+    "Content-Type": "application/json"
+}
+data = {
+    "keyword": "fitness"
+}
+
+response = requests.post(url, headers=headers, json=data)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "task_abc123",
+  "squid_id": "YOUR_SQUID_ID",
+  "status": "pending",
+  "keyword": "fitness",
+  "created_at": "2024-01-15T10:30:00Z"
+}
+```

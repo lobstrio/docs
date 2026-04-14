@@ -1,0 +1,112 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Amazon Reviews Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Amazon Reviews Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="review_id" type="string">
+  Unique identifier for the Amazon customer review. Example: `R20VZPJE39ZA0O`
+</ResponseField>
+
+<ResponseField name="review_url" type="string">
+  Direct URL to the review on Amazon. Example: `https://www.amazon.com/gp/customer-reviews/R20VZPJE39ZA0O`
+</ResponseField>
+
+<ResponseField name="product_url" type="string">
+  Amazon product page URL. Example: `https://www.amazon.com/dp/B0D3V4T7K1`
+</ResponseField>
+
+<ResponseField name="asin" type="string">
+  Amazon Standard Identification Number (ASIN) for the product. Example: `B0D3V4T7K1`
+</ResponseField>
+
+<ResponseField name="review_title" type="string">
+  Title or headline of the customer review. Example: `1.0 out of 5 stars Disappointing Read`
+</ResponseField>
+
+<ResponseField name="review_text" type="string">
+  Full text content of the customer review. Example: `It reads like AI wrote it. Sort paragraphs and the usage of bullet points is excessive. The book has minimal ideas repeated over and over again. It felt like a weird read so I tried to look up the author and other works and could not find much of anything about the author. There is only one blurry photo and no social media. Very disappointing.`
+</ResponseField>
+
+<ResponseField name="review_rating" type="integer">
+  Star rating given by the reviewer (1 to 5). Example: `1`
+</ResponseField>
+
+<ResponseField name="review_date" type="string">
+  Review date as displayed on Amazon (e.g. Reviewed in the United States on January 26, 2026). Example: `Reviewed in the United States on January 26, 2026`
+</ResponseField>
+
+<ResponseField name="review_date_raw" type="datetime">
+  Review publication date in ISO 8601 format. Example: `2026-01-26T00:00:00.000Z`
+</ResponseField>
+
+<ResponseField name="review_verified" type="boolean">
+  Whether the reviewer purchased the product on Amazon (Verified Purchase). Example: `true`
+</ResponseField>
+
+<ResponseField name="review_format" type="string">
+  Format or variant of the product reviewed (e.g. Paperback, Kindle Edition). Example: `Format: Paperback`
+</ResponseField>
+
+<ResponseField name="review_helpful_count" type="integer">
+  Number of users who marked the review as helpful. Example: `3`
+</ResponseField>
+
+<ResponseField name="review_images" type="json">
+  List of image URLs attached to the customer review. Example: `['https://m.media-amazon.com/images/I/81jt3hLUmNL._SY88.jpg']`
+</ResponseField>
+
+<ResponseField name="author_name" type="string">
+  Display name of the reviewer on Amazon. Example: `Autumn Autumn`
+</ResponseField>
+
+<ResponseField name="author_profile_url" type="string">
+  URL to the reviewer's Amazon profile page. Example: `https://www.amazon.com/gp/profile/amzn1.account.AFKX2WHZM2VJ7RP4XHRCJD7JXDXQ/ref=cm_cr_getr_d_gw_btm`
+</ResponseField>
+
+<ResponseField name="author_avatar" type="string">
+  URL of the reviewer's Amazon avatar image. Example: `https://m.media-amazon.com/images/S/amazon-avatars-global/default._CR0,0,1024,1024_SX48_.png`
+</ResponseField>
+
+<ResponseField name="total_reviews" type="integer">
+  Total number of written reviews for the product on Amazon. Example: `128`
+</ResponseField>
+
+<ResponseField name="total_ratings" type="integer">
+  Total number of ratings for the product (including those without a written review). Example: `169`
+</ResponseField>
+
+<ResponseField name="country" type="string">
+  Country where the review was posted (e.g. the United States). Example: `the United States`
+</ResponseField>
+
+<ResponseField name="review_category_url" type="string">
+  URL to the product's reviews listing page on Amazon. Example: `https://www.amazon.com/Talk-Anyone-Anytime-Anywhere-Communication/product-reviews/B0D3V4T7K1`
+</ResponseField>
+
+<ResponseField name="is_amazon_vine" type="boolean">
+  Whether the review was submitted through the Amazon Vine program. Example: `false`
+</ResponseField>

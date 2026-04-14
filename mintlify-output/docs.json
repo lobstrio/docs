@@ -1,0 +1,527 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "lobstr.io",
+  "colors": {
+    "primary": "#ff0000",
+    "light": "#ff3333",
+    "dark": "#cc0000"
+  },
+  "favicon": "/favicon.svg",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "Overview",
+            "pages": [
+              "index"
+            ]
+          },
+          {
+            "group": "Getting Started",
+            "pages": [
+              "docs/authentication",
+              "docs/rate-limiting"
+            ]
+          },
+          {
+            "group": "User",
+            "pages": [
+              "docs/user-me",
+              "docs/get-balance"
+            ]
+          },
+          {
+            "group": "Crawler",
+            "pages": [
+              "docs/list-crawlers",
+              "docs/get-crawler-details",
+              "docs/get-crawler-parameters",
+              "docs/get-crawler-attributes"
+            ]
+          },
+          {
+            "group": "Squid",
+            "pages": [
+              "docs/create-squid",
+              "docs/update-squid",
+              "docs/list-squids",
+              "docs/get-squid-details",
+              "docs/empty-squid",
+              "docs/delete-squid"
+            ]
+          },
+          {
+            "group": "Delivery",
+            "pages": [
+              "docs/configure-email-delivery",
+              "docs/configure-sftp-delivery",
+              "docs/configure-google-sheet-delivery",
+              "docs/configure-s3-delivery",
+              "docs/configure-webhook-delivery",
+              "docs/test-delivery"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "docs/list-accounts",
+              "docs/list-account-types",
+              "docs/get-account-details",
+              "docs/sync-account",
+              "docs/check-sync-status",
+              "docs/update-account-limits",
+              "docs/refresh-cookies",
+              "docs/delete-account"
+            ]
+          },
+          {
+            "group": "Task",
+            "pages": [
+              "docs/add-tasks",
+              "docs/upload-tasks",
+              "docs/check-upload-status",
+              "docs/list-tasks",
+              "docs/get-task",
+              "docs/delete-task"
+            ]
+          },
+          {
+            "group": "Run",
+            "pages": [
+              "docs/start-run",
+              "docs/list-runs",
+              "docs/get-run",
+              "docs/get-run-stats",
+              "docs/get-run-tasks",
+              "docs/abort-run",
+              "docs/download-run"
+            ]
+          },
+          {
+            "group": "Result",
+            "pages": [
+              "docs/get-results"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Examples",
+        "groups": [
+          {
+            "group": "Google Maps Reviews Scraper",
+            "pages": [
+              "examples/google-maps-reviews-scraper/add-tasks",
+              "examples/google-maps-reviews-scraper/update-settings",
+              "examples/google-maps-reviews-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Google Maps Leads Scraper",
+            "pages": [
+              "examples/google-maps-leads-scraper/add-task-urls",
+              "examples/google-maps-leads-scraper/get-geolocation",
+              "examples/google-maps-leads-scraper/add-task-params",
+              "examples/google-maps-leads-scraper/update-settings",
+              "examples/google-maps-leads-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Google Search Scraper",
+            "pages": [
+              "examples/google-search-scraper/add-tasks",
+              "examples/google-search-scraper/get-geolocation",
+              "examples/google-search-scraper/update-settings",
+              "examples/google-search-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Google News Search Export",
+            "pages": [
+              "examples/google-news-search-export/add-tasks",
+              "examples/google-news-search-export/update-settings",
+              "examples/google-news-search-export/get-results"
+            ]
+          },
+          {
+            "group": "Twitter Profile Scraper",
+            "pages": [
+              "examples/twitter-profile-scraper/add-tasks",
+              "examples/twitter-profile-scraper/update-settings",
+              "examples/twitter-profile-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Twitter Search Results Scraper",
+            "pages": [
+              "examples/twitter-search-results-scraper/add-tasks",
+              "examples/twitter-search-results-scraper/update-settings",
+              "examples/twitter-search-results-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Twitter User Tweets Scraper",
+            "pages": [
+              "examples/twitter-user-tweets-scraper/add-tasks",
+              "examples/twitter-user-tweets-scraper/update-settings",
+              "examples/twitter-user-tweets-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Leboncoin Listings Search Export",
+            "pages": [
+              "examples/leboncoin-listings-search-export/add-tasks",
+              "examples/leboncoin-listings-search-export/update-settings",
+              "examples/leboncoin-listings-search-export/get-results"
+            ]
+          },
+          {
+            "group": "Leboncoin Listings & Phone Search Export",
+            "pages": [
+              "examples/leboncoin-iter-listings-with-phone/add-tasks",
+              "examples/leboncoin-iter-listings-with-phone/update-settings",
+              "examples/leboncoin-iter-listings-with-phone/get-results"
+            ]
+          },
+          {
+            "group": "Leboncoin Auto Message Sender",
+            "pages": [
+              "examples/leboncoin-auto-message-sender/add-tasks",
+              "examples/leboncoin-auto-message-sender/update-settings",
+              "examples/leboncoin-auto-message-sender/get-results"
+            ]
+          },
+          {
+            "group": "Facebook Pages Search Export",
+            "pages": [
+              "examples/facebook-pages-search-export/add-tasks",
+              "examples/facebook-pages-search-export/update-settings",
+              "examples/facebook-pages-search-export/get-results"
+            ]
+          },
+          {
+            "group": "Facebook Page Details Export",
+            "pages": [
+              "examples/facebook-page-details-export/add-tasks",
+              "examples/facebook-page-details-export/update-settings",
+              "examples/facebook-page-details-export/get-results"
+            ]
+          },
+          {
+            "group": "Vinted Products Scraper",
+            "pages": [
+              "examples/vinted-products-scraper/add-tasks",
+              "examples/vinted-products-scraper/update-settings",
+              "examples/vinted-products-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Sales Navigator Leads Scraper",
+            "pages": [
+              "examples/sales-navigator-leads-scraper/add-tasks",
+              "examples/sales-navigator-leads-scraper/update-settings",
+              "examples/sales-navigator-leads-scraper/get-results"
+            ]
+          },
+          {
+            "group": "SeLoger Search Export",
+            "pages": [
+              "examples/seloger-search-export/add-tasks",
+              "examples/seloger-search-export/update-settings",
+              "examples/seloger-search-export/get-results"
+            ]
+          },
+          {
+            "group": "YouTube Channel Email Scraper",
+            "pages": [
+              "examples/youtube-channel-email-scraper/add-tasks",
+              "examples/youtube-channel-email-scraper/update-settings",
+              "examples/youtube-channel-email-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Yelp Search Export",
+            "pages": [
+              "examples/yelp-search-export/add-tasks",
+              "examples/yelp-search-export/update-settings",
+              "examples/yelp-search-export/get-results"
+            ]
+          },
+          {
+            "group": "Idealista Listings Search Export",
+            "pages": [
+              "examples/idealista-listings-search-export/add-tasks",
+              "examples/idealista-listings-search-export/update-settings",
+              "examples/idealista-listings-search-export/get-results"
+            ]
+          },
+          {
+            "group": "PAP Search Export",
+            "pages": [
+              "examples/pap-iter-apartments/add-tasks",
+              "examples/pap-iter-apartments/update-settings",
+              "examples/pap-iter-apartments/get-results"
+            ]
+          },
+          {
+            "group": "Pages Jaunes Companies Search Export",
+            "pages": [
+              "examples/pages-jaunes-iter-companies/add-tasks",
+              "examples/pages-jaunes-iter-companies/update-settings",
+              "examples/pages-jaunes-iter-companies/get-results"
+            ]
+          },
+          {
+            "group": "TripAdvisor Restaurants Search Export",
+            "pages": [
+              "examples/tripadvisor-restaurants-search-export/add-tasks",
+              "examples/tripadvisor-restaurants-search-export/update-settings",
+              "examples/tripadvisor-restaurants-search-export/get-results"
+            ]
+          },
+          {
+            "group": "TripAdvisor Reviews Scraper",
+            "pages": [
+              "examples/tripadvisor-reviews-scraper/add-tasks",
+              "examples/tripadvisor-reviews-scraper/update-settings",
+              "examples/tripadvisor-reviews-scraper/get-results"
+            ]
+          },
+          {
+            "group": "TikTok Top Ads Scraper",
+            "pages": [
+              "examples/tiktok-top-ads-scraper/add-tasks",
+              "examples/tiktok-top-ads-scraper/update-settings",
+              "examples/tiktok-top-ads-scraper/get-results"
+            ]
+          },
+          {
+            "group": "LinkedIn Profile Scraper",
+            "pages": [
+              "examples/linkedin-profile-scraper/add-tasks",
+              "examples/linkedin-profile-scraper/update-settings",
+              "examples/linkedin-profile-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Instagram Reels Scraper",
+            "pages": [
+              "examples/instagram-reels-scraper/add-tasks",
+              "examples/instagram-reels-scraper/update-settings",
+              "examples/instagram-reels-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Instagram Profile Scraper",
+            "pages": [
+              "examples/instagram-profile-scraper/add-tasks",
+              "examples/instagram-profile-scraper/update-settings",
+              "examples/instagram-profile-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Instagram Posts Scraper",
+            "pages": [
+              "examples/instagram-posts-scraper/add-tasks",
+              "examples/instagram-posts-scraper/update-settings",
+              "examples/instagram-posts-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Sales Navigator Companies Scraper",
+            "pages": [
+              "examples/sales-navigator-companies-scraper/add-tasks",
+              "examples/sales-navigator-companies-scraper/update-settings",
+              "examples/sales-navigator-companies-scraper/get-results"
+            ]
+          },
+          {
+            "group": "LinkedIn Posts Commenters and Likers Scraper",
+            "pages": [
+              "examples/linkedin-posts-commenters-and-likers-scraper/add-tasks",
+              "examples/linkedin-posts-commenters-and-likers-scraper/update-settings",
+              "examples/linkedin-posts-commenters-and-likers-scraper/get-results"
+            ]
+          },
+          {
+            "group": "LaCentrale Cars Scraper",
+            "pages": [
+              "examples/lacentrale-cars-scraper/add-tasks",
+              "examples/lacentrale-cars-scraper/update-settings",
+              "examples/lacentrale-cars-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Bien'Ici Search Export",
+            "pages": [
+              "examples/bienici-listings-search-export/add-tasks",
+              "examples/bienici-listings-search-export/update-settings",
+              "examples/bienici-listings-search-export/get-results"
+            ]
+          },
+          {
+            "group": "Amazon Reviews Scraper",
+            "pages": [
+              "examples/amazon-reviews-scraper/add-tasks",
+              "examples/amazon-reviews-scraper/update-settings",
+              "examples/amazon-reviews-scraper/get-results"
+            ]
+          },
+          {
+            "group": "AutoScout24 Listings Scraper",
+            "pages": [
+              "examples/autoscout24-listings-scraper/add-tasks",
+              "examples/autoscout24-listings-scraper/update-settings",
+              "examples/autoscout24-listings-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Bien'Ici Listings Search Export",
+            "pages": [
+              "examples/bienici-listings-search-export/add-tasks",
+              "examples/bienici-listings-search-export/update-settings",
+              "examples/bienici-listings-search-export/get-results"
+            ]
+          },
+          {
+            "group": "Facebook Business Page Scraper",
+            "pages": [
+              "examples/facebook-business-page-scraper/add-tasks",
+              "examples/facebook-business-page-scraper/update-settings",
+              "examples/facebook-business-page-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Facebook Group Posts Scraper",
+            "pages": [
+              "examples/facebook-group-posts-scraper/add-tasks",
+              "examples/facebook-group-posts-scraper/update-settings",
+              "examples/facebook-group-posts-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Immoweb Listings & Phone Search Export",
+            "pages": [
+              "examples/immoweb-listings-phone-search-export/add-tasks",
+              "examples/immoweb-listings-phone-search-export/update-settings",
+              "examples/immoweb-listings-phone-search-export/get-results"
+            ]
+          },
+          {
+            "group": "Instagram Post Comments Scraper",
+            "pages": [
+              "examples/instagram-post-comments-scraper/add-tasks",
+              "examples/instagram-post-comments-scraper/update-settings",
+              "examples/instagram-post-comments-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Leboncoin Listing Scraper",
+            "pages": [
+              "examples/leboncoin-listing-scraper/add-tasks",
+              "examples/leboncoin-listing-scraper/update-settings",
+              "examples/leboncoin-listing-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Leboncoin Listing Status Checker",
+            "pages": [
+              "examples/leboncoin-listing-status-checker/add-tasks",
+              "examples/leboncoin-listing-status-checker/update-settings",
+              "examples/leboncoin-listing-status-checker/get-results"
+            ]
+          },
+          {
+            "group": "Leboncoin Listings Search Export",
+            "pages": [
+              "examples/leboncoin-listings-search-export/add-tasks",
+              "examples/leboncoin-listings-search-export/update-settings",
+              "examples/leboncoin-listings-search-export/get-results"
+            ]
+          },
+          {
+            "group": "LinkedIn Leads Scraper",
+            "pages": [
+              "examples/linkedin-leads-scraper/add-tasks",
+              "examples/linkedin-leads-scraper/update-settings",
+              "examples/linkedin-leads-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Sales Nav Profile Scraper",
+            "pages": [
+              "examples/sales-nav-profile-scraper/add-tasks",
+              "examples/sales-nav-profile-scraper/update-settings",
+              "examples/sales-nav-profile-scraper/get-results"
+            ]
+          },
+          {
+            "group": "TikTok Comments Scraper",
+            "pages": [
+              "examples/tiktok-comments-scraper/add-tasks",
+              "examples/tiktok-comments-scraper/update-settings",
+              "examples/tiktok-comments-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Trustpilot Reviews Scraper",
+            "pages": [
+              "examples/trustpilot-reviews-scraper/add-tasks",
+              "examples/trustpilot-reviews-scraper/update-settings",
+              "examples/trustpilot-reviews-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Twitter Followers/Following Scraper",
+            "pages": [
+              "examples/twitter-followers-following-scraper/add-tasks",
+              "examples/twitter-followers-following-scraper/update-settings",
+              "examples/twitter-followers-following-scraper/get-results"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Developer Tools",
+        "groups": [
+          {
+            "group": "Developer Tools",
+            "pages": [
+              "docs/sdk",
+              "docs/cli",
+              "docs/mcp"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
+  "api": {
+    "mdx": {
+      "server": "https://api.lobstr.io",
+      "auth": {
+        "method": "bearer"
+      }
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "lobstr.io",
+        "href": "https://lobstr.io"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://app.lobstr.io"
+    }
+  }
+}

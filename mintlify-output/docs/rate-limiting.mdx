@@ -1,0 +1,110 @@
+---
+title: "Rate Limiting"
+description: "Understanding API rate limits and how to handle them"
+---
+
+The lobstr.io API enforces rate limits to ensure fair usage and stable service performance. When you exceed the rate limit, the API returns a 429 Too Many Requests response.
+
+## Rate Limit Headers
+
+Every API response includes headers to help you track your rate limit usage:
+
+| Header | Description |
+| --- | --- |
+| **X-RateLimit-Limit** | Total requests allowed per minute |
+| **X-RateLimit-Remaining** | Number of requests remaining in the current rate limit window |
+| **X-RateLimit-Reset** | UNIX timestamp indicating when the rate limit window resets |
+| **Retry-After** | Seconds until you can retry after hitting the limit |
+
+## Endpoint-Specific Limits
+
+Different endpoints have different rate limits based on their resource intensity:
+
+| Endpoint | Limit |
+| --- | --- |
+| /v1/squids | 120 requests/minute |
+| /v1/tasks | 90 requests/minute |
+| /v1/runtasks | 90 requests/minute |
+| /v1/runs | 120 requests/minute |
+| /v1/results | 2 requests/second |
+
+## Rate Limit Error Response
+
+When you exceed the rate limit, you'll receive a 429 response:
+
+```json
+{
+  "error": "Rate limit exceeded. Please try again later.",
+  "type": "RateLimitExceeded",
+  "code": 429
+}
+```
+
+## Example Response Headers
+
+```
+X-RateLimit-Limit: 120
+X-RateLimit-Remaining: 0
+X-RateLimit-Reset: 1716909300
+Retry-After: 45
+```
+
+<Tip>
+  Monitor the X-RateLimit-Remaining header to proactively slow down requests before hitting the limit.
+</Tip>
+
+<Note>
+  The /v1/results endpoint has a stricter limit (2 req/sec) due to the data-intensive nature of result retrieval.
+</Note>
+
+<Warning>
+  Repeatedly hitting rate limits may result in temporary IP blocks. Implement exponential backoff in your code.
+</Warning>
+
+<Tip>
+  Use the Retry-After header value to know exactly when to retry your request.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -i -X GET "https://api.lobstr.io/v1/results" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import time
+import requests
+
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+def request_with_retry(url, max_retries=5):
+    for attempt in range(max_retries):
+        response = requests.get(url, headers=headers)
+
+        if response.status_code == 429:
+            retry_after = int(
+                response.headers.get("Retry-After", 2 ** attempt)
+            )
+            print(f"Rate limited. Retrying in {retry_after}s...")
+            time.sleep(retry_after)
+            continue
+
+        return response
+
+    raise Exception("Max retries exceeded")
+```
+</CodeGroup>
+
+## Response
+
+```json 429
+{
+  "error": "Rate limit exceeded. Please try again later.",
+  "type": "RateLimitExceeded",
+  "code": 429
+}
+```

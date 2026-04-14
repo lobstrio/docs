@@ -1,0 +1,233 @@
+---
+title: "List Accounts"
+description: "Retrieve a paginated list of all connected platform accounts"
+api: "GET https://api.lobstr.io/v1/accounts"
+---
+
+This endpoint retrieves a paginated list of all connected platform accounts (like Twitter, LinkedIn, Facebook) associated with the authenticated user.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Response Structure
+
+<ResponseField name="total_results" type="integer">
+  Total number of accounts. Example: `2`
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  Maximum results per page. Example: `50`
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page number. Example: `1`
+</ResponseField>
+
+<ResponseField name="total_pages" type="integer">
+  Total number of pages. Example: `1`
+</ResponseField>
+
+<ResponseField name="result_from" type="integer">
+  Starting result index. Example: `1`
+</ResponseField>
+
+<ResponseField name="result_to" type="integer">
+  Ending result index. Example: `3`
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of account objects. Example: `[...]`
+</ResponseField>
+
+<ResponseField name="next" type="string | null">
+  URL for next page (null if last page). Example: `null`
+</ResponseField>
+
+<ResponseField name="previous" type="string | null">
+  URL for previous page (null if first page). Example: `null`
+</ResponseField>
+
+## Account Object Fields
+
+<ResponseField name="id" type="string">
+  Unique account identifier. Example: `"6e5f36d27502ec69fda745ec59ead509"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "account". Example: `"account"`
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  Platform username. Example: `"MisterDebugger"`
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  Account creation timestamp (ISO 8601). Example: `"2025-02-11T08:28:14Z"`
+</ResponseField>
+
+<ResponseField name="last_synchronization_time" type="string">
+  Last sync timestamp. Example: `"2025-02-11T08:28:14Z"`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  HTTP status code. Example: `"200"`
+</ResponseField>
+
+<ResponseField name="status_code_info" type="string">
+  Status information. Example: `"synchronized"`
+</ResponseField>
+
+<ResponseField name="status_code_description" type="string">
+  Human-readable status message. Example: `"Success!"`
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Account type identifier. Example: `"facebook-sync"`
+</ResponseField>
+
+<ResponseField name="params" type="object">
+  Account parameters (default and user-specific). Example: `{"default": {}, "user": {}}`
+</ResponseField>
+
+<ResponseField name="updated_at" type="string | null">
+  Last update timestamp. Example: `null`
+</ResponseField>
+
+<ResponseField name="account_type_hash" type="string">
+  Account type identifier hash. Example: `"16f5b7f91e8fc533eab88be973273a02"`
+</ResponseField>
+
+<ResponseField name="squids" type="array">
+  Array of squids using this account. Example: `[]`
+</ResponseField>
+
+<ResponseField name="baseurl" type="string">
+  Platform base URL. Example: `"https://www.facebook.com"`
+</ResponseField>
+
+<ResponseField name="cookies" type="array">
+  Required cookie names for authentication. Example: `[{"name": "c_user", "required": true}]`
+</ResponseField>
+
+<ResponseField name="icon" type="string">
+  Base64 encoded platform icon. Example: `"<base64 image data>"`
+</ResponseField>
+
+<Tip>
+  Use this endpoint to check which platform accounts are currently synced and their status before running squids that require authentication.
+</Tip>
+
+<Note>
+  The squids array shows which squids are currently using each account, helping you manage account usage across your projects.
+</Note>
+
+<Warning>
+  Check the status_code_info field to identify accounts with expired cookies that need re-synchronization.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/accounts" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/accounts"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+
+print(f"Total accounts: {data['total_results']}")
+print(f"Showing {data['result_from']}-{data['result_to']}\n")
+
+# Display connected accounts
+for account in data['data']:
+    status = "✓" if account['status'] == "200" else "✗"
+    print(f"{status} {account['username']} ({account['type']})")
+    print(f"   ID: {account['id']}")
+    print(f"   Status: {account['status_code_info']}")
+    print(f"   Platform: {account['baseurl']}")
+    print()
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 2,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 3,
+  "data": [
+    {
+      "id": "6e5f36d27502ec69fda745ec59ead509",
+      "object": "account",
+      "username": "MisterDebugger",
+      "created_at": "2025-02-11T08:28:14Z",
+      "last_synchronization_time": "2025-02-11T08:28:14Z",
+      "status": "200",
+      "status_code_info": "synchronized",
+      "status_code_description": "Success!",
+      "type": "facebook-sync",
+      "params": {
+        "default": {},
+        "user": {}
+      },
+      "updated_at": null,
+      "account_type_hash": "16f5b7f91e8fc533eab88be973273a02",
+      "squids": [],
+      "baseurl": "https://www.facebook.com",
+      "cookies": [
+        {"name": "c_user", "required": true},
+        {"name": "xs", "required": true}
+      ],
+      "icon": "<base64 image data>"
+    },
+    {
+      "id": "abfeb440ceccdfab974e8d261836c9d6",
+      "object": "account",
+      "username": "MisterDebugger",
+      "created_at": "2025-02-11T08:28:22Z",
+      "last_synchronization_time": "2025-02-11T08:28:22Z",
+      "status": "200",
+      "status_code_info": "synchronized",
+      "status_code_description": "Success!",
+      "type": "twitter-sync",
+      "params": {
+        "default": {},
+        "user": {}
+      },
+      "updated_at": null,
+      "account_type_hash": "9853173fc00a940a33d7a420c176ad3b",
+      "squids": [],
+      "baseurl": "https://x.com",
+      "cookies": [
+        {"name": "auth_token", "required": true},
+        {"name": "ct0", "required": true}
+      ],
+      "icon": "<base64 image data>"
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```
+
+```json 401
+{
+  "detail": "Invalid token."
+}
+```

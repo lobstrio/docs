@@ -1,0 +1,70 @@
+---
+title: "Authentication"
+description: "Learn how to authenticate your API requests using token-based authentication"
+api: "GET https://api.lobstr.io/v1/me"
+---
+
+All requests to the lobstr.io API must include an `Authorization` header with your API token. You can obtain your API token from the [API menu](https://app.lobstr.io/dashboard/api) in your dashboard.
+
+The authentication format follows the standard Token authentication scheme:
+
+```
+Authorization: Token YOUR_API_KEY
+```
+
+Once authenticated, you'll have access to all API endpoints based on your account's permission level and subscription plan.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token from the dashboard. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<Tip>
+  Store your API key in environment variables rather than hardcoding it in your source code. This prevents accidental exposure in version control systems.
+</Tip>
+
+<Warning>
+  Never share your API key publicly or commit it to public repositories. Treat it like a password.
+</Warning>
+
+<Note>
+  If you believe your API key has been compromised, regenerate it immediately from your dashboard. The old key will be invalidated.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/me" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+}
+
+response = requests.get(
+    "https://api.lobstr.io/v1/me",
+    headers=headers
+)
+
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": 12345,
+  "email": "user@example.com",
+  "first_name": "John",
+  "last_name": "Doe",
+  "is_active": true,
+  "date_joined": "2024-01-15T10:30:00Z"
+}
+```

@@ -1,0 +1,139 @@
+---
+title: "Configure Google Sheet Delivery"
+description: "Export squid run results directly to a shared Google Sheet"
+api: "POST https://api.lobstr.io/v1/delivery?squid={squid_hash}"
+---
+
+Configure Google Sheet delivery to export run results directly to a shared Google Sheet. Results can be overwritten with each run or appended with deduplication.
+
+## Behavior
+
+- **append = false**: Only the latest run's data is exported. Any previously exported data is overwritten.
+- **append = true**: Data from all runs is appended and deduplicated before export.
+
+## Requirements
+
+- The Google Sheet must be shared with "Anyone with the link"
+- The sheet must have **Editor** access permission
+- Export is limited to 100,000 rows
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  The unique identifier (hash) of the squid for which to configure Google Sheet delivery. Example: `c106a44a98044ef18acc59986ae10967`
+</ParamField>
+
+## Request Body
+
+<ParamField body="google_sheet_fields.url" type="string" required>
+  Public Google Sheet URL (must be accessible with Editor permission). Example: `"https://docs.google.com/spreadsheets/d/1ly9nwTs-hNaFCzWtSljevSf16chs5Nn0PIv_TpQSEhA/edit?usp=sharing"`
+</ParamField>
+
+<ParamField body="google_sheet_fields.append" type="boolean" required>
+  false: Overwrites previous data with the last run's result. true: Appends new results, deduplicated. Example: `false`
+</ParamField>
+
+<ParamField body="google_sheet_fields.is_active" type="boolean" required>
+  Set to true to enable Google Sheet export, false to disable. Example: `true`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="google_sheet_fields.url" type="string">
+  The configured Google Sheet URL. Example: `"https://docs.google.com/spreadsheets/d/1ly9nwTs-hNaFCzWtSljevSf16chs5Nn0PIv_TpQSEhA/edit?usp=sharing"`
+</ResponseField>
+
+<ResponseField name="google_sheet_fields.is_active" type="boolean">
+  Whether Google Sheet export is active. Example: `true`
+</ResponseField>
+
+<ResponseField name="google_sheet_fields.append" type="boolean">
+  Append mode setting. Example: `false`
+</ResponseField>
+
+<Warning>
+  The Google Sheet MUST be shared with 'Anyone with the link' and have Editor permissions. Without these settings, export will fail.
+</Warning>
+
+<Tip>
+  Use append: false for dashboards where you only want the latest data. Use append: true for historical tracking.
+</Tip>
+
+<Note>
+  When append is true, Lobstr automatically deduplicates rows before exporting, so you won't get duplicate entries.
+</Note>
+
+<Warning>
+  Export is limited to 100,000 rows. If your squid generates more results, consider using S3 or SFTP delivery instead.
+</Warning>
+
+<Tip>
+  Use the Test Google Sheet endpoint to verify your sheet permissions before activating automatic delivery.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/delivery?squid=YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "google_sheet_fields": {
+      "url": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit?usp=sharing",
+      "append": false,
+      "is_active": true
+    }
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/delivery"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+params = {
+    "squid": "YOUR_SQUID_HASH"
+}
+payload = {
+    "google_sheet_fields": {
+        "url": "https://docs.google.com/spreadsheets/d/YOUR_SHEET_ID/edit?usp=sharing",
+        "append": False,
+        "is_active": True
+    }
+}
+
+response = requests.post(url, headers=headers, params=params, json=payload)
+result = response.json()
+
+print("Google Sheet delivery configured successfully!")
+print(f"Sheet URL: {result['google_sheet_fields']['url']}")
+print(f"Append mode: {result['google_sheet_fields']['append']}")
+print(f"Active: {result['google_sheet_fields']['is_active']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "google_sheet_fields": {
+    "url": "https://docs.google.com/spreadsheets/d/1ly9nwTs-hNaFCzWtSljevSf16chs5Nn0PIv_TpQSEhA/edit?usp=sharing",
+    "is_active": true,
+    "append": false
+  }
+}
+```

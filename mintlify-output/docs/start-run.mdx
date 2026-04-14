@@ -1,0 +1,146 @@
+---
+title: "Start Run"
+description: "Initiate a new run for a specified squid"
+api: "POST https://api.lobstr.io/v1/runs"
+---
+
+This endpoint initiates a new run for a specified squid, starting the scraping process for all active tasks within that squid.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+<ParamField body="squid" type="string" required>
+  The hash ID of the squid to run. Example: `"b6c56d18cb0046949461ba9ca278e8ad"`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Unique identifier of the new run. Example: `"dd3473abe4cb41b683551e851edded94"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "run". Example: `"run"`
+</ResponseField>
+
+<ResponseField name="squid" type="string">
+  The squid being executed. Example: `"b6c56d18cb0046949461ba9ca278e8ad"`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Initial run status (typically "pending"). Example: `"pending"`
+</ResponseField>
+
+<ResponseField name="is_done" type="boolean">
+  Whether the run has completed (false for new runs). Example: `false`
+</ResponseField>
+
+<ResponseField name="started_at" type="string">
+  Run start timestamp. Example: `"2025-02-10T14:27:45Z"`
+</ResponseField>
+
+<ResponseField name="origin" type="string">
+  Origin of the run ("user" for API-initiated runs). Example: `"user"`
+</ResponseField>
+
+<Tip>
+  Save the returned run ID to track progress using Get Run or Get Run Stats endpoints.
+</Tip>
+
+<Warning>
+  Ensure your squid has active tasks before starting a run, or the run will complete immediately with no results.
+</Warning>
+
+<Note>
+  Only one run can be active per squid at a time. Starting a new run while one is active will return an error.
+</Note>
+
+<Tip>
+  For crawlers requiring accounts (e.g., LinkedIn, Facebook), ensure you have synced accounts before starting a run.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/runs" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "b6c56d18cb0046949461ba9ca278e8ad"
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/runs"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+payload = {
+    "squid": "b6c56d18cb0046949461ba9ca278e8ad"
+}
+
+response = requests.post(url, headers=headers, json=payload)
+run = response.json()
+
+print(f"Run started successfully!")
+print(f"Run ID: {run['id']}")
+print(f"Status: {run['status']}")
+print(f"Started at: {run['started_at']}")
+
+# Save run ID for tracking progress
+run_id = run['id']
+print(f"\nUse run ID '{run_id}' to track progress with Get Run Stats endpoint")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "dd3473abe4cb41b683551e851edded94",
+  "object": "run",
+  "squid": "b6c56d18cb0046949461ba9ca278e8ad",
+  "is_done": false,
+  "started_at": "2025-02-10T14:27:45Z",
+  "total_results": 0,
+  "total_unique_results": 0,
+  "next_launch_at": null,
+  "ended_at": null,
+  "duration": 0,
+  "credit_used": 0,
+  "origin": "user",
+  "force_launch": false,
+  "status": "pending",
+  "export_done": null,
+  "export_count": 0,
+  "export_time": null,
+  "email_done": null,
+  "email_time": null,
+  "created_at": "2025-02-10T14:27:45Z",
+  "done_reason": null,
+  "done_reason_desc": null
+}
+```
+
+```json 400
+{
+  "error": {
+    "message": "A run is already active for this squid",
+    "type": "validation_error",
+    "param": "squid"
+  }
+}
+```

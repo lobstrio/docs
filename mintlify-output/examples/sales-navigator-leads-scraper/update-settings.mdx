@@ -1,0 +1,134 @@
+---
+title: "Update Settings"
+description: "Configure scraper settings for Sales Navigator Leads Scraper including email enrichment"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your squid settings for the Sales Navigator Leads Scraper. This scraper supports email enrichment and requires linked Sales Navigator accounts.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **functions.email_enrichment** | boolean | false | Enable email enrichment using lobstr.io's service (incurs extra credits) |
+| **profiles_per_page** | integer | 25 | Number of leads to scrape per page (max: 25) |
+| **max_pages** | integer | 100 | Maximum number of pages to crawl (max: 100) |
+| **max_results** | integer | null | null | Total leads to collect before stopping (`null` = no limit) |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **accounts** | array | Array of linked Sales Navigator account hashes (required) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Warning>
+  Enabling `functions.email_enrichment` incurs additional credit costs for email enrichment.
+</Warning>
+
+<Tip>
+  Use multiple Sales Navigator accounts in the `accounts` array to increase throughput and avoid rate limits.
+</Tip>
+
+<Note>
+  Sales Navigator limits search results to 2,500 leads. Use more specific filters to access different lead segments.
+</Note>
+
+<Note>
+  **Backward compatibility:** The old function name `email` is still accepted but deprecated. Migrate to `email_enrichment`.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Sales Navigator Leads Scraper (1)",
+    "accounts": ["YOUR_SALES_NAV_ACCOUNT_HASH"],
+    "no_line_breaks": true,
+    "export_unique_results": true,
+    "to_complete": false,
+    "params": {
+      "functions": {
+        "email_enrichment": true
+      },
+      "profiles_per_page": 25,
+      "max_pages": 100,
+      "max_results": null
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update squid settings with email enrichment and linked accounts
+payload = {
+    "name": "Sales Navigator Leads Scraper (1)",
+    "accounts": ["YOUR_SALES_NAV_ACCOUNT_HASH"],  # Required: linked Sales Nav accounts
+    "no_line_breaks": True,
+    "export_unique_results": True,
+    "to_complete": False,
+    "params": {
+        "functions": {
+            "email_enrichment": True  # Enable email enrichment (extra credits)
+        },
+        "profiles_per_page": 25,  # Max: 25
+        "max_pages": 100,         # Max: 100
+        "max_results": None       # null = no limit
+    }
+}
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json=payload
+)
+
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Sales Navigator Leads Scraper (1)",
+  "no_line_breaks": true,
+  "params": {
+    "functions": {
+      "email_enrichment": true
+    },
+    "max_pages": 100,
+    "max_results": null,
+    "profiles_per_page": 25
+  },
+  "to_complete": false,
+  "export_unique_results": true
+}
+```

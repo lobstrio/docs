@@ -1,0 +1,112 @@
+---
+title: "Get Geolocation"
+description: "Fetch valid location values for geographic search bias"
+api: "GET https://api.lobstr.io/v1/googlelocations"
+---
+
+Use this endpoint to fetch valid location values for the `params.location` setting in the Google Search Scraper. These values provide geographic bias for your search queries.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="q" type="string" required>
+  Search substring for location names. Example: `Alabama`
+</ParamField>
+
+<ParamField query="country_name" type="string" required>
+  Full country name. Example: `United States`
+</ParamField>
+
+## Query Parameters
+
+| Parameter | Required | Description |
+| --- | --- | --- |
+| **q** | Yes | Substring to search for in region, district, or city names |
+| **country_name** | Yes | Full country name to scope the search (e.g., `United States`) |
+
+## Response Fields
+
+| Field | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name of the location (region, district, or city) |
+| **canonical_name** | string | Full hierarchical name (e.g., `Alabama,United States`) |
+| **country_name** | string | Country associated with this location |
+| **country_code** | string | ISO 2-letter country code (e.g., `US`) |
+
+<Tip>
+  Use the returned `name` value as your `params.location` setting.
+</Tip>
+
+<Note>
+  Location values provide geographic bias - search results will be relevant to that area.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/googlelocations?q=Alabama&country_name=United%20States" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+# Search for locations containing "Alabama" in United States
+response = requests.get(f"{BASE_URL}/googlelocations",
+    headers=headers,
+    params={
+        "q": "Alabama",
+        "country_name": "United States"
+    }
+)
+
+data = response.json()
+print(f"Found {len(data['data'])} locations")
+for location in data["data"][:5]:
+    print(f"  {location['name']} ({location['country_code']})")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "success": true,
+  "data": [
+    {
+      "name": "Alabama",
+      "canonical_name": "Alabama,United States",
+      "country_name": "United States",
+      "country_code": "US"
+    },
+    {
+      "name": "Alabama's 1st Congressional District 2022 redistricting",
+      "canonical_name": "Alabama's 1st Congressional District 2022 redistricting,Alabama,United States",
+      "country_name": "United States",
+      "country_code": "US"
+    },
+    {
+      "name": "The University of Alabama",
+      "canonical_name": "The University of Alabama,Alabama,United States",
+      "country_name": "United States",
+      "country_code": "US"
+    },
+    {
+      "name": "University of Alabama at Birmingham",
+      "canonical_name": "University of Alabama at Birmingham,Alabama,United States",
+      "country_name": "United States",
+      "country_code": "US"
+    }
+  ]
+}
+```

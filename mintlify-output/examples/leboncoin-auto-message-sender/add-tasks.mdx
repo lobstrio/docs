@@ -1,0 +1,107 @@
+---
+title: "Add Tasks"
+description: "Add Leboncoin listing URLs to send automated messages"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Leboncoin listing URLs to send automated messages to sellers. Each task represents a listing that will receive your templated message.
+
+Unlike search export scrapers, this tool takes direct listing URLs rather than search result pages. You can obtain listing URLs from the Leboncoin Listings Search Export scraper results.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Leboncoin Auto Message Sender crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Direct Leboncoin listing URL (e.g., `https://www.leboncoin.fr/ad/locations/2943434204`) |
+
+<Tip>
+  Use the Leboncoin Listings Search Export scraper to collect listing URLs, then pass them to this tool for messaging.
+</Tip>
+
+<Warning>
+  Ensure you have configured your message template in the squid settings before adding tasks.
+</Warning>
+
+<Note>
+  Messages are only sent to listings where the seller has messaging enabled.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "tasks": [
+      {
+        "url": "https://www.leboncoin.fr/ad/locations/2943434204"
+      }
+    ],
+    "squid": "YOUR_SQUID_HASH"
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Leboncoin listing URLs to send messages to
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "tasks": [
+            {"url": "https://www.leboncoin.fr/ad/locations/2943434204"}
+        ],
+        "squid": squid_id
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "bbeff62182c6239a8df533ec9d281c2e",
+      "created_at": "2025-07-04T04:57:45.202264",
+      "is_active": true,
+      "params": {
+        "url": "https://www.leboncoin.fr/ad/locations/2943434204"
+      },
+      "module": 103,
+      "object": "task"
+    }
+  ]
+}
+```

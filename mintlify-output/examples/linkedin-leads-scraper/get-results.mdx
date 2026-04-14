@@ -1,0 +1,304 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from LinkedIn Leads Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **LinkedIn Leads Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the LinkedIn profile. Example: `https://www.linkedin.com/in/williamhgates`
+</ResponseField>
+
+<ResponseField name="public_identifier" type="string">
+  LinkedIn public profile slug used in the profile URL. Example: `williamhgates`
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  First name of the LinkedIn member. Example: `Bill`
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  Last name of the LinkedIn member. Example: `Gates`
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Full name of the LinkedIn member. Example: `Bill Gates`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address found or enriched for this LinkedIn member. Example: `bill@microsoft.com`
+</ResponseField>
+
+<ResponseField name="email_status" type="string">
+  Validation status of the email address (e.g. valid, risky, invalid). Example: `valid`
+</ResponseField>
+
+<ResponseField name="headline" type="string">
+  LinkedIn headline / job title of the member. Example: `Co-chair, Bill & Melinda Gates Foundation`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  LinkedIn profile summary / about section. Example: `Sharing things I'm learning through my foundation work and other interests.`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Geographic location of the LinkedIn member. Example: `Seattle, Washington, United States`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Industry of the LinkedIn member. Example: `Philanthropic Fundraising Services`
+</ResponseField>
+
+<ResponseField name="vmid" type="string">
+  LinkedIn internal member ID (numeric vmid). Example: `251749025`
+</ResponseField>
+
+<ResponseField name="sales_nav_url" type="string">
+  Sales Navigator URL for the LinkedIn member. Example: `https://www.linkedin.com/sales/people/251749025`
+</ResponseField>
+
+<ResponseField name="connection_degree" type="string">
+  Connection degree between the scraping account and this member (1, 2, 3, Out of Network). Example: `2`
+</ResponseField>
+
+<ResponseField name="connections_url" type="string">
+  URL to see the connections of this LinkedIn member. Example: `https://www.linkedin.com/search/results/people/?facetConnectionOf=%5B%22251749025%22%5D`
+</ResponseField>
+
+<ResponseField name="mutual_connections_url" type="string">
+  URL to see mutual connections with this LinkedIn member. Example: `https://www.linkedin.com/search/results/people/?facetNetwork=%5B%22F%22%5D&facetConnectionOf=%5B%22251749025%22%5D`
+</ResponseField>
+
+<ResponseField name="mutual_connections_text" type="string">
+  Human-readable text describing mutual connections. Example: `3 mutual connections`
+</ResponseField>
+
+<ResponseField name="picture_url" type="string">
+  Profile picture URL of the LinkedIn member. Example: `https://media.licdn.com/dms/image/v2/example.jpg`
+</ResponseField>
+
+<ResponseField name="background_picture_url" type="string">
+  Background/banner picture URL of the LinkedIn member. Example: `https://media.licdn.com/dms/image/v2/example-bg.jpg`
+</ResponseField>
+
+<ResponseField name="is_creator" type="boolean">
+  Whether the member has Creator mode enabled. Example: `true`
+</ResponseField>
+
+<ResponseField name="open_to_work" type="boolean">
+  Whether the member has the Open To Work frame on their profile picture. Example: `false`
+</ResponseField>
+
+<ResponseField name="num_connections" type="integer">
+  Number of connections the member has. Example: `500`
+</ResponseField>
+
+<ResponseField name="num_followers" type="integer">
+  Number of followers the member has. Example: `35000000`
+</ResponseField>
+
+<ResponseField name="skills" type="json">
+  List of skills listed on the member's profile. Example: `['Software Development', 'Philanthropy']`
+</ResponseField>
+
+<ResponseField name="job_1" type="json">
+  Most recent job position (structured object). Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_1_title" type="string">
+  Job title of the most recent position. Example: `Co-chair`
+</ResponseField>
+
+<ResponseField name="job_1_company_name" type="string">
+  Company name of the most recent position. Example: `Bill & Melinda Gates Foundation`
+</ResponseField>
+
+<ResponseField name="job_1_company_url" type="string">
+  LinkedIn company URL for the most recent position. Example: `https://www.linkedin.com/company/bill-melinda-gates-foundation/`
+</ResponseField>
+
+<ResponseField name="job_1_company_logo" type="string">
+  Company logo URL for the most recent position. Example: `https://media.licdn.com/dms/image/v2/example-logo.jpg`
+</ResponseField>
+
+<ResponseField name="job_1_location" type="string">
+  Location of the most recent position. Example: `Seattle, WA`
+</ResponseField>
+
+<ResponseField name="job_1_description" type="string">
+  Description of the most recent position. Example: `Leading philanthropic initiatives...`
+</ResponseField>
+
+<ResponseField name="job_1_start_year" type="integer">
+  Start year of the most recent position. Example: `2000`
+</ResponseField>
+
+<ResponseField name="job_1_start_month" type="integer">
+  Start month of the most recent position. Example: `1`
+</ResponseField>
+
+<ResponseField name="job_1_end_year" type="integer">
+  End year of the most recent position (null if current)
+</ResponseField>
+
+<ResponseField name="job_1_end_month" type="integer">
+  End month of the most recent position (null if current)
+</ResponseField>
+
+<ResponseField name="job_2" type="json">
+  2nd most recent job position (structured object). Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_2_title" type="string">
+  Job title of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_company_name" type="string">
+  Company name of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_company_url" type="string">
+  Company URL of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_company_logo" type="string">
+  Company logo URL of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_location" type="string">
+  Location of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_description" type="string">
+  Description of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_start_year" type="integer">
+  Start year of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_start_month" type="integer">
+  Start month of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_end_year" type="integer">
+  End year of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_2_end_month" type="integer">
+  End month of the 2nd position
+</ResponseField>
+
+<ResponseField name="job_3" type="json">
+  3rd most recent job position (structured object). Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_3_title" type="string">
+  Job title of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_company_name" type="string">
+  Company name of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_company_url" type="string">
+  Company URL of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_company_logo" type="string">
+  Company logo URL of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_location" type="string">
+  Location of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_description" type="string">
+  Description of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_start_year" type="integer">
+  Start year of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_start_month" type="integer">
+  Start month of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_end_year" type="integer">
+  End year of the 3rd position
+</ResponseField>
+
+<ResponseField name="job_3_end_month" type="integer">
+  End month of the 3rd position
+</ResponseField>
+
+<ResponseField name="education_1" type="json">
+  Most recent education entry (school name, field of study, dates). Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_2" type="json">
+  2nd education entry. Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_3" type="json">
+  3rd education entry. Example: `{}`
+</ResponseField>
+
+<ResponseField name="interests_companies" type="json">
+  List of companies the member follows on LinkedIn. Example: `[]`
+</ResponseField>
+
+<ResponseField name="interests_groups" type="json">
+  List of LinkedIn groups the member has joined. Example: `[]`
+</ResponseField>
+
+<ResponseField name="featured_1" type="json">
+  First featured post or article on the member's profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="featured_2" type="json">
+  Second featured post or article. Example: `{}`
+</ResponseField>
+
+<ResponseField name="featured_3" type="json">
+  Third featured post or article. Example: `{}`
+</ResponseField>
+
+<ResponseField name="jobs" type="json">
+  Full list of all job positions (raw array). Example: `[]`
+</ResponseField>
+
+<ResponseField name="educations" type="json">
+  Full list of all education entries (raw array). Example: `[]`
+</ResponseField>
+
+<ResponseField name="functions" type="json">
+  Additional enrichment functions enabled for this record. Example: `[]`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Timestamp when this record was scraped. Example: `2026-04-01T10:00:00Z`
+</ResponseField>

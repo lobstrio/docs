@@ -1,0 +1,116 @@
+---
+title: "Add Tasks"
+description: "Add YouTube channel URLs to scrape contact emails"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add YouTube channel URLs to scrape contact information including email addresses, social media links, and channel statistics. The scraper extracts data from the channel's About page.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the YouTube Channel Email Scraper |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | YouTube channel URL (e.g., `https://www.youtube.com/c/ChannelName` or `https://www.youtube.com/@handle`) |
+
+## Supported URL Formats
+
+The scraper accepts various YouTube channel URL formats:
+
+| Format | Example |
+| --- | --- |
+| Custom URL | `https://www.youtube.com/c/ChannelName` |
+| Handle URL | `https://www.youtube.com/@channelhandle` |
+| Channel ID | `https://www.youtube.com/channel/UCxxxxxxxxxxxxxxxx` |
+| User URL | `https://www.youtube.com/user/username` |
+
+<Tip>
+  You can use any YouTube channel URL format - the scraper will resolve it to the correct channel.
+</Tip>
+
+<Note>
+  Email addresses are only available if the channel owner has made them public in the About section.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.youtube.com/c/TechLegend"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add YouTube channel URLs to scrape
+payload = {
+    "squid": squid_id,
+    "tasks": [
+        {"url": "https://www.youtube.com/c/TechLegend"},
+        {"url": "https://www.youtube.com/@mkbhd"},
+        {"url": "https://www.youtube.com/channel/UCBcRF18a7Qf58cCRy5xuWwQ"}
+    ]
+}
+
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json=payload
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "82367f24d9450b2222080eed91662968",
+      "created_at": "2025-07-17T09:06:47.287893",
+      "is_active": true,
+      "params": {
+        "url": "https://www.youtube.com/c/TechLegend"
+      },
+      "module": 115,
+      "object": "task"
+    }
+  ]
+}
+```

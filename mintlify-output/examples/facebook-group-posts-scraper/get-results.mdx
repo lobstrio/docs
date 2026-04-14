@@ -1,0 +1,145 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Facebook Public Group Posts Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Facebook Public Group Posts Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the post in the Facebook group. Example: `https://www.facebook.com/groups/211270969394435/permalink/2311529512701893/`
+</ResponseField>
+
+<ResponseField name="facebook_url" type="string">
+  Facebook profile URL of the post author. Example: `https://www.facebook.com/groups/211270969394435`
+</ResponseField>
+
+<ResponseField name="post_id" type="string">
+  Unique identifier for the Facebook post. Example: `2311529512701893`
+</ResponseField>
+
+<ResponseField name="group_id" type="string">
+  Unique identifier for the Facebook group. Example: `211270969394435`
+</ResponseField>
+
+<ResponseField name="group_title" type="string">
+  Name of the Facebook group where the post was published. Example: `U.S. Small Business Owners`
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Unique identifier of the post author on Facebook. Example: `pfbid02g3sw5paCKX5181uQw8EV7kPuEHfhJRyRFawG41QVdgjQnRirbKkJSvXZmwtSQdfRl`
+</ResponseField>
+
+<ResponseField name="user_name" type="string">
+  Display name of the post author. Example: `Ashraf Khan Ashraf`
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  Full text content of the Facebook group post. Example: `⭐⭐⭐⭐⭐ 100% Permanent & Sticky Reviews – Guaranteed! ⭐⭐⭐⭐⭐
+✅ Non-Drop Reviews with Full Warranty
+🔹 Services:
+✔️ Google Maps | Trustpilot | Facebook
+✔️ Negative Review Removal
+✔️ With / Without Image Reviews
+✔️ 5⭐ Rating Boost
+🌍 Countries Available:
+🇺🇸 USA | 🇨🇦 Canada | 🇦🇺 Australia | 🇬🇧 UK
+🇩🇪 Germany | 🇫🇷 France | 🇮🇹 Italy | 🇪🇸 Spain
+🇳🇱 Netherlands | 🇸🇪 Sweden | 🇳🇴 Norway
+🇦🇪 UAE | 🇸🇦 Saudi Arabia
+📩 Serious Clients Only — Inbox Now!
+📞 WhatsApp: +92 3492324208`
+</ResponseField>
+
+<ResponseField name="time" type="string">
+  Publication date and time of the post in ISO 8601 format. Example: `2026-03-19T11:27:00.000Z`
+</ResponseField>
+
+<ResponseField name="timestamp" type="int">
+  Unix timestamp of when the post was published. Example: `1773919620`
+</ResponseField>
+
+<ResponseField name="reaction_count" type="int">
+  Total number of reactions on the post (all types combined). Example: `0`
+</ResponseField>
+
+<ResponseField name="like_count" type="int">
+  Number of Like reactions on the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="love_count" type="int">
+  Number of Love reactions on the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="haha_count" type="int">
+  Number of Haha reactions on the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="wow_count" type="int">
+  Number of Wow reactions on the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="sad_count" type="int">
+  Number of Sad reactions on the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="angry_count" type="int">
+  Number of Angry reactions on the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="share_count" type="int">
+  Number of times the post was shared. Example: `0`
+</ResponseField>
+
+<ResponseField name="comments_count" type="int">
+  Total number of comments on the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  URL of the first image attached to the post
+</ResponseField>
+
+<ResponseField name="image_urls" type="string">
+  Comma-separated list of all image URLs in the post
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  URL of the video attached to the post
+</ResponseField>
+
+<ResponseField name="link_url" type="string">
+  URL of the external link shared in the post
+</ResponseField>
+
+<ResponseField name="link_title" type="string">
+  Title of the external link shared in the post
+</ResponseField>
+
+<ResponseField name="comments" type="string">
+  JSON array of comments on the post
+</ResponseField>
+
+<ResponseField name="feedback_id" type="string">
+  Internal Facebook feedback identifier for the post. Example: `ZmVlZGJhY2s6MjMxMTUyOTUxMjcwMTg5Mw==`
+</ResponseField>

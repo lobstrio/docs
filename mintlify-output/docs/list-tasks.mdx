@@ -1,0 +1,153 @@
+---
+title: "List Tasks"
+description: "Retrieve a paginated list of tasks for a specific squid"
+api: "GET https://api.lobstr.io/v1/tasks"
+---
+
+This endpoint retrieves a paginated list of tasks for a specific squid. You can choose between two query types to get different levels of detail.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+| Parameter | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | The squid hash ID to list tasks for |
+| **type** | string | No | Response detail level: 'url' (basic) or 'params' (detailed). Default: 'url' |
+| **page** | integer | No | Page number for pagination. Default: 1 |
+| **limit** | integer | No | Results per page. Default: 50, Max: 100 |
+
+## Response Field Explanations
+
+<ResponseField name="total_results" type="integer">
+  Total number of tasks. Example: `2`
+</ResponseField>
+
+<ResponseField name="limit" type="integer">
+  Maximum results per page. Example: `50`
+</ResponseField>
+
+<ResponseField name="page" type="integer">
+  Current page number. Example: `1`
+</ResponseField>
+
+<ResponseField name="total_pages" type="integer">
+  Total number of pages. Example: `1`
+</ResponseField>
+
+<ResponseField name="data" type="array">
+  Array of task objects. Example: `[...]`
+</ResponseField>
+
+<ResponseField name="data[].id" type="string">
+  Unique task identifier. Example: `"6b9d3afdf4e76df374915a50d7a495c4"`
+</ResponseField>
+
+<ResponseField name="data[].created_at" type="string">
+  Task creation timestamp. Example: `"2025-03-05T09:24:49.581177"`
+</ResponseField>
+
+<ResponseField name="data[].is_active" type="boolean">
+  Whether the task is active. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].params" type="object">
+  Task parameters. Example: `{"url": "..."}`
+</ResponseField>
+
+<ResponseField name="next" type="string | null">
+  URL for next page (null if last page). Example: `null`
+</ResponseField>
+
+<ResponseField name="previous" type="string | null">
+  URL for previous page (null if first page). Example: `null`
+</ResponseField>
+
+<Tip>
+  Use type=url for a quick overview of tasks, or type=params when you need full parameter details.
+</Tip>
+
+<Note>
+  Results are paginated. Use the next and previous URLs to navigate through large task lists.
+</Note>
+
+<Tip>
+  Check is_active to identify tasks that are ready to run vs. disabled tasks.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/tasks?squid=a1b2c3d4e5f6g7h8i9j0&type=params&page=1&limit=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/tasks"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+params = {
+    "squid": "a1b2c3d4e5f6g7h8i9j0",
+    "type": "params",  # Use "url" for basic info, "params" for full details
+    "page": 1,
+    "limit": 50
+}
+
+response = requests.get(url, headers=headers, params=params)
+data = response.json()
+
+print(f"Total tasks: {data['total_results']}")
+print(f"Page {data['page']} of {data['total_pages']}\n")
+
+# Display tasks
+for task in data['data']:
+    status = "Active" if task['is_active'] else "Inactive"
+    print(f"[{status}] Task: {task['id']}")
+    print(f"  Created: {task['created_at']}")
+    print(f"  Params: {task['params']}")
+    print()
+
+# Check for more pages
+if data['next']:
+    print(f"Next page: {data['next']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 2,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "data": [
+    {
+      "id": "6b9d3afdf4e76df374915a50d7a495c4",
+      "created_at": "2025-03-05T09:24:49.581177",
+      "is_active": true,
+      "params": {
+        "url": "https://www.linkedin.com/in/johndoe"
+      }
+    },
+    {
+      "id": "c5e29d2aba8b77cdc56391e7405302de",
+      "created_at": "2025-03-05T09:24:49.581177",
+      "is_active": true,
+      "params": {
+        "url": "https://www.linkedin.com/in/janedoe"
+      }
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

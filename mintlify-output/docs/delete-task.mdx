@@ -1,0 +1,96 @@
+---
+title: "Delete Task"
+description: "Permanently delete a specific task from a squid"
+api: "DELETE https://api.lobstr.io/v1/tasks/{task_hash}"
+---
+
+This endpoint permanently deletes a specific task using its hash ID. The task and its associated data will be removed from the system.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="task_hash" type="string" required>
+  The unique identifier (hash) of the task to delete. Example: `c5e29d2aba8b77cdc56391e7405302de`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  The deleted task's identifier. Example: `"c5e29d2aba8b77cdc56391e7405302de"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "task". Example: `"task"`
+</ResponseField>
+
+<ResponseField name="deleted" type="boolean">
+  Confirmation of deletion (true on success). Example: `true`
+</ResponseField>
+
+<Warning>
+  This action is permanent and cannot be undone. Task data and results will be lost.
+</Warning>
+
+<Tip>
+  Use Get Task first to verify you're deleting the correct task.
+</Tip>
+
+<Note>
+  Deleting a task does not affect results that have already been exported or delivered.
+</Note>
+
+<Tip>
+  To remove all tasks from a squid, use the Empty Squid endpoint instead of deleting tasks one by one.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X DELETE "https://api.lobstr.io/v1/tasks/c5e29d2aba8b77cdc56391e7405302de" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+task_hash = "c5e29d2aba8b77cdc56391e7405302de"
+url = f"https://api.lobstr.io/v1/tasks/{task_hash}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.delete(url, headers=headers)
+result = response.json()
+
+if result['deleted']:
+    print(f"Task {result['id']} deleted successfully")
+else:
+    print("Failed to delete task")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "c5e29d2aba8b77cdc56391e7405302de",
+  "object": "task",
+  "deleted": true
+}
+```
+
+```json 404
+{
+  "error": {
+    "message": "Task not found",
+    "type": "not_found_error",
+    "param": "task_hash"
+  }
+}
+```

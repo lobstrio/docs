@@ -1,0 +1,688 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Linkedin Profile Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Linkedin Profile Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the LinkedIn profile. Example: `https://www.linkedin.com/in/david-shibley`
+</ResponseField>
+
+<ResponseField name="public_identifier" type="string">
+  LinkedIn public profile slug used in the profile URL. Example: `david-shibley`
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  First name of the LinkedIn member. Example: `David`
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  Last name of the LinkedIn member. Example: `Shibley`
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Full name of the LinkedIn member. Example: `David Shibley`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address found or enriched for this LinkedIn member. Example: `dave@melcap.com`
+</ResponseField>
+
+<ResponseField name="email_status" type="string">
+  Validation status of the email address (e.g. valid, risky, invalid). Example: `valid`
+</ResponseField>
+
+<ResponseField name="headline" type="string">
+  Professional headline shown below the name on the LinkedIn profile. Example: `Vice President of Business Strategy at Cassidy Advertising`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  About or summary text from the LinkedIn profile. Example: `With over 5 years of professional client services experience, currently serving as Vice President of Business Strategy at Cassidy Advertising & Consulting, contributing to strategic planning and client engagement. Committed to fostering collaborative growth and aligning strategies to advance organizational goals. Past roles as Investment Banking Associate and Staff Accountant honed expertise in financial data analysis, reporting, and deal structuring. Skilled in business strategy, client relations, and leveraging insights and analytics for impactful outcomes.`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Location shown on the LinkedIn profile. Example: `Cleveland, Ohio, United States`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Industry the person works in as listed on LinkedIn. Example: `Marketing & Advertising`
+</ResponseField>
+
+<ResponseField name="vmid" type="string">
+  LinkedIn internal member ID (vmid). Example: `ACoAABBSYCEB2RG5DGmF2FHaW3QIGLMpHLChBRc`
+</ResponseField>
+
+<ResponseField name="sales_nav_url" type="string">
+  URL to the person's LinkedIn Sales Navigator profile. Example: `https://www.linkedin.com/sales/people/ACoAABBSYCEB2RG5DGmF2FHaW3QIGLMpHLChBRc`
+</ResponseField>
+
+<ResponseField name="connection_degree" type="string">
+  Degree of connection between this profile and the scraping account (1st, 2nd, 3rd). Example: `3`
+</ResponseField>
+
+<ResponseField name="connections_url" type="string">
+  URL to this profile's connections list on LinkedIn. Example: `https://www.linkedin.com/search/results/people/?facetConnectionOf=%5B%22ACoAABBSYCEB2RG5DGmF2FHaW3QIGLMpHLChBRc%22%5D&facetNetwork=%5B%22F%22%2C%22S%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH`
+</ResponseField>
+
+<ResponseField name="mutual_connections_url" type="string">
+  URL to the mutual connections between this profile and the scraping account. Example: `https://www.linkedin.com/search/results/people/?facetNetwork=%5B%22F%22%5D&facetConnectionOf=%5B%22ACoAABBSYCEB2RG5DGmF2FHaW3QIGLMpHLChBRc%22%5D&origin=MEMBER_PROFILE_CANNED_SEARCH&RESULT_TYPE=PEOPLE`
+</ResponseField>
+
+<ResponseField name="mutual_connections_text" type="string">
+  Text summary describing mutual connections. Example: `0 mutual connections`
+</ResponseField>
+
+<ResponseField name="picture_url" type="string">
+  URL of the LinkedIn profile picture. Example: `https://media.licdn.com/dms/image/v2/D5603AQFQQKystZJSAA/profile-displayphoto-scale_400_400/B56ZmfjYy4JkAk-/0/1759318479293?e=1775692800&v=beta&t=SAzzG76z7sunESZpozYWL5uc-nAg4BMMDjfUwIIXtAk`
+</ResponseField>
+
+<ResponseField name="background_picture_url" type="string">
+  URL of the LinkedIn profile's background banner image. Example: `https://media.licdn.com/dms/image/v2/D4D16AQFV1Mlvp-78Uw/profile-displaybackgroundimage-shrink_200_800/B4DZm_ItgpGkAU-/0/1759848357816?e=1775692800&v=beta&t=Ix85xp8Ly5B8H6R94ZCMU_T9WAkTxkZJmeyRacB9GGk`
+</ResponseField>
+
+<ResponseField name="is_creator" type="string">
+  Whether the account has creator mode enabled on LinkedIn. Example: `False`
+</ResponseField>
+
+<ResponseField name="open_to_work" type="boolean">
+  Whether the profile has the Open to Work banner enabled. Example: `false`
+</ResponseField>
+
+<ResponseField name="num_connections" type="integer">
+  Total number of 1st-degree LinkedIn connections. Example: `1344`
+</ResponseField>
+
+<ResponseField name="num_followers" type="integer">
+  Total number of LinkedIn followers. Example: `1348`
+</ResponseField>
+
+<ResponseField name="skills" type="json">
+  Skills listed on the LinkedIn profile. Example: `['Microsoft Excel', 'Event Planning', 'Public Speaking', 'PowerPoint', 'Leadership', 'Microsoft PowerPoint', 'Social Media', 'Microsoft Office', 'Microsoft Word', 'Customer Service', 'Management', 'Strategic Planning']`
+</ResponseField>
+
+<ResponseField name="job_1" type="json">
+  JSON object for the 1st work experience entry on the LinkedIn profile. Example: `{'title': 'Vice President of Business Strategy', 'end_year': None, 'location': None, 'end_month': None, 'start_year': 2025, 'company_url': 'https://www.linkedin.com/company/1620351/', 'description': None, 'start_month': 9, 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQGNJvt99hfofA/company-logo_400_400/company-logo_400_400/0/1630579191372/cassidy_advertising__consulting_llc_logo?e=1775692800&v=beta&t=KDDsoQaD9Swq9jcjc27uPPZCez_CmDuWLMlhr5yuvSc', 'company_name': 'Cassidy Advertising & Consulting LLC'}`
+</ResponseField>
+
+<ResponseField name="job_2" type="json">
+  JSON object for the 2nd work experience entry on the LinkedIn profile. Example: `{'title': 'Investment Banking Associate', 'end_year': 2025, 'location': None, 'end_month': 8, 'start_year': 2024, 'company_url': 'https://www.linkedin.com/company/5562018/', 'description': None, 'start_month': 1, 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQHNzoXUJzRBmA/company-logo_400_400/company-logo_400_400/0/1631334371809?e=1775692800&v=beta&t=-Rj5v_dklXsykly2yPwy7xKK8j07MXRpqiiQeYzSLUM', 'company_name': 'MelCap Partners, LLC'}`
+</ResponseField>
+
+<ResponseField name="job_3" type="json">
+  JSON object for the 3rd work experience entry on the LinkedIn profile. Example: `{'title': 'Investment Banking Analyst', 'end_year': 2023, 'location': None, 'end_month': 12, 'start_year': 2022, 'company_url': 'https://www.linkedin.com/company/5562018/', 'description': None, 'start_month': 8, 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQHNzoXUJzRBmA/company-logo_400_400/company-logo_400_400/0/1631334371809?e=1775692800&v=beta&t=-Rj5v_dklXsykly2yPwy7xKK8j07MXRpqiiQeYzSLUM', 'company_name': 'MelCap Partners'}`
+</ResponseField>
+
+<ResponseField name="job_4" type="json">
+  JSON object for the 4th work experience entry on the LinkedIn profile. Example: `{'title': 'Audit Staff Accountant', 'end_year': 2022, 'location': 'Cleveland, Ohio, United States', 'end_month': 8, 'start_year': 2020, 'company_url': 'https://www.linkedin.com/company/21984/', 'description': None, 'start_month': 9, 'company_logo': 'https://media.licdn.com/dms/image/v2/D4E0BAQHTKbL7_5S_kw/company-logo_400_400/company-logo_400_400/0/1730466042261/marcum_llp_logo?e=1775692800&v=beta&t=Uszcw8JZwdF_F8rdgJpYEMGhq64Pa5bih2ARS15bTO4', 'company_name': 'Marcum LLP'}`
+</ResponseField>
+
+<ResponseField name="job_5" type="json">
+  JSON object for the 5th work experience entry on the LinkedIn profile. Example: `{'title': 'Graduate Student', 'end_year': 2020, 'location': 'South Bend, Indiana Area', 'end_month': 5, 'start_year': 2019, 'company_url': 'https://www.linkedin.com/company/15102069/', 'description': 'Masters of Science in Accountancy Class of 2020', 'start_month': 8, 'company_logo': 'https://media.licdn.com/dms/image/v2/C4D0BAQGU6YLdAy1dTw/company-logo_400_400/company-logo_400_400/0/1630544558231/university_of_notre_dame___mendoza_college_of_business_logo?e=1775692800&v=beta&t=QQRvJBsKyL5p8rcdKApPyrMRHhgcrDivWuA1QsGvpJA', 'company_name': 'University of Notre Dame - Mendoza College of Business'}`
+</ResponseField>
+
+<ResponseField name="job_6" type="json">
+  JSON object for the 6th work experience entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_7" type="json">
+  JSON object for the 7th work experience entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_8" type="json">
+  JSON object for the 8th work experience entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_9" type="json">
+  JSON object for the 9th work experience entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_10" type="json">
+  JSON object for the 10th work experience entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="job_1_title" type="string">
+  Job title for the 1st work experience. Example: `Vice President of Business Strategy`
+</ResponseField>
+
+<ResponseField name="job_1_description" type="string">
+  Description text for the 1st work experience
+</ResponseField>
+
+<ResponseField name="job_1_location" type="string">
+  Location of the 1st work experience
+</ResponseField>
+
+<ResponseField name="job_1_start_year" type="integer">
+  Start year of the 1st work experience. Example: `2025`
+</ResponseField>
+
+<ResponseField name="job_1_start_month" type="integer">
+  Start month of the 1st work experience. Example: `9`
+</ResponseField>
+
+<ResponseField name="job_1_end_year" type="integer">
+  End year of the 1st work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_1_end_month" type="integer">
+  End month of the 1st work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_1_company_name" type="string">
+  Company name for the 1st work experience. Example: `Cassidy Advertising & Consulting LLC`
+</ResponseField>
+
+<ResponseField name="job_1_company_url" type="string">
+  LinkedIn URL of the company for the 1st work experience. Example: `https://www.linkedin.com/company/1620351/`
+</ResponseField>
+
+<ResponseField name="job_1_company_logo" type="string">
+  Logo URL of the company for the 1st work experience. Example: `https://media.licdn.com/dms/image/v2/C4E0BAQGNJvt99hfofA/company-logo_400_400/company-logo_400_400/0/1630579191372/cassidy_advertising__consulting_llc_logo?e=1775692800&v=beta&t=KDDsoQaD9Swq9jcjc27uPPZCez_CmDuWLMlhr5yuvSc`
+</ResponseField>
+
+<ResponseField name="job_2_title" type="string">
+  Job title for the 2nd work experience. Example: `Investment Banking Associate`
+</ResponseField>
+
+<ResponseField name="job_2_description" type="string">
+  Description text for the 2nd work experience
+</ResponseField>
+
+<ResponseField name="job_2_location" type="string">
+  Location of the 2nd work experience
+</ResponseField>
+
+<ResponseField name="job_2_start_year" type="integer">
+  Start year of the 2nd work experience. Example: `2024`
+</ResponseField>
+
+<ResponseField name="job_2_start_month" type="integer">
+  Start month of the 2nd work experience. Example: `1`
+</ResponseField>
+
+<ResponseField name="job_2_end_year" type="integer">
+  End year of the 2nd work experience (null if current). Example: `2025`
+</ResponseField>
+
+<ResponseField name="job_2_end_month" type="integer">
+  End month of the 2nd work experience (null if current). Example: `8`
+</ResponseField>
+
+<ResponseField name="job_2_company_name" type="string">
+  Company name for the 2nd work experience. Example: `MelCap Partners, LLC`
+</ResponseField>
+
+<ResponseField name="job_2_company_url" type="string">
+  LinkedIn URL of the company for the 2nd work experience. Example: `https://www.linkedin.com/company/5562018/`
+</ResponseField>
+
+<ResponseField name="job_2_company_logo" type="string">
+  Logo URL of the company for the 2nd work experience. Example: `https://media.licdn.com/dms/image/v2/C4E0BAQHNzoXUJzRBmA/company-logo_400_400/company-logo_400_400/0/1631334371809?e=1775692800&v=beta&t=-Rj5v_dklXsykly2yPwy7xKK8j07MXRpqiiQeYzSLUM`
+</ResponseField>
+
+<ResponseField name="job_3_title" type="string">
+  Job title for the 3rd work experience. Example: `Investment Banking Analyst`
+</ResponseField>
+
+<ResponseField name="job_3_description" type="string">
+  Description text for the 3rd work experience
+</ResponseField>
+
+<ResponseField name="job_3_location" type="string">
+  Location of the 3rd work experience
+</ResponseField>
+
+<ResponseField name="job_3_start_year" type="integer">
+  Start year of the 3rd work experience. Example: `2022`
+</ResponseField>
+
+<ResponseField name="job_3_start_month" type="integer">
+  Start month of the 3rd work experience. Example: `8`
+</ResponseField>
+
+<ResponseField name="job_3_end_year" type="integer">
+  End year of the 3rd work experience (null if current). Example: `2023`
+</ResponseField>
+
+<ResponseField name="job_3_end_month" type="integer">
+  End month of the 3rd work experience (null if current). Example: `12`
+</ResponseField>
+
+<ResponseField name="job_3_company_name" type="string">
+  Company name for the 3rd work experience. Example: `MelCap Partners`
+</ResponseField>
+
+<ResponseField name="job_3_company_url" type="string">
+  LinkedIn URL of the company for the 3rd work experience. Example: `https://www.linkedin.com/company/5562018/`
+</ResponseField>
+
+<ResponseField name="job_3_company_logo" type="string">
+  Logo URL of the company for the 3rd work experience. Example: `https://media.licdn.com/dms/image/v2/C4E0BAQHNzoXUJzRBmA/company-logo_400_400/company-logo_400_400/0/1631334371809?e=1775692800&v=beta&t=-Rj5v_dklXsykly2yPwy7xKK8j07MXRpqiiQeYzSLUM`
+</ResponseField>
+
+<ResponseField name="job_4_title" type="string">
+  Job title for the 4th work experience. Example: `Audit Staff Accountant`
+</ResponseField>
+
+<ResponseField name="job_4_description" type="string">
+  Description text for the 4th work experience
+</ResponseField>
+
+<ResponseField name="job_4_location" type="string">
+  Location of the 4th work experience. Example: `Cleveland, Ohio, United States`
+</ResponseField>
+
+<ResponseField name="job_4_start_year" type="integer">
+  Start year of the 4th work experience. Example: `2020`
+</ResponseField>
+
+<ResponseField name="job_4_start_month" type="integer">
+  Start month of the 4th work experience. Example: `9`
+</ResponseField>
+
+<ResponseField name="job_4_end_year" type="integer">
+  End year of the 4th work experience (null if current). Example: `2022`
+</ResponseField>
+
+<ResponseField name="job_4_end_month" type="integer">
+  End month of the 4th work experience (null if current). Example: `8`
+</ResponseField>
+
+<ResponseField name="job_4_company_name" type="string">
+  Company name for the 4th work experience. Example: `Marcum LLP`
+</ResponseField>
+
+<ResponseField name="job_4_company_url" type="string">
+  LinkedIn URL of the company for the 4th work experience. Example: `https://www.linkedin.com/company/21984/`
+</ResponseField>
+
+<ResponseField name="job_4_company_logo" type="string">
+  Logo URL of the company for the 4th work experience. Example: `https://media.licdn.com/dms/image/v2/D4E0BAQHTKbL7_5S_kw/company-logo_400_400/company-logo_400_400/0/1730466042261/marcum_llp_logo?e=1775692800&v=beta&t=Uszcw8JZwdF_F8rdgJpYEMGhq64Pa5bih2ARS15bTO4`
+</ResponseField>
+
+<ResponseField name="job_4_title" type="string">
+  Job title for the 4th work experience. Example: `Audit Staff Accountant`
+</ResponseField>
+
+<ResponseField name="job_4_description" type="string">
+  Description text for the 4th work experience
+</ResponseField>
+
+<ResponseField name="job_4_location" type="string">
+  Location of the 4th work experience. Example: `Cleveland, Ohio, United States`
+</ResponseField>
+
+<ResponseField name="job_4_start_year" type="integer">
+  Start year of the 4th work experience. Example: `2020`
+</ResponseField>
+
+<ResponseField name="job_4_start_month" type="integer">
+  Start month of the 4th work experience. Example: `9`
+</ResponseField>
+
+<ResponseField name="job_4_end_year" type="integer">
+  End year of the 4th work experience (null if current). Example: `2022`
+</ResponseField>
+
+<ResponseField name="job_4_end_month" type="integer">
+  End month of the 4th work experience (null if current). Example: `8`
+</ResponseField>
+
+<ResponseField name="job_4_company_name" type="string">
+  Company name for the 4th work experience. Example: `Marcum LLP`
+</ResponseField>
+
+<ResponseField name="job_4_company_url" type="string">
+  LinkedIn URL of the company for the 4th work experience. Example: `https://www.linkedin.com/company/21984/`
+</ResponseField>
+
+<ResponseField name="job_4_company_logo" type="string">
+  Logo URL of the company for the 4th work experience. Example: `https://media.licdn.com/dms/image/v2/D4E0BAQHTKbL7_5S_kw/company-logo_400_400/company-logo_400_400/0/1730466042261/marcum_llp_logo?e=1775692800&v=beta&t=Uszcw8JZwdF_F8rdgJpYEMGhq64Pa5bih2ARS15bTO4`
+</ResponseField>
+
+<ResponseField name="job_5_title" type="string">
+  Job title for the 5th work experience. Example: `Graduate Student`
+</ResponseField>
+
+<ResponseField name="job_5_description" type="string">
+  Description text for the 5th work experience. Example: `Masters of Science in Accountancy Class of 2020`
+</ResponseField>
+
+<ResponseField name="job_5_location" type="string">
+  Location of the 5th work experience. Example: `South Bend, Indiana Area`
+</ResponseField>
+
+<ResponseField name="job_5_start_year" type="integer">
+  Start year of the 5th work experience. Example: `2019`
+</ResponseField>
+
+<ResponseField name="job_5_start_month" type="integer">
+  Start month of the 5th work experience. Example: `8`
+</ResponseField>
+
+<ResponseField name="job_5_end_year" type="integer">
+  End year of the 5th work experience (null if current). Example: `2020`
+</ResponseField>
+
+<ResponseField name="job_5_end_month" type="integer">
+  End month of the 5th work experience (null if current). Example: `5`
+</ResponseField>
+
+<ResponseField name="job_5_company_name" type="string">
+  Company name for the 5th work experience. Example: `University of Notre Dame - Mendoza College of Business`
+</ResponseField>
+
+<ResponseField name="job_5_company_url" type="string">
+  LinkedIn URL of the company for the 5th work experience. Example: `https://www.linkedin.com/company/15102069/`
+</ResponseField>
+
+<ResponseField name="job_5_company_logo" type="string">
+  Logo URL of the company for the 5th work experience. Example: `https://media.licdn.com/dms/image/v2/C4D0BAQGU6YLdAy1dTw/company-logo_400_400/company-logo_400_400/0/1630544558231/university_of_notre_dame___mendoza_college_of_business_logo?e=1775692800&v=beta&t=QQRvJBsKyL5p8rcdKApPyrMRHhgcrDivWuA1QsGvpJA`
+</ResponseField>
+
+<ResponseField name="job_6_title" type="string">
+  Job title for the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_6_description" type="string">
+  Description text for the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_6_location" type="string">
+  Location of the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_6_start_year" type="integer">
+  Start year of the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_6_start_month" type="integer">
+  Start month of the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_6_end_year" type="integer">
+  End year of the 6th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_6_end_month" type="integer">
+  End month of the 6th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_6_company_name" type="string">
+  Company name for the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_6_company_url" type="string">
+  LinkedIn URL of the company for the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_6_company_logo" type="string">
+  Logo URL of the company for the 6th work experience
+</ResponseField>
+
+<ResponseField name="job_7_title" type="string">
+  Job title for the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_7_description" type="string">
+  Description text for the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_7_location" type="string">
+  Location of the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_7_start_year" type="integer">
+  Start year of the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_7_start_month" type="integer">
+  Start month of the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_7_end_year" type="integer">
+  End year of the 7th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_7_end_month" type="integer">
+  End month of the 7th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_7_company_name" type="string">
+  Company name for the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_7_company_url" type="string">
+  LinkedIn URL of the company for the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_7_company_logo" type="string">
+  Logo URL of the company for the 7th work experience
+</ResponseField>
+
+<ResponseField name="job_8_title" type="string">
+  Job title for the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_8_description" type="string">
+  Description text for the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_8_location" type="string">
+  Location of the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_8_start_year" type="integer">
+  Start year of the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_8_start_month" type="integer">
+  Start month of the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_8_end_year" type="integer">
+  End year of the 8th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_8_end_month" type="integer">
+  End month of the 8th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_8_company_name" type="string">
+  Company name for the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_8_company_url" type="string">
+  LinkedIn URL of the company for the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_8_company_logo" type="string">
+  Logo URL of the company for the 8th work experience
+</ResponseField>
+
+<ResponseField name="job_9_title" type="string">
+  Job title for the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_9_description" type="string">
+  Description text for the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_9_location" type="string">
+  Location of the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_9_start_year" type="integer">
+  Start year of the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_9_start_month" type="integer">
+  Start month of the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_9_end_year" type="integer">
+  End year of the 9th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_9_end_month" type="integer">
+  End month of the 9th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_9_company_name" type="string">
+  Company name for the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_9_company_url" type="string">
+  LinkedIn URL of the company for the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_9_company_logo" type="string">
+  Logo URL of the company for the 9th work experience
+</ResponseField>
+
+<ResponseField name="job_10_title" type="string">
+  Job title for the 10th work experience
+</ResponseField>
+
+<ResponseField name="job_10_description" type="string">
+  Description text for the 10th work experience
+</ResponseField>
+
+<ResponseField name="job_10_location" type="string">
+  Location of the 10th work experience
+</ResponseField>
+
+<ResponseField name="job_10_start_year" type="integer">
+  Start year of the 10th work experience
+</ResponseField>
+
+<ResponseField name="job_10_start_month" type="integer">
+  Start month of the 10th work experience
+</ResponseField>
+
+<ResponseField name="job_10_end_year" type="integer">
+  End year of the 10th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_10_end_month" type="integer">
+  End month of the 10th work experience (null if current)
+</ResponseField>
+
+<ResponseField name="job_10_company_name" type="string">
+  Company name for the 10th work experience
+</ResponseField>
+
+<ResponseField name="job_10_company_url" type="string">
+  LinkedIn URL of the company for the 10th work experience
+</ResponseField>
+
+<ResponseField name="job_10_company_logo" type="string">
+  Logo URL of the company for the 10th work experience
+</ResponseField>
+
+<ResponseField name="education_1" type="json">
+  JSON object for the 1st education entry on the LinkedIn profile. Example: `{'grade': None, 'end_year': 2015, 'activities': None, 'school_urn': 'urn:li:fsd_school:3185119', 'start_year': 2011, 'description': 'Varsity Football Team Captain', 'school_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQHxGZiajzHBHg/company-logo_400_400/company-logo_400_400/0/1631371114746/saint_ignatius_high_school_logo?e=1775692800&v=beta&t=p6mYmQOidWylws1rdca8euxkwEhPAMI-Rp2veaCuCbY', 'school_name': 'Saint Ignatius High School', 'field_of_study': ''}`
+</ResponseField>
+
+<ResponseField name="education_2" type="json">
+  JSON object for the 2nd education entry on the LinkedIn profile. Example: `{'grade': None, 'end_year': 2020, 'activities': None, 'school_urn': 'urn:li:fsd_school:18367', 'start_year': 2019, 'description': None, 'school_logo': 'https://media.licdn.com/dms/image/v2/C4D0BAQGU6YLdAy1dTw/company-logo_400_400/company-logo_400_400/0/1630544558231/university_of_notre_dame___mendoza_college_of_business_logo?e=1775692800&v=beta&t=QQRvJBsKyL5p8rcdKApPyrMRHhgcrDivWuA1QsGvpJA', 'school_name': 'University of Notre Dame - Mendoza College of Business', 'field_of_study': 'Master of Science - MS, Accounting'}`
+</ResponseField>
+
+<ResponseField name="education_3" type="json">
+  JSON object for the 3rd education entry on the LinkedIn profile. Example: `{'grade': None, 'end_year': 2019, 'activities': None, 'school_urn': 'urn:li:fsd_school:18771', 'start_year': 2015, 'description': 'Minors: Finance and Sport Management', 'school_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQEJmXnCQ8bRCQ/company-logo_400_400/company-logo_400_400/0/1631342299438?e=1775692800&v=beta&t=jfaD9Y6mPPF_b_eV4enhqur75TJyll9xFtWSBrsBfiY', 'school_name': 'Elon University', 'field_of_study': 'Bachelor of Science - BS, Accounting'}`
+</ResponseField>
+
+<ResponseField name="education_4" type="json">
+  JSON object for the 4th education entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_5" type="json">
+  JSON object for the 5th education entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_6" type="json">
+  JSON object for the 6th education entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_7" type="json">
+  JSON object for the 7th education entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_8" type="json">
+  JSON object for the 8th education entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_9" type="json">
+  JSON object for the 9th education entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="education_10" type="json">
+  JSON object for the 10th education entry on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="interests_companies" type="json">
+  LinkedIn companies this person follows. Example: `[{'company_id': '8450', 'company_url': 'https://www.linkedin.com/company/8450/', 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQFV98UAyjaH7g/company-logo_200_200/company-logo_200_200/0/1668198003810/aicpa_logo?e=1775692800&v=beta&t=nzwdgDWFggL9e_IrnzlRQw2a04M9BnaFgYSh99B2dng', 'is_following': False, 'follower_count': 318176}, {'company_id': '412132', 'company_url': 'https://www.linkedin.com/company/412132/', 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQHxGZiajzHBHg/company-logo_200_200/company-logo_200_200/0/1631371114746/saint_ignatius_high_school_logo?e=1775692800&v=beta&t=eYfT7qH5mXofSmzMiRRVY34mk7a9FzMgTn5pLJ26n38', 'is_following': False, 'follower_count': 7776}, {'company_id': '21984', 'company_url': 'https://www.linkedin.com/company/21984/', 'company_logo': 'https://media.licdn.com/dms/image/v2/D4E0BAQHTKbL7_5S_kw/company-logo_200_200/company-logo_200_200/0/1730466042261/marcum_llp_logo?e=1775692800&v=beta&t=nziUMRa2SmWy96tSFeNpG-pZXegSYPE8DvIpMHPp35s', 'is_following': False, 'follower_count': 50065}]`
+</ResponseField>
+
+<ResponseField name="interests_groups" type="json">
+  LinkedIn groups this person is a member of. Example: `[{'group_id': '12068263', 'group_url': 'https://www.linkedin.com/groups/12068263/', 'group_logo': 'https://media.licdn.com/dms/image/v2/C4E07AQGGOVB8anAuQQ/group-logo_image-shrink_200x200/group-logo_image-shrink_200x200/0/1631001642624?e=1774551600&v=beta&t=wpXl75yxrLXA8drFPHyA81pPgEooE3KGSfxo7Mlkj9U', 'group_name': "Elon University's Beta Alpha Psi Chapter"}, {'group_id': '61715', 'group_url': 'https://www.linkedin.com/groups/61715/', 'group_logo': 'https://media.licdn.com/dms/image/v2/C4D07AQGRy12-ZPhupw/group-logo_image-shrink_200x200/group-logo_image-shrink_200x200/0/1631357469421?e=1774551600&v=beta&t=PN4CDsrFH7G43QPlxO9A3mVHcJ2lM9BTDK8f-V2Q5UE', 'group_name': 'Ignatius Men Forever - Saint Ignatius High School, Cleveland'}]`
+</ResponseField>
+
+<ResponseField name="featured_1" type="json">
+  1st featured content item pinned on the LinkedIn profile. Example: `{'text': "I'm thrilled to be joining the executive team at Cassidy Advertising & Consulting LLC alongside Laura Berena and Hailey Cassidy. After 5+ years of helping middle-market companies with strategic financial services, I'm looking forward to bringing that experience into a new industry.", 'post_url': 'https://www.linkedin.com/feed/update/urn:li:activity:7379139520778321921?updateEntityUrn=urn%3Ali%3Afs_feedUpdate%3A%28V2%2Curn%3Ali%3Aactivity%3A7379139520778321921%29', 'post_urn': 'urn:li:activity:7379139520778321921', 'num_likes': 157, 'num_comments': 27}`
+</ResponseField>
+
+<ResponseField name="featured_2" type="json">
+  2nd featured content item pinned on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="featured_3" type="json">
+  3rd featured content item pinned on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="featured_4" type="json">
+  4th featured content item pinned on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="featured_5" type="json">
+  5th featured content item pinned on the LinkedIn profile. Example: `{}`
+</ResponseField>
+
+<ResponseField name="jobs" type="json">
+  Full work experience history as a JSON array. Example: `[{'title': 'Vice President of Business Strategy', 'description': None, 'location': None, 'start_year': 2025, 'start_month': 9, 'end_year': None, 'end_month': None, 'company_name': 'Cassidy Advertising & Consulting LLC', 'company_url': 'https://www.linkedin.com/company/1620351/', 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQGNJvt99hfofA/company-logo_400_400/company-logo_400_400/0/1630579191372/cassidy_advertising__consulting_llc_logo?e=1775692800&v=beta&t=KDDsoQaD9Swq9jcjc27uPPZCez_CmDuWLMlhr5yuvSc'}, {'title': 'Investment Banking Associate', 'description': None, 'location': None, 'start_year': 2024, 'start_month': 1, 'end_year': 2025, 'end_month': 8, 'company_name': 'MelCap Partners, LLC', 'company_url': 'https://www.linkedin.com/company/5562018/', 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQHNzoXUJzRBmA/company-logo_400_400/company-logo_400_400/0/1631334371809?e=1775692800&v=beta&t=-Rj5v_dklXsykly2yPwy7xKK8j07MXRpqiiQeYzSLUM'}, {'title': 'Investment Banking Analyst', 'description': None, 'location': None, 'start_year': 2022, 'start_month': 8, 'end_year': 2023, 'end_month': 12, 'company_name': 'MelCap Partners', 'company_url': 'https://www.linkedin.com/company/5562018/', 'company_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQHNzoXUJzRBmA/company-logo_400_400/company-logo_400_400/0/1631334371809?e=1775692800&v=beta&t=-Rj5v_dklXsykly2yPwy7xKK8j07MXRpqiiQeYzSLUM'}, {'title': 'Audit Staff Accountant', 'description': None, 'location': 'Cleveland, Ohio, United States', 'start_year': 2020, 'start_month': 9, 'end_year': 2022, 'end_month': 8, 'company_name': 'Marcum LLP', 'company_url': 'https://www.linkedin.com/company/21984/', 'company_logo': 'https://media.licdn.com/dms/image/v2/D4E0BAQHTKbL7_5S_kw/company-logo_400_400/company-logo_400_400/0/1730466042261/marcum_llp_logo?e=1775692800&v=beta&t=Uszcw8JZwdF_F8rdgJpYEMGhq64Pa5bih2ARS15bTO4'}, {'title': 'Graduate Student', 'description': 'Masters of Science in Accountancy Class of 2020', 'location': 'South Bend, Indiana Area', 'start_year': 2019, 'start_month': 8, 'end_year': 2020, 'end_month': 5, 'company_name': 'University of Notre Dame - Mendoza College of Business', 'company_url': 'https://www.linkedin.com/company/15102069/', 'company_logo': 'https://media.licdn.com/dms/image/v2/C4D0BAQGU6YLdAy1dTw/company-logo_400_400/company-logo_400_400/0/1630544558231/university_of_notre_dame___mendoza_college_of_business_logo?e=1775692800&v=beta&t=QQRvJBsKyL5p8rcdKApPyrMRHhgcrDivWuA1QsGvpJA'}]`
+</ResponseField>
+
+<ResponseField name="educations" type="json">
+  Full education history as a JSON array. Example: `[{'school_name': 'Saint Ignatius High School', 'field_of_study': '', 'start_year': 2011, 'end_year': 2015, 'activities': None, 'grade': None, 'school_urn': 'urn:li:fsd_school:3185119', 'school_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQHxGZiajzHBHg/company-logo_400_400/company-logo_400_400/0/1631371114746/saint_ignatius_high_school_logo?e=1775692800&v=beta&t=p6mYmQOidWylws1rdca8euxkwEhPAMI-Rp2veaCuCbY'}, {'school_name': 'University of Notre Dame - Mendoza College of Business', 'field_of_study': 'Master of Science - MS, Accounting', 'start_year': 2019, 'end_year': 2020, 'activities': None, 'grade': None, 'school_urn': 'urn:li:fsd_school:18367', 'school_logo': 'https://media.licdn.com/dms/image/v2/C4D0BAQGU6YLdAy1dTw/company-logo_400_400/company-logo_400_400/0/1630544558231/university_of_notre_dame___mendoza_college_of_business_logo?e=1775692800&v=beta&t=QQRvJBsKyL5p8rcdKApPyrMRHhgcrDivWuA1QsGvpJA'}, {'school_name': 'Elon University', 'field_of_study': 'Bachelor of Science - BS, Accounting', 'start_year': 2015, 'end_year': 2019, 'activities': None, 'grade': None, 'school_urn': 'urn:li:fsd_school:18771', 'school_logo': 'https://media.licdn.com/dms/image/v2/C4E0BAQEJmXnCQ8bRCQ/company-logo_400_400/company-logo_400_400/0/1631342299438?e=1775692800&v=beta&t=jfaD9Y6mPPF_b_eV4enhqur75TJyll9xFtWSBrsBfiY'}]`
+</ResponseField>
+
+<ResponseField name="functions" type="json">
+  Additional enrichment functions enabled for this record. Example: `[]`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Timestamp when this LinkedIn profile was scraped. Example: `2025-07-01T12:00:00Z`
+</ResponseField>

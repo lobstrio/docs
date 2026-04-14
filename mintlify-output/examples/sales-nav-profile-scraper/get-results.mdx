@@ -1,0 +1,208 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Sales Navigator Profile Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Sales Navigator Profile Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="profile_id" type="string">
+  Sales Navigator profile ID. Example: `ACwAAAGHtboB_SK60RCbrgLUstRVuTcNlzAHfPU`
+</ResponseField>
+
+<ResponseField name="public_id" type="string">
+  LinkedIn public ID (slug). Example: `danadelstein`
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  First name. Example: `Daniel (Dan)`
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  Last name. Example: `Adelstein`
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Full name. Example: `Daniel (Dan) Adelstein`
+</ResponseField>
+
+<ResponseField name="headline" type="string">
+  Profile headline. Example: `Senior Vice President of International Development at Xponential Fitness (NYSE:XPOF)`
+</ResponseField>
+
+<ResponseField name="job_title" type="string">
+  Current job title. Example: `Senior Vice President of International Development`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Current company name. Example: `Xponential Fitness`
+</ResponseField>
+
+<ResponseField name="current_company_url" type="string">
+  Current company LinkedIn URL. Example: `https://www.linkedin.com/company/19193147/`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Profile location. Example: `Lake Worth, Florida, United States`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address found or enriched for this person. Example: `danieladelstein@yahoo.com`
+</ResponseField>
+
+<ResponseField name="email_status" type="string">
+  Email status. Example: `valid`
+</ResponseField>
+
+<ResponseField name="mobile_phone" type="string">
+  Mobile phone number. Example: `+1-555-000-0000`
+</ResponseField>
+
+<ResponseField name="public_url" type="string">
+  LinkedIn public profile URL. Example: `https://www.linkedin.com/in/danadelstein`
+</ResponseField>
+
+<ResponseField name="sales_navigator_url" type="string">
+  LinkedIn Sales Navigator profile URL. Example: `https://www.linkedin.com/sales/people/ACwAAAGHtboB_SK60RCbrgLUstRVuTcNlzAHfPU,NAME_SEARCH,3tl8`
+</ResponseField>
+
+<ResponseField name="profile_picture_url" type="string">
+  Profile picture URL. Example: `https://media.licdn.com/dms/image/C4E03AQFelTC96_eCyQ/profile-displayphoto-shrink_100_100/0/1649968936543`
+</ResponseField>
+
+<ResponseField name="profile_background_picture_url" type="string">
+  Profile background picture URL. Example: `https://media.licdn.com/dms/image/C4E16AQGSyK_L6GSwng/profile-displaybackgroundimage-shrink_200_800/0/1648546335745`
+</ResponseField>
+
+<ResponseField name="summary" type="string">
+  Profile summary / about section. Example: `Founded in 2017 and headquartered in Irvine, California...`
+</ResponseField>
+
+<ResponseField name="current_position" type="json">
+  Current position details. Example: `{'companyName': 'Xponential Fitness', 'title': 'Senior Vice President of International Development', 'companyUrn': 'urn:li:fs_salesCompany:19193147', 'current': True, 'location': 'Irvine, CA.', 'startedOn': {'year': 2022, 'month': 3}, 'endedOn': {}}`
+</ResponseField>
+
+<ResponseField name="past_job" type="string">
+  Most recent past job title. Example: `Associate Vice President of Franchise Development`
+</ResponseField>
+
+<ResponseField name="past_company_name" type="string">
+  Most recent past company name. Example: `Mathnasium - The Math Learning Center`
+</ResponseField>
+
+<ResponseField name="positions" type="json">
+  All work positions / experience. Example: `[]`
+</ResponseField>
+
+<ResponseField name="past_school" type="string">
+  Most recent school name. Example: `University of Florida`
+</ResponseField>
+
+<ResponseField name="past_school_url" type="string">
+  Most recent school LinkedIn URL. Example: `https://www.linkedin.com/school/uflorida/`
+</ResponseField>
+
+<ResponseField name="educations" type="json">
+  Education history. Example: `[]`
+</ResponseField>
+
+<ResponseField name="skills" type="json">
+  Skills and endorsement counts. Example: `[]`
+</ResponseField>
+
+<ResponseField name="languages" type="json">
+  Languages spoken. Example: `[]`
+</ResponseField>
+
+<ResponseField name="volunteering_experiences" type="json">
+  Volunteering experience entries. Example: `[]`
+</ResponseField>
+
+<ResponseField name="connection_type" type="integer">
+  Connection degree (1, 2, or 3). Example: `2`
+</ResponseField>
+
+<ResponseField name="num_of_connections" type="integer">
+  Number of connections. Example: `7869`
+</ResponseField>
+
+<ResponseField name="num_of_shared_connections" type="integer">
+  Number of shared connections with the scraping account. Example: `2`
+</ResponseField>
+
+<ResponseField name="shared_connections" type="json">
+  Mutual connections between you and this profile. Example: `[]`
+</ResponseField>
+
+<ResponseField name="recent_posts" type="json">
+  Recent posts and comments (last 90 days) with text, reactions, comments count. Example: `[]`
+</ResponseField>
+
+<ResponseField name="spotlight_badges" type="json">
+  Spotlight badges (mutual connections, recent posts, etc.). Example: `[{'id': 'SECOND_DEGREE_CONNECTION', 'displayValue': '2 mutual connections'}]`
+</ResponseField>
+
+<ResponseField name="following" type="json">
+  Companies, schools and groups this person follows (up to 10). Example: `[]`
+</ResponseField>
+
+<ResponseField name="following_count" type="integer">
+  Total number of entities this person follows. Example: `608`
+</ResponseField>
+
+<ResponseField name="last_interaction_type" type="string">
+  Type of last interaction with this profile. Example: `VIEW_PROFILE`
+</ResponseField>
+
+<ResponseField name="last_interaction_time" type="integer">
+  Timestamp (ms) of last interaction with this profile. Example: `1687496301805`
+</ResponseField>
+
+<ResponseField name="open_link" type="boolean">
+  Whether the profile has OpenLink enabled. Example: `false`
+</ResponseField>
+
+<ResponseField name="premium" type="boolean">
+  Whether the profile has LinkedIn Premium. Example: `false`
+</ResponseField>
+
+<ResponseField name="pending_invitation" type="boolean">
+  Whether there is a pending connection invitation. Example: `false`
+</ResponseField>
+
+<ResponseField name="saved" type="boolean">
+  Whether the lead is saved in Sales Navigator. Example: `false`
+</ResponseField>
+
+<ResponseField name="viewed" type="boolean">
+  Whether the profile has been viewed. Example: `true`
+</ResponseField>
+
+<ResponseField name="unlocked" type="boolean">
+  Whether the profile is unlocked in Sales Navigator. Example: `false`
+</ResponseField>
+
+<ResponseField name="full_name_pronunciation_audio" type="json">
+  Full name pronunciation audio metadata. Example: `{}`
+</ResponseField>

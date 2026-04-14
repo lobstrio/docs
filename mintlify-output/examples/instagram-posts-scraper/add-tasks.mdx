@@ -1,0 +1,131 @@
+---
+title: "Add Tasks"
+description: "Add Instagram profile URLs, post URLs, or usernames to scrape posts using the lobstr.io API"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Instagram profiles or posts as tasks to your squid. The scraper will extract posts, captions, engagement metrics, and metadata from the provided profiles or individual posts.
+
+You can provide a profile URL, a single post/reel URL, or just a username.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Supported Input Formats
+
+**Profile URL:**
+
+`https://www.instagram.com/natgeo/`
+
+`https://instagram.com/username`
+
+**Single Post URL:**
+
+`https://www.instagram.com/p/ABC123/`
+
+**Reel URL:**
+
+`https://www.instagram.com/reel/ABC123/`
+
+**Username only:**
+
+`natgeo`
+
+`cristiano`
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Instagram Posts Scraper crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+<Tip>
+  You can use just the username without the full URL - the scraper will resolve it automatically.
+</Tip>
+
+<Note>
+  When scraping a profile, all public posts will be collected. For single posts, only that specific post data is returned.
+</Note>
+
+<Tip>
+  You can add up to 1000 tasks in a single request for bulk operations.
+</Tip>
+
+<Note>
+  Duplicate URLs are automatically detected and won't be added twice.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url": "https://www.instagram.com/natgeo/"},
+      {"url": "https://www.instagram.com/cristiano/"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Instagram profiles to scrape posts from
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": "https://www.instagram.com/natgeo/"},
+            {"url": "https://www.instagram.com/cristiano/"}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "tasks": [
+    {
+      "id": "task_abc123def456",
+      "status": "pending",
+      "params": {
+        "url": "https://www.instagram.com/natgeo/"
+      }
+    },
+    {
+      "id": "task_abc123def457",
+      "status": "pending",
+      "params": {
+        "url": "https://www.instagram.com/cristiano/"
+      }
+    }
+  ],
+  "duplicated_count": 0
+}
+```

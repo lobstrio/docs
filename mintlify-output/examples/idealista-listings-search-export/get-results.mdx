@@ -1,0 +1,68 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Idealista Listings Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Idealista Listings Search Export** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on Idealista. Example: `https://www.idealista.com/en/inmueble/106993032/`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the property listing on Idealista. Example: `Flat / apartment for sale in Galleteras Nn, La Ribera-Ibarrekolanda, Bilbao`
+</ResponseField>
+
+<ResponseField name="price" type="int">
+  Listed price of the property. Example: `526000`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  ISO 3-letter currency code of the listed price. Example: `EUR`
+</ResponseField>
+
+<ResponseField name="bedrooms" type="int">
+  Number of bedrooms in the property. Example: `2`
+</ResponseField>
+
+<ResponseField name="area" type="int">
+  Living surface area of the property in square metres. Example: `99`
+</ResponseField>
+
+<ResponseField name="floor" type="string">
+  Floor level where the property is located. Example: `1st floor exterior with lift`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full description text provided by the seller or agency on Idealista. Example: `A little piece of nature in the heart of Bilbao. Ubide Barri is the new development by Loiola, located in the most sought-after enclave of Zorrotzaurre Island: on the first line of the Deusto estuary, surrounded by parks and with the best connections to the city.`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Contact phone number for the listing. Example: `+34843750610`
+</ResponseField>
+
+<ResponseField name="main_image" type="string">
+  URL of the property's main listing image on Idealista. Example: `https://img4.idealista.com/blur/WEB_DETAIL/0/id.pro.es.image.master/00/63/2d/1326662095.jpg`
+</ResponseField>

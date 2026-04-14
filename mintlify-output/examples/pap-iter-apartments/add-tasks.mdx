@@ -1,0 +1,101 @@
+---
+title: "Add Tasks"
+description: "Add PAP.fr search URLs as tasks for scraping French real estate listings"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add PAP.fr (Particulier a Particulier) search URLs to your squid for scraping French private real estate listings. PAP is a French platform for direct owner-to-buyer property transactions without agents. The scraper extracts property details including price, location, energy ratings, and contact information.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Task Format
+
+Each task should contain a URL from a PAP.fr search results page. You can search for properties by location, type, and filters on PAP, then use those search URLs as tasks.
+
+## Supported URL Formats
+
+The scraper supports PAP.fr search URLs from various property categories:
+
+<Tip>
+  PAP.fr is for private sales (particulier a particulier), meaning you deal directly with owners rather than agencies. This can mean more negotiation flexibility.
+</Tip>
+
+<Note>
+  PAP URLs use department codes (e.g., 'ain-01' for Ain department). Apply location filters on the website to get the correct URL format.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.pap.fr/annonce/vente-immobiliere-ain-01-g364"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add PAP.fr search URLs as tasks
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": "https://www.pap.fr/annonce/vente-immobiliere-ain-01-g364"},
+            {"url": "https://www.pap.fr/annonce/vente-immobiliere-paris-75-g439"}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+
+for task in data["tasks"]:
+    print(f"  Task ID: {task['id']}")
+    print(f"  URL: {task['params']['url']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "82367f24d9450b2222080eed91662968",
+      "created_at": "2025-07-17T09:06:47.287893",
+      "is_active": true,
+      "params": {
+        "url": "https://www.pap.fr/annonce/vente-immobiliere-ain-01-g364"
+      },
+      "module": 115,
+      "object": "task"
+    }
+  ]
+}
+```

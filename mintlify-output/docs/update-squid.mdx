@@ -1,0 +1,168 @@
+---
+title: "Update Squid"
+description: "Update squid settings including parameters, concurrency, scheduling, and delivery integrations"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+This endpoint updates an existing squid's settings using its hash ID. You can configure crawler parameters, execution settings, scheduling, notifications, and data delivery integrations.
+
+### Squid Settings
+
+<ParamField body="name" type="string">
+  Display name for the squid. Example: `"My Custom Squid"`
+</ParamField>
+
+<ParamField body="is_active" type="boolean">
+  Enable (true) or disable (false) the squid. Example: `true`
+</ParamField>
+
+<ParamField body="concurrency" type="integer">
+  Number of concurrent tasks to run simultaneously (1-20). Example: `2`
+</ParamField>
+
+<ParamField body="to_complete" type="boolean">
+  Stop after all tasks complete (true) or run until credits exhausted (false). Example: `false`
+</ParamField>
+
+<ParamField body="export_unique_results" type="boolean">
+  Export only unique results, removing duplicates. Example: `true`
+</ParamField>
+
+<ParamField body="no_line_breaks" type="boolean">
+  Remove newlines from exported data. Example: `true`
+</ParamField>
+
+<ParamField body="run_notify" type="string">
+  Notification preference: null (no notifications), "on_success", or "on_error". Example: `"on_success"`
+</ParamField>
+
+<ParamField body="cron_expression" type="string">
+  Cron expression for scheduling automated runs. Example: `"0 10 * * *"`
+</ParamField>
+
+<ParamField body="timezone" type="string">
+  Timezone identifier for schedule execution. Example: `"Europe/Paris"`
+</ParamField>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid_hash" type="string" required>
+  The unique identifier (hash) of the squid to update. Example: `e86b29c032024b66aff529e1d43c2bd7`
+</ParamField>
+
+<Tip>
+  The params object structure depends on the crawler. Use Get Crawler Parameters endpoint to see available options before updating.
+</Tip>
+
+<Note>
+  Optional function parameters (in params.functions) cost extra credits per row. Check the crawler details for pricing.
+</Note>
+
+<Warning>
+  Setting is_active to false will prevent the squid from running. Use this to temporarily pause a squid without deleting it.
+</Warning>
+
+<Tip>
+  You can update just one field at a time - send only the fields you want to change. Other settings remain unchanged.
+</Tip>
+
+<Tip>
+  Use cron_expression and timezone to schedule recurring runs. Common patterns: '0 9 * * *' (daily at 9am), '0 0 * * 0' (weekly on Sunday).
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/e86b29c032024b66aff529e1d43c2bd7" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Updated Squid Name",
+    "concurrency": 2,
+    "is_active": true,
+    "params": {
+      "max_results": 150,
+      "functions": {
+        "extract_emails_from_website": true,
+        "collect_business_details": true,
+        "fetch_business_images": false
+      },
+      "ratings": "4.0+",
+      "country": "United States",
+      "language": "English (United States)"
+    },
+    "run_notify": "on_success"
+  }'
+```
+
+```python Python
+import requests
+
+squid_id = "e86b29c032024b66aff529e1d43c2bd7"
+url = f"https://api.lobstr.io/v1/squids/{squid_id}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+payload = {
+    "name": "Updated Squid Name",
+    "concurrency": 2,
+    "is_active": True,
+    "params": {
+        "max_results": 150,
+        "functions": {
+            "extract_emails_from_website": True,
+            "collect_business_details": True,
+            "fetch_business_images": False
+        },
+        "ratings": "4.0+",
+        "country": "United States",
+        "language": "English (United States)"
+    },
+    "run_notify": "on_success"
+}
+
+response = requests.post(url, headers=headers, json=payload)
+result = response.json()
+
+print(f"Squid updated successfully!")
+print(f"Name: {result['name']}")
+print(f"Concurrency: {result.get('concurrency', 'N/A')}")
+print(f"Notifications: {result.get('run_notify', 'None')}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "name": "Updated Squid Name",
+  "no_line_breaks": true,
+  "is_active": true,
+  "params": {
+    "max_results": 150,
+    "functions": {
+      "extract_emails_from_website": true,
+      "collect_business_details": true,
+      "fetch_business_images": false
+    },
+    "ratings": "4.0+",
+    "country": "United States",
+    "language": "English (United States)"
+  },
+  "to_complete": false,
+  "run_notify": "on_success",
+  "export_unique_results": true
+}
+```

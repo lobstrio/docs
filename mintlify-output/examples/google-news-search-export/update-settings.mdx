@@ -1,0 +1,113 @@
+---
+title: "Update Settings"
+description: "Configure the Google News Search Export parameters"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure the scraper parameters to control how Google News articles are collected. These settings include language, recency filters, and result limits.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| **language** | string | Country edition and UI language for Google News (e.g., `English (United States)`) |
+| **time_range** | string | Filter by recency: `Any time`, `Past hour`, `Past 24h`, `Past week`, `Past year` |
+| **max_results** | integer | Maximum articles to scrape. Leave blank to extract all news since 2005. |
+
+## Max Results Behavior
+
+The `max_results` setting affects how the scraper operates:
+
+- **≤ 100**: No date filter is applied, fetches recent articles
+- **> 100**: Scraper breaks the span into daily windows and fetches news day by day
+- **Blank**: Pulls every article back to 2005-01-01 (when combined with `Any time`)
+
+<Warning>
+  Leaving max_results blank with time_range as 'Any time' will pull every article back to 2005 - this can be very large.
+</Warning>
+
+<Tip>
+  Use time_range filters like 'Past week' for recent news monitoring.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Google News Search Export",
+    "concurrency": 1,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "language": "English (United States)",
+      "time_range": "Past week",
+      "max_results": 100
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Update scraper settings
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Google News Search Export",
+        "concurrency": 1,
+        "export_unique_results": True,
+        "to_complete": False,
+        "no_line_breaks": True,
+        "params": {
+            "language": "English (United States)",
+            "time_range": "Past week",
+            "max_results": 100
+        }
+    }
+)
+
+data = response.json()
+print(f"Updated: {data['name']}")
+print(f"Time range: {data['params']['time_range']}")
+print(f"Max results: {data['params']['max_results']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Google News Search Export",
+  "no_line_breaks": true,
+  "params": {
+    "language": "English (United States)",
+    "time_range": "Past week",
+    "max_results": 100
+  },
+  "to_complete": false,
+  "export_unique_results": true
+}
+```

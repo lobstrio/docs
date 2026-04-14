@@ -1,0 +1,47 @@
+---
+title: "Update Settings"
+description: "Configure settings for your Immoweb Listings & Phones Search Export squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **Immoweb Listings & Phones Search Export** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+## Settings Fields
+
+<ParamField body="params.max_pages" type="integer">
+
+</ParamField>
+
+<ParamField body="params.max_results" type="integer">
+
+</ParamField>
+
+<ParamField body="params.max_unique_results_per_run" type="int">
+
+</ParamField>
+
+## Optional Functions
+
+<Note>
+  Functions are optional add-ons that enable extra data extraction. Each incurs additional credits per row.
+</Note>
+
+<ParamField body="params.functions.product_details" type="boolean">
+  Default: `true`. Extra cost: `{'legacy': 100, 'current': 4}` credits/row.
+</ParamField>

@@ -1,0 +1,110 @@
+---
+title: "Add Tasks"
+description: "Add Bien'Ici search URLs to scrape real estate listings"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Bien'Ici search URLs to scrape French real estate listings. The scraper extracts comprehensive property details including pricing, location, amenities, energy performance ratings, and agency information from bienici.com.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Bien'Ici Search Export crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Bien'Ici search URL (e.g., `https://www.bienici.com/recherche/achat/bouches-du-rhone-13/maisonvilla`) |
+
+<Tip>
+  Perform your search on bienici.com first, apply all filters (location, property type, price range), then copy the URL to preserve all search parameters.
+</Tip>
+
+<Note>
+  Bien'Ici is a French real estate aggregator platform - URLs follow the pattern `https://www.bienici.com/recherche/{transaction}/{location}/{property-type}`.
+</Note>
+
+<Tip>
+  The URL supports various transaction types: `achat` (buy), `location` (rent), and property types like `maisonvilla`, `appartement`, etc.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.bienici.com/recherche/achat/bouches-du-rhone-13/maisonvilla"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add Bien'Ici search URLs
+# Copy the URL directly from bienici.com after applying filters
+payload = {
+    "squid": squid_id,
+    "tasks": [
+        {
+            "url": "https://www.bienici.com/recherche/achat/bouches-du-rhone-13/maisonvilla"
+        }
+    ]
+}
+
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json=payload
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "8a2b4c6d8e0f2a4b6c8d0e2f4a6b8c0d",
+      "created_at": "2025-07-17T08:55:52.537282",
+      "is_active": true,
+      "params": {
+        "url": "https://www.bienici.com/recherche/achat/bouches-du-rhone-13/maisonvilla"
+      },
+      "module": 13,
+      "object": "task"
+    }
+  ]
+}
+```

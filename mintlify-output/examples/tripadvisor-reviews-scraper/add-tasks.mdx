@@ -1,0 +1,101 @@
+---
+title: "Add Tasks"
+description: "Add TripAdvisor place URLs as tasks to scrape reviews from hotels, restaurants, and attractions"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add TripAdvisor place URLs to your squid for scraping reviews. The scraper extracts comprehensive review data including ratings, review text, user information, travel dates, photos, subratings, owner responses, and more from hotels, restaurants, and attractions on TripAdvisor.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Task Format
+
+Each task should contain a URL from a TripAdvisor place page. You can scrape reviews from hotels, restaurants, or attractions.
+
+## Supported URL Formats
+
+The scraper supports TripAdvisor review URLs from various regional domains:
+
+<Tip>
+  Use the scraper's filter settings (language, rating, fetch_since) to collect only the reviews you need and reduce credit consumption.
+</Tip>
+
+<Note>
+  Each place type (hotel, restaurant, attraction) has its own URL format on TripAdvisor. Make sure to use the review page URL, not the overview page.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.tripadvisor.com/Hotel_Review-g60763-d208453-Reviews-Hilton_New_York_Times_Square-New_York_City_New_York.html"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+# Add TripAdvisor place URLs as tasks
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_id,
+        "tasks": [
+            {"url": "https://www.tripadvisor.com/Hotel_Review-g60763-d208453-Reviews-Hilton_New_York_Times_Square-New_York_City_New_York.html"},
+            {"url": "https://www.tripadvisor.com/Hotel_Review-g60763-d120461-Reviews-The_Knickerbocker-New_York_City_New_York.html"}
+        ]
+    }
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+
+for task in data["tasks"]:
+    print(f"  Task ID: {task['id']}")
+    print(f"  URL: {task['params']['url']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "a7d9f45e3b2c8e1f7d6a8b9c4e5f7a9b",
+      "created_at": "2025-01-27T14:30:00.123456",
+      "is_active": true,
+      "params": {
+        "url": "https://www.tripadvisor.com/Hotel_Review-g60763-d208453-Reviews-Hilton_New_York_Times_Square-New_York_City_New_York.html"
+      },
+      "module": 132,
+      "object": "task"
+    }
+  ]
+}
+```

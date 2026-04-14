@@ -1,0 +1,125 @@
+---
+title: "Check Sync Status"
+description: "Monitor the synchronization status of a cookie update task"
+api: "GET https://api.lobstr.io/v1/synchronize/{sync_task_id}"
+---
+
+This endpoint checks the synchronization status of a cookie update task using its hash ID. Use this to monitor whether your account cookies have been successfully synchronized.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="sync_task_id" type="string" required>
+  The synchronization task ID returned from Sync Account or Refresh Cookies. Example: `75bed0d425c4bc1912a17fe9fc4dd2a1`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="id" type="string">
+  Synchronization task identifier. Example: `"75bed0d425c4bc1912a17fe9fc4dd2a1"`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "synchronize-cookies". Example: `"synchronize-cookies"`
+</ResponseField>
+
+<ResponseField name="status_code" type="integer">
+  Task status code (100=created, 120=synchronizing, 200=synchronized). Example: `200`
+</ResponseField>
+
+<ResponseField name="status_text" type="string">
+  Human-readable status. Example: `"synchronized"`
+</ResponseField>
+
+<ResponseField name="account_hash" type="string">
+  Hash of the created/updated account. Example: `"84efd37ebd21c0f232826b7763b403d3"`
+</ResponseField>
+
+<Tip>
+  Poll this endpoint every few seconds after initiating a sync until status_code reaches 200 (synchronized) or an error state.
+</Tip>
+
+<Note>
+  Once status_code is 200, use the returned account_hash to access the synchronized account with Get Account Details.
+</Note>
+
+<Warning>
+  If synchronization remains at status_code 120 for more than 30 seconds, the cookies may be invalid. Try re-syncing with fresh cookies.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/synchronize/75bed0d425c4bc1912a17fe9fc4dd2a1" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+import time
+
+sync_task_id = "75bed0d425c4bc1912a17fe9fc4dd2a1"
+
+url = f"https://api.lobstr.io/v1/synchronize/{sync_task_id}"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+# Poll until synchronization completes
+while True:
+    response = requests.get(url, headers=headers)
+    data = response.json()
+
+    status_code = data['status_code']
+    status_text = data['status_text']
+
+    print(f"Status: {status_code} - {status_text}")
+
+    if status_code == 100:
+        print("   Task created, waiting...")
+    elif status_code == 120:
+        print("   Synchronizing cookies...")
+    elif status_code == 200:
+        print(f"\n✓ Success! Account hash: {data['account_hash']}")
+        break
+    elif status_code >= 400:
+        print(f"\n✗ Failed: {status_text}")
+        break
+
+    time.sleep(2)
+```
+</CodeGroup>
+
+## Response
+
+```json 120
+{
+  "id": "75bed0d425c4bc1912a17fe9fc4dd2a1",
+  "object": "synchronize-cookies",
+  "status_code": 120,
+  "status_text": "synchronizing",
+  "account_hash": "84efd37ebd21c0f232826b7763b403d3"
+}
+```
+
+```json 200
+{
+  "id": "75bed0d425c4bc1912a17fe9fc4dd2a1",
+  "object": "synchronize-cookies",
+  "status_code": 200,
+  "status_text": "synchronized",
+  "account_hash": "84efd37ebd21c0f232826b7763b403d3"
+}
+```
+
+```json 404
+{
+  "detail": "Synchronization task not found."
+}
+```

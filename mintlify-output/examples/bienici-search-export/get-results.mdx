@@ -1,0 +1,582 @@
+---
+title: "Get Results"
+description: "Retrieve scraped Bien'Ici real estate listings"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped Bien'Ici real estate listings including comprehensive property details, pricing, location, amenities, energy performance ratings, and agency information.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from. Example: `53317cbe332e408c5c46372a18e4fc76`
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional). Example: `a1b2c3d4e5f6789012345678901234ab`
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+<ParamField query="page_size" type="integer">
+  Results per page (default: 50, max: 100). Example: `50`
+</ParamField>
+
+## Core Result Fields
+
+Standard result identifiers:
+
+<ResponseField name="id" type="integer">
+  Unique result identifier. Example: `8542691`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "result". Example: `"result"`
+</ResponseField>
+
+<ResponseField name="squid" type="string">
+  Squid that produced this result. Example: `"53317cbe332e408c5c46372a18e4fc76"`
+</ResponseField>
+
+<ResponseField name="run" type="string">
+  Run that produced this result. Example: `"a1b2c3d4e5f6789012345678901234ab"`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct link to the listing. Example: `"https://www.bienici.com/annonce/vente/antibes/appartement/3pieces/apimo-7410861"`
+</ResponseField>
+
+<ResponseField name="listing_id" type="string">
+  Unique Bien'Ici listing identifier. Example: `"apimo-7410861"`
+</ResponseField>
+
+## Property Information
+
+Basic property details:
+
+<ResponseField name="title" type="string">
+  Headline/title of the listing. Example: `"3 PIÈCES PROCHE PLACE DE GAULLE"`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full listing description. Example: `"Idéalement situé au centre d'Antibes..."`
+</ResponseField>
+
+<ResponseField name="property_type" type="string">
+  Type of property. Example: `"flat"`
+</ResponseField>
+
+<ResponseField name="ad_type" type="string">
+  Transaction type. Example: `"buy"`
+</ResponseField>
+
+<ResponseField name="new_property" type="boolean">
+  Whether it's a new build. Example: `false`
+</ResponseField>
+
+<ResponseField name="year_of_construction" type="integer | null">
+  Year the property was built. Example: `1980`
+</ResponseField>
+
+<ResponseField name="reference" type="string">
+  Agency reference number. Example: `"7410861"`
+</ResponseField>
+
+## Location Information
+
+Geographic details:
+
+<ResponseField name="city" type="string">
+  City name. Example: `"Antibes"`
+</ResponseField>
+
+<ResponseField name="postal_code" type="string">
+  Postal code. Example: `"06600"`
+</ResponseField>
+
+<ResponseField name="department_code" type="string">
+  French department code. Example: `"06"`
+</ResponseField>
+
+<ResponseField name="district" type="json | null">
+  District information with name and INSEE code. Example: `{"name": "Antibes", "code_insee": "06004"}`
+</ResponseField>
+
+<ResponseField name="address_known" type="boolean">
+  Whether exact address is available. Example: `false`
+</ResponseField>
+
+<ResponseField name="blur_info" type="json | null">
+  Address precision level. Example: `{"type": "cityOrArrondissement"}`
+</ResponseField>
+
+## Pricing Information
+
+Price and transaction details:
+
+<ResponseField name="price" type="float">
+  Total listing price in euros. Example: `267000`
+</ResponseField>
+
+<ResponseField name="price_without_fees" type="float | null">
+  Price excluding agency fees. Example: `260000`
+</ResponseField>
+
+<ResponseField name="price_per_square_meter" type="float | null">
+  Price per square meter. Example: `5037.74`
+</ResponseField>
+
+<ResponseField name="transaction_type" type="string">
+  Transaction type identifier. Example: `"buy"`
+</ResponseField>
+
+<ResponseField name="fees_charged_to" type="string | null">
+  Who pays agency fees. Example: `"purchaser"`
+</ResponseField>
+
+<ResponseField name="agency_fee_percentage" type="float | null">
+  Agency fee as percentage. Example: `3.5`
+</ResponseField>
+
+<ResponseField name="reduced_vat" type="boolean">
+  Whether reduced VAT applies. Example: `false`
+</ResponseField>
+
+## Size & Layout
+
+Property dimensions and room counts:
+
+<ResponseField name="surface_area" type="float">
+  Living area in square meters. Example: `53`
+</ResponseField>
+
+<ResponseField name="land_surface_area" type="float | null">
+  Land area in square meters. Example: `250`
+</ResponseField>
+
+<ResponseField name="rooms_quantity" type="integer">
+  Total number of rooms. Example: `3`
+</ResponseField>
+
+<ResponseField name="bedrooms_quantity" type="integer | null">
+  Number of bedrooms. Example: `2`
+</ResponseField>
+
+<ResponseField name="bathrooms_quantity" type="integer | null">
+  Number of bathrooms. Example: `1`
+</ResponseField>
+
+<ResponseField name="shower_rooms_quantity" type="integer | null">
+  Number of shower rooms. Example: `1`
+</ResponseField>
+
+<ResponseField name="toilet_quantity" type="integer | null">
+  Number of toilets. Example: `2`
+</ResponseField>
+
+<ResponseField name="floor" type="integer | null">
+  Floor number. Example: `1`
+</ResponseField>
+
+<ResponseField name="floor_quantity" type="integer | null">
+  Total floors in building. Example: `4`
+</ResponseField>
+
+## Amenities & Features
+
+Property amenities (boolean fields):
+
+<ResponseField name="has_garage" type="boolean">
+  Has garage. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_parking" type="boolean">
+  Has parking. Example: `true`
+</ResponseField>
+
+<ResponseField name="parking_places_quantity" type="integer | null">
+  Number of parking spaces. Example: `1`
+</ResponseField>
+
+<ResponseField name="has_cellar" type="boolean">
+  Has cellar/basement. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_elevator" type="boolean">
+  Has elevator. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_balcony" type="boolean">
+  Has balcony. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_terrace" type="boolean">
+  Has terrace. Example: `true`
+</ResponseField>
+
+<ResponseField name="terraces_quantity" type="integer | null">
+  Number of terraces. Example: `1`
+</ResponseField>
+
+<ResponseField name="has_garden" type="boolean">
+  Has garden. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_pool" type="boolean">
+  Has swimming pool. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_air_conditioning" type="boolean">
+  Has air conditioning. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_fireplace" type="boolean">
+  Has fireplace. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_alarm" type="boolean">
+  Has alarm system. Example: `false`
+</ResponseField>
+
+## Security & Access
+
+Building security features:
+
+<ResponseField name="has_intercom" type="boolean">
+  Has intercom. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_door_code" type="boolean">
+  Has door code entry. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_videophone" type="boolean">
+  Has video intercom. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_disabled_people_friendly" type="boolean">
+  Accessible for disabled persons. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_calm" type="boolean">
+  Quiet location. Example: `true`
+</ResponseField>
+
+<ResponseField name="work_to_do" type="boolean">
+  Renovation needed. Example: `false`
+</ResponseField>
+
+<ResponseField name="exposition" type="string | null">
+  Sun exposure direction. Example: `"Sud-Ouest"`
+</ResponseField>
+
+## Energy Performance
+
+DPE and GES ratings (French energy diagnostics):
+
+<ResponseField name="energy_classification" type="string | null">
+  Energy Performance rating (A-G). Example: `"E"`
+</ResponseField>
+
+<ResponseField name="energy_value" type="float | null">
+  Energy consumption value (kWh/m²/year). Example: `279`
+</ResponseField>
+
+<ResponseField name="greenhouse_gaz_classification" type="string | null">
+  Greenhouse Gas rating (A-G). Example: `"B"`
+</ResponseField>
+
+<ResponseField name="greenhouse_gaz_value" type="float | null">
+  GHG emissions value (kg CO2/m²/year). Example: `9`
+</ResponseField>
+
+<ResponseField name="energy_performance_diagnostic_date" type="string | null">
+  Date of DPE diagnosis. Example: `"2022-09-21"`
+</ResponseField>
+
+<ResponseField name="max_energy_consumption" type="float | null">
+  Maximum estimated annual energy cost. Example: `2900`
+</ResponseField>
+
+<ResponseField name="min_energy_consumption" type="float | null">
+  Minimum estimated annual energy cost. Example: `2100`
+</ResponseField>
+
+<ResponseField name="use_july_2021_energy_performance_diagnostic" type="boolean">
+  Uses new 2021 DPE standard. Example: `true`
+</ResponseField>
+
+<ResponseField name="heating" type="string | null">
+  Heating type description. Example: `"radiateur électrique individuel"`
+</ResponseField>
+
+## Condominium Details
+
+For properties in co-ownership (copropriété):
+
+<ResponseField name="is_in_condominium" type="boolean">
+  Part of a condominium. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_condominium_in_procedure" type="boolean">
+  Condominium under legal procedure. Example: `false`
+</ResponseField>
+
+## Agency Information
+
+Real estate agency details:
+
+<ResponseField name="account_type" type="string">
+  Type of seller account. Example: `"agency"`
+</ResponseField>
+
+<ResponseField name="account_display_name" type="string">
+  Agency or seller display name. Example: `"APIMO Agency"`
+</ResponseField>
+
+<ResponseField name="ad_created_by_pro" type="boolean">
+  Listed by professional. Example: `true`
+</ResponseField>
+
+<ResponseField name="customer_id" type="string | null">
+  Agency customer identifier. Example: `"apimo-customer-123"`
+</ResponseField>
+
+<ResponseField name="agency_fee_url" type="string | null">
+  URL to agency fee document. Example: `"https://api.apimo.pro/document_agency/"`
+</ResponseField>
+
+<ResponseField name="is_exclusive_sale_mandate" type="boolean">
+  Exclusive agency mandate. Example: `false`
+</ResponseField>
+
+## Media & Images
+
+Listing images and virtual tours:
+
+<ResponseField name="photos" type="json">
+  Array of photo URLs. Example: `[]`
+</ResponseField>
+
+<ResponseField name="with_3d_model" type="boolean">
+  Has 3D model available. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_3d_highlighted" type="boolean">
+  3D tour is highlighted. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_lot_with_360" type="boolean">
+  Has 360° view. Example: `false`
+</ResponseField>
+
+<ResponseField name="need_virtual_tour" type="boolean">
+  Virtual tour requested. Example: `false`
+</ResponseField>
+
+## Listing Status
+
+Status and metadata:
+
+<ResponseField name="status" type="json">
+  Listing market status. Example: `{"onTheMarket": true}`
+</ResponseField>
+
+<ResponseField name="is_bien_ici_exclusive" type="boolean">
+  Bien'Ici exclusive listing. Example: `false`
+</ResponseField>
+
+<ResponseField name="price_has_decreased" type="boolean">
+  Price has been reduced. Example: `false`
+</ResponseField>
+
+<ResponseField name="relevance_bonus" type="integer | null">
+  Search relevance score. Example: `5`
+</ResponseField>
+
+<ResponseField name="optical_fiber_status" type="string | null">
+  Fiber optic availability. Example: `"deploye"`
+</ResponseField>
+
+## Timestamps
+
+<ResponseField name="modification_date" type="datetime">
+  Last modification date (ISO 8601). Example: `"2022-09-23T09:03:11.123Z"`
+</ResponseField>
+
+<ResponseField name="publication_date" type="datetime">
+  Original publication date. Example: `"2022-09-21T13:54:51.302Z"`
+</ResponseField>
+
+<ResponseField name="threshold_date" type="datetime | null">
+  Listing threshold date. Example: `"2025-08-17T00:00:00.000Z"`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="string">
+  When scraped (ISO 8601). Example: `"2025-07-16T10:04:14.545Z"`
+</ResponseField>
+
+<Tip>
+  Use `energy_classification` and `greenhouse_gaz_classification` to filter properties by energy efficiency (A = most efficient, G = least efficient).
+</Tip>
+
+<Tip>
+  Check `price_has_decreased` to identify listings where prices have been reduced - useful for finding motivated sellers.
+</Tip>
+
+<Note>
+  DPE/GES ratings follow French energy diagnostic standards. Properties using the July 2021 standard (`use_july_2021_energy_performance_diagnostic: true`) have more accurate ratings.
+</Note>
+
+<Tip>
+  Filter by `ad_type` to separate purchases (`buy`) from rentals, and by `property_type` for specific property categories.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&run=YOUR_RUN_HASH" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+run_id = "YOUR_RUN_HASH"
+
+# Get Bien'Ici real estate listing results
+response = requests.get(f"{BASE_URL}/results",
+    headers=headers,
+    params={"squid": squid_id, "run": run_id}
+)
+
+data = response.json()
+print(f"Total listings: {data['total_results']}")
+
+for listing in data["data"]:
+    print(f"\n{listing['title']}")
+    print(f"  Type: {listing['property_type']}")
+    print(f"  Price: €{listing['price']:,}")
+    print(f"  Area: {listing['surface_area']} m²")
+    print(f"  Location: {listing['city']} ({listing['postal_code']})")
+    print(f"  Rooms: {listing['rooms_quantity']}")
+    if listing.get('energy_classification'):
+        print(f"  Energy Rating (DPE): {listing['energy_classification']}")
+    print(f"  URL: {listing['url']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 50,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 50,
+  "data": [
+    {
+      "id": 8542691,
+      "object": "result",
+      "squid": "53317cbe332e408c5c46372a18e4fc76",
+      "run": "a1b2c3d4e5f6789012345678901234ab",
+      "url": "https://www.bienici.com/annonce/vente/antibes/appartement/3pieces/apimo-7410861",
+      "modification_date": "2022-09-23T09:03:11.123Z",
+      "city": "Antibes",
+      "postal_code": "06600",
+      "listing_id": "apimo-7410861",
+      "ad_type": "buy",
+      "property_type": "flat",
+      "title": "3 PIÈCES PROCHE PLACE DE GAULLE",
+      "description": "Idéalement situé au centre d'Antibes, cet appartement de 3 pièces offre un cadre de vie agréable à deux pas de toutes commodités.",
+      "publication_date": "2022-09-21T13:54:51.302Z",
+      "reference": "7410861",
+      "new_property": false,
+      "year_of_construction": 1980,
+      "price": 267000,
+      "price_without_fees": 260000,
+      "surface_area": 53,
+      "land_surface_area": null,
+      "rooms_quantity": 3,
+      "bedrooms_quantity": 2,
+      "floor_quantity": 4,
+      "floor": 1,
+      "bathrooms_quantity": 1,
+      "shower_rooms_quantity": 1,
+      "toilet_quantity": 2,
+      "terraces_quantity": 1,
+      "parking_places_quantity": 1,
+      "has_cellar": true,
+      "has_alarm": false,
+      "has_fireplace": false,
+      "has_garage": true,
+      "has_parking": true,
+      "has_elevator": true,
+      "has_intercom": true,
+      "has_door_code": true,
+      "has_videophone": false,
+      "has_air_conditioning": true,
+      "has_garden": false,
+      "has_pool": false,
+      "has_balcony": true,
+      "has_terrace": true,
+      "is_disabled_people_friendly": false,
+      "is_calm": true,
+      "work_to_do": false,
+      "exposition": "Sud-Ouest",
+      "energy_value": 279,
+      "greenhouse_gaz_value": 9,
+      "energy_classification": "E",
+      "greenhouse_gaz_classification": "B",
+      "energy_performance_diagnostic_date": "2022-09-21",
+      "max_energy_consumption": 2900,
+      "min_energy_consumption": 2100,
+      "use_july_2021_energy_performance_diagnostic": true,
+      "heating": "radiateur électrique individuel",
+      "is_exclusive_sale_mandate": false,
+      "fees_charged_to": "purchaser",
+      "agency_fee_percentage": 3.5,
+      "ad_created_by_pro": true,
+      "transaction_type": "buy",
+      "price_per_square_meter": 5037.74,
+      "account_type": "agency",
+      "account_display_name": "APIMO Agency",
+      "department_code": "06",
+      "district": {
+        "name": "Antibes",
+        "code_insee": "06004"
+      },
+      "address_known": false,
+      "optical_fiber_status": "deploye",
+      "photos": [],
+      "with_3d_model": false,
+      "is_bien_ici_exclusive": false,
+      "price_has_decreased": false,
+      "is_in_condominium": true,
+      "is_condominium_in_procedure": false,
+      "status": {
+        "onTheMarket": true
+      },
+      "scraping_time": "2025-07-16T10:04:14.545Z"
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

@@ -1,0 +1,298 @@
+---
+title: "Get Crawler Parameters"
+description: "Retrieve the list of configurable input parameters for a specific crawler"
+api: "GET https://api.lobstr.io/v1/crawlers/{crawler_hash}/params"
+---
+
+This endpoint returns all configurable input parameters for a specific crawler. The response is organized into two main sections: `task` and `squid`.
+
+## Response Structure
+
+The response contains:
+- **task**: Object containing task-level parameters (parameter name as key)
+- **squid**: Object containing squid-level parameters and functions
+- **squid.functions**: Optional add-on features with extra credit costs
+
+### Task-level Parameter Fields
+
+<ResponseField name="task.{parameter_name}.type" type="string">
+  Data type (string, int, boolean, etc.). Example: `"string"`
+</ResponseField>
+
+<ResponseField name="task.{parameter_name}.group" type="string">
+  Logical grouping (e.g., "url", "location"). Example: `"url"`
+</ResponseField>
+
+<ResponseField name="task.{parameter_name}.regex" type="string">
+  Validation pattern for string inputs. Example: `"^https?://.*"`
+</ResponseField>
+
+<ResponseField name="task.{parameter_name}.required" type="boolean">
+  Whether the parameter is mandatory. Example: `true`
+</ResponseField>
+
+<ResponseField name="task.{parameter_name}.default" type="string | number | boolean | null">
+  Default value if not provided. Example: `null`
+</ResponseField>
+
+<ResponseField name="task.{parameter_name}.attribute" type="string">
+  Internal attribute name. Example: `"url"`
+</ResponseField>
+
+<ResponseField name="task.{parameter_name}.is_params" type="boolean">
+  Whether it's used for URL parameter generation. Example: `true`
+</ResponseField>
+
+### Squid-level Parameter Fields
+
+<ResponseField name="squid.{parameter_name}.type" type="string">
+  Data type of the parameter. Example: `"string"`
+</ResponseField>
+
+<ResponseField name="squid.{parameter_name}.allowed" type="array">
+  Array of valid values (for enum types). Example: `["en", "es", "fr"]`
+</ResponseField>
+
+<ResponseField name="squid.{parameter_name}.default" type="string | number | boolean | null">
+  Default value if not provided. Example: `"en"`
+</ResponseField>
+
+<ResponseField name="squid.{parameter_name}.required" type="boolean">
+  Whether the parameter is mandatory. Example: `false`
+</ResponseField>
+
+<ResponseField name="squid.{parameter_name}.attribute" type="string">
+  Internal attribute name. Example: `"language"`
+</ResponseField>
+
+### Functions (Optional Add-ons) Fields
+
+<ResponseField name="squid.functions.{function_name}.sort" type="integer">
+  Display order of the function. Example: `1`
+</ResponseField>
+
+<ResponseField name="squid.functions.{function_name}.default" type="boolean">
+  Whether the function is enabled by default. Example: `false`
+</ResponseField>
+
+<ResponseField name="squid.functions.{function_name}.credits_per_function" type="number">
+  Extra credits charged per row when this function is enabled. Example: `0.5`
+</ResponseField>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string">
+  Content type of the request. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="crawler_hash" type="string" required>
+  The unique identifier (hash/id) of the crawler. Example: `4734d096159ef05210e0e1677e8be823`
+</ParamField>
+
+<Tip>
+  The response structure uses parameter names as object keys. Access task parameters via params.task.url, squid parameters via params.squid.language, etc.
+</Tip>
+
+<Note>
+  Functions under squid.functions are optional add-ons. Each function has a credits_per_function cost applied per result row when enabled.
+</Note>
+
+<Warning>
+  Pay attention to 'allowed' arrays in squid parameters - these only accept specific values. Sending invalid values will cause validation errors.
+</Warning>
+
+<Tip>
+  Use 'regex' patterns in task parameters to validate input before sending. This helps catch errors early and reduces failed tasks.
+</Tip>
+
+<Tip>
+  Parameters with 'group' field are logically related. For location-based crawlers, you'll typically need to provide all parameters in the 'location' group.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/crawlers/4734d096159ef05210e0e1677e8be823/params" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+crawler_id = "4734d096159ef05210e0e1677e8be823"
+url = f"https://api.lobstr.io/v1/crawlers/{crawler_id}/params"
+headers = {
+    "Authorization": "Token YOUR_API_KEY"
+}
+
+response = requests.get(url, headers=headers)
+params = response.json()
+
+# Display task-level parameters
+print("=== Task-level Parameters ===")
+for param_name, param_config in params['task'].items():
+    req = " (Required)" if param_config['required'] else " (Optional)"
+    print(f"\n{param_name} ({param_config['type']}){req}")
+    if param_config.get('regex'):
+        print(f"  Validation: {param_config['regex']}")
+    if param_config.get('default') is not None:
+        print(f"  Default: {param_config['default']}")
+    print(f"  Group: {param_config.get('group', 'N/A')}")
+
+# Display squid-level parameters
+print("\n=== Squid-level Parameters ===")
+squid_params = {k: v for k, v in params['squid'].items() if k != 'functions'}
+for param_name, param_config in squid_params.items():
+    req = " (Required)" if param_config['required'] else " (Optional)"
+    print(f"\n{param_name} ({param_config['type']}){req}")
+    if param_config.get('allowed'):
+        print(f"  Allowed values: {len(param_config['allowed'])} options")
+        print(f"  Default: {param_config['default']}")
+
+# Display optional functions (add-ons with extra costs)
+if 'functions' in params['squid']:
+    print("\n=== Optional Functions (Extra Credits) ===")
+    for func_name, func_config in params['squid']['functions'].items():
+        enabled = " (Enabled by default)" if func_config['default'] else ""
+        print(f"\n{func_name}{enabled}")
+        print(f"  Credits per function: {func_config['credits_per_function']}")
+        print(f"  Sort order: {func_config['sort']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "task": {
+    "url": {
+      "type": "string",
+      "group": "url",
+      "regex": "http(.*)google(.*)/maps/(search|place)(.*)",
+      "default": null,
+      "required": true,
+      "attribute": "url",
+      "is_params": false
+    },
+    "city": {
+      "type": "string",
+      "group": "location",
+      "default": null,
+      "required": true,
+      "attribute": "city",
+      "is_params": true
+    },
+    "region": {
+      "type": "string",
+      "group": "location",
+      "default": null,
+      "required": false,
+      "attribute": "region",
+      "is_params": true
+    },
+    "country": {
+      "type": "string",
+      "group": "location",
+      "default": null,
+      "required": true,
+      "attribute": "country",
+      "is_params": true
+    },
+    "category": {
+      "type": "string",
+      "group": "location",
+      "default": null,
+      "required": true,
+      "attribute": "category",
+      "is_params": true
+    },
+    "district": {
+      "type": "string",
+      "group": "location",
+      "default": null,
+      "required": false,
+      "attribute": "district",
+      "is_params": true
+    }
+  },
+  "squid": {
+    "country": {
+      "type": "string",
+      "allowed": [
+        "Afghanistan",
+        "Albania",
+        "Algeria",
+        "United States",
+        "United Kingdom",
+        "France",
+        "Germany",
+        "Japan",
+        "Brazil"
+      ],
+      "default": "United States",
+      "required": false,
+      "attribute": "country",
+      "is_params": false
+    },
+    "ratings": {
+      "type": "string",
+      "allowed": [
+        "Any rating",
+        "2.0+",
+        "2.5+",
+        "3.0+",
+        "3.5+",
+        "4.0+",
+        "4.5+"
+      ],
+      "default": "Any rating",
+      "required": false,
+      "attribute": "ratings",
+      "is_params": false
+    },
+    "language": {
+      "type": "string",
+      "allowed": [
+        "Afrikaans",
+        "English (United States)",
+        "Español (España)",
+        "Français (France)",
+        "Deutsch (Deutschland)",
+        "Italiano",
+        "Português (Brasil)",
+        "日本語",
+        "简体中文",
+        "繁體中文"
+      ],
+      "default": "English (United States)",
+      "required": true,
+      "attribute": "language",
+      "is_params": false
+    },
+    "functions": {
+      "fetch_business_images": {
+        "sort": 1,
+        "default": false,
+        "credits_per_function": 10
+      },
+      "collect_business_details": {
+        "sort": 0,
+        "default": false,
+        "credits_per_function": 10
+      },
+      "extract_emails_from_website": {
+        "sort": 2,
+        "default": true,
+        "credits_per_function": 10
+      }
+    }
+  }
+}
+```

@@ -1,0 +1,58 @@
+---
+title: "lobstr.io API Documentation"
+description: "The most powerful and easy-to-use data collection API. 50+ ready-made crawlers, simple REST endpoints, structured JSON output."
+---
+
+<CardGroup cols={3}>
+  <Card title="Quick Start" icon="bolt" href="/docs/authentication">
+    Get your API key and make your first request in minutes.
+  </Card>
+  <Card title="50+ Crawlers" icon="spider-web" href="/docs/list-crawlers">
+    Google Maps, LinkedIn, Twitter, Instagram, and more — ready to use.
+  </Card>
+  <Card title="Python SDK" icon="python" href="/docs/sdk">
+    Typed models, auto-pagination, sync and async clients.
+  </Card>
+</CardGroup>
+
+## Core Concepts
+
+The lobstr.io API is built around three primitives:
+
+- **Squid** — a configured scraper instance tied to a crawler and your settings
+- **Task** — a URL or keyword the squid will scrape
+- **Run** — a single execution of a squid against its tasks
+
+A typical workflow:
+
+<Steps>
+  <Step title="Authenticate">
+    Include `Authorization: Token YOUR_API_KEY` in every request. Get your key from the [dashboard](https://app.lobstr.io/dashboard/api).
+  </Step>
+  <Step title="Create a squid">
+    Pick a crawler (e.g. `google-maps-leads-scraper`) and create a squid with your settings.
+  </Step>
+  <Step title="Add tasks">
+    Add URLs or keywords as tasks to the squid.
+  </Step>
+  <Step title="Start a run">
+    Trigger a run and poll for completion.
+  </Step>
+  <Step title="Get results">
+    Fetch structured JSON results from `GET /v1/results`.
+  </Step>
+</Steps>
+
+## Developer Tools
+
+<CardGroup cols={3}>
+  <Card title="Python SDK" icon="python" href="/docs/sdk">
+    `pip install lobstrio-sdk`
+  </Card>
+  <Card title="CLI" icon="terminal" href="/docs/cli">
+    `pip install lobstrio`
+  </Card>
+  <Card title="MCP Server" icon="robot" href="/docs/mcp">
+    Connect Claude or Cursor to the docs.
+  </Card>
+</CardGroup>

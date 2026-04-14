@@ -1,0 +1,162 @@
+---
+title: "Configure SFTP Delivery"
+description: "Set up secure SFTP server delivery for squid run results"
+api: "POST https://api.lobstr.io/v1/delivery?squid={squid_hash}"
+---
+
+Configure SFTP delivery to securely store run results on your own SFTP server. Results will be automatically uploaded to your specified server and directory when runs complete.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  The unique identifier (hash) of the squid for which to configure SFTP delivery. Example: `c106a44a98044ef18acc59986ae10967`
+</ParamField>
+
+## Request Body
+
+<ParamField body="ftp_fields.host" type="string" required>
+  SFTP server hostname or IP address. Example: `"sftp.example.com"`
+</ParamField>
+
+<ParamField body="ftp_fields.port" type="integer" required>
+  SFTP server port number (default is 22). Example: `22`
+</ParamField>
+
+<ParamField body="ftp_fields.username" type="string" required>
+  Username for SFTP authentication. Example: `"user"`
+</ParamField>
+
+<ParamField body="ftp_fields.password" type="string" required>
+  Password for SFTP authentication. Example: `"myC00lP@ssword"`
+</ParamField>
+
+<ParamField body="ftp_fields.directory" type="string" required>
+  Target directory path on the SFTP server where files will be uploaded. Example: `"/upload/path"`
+</ParamField>
+
+<ParamField body="ftp_fields.is_active" type="boolean" required>
+  Set to true to enable SFTP delivery, false to disable. Example: `true`
+</ParamField>
+
+## Response Field Explanations
+
+<ResponseField name="ftp_fields.host" type="string">
+  SFTP server hostname. Example: `"sftp.example.com"`
+</ResponseField>
+
+<ResponseField name="ftp_fields.port" type="integer">
+  SFTP server port. Example: `22`
+</ResponseField>
+
+<ResponseField name="ftp_fields.username" type="string">
+  SFTP username. Example: `"user"`
+</ResponseField>
+
+<ResponseField name="ftp_fields.password" type="string">
+  SFTP password (returned in response). Example: `"myC00lP@ssword"`
+</ResponseField>
+
+<ResponseField name="ftp_fields.directory" type="string">
+  Target directory path. Example: `"/upload/path"`
+</ResponseField>
+
+<ResponseField name="ftp_fields.is_active" type="boolean">
+  Whether SFTP delivery is active. Example: `true`
+</ResponseField>
+
+<Warning>
+  Ensure your SFTP server is accessible from lobstr.io's servers. Check firewall rules and IP allowlists if connection fails.
+</Warning>
+
+<Tip>
+  Use the Test SFTP endpoint to verify your credentials and server connectivity before activating automatic delivery.
+</Tip>
+
+<Note>
+  The directory path must exist on the server. Lobstr will not create directories automatically.
+</Note>
+
+<Warning>
+  Store SFTP credentials securely. While they're returned in API responses, treat them as sensitive data.
+</Warning>
+
+<Tip>
+  Set is_active to false to temporarily disable SFTP delivery without removing your configuration.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/delivery?squid=YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "ftp_fields": {
+      "host": "sftp.example.com",
+      "port": 22,
+      "username": "user",
+      "password": "password",
+      "directory": "/upload/path",
+      "is_active": true
+    }
+  }'
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/delivery"
+headers = {
+    "Authorization": "Token YOUR_API_KEY",
+    "Content-Type": "application/json"
+}
+params = {
+    "squid": "YOUR_SQUID_HASH"
+}
+payload = {
+    "ftp_fields": {
+        "host": "sftp.example.com",
+        "port": 22,
+        "username": "user",
+        "password": "password",
+        "directory": "/upload/path",
+        "is_active": True
+    }
+}
+
+response = requests.post(url, headers=headers, params=params, json=payload)
+result = response.json()
+
+print("SFTP delivery configured successfully!")
+print(f"Host: {result['ftp_fields']['host']}")
+print(f"Port: {result['ftp_fields']['port']}")
+print(f"Username: {result['ftp_fields']['username']}")
+print(f"Directory: {result['ftp_fields']['directory']}")
+print(f"Active: {result['ftp_fields']['is_active']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "ftp_fields": {
+    "host": "sftp.example.com",
+    "port": 22,
+    "username": "user",
+    "password": "password",
+    "directory": "/upload/path"
+  }
+}
+```

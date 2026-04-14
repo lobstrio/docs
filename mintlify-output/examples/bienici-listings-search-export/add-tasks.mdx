@@ -1,0 +1,33 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Bien'Ici Search Export squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **Bien'Ici Search Export** squid. Each task object must include the required fields below.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects. Each task supports the fields below.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  Default: `https://www.bienici.com/recherche/achat/bouches-du-rhone-13/maisonvilla`.
+</ParamField>

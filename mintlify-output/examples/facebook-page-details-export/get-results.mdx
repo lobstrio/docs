@@ -1,0 +1,238 @@
+---
+title: "Get Results"
+description: "Retrieve detailed Facebook page information including contact details, ratings, and social links"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve detailed information from scraped Facebook pages including business details, contact information, ratings, and social media links.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from. Example: `05d966bcc86f48b6afca3de8a0a0dc5e`
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional, filters to that run only). Example: `401314a9bf2547c984a3c5d335273a56`
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+<ParamField query="page_size" type="integer">
+  Results per page (default: 50, max: 100). Example: `50`
+</ParamField>
+
+## Result Fields
+
+Each result object contains the following fields:
+
+<ResponseField name="id" type="integer">
+  Unique result identifier. Example: `50017`
+</ResponseField>
+
+<ResponseField name="object" type="string">
+  Always "result". Example: `"result"`
+</ResponseField>
+
+<ResponseField name="squid" type="string">
+  Squid that produced this result. Example: `"05d966bcc86f48b6afca3de8a0a0dc5e"`
+</ResponseField>
+
+<ResponseField name="run" type="string">
+  Run that produced this result. Example: `"401314a9bf2547c984a3c5d335273a56"`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Name of the Facebook page. Example: `"Example Business LLC"`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Page category. Example: `"Local Business"`
+</ResponseField>
+
+<ResponseField name="about" type="string | null">
+  "About" section content of the Facebook page. Example: `"Your trusted local service provider since 2010."`
+</ResponseField>
+
+<ResponseField name="address" type="string | null">
+  Physical address of the business. Example: `"123 Main Street, New York, NY 10001"`
+</ResponseField>
+
+<ResponseField name="phone" type="string | null">
+  Contact phone number. Example: `"+1 (555) 123-4567"`
+</ResponseField>
+
+<ResponseField name="email" type="string | null">
+  Contact email address. Example: `"contact@example-business.com"`
+</ResponseField>
+
+<ResponseField name="wesbite" type="string | null">
+  Website URL (note: field name has typo in API). Example: `"https://www.example-business.com"`
+</ResponseField>
+
+<ResponseField name="instagram" type="string | null">
+  Instagram profile URL if listed. Example: `"https://www.instagram.com/examplebusiness"`
+</ResponseField>
+
+<ResponseField name="likes" type="string">
+  Number of page likes. Example: `"1542"`
+</ResponseField>
+
+<ResponseField name="followers" type="string">
+  Number of page followers. Example: `"1876"`
+</ResponseField>
+
+<ResponseField name="reviews" type="integer">
+  Number of reviews the page has received. Example: `24`
+</ResponseField>
+
+<ResponseField name="score" type="number">
+  Average rating score (0-5). Example: `4.5`
+</ResponseField>
+
+<ResponseField name="visits" type="integer">
+  Number of page visits if available. Example: `350`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  URL of the page's profile image. Example: `"https://scontent.xx.fbcdn.net/..."`
+</ResponseField>
+
+<ResponseField name="menu" type="string | null">
+  URL of the page's menu or services section. Example: `null`
+</ResponseField>
+
+<ResponseField name="price" type="string | null">
+  Price information if provided. Example: `null`
+</ResponseField>
+
+<ResponseField name="internal_id" type="string">
+  Facebook's internal page identifier. Example: `"123456789"`
+</ResponseField>
+
+<ResponseField name="slug" type="string">
+  URL path slug for the page. Example: `"/pages/example-business/123456789/"`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Full URL to the Facebook page. Example: `"https://www.facebook.com/pages/example-business/123456789/"`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Scrape status (e.g., "valid_page"). Example: `"valid_page"`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="string">
+  When this result was scraped (ISO 8601). Example: `"2025-05-02T08:17:12.353Z"`
+</ResponseField>
+
+<Tip>
+  Use the `next` URL in the response to paginate through all results.
+</Tip>
+
+<Warning>
+  Note: The API field is named `wesbite` (with a typo). Use this exact spelling when accessing the website field.
+</Warning>
+
+<Note>
+  The `likes` and `followers` fields are returned as strings, not integers.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&run=YOUR_RUN_HASH" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+run_id = "YOUR_RUN_HASH"
+
+# Get Facebook page details results
+response = requests.get(f"{BASE_URL}/results",
+    headers=headers,
+    params={"squid": squid_id, "run": run_id}
+)
+
+data = response.json()
+print(f"Total pages: {data['total_results']}")
+
+for page in data["data"]:
+    print(f"\n{page['name']}")
+    print(f"  Category: {page['category']}")
+    print(f"  Likes: {page['likes']} | Followers: {page['followers']}")
+    if page.get('score'):
+        print(f"  Rating: {page['score']} ({page['reviews']} reviews)")
+    if page.get('phone'):
+        print(f"  Phone: {page['phone']}")
+    if page.get('email'):
+        print(f"  Email: {page['email']}")
+    if page.get('wesbite'):  # Note: API typo
+        print(f"  Website: {page['wesbite']}")
+    if page.get('instagram'):
+        print(f"  Instagram: {page['instagram']}")
+    print(f"  URL: {page['url']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 100,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 50017,
+      "object": "result",
+      "squid": "05d966bcc86f48b6afca3de8a0a0dc5e",
+      "run": "401314a9bf2547c984a3c5d335273a56",
+      "name": "Example Business LLC",
+      "category": "Local Business",
+      "about": "Your trusted local service provider since 2010.",
+      "address": "123 Main Street, New York, NY 10001",
+      "phone": "+1 (555) 123-4567",
+      "email": "contact@example-business.com",
+      "wesbite": "https://www.example-business.com",
+      "instagram": "https://www.instagram.com/examplebusiness",
+      "likes": "1542",
+      "followers": "1876",
+      "reviews": 24,
+      "score": 4.5,
+      "visits": 350,
+      "image_url": "https://scontent.xx.fbcdn.net/v/example-image.jpg",
+      "menu": null,
+      "price": null,
+      "internal_id": "123456789",
+      "slug": "/pages/example-business/123456789/",
+      "url": "https://www.facebook.com/pages/example-business/123456789/",
+      "status": "valid_page",
+      "scraping_time": "2025-05-02T08:17:12.353Z",
+      "functions": null,
+      "native_id": 50017
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

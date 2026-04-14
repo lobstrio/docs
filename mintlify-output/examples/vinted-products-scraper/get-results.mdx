@@ -1,0 +1,156 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Vinted Products Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Vinted Products Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+Each result object contains the following fields:
+
+<ResponseField name="internal_id" type="string">
+  Unique identifier for the listing on Vinted. Example: `8381892452`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the item listing on Vinted. Example: `https://www.vinted.com/items/8381892452-air-jordan-5-wolf-grey`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the item listing on Vinted. Example: `Air Jordan 5  wolf grey`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listed price of the item. Example: `291`
+</ResponseField>
+
+<ResponseField name="is_visible" type="integer">
+  Whether the listing is currently visible to buyers on Vinted. Example: `1`
+</ResponseField>
+
+<ResponseField name="discount" type="string">
+  Discount applied to the item price
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  ISO 3-letter currency code of the listed price. Example: `USD`
+</ResponseField>
+
+<ResponseField name="brand_title" type="string">
+  Brand name of the listed item. Example: `Jordan`
+</ResponseField>
+
+<ResponseField name="is_for_swap" type="boolean">
+  Whether the seller is open to swapping the item instead of selling. Example: `false`
+</ResponseField>
+
+<ResponseField name="promoted" type="boolean">
+  Whether the listing has paid promotion on Vinted. Example: `false`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  URL of the main listing image on Vinted. Example: `https://images1.vinted.net/t/01_01a39_zLtBDgLdFFsi75ds1PDdGcQe/f800/1773400288.webp?s=08f8c6b85155c02fa5358a303ccd36bfb44fabf9`
+</ResponseField>
+
+<ResponseField name="image_dominant_color" type="string">
+  Dominant colour detected in the main listing image. Example: `#545962`
+</ResponseField>
+
+<ResponseField name="favourite_count" type="integer">
+  Number of times the listing has been added to favourites by buyers. Example: `0`
+</ResponseField>
+
+<ResponseField name="is_favourite" type="boolean">
+  Whether the item is marked as favourite by the scraping account. Example: `false`
+</ResponseField>
+
+<ResponseField name="favourite_group_id" type="string">
+  Internal identifier for the favourite group
+</ResponseField>
+
+<ResponseField name="badge" type="string">
+  Trust or certification badge on the listing (e.g. Pro seller)
+</ResponseField>
+
+<ResponseField name="conversion" type="json">
+  Internal conversion metric for the listing
+</ResponseField>
+
+<ResponseField name="service_fee" type="float">
+  Buyer protection or service fee charged by Vinted. Example: `15.25`
+</ResponseField>
+
+<ResponseField name="total_item_price" type="float">
+  Total price including all fees and service charges. Example: `306.25`
+</ResponseField>
+
+<ResponseField name="view_count" type="integer">
+  Number of times the listing has been viewed. Example: `0`
+</ResponseField>
+
+<ResponseField name="size_title" type="string">
+  Size label of the item (e.g. S, M, L, 38, UK10). Example: `10`
+</ResponseField>
+
+<ResponseField name="content_source" type="string">
+  Internal content source identifier for the listing. Example: `catalog`
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Unique Vinted identifier of the seller. Example: `223926023`
+</ResponseField>
+
+<ResponseField name="user_login" type="string">
+  Login username of the seller on Vinted. Example: `saf0921`
+</ResponseField>
+
+<ResponseField name="user_business" type="boolean">
+  Whether the seller is a registered business account on Vinted. Example: `false`
+</ResponseField>
+
+<ResponseField name="user_profile_url" type="string">
+  URL to the seller's Vinted profile. Example: `https://www.vinted.com/member/223926023-saf0921`
+</ResponseField>
+
+<ResponseField name="user_photo_url" type="string">
+  URL of the seller's Vinted profile photo. Example: `https://images1.vinted.net/t/06_00766_fgANGTQTXdbSuyxoBr4DrCQD/f800/1765632251.webp?s=41905c4cbb60f2d60151d0c4bf1039bd6a4e4863`
+</ResponseField>
+
+<ResponseField name="user_is_sus" type="boolean">
+  Whether the seller's account is flagged as suspicious by Vinted. Example: `false`
+</ResponseField>
+
+<ResponseField name="user_orientation" type="string">
+  Seller's preferred item category orientation (e.g. men, women, kids)
+</ResponseField>
+
+<ResponseField name="user_is_hidden" type="boolean">
+  Whether the seller's account is hidden on Vinted. Example: `false`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full description text provided by the seller for the item. Example: `Air Jordan 5  wolf grey, brand: Jordan, condition: New with tags, size: 10, $291.00, $306.25 includes Buyer Protection`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Current status of the listing on Vinted (e.g. active, sold, reserved). Example: `New with tags`
+</ResponseField>

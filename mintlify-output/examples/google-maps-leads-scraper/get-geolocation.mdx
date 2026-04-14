@@ -1,0 +1,112 @@
+---
+title: "Get Geolocation"
+description: "Fetch valid regions, districts, and cities for parameter-based tasks"
+api: "GET https://api.lobstr.io/v1/googlemaps/locations"
+---
+
+Use this endpoint to fetch valid regions, districts, and cities used in parameter-based tasks for the Google Maps Search Export crawler. This is essential when constructing structured tasks where accurate location inputs are required.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="country_code" type="string" required>
+  ISO 2-letter country code. Example: `US`
+</ParamField>
+
+<ParamField query="region" type="string">
+  State or province name. Example: `California`
+</ParamField>
+
+<ParamField query="district" type="string">
+  County or local district. Example: `San Diego`
+</ParamField>
+
+<ParamField query="city" type="string">
+  City name filter
+</ParamField>
+
+## How It Works
+
+The value you leave empty determines what the API returns:
+
+- Leave `region` empty to get **regions** for a country
+- Provide `region`, leave `city` empty to get **cities** in that region
+- Provide `district` to narrow down the city list further
+
+## Query Parameters
+
+| Parameter | Required | Description |
+| --- | --- | --- |
+| **country_code** | Yes | ISO 2-letter country code (e.g., `US`, `FR`, `PK`) |
+| **region** | Conditional | Required when querying districts or cities. Leave empty to get regions. |
+| **district** | No | Narrows the city list within a region |
+| **city** | No | Used when retrieving a refined list of locations |
+
+<Tip>
+  Use the returned values for `region`, `district`, and `city` in parameter-based tasks.
+</Tip>
+
+<Tip>
+  Combine location values with `category` to generate accurate search inputs.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/googlemaps/locations?country_code=US&region=California&city" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+# Get cities in California, US
+response = requests.get(f"{BASE_URL}/googlemaps/locations",
+    headers=headers,
+    params={
+        "country_code": "US",
+        "region": "California",
+        "city": ""
+    }
+)
+
+cities = response.json()
+print(f"Found {len(cities)} cities")
+for city in cities[:10]:
+    print(f"  {city}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+[
+  "Acampo 95220",
+  "Acton 93510",
+  "Adelanto 92301",
+  "Adin 96006",
+  "Agoura Hills 91301",
+  "Agoura Hills 91376",
+  "Aguanga 92536",
+  "Ahwahnee 93601",
+  "Alameda 94501",
+  "Alameda 94502",
+  "Alamo 94507",
+  "Albany 94706",
+  "Albion 95410",
+  "Alderpoint 95511",
+  "Alhambra 91801",
+  "Alhambra 91802",
+  "Alhambra 91803"
+]
+```

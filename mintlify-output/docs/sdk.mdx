@@ -1,0 +1,151 @@
+---
+title: "Python SDK"
+description: "Official Python SDK for the lobstr.io API. Sync and async clients, typed models, auto-pagination, and full API coverage."
+---
+
+## Installation
+
+```bash
+pip install lobstrio-sdk
+```
+
+<CardGroup cols={4}>
+  <Card title="Sync & Async" icon="bolt">
+    Both `LobstrClient` and `AsyncLobstrClient` with identical API surfaces.
+  </Card>
+  <Card title="Typed Models" icon="layer-group">
+    Dataclass models for every response — no raw dicts in the public API.
+  </Card>
+  <Card title="Auto-Pagination" icon="arrows-rotate">
+    Lazy `PageIterator` streams all pages on demand with `.iter()` method.
+  </Card>
+  <Card title="Automatic Auth" icon="lock">
+    Token resolved from explicit param, `LOBSTR_TOKEN` env, or `~/.config/lobstr/config.toml`.
+  </Card>
+</CardGroup>
+
+## Quick Start
+
+<CodeGroup>
+```python Sync
+from lobstrio import LobstrClient
+
+client = LobstrClient()  # auto-resolves token
+
+# Get account info
+user = client.me()
+print(f"{user.email} — {client.balance().credits} credits")
+
+# Create a squid and scrape
+squid = client.squids.create(
+    crawler="google-maps-leads-scraper",
+    name="Restaurants Paris"
+)
+client.squids.update(squid.id, params={"country": "France", "max_results": 50})
+client.tasks.add(squid=squid.id, tasks=[
+    {"url": "https://google.com/maps/search/restaurants+paris"}
+])
+
+# Start and wait for completion
+run = client.runs.start(squid=squid.id)
+run = client.runs.wait(run.id)
+
+# Get results
+for page in client.results.iter(run=run.id):
+    for place in page.data:
+        print(f"{place['name']} — {place['score']}★")
+```
+
+```python Async
+import asyncio
+from lobstrio import AsyncLobstrClient
+
+async def main():
+    async with AsyncLobstrClient() as client:
+        squids = await client.squids.list()
+        for squid in squids.data:
+            print(f"{squid.name} ({squid.id})")
+
+asyncio.run(main())
+```
+</CodeGroup>
+
+## API Reference
+
+### User
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.me()` | GET | `/v1/me` | Get authenticated user profile |
+| `client.balance()` | GET | `/v1/user/balance` | Get current credit balance |
+
+### Crawlers
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.crawlers.list()` | GET | `/v1/crawlers` | List all available crawlers |
+| `client.crawlers.get(hash)` | GET | `/v1/crawlers/{hash}` | Get crawler details by hash |
+| `client.crawlers.params(hash)` | GET | `/v1/crawlers/{hash}/params` | Get supported parameters for a crawler |
+| `client.crawlers.attributes(hash)` | GET | `/v1/crawlers/{hash}/attributes` | Get output attributes for a crawler |
+
+### Squids
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.squids.create(crawler, name)` | POST | `/v1/squids` | Create a new squid for a crawler |
+| `client.squids.list()` | GET | `/v1/squids` | List all squids in your account |
+| `client.squids.get(hash)` | GET | `/v1/squids/{hash}` | Get squid details by hash |
+| `client.squids.update(hash, ...)` | POST | `/v1/squids/{hash}` | Update squid settings or parameters |
+| `client.squids.empty(hash)` | POST | `/v1/squids/{hash}/empty` | Remove all tasks from a squid |
+| `client.squids.delete(hash)` | DELETE | `/v1/squids/{hash}` | Permanently delete a squid |
+
+### Tasks
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.tasks.add(squid, tasks)` | POST | `/v1/tasks` | Add one or more tasks to a squid |
+| `client.tasks.list(squid)` | GET | `/v1/tasks` | List tasks for a squid |
+| `client.tasks.get(hash)` | GET | `/v1/tasks/{hash}` | Get a single task by hash |
+| `client.tasks.upload(squid, file)` | POST | `/v1/tasks/upload` | Bulk upload tasks from a file |
+| `client.tasks.upload_status(id)` | GET | `/v1/tasks/upload/{id}` | Check status of a bulk upload |
+| `client.tasks.delete(hash)` | DELETE | `/v1/tasks/{hash}` | Delete a task by hash |
+
+### Runs
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.runs.start(squid)` | POST | `/v1/runs` | Start a new run for a squid |
+| `client.runs.list(squid)` | GET | `/v1/runs` | List all runs for a squid |
+| `client.runs.get(hash)` | GET | `/v1/runs/{hash}` | Get run details by hash |
+| `client.runs.stats(hash)` | GET | `/v1/runs/{hash}/stats` | Get statistics for a run |
+| `client.runs.tasks(hash)` | GET | `/v1/runtasks` | List tasks executed in a run |
+| `client.runs.abort(hash)` | POST | `/v1/runs/{hash}/abort` | Abort an in-progress run |
+| `client.runs.download(hash)` | GET | `/v1/runs/{hash}/download` | Download run results as a file |
+| `client.runs.wait(hash)` | GET | `/v1/runs/{hash}` | Poll until run completes |
+
+### Results
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.results.list(run)` | GET | `/v1/results` | Get first page of results for a run |
+| `client.results.iter(run)` | GET | `/v1/results` | Lazily iterate all result pages |
+
+### Accounts
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.accounts.list()` | GET | `/v1/accounts` | List all connected accounts |
+| `client.accounts.get(hash)` | GET | `/v1/accounts/{hash}` | Get account details by hash |
+| `client.accounts.types()` | GET | `/v1/accounts/types` | List supported account types |
+| `client.accounts.sync(type, cookies)` | POST | `/v1/synchronize` | Sync an account using cookies |
+| `client.accounts.delete(hash)` | DELETE | `/v1/accounts/{hash}` | Delete a connected account |
+
+### Delivery
+
+| SDK Method | HTTP | Endpoint | Description |
+|---|---|---|---|
+| `client.delivery.email(squid, ...)` | POST | `/v1/delivery` | Configure email delivery for a squid |
+| `client.delivery.google_sheet(squid, ...)` | POST | `/v1/delivery` | Configure Google Sheets delivery |
+| `client.delivery.s3(squid, ...)` | POST | `/v1/delivery` | Configure Amazon S3 delivery |
+| `client.delivery.webhook(squid, ...)` | POST | `/v1/delivery` | Configure webhook delivery |
+| `client.delivery.sftp(squid, ...)` | POST | `/v1/delivery` | Configure SFTP delivery |
