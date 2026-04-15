@@ -20,9 +20,10 @@ export LOBSTR_API_KEY="your_api_key_here"
 Confirm your key is working before proceeding.
 
 ```python Python
-import requests
+import requests,os
 
-headers = {"Authorization": f"Token {LOBSTR_API_KEY}"}
+API_KEY = os.environ["LOBSTR_API_KEY"]
+headers = {"Authorization": f"Token {API_KEY}"}
 
 response = requests.get("https://api.lobstr.io/v1/me", headers=headers)
 user = response.json()
