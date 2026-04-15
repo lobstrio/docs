@@ -112,6 +112,12 @@
         "tab": "Examples",
         "groups": [
           {
+            "group": "Overview",
+            "pages": [
+              "examples/index"
+            ]
+          },
+          {
             "group": "Google Maps Reviews Scraper",
             "pages": [
               "examples/google-maps-reviews-scraper/add-tasks",
