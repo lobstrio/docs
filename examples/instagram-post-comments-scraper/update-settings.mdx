@@ -32,8 +32,8 @@ Update the configuration of your **Instagram Post Comments Scraper** squid. Pass
   Allowed values: `recent`, `popular`. Default: `recent`.
 </ParamField>
 
-<ParamField body="params.fetch_since" type="fetch_since">
-
+<ParamField body="params.fetch_since" type="string">
+  Filter results by date. Accepts a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD"`). Replaces the deprecated `hours_back` parameter.
 </ParamField>
 
 <ParamField body="params.max_results" type="integer">

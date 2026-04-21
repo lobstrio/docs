@@ -22,7 +22,7 @@ This endpoint retrieves a paginated list of results (scraped data) produced by a
 | **run** | string | One of* | Hash of the run. Returns results from that single execution only |
 | **task** | string | No | Hash of a specific task. Filters results to just that task |
 | **page** | integer | No | Page number to fetch (1-indexed). Default: 1 |
-| **page_size** | integer | No | Number of results per page. Default: 50, Max: 100 |
+| **limit** | integer | No | Number of results per page. Default: 50, Max: 100 |
 
 ## Response Field Explanations
 
@@ -31,7 +31,7 @@ This endpoint retrieves a paginated list of results (scraped data) produced by a
 </ResponseField>
 
 <ResponseField name="limit" type="integer">
-  The page_size requested (or default). Example: `50`
+  Number of results per page (matches the `limit` param). Example: `50`
 </ResponseField>
 
 <ResponseField name="page" type="integer">
@@ -101,14 +101,14 @@ Use the Get Crawler Details endpoint to understand what fields your specific cra
 </Warning>
 
 <Tip>
-  For large result sets, increase page_size to 100 to reduce the number of API calls needed.
+  For large result sets, increase limit to 100 to reduce the number of API calls needed.
 </Tip>
 
 ## Code Examples
 
 <CodeGroup>
 ```bash cURL
-curl -X GET "https://api.lobstr.io/v1/results?squid=b6c56d18cb0046949461ba9ca278e8ad&page=1&page_size=50" \
+curl -X GET "https://api.lobstr.io/v1/results?squid=b6c56d18cb0046949461ba9ca278e8ad&page=1&limit=50" \
   -H "Authorization: Token YOUR_API_KEY"
 ```
 
@@ -123,7 +123,7 @@ params = {
     "squid": "b6c56d18cb0046949461ba9ca278e8ad",
     # OR use "run": "run_hash" to get results from a specific run
     "page": 1,
-    "page_size": 50
+    "limit": 50
 }
 
 # Fetch all results with pagination
@@ -202,7 +202,7 @@ for result in all_results[:5]:  # Show first 5
       "scraping_time": "2025-02-10T14:31:06.104Z"
     }
   ],
-  "next": "https://api.lobstr.io/v1/results?squid=b6c56d18cb0046949461ba9ca278e8ad&page=2&page_size=50",
+  "next": "https://api.lobstr.io/v1/results?squid=b6c56d18cb0046949461ba9ca278e8ad&page=2&limit=50",
   "previous": null
 }
 ```

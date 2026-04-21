@@ -36,8 +36,8 @@ Update the configuration of your **Amazon Reviews Scraper** squid. Pass crawler-
   Allowed values: `text_image_video`, `image_and_video_only`. Default: `text_image_video`.
 </ParamField>
 
-<ParamField body="params.fetch_since" type="fetch_since">
-
+<ParamField body="params.fetch_since" type="string">
+  Filter results by date. Accepts a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD"`). Replaces the deprecated `hours_back` parameter.
 </ParamField>
 
 <ParamField body="params.format_type" type="string">

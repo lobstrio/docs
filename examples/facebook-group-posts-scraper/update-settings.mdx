@@ -24,8 +24,8 @@ Update the configuration of your **Facebook Public Group Posts Scraper** squid. 
 
 ## Settings Fields
 
-<ParamField body="params.fetch_since" type="fetch_since">
-
+<ParamField body="params.fetch_since" type="string">
+  Filter results by date. Accepts a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD"`). Replaces the deprecated `hours_back` parameter.
 </ParamField>
 
 <ParamField body="params.max_results" type="integer">
