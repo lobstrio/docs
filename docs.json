@@ -159,6 +159,14 @@
             ]
           },
           {
+            "group": "Facebook Private Group Posts Scraper",
+            "pages": [
+              "examples/facebook-private-group-posts/add-tasks",
+              "examples/facebook-private-group-posts/update-settings",
+              "examples/facebook-private-group-posts/get-results"
+            ]
+          },
+          {
             "group": "Facebook Group Posts Scraper",
             "pages": [
               "examples/facebook-group-posts-scraper/add-tasks",
@@ -330,6 +338,14 @@
             ]
           },
           {
+            "group": "ParuVendu Listings Scraper",
+            "pages": [
+              "examples/paruvendu-listings-scraper/add-tasks",
+              "examples/paruvendu-listings-scraper/update-settings",
+              "examples/paruvendu-listings-scraper/get-results"
+            ]
+          },
+          {
             "group": "Pages Jaunes Companies Search Export",
             "pages": [
               "examples/pages-jaunes-iter-companies/add-tasks",
@@ -370,11 +386,27 @@
             ]
           },
           {
+            "group": "Realtor Listings Scraper",
+            "pages": [
+              "examples/realtor-iter-listings/add-tasks",
+              "examples/realtor-iter-listings/update-settings",
+              "examples/realtor-iter-listings/get-results"
+            ]
+          },
+          {
             "group": "SeLoger Search Export",
             "pages": [
               "examples/seloger-search-export/add-tasks",
               "examples/seloger-search-export/update-settings",
               "examples/seloger-search-export/get-results"
+            ]
+          },
+          {
+            "group": "TikTok Video Scraper",
+            "pages": [
+              "examples/tiktok-video-scraper/add-tasks",
+              "examples/tiktok-video-scraper/update-settings",
+              "examples/tiktok-video-scraper/get-results"
             ]
           },
           {

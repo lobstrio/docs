@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <clipPath id="rsqc5iuofa">
+            <path data-name="Прямоугольник 14246" style="fill:#fff" d="M0 0h21.49v21.508H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="Google News Search Export" transform="translate(-523 -1159)">
+        <rect data-name="Прямоугольник 14254" width="40" height="40" rx="9" transform="translate(523 1159)" style="fill:#ea4335"/>
+        <g data-name="Сгруппировать 17914">
+            <g data-name="Сгруппировать 17913" transform="translate(533 1167.983)" style="clip-path:url(#rsqc5iuofa)">
+                <path data-name="Контур 67889" d="M16.519 5.959h2.276a.733.733 0 0 0 .139.049 2.7 2.7 0 0 1 2.558 2.462v10.086c-.336 2.049-1.654 2.9-3.635 2.93-4.534.063-9.073-.04-13.607 0A4.8 4.8 0 0 1 0 17.151V2.415A2.779 2.779 0 0 1 2.372 0H14.1a2.849 2.849 0 0 1 2.418 2.555zM4.072 4a.755.755 0 0 0 .087 1.486h4.684a.754.754 0 0 0 0-1.492zm12.447 3.507v10.956a1.9 1.9 0 0 0 1.526 1.524 1.8 1.8 0 0 0 2-1.9c.178-3.017-.138-6.209 0-9.244.055-.5-.483-1.339-1.008-1.339zm-12.352.481a.754.754 0 0 0-.06 1.491h8.26a.757.757 0 0 0-.142-1.5zm-.142 4.034a.762.762 0 0 0 .225 1.49h7.975a.757.757 0 0 0 .142-1.5zm.047 3.988A.756.756 0 0 0 4.2 17.5h8.117a.755.755 0 0 0 0-1.5z" transform="translate(0 .001)" style="fill:#fff"/>
+            </g>
+        </g>
+    </g>
+</svg>

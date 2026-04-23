@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.061" y1="0.075" x2="0.91" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7a17fe"/>
+      <stop offset="0.39" stop-color="#fc14bd"/>
+      <stop offset="0.657" stop-color="#ff4521"/>
+      <stop offset="1" stop-color="#ffc904"/>
+    </linearGradient>
+  </defs>
+  <g id="instragram-reels-scraper" transform="translate(-1018 -2104)">
+    <rect id="Прямоугольник_9302" data-name="Прямоугольник 9302" width="40" height="40" rx="9" transform="translate(1018 2104)" fill="url(#linear-gradient)"/>
+    <g id="Прямоугольник_14472" data-name="Прямоугольник 14472" transform="translate(1026 2114)" fill="none" stroke="#fff" stroke-width="2">
+      <rect width="24" height="20" rx="5" stroke="none"/>
+      <rect x="1" y="1" width="22" height="18" rx="4" fill="none"/>
+    </g>
+    <path id="Контур_71439" data-name="Контур 71439" d="M0-1H21" transform="translate(1027.5 2120.5)" fill="none" stroke="#fff" stroke-width="2"/>
+    <path id="Контур_71438" data-name="Контур 71438" d="M2.669,1.713a1,1,0,0,1,1.736,0l2.136,3.71a.993.993,0,0,1-.868,1.485H1.4A.993.993,0,0,1,.533,5.423Z" transform="translate(1042.053 2122.535) rotate(90)" fill="#fff"/>
+  </g>
+</svg>

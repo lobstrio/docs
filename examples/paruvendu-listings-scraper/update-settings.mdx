@@ -1,0 +1,134 @@
+---
+title: "Update Settings"
+description: "Configure settings for your ParuVendu Listings Scraper squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **ParuVendu Listings Scraper** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+## Settings Fields
+
+<ParamField body="params.max_results" type="integer">
+  Maximum number of listings to collect per task. Leave empty for unlimited.
+</ParamField>
+
+<ParamField body="params.max_unique_results_per_run" type="integer">
+  Maximum number of unique results across all tasks in a run. Leave empty for unlimited.
+</ParamField>
+
+<ParamField body="params.max_pages" type="integer">
+  Maximum number of search result pages to crawl per task. Default: `100`, max: `100`.
+</ParamField>
+
+<ParamField body="params.fetch_since" type="string">
+  Only collect listings published after this point. Accepts a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD HH:MM"`).
+</ParamField>
+
+<ParamField body="params.fetch_since_timezone" type="string">
+  Timezone for interpreting an absolute `fetch_since` date (e.g. `"Europe/Paris"`). Only applies when `fetch_since` is an absolute date — ignored for relative values like `"24h"` or `"7d"`.
+</ParamField>
+
+<Tip>
+  Set `fetch_since` to `null` to collect all listings, or use a relative duration (`"24h"`, `"7d"`, `"2w"`) or absolute date (`"YYYY-MM-DD HH:MM"`) to collect only recent listings. When using an absolute date, set `fetch_since_timezone` to interpret it in the correct timezone (e.g. `"Europe/Paris"`).
+</Tip>
+
+## Optional Functions
+
+<Note>
+  Functions are optional add-ons that enable extra data extraction. Each incurs additional credits per row.
+</Note>
+
+<ParamField body="params.get_annonce_details" type="boolean">
+  Fetch additional details by visiting each listing's detail page: full description, features, seller info, and phone number. Default: `false`. Extra cost: `4` credits per listing.
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "ParuVendu BMW Listings",
+    "params": {
+      "max_results": 100,
+      "max_pages": 10,
+      "fetch_since": "7d",
+      "fetch_since_timezone": null,
+      "get_annonce_details": false
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_hash = "YOUR_SQUID_HASH"
+
+response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
+    headers=headers,
+    json={
+        "name": "ParuVendu BMW Listings",
+        "params": {
+            "max_results": 100,
+            "max_pages": 10,
+            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01 00:00"
+            "fetch_since_timezone": None,  # e.g. "Europe/Paris" — only used with absolute fetch_since
+            "get_annonce_details": False
+        }
+    }
+)
+
+data = response.json()
+print(f"Squid updated: {data['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "id": "YOUR_SQUID_HASH",
+  "name": "ParuVendu BMW Listings",
+  "crawler": {
+    "id": "6a564030e814e6de4931637f7fb0c06e",
+    "name": "ParuVendu Listings Scraper",
+    "slug": "paruvendu-listings-scraper"
+  },
+  "params": {
+    "max_results": 100,
+    "max_pages": 10,
+    "fetch_since": "7d",
+    "fetch_since_timezone": null,
+    "get_annonce_details": false
+  },
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": true,
+  "no_line_breaks": false,
+  "status": "idle",
+  "created_at": "2025-01-20T10:15:00.000000",
+  "updated_at": "2025-01-27T14:35:00.000000"
+}
+```

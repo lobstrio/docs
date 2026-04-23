@@ -1,0 +1,225 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Facebook Private Group Posts Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Facebook Private Group Posts Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional).
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+<ParamField query="limit" type="integer">
+  Results per page (default: 50, max: 100).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="url" type="string">
+  Direct URL to the post in the Facebook group. Example: `https://www.facebook.com/groups/336266723393832/permalink/123456789/`
+</ResponseField>
+
+<ResponseField name="post_id" type="string">
+  Unique identifier for the Facebook post. Example: `123456789`
+</ResponseField>
+
+<ResponseField name="group_id" type="string">
+  Unique identifier for the Facebook group. Example: `336266723393832`
+</ResponseField>
+
+<ResponseField name="group_title" type="string">
+  Name of the Facebook group where the post was published. Example: `My Group`
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Unique identifier of the post author on Facebook.
+</ResponseField>
+
+<ResponseField name="user_name" type="string">
+  Display name of the post author. Example: `John Doe`
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  Full text content of the post.
+</ResponseField>
+
+<ResponseField name="time" type="string">
+  Publication date and time of the post in ISO 8601 format. Example: `2026-03-19T11:27:00.000Z`
+</ResponseField>
+
+<ResponseField name="timestamp" type="integer">
+  Unix timestamp of when the post was published. Example: `1773919620`
+</ResponseField>
+
+<ResponseField name="likes_count" type="integer">
+  Total number of likes on the post. Example: `12`
+</ResponseField>
+
+<ResponseField name="comments_count" type="integer">
+  Total number of comments on the post. Example: `5`
+</ResponseField>
+
+<ResponseField name="shares_count" type="integer">
+  Number of times the post was shared. Example: `2`
+</ResponseField>
+
+<ResponseField name="reaction_like_count" type="integer">
+  Number of Like reactions. Example: `10`
+</ResponseField>
+
+<ResponseField name="reaction_love_count" type="integer">
+  Number of Love reactions. Example: `2`
+</ResponseField>
+
+<ResponseField name="reaction_haha_count" type="integer">
+  Number of Haha reactions. Example: `0`
+</ResponseField>
+
+<ResponseField name="reaction_wow_count" type="integer">
+  Number of Wow reactions. Example: `0`
+</ResponseField>
+
+<ResponseField name="reaction_sad_count" type="integer">
+  Number of Sad reactions. Example: `0`
+</ResponseField>
+
+<ResponseField name="reaction_angry_count" type="integer">
+  Number of Angry reactions. Example: `0`
+</ResponseField>
+
+<ResponseField name="image_1" type="string">
+  URL of the first image attached to the post.
+</ResponseField>
+
+<ResponseField name="image_2" type="string">
+  URL of the second image attached to the post.
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  URL of the video attached to the post.
+</ResponseField>
+
+<ResponseField name="link_attachment" type="string">
+  URL of the external link shared in the post.
+</ResponseField>
+
+<ResponseField name="comment_1" type="string">
+  Text of the first comment on the post.
+</ResponseField>
+
+<ResponseField name="comment_2" type="string">
+  Text of the second comment on the post.
+</ResponseField>
+
+<ResponseField name="feedback_id" type="string">
+  Internal Facebook feedback identifier for the post.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=1&limit=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+params = {
+    "squid": "YOUR_SQUID_HASH",
+    "page": 1,
+    "limit": 50
+}
+
+all_results = []
+url = f"{BASE_URL}/results"
+
+while True:
+    response = requests.get(url, headers=headers, params=params)
+    data = response.json()
+
+    all_results.extend(data["data"])
+    print(f"Fetched page {data['page']} of {data['total_pages']}")
+
+    if data["next"] is None:
+        break
+
+    url = data["next"]
+    params = {}
+
+print(f"\nTotal posts collected: {len(all_results)}")
+for post in all_results[:5]:
+    print(f"- {post.get('user_name')}: {post.get('text', '')[:80]}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 42,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 42,
+  "data": [
+    {
+      "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "object": "result",
+      "squid": "YOUR_SQUID_HASH",
+      "run": "RUN_HASH",
+      "url": "https://www.facebook.com/groups/336266723393832/permalink/123456789/",
+      "post_id": "123456789",
+      "group_id": "336266723393832",
+      "group_title": "My Private Group",
+      "user_id": "987654321",
+      "user_name": "John Doe",
+      "text": "Hello everyone! Check out this great resource...",
+      "time": "2026-03-19T11:27:00.000Z",
+      "timestamp": 1773919620,
+      "likes_count": 12,
+      "comments_count": 5,
+      "shares_count": 2,
+      "reaction_like_count": 10,
+      "reaction_love_count": 2,
+      "reaction_haha_count": 0,
+      "reaction_wow_count": 0,
+      "reaction_sad_count": 0,
+      "reaction_angry_count": 0,
+      "image_1": null,
+      "image_2": null,
+      "video_url": null,
+      "link_attachment": "https://example.com/resource",
+      "comment_1": "Great post!",
+      "comment_2": "Thanks for sharing.",
+      "feedback_id": "ZmVlZGJhY2s6MTIzNDU2Nzg5",
+      "scraping_time": "2026-03-20T09:15:00.000Z"
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

@@ -1,0 +1,114 @@
+---
+title: "Update Settings"
+description: "Configure settings for your Realtor Listings Scraper squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **Realtor Listings Scraper** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+## Settings Fields
+
+<ParamField body="params.max_results" type="integer">
+  Maximum number of listings to collect per task. Leave empty for unlimited.
+</ParamField>
+
+<ParamField body="params.max_unique_results_per_run" type="integer">
+  Maximum number of unique results across all tasks in a run. Leave empty for unlimited.
+</ParamField>
+
+<ParamField body="params.fetch_since" type="string">
+  Only collect listings published after this point (based on `published_at`). Accepts a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD HH:MM"`).
+</ParamField>
+
+<ParamField body="params.fetch_since_timezone" type="string">
+  Timezone for interpreting an absolute `fetch_since` date (e.g. `"America/New_York"`). Only applies when `fetch_since` is an absolute date — ignored for relative values like `"24h"` or `"7d"`.
+</ParamField>
+
+<Tip>
+  Set `fetch_since` to `null` to collect all listings, or use a relative duration (`"24h"`, `"7d"`, `"2w"`) or absolute date (`"YYYY-MM-DD HH:MM"`) to collect only recent listings. When using an absolute date, set `fetch_since_timezone` to interpret it in the correct timezone (e.g. `"America/New_York"`).
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Realtor California Listings",
+    "params": {
+      "max_results": 200,
+      "fetch_since": "7d",
+      "fetch_since_timezone": null
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_hash = "YOUR_SQUID_HASH"
+
+response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
+    headers=headers,
+    json={
+        "name": "Realtor California Listings",
+        "params": {
+            "max_results": 200,
+            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01 00:00"
+            "fetch_since_timezone": None  # e.g. "America/New_York" — only used with absolute fetch_since
+        }
+    }
+)
+
+data = response.json()
+print(f"Squid updated: {data['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "id": "YOUR_SQUID_HASH",
+  "name": "Realtor California Listings",
+  "crawler": {
+    "id": "f388a9866f943bc5c29bde8b33587bd3",
+    "name": "Realtor Iter Listings",
+    "slug": "realtor-iter-listings"
+  },
+  "params": {
+    "max_results": 200,
+    "fetch_since": "7d",
+    "fetch_since_timezone": null
+  },
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": true,
+  "no_line_breaks": false,
+  "status": "idle",
+  "created_at": "2025-01-20T10:15:00.000000",
+  "updated_at": "2025-01-27T14:35:00.000000"
+}
+```

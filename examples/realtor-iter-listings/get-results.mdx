@@ -1,0 +1,240 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Realtor Listings Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Realtor Listings Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional).
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+<ParamField query="limit" type="integer">
+  Results per page (default: 50, max: 100).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on realtor.com. Example: `https://www.realtor.com/realestateandhomes-detail/123-Main-St_Los-Angeles_CA_90001_M12345-67890`
+</ResponseField>
+
+<ResponseField name="full_address" type="string">
+  Full formatted address of the property. Example: `123 Main St, Los Angeles, CA 90001`
+</ResponseField>
+
+<ResponseField name="street" type="string">
+  Street address. Example: `123 Main St`
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City name. Example: `Los Angeles`
+</ResponseField>
+
+<ResponseField name="state" type="string">
+  US state abbreviation. Example: `CA`
+</ResponseField>
+
+<ResponseField name="county" type="string">
+  County name. Example: `Los Angeles County`
+</ResponseField>
+
+<ResponseField name="zip_code" type="string">
+  ZIP code. Example: `90001`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Listing status (e.g. for_sale, sold, pending). Example: `for_sale`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listed price in USD. Example: `750000`
+</ResponseField>
+
+<ResponseField name="sold_price" type="integer">
+  Final sold price (if applicable). Example: `740000`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency of the price. Example: `USD`
+</ResponseField>
+
+<ResponseField name="bed" type="integer">
+  Number of bedrooms. Example: `3`
+</ResponseField>
+
+<ResponseField name="bath" type="number">
+  Number of bathrooms. Example: `2.5`
+</ResponseField>
+
+<ResponseField name="house_size" type="integer">
+  Interior living area in square feet. Example: `1850`
+</ResponseField>
+
+<ResponseField name="acre_lot" type="number">
+  Lot size in acres. Example: `0.15`
+</ResponseField>
+
+<ResponseField name="property_type" type="string">
+  Type of property (e.g. single_family, condo, townhouse). Example: `single_family`
+</ResponseField>
+
+<ResponseField name="is_new_construction" type="boolean">
+  Whether the property is new construction. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_to_be_built" type="boolean">
+  Whether the property is to be built. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_foreclosure" type="boolean">
+  Whether the listing is a foreclosure. Example: `false`
+</ResponseField>
+
+<ResponseField name="pending" type="boolean">
+  Whether the listing is under contract/pending. Example: `false`
+</ResponseField>
+
+<ResponseField name="brokered_by" type="string">
+  Name of the brokerage listing the property. Example: `Keller Williams Realty`
+</ResponseField>
+
+<ResponseField name="seller" type="string">
+  Primary seller or listing agent name.
+</ResponseField>
+
+<ResponseField name="co_seller" type="string">
+  Co-seller or co-listing agent name.
+</ResponseField>
+
+<ResponseField name="lat" type="number">
+  Latitude coordinate of the property. Example: `34.052235`
+</ResponseField>
+
+<ResponseField name="lng" type="number">
+  Longitude coordinate of the property. Example: `-118.243683`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  URL of the main listing photo.
+</ResponseField>
+
+<ResponseField name="published_at" type="string">
+  Date the listing was first published. Example: `2026-03-10`
+</ResponseField>
+
+<ResponseField name="list_date" type="string">
+  Date the property was listed. Example: `2026-03-10`
+</ResponseField>
+
+<ResponseField name="sold_date" type="string">
+  Date the property was sold (if applicable). Example: `2026-03-28`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=1&limit=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+params = {
+    "squid": "YOUR_SQUID_HASH",
+    "page": 1,
+    "limit": 50
+}
+
+all_results = []
+url = f"{BASE_URL}/results"
+
+while True:
+    response = requests.get(url, headers=headers, params=params)
+    data = response.json()
+
+    all_results.extend(data["data"])
+    print(f"Fetched page {data['page']} of {data['total_pages']}")
+
+    if data["next"] is None:
+        break
+
+    url = data["next"]
+    params = {}
+
+print(f"\nTotal listings collected: {len(all_results)}")
+for listing in all_results[:5]:
+    print(f"- {listing.get('full_address')} — ${listing.get('price', 0):,} ({listing.get('bed')}bd/{listing.get('bath')}ba)")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 120,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 3,
+  "result_from": 1,
+  "result_to": 50,
+  "data": [
+    {
+      "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "object": "result",
+      "squid": "YOUR_SQUID_HASH",
+      "run": "RUN_HASH",
+      "url": "https://www.realtor.com/realestateandhomes-detail/123-Main-St_Los-Angeles_CA_90001_M12345-67890",
+      "full_address": "123 Main St, Los Angeles, CA 90001",
+      "street": "123 Main St",
+      "city": "Los Angeles",
+      "state": "CA",
+      "county": "Los Angeles County",
+      "zip_code": "90001",
+      "status": "for_sale",
+      "price": 750000,
+      "sold_price": null,
+      "currency": "USD",
+      "bed": 3,
+      "bath": 2.0,
+      "house_size": 1850,
+      "acre_lot": 0.15,
+      "property_type": "single_family",
+      "is_new_construction": false,
+      "is_foreclosure": false,
+      "pending": false,
+      "brokered_by": "Keller Williams Realty",
+      "lat": 34.052235,
+      "lng": -118.243683,
+      "published_at": "2026-03-10",
+      "list_date": "2026-03-10",
+      "scraping_time": "2026-03-20T09:15:00.000Z"
+    }
+  ],
+  "next": "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=2&limit=50",
+  "previous": null
+}
+```

@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <clipPath id="bfvgezoaza">
+            <rect data-name="Прямоугольник 14259" width="40" height="40" rx="9" transform="translate(520 775)" style="fill:#0a2540;opacity:.06"/>
+        </clipPath>
+        <clipPath id="z2umb8ni1b">
+            <path data-name="Прямоугольник 14258" style="fill:none" d="M0 0h47.162v54.137H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="Группа масок 668" style="clip-path:url(#bfvgezoaza)" transform="translate(-520 -775)">
+        <g data-name="Сгруппировать 17935">
+            <g data-name="Сгруппировать 17934" style="clip-path:url(#z2umb8ni1b)" transform="rotate(-154.03 370.276 351.547)">
+                <path data-name="Контур 67901" d="M96.822 54.06c2.407-7.749 4.865-15.474 7.308-23.206.071-.226.071-.491.118-.638.058-.184.242-.457.33-.735 3.084-9.76 6.189-19.512 9.19-29.314 3.82.009 8.317-.378 12.046 0 3.012.3 5.644 3.616 5.856 7.481V46.7c-.318 3.8-2.7 6.876-5.669 7.354-9.725.059-19.454-.073-29.178 0" transform="translate(-84.508)" style="fill:#50b96f"/>
+                <path data-name="Контур 67902" d="M29.907 1c-3 9.8-6.106 19.554-9.19 29.314-.088.278-.272.55-.33.735L.869 18.7l-.1-.36c.091-3.121-.1-6.326.005-9.435C.923 4.68 3.332 1.447 6.626.994c7.76.024 15.522-.013 23.281.006" transform="translate(-.647 -.832)" style="fill:#3b96d2"/>
+                <path data-name="Контур 67903" d="M19.74 71.824c-.047.148-.046.412-.118.638-2.443 7.731-4.9 15.457-7.308 23.206C6.743 95.711.832 96.966.029 87.462c.085-12.368-.1-24.744 0-37.111 0-.206-.061-.541.1-.667C.02 52.792.214 56 .123 59.118l.1.36z" transform="translate(0 -41.608)" style="fill:#f6e142"/>
+            </g>
+        </g>
+    </g>
+    <g data-name="Сгруппировать 17932">
+        <path data-name="Контур 67878" d="m0 144.468 5.012.024a2.781 2.781 0 0 1-.569 1.606 2.5 2.5 0 0 1-4.322-.781L0 144.893z" transform="translate(8.3 -125.762)" style="fill:#fff"/>
+        <path data-name="Контур 67879" d="M43.823 182.672v6.119a2.3 2.3 0 0 1-2.3 2.3H24.752a2.3 2.3 0 0 1-2.3-2.3v-6.119a3.893 3.893 0 0 0 4.278-1.512 3.936 3.936 0 0 0 6.386.048c.051-.011.605.63.728.731a3.928 3.928 0 0 0 5.7-.78 3.9 3.9 0 0 0 4.278 1.512" transform="translate(-12.737 -160.137)" style="fill:#fff"/>
+        <path data-name="Контур 67880" d="M108.869 0v7.705h-4.822L105.37 0z" transform="translate(-89.176 9.583)" style="fill:#fff"/>
+        <path data-name="Контур 67881" d="m206.352 0 1.324 7.705h-4.822V0z" transform="translate(-181.742 9.583)" style="fill:#fff"/>
+        <path data-name="Контур 67882" d="M10.637 0 9.313 7.705H4.491L7.209 0z" transform="translate(4.093 9.583)" style="fill:#fff"/>
+        <path data-name="Контур 67883" d="M287.6 7.7h-4.822L281.45 0h3.427z" transform="translate(-255.375 9.583)" style="fill:#fff"/>
+        <path data-name="Контур 67884" d="M207.851 144.468a2.747 2.747 0 0 1-.59 1.655 2.5 2.5 0 0 1-4.421-1.655z" transform="translate(-181.729 -125.762)" style="fill:#fff"/>
+        <path data-name="Контур 67885" d="M106.064 144.468a2.5 2.5 0 0 1-4.463 1.6 2.782 2.782 0 0 1-.548-1.6z" transform="translate(-86.372 -125.762)" style="fill:#fff"/>
+        <path data-name="Контур 67886" d="M308.917 144.468a2.5 2.5 0 0 1-4.463 1.6 2.782 2.782 0 0 1-.548-1.6z" transform="translate(-276.414 -125.762)" style="fill:#fff"/>
+    </g>
+</svg>

@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+    <defs>
+        <clipPath id="pky27qhz6a">
+            <path data-name="Прямоугольник 14278" style="fill:#fff" d="M0 0h17.865v21.071H0z"/>
+        </clipPath>
+    </defs>
+    <g data-name="Twitter Profile Scraper" transform="translate(-1021 -524)">
+        <rect data-name="Прямоугольник 9302" width="40" height="40" rx="9" transform="translate(1021 524)" style="fill:#4ea6ed"/>
+        <g data-name="Сгруппировать 17939">
+            <g data-name="Сгруппировать 17938" style="clip-path:url(#pky27qhz6a)" transform="translate(1032.067 533.259)">
+                <path data-name="Контур 67904" d="M5.683 170.3c2.088-.153 4.313.082 6.416-.015a6.088 6.088 0 0 1 5.606 4.643c.486 2.182-.1 3.117-2.181 3.749-3.324 1.01-10.517 1.044-13.766-.2-1.494-.57-1.921-1.327-1.707-2.935a6.164 6.164 0 0 1 5.632-5.242" transform="translate(0 -158.351)" style="fill:#fff"/>
+                <path data-name="Контур 67905" d="M54.216.027a5.469 5.469 0 0 1 5.1 8.607 5.516 5.516 0 0 1-9.356-.673A5.489 5.489 0 0 1 54.216.027" transform="translate(-45.918)" style="fill:#fff"/>
+            </g>
+        </g>
+    </g>
+</svg>

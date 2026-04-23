@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.061" y1="0.075" x2="0.91" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7a17fe"/>
+      <stop offset="0.39" stop-color="#fc14bd"/>
+      <stop offset="0.657" stop-color="#ff4521"/>
+      <stop offset="1" stop-color="#ffc904"/>
+    </linearGradient>
+  </defs>
+  <g id="icon_instagram_profile" transform="translate(-1016 -3330)">
+    <rect id="Прямоугольник_9302" data-name="Прямоугольник 9302" width="40" height="40" rx="9" transform="translate(1016 3330)" fill="url(#linear-gradient)"/>
+    <path id="Исключение_1" data-name="Исключение 1" d="M17759,15988h-16a4.006,4.006,0,0,1-4-4v-16a4,4,0,0,1,4-4h16a4,4,0,0,1,4,4v16A4.006,4.006,0,0,1,17759,15988Zm-16.3-4.573a.573.573,0,0,0,0,1.146h10.334a.573.573,0,0,0,0-1.146Zm1.428-16a2,2,0,0,0-2,2v9.714a2,2,0,0,0,2,2h13.738a2,2,0,0,0,2-2v-9.714a2,2,0,0,0-2-2Z" transform="translate(-16715 -12626)" fill="#fff"/>
+  </g>
+</svg>

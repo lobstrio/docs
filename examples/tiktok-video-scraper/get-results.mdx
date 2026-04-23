@@ -1,0 +1,308 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TikTok Video Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TikTok Video Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional).
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+<ParamField query="limit" type="integer">
+  Results per page (default: 50, max: 100).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="video_id" type="string">
+  Unique TikTok identifier for the video. Example: `6862153058223197445`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Caption/description text of the video.
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  ISO 8601 timestamp of when the video was published. Example: `2020-08-17T12:34:56Z`
+</ResponseField>
+
+<ResponseField name="play_count" type="integer">
+  Total number of plays/views. Example: `52300000`
+</ResponseField>
+
+<ResponseField name="like_count" type="integer">
+  Total number of likes. Example: `3100000`
+</ResponseField>
+
+<ResponseField name="comment_count" type="integer">
+  Total number of comments. Example: `45000`
+</ResponseField>
+
+<ResponseField name="share_count" type="integer">
+  Number of times the video was shared. Example: `120000`
+</ResponseField>
+
+<ResponseField name="collect_count" type="integer">
+  Number of times the video was saved/collected. Example: `870000`
+</ResponseField>
+
+<ResponseField name="repost_count" type="integer">
+  Number of reposts. Example: `0`
+</ResponseField>
+
+<ResponseField name="duration" type="integer">
+  Video duration in seconds. Example: `15`
+</ResponseField>
+
+<ResponseField name="width" type="integer">
+  Video width in pixels. Example: `576`
+</ResponseField>
+
+<ResponseField name="height" type="integer">
+  Video height in pixels. Example: `1024`
+</ResponseField>
+
+<ResponseField name="definition" type="string">
+  Video quality definition. Example: `540p`
+</ResponseField>
+
+<ResponseField name="bitrate" type="integer">
+  Video bitrate. Example: `1243660`
+</ResponseField>
+
+<ResponseField name="file_size" type="integer">
+  File size in bytes. Example: `2330107`
+</ResponseField>
+
+<ResponseField name="is_ad" type="boolean">
+  Whether the video is an advertisement. Example: `false`
+</ResponseField>
+
+<ResponseField name="duet_enabled" type="boolean">
+  Whether duets are enabled for this video. Example: `true`
+</ResponseField>
+
+<ResponseField name="stitch_enabled" type="boolean">
+  Whether stitches are enabled for this video. Example: `true`
+</ResponseField>
+
+<ResponseField name="location_created" type="string">
+  Country code where the video was created. Example: `US`
+</ResponseField>
+
+<ResponseField name="play_url" type="string">
+  URL to stream the video.
+</ResponseField>
+
+<ResponseField name="download_url" type="string">
+  URL to download the video.
+</ResponseField>
+
+<ResponseField name="cover_url" type="string">
+  URL of the video thumbnail/cover image.
+</ResponseField>
+
+<ResponseField name="dynamic_cover" type="string">
+  URL of the animated cover image.
+</ResponseField>
+
+<ResponseField name="music_id" type="string">
+  Unique identifier for the music track used. Example: `6862153058223197445`
+</ResponseField>
+
+<ResponseField name="music_title" type="string">
+  Title of the music track. Example: `M to the B`
+</ResponseField>
+
+<ResponseField name="music_author" type="string">
+  Artist name of the music track. Example: `Millie B`
+</ResponseField>
+
+<ResponseField name="music_play_url" type="string">
+  URL to play the music track.
+</ResponseField>
+
+<ResponseField name="music_duration" type="integer">
+  Duration of the music track in seconds. Example: `60`
+</ResponseField>
+
+<ResponseField name="music_original" type="boolean">
+  Whether the audio is the creator's original sound. Example: `false`
+</ResponseField>
+
+<ResponseField name="music_is_copyrighted" type="boolean">
+  Whether the music track is copyrighted. Example: `true`
+</ResponseField>
+
+<ResponseField name="author_id" type="string">
+  Unique TikTok user ID of the video author. Example: `6569595380449902597`
+</ResponseField>
+
+<ResponseField name="author_sec_uid" type="string">
+  Secondary unique identifier for the author's account.
+</ResponseField>
+
+<ResponseField name="author_username" type="string">
+  TikTok username (handle) of the author. Example: `bellapoarch`
+</ResponseField>
+
+<ResponseField name="author_nickname" type="string">
+  Display name of the author. Example: `Bella Poarch`
+</ResponseField>
+
+<ResponseField name="author_verified" type="boolean">
+  Whether the author's account is verified. Example: `true`
+</ResponseField>
+
+<ResponseField name="author_bio" type="string">
+  Bio/description from the author's profile.
+</ResponseField>
+
+<ResponseField name="author_follower_count" type="integer">
+  Number of followers the author has. Example: `92800000`
+</ResponseField>
+
+<ResponseField name="author_following_count" type="integer">
+  Number of accounts the author follows. Example: `728`
+</ResponseField>
+
+<ResponseField name="author_total_likes" type="integer">
+  Total likes received across all the author's videos. Example: `2200000000`
+</ResponseField>
+
+<ResponseField name="author_video_count" type="integer">
+  Total number of videos published by the author. Example: `421`
+</ResponseField>
+
+<ResponseField name="author_avatar" type="string">
+  URL of the author's profile picture.
+</ResponseField>
+
+<ResponseField name="is_related" type="boolean">
+  Whether this result is a related video (not directly from a task URL). Example: `false`
+</ResponseField>
+
+<ResponseField name="related_to_video_id" type="string">
+  The video ID of the task that triggered this related result. Only set when `is_related` is `true`.
+</ResponseField>
+
+<ResponseField name="input_video_url" type="string">
+  The original task URL that produced this result.
+</ResponseField>
+
+<ResponseField name="scraping_time" type="string">
+  ISO 8601 timestamp of when this result was scraped.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=1&limit=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+params = {
+    "squid": "YOUR_SQUID_HASH",
+    "page": 1,
+    "limit": 50
+}
+
+all_results = []
+url = f"{BASE_URL}/results"
+
+while True:
+    response = requests.get(url, headers=headers, params=params)
+    data = response.json()
+
+    all_results.extend(data["data"])
+    print(f"Fetched page {data['page']} of {data['total_pages']}")
+
+    if data["next"] is None:
+        break
+
+    url = data["next"]
+    params = {}
+
+print(f"\nTotal videos collected: {len(all_results)}")
+for video in all_results[:5]:
+    print(f"- @{video.get('author_username')}: {video.get('description', '')[:60]} ({video.get('play_count', 0):,} plays)")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 2,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 2,
+  "data": [
+    {
+      "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "object": "result",
+      "squid": "YOUR_SQUID_HASH",
+      "run": "RUN_HASH",
+      "video_id": "6862153058223197445",
+      "description": "😛✌️ #fyp #foryou #foryoupage",
+      "created_at": "2020-08-17T12:34:56Z",
+      "play_count": 52300000,
+      "like_count": 3100000,
+      "comment_count": 45000,
+      "share_count": 120000,
+      "collect_count": 870000,
+      "repost_count": 0,
+      "duration": 15,
+      "width": 576,
+      "height": 1024,
+      "definition": "540p",
+      "is_ad": false,
+      "duet_enabled": true,
+      "stitch_enabled": true,
+      "location_created": "US",
+      "music_title": "M to the B",
+      "music_author": "Millie B",
+      "music_original": false,
+      "music_is_copyrighted": true,
+      "author_username": "bellapoarch",
+      "author_nickname": "Bella Poarch",
+      "author_verified": true,
+      "author_follower_count": 92800000,
+      "is_related": false,
+      "related_to_video_id": null,
+      "input_video_url": "https://www.tiktok.com/@bellapoarch/video/6862153058223197445",
+      "scraping_time": "2026-03-20T09:15:00.000Z"
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

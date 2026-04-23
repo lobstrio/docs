@@ -1,0 +1,243 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from ParuVendu Listings Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **ParuVendu Listings Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional).
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+<ParamField query="limit" type="integer">
+  Results per page (default: 50, max: 100).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing on paruvendu.fr.
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the listing. Example: `BMW Série 3 320d 150ch`
+</ResponseField>
+
+<ResponseField name="section" type="string">
+  Top-level category of the listing (e.g. car, real estate). Example: `voiture`
+</ResponseField>
+
+<ResponseField name="annonce_type" type="string">
+  Type of listing (e.g. sale, rental). Example: `vente`
+</ResponseField>
+
+<ResponseField name="asset_type" type="string">
+  Sub-category or asset type within the section. Example: `berline`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Listed price. Example: `12500`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency of the price. Example: `EUR`
+</ResponseField>
+
+<ResponseField name="make" type="string">
+  Vehicle manufacturer or brand. Example: `BMW`
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  Vehicle model. Example: `Série 3`
+</ResponseField>
+
+<ResponseField name="year" type="integer">
+  Year of manufacture. Example: `2018`
+</ResponseField>
+
+<ResponseField name="mileage" type="integer">
+  Odometer reading in kilometres. Example: `85000`
+</ResponseField>
+
+<ResponseField name="fuel_type" type="string">
+  Fuel type (e.g. Diesel, Essence, Électrique). Example: `Diesel`
+</ResponseField>
+
+<ResponseField name="gearbox" type="string">
+  Gearbox type (e.g. Manuelle, Automatique). Example: `Manuelle`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  City or region of the listing. Example: `Paris`
+</ResponseField>
+
+<ResponseField name="postal_code" type="string">
+  Postal code of the listing location. Example: `75001`
+</ResponseField>
+
+<ResponseField name="room_count" type="integer">
+  Number of rooms (for real estate listings).
+</ResponseField>
+
+<ResponseField name="area" type="integer">
+  Surface area in square metres (for real estate listings).
+</ResponseField>
+
+<ResponseField name="picture" type="string">
+  URL of the main listing image.
+</ResponseField>
+
+<ResponseField name="description_preview" type="string">
+  Short preview of the listing description.
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Full description text (available when `get_annonce_details` is enabled).
+</ResponseField>
+
+<ResponseField name="features" type="string">
+  List of features or equipment (available when `get_annonce_details` is enabled).
+</ResponseField>
+
+<ResponseField name="seller_name" type="string">
+  Name of the seller (available when `get_annonce_details` is enabled).
+</ResponseField>
+
+<ResponseField name="seller_url" type="string">
+  URL to the seller's profile page (available when `get_annonce_details` is enabled).
+</ResponseField>
+
+<ResponseField name="seller_ads_count" type="integer">
+  Number of active listings by the seller (available when `get_annonce_details` is enabled).
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Seller phone number (available when `get_annonce_details` is enabled).
+</ResponseField>
+
+<ResponseField name="reference" type="string">
+  Unique listing reference number on paruvendu.fr.
+</ResponseField>
+
+<ResponseField name="last_publication_date" type="string">
+  Date the listing was last published or refreshed. Example: `2026-03-15`
+</ResponseField>
+
+<ResponseField name="updated_at" type="string">
+  ISO 8601 timestamp of the last update. Example: `2026-03-15T10:30:00Z`
+</ResponseField>
+
+<ResponseField name="dpe_energy" type="string">
+  Energy performance rating (DPE) for real estate listings (A–G). Example: `C`
+</ResponseField>
+
+<ResponseField name="dpe_greenhouse" type="string">
+  Greenhouse gas emission rating (GES) for real estate listings (A–G). Example: `D`
+</ResponseField>
+
+<ResponseField name="list_infos" type="string">
+  Additional structured info extracted from the listing summary.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=1&limit=50" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+params = {
+    "squid": "YOUR_SQUID_HASH",
+    "page": 1,
+    "limit": 50
+}
+
+all_results = []
+url = f"{BASE_URL}/results"
+
+while True:
+    response = requests.get(url, headers=headers, params=params)
+    data = response.json()
+
+    all_results.extend(data["data"])
+    print(f"Fetched page {data['page']} of {data['total_pages']}")
+
+    if data["next"] is None:
+        break
+
+    url = data["next"]
+    params = {}
+
+print(f"\nTotal listings collected: {len(all_results)}")
+for listing in all_results[:5]:
+    print(f"- {listing.get('title')} — {listing.get('price')} {listing.get('currency')} ({listing.get('location')})")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "total_results": 87,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 2,
+  "result_from": 1,
+  "result_to": 50,
+  "data": [
+    {
+      "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "object": "result",
+      "squid": "YOUR_SQUID_HASH",
+      "run": "RUN_HASH",
+      "url": "https://www.paruvendu.fr/a/voiture-occasion/bmw/serie-3/12345678/",
+      "title": "BMW Série 3 320d 150ch BVA",
+      "section": "voiture",
+      "annonce_type": "vente",
+      "asset_type": "berline",
+      "price": 12500,
+      "currency": "EUR",
+      "make": "BMW",
+      "model": "Série 3",
+      "year": 2018,
+      "mileage": 85000,
+      "fuel_type": "Diesel",
+      "gearbox": "Automatique",
+      "location": "Paris",
+      "postal_code": "75001",
+      "picture": "https://img.paruvendu.fr/thumb/12345678_1.jpg",
+      "description_preview": "Véhicule en excellent état, révision faite...",
+      "last_publication_date": "2026-03-15",
+      "reference": "12345678",
+      "scraping_time": "2026-03-20T09:15:00.000Z"
+    }
+  ],
+  "next": "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=2&limit=50",
+  "previous": null
+}
+```
