@@ -32,7 +32,8 @@
             "pages": [
               "docs/concepts",
               "docs/pagination",
-              "docs/errors"
+              "docs/errors",
+              "docs/timezones"
             ]
           },
           {
