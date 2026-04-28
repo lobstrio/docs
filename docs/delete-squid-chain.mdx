@@ -1,0 +1,49 @@
+---
+title: "Delete Squid Chain"
+description: "Remove the chain configuration from a squid"
+api: "DELETE https://api.lobstr.io/v1/squids/{id}/chain"
+---
+
+Removes the chain configuration from a squid. The source and target squids themselves are not deleted — only the link between them.
+
+## Path Parameters
+
+<ParamField path="id" type="string" required>
+  Hash ID of the source squid. Example: `"e86b29c032024b66aff529e1d43c2bd7"`
+</ParamField>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X DELETE "https://api.lobstr.io/v1/squids/e86b29c032024b66aff529e1d43c2bd7/chain" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/squids/e86b29c032024b66aff529e1d43c2bd7/chain"
+headers = {"Authorization": "Token YOUR_API_KEY"}
+
+response = requests.delete(url, headers=headers)
+# 204 No Content on success
+```
+</CodeGroup>
+
+## Response
+
+```json 204
+```
+
+```json 404
+{
+  "error": "No chain configured on this squid."
+}
+```

@@ -60,7 +60,11 @@
               "docs/list-squids",
               "docs/get-squid-details",
               "docs/empty-squid",
-              "docs/delete-squid"
+              "docs/delete-squid",
+              "docs/configure-squid-chain",
+              "docs/get-squid-chain",
+              "docs/update-squid-chain",
+              "docs/delete-squid-chain"
             ]
           },
           {
@@ -190,7 +194,8 @@
               "examples/google-maps-leads-scraper/get-geolocation",
               "examples/google-maps-leads-scraper/add-task-params",
               "examples/google-maps-leads-scraper/update-settings",
-              "examples/google-maps-leads-scraper/get-results"
+              "examples/google-maps-leads-scraper/get-results",
+              "examples/google-maps-leads-scraper/configure-chain"
             ]
           },
           {
@@ -533,7 +538,7 @@
           {
             "group": "2026",
             "pages": [
-              "changelog/2026-04-22"
+              "changelog/2026-04-28"
             ]
           }
         ]

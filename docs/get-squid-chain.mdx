@@ -1,0 +1,67 @@
+---
+title: "Get Squid Chain"
+description: "Retrieve the chain configuration for a squid"
+api: "GET https://api.lobstr.io/v1/squids/{id}/chain"
+---
+
+Returns the chain configuration attached to a squid, or `null` if no chain is configured.
+
+## Path Parameters
+
+<ParamField path="id" type="string" required>
+  Hash ID of the squid. Example: `"e86b29c032024b66aff529e1d43c2bd7"`
+</ParamField>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl "https://api.lobstr.io/v1/squids/e86b29c032024b66aff529e1d43c2bd7/chain" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+url = "https://api.lobstr.io/v1/squids/e86b29c032024b66aff529e1d43c2bd7/chain"
+headers = {"Authorization": "Token YOUR_API_KEY"}
+
+response = requests.get(url, headers=headers)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+  "target_module": {
+    "id": "9a3f1c8b2e7d4a56f0e1b2c3d4e5f678",
+    "public_name": "Google Maps Reviews Scraper",
+    "name": "googlemapreviews_matrix",
+    "max_concurrency": 10
+  },
+  "target_cluster": {
+    "id": "f7e8d9c0b1a2f7e8d9c0b1a2f7e8d9c0",
+    "hash_value": "f7e8d9c0b1a2f7e8d9c0b1a2f7e8d9c0",
+    "name": "Reviews (chained)"
+  },
+  "field_map": {"url": "url"},
+  "is_active": true,
+  "autostart": true,
+  "cluster_name": "Reviews (chained)",
+  "cluster_concurrency": 3,
+  "created_at": "2026-04-28T10:00:00Z"
+}
+```
+
+```json 200
+null
+```

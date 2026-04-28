@@ -1,0 +1,21 @@
+---
+title: "April 28, 2026"
+description: "API updates shipped April 28, 2026"
+---
+
+<Update label="April 28, 2026">
+
+### New
+- **Crawler chaining** — a squid can now automatically feed its results into a second crawler as soon as a run completes. Configure a chain on any squid by setting a `chain` object with the following fields:
+
+  | Field | Type | Description |
+  |---|---|---|
+  | `target_crawler` | string | Slug of the crawler that will receive the results as inputs |
+  | `field_map` | object | Maps a result field from the source to an input param on the target (e.g. `{"url": "url"}`) |
+  | `autostart` | boolean | If `true`, the downstream run starts immediately. If `false`, tasks are queued and the run is left paused for manual review. Defaults to `true` |
+  | `cluster_settings` | object | Optional — pre-configure the downstream squid's `name` and `concurrency` on first creation |
+
+- **`GET /v1/squids/{id}`** — response now includes a `chain` object when a chain is configured on the squid
+- **`GET /v1/runs`** — runs triggered by a chain now include `"origin": "chain"` in the response
+
+</Update>

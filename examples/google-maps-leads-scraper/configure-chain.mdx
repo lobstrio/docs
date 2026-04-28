@@ -1,0 +1,117 @@
+---
+title: "Configure Chain"
+description: "Automatically feed Google Maps leads into a Google Maps Reviews scrape"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}/chain"
+---
+
+Once your Google Maps Leads Scraper squid collects place URLs, you can chain it to a **Google Maps Reviews Scraper** so that reviews are fetched automatically for every place found — no manual steps required.
+
+When a leads run completes, the scheduler extracts the `url` field from each result and queues it as a task on the reviews squid, then starts a new run.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+<ParamField body="target_module_id" type="string" required>
+  Hash ID of the Google Maps Reviews Scraper crawler. Retrieve it from `GET /v1/crawlers`.
+</ParamField>
+
+<ParamField body="field_map" type="object" required>
+  Maps the `url` field from leads results to the `url` input on the reviews crawler. Always `{"url": "url"}` for this chain.
+</ParamField>
+
+<ParamField body="autostart" type="boolean">
+  Whether the reviews run starts automatically. Defaults to `true`.
+</ParamField>
+
+<ParamField body="cluster_name" type="string">
+  Name for the auto-created reviews squid. Example: `"Google Maps Reviews (chained)"`.
+</ParamField>
+
+<ParamField body="cluster_concurrency" type="integer">
+  Concurrency for the reviews squid. Defaults to `1`.
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_LEADS_SQUID_HASH/chain" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "target_module_id": "GOOGLE_MAPS_REVIEWS_CRAWLER_HASH",
+    "field_map": {"url": "url"},
+    "autostart": true,
+    "cluster_name": "Google Maps Reviews (chained)",
+    "cluster_concurrency": 3
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {
+    "Authorization": f"Token {API_KEY}",
+    "Content-Type": "application/json"
+}
+
+leads_squid_id = "YOUR_LEADS_SQUID_HASH"
+
+response = requests.post(
+    f"{BASE_URL}/squids/{leads_squid_id}/chain",
+    headers=headers,
+    json={
+        "target_module_id": "GOOGLE_MAPS_REVIEWS_CRAWLER_HASH",
+        "field_map": {"url": "url"},
+        "autostart": True,
+        "cluster_name": "Google Maps Reviews (chained)",
+        "cluster_concurrency": 3
+    }
+)
+
+chain = response.json()
+print(f"Chain configured: {chain['id']}")
+print(f"Target crawler: {chain['target_module']['public_name']}")
+print(f"Autostart: {chain['autostart']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+  "target_module": {
+    "id": "9a3f1c8b2e7d4a56f0e1b2c3d4e5f678",
+    "public_name": "Google Maps Reviews Scraper",
+    "name": "googlemapreviews_matrix",
+    "max_concurrency": 10
+  },
+  "target_cluster": null,
+  "field_map": {"url": "url"},
+  "is_active": true,
+  "autostart": true,
+  "cluster_name": "Google Maps Reviews (chained)",
+  "cluster_concurrency": 3,
+  "created_at": "2026-04-28T10:00:00Z"
+}
+```
+
+<Note>
+  `target_cluster` is `null` until the first leads run completes and triggers the chain. After that it will contain the auto-created reviews squid.
+</Note>
+
+<Tip>
+  Set `autostart: false` if you want to review the queued tasks before the reviews run starts.
+</Tip>
