@@ -32,7 +32,7 @@ Enable these in the `params.functions` object:
 
 | Function | Type | Default | Description |
 | --- | --- | --- | --- |
-| **product_details** | boolean | true | Visit each listing's detail page to fetch full description, phone number, and additional attributes (4 credits per listing) |
+| **get_listing_details** | boolean | true | Visit each listing's detail page to fetch full description, phone number, and additional attributes (4 credits per listing) |
 
 ## Squid Settings
 
@@ -47,7 +47,7 @@ Configure general squid settings:
 | **no_line_breaks** | boolean | Remove line breaks from results |
 
 <Warning>
-  `product_details` is enabled by default and costs 4 additional credits per listing. Disable it if you only need listing summaries.
+  `get_listing_details` is enabled by default and costs 4 additional credits per listing. Disable it if you only need listing summaries.
 </Warning>
 
 ## Code Examples
@@ -67,7 +67,7 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
       "max_pages": 10,
       "max_results": 200,
       "functions": {
-        "product_details": true
+        "get_listing_details": true
       }
     }
   }'
@@ -94,7 +94,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
             "max_pages": 10,
             "max_results": 200,
             "functions": {
-                "product_details": True  # 4 credits per listing
+                "get_listing_details": True  # 4 credits per listing
             }
         }
     }
@@ -118,7 +118,7 @@ print(f"Settings updated: {data['name']}")
     "max_pages": 10,
     "max_results": 200,
     "functions": {
-      "product_details": true
+      "get_listing_details": true
     }
   }
 }
