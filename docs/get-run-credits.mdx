@@ -1,0 +1,174 @@
+---
+title: "Get Run Credits"
+description: "Retrieve the per-function credit breakdown for a completed run"
+api: "GET https://api.lobstr.io/v1/runs/{run_hash}/credits"
+---
+
+Returns a detailed credit breakdown for a single run, showing how credits were spent across base scraping and any enrichment functions (e.g. phone numbers, email extraction, images). Use this to understand the cost composition of a run and identify which functions drive the most spend.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Path Parameters
+
+<ParamField path="run_hash" type="string" required>
+  The unique identifier (hash) of the run. Example: `0393be3ea6f74986906153df1c3f9894`
+</ParamField>
+
+## Response Fields
+
+<ResponseField name="run_id" type="string">
+  The hash ID of the run. Example: `"0393be3ea6f74986906153df1c3f9894"`
+</ResponseField>
+
+<ResponseField name="total_credits" type="float">
+  Total credits consumed by the run. Example: `116`
+</ResponseField>
+
+<ResponseField name="total_results" type="integer">
+  Total number of results collected in the run. Example: `20`
+</ResponseField>
+
+<ResponseField name="breakdown" type="array">
+  List of per-function credit entries, sorted by credits descending.
+
+  <Expandable title="breakdown item">
+    <ResponseField name="function" type="string">
+      Internal function name. `"base"` represents the core scraping step. Enrichment functions (e.g. `"get_phone_numbers"`, `"extract_emails_from_website"`) appear as separate entries. `"filters"` is a virtual entry that groups all active filter costs.
+    </ResponseField>
+    <ResponseField name="credits" type="float">
+      Credits charged for this function. Example: `80`
+    </ResponseField>
+    <ResponseField name="attempts" type="integer">
+      Number of results this function ran on. For the virtual `"filters"` entry this is `0`.
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="rates" type="object">
+  Credit rates for the run's squid.
+
+  <Expandable title="rates fields">
+    <ResponseField name="credits_per_row" type="float">
+      Base cost per result. Example: `4`
+    </ResponseField>
+    <ResponseField name="[function_name]" type="float">
+      Cost per result for each enrichment function, keyed by function name. Example: `"get_phone_numbers": 6`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="function_colors" type="object">
+  Display color palette for each function, used by the dashboard UI.
+
+  <Expandable title="function_colors item">
+    <ResponseField name="bg_color" type="string">
+      Background color hex. Example: `"#EAFBF3"`
+    </ResponseField>
+    <ResponseField name="txt_color" type="string">
+      Text / foreground color hex. Example: `"#0F9F5F"`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<ResponseField name="base_function_label" type="string | null">
+  Human-readable display name for the base scraping step, derived from the squid's configuration. Example: `"Export Listings (No Phone)"`. `null` if the squid has no labelled main function.
+</ResponseField>
+
+<ResponseField name="filter_breakdown" type="array">
+  Per-filter credit detail when the squid charges for active filters (e.g. geo match, category match). Empty array if no filter costs apply.
+
+  <Expandable title="filter_breakdown item">
+    <ResponseField name="name" type="string">
+      Internal filter parameter name. Example: `"geo_match"`
+    </ResponseField>
+    <ResponseField name="display" type="string">
+      Human-readable filter name shown in the UI. Example: `"Geo Match"`
+    </ResponseField>
+    <ResponseField name="rate" type="float">
+      Credits charged per result for this filter. Example: `1`
+    </ResponseField>
+    <ResponseField name="credits" type="float">
+      Total credits charged for this filter in the run. Example: `20`
+    </ResponseField>
+  </Expandable>
+</ResponseField>
+
+<Note>
+  Credits are only charged for results that were successfully collected. Results discarded by filters (e.g. closed businesses, website filter, geo/category mismatch) are not billed.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X GET "https://api.lobstr.io/v1/runs/0393be3ea6f74986906153df1c3f9894/credits" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+run_hash = "0393be3ea6f74986906153df1c3f9894"
+url = f"https://api.lobstr.io/v1/runs/{run_hash}/credits"
+headers = {"Authorization": "Token YOUR_API_KEY"}
+
+response = requests.get(url, headers=headers)
+data = response.json()
+
+print(f"Total credits: {data['total_credits']}")
+print(f"Total results: {data['total_results']}")
+avg = data['total_credits'] / data['total_results'] if data['total_results'] else 0
+print(f"Avg cost per result: {avg:.2f}")
+
+for entry in data['breakdown']:
+    print(f"  {entry['function']}: {entry['credits']} credits ({entry['attempts']} results)")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "run_id": "0393be3ea6f74986906153df1c3f9894",
+  "total_credits": 116,
+  "total_results": 20,
+  "breakdown": [
+    {
+      "function": "base",
+      "credits": 80,
+      "attempts": 20
+    },
+    {
+      "function": "get_phone_numbers",
+      "credits": 36,
+      "attempts": 20
+    }
+  ],
+  "rates": {
+    "credits_per_row": 4,
+    "get_phone_numbers": 6
+  },
+  "function_colors": {
+    "Export Listings (No Phone)": {
+      "bg_color": "#EAFBF3",
+      "txt_color": "#0F9F5F"
+    },
+    "get_phone_numbers": {
+      "bg_color": "#EEF2F7",
+      "txt_color": "#62748A"
+    }
+  },
+  "base_function_label": "Export Listings (No Phone)",
+  "filter_breakdown": []
+}
+```
+
+```json 404
+{
+  "detail": "Run not found."
+}
+```
