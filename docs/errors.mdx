@@ -90,6 +90,48 @@ These occur when the request is valid but the operation can't proceed due to acc
 
 ---
 
+## Run stop reasons
+
+When a run ends, the response includes a `done_reason` field (slug) and `done_reason_desc` (human-readable message) explaining why it stopped. These are not HTTP errors — they appear in the run object returned by [Get Run Details](/docs/get-run-details).
+
+### Account errors
+
+These indicate a problem with the account attached to the squid. Re-sync or replace the account, then resume the run.
+
+| `done_reason` | Description |
+|---------------|-------------|
+| `no_accounts` | No accounts are linked to this squid — the run closes permanently. Fix: attach an account. |
+| `no_account_available` | Accounts are linked but all are currently in use by other runs — the run pauses and resumes automatically once one is free. |
+| `account_blocked` | The account has been blocked by the platform |
+| `account_too_many_requests` | The platform rate-limited the account |
+| `cookies_expired` | Account cookies have expired — re-sync required |
+| `wrong_credentials` | Account credentials are incorrect |
+| `logged_out` | The account has been logged out |
+| `checkpoint_reached` | The account is blocked on a checkpoint |
+| `challenge_required` | The platform is asking for a challenge |
+| `non_premium` | A premium platform account is required |
+| `sales_seat_required` | A Sales Navigator seat is required for this account |
+| `limit_exceeded` | The account has reached its platform usage limit |
+
+### General stop reasons
+
+| `done_reason` | Description |
+|---------------|-------------|
+| `tasks_done` | All tasks completed successfully |
+| `no_credits_left` | Account ran out of lobstr.io credits |
+| `deactivated` | Run was deactivated |
+| `website_inaccessible` | Target website is currently down |
+| `premium_plan_needed` | A premium plan is required to run this module |
+| `module_under_maintenance` | Module is temporarily under maintenance |
+| `request_failed` | A request failed — run paused for 6 hours |
+| `export_failed` | Results export failed |
+| `last_invoice_not_paid` | Last invoice is unpaid |
+| `maintenance_fees_not_paid` | Custom module maintenance fees are unpaid |
+| `batch_wait` | Current batch processed — waiting for timeout |
+| `emails_verified` | All emails have been verified |
+
+---
+
 ## Rate limiting (429)
 
 Requests that exceed your plan's rate limit return a `429` response. See [Rate Limiting](/docs/rate-limiting) for limits and retry guidance.
