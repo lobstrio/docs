@@ -1,0 +1,21 @@
+---
+title: "May 12, 2026"
+description: "API updates shipped May 12, 2026"
+---
+
+<Update label="May 12, 2026">
+
+### New
+- **`GET /v1/credits/modules`** — new endpoint returning a per-module, per-function credit breakdown aggregated across all your completed runs. Accepts an optional `?days=N` query parameter to restrict to the last N days.
+- **Google Maps: neighborhood field** — business results from the Google Maps Leads Scraper now include a `neighborhood` field extracted from the address component.
+- **Google Maps: structured attribute fields** — four new JSONB fields added to Google Maps results: `service_options`, `accessibility`, `highlights`, and `payment_methods`. Each is an array of `{name, available}` objects scraped from the detail page.
+- **Google Maps: TikTok, WhatsApp, and Pinterest social links** — the Google Maps Leads Scraper now extracts TikTok, WhatsApp, and Pinterest profiles from business websites, in addition to the existing Facebook, Instagram, Twitter, and LinkedIn links.
+
+### Improved
+- **Vinted: `max_results` per task** — the Vinted Products Scraper now supports a `max_results` parameter to cap the number of results collected per search URL.
+
+### Fixed
+- **LaCentrale: hour-based `fetch_since` rejected** — the LaCentrale scraper now rejects `fetch_since` values with hour precision (e.g. `1h`, `6h`) since the platform only provides date-level timestamps. Use day-based values (`1d`, `7d`) instead.
+- **Export: memory usage on large runs** — the CSV export pipeline no longer holds two copies of the data in memory simultaneously. Runs with millions of results previously caused OOM restarts; this is now fixed.
+
+</Update>

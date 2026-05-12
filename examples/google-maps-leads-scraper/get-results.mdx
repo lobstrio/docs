@@ -75,6 +75,10 @@ Each result object contains the following fields:
   City where the business is located. Example: `Khlong Toei`
 </ResponseField>
 
+<ResponseField name="neighborhood" type="string">
+  Neighborhood extracted from the address components. Example: `Marais`
+</ResponseField>
+
 <ResponseField name="lat" type="float">
   Latitude coordinate of the business. Example: `13.7296173`
 </ResponseField>
@@ -199,6 +203,18 @@ Each result object contains the following fields:
   Twitter/X profile URL found on the business website. Example: `https://twitter.com/marriottbonvoy`
 </ResponseField>
 
+<ResponseField name="tiktok" type="string">
+  TikTok profile URL found on the business website
+</ResponseField>
+
+<ResponseField name="whatsapp" type="string">
+  WhatsApp contact URL found on the business website
+</ResponseField>
+
+<ResponseField name="pinterest" type="string">
+  Pinterest profile URL found on the business website
+</ResponseField>
+
 <ResponseField name="additional_phone" type="string">
   Secondary phone number found on the business website. Example: `+6622620000`
 </ResponseField>
@@ -221,4 +237,20 @@ Each result object contains the following fields:
 
 <ResponseField name="reviews_per_score_5" type="integer">
   Number of 5-star reviews. Example: `48`
+</ResponseField>
+
+<ResponseField name="service_options" type="json">
+  Service options available at the business, as `{name, available}` objects. Example: `[{"name": "Dine-in", "available": true}, {"name": "Takeaway", "available": true}, {"name": "Delivery", "available": false}]`
+</ResponseField>
+
+<ResponseField name="accessibility" type="json">
+  Accessibility features, as `{name, available}` objects. Example: `[{"name": "Wheelchair-accessible entrance", "available": true}]`
+</ResponseField>
+
+<ResponseField name="highlights" type="json">
+  Business highlights, as `{name, available}` objects. Example: `[{"name": "Live music", "available": true}, {"name": "Sport", "available": true}]`
+</ResponseField>
+
+<ResponseField name="payment_methods" type="json">
+  Accepted payment methods, as `{name, available}` objects. Example: `[{"name": "Credit cards", "available": true}, {"name": "NFC mobile payments", "available": true}]`
 </ResponseField>
