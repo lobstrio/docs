@@ -84,6 +84,7 @@
               "docs/list-accounts",
               "docs/list-account-types",
               "docs/get-account-details",
+              "docs/link-account-to-squid",
               "docs/sync-account",
               "docs/check-sync-status",
               "docs/update-account-limits",

@@ -1,0 +1,110 @@
+---
+title: "Link Account to Squid"
+description: "Attach a platform account to a squid so account-based scrapers can authenticate"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Some scrapers require a connected platform account to run (LinkedIn, Facebook, Sales Navigator, etc.). Link one or more accounts to a squid by passing their hash IDs in the `accounts` array when updating the squid.
+
+<Note>
+  Only scrapers that require authentication have an `accounts` field. For public scrapers (Google Maps, Trustpilot, etc.) this field is ignored.
+</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Path Parameters
+
+<ParamField path="squid_hash" type="string" required>
+  The hash of the squid to update
+</ParamField>
+
+## Body Parameters
+
+<ParamField body="accounts" type="array" required>
+  Array of account hash strings to link to the squid. Pass an empty array `[]` or `null` to remove all linked accounts. Each hash must correspond to an account of the correct type for the scraper.
+</ParamField>
+
+## How to find your account hash
+
+Use [List Accounts](/docs/list-accounts) to retrieve your connected accounts and their `id` (hash) values:
+
+```bash
+curl -X GET "https://api.lobstr.io/v1/accounts" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+The `id` field in each account object is the hash you pass in the `accounts` array.
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "accounts": ["YOUR_ACCOUNT_HASH"]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+# Step 1: get your account hashes
+accounts_response = requests.get(f"{BASE_URL}/accounts", headers=headers)
+accounts = accounts_response.json()["data"]
+
+# Find the account you want to link
+linkedin_account = next(a for a in accounts if a["type"] == "linkedin-sync")
+account_hash = linkedin_account["id"]
+
+# Step 2: link the account to your squid
+squid_hash = "YOUR_SQUID_HASH"
+response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
+    headers=headers,
+    json={"accounts": [account_hash]}
+)
+
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "name": "LinkedIn Leads Scraper (1)",
+  "concurrency": 1,
+  "accounts": ["YOUR_ACCOUNT_HASH"]
+}
+```
+
+## Removing linked accounts
+
+Pass an empty array to unlink all accounts from a squid:
+
+```bash
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"accounts": []}'
+```
+
+## Errors
+
+| Error | Cause |
+|-------|-------|
+| `AccountDoesNotExist` | One of the account hashes was not found or doesn't belong to you |
+| `InvalidParamType` | `accounts` is not an array, or contains non-string values |
