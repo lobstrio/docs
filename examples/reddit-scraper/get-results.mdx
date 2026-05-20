@@ -1,0 +1,161 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Reddit Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Reddit Scraper** runs. Each result row represents a post, comment, user profile, or subreddit — indicated by the `type` field.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+
+Each result object contains the following fields:
+
+<ResponseField name="type" type="string">
+  Row type: `post` for the post itself, `comment` for a comment, `user` for a user profile, `subreddit` for subreddit metadata. Example: `post`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Canonical URL of the Reddit post. Example: `https://www.reddit.com/r/Bitcoin/comments/1rcbgsa/crypto_beginners/`
+</ResponseField>
+
+<ResponseField name="post_id" type="string">
+  Reddit post ID (base36 identifier). Example: `1rcbgsa`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the Reddit post. Example: `Crypto beginners guide`
+</ResponseField>
+
+<ResponseField name="body" type="string">
+  Text body of the post (for text posts) or comment text (for comment rows). Example: `Here's everything you need to know as a beginner.`
+</ResponseField>
+
+<ResponseField name="post_type" type="string">
+  Type of post: `text`, `image`, `link`, `video`, etc. Example: `text`
+</ResponseField>
+
+<ResponseField name="score" type="integer">
+  Upvote score of the post or comment. Example: `1842`
+</ResponseField>
+
+<ResponseField name="comment_count" type="integer">
+  Number of comments on the post. Populated for `type='post'` rows. Example: `126`
+</ResponseField>
+
+<ResponseField name="award_count" type="integer">
+  Number of awards received by the post. Example: `3`
+</ResponseField>
+
+<ResponseField name="author" type="string">
+  Username of the post or comment author. Example: `Independent_Lynx715`
+</ResponseField>
+
+<ResponseField name="author_id" type="string">
+  Reddit ID of the author. Example: `t2_19xe8ly1c0`
+</ResponseField>
+
+<ResponseField name="subreddit" type="string">
+  Name of the subreddit (without prefix). Example: `Bitcoin`
+</ResponseField>
+
+<ResponseField name="subreddit_prefixed_name" type="string">
+  Subreddit name with `r/` prefix. Example: `r/Bitcoin`
+</ResponseField>
+
+<ResponseField name="subreddit_id" type="string">
+  Reddit ID of the subreddit. Example: `t5_3oxtd`
+</ResponseField>
+
+<ResponseField name="flair" type="string">
+  Post flair label (if any). Example: `Discussion`
+</ResponseField>
+
+<ResponseField name="domain" type="string">
+  Domain of the post content. `self.xxx` for text posts, or the external domain for link posts. Example: `self.Bitcoin`
+</ResponseField>
+
+<ResponseField name="language" type="string">
+  Detected language of the post (ISO 639-1). Example: `en`
+</ResponseField>
+
+<ResponseField name="created_at" type="string">
+  UTC timestamp when the post or comment was created. Example: `2026-04-23T11:16:27`
+</ResponseField>
+
+<ResponseField name="comment_id" type="string">
+  Reddit comment ID (base36). Populated for `type='comment'` rows only. Example: `ohsv4v5`
+</ResponseField>
+
+<ResponseField name="parent_id" type="string">
+  Parent comment ID for nested replies. Populated for replies; null for top-level comments and post rows. Example: `ohsv4v5`
+</ResponseField>
+
+<ResponseField name="depth" type="integer">
+  Comment nesting depth (0 = top-level comment). Null for post rows. Example: `0`
+</ResponseField>
+
+<ResponseField name="karma" type="integer">
+  Total karma of the user. Populated for `type='user'` rows only. Example: `87`
+</ResponseField>
+
+<ResponseField name="post_karma" type="integer">
+  Post karma of the user. Populated for `type='user'` rows only. Example: `17`
+</ResponseField>
+
+<ResponseField name="comment_karma" type="integer">
+  Comment karma of the user. Populated for `type='user'` rows only. Example: `70`
+</ResponseField>
+
+<ResponseField name="contributions" type="integer">
+  Number of contributions by the user. Populated for `type='user'` rows only. Example: `7`
+</ResponseField>
+
+<ResponseField name="trophies" type="string">
+  JSON array of trophy names earned by the user. Populated for `type='user'` rows only. Example: `["Five-Year Club"]`
+</ResponseField>
+
+<ResponseField name="active_subreddits" type="string">
+  JSON array of subreddits the user is active in (prefixed). Populated for `type='user'` rows only. Example: `["r/Bitcoin", "r/PostCardExchange"]`
+</ResponseField>
+
+<ResponseField name="moderated_subreddits" type="string">
+  JSON array of subreddits the user moderates (prefixed). Populated for `type='user'` rows only. Example: `["r/belikeme"]`
+</ResponseField>
+
+<ResponseField name="subreddit_description" type="string">
+  Description of the subreddit. Populated for `type='subreddit'` rows only. Example: `A community dedicated to Bitcoin.`
+</ResponseField>
+
+<ResponseField name="weekly_active_users" type="integer">
+  Number of weekly active users in the subreddit. Populated for `type='subreddit'` rows only. Example: `1208799`
+</ResponseField>
+
+<ResponseField name="weekly_contributions" type="integer">
+  Number of weekly contributions (posts + comments) in the subreddit. Populated for `type='subreddit'` rows only. Example: `18683`
+</ResponseField>
+
+<ResponseField name="subreddit_rules" type="string">
+  JSON array of subreddit rules, each with `number`, `title`, and `description`. Populated for `type='subreddit'` rows only. Example: `[{"number": "1", "title": "Be civil", "description": "..."}]`
+</ResponseField>
+
+<ResponseField name="subreddit_resources" type="string">
+  JSON array of community resource links, each with `text` and `url`. Populated for `type='subreddit'` rows only. Example: `[{"text": "Wiki", "url": "https://www.reddit.com/r/Bitcoin/wiki/"}]`
+</ResponseField>

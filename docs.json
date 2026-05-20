@@ -402,6 +402,14 @@
             ]
           },
           {
+            "group": "Reddit Scraper",
+            "pages": [
+              "examples/reddit-scraper/add-tasks",
+              "examples/reddit-scraper/update-settings",
+              "examples/reddit-scraper/get-results"
+            ]
+          },
+          {
             "group": "SeLoger Search Export",
             "pages": [
               "examples/seloger-search-export/add-tasks",

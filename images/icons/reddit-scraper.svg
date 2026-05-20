@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="icon" transform="translate(-732 -5299)">
+    <g id="icon-2" data-name="icon" transform="translate(10 2370)">
+      <rect id="Прямоугольник_14317" data-name="Прямоугольник 14317" width="40" height="40" rx="9" transform="translate(722 2929)" fill="#ff4501"/>
+    </g>
+    <path id="document" d="M8.249,2h8.795a4.249,4.249,0,0,1,4.249,4.249v13.4A4.249,4.249,0,0,1,17.044,23.9H8.249A4.249,4.249,0,0,1,4,19.653V6.249A4.249,4.249,0,0,1,8.249,2Zm6.936,6.458H8.068a.775.775,0,0,0,0,1.551h7.117a.775.775,0,0,0,0-1.551ZM13.156,18.506H8.068a.775.775,0,1,1,0-1.551h5.088a.775.775,0,1,1,0,1.551ZM8.068,14.258h9.156a.775.775,0,0,0,0-1.551H8.068a.775.775,0,0,0,0,1.551Z" transform="translate(739.354 5306.049)" fill="#fff" fill-rule="evenodd"/>
+  </g>
+</svg>

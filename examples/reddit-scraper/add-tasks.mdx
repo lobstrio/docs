@@ -1,0 +1,110 @@
+---
+title: "Add Tasks"
+description: "Add Reddit URLs to scrape posts, comments, user profiles, or subreddits"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Reddit URLs to collect posts, comments, user profiles, or subreddit metadata. The scraper handles post threads (with nested comments), subreddit feeds, user profile pages, and global or subreddit-scoped search results.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the Reddit Scraper crawler |
+| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **url** | string | Yes | Reddit URL to scrape — see supported URL types below |
+
+## Supported URL Types
+
+| Type | Example |
+| --- | --- |
+| Post thread | `https://www.reddit.com/r/Bitcoin/comments/1rcbgsa/crypto_beginners/` |
+| Subreddit | `https://www.reddit.com/r/Bitcoin/` |
+| User profile | `https://www.reddit.com/user/thisisbillgates/` |
+| Global search | `https://www.reddit.com/search/?q=bitcoin` |
+| Subreddit search | `https://www.reddit.com/r/Bitcoin/search/?q=lightning` |
+
+<Tip>
+  For post URLs, the scraper returns one row for the post itself and one row per comment. Use `skip_comments` or `skip_posts` in settings to limit output to just one type.
+</Tip>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "url": "https://www.reddit.com/r/Bitcoin/"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+payload = {
+    "squid": squid_id,
+    "tasks": [
+        {"url": "https://www.reddit.com/r/Bitcoin/"},
+        {"url": "https://www.reddit.com/r/Bitcoin/comments/1rcbgsa/crypto_beginners/"},
+        {"url": "https://www.reddit.com/user/thisisbillgates/"}
+    ]
+}
+
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json=payload
+)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "a1b2c3d4e5f6a1b2c3d4e5f6a1b2c3d4",
+      "created_at": "2026-05-20T10:00:00.000000",
+      "is_active": true,
+      "params": {
+        "url": "https://www.reddit.com/r/Bitcoin/"
+      },
+      "module": 118,
+      "object": "task"
+    }
+  ]
+}
+```

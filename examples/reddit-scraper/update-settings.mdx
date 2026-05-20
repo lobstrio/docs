@@ -1,0 +1,132 @@
+---
+title: "Update Settings"
+description: "Configure the Reddit Scraper settings and filters"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your Reddit Scraper squid settings. Control sort order per input type, filter by date, limit results, and choose whether to include posts, comments, or both.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **max_results** | integer | unlimited | Maximum number of rows (posts + comments) to collect per task |
+| **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
+| **fetch_since** | string | null | Stop collecting content older than this threshold. Use a relative duration (`24h`, `7d`, `2w`) or absolute date (`YYYY-MM-DD HH:MM`) |
+| **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values |
+| **sort_comments** | string | `best` | Sort order for post thread comments: `best`, `top`, `new`, `controversial`, `old`, `q&a` |
+| **sort_search** | string | `relevance` | Sort order for search results: `relevance`, `hot`, `top`, `new`, `comments` |
+| **sort_subreddit** | string | `hot` | Sort order for subreddit feeds: `hot`, `new`, `top`, `rising`, `controversial` |
+| **include_nsfw** | boolean | `false` | Include NSFW (adult) posts and comments in results |
+| **skip_comments** | boolean | `false` | Return only post rows — skip all comments |
+| **skip_posts** | boolean | `false` | Skip post rows. For post URLs: returns comments only. For user URLs: returns profile and comments. For subreddit URLs: returns subreddit metadata only |
+
+## Squid Settings
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping threads (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Tip>
+  The `sort_comments`, `sort_search`, and `sort_subreddit` parameters are each applied only when the input URL matches the corresponding type — they do not conflict with each other.
+</Tip>
+
+<Note>
+  `fetch_since` filters based on the `created_at` field of each post or comment. It is useful for incremental runs to avoid re-collecting old content.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Reddit Scraper (1)",
+    "concurrency": 1,
+    "export_unique_results": true,
+    "to_complete": false,
+    "no_line_breaks": true,
+    "params": {
+      "max_results": 500,
+      "fetch_since": "7d",
+      "sort_subreddit": "hot",
+      "sort_comments": "top",
+      "skip_comments": false,
+      "skip_posts": false,
+      "include_nsfw": false
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Reddit Scraper (1)",
+        "concurrency": 1,
+        "export_unique_results": True,
+        "to_complete": False,
+        "no_line_breaks": True,
+        "params": {
+            "max_results": 500,
+            "fetch_since": "7d",
+            "sort_subreddit": "hot",
+            "sort_comments": "top",
+            "skip_comments": False,
+            "skip_posts": False,
+            "include_nsfw": False
+        }
+    }
+)
+
+data = response.json()
+print(f"Settings updated: {data['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Reddit Scraper (1)",
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": false,
+  "no_line_breaks": true,
+  "params": {
+    "max_results": 500,
+    "fetch_since": "7d",
+    "sort_subreddit": "hot",
+    "sort_comments": "top",
+    "skip_comments": false,
+    "skip_posts": false,
+    "include_nsfw": false
+  }
+}
+```
