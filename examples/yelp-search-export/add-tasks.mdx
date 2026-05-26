@@ -1,10 +1,10 @@
 ---
 title: "Add Tasks"
-description: "Add Yelp search URLs to scrape business listings"
+description: "Add Yelp search tasks to scrape business listings"
 api: "POST https://api.lobstr.io/v1/tasks"
 ---
 
-Add Yelp search URLs to scrape business listings. The scraper extracts business details including contact information, ratings, reviews, categories, and location data.
+Add Yelp search tasks to scrape business listings. You can provide either a Yelp search URL or use `keyword` + `location` to build the search programmatically.
 
 ## Headers
 
@@ -21,26 +21,31 @@ Add Yelp search URLs to scrape business listings. The scraper extracts business 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | **squid** | string | Yes | Hash of your squid configured with the Yelp Search Export crawler |
-| **tasks** | array | Yes | Array of task objects, each containing a `url` field |
+| **tasks** | array | Yes | Array of task objects |
 
 ## Task Object
 
+You can either pass a `url` or use `keyword` + `location` (with optional `country`):
+
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| **url** | string | Yes | Yelp search URL (e.g., `https://www.yelp.com/search?find_desc=Restaurants&find_loc=New+York`) |
-
-<Tip>
-  Perform your search on Yelp first, apply filters (category, location, price range), then copy the URL to preserve all parameters.
-</Tip>
+| **url** | string | No | Full Yelp search URL (e.g., `https://www.yelp.com/search?find_desc=Restaurants&find_loc=New+York`) |
+| **keyword** | string | No | What you're looking for (business category or search term). Example: `Italian restaurant` |
+| **location** | string | No | City or area to search in. Example: `New York, NY` |
+| **country** | string | No | Country to scope the location list. Leave empty to use top worldwide cities |
 
 <Note>
-  Yelp search URLs use `find_desc` for the search term and `find_loc` for the location.
+  Either `url` or `keyword` + `location` is required. When using `keyword` and `location`, filters set in the squid settings (price, sort, distance, etc.) are applied automatically.
 </Note>
+
+<Tip>
+  To use advanced Yelp filters (cuisine type, outdoor seating, etc.), apply them on Yelp's website first and then copy the resulting URL.
+</Tip>
 
 ## Code Examples
 
 <CodeGroup>
-```bash cURL
+```bash cURL (URL)
 curl -X POST "https://api.lobstr.io/v1/tasks" \
   -H "Authorization: Token YOUR_API_KEY" \
   -H "Content-Type: application/json" \
@@ -49,6 +54,22 @@ curl -X POST "https://api.lobstr.io/v1/tasks" \
     "tasks": [
       {
         "url": "https://www.yelp.com/search?find_desc=Restaurants&find_loc=New+York%2C+NY"
+      }
+    ]
+  }'
+```
+
+```bash cURL (keyword + location)
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "keyword": "Italian restaurant",
+        "location": "New York, NY",
+        "country": "US"
       }
     ]
   }'
@@ -63,21 +84,23 @@ headers = {"Authorization": f"Token {API_KEY}"}
 
 squid_id = "YOUR_SQUID_HASH"
 
-# Add Yelp search URLs
-# Copy the URL directly from Yelp after applying filters
+# Option 1: use a full Yelp URL
 payload = {
     "squid": squid_id,
     "tasks": [
-        {
-            "url": "https://www.yelp.com/search?find_desc=Restaurants&find_loc=New+York%2C+NY"
-        }
+        {"url": "https://www.yelp.com/search?find_desc=Restaurants&find_loc=New+York%2C+NY"}
     ]
 }
 
-response = requests.post(f"{BASE_URL}/tasks",
-    headers=headers,
-    json=payload
-)
+# Option 2: use keyword + location (filters from squid settings apply)
+payload = {
+    "squid": squid_id,
+    "tasks": [
+        {"keyword": "Italian restaurant", "location": "New York, NY", "country": "US"}
+    ]
+}
+
+response = requests.post(f"{BASE_URL}/tasks", headers=headers, json=payload)
 
 data = response.json()
 print(f"Added {len(data['tasks'])} tasks")
@@ -96,7 +119,9 @@ print(f"Duplicates skipped: {data['duplicated_count']}")
       "created_at": "2025-07-17T09:06:47.287893",
       "is_active": true,
       "params": {
-        "url": "https://www.yelp.com/search?find_desc=Restaurants&find_loc=New+York%2C+NY"
+        "keyword": "Italian restaurant",
+        "location": "New York, NY",
+        "country": "US"
       },
       "module": 115,
       "object": "task"

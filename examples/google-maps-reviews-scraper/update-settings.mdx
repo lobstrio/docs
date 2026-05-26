@@ -25,7 +25,13 @@ Set these parameters in the `params` object:
 | **sort_by** | string | newest | Sort reviews: `newest`, `most_relevant`, `highest_rating`, or `lowest_rating` |
 | **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `modified_at_datetime`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM) |
 | **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Only applies when `fetch_since` is an absolute date — ignored for relative values like `24h` or `7d`. See [supported timezones](/docs/timezones). |
-| **max_results** | integer | 20 | Maximum number of reviews to collect per place |
+| **max_results** | integer | null | Maximum number of reviews to collect per place |
+| **max_unique_results_per_run** | integer | null | Maximum unique results across all tasks in the entire run |
+| **skip_reviews_without_text** | boolean | false | Skip reviews that have no text content |
+| **skip_reviews_without_image** | boolean | false | Skip reviews that have no attached pictures |
+| **rating_filter** | string | All | Filter reviews by star rating. `All` keeps every review; `Minimum rating` keeps only reviews at or above `min_rating_score`; `Exact rating` keeps only reviews matching `min_rating_score` exactly |
+| **min_rating_score** | integer | null | Minimum star rating to include (1–5). Used when `rating_filter` is `Minimum rating` or `Exact rating` |
+| **max_rating_score** | integer | null | Maximum star rating to include (1–5). Used with `min_rating_score` to define a range |
 | **language** | string | English (United States) | Language for extracted reviews |
 | **functions.get_short_review_link** | boolean | false | Collect shortened review links (1 credit per review) |
 
@@ -78,6 +84,9 @@ curl -X POST "https://api.lobstr.io/v1/squids/b6ab0f03b02e472a8e2ab0b16b4fdd0f" 
       "sort_by": "newest",
       "fetch_since": null,
       "max_results": 20,
+      "skip_reviews_without_text": false,
+      "skip_reviews_without_image": false,
+      "rating_filter": "All",
       "language": "English (United States)",
       "functions": {
         "get_short_review_link": false
@@ -108,6 +117,9 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
             "sort_by": "newest",
             "fetch_since": None,
             "max_results": 20,
+            "skip_reviews_without_text": False,
+            "skip_reviews_without_image": False,
+            "rating_filter": "All",
             "language": "English (United States)",
             "functions": {
                 "get_short_review_link": False
@@ -133,6 +145,9 @@ print(f"Max results: {data['params']['max_results']}")
     "sort_by": "newest",
     "fetch_since": null,
     "max_results": 20,
+    "skip_reviews_without_text": false,
+    "skip_reviews_without_image": false,
+    "rating_filter": "All",
     "language": "English (United States)",
     "functions": {
       "get_short_review_link": false

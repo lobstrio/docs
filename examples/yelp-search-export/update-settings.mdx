@@ -4,7 +4,7 @@ description: "Configure Yelp Search Export scraper settings"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
 ---
 
-Configure your Yelp Search Export squid settings. Control result limits and enable contact harvesting to extract email addresses from business websites.
+Configure your Yelp Search Export squid settings. Control result limits, contact harvesting, and search filters such as price range, distance, and business amenities.
 
 ## Headers
 
@@ -22,8 +22,27 @@ Set these parameters in the `params` object:
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| **max_results** | integer | null | Maximum number of businesses to collect before stopping |
+| **max_results** | integer | 240 | Maximum number of businesses to collect per task. Yelp displays up to 240 results per search |
+| **max_unique_results_per_run** | integer | null | Maximum unique results across all tasks in the entire run |
 | **collect_contacts** | boolean | true | Visit each business's website to extract email addresses and social links (1 credit per business) |
+| **sort** | string | Recommended | How results are ordered: `Recommended`, `Highest Rated`, or `Review Count` |
+| **distance** | string | Any Distance | Maximum search radius: `Any Distance`, `Bird's-eye View`, `Driving (25 mi.)`, `Biking (6 mi.)`, `Walking (1 mi.)`, or `Within 4 blocks` |
+| **price_1** | boolean | false | Include businesses with price level $ (inexpensive) |
+| **price_2** | boolean | false | Include businesses with price level $$ (moderate) |
+| **price_3** | boolean | false | Include businesses with price level $$$ (pricey) |
+| **price_4** | boolean | false | Include businesses with price level $$$$ (very expensive) |
+| **hot_and_new** | boolean | false | Only show businesses tagged as Hot and New by Yelp |
+| **open_now** | boolean | false | Only show businesses that are open at the time of the search |
+| **good_for_kids** | boolean | false | Only show businesses marked as good for kids |
+| **good_for_groups** | boolean | false | Only show businesses marked as good for groups |
+| **free_wifi** | boolean | false | Only show businesses that offer free Wi-Fi |
+| **dogs_allowed** | boolean | false | Only show businesses that allow dogs |
+| **wheelchair_accessible** | boolean | false | Only show businesses that are wheelchair accessible |
+| **open_to_all** | boolean | false | Only show businesses tagged as open to all |
+| **accepts_credit_cards** | boolean | false | Only show businesses that accept credit cards |
+| **accepts_cryptocurrency** | boolean | false | Only show businesses that accept cryptocurrency |
+| **accepts_apple_pay** | boolean | false | Only show businesses that accept Apple Pay |
+| **offers_military_discount** | boolean | false | Only show businesses that offer a military discount |
 
 ## Squid Settings
 
@@ -37,6 +56,10 @@ Configure general squid settings:
 | **to_complete** | boolean | Run until all tasks complete |
 | **no_line_breaks** | boolean | Remove line breaks from results |
 
+<Note>
+  Filter parameters (`price_1`, `open_now`, etc.) apply when tasks use `keyword` + `location` as input. When a full URL is provided, Yelp applies the filters embedded in that URL instead.
+</Note>
+
 <Tip>
   Enable `collect_contacts` to extract email addresses from business websites for outreach campaigns.
 </Tip>
@@ -44,10 +67,6 @@ Configure general squid settings:
 <Warning>
   Enabling `collect_contacts` adds extra HTTP requests per business, increasing total run time and credit usage.
 </Warning>
-
-<Note>
-  Use `max_results` to limit the scope of large searches and control costs.
-</Note>
 
 ## Code Examples
 
@@ -64,7 +83,13 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "no_line_breaks": true,
     "params": {
       "max_results": 240,
-      "collect_contacts": true
+      "collect_contacts": true,
+      "sort": "Highest Rated",
+      "distance": "Driving (25 mi.)",
+      "price_1": true,
+      "price_2": true,
+      "open_now": false,
+      "good_for_kids": false
     }
   }'
 ```
@@ -78,7 +103,6 @@ headers = {"Authorization": f"Token {API_KEY}"}
 
 squid_id = "YOUR_SQUID_HASH"
 
-# Update squid settings with contact collection enabled
 payload = {
     "name": "Yelp Search Export (1)",
     "concurrency": 1,
@@ -86,16 +110,18 @@ payload = {
     "to_complete": False,
     "no_line_breaks": True,
     "params": {
-        "max_results": 240,  # Limit to 240 businesses
-        "collect_contacts": True  # Extract emails from business websites
+        "max_results": 240,
+        "collect_contacts": True,
+        "sort": "Highest Rated",
+        "distance": "Driving (25 mi.)",
+        "price_1": True,
+        "price_2": True,
+        "open_now": False,
+        "good_for_kids": False
     }
 }
 
-response = requests.post(f"{BASE_URL}/squids/{squid_id}",
-    headers=headers,
-    json=payload
-)
-
+response = requests.post(f"{BASE_URL}/squids/{squid_id}", headers=headers, json=payload)
 print(f"Settings updated: {response.json()['name']}")
 ```
 </CodeGroup>
@@ -111,7 +137,13 @@ print(f"Settings updated: {response.json()['name']}")
   "no_line_breaks": true,
   "params": {
     "max_results": 240,
-    "collect_contacts": true
+    "collect_contacts": true,
+    "sort": "Highest Rated",
+    "distance": "Driving (25 mi.)",
+    "price_1": true,
+    "price_2": true,
+    "open_now": false,
+    "good_for_kids": false
   }
 }
 ```

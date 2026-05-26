@@ -1,0 +1,24 @@
+---
+title: "May 26, 2026"
+description: "API updates shipped May 26, 2026"
+---
+
+<Update label="May 26, 2026">
+
+### New
+- **Reddit Scraper** — new public scraper to collect posts, comments, user profiles, and subreddit metadata from Reddit. Supports post URLs, subreddit URLs, user profiles, global search, and subreddit search. Configurable sort order per input type (`sort_comments`, `sort_search`, `sort_subreddit`), `fetch_since` filtering, and options to skip posts or skip comments. See the [Reddit Scraper](/examples/reddit-scraper/add-tasks) example.
+
+### Improved
+- **Google Maps Reviews: rating filter and content filters** — you can now filter reviews by star rating using `rating_filter` (`All`, `Minimum rating`, or `Exact rating`) combined with `min_rating_score` and `max_rating_score`. Two new boolean flags let you skip reviews with no text (`skip_reviews_without_text`) or no images (`skip_reviews_without_image`).
+- **Yelp Search: keyword + location input and filter params** — tasks now accept `keyword` and `location` (with optional `country`) as an alternative to a full URL. Squid-level filter params have been added: `sort`, `distance`, price tiers (`price_1`–`price_4`), and Boolean flags for `open_now`, `hot_and_new`, `good_for_kids`, `good_for_groups`, `free_wifi`, `dogs_allowed`, `wheelchair_accessible`, `open_to_all`, `accepts_credit_cards`, `accepts_cryptocurrency`, `accepts_apple_pay`, and `offers_military_discount`.
+- **Sales Navigator Leads: `open_to_work` and `twitter_url` fields** — the scraper now exports whether a person has the LinkedIn Open To Work badge enabled and their Twitter/X profile URL (if linked on their LinkedIn profile).
+
+### Fixed
+- **Instagram Post Comments: duplicate results** — comments were occasionally returned multiple times in the same run. Fixed.
+- **ParuVendu: pagination beyond page 5** — pages 6 and beyond were returning 404 errors. Fixed by appending the required `allp=1` parameter to paginated URLs.
+- **Immoweb: XSRF token lost on proxy rotation** — session token was invalidated after proxy switches, causing requests to fail mid-run. Fixed.
+- **Instagram Posts: CSRF token invalidated by API calls** — CSRF token was being dropped after certain API responses, causing authentication failures. Fixed.
+- **Leboncoin Listing Status: DataDome 403s** — the status checker was blocked by DataDome anti-bot protection. Switched to a browser-based client that correctly handles the challenge.
+- **PAP: TLS failures on datacenter proxy** — proxy-related SSL errors now trigger an automatic retry.
+
+</Update>
