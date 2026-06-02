@@ -76,7 +76,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
         "name": "Realtor California Listings",
         "params": {
             "max_results": 200,
-            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01 00:00"
+            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01 00:00:00"
             "fetch_since_timezone": None  # e.g. "America/New_York" — only used with absolute fetch_since
         }
     }

@@ -25,7 +25,7 @@ Set these parameters in the `params` object:
 | **max_results** | integer | 50 | Maximum number of results to collect per search URL (max: 2400) |
 | **max_pages** | integer | 100 | Last page the crawler will visit during a run |
 | **max_unique_results_per_run** | integer | null | Maximum unique results retrieved across all tasks in a run. Leave empty for unlimited |
-| **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `modification_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM) |
+| **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `modification_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM:SS) |
 | **collect_ads** | boolean | false | If false, will NOT collect sponsored listings |
 
 ## Squid Settings

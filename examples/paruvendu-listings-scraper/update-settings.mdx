@@ -37,7 +37,9 @@ Update the configuration of your **ParuVendu Listings Scraper** squid. Pass craw
 </ParamField>
 
 <ParamField body="params.fetch_since" type="string">
-  Only collect listings published after this point. Accepts a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD HH:MM"`).
+  Only collect listings published after this point. Use a date (`YYYY-MM-DD`) or a relative duration (`24h`, `7d`, `2w`). If not provided, no time filtering is applied.
+
+  **Category support:** publication dates are available on listing pages only for `immobilier`. For other categories (vehicles, services, animaux, etc.) a date is only available on the detail page — enable `get_annonce_details` for `fetch_since` to work with those categories. Some categories (`emploi`, `location-vacances`, `mondebarras`, `moto`, `services`) do not expose a publication date at all and `fetch_since` will have no effect for them.
 </ParamField>
 
 <ParamField body="params.fetch_since_timezone" type="string">
@@ -45,7 +47,7 @@ Update the configuration of your **ParuVendu Listings Scraper** squid. Pass craw
 </ParamField>
 
 <Tip>
-  Set `fetch_since` to `null` to collect all listings, or use a relative duration (`"24h"`, `"7d"`, `"2w"`) or absolute date (`"YYYY-MM-DD HH:MM"`) to collect only recent listings. When using an absolute date, set `fetch_since_timezone` to interpret it in the correct timezone (e.g. `"Europe/Paris"`).
+  Use `fetch_since: "7d"` to collect only listings from the last 7 days. Enable `get_annonce_details` if you're scraping non-`immobilier` categories and need date filtering to work.
 </Tip>
 
 ## Optional Functions
@@ -93,7 +95,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
         "params": {
             "max_results": 100,
             "max_pages": 10,
-            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01 00:00"
+            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01"
             "fetch_since_timezone": None,  # e.g. "Europe/Paris" — only used with absolute fetch_since
             "get_annonce_details": False
         }

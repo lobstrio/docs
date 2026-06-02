@@ -25,7 +25,7 @@ Update the configuration of your **Facebook Private Group Posts Scraper** squid.
 ## Settings Fields
 
 <ParamField body="params.fetch_since" type="string">
-  Only collect posts published after this point. Use a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD HH:MM"`).
+  Only collect posts published after this point. Use a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`YYYY-MM-DD`).
 </ParamField>
 
 <ParamField body="params.fetch_since_timezone" type="string">
@@ -33,7 +33,7 @@ Update the configuration of your **Facebook Private Group Posts Scraper** squid.
 </ParamField>
 
 <Tip>
-  Set `fetch_since` to `null` to collect all posts, or use a relative duration (`"24h"`, `"7d"`, `"2w"`) or absolute date (`"YYYY-MM-DD HH:MM"`) to collect only recent posts. When using an absolute date, set `fetch_since_timezone` to interpret it in the correct timezone (e.g. `"Europe/Paris"`).
+  Set `fetch_since` to `null` to collect all posts, or use a relative duration (`"24h"`, `"7d"`, `"2w"`) or absolute date (`YYYY-MM-DD`) to collect only recent posts. When using an absolute date, set `fetch_since_timezone` to interpret it in the correct timezone (e.g. `"Europe/Paris"`).
 </Tip>
 
 ## Code Examples
@@ -66,7 +66,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
     json={
         "name": "Facebook Private Group Posts",
         "params": {
-            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01 00:00"
+            "fetch_since": "7d",  # relative: "24h", "7d", "2w" | absolute: "2026-01-01"
             "fetch_since_timezone": None  # e.g. "Europe/Paris" — only used with absolute fetch_since
         }
     }

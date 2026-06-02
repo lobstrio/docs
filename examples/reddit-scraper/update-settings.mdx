@@ -24,7 +24,7 @@ Set these parameters in the `params` object:
 | --- | --- | --- | --- |
 | **max_results** | integer | unlimited | Maximum number of rows (posts + comments) to collect per task |
 | **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
-| **fetch_since** | string | null | Stop collecting content older than this threshold. Use a relative duration (`24h`, `7d`, `2w`) or absolute date (`YYYY-MM-DD HH:MM`) |
+| **fetch_since** | string | null | Stop collecting content older than this threshold. Use a relative duration (`24h`, `7d`, `2w`) or absolute date (`YYYY-MM-DD HH:MM:SS`) |
 | **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values |
 | **sort_comments** | string | `best` | Sort order for post thread comments: `best`, `top`, `new`, `controversial`, `old`, `q&a` |
 | **sort_search** | string | `relevance` | Sort order for search results: `relevance`, `hot`, `top`, `new`, `comments` |

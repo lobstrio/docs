@@ -1,0 +1,26 @@
+---
+title: "June 2, 2026"
+description: "API updates shipped June 2, 2026"
+---
+
+<Update label="June 2, 2026">
+
+### Improved
+- **Instagram scrapers rebuilt** — Instagram Posts, Instagram Profile, and Instagram Reels scrapers have all been rebuilt to work with Instagram's current API. Single-post URLs are now also handled correctly in the Posts scraper.
+- **Credit endpoints: `status` and `is_deleted` fields** — `/v1/squids/{hash}/credits` rows now include a `status` field showing the run's final state. `/v1/credits/squids` rows now include an `is_deleted` flag and retain deleted squids in the list for 30 days.
+- **Reddit Scraper: improved reliability** — browser upgraded to curl_cffi with Chrome impersonation; proxies are now rotated automatically on 403 blocks.
+
+### Fixed
+- **`fetch_since`: seconds precision in absolute dates** — absolute `fetch_since` values that include seconds (e.g. `2026-05-01 12:00:00`) are now parsed and validated correctly.
+- **`fetch_since`: clamped to maximum allowed range** — extremely large `fetch_since` durations no longer cause overflow errors.
+- **Instagram Post Comments: session expiry handling** — a dead session now correctly raises `cookies_expired` instead of triggering a 429 retry loop.
+- **TikTok Video: WAF bypass updated** — the previous DataDome bypass has been replaced with correct SlardarWAF handling to fix blocked requests.
+- **YouTube Channel Emails: page parsing fixed** — `ytInitialData` is now extracted from the full page body rather than an XPath text node, fixing failures on recent page layouts.
+- **SeLoger: preserve `annonce_id`** — listings whose detail page JSON omits the ID field no longer lose their `annonce_id`.
+- **ParuVendu: handle 404 on list pages** — 404 responses on paginated list pages are now handled gracefully.
+- **PAP: retry on connection timeouts** — proxy-related connection timeouts now trigger an automatic retry with a fresh proxy.
+- **Leboncoin Auto Message Sender: daily quota lock corrected** — the message rate-limit cooldown was being applied for the wrong duration. It is now correctly locked for 24 hours to match the documented daily limit.
+- **Yelp Reviews & Yelp Search: Cloudflare tunnel errors handled** — 521–524 proxy tunnel errors from Cloudflare now trigger an automatic retry instead of failing the task.
+- **Idealista: browser impersonation updated** — the scraper now uses an updated browser fingerprint to handle Idealista's current bot-detection layer.
+
+</Update>
