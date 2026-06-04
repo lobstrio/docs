@@ -1,0 +1,41 @@
+---
+title: "Get Results"
+description: "Retrieve status check results from LaCentrale Listing Status Checker"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve status check results from your **LaCentrale Listing Status Checker** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  LaCentrale listing URL that was checked. Example: `https://www.lacentrale.fr/auto-occasion-annonce-66103802227.html`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Listing status: `active` or `deactivated`. Example: `active`
+</ResponseField>
+
+<ResponseField name="status_code" type="integer">
+  HTTP status code returned by LaCentrale. `200` = active, `404`/`410` = deactivated or expired. Example: `200`
+</ResponseField>

@@ -282,6 +282,14 @@
             ]
           },
           {
+            "group": "LaCentrale Listing Status Checker",
+            "pages": [
+              "examples/lacentrale-listing-status-checker/add-tasks",
+              "examples/lacentrale-listing-status-checker/update-settings",
+              "examples/lacentrale-listing-status-checker/get-results"
+            ]
+          },
+          {
             "group": "Leboncoin Auto Message Sender",
             "pages": [
               "examples/leboncoin-auto-message-sender/add-tasks",
