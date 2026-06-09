@@ -338,6 +338,14 @@
             ]
           },
           {
+            "group": "LinkedIn Posts Scraper",
+            "pages": [
+              "examples/linkedin-posts-scraper/add-tasks",
+              "examples/linkedin-posts-scraper/update-settings",
+              "examples/linkedin-posts-scraper/get-results"
+            ]
+          },
+          {
             "group": "LinkedIn Posts Commenters and Likers Scraper",
             "pages": [
               "examples/linkedin-posts-commenters-and-likers-scraper/add-tasks",
@@ -564,6 +572,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-06-09",
               "changelog/2026-06-02",
               "changelog/2026-05-26",
               "changelog/2026-05-19",

@@ -1,0 +1,189 @@
+---
+title: "Get Results"
+description: "Retrieve scraped posts from LinkedIn Posts Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped posts from your **LinkedIn Posts Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+
+Each result object contains the following fields:
+
+<ResponseField name="urn" type="string">
+  Unique LinkedIn activity URN of the post. Example: `urn:li:activity:7202146404788580353`
+</ResponseField>
+
+<ResponseField name="post_url" type="string">
+  Direct URL of the LinkedIn post. Example: `https://www.linkedin.com/feed/update/urn:li:activity:7202146404788580353`
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  Full text content of the post.
+</ResponseField>
+
+<ResponseField name="posted_at" type="string">
+  ISO datetime when the post was published. Example: `2024-05-31T03:18:32Z`
+</ResponseField>
+
+<ResponseField name="posted_at_timestamp" type="integer">
+  Unix timestamp in milliseconds when the post was published. Example: `1717125512311`
+</ResponseField>
+
+<ResponseField name="time_since_posted" type="string">
+  Human-readable relative time since the post was published. Example: `2w`
+</ResponseField>
+
+<ResponseField name="is_repost" type="boolean">
+  Whether this post is a repost/share of another post. Example: `false`
+</ResponseField>
+
+<ResponseField name="post_type" type="string">
+  Type of the post: `text`, `image`, `video`, `article`, `document`, `poll`, etc. Example: `image`
+</ResponseField>
+
+<ResponseField name="image" type="string">
+  Main/cover image URL of the post.
+</ResponseField>
+
+<ResponseField name="images" type="string">
+  JSON array of all image URLs attached to the post.
+</ResponseField>
+
+<ResponseField name="author_type" type="string">
+  Type of the post author: `Person` or `Company`. Example: `Person`
+</ResponseField>
+
+<ResponseField name="author_profile_url" type="string">
+  LinkedIn profile URL of the post author. Example: `https://www.linkedin.com/in/mariela-garcia-de-fabbri`
+</ResponseField>
+
+<ResponseField name="author_profile_id" type="string">
+  LinkedIn internal profileId (miniProfileUrn) of the post author. Example: `ACoAACDe59sBx8ChxT_OJagid6rniBLlYctSmFg`
+</ResponseField>
+
+<ResponseField name="author_public_id" type="string">
+  LinkedIn public slug of the post author. Example: `mariela-garcia-de-fabbri`
+</ResponseField>
+
+<ResponseField name="author_full_name" type="string">
+  Full name of the post author. Example: `Mariela Garcia de Fabbri`
+</ResponseField>
+
+<ResponseField name="author_first_name" type="string">
+  First name of the post author. Example: `Mariela`
+</ResponseField>
+
+<ResponseField name="author_last_name" type="string">
+  Last name of the post author. Example: `Garcia de Fabbri`
+</ResponseField>
+
+<ResponseField name="author_headline" type="string">
+  LinkedIn headline / occupation of the post author. Example: `Peruana. Economista. Líder empresarial.`
+</ResponseField>
+
+<ResponseField name="author_picture" type="string">
+  Profile picture URL of the post author.
+</ResponseField>
+
+<ResponseField name="author_background_image" type="string">
+  Background/banner image URL of the post author's profile.
+</ResponseField>
+
+<ResponseField name="author" type="string">
+  Full structured author object (JSON) with `firstName`, `lastName`, `occupation`, `id`, `publicId`, `profileId`, `picture`, `backgroundImage`.
+</ResponseField>
+
+<ResponseField name="num_likes" type="integer">
+  Total number of likes/reactions on the post. Example: `62`
+</ResponseField>
+
+<ResponseField name="num_comments" type="integer">
+  Total number of comments on the post. Example: `1`
+</ResponseField>
+
+<ResponseField name="num_shares" type="integer">
+  Total number of shares/reposts of the post. Example: `0`
+</ResponseField>
+
+<ResponseField name="reaction_counts" type="string">
+  JSON breakdown of reactions by type. Example: `{"LIKE": 27, "PRAISE": 3, "EMPATHY": 1}`
+</ResponseField>
+
+<ResponseField name="hashtags" type="string">
+  JSON array of hashtag keywords referenced in the post text. Example: `["opentowork", "hiring"]`
+</ResponseField>
+
+<ResponseField name="mentions" type="string">
+  JSON array of profile and company mentions in the post text, each with `public_id`, `first_name`, `last_name`, `start`, `length`, and `type`.
+</ResponseField>
+
+<ResponseField name="attributes" type="string">
+  JSON array of inline attributes in the post text (profile mentions, hashtags, URLs, etc.) with character offsets.
+</ResponseField>
+
+<ResponseField name="top_comments" type="string">
+  JSON array of up to 3 top comments, each with `author_name`, `author_url`, `author_picture`, `text`, `date_published`, and `num_likes`.
+</ResponseField>
+
+<ResponseField name="reshared_post" type="string">
+  When this post is a repost, the original post payload (JSON) including `urn`, `author_name`, `author_profile_url`, and `text`. Null otherwise.
+</ResponseField>
+
+<ResponseField name="media_details" type="string">
+  JSON object with structured media attached to the post: article, video, poll, document, or event details beyond plain image URLs.
+</ResponseField>
+
+<ResponseField name="share_audience" type="string">
+  Share audience of the post. Example: `PUBLIC`
+</ResponseField>
+
+<ResponseField name="commenting_disabled" type="boolean">
+  Whether commenting is disabled on the post. Example: `false`
+</ResponseField>
+
+<ResponseField name="allowed_commenters_scope" type="string">
+  Audience scope allowed to comment. Example: `ALL`
+</ResponseField>
+
+<ResponseField name="can_react" type="boolean">
+  Whether reacting to the post is allowed.
+</ResponseField>
+
+<ResponseField name="can_post_comments" type="boolean">
+  Whether commenting on the post is allowed.
+</ResponseField>
+
+<ResponseField name="can_share" type="boolean">
+  Whether sharing/reposting the post is allowed.
+</ResponseField>
+
+<ResponseField name="root_share" type="boolean">
+  Whether this is the root share (original post, not a nested reshare).
+</ResponseField>
+
+<ResponseField name="profile_input_url" type="string">
+  Original input URL used to discover this post. Example: `https://www.linkedin.com/in/gaspard-lezin/`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="string">
+  Timestamp when this record was scraped. Example: `2026-04-21T15:55:00Z`
+</ResponseField>
