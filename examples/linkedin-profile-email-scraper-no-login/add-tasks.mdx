@@ -1,0 +1,94 @@
+---
+title: "Add Tasks"
+description: "Add LinkedIn profile URLs to scrape without a LinkedIn account"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add LinkedIn profile URLs to your **LinkedIn Profile & Email Scraper (No Login)** squid. No LinkedIn account is required.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Request Body
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **squid** | string | Yes | Hash of your squid configured with the LinkedIn Profile & Email Scraper (No Login) |
+| **tasks** | array | Yes | Array of task objects, each containing a `linkedin_url` field |
+
+## Task Object
+
+| Field | Type | Required | Description |
+| --- | --- | --- | --- |
+| **linkedin_url** | string | Yes | LinkedIn profile URL (e.g. `https://www.linkedin.com/in/williamhgates`) or bare slug (e.g. `williamhgates`) |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {
+        "linkedin_url": "https://www.linkedin.com/in/williamhgates"
+      },
+      {
+        "linkedin_url": "https://www.linkedin.com/in/jeffweiner08"
+      }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+payload = {
+    "squid": squid_id,
+    "tasks": [
+        {"linkedin_url": "https://www.linkedin.com/in/williamhgates"},
+        {"linkedin_url": "https://www.linkedin.com/in/jeffweiner08"}
+    ]
+}
+
+response = requests.post(f"{BASE_URL}/tasks", headers=headers, json=payload)
+
+data = response.json()
+print(f"Added {len(data['tasks'])} tasks")
+print(f"Duplicates skipped: {data['duplicated_count']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "duplicated_count": 0,
+  "tasks": [
+    {
+      "id": "a1b2c3d4e5f6a7b8c9d0e1f2a3b4c5d6",
+      "created_at": "2026-06-09T10:00:00.000000",
+      "is_active": true,
+      "params": {
+        "linkedin_url": "https://www.linkedin.com/in/williamhgates"
+      },
+      "object": "task"
+    }
+  ]
+}
+```

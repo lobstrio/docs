@@ -1,0 +1,103 @@
+---
+title: "Update Settings"
+description: "Configure the LinkedIn Profile & Email Scraper (No Login) settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **LinkedIn Profile & Email Scraper (No Login)** squid settings. Enable email enrichment to find verified email addresses for each profile.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **email_enrichment** | boolean | true | Find verified email addresses using Lobstr.io's enrichment service. Costs 9 credits per enriched profile. No email found = 0 credits. |
+| **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping threads (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Note>
+  Email enrichment (`email_enrichment`) is enabled by default. Disable it if you only need profile data and want to avoid enrichment credit usage.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "LinkedIn Profile & Email Scraper (No Login) (1)",
+    "concurrency": 2,
+    "export_unique_results": true,
+    "to_complete": true,
+    "params": {
+      "email_enrichment": true,
+      "max_unique_results_per_run": 500
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "LinkedIn Profile & Email Scraper (No Login) (1)",
+        "concurrency": 2,
+        "export_unique_results": True,
+        "to_complete": True,
+        "params": {
+            "email_enrichment": True,
+            "max_unique_results_per_run": 500
+        }
+    }
+)
+
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "LinkedIn Profile & Email Scraper (No Login) (1)",
+  "concurrency": 2,
+  "export_unique_results": true,
+  "to_complete": true,
+  "params": {
+    "email_enrichment": true,
+    "max_unique_results_per_run": 500
+  }
+}
+```

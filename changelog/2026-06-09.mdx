@@ -6,6 +6,8 @@ description: "API updates shipped June 9, 2026"
 <Update label="June 9, 2026">
 
 ### New
+- **LinkedIn Profile & Email Scraper (No Login)** — new public scraper to collect full LinkedIn profile data without requiring a LinkedIn account. Returns 40+ fields including work experience, education, skills, certifications, and contact details. Enable `email_enrichment` to find verified email addresses. Accepts a profile URL or bare slug. See the [LinkedIn Profile & Email Scraper (No Login)](/examples/linkedin-profile-email-scraper-no-login/add-tasks) example.
+- **Leboncoin Boutiques Scraper** — new public scraper to collect store/boutique listings from Leboncoin's business directory. Returns store name, address, GPS coordinates, SIREN/SIRET, opening hours, phone number, ratings, and sector. Enable `get_details` for enriched store data and `get_phone_numbers` to retrieve phone numbers. See the [Leboncoin Boutiques Scraper](/examples/leboncoin-boutique/add-tasks) example.
 - **LinkedIn Posts Scraper** — new public scraper to collect posts from any LinkedIn profile, company page, or direct post URL. Returns full post content, author details, engagement counts (likes, comments, shares), reaction breakdown, hashtags, mentions, top comments, and rich media details. Supports `fetch_since` filtering to collect only recent posts. See the [LinkedIn Posts Scraper](/examples/linkedin-posts-scraper/add-tasks) example.
 
 ### Fixed

@@ -290,6 +290,14 @@
             ]
           },
           {
+            "group": "Leboncoin Boutiques Scraper",
+            "pages": [
+              "examples/leboncoin-boutique/add-tasks",
+              "examples/leboncoin-boutique/update-settings",
+              "examples/leboncoin-boutique/get-results"
+            ]
+          },
+          {
             "group": "Leboncoin Auto Message Sender",
             "pages": [
               "examples/leboncoin-auto-message-sender/add-tasks",
@@ -351,6 +359,14 @@
               "examples/linkedin-posts-commenters-and-likers-scraper/add-tasks",
               "examples/linkedin-posts-commenters-and-likers-scraper/update-settings",
               "examples/linkedin-posts-commenters-and-likers-scraper/get-results"
+            ]
+          },
+          {
+            "group": "LinkedIn Profile & Email Scraper (No Login)",
+            "pages": [
+              "examples/linkedin-profile-email-scraper-no-login/add-tasks",
+              "examples/linkedin-profile-email-scraper-no-login/update-settings",
+              "examples/linkedin-profile-email-scraper-no-login/get-results"
             ]
           },
           {

@@ -1,0 +1,112 @@
+---
+title: "Update Settings"
+description: "Configure the Leboncoin Boutiques Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Leboncoin Boutiques Scraper** squid settings. Enable enrichment functions to collect additional store details, phone numbers, and business registration data.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **get_details** | boolean | true | Fetch full store data: address, SIREN/SIRET, GPS coordinates, opening hours, description, and ratings (1 credit per store) |
+| **get_phone_numbers** | boolean | true | Retrieve phone numbers for each store. No account required (1 credit per store) |
+| **max_results** | integer | unlimited | Maximum stores collected per URL |
+| **max_pages** | integer | 99 | Maximum number of pages to crawl per URL |
+| **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
+
+## Squid Settings
+
+Configure general squid settings:
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid configuration |
+| **concurrency** | integer | Number of parallel scraping threads (default: 1) |
+| **export_unique_results** | boolean | Export only unique results (deduplicated) |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from results |
+
+<Warning>
+  Enabling `get_details` or `get_phone_numbers` adds an extra request per store, increasing run time and credit usage.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Leboncoin Boutiques Scraper (1)",
+    "concurrency": 2,
+    "export_unique_results": true,
+    "to_complete": true,
+    "params": {
+      "get_details": true,
+      "get_phone_numbers": true,
+      "max_results": 500,
+      "max_pages": 10
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}",
+    headers=headers,
+    json={
+        "name": "Leboncoin Boutiques Scraper (1)",
+        "concurrency": 2,
+        "export_unique_results": True,
+        "to_complete": True,
+        "params": {
+            "get_details": True,
+            "get_phone_numbers": True,
+            "max_results": 500,
+            "max_pages": 10
+        }
+    }
+)
+
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "Leboncoin Boutiques Scraper (1)",
+  "concurrency": 2,
+  "export_unique_results": true,
+  "to_complete": true,
+  "params": {
+    "get_details": true,
+    "get_phone_numbers": true,
+    "max_results": 500,
+    "max_pages": 10
+  }
+}
+```

@@ -1,0 +1,145 @@
+---
+title: "Get Results"
+description: "Retrieve scraped store data from Leboncoin Boutiques Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped store data from your **Leboncoin Boutiques Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+
+Each result object contains the following fields:
+
+<ResponseField name="online_store_id" type="string">
+  Unique store ID on Leboncoin.
+</ResponseField>
+
+<ResponseField name="online_store_name" type="string">
+  Store display name. Example: `Auto Elite Paris`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  URL of the store's Leboncoin page.
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Phone number of the store. Populated when `get_phone_numbers` is enabled.
+</ResponseField>
+
+<ResponseField name="is_mobile" type="boolean">
+  Whether the phone number is a French mobile number (starts with 06 or 07).
+</ResponseField>
+
+<ResponseField name="has_phone" type="boolean">
+  Whether a phone number is publicly available for the store.
+</ResponseField>
+
+<ResponseField name="active_since" type="string">
+  Date the store was registered on Leboncoin. Example: `2018-03-15T00:00:00Z`
+</ResponseField>
+
+<ResponseField name="address" type="string">
+  Street address of the store. Populated when `get_details` is enabled.
+</ResponseField>
+
+<ResponseField name="zipcode" type="string">
+  Postal code. Example: `75008`
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City. Example: `Paris`
+</ResponseField>
+
+<ResponseField name="department" type="string">
+  Department code. Example: `75`
+</ResponseField>
+
+<ResponseField name="department_label" type="string">
+  Department name. Example: `Paris`
+</ResponseField>
+
+<ResponseField name="region" type="string">
+  Region code. Example: `11`
+</ResponseField>
+
+<ResponseField name="region_label" type="string">
+  Region name. Example: `Île-de-France`
+</ResponseField>
+
+<ResponseField name="lat" type="float">
+  GPS latitude of the store. Populated when `get_details` is enabled.
+</ResponseField>
+
+<ResponseField name="lng" type="float">
+  GPS longitude of the store. Populated when `get_details` is enabled.
+</ResponseField>
+
+<ResponseField name="siren" type="string">
+  SIREN number (9-digit French company identifier). Populated when `get_details` is enabled.
+</ResponseField>
+
+<ResponseField name="siret" type="string">
+  SIRET number (14-digit French establishment identifier). Populated when `get_details` is enabled.
+</ResponseField>
+
+<ResponseField name="slogan" type="string">
+  Store slogan as shown on their Leboncoin page.
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Store description. Populated when `get_details` is enabled.
+</ResponseField>
+
+<ResponseField name="opening_hours" type="string">
+  Opening hours text. Populated when `get_details` is enabled.
+</ResponseField>
+
+<ResponseField name="rating_value" type="float">
+  Average Google rating. Example: `4.7`
+</ResponseField>
+
+<ResponseField name="rating_count" type="integer">
+  Number of ratings. Example: `312`
+</ResponseField>
+
+<ResponseField name="logo_url" type="string">
+  URL of the store's logo image.
+</ResponseField>
+
+<ResponseField name="sector" type="string">
+  Business sector. Example: `vehicles`
+</ResponseField>
+
+<ResponseField name="sector_id" type="integer">
+  Numeric sector ID.
+</ResponseField>
+
+<ResponseField name="hide_address" type="boolean">
+  Whether the store address is hidden on their public page.
+</ResponseField>
+
+<ResponseField name="hide_contact_form" type="boolean">
+  Whether the contact form is hidden on their public page.
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Owner UUID on Leboncoin.
+</ResponseField>

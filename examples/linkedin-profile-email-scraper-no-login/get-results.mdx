@@ -1,0 +1,177 @@
+---
+title: "Get Results"
+description: "Retrieve scraped profiles from LinkedIn Profile & Email Scraper (No Login)"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped profiles from your **LinkedIn Profile & Email Scraper (No Login)** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+
+Each result object contains the following fields:
+
+<ResponseField name="full_name" type="string">
+  First and last name concatenated. Example: `Bill Gates`
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  First name on the profile. Example: `Bill`
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  Last name on the profile. Example: `Gates`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email found via Lobstr.io's enrichment service. Only populated when `email_enrichment` is enabled.
+</ResponseField>
+
+<ResponseField name="email_status" type="string">
+  Validation status of the enriched email: `valid`, `risky`, etc.
+</ResponseField>
+
+<ResponseField name="headline" type="string">
+  Profile headline — the short tagline shown under the name. Example: `Co-chair, Bill & Melinda Gates Foundation`
+</ResponseField>
+
+<ResponseField name="summary" type="string">
+  Full About / summary section of the profile.
+</ResponseField>
+
+<ResponseField name="top_skills" type="string">
+  First few skill names joined with ` • `. Example: `Leadership • Strategic Planning • Philanthropy`
+</ResponseField>
+
+<ResponseField name="location_name" type="string">
+  Human-readable location string from the profile. Example: `Seattle, Washington, United States`
+</ResponseField>
+
+<ResponseField name="country_code" type="string">
+  ISO country code resolved from the profile's geo location. Example: `US`
+</ResponseField>
+
+<ResponseField name="industry_name" type="string">
+  Resolved industry name. Example: `Philanthropic Fundraising Services`
+</ResponseField>
+
+<ResponseField name="positions" type="string">
+  JSON array of work positions: title, company, location, employment type, dates, and description.
+</ResponseField>
+
+<ResponseField name="educations" type="string">
+  JSON array of education entries: school, degree, field of study, dates, and description.
+</ResponseField>
+
+<ResponseField name="skills" type="string">
+  JSON array of skills with name and entity URN.
+</ResponseField>
+
+<ResponseField name="certifications" type="string">
+  JSON array of certifications: name, issuer, license number, dates, URL, and issuing authority.
+</ResponseField>
+
+<ResponseField name="courses" type="string">
+  JSON array of courses: name, course number, and school association.
+</ResponseField>
+
+<ResponseField name="projects" type="string">
+  JSON array of projects: title, description, URL, and dates.
+</ResponseField>
+
+<ResponseField name="publications" type="string">
+  JSON array of publications: name, publisher, description, URL, and published date.
+</ResponseField>
+
+<ResponseField name="honors_and_awards" type="string">
+  JSON array of honors and awards: title, issuer, description, and issued date.
+</ResponseField>
+
+<ResponseField name="organizations" type="string">
+  JSON array of organizations, clubs, or professional bodies the member is affiliated with.
+</ResponseField>
+
+<ResponseField name="languages" type="string">
+  JSON array of languages with name and proficiency level.
+</ResponseField>
+
+<ResponseField name="volunteer_experiences" type="string">
+  JSON array of volunteer experiences: role, organization, cause, description, and dates.
+</ResponseField>
+
+<ResponseField name="volunteer_causes" type="string">
+  JSON array of volunteer cause codes the member supports.
+</ResponseField>
+
+<ResponseField name="featured_items" type="string">
+  JSON array of items in the Featured section: posts, articles, links, and photos.
+</ResponseField>
+
+<ResponseField name="profile_picture_url" type="string">
+  Direct URL to the highest-resolution profile picture available.
+</ResponseField>
+
+<ResponseField name="background_image_url" type="string">
+  Direct URL to the largest cover/background image available.
+</ResponseField>
+
+<ResponseField name="linkedin_url" type="string">
+  Public LinkedIn profile URL. Example: `https://www.linkedin.com/in/williamhgates`
+</ResponseField>
+
+<ResponseField name="slug" type="string">
+  Public LinkedIn profile identifier. Example: `williamhgates`
+</ResponseField>
+
+<ResponseField name="entity_urn" type="string">
+  LinkedIn fsd_profile entity URN. Example: `urn:li:fsd_profile:ACoAAA8BYqEBhiA97dDu2Y4PxFPgBcPlMHXHQw4`
+</ResponseField>
+
+<ResponseField name="object_urn" type="string">
+  Stable numeric member URN.
+</ResponseField>
+
+<ResponseField name="premium" type="boolean">
+  Whether the member has LinkedIn Premium.
+</ResponseField>
+
+<ResponseField name="influencer" type="boolean">
+  Whether the member is a LinkedIn Influencer.
+</ResponseField>
+
+<ResponseField name="is_creator" type="boolean">
+  Whether the profile has Creator Mode enabled.
+</ResponseField>
+
+<ResponseField name="member_distance" type="string">
+  Connection distance from the scraping account: `DISTANCE_1`, `DISTANCE_2`, `DISTANCE_3`, or `OUT_OF_NETWORK`.
+</ResponseField>
+
+<ResponseField name="primary_locale" type="string">
+  Profile's primary display locale code. Example: `en_US`
+</ResponseField>
+
+<ResponseField name="more_profiles" type="string">
+  JSON array of recommended/related profiles surfaced in the same response.
+</ResponseField>
+
+<ResponseField name="scraping_time" type="string">
+  UTC timestamp when the profile was scraped.
+</ResponseField>
