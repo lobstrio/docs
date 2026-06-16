@@ -254,3 +254,123 @@ Each result object contains the following fields:
 <ResponseField name="payment_methods" type="json">
   Accepted payment methods, as `{name, available}` objects. Example: `[{"name": "Credit cards", "available": true}, {"name": "NFC mobile payments", "available": true}]`
 </ResponseField>
+
+<ResponseField name="kgmid" type="string">
+  Google Knowledge Graph ID of the business. Example: `/g/11rz7_3hkb`
+</ResponseField>
+
+<ResponseField name="reviews_link" type="string">
+  Direct link to the business's Google reviews page
+</ResponseField>
+
+<ResponseField name="name_for_emails" type="string">
+  Cleaned business name for email personalization — no punctuation or accents. Example: `The Mesh Bangkok Sukhumvit 22`
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether the listing is claimed and verified by its owner on Google Maps. Example: `true`
+</ResponseField>
+
+<ResponseField name="area_service" type="boolean">
+  Whether the business serves customers at their location instead of a fixed storefront
+</ResponseField>
+
+<ResponseField name="street_address" type="string">
+  Street-level portion of the business address. Example: `30 Sukhumvit Alley 22`
+</ResponseField>
+
+<ResponseField name="county" type="string">
+  County-level administrative division (US). Example: `Cook County`
+</ResponseField>
+
+<ResponseField name="state_code" type="string">
+  Two-letter state code (US). Example: `IL`
+</ResponseField>
+
+<ResponseField name="region" type="string">
+  First-level administrative division: state, province, or region. Example: `Île-de-France`
+</ResponseField>
+
+<ResponseField name="timezone" type="string">
+  IANA timezone of the business location. Example: `America/New_York`
+</ResponseField>
+
+<ResponseField name="streetview_url" type="string">
+  Street View thumbnail image URL for the business location
+</ResponseField>
+
+<ResponseField name="owner_name" type="string">
+  Display name of the listing owner profile on Google Maps
+</ResponseField>
+
+<ResponseField name="owner_id" type="string">
+  Stable Google Maps owner/contributor ID
+</ResponseField>
+
+<ResponseField name="owner_link" type="string">
+  Link to the owner's Google Maps profile
+</ResponseField>
+
+<ResponseField name="owner_posts" type="json">
+  Posts published by the business owner (updates, events, offers)
+</ResponseField>
+
+<ResponseField name="customer_posts" type="json">
+  Posts published by customers about the business
+</ResponseField>
+
+<ResponseField name="image_categories" type="json">
+  Photo gallery category labels available on the listing (e.g. Food and drink, Exterior, Interior)
+</ResponseField>
+
+<ResponseField name="menu_items" type="json">
+  Structured menu with dishes: section, description, price, and photo. Requires `collect_business_details`.
+</ResponseField>
+
+<ResponseField name="price_range" type="string">
+  Typical spend range reported by Google. Example: `$20–80`
+</ResponseField>
+
+<ResponseField name="booking_link" type="string">
+  Direct reservation or booking URL for the business
+</ResponseField>
+
+<ResponseField name="popular_times" type="text">
+  Typical busy times by day and hour (relative busyness 0–100)
+</ResponseField>
+
+<ResponseField name="popular_times_live" type="string">
+  Live crowd level right now (only available when the place is open and Google has live data)
+</ResponseField>
+
+<ResponseField name="popular_times_live_percent" type="integer">
+  Live busyness percentage right now (0–100)
+</ResponseField>
+
+<ResponseField name="other_hours" type="json">
+  Secondary opening-hours sets: delivery, drive-through, kitchen, etc.
+</ResponseField>
+
+<ResponseField name="actions" type="json">
+  Action buttons available on the Google Maps listing (e.g. order online, reserve a table)
+</ResponseField>
+
+<ResponseField name="order_providers" type="json">
+  Online food ordering providers available for the business (e.g. Uber Eats, DoorDash)
+</ResponseField>
+
+<ResponseField name="youtube" type="text">
+  YouTube channel URL found on the business website
+</ResponseField>
+
+<ResponseField name="reviews_tags" type="json">
+  Keywords most mentioned in reviews, with mention counts. Example: `[{"key": "tacos", "count": 42}]`
+</ResponseField>
+
+<ResponseField name="people_also_search" type="json">
+  Related businesses Google shows under "People also search for"
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Timestamp when the result was scraped
+</ResponseField>

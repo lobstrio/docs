@@ -4,7 +4,7 @@ description: "Configure Twitter Search Results Scraper settings"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
 ---
 
-Configure your Twitter Search Results Scraper squid settings. Control the maximum number of results to fetch per search query.
+Configure your Twitter Search Results Scraper squid settings. Control the maximum number of results and use `fetch_since` to collect only recent tweets.
 
 ## Headers
 
@@ -22,7 +22,10 @@ Set these parameters in the `params` object:
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| **max_results** | integer | null | Maximum number of tweets to scrape per search query |
+| **max_results** | integer | unlimited | Maximum number of tweets to scrape per search query |
+| **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
+| **fetch_since** | string | — | Stop scraping when tweets older than this threshold are reached. Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Works best with Latest search URLs (`&f=live`); Top results are relevance-ranked, so the task may stop on an older popular tweet. |
+| **fetch_since_timezone** | string | UTC | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`) |
 
 ## Squid Settings
 
@@ -37,12 +40,8 @@ Configure general squid settings:
 | **no_line_breaks** | boolean | Remove line breaks from results |
 
 <Tip>
-  Set `max_results` to limit credit usage when testing new search queries.
+  Use `fetch_since: "24h"` for incremental runs that collect only the last day of tweets. Pair with a Latest search URL (`&f=live`) for the most predictable cutoff behavior.
 </Tip>
-
-<Note>
-  Leave `max_results` as null to scrape all available results for your search query.
-</Note>
 
 ## Code Examples
 
@@ -58,7 +57,9 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "to_complete": false,
     "no_line_breaks": true,
     "params": {
-      "max_results": 42
+      "max_results": 500,
+      "fetch_since": "7d",
+      "fetch_since_timezone": "Europe/Paris"
     }
   }'
 ```
@@ -72,7 +73,6 @@ headers = {"Authorization": f"Token {API_KEY}"}
 
 squid_id = "YOUR_SQUID_HASH"
 
-# Update scraper settings
 response = requests.post(f"{BASE_URL}/squids/{squid_id}",
     headers=headers,
     json={
@@ -82,7 +82,9 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
         "to_complete": False,
         "no_line_breaks": True,
         "params": {
-            "max_results": 42  # Maximum tweets per search
+            "max_results": 500,
+            "fetch_since": "7d",
+            "fetch_since_timezone": "Europe/Paris"
         }
     }
 )
@@ -101,7 +103,9 @@ print(response.json())
   "to_complete": false,
   "no_line_breaks": true,
   "params": {
-    "max_results": 42
+    "max_results": 500,
+    "fetch_since": "7d",
+    "fetch_since_timezone": "Europe/Paris"
   }
 }
 ```

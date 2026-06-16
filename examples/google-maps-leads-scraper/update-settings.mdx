@@ -23,7 +23,13 @@ Set these parameters in the `params` object:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | **country** | string | — | Regional context for search results (e.g., `United States`) |
-| **ratings** | string | Any rating | Filter by rating threshold: `Any rating`, `4.0+`, `2.5+` |
+| **ratings** | string | Any rating | Minimum rating filter: `Any rating`, `2.5+`, `3.0+`, `3.5+`, `4.0+`, `4.5+` |
+| **max_rating** | string | Any rating | Maximum rating filter. Combine with `ratings` to define a score range (e.g. collect only 3–4 star businesses) |
+| **min_reviews** | integer | — | Only collect places with at least this many reviews |
+| **max_reviews** | integer | — | Only collect places with at most this many reviews |
+| **exact_name_match** | boolean | false | Only collect places whose name matches your search query — useful to target a specific brand or chain |
+| **phone_filter** | string | all | Filter by phone presence: `all`, `with_phone`, `without_phone` |
+| **verified_filter** | string | all | Filter by owner-claimed status: `all`, `verified_only`, `unverified_only` |
 | **language** | string | — | Language for place names and metadata (e.g., `English (United States)`) |
 | **max_results** | integer | unlimited | Maximum places to collect before task ends |
 | **geo_match** | boolean | true | Only return results that geographically match the searched location |

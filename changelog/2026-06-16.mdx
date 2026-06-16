@@ -1,0 +1,33 @@
+---
+title: "June 16, 2026"
+description: "API updates shipped June 16, 2026"
+---
+
+<Update label="June 16, 2026">
+
+### Improved
+- **Google Maps Leads: new filters and result fields** — added `max_rating` (upper bound on star rating), `min_reviews`, `max_reviews` (review count range), `exact_name_match` (target a specific brand or chain), `phone_filter`, and `verified_filter` (owner-claimed listings). New result fields: `owner_posts`, `customer_posts`, `image_categories`, `menu_items`, `is_verified`, `kgmid`, `reviews_link`, `name_for_emails`, `streetview_url`, `county`, `state_code`, `region`, `timezone`, `owner_name`, `owner_link`, `popular_times`, `popular_times_live`, `booking_link`, `actions`, `order_providers`, `reviews_tags`, and `people_also_search`.
+- **Twitter Search Results: `fetch_since` support** — use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`) to stop scraping when tweets older than the threshold are reached. Works best with Latest search URLs (`&f=live`). Also added `fetch_since_timezone` and `max_unique_results_per_run`.
+- **LinkedIn Posts Commenters & Likers: `max_results` and `max_unique_results_per_run`** — cap the number of engagers collected per post or across the entire run.
+
+### Fixed
+- **Sales Navigator Profile: positions scraping** — work experience entries were being parsed incorrectly. Fixed.
+- **Sales Navigator Companies: re-login crash** — an `AssertionError` after automatic re-login no longer interrupts runs.
+- **Sales Navigator email enrichment** — enrichment requests were failing silently in some cases. Fixed.
+- **LinkedIn Posts Commenters & Likers: result deduplication** — commenters/likers were occasionally duplicated in exported results. Fixed.
+- **TikTok Top Ads: industry filter IDs** — incorrect internal IDs were being sent for several industry categories, causing filter to have no effect. Fixed.
+- **Leboncoin listings: 0 results** — a parsing change on Leboncoin caused some search pages to return 0 results. Fixed.
+- **Leboncoin Boutiques: escape sequence parsing** — invalid escape sequences in store descriptions caused parsing errors. Fixed.
+- **ParuVendu listings: pycurl stream error** — intermittent stream errors on listing pages are now caught and retried. Fixed.
+- **PAP: connection retries** — base-level `ConnectionError` exceptions from `curl_cffi` are now retried automatically. Fixed.
+- **LaCentrale Listing Status Checker: DataDome bypass** — migrated to a more reliable DataDome bypass path; improves success rate on listing status checks.
+
+### Platform
+- **Export: JSON and JSONL formats** — run results can now be downloaded as `.json` (array) or `.jsonl` (newline-delimited JSON) in addition to CSV and XLSX.
+- **Export: field selection** — use `fields` to select a subset of columns, or `omit` to exclude specific columns from exported files.
+- **Export: XLSX download** — XLSX is now available as a direct download format when exporting run results.
+- **Export: faster XLSX generation** — switched to `xlsxwriter` for XLSX exports; large files generate significantly faster.
+- **Export: background conversion for large files** — XLSX exports over Excel's row limit (~1 M rows) are rejected upfront with a clear error. Large exports are offloaded to a dedicated background queue so the API response is not blocked.
+- **Export: live progress** — background export conversion progress is now surfaced in real time.
+
+</Update>
