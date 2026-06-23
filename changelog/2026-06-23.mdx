@@ -1,0 +1,18 @@
+---
+title: "June 23, 2026"
+description: "API updates shipped June 23, 2026"
+---
+
+<Update label="June 23, 2026">
+
+### Improved
+- **Yelp Reviews: `fetch_since`, language filter, owner replies, and Elite fields** — added `fetch_since` to stop scraping when reviews older than the threshold are reached (relative: `24h`, `7d`; absolute: `YYYY-MM-DD HH:MM:SS`). Added `language` to filter reviews by locale (ISO 639-1 code). New result fields: `reply_text`, `reply_datetime`, `reply_timestamp` (owner replies); `is_elite`, `user_elite_years` (Elite reviewer status). Reaction columns renamed to match the current Yelp UI: `useful_count` → `helpful_count`, `funny_count` → `thanks_count`, `cool_count` → `love_this_count`; added `oh_no_count`.
+- **Pages Jaunes: `street_address` field** — the street-level portion of the address is now returned as a separate `street_address` field alongside `full_address`.
+
+### Fixed
+- **LinkedIn Profile: geo location** — the location field was incorrectly populated in some profiles. Fixed.
+- **Sales Navigator Companies: pagination on negative search totals** — a crash when the API returned a negative total count is now handled by falling back to `has_next_page`-based pagination. Fixed.
+- **LaCentrale (cars): DataDome bypass** — upgraded to the new DataDome bypass path with macOS/Chrome 141 identity and cookie warming; improves listing scrape reliability.
+- **Leboncoin Auto Message Sender: sliding-window message quota** — replaced the flat 24-message/day lock with a sliding-window quota, reducing false throttling on accounts that spread sends throughout the day.
+
+</Update>

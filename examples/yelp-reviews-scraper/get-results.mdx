@@ -56,16 +56,32 @@ Each result object contains the following fields:
   Whether the review is highlighted as featured by Yelp. Example: `false`
 </ResponseField>
 
-<ResponseField name="useful_count" type="integer">
-  Community vote count: "Useful". Example: `12`
+<ResponseField name="helpful_count" type="integer">
+  Community vote count: "Helpful". Example: `12`
 </ResponseField>
 
-<ResponseField name="funny_count" type="integer">
-  Community vote count: "Funny". Example: `4`
+<ResponseField name="thanks_count" type="integer">
+  Community vote count: "Thanks". Example: `4`
 </ResponseField>
 
-<ResponseField name="cool_count" type="integer">
-  Community vote count: "Cool". Example: `8`
+<ResponseField name="love_this_count" type="integer">
+  Community vote count: "Love This". Example: `8`
+</ResponseField>
+
+<ResponseField name="oh_no_count" type="integer">
+  Community vote count: "Oh No". Example: `1`
+</ResponseField>
+
+<ResponseField name="reply_text" type="string">
+  Text of the owner's reply to the review, if any
+</ResponseField>
+
+<ResponseField name="reply_datetime" type="string">
+  Date and time the owner reply was posted (UTC, ISO format). Example: `2026-04-10 09:15:00`
+</ResponseField>
+
+<ResponseField name="reply_timestamp" type="integer">
+  Unix timestamp of the owner reply. Example: `1744277700`
 </ResponseField>
 
 <ResponseField name="photo_count" type="integer">
@@ -114,6 +130,14 @@ Each result object contains the following fields:
 
 <ResponseField name="has_user_paid_through_yelp" type="boolean">
   Whether the reviewer paid for a service through Yelp's payment integration. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_elite" type="boolean">
+  Whether the reviewer currently holds Yelp Elite status. Example: `true`
+</ResponseField>
+
+<ResponseField name="user_elite_years" type="json">
+  List of years the reviewer held Yelp Elite status. Example: `[2024, 2025, 2026]`
 </ResponseField>
 
 <ResponseField name="business_url" type="string">
