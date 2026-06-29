@@ -13,6 +13,6 @@ description: "API updates shipped June 23, 2026"
 - **LinkedIn Profile: geo location** — the location field was incorrectly populated in some profiles. Fixed.
 - **Sales Navigator Companies: pagination on negative search totals** — a crash when the API returned a negative total count is now handled by falling back to `has_next_page`-based pagination. Fixed.
 - **LaCentrale (cars): DataDome bypass** — upgraded to the new DataDome bypass path with macOS/Chrome 141 identity and cookie warming; improves listing scrape reliability.
-- **Leboncoin Auto Message Sender: sliding-window message quota** — replaced the flat 24-message/day lock with a sliding-window quota, reducing false throttling on accounts that spread sends throughout the day.
+- **Leboncoin Auto Message Sender: sliding-window message quota** — replaced the flat 30-message/day lock with a sliding-window quota, reducing false throttling on accounts that spread sends throughout the day.
 
 </Update>
