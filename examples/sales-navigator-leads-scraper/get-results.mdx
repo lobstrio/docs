@@ -169,6 +169,22 @@ I am the person you come to when you want a really thought-provoking speech on l
   Seniority level of the person's current position (e.g. Director, Manager, Entry). Example: `CXO, Senior`
 </ResponseField>
 
+<ResponseField name="recently_hired" type="boolean">
+  Whether the person has been in their current position for fewer than 3 months. Example: `false`
+</ResponseField>
+
+<ResponseField name="pending_invitation" type="boolean">
+  Whether a LinkedIn connection invitation is pending from the scraping account to this person. Example: `false`
+</ResponseField>
+
+<ResponseField name="current_role_description" type="string">
+  Full text of the job description for the person's current role. Requires `get_profile_details`.
+</ResponseField>
+
+<ResponseField name="banner_url" type="string">
+  URL of the person's LinkedIn profile banner/background image. Requires `get_profile_details`.
+</ResponseField>
+
 <ResponseField name="position_id" type="string">
   Unique identifier for this position. Example: `344632796142`
 </ResponseField>

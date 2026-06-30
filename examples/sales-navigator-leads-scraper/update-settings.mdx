@@ -24,9 +24,16 @@ Set these parameters in the `params` object:
 | --- | --- | --- | --- |
 | **functions.email_enrichment** | boolean | false | Enable email enrichment using lobstr.io's service (9 credits per profile where an email is found) |
 | **functions.mobile_enrichment** | boolean | false | Enable mobile phone enrichment (300 credits per profile where a mobile number is found) |
+| **get_profile_details** | boolean | false | Fetch additional profile data: current role description and profile banner URL |
 | **profiles_per_page** | integer | 25 | Number of leads to scrape per page (max: 25) |
 | **max_pages** | integer | 100 | Maximum number of pages to crawl (max: 100) |
-| **max_results** | integer | null | Total leads to collect before stopping (`null` = no limit) |
+| **max_results** | integer | — | Total leads to collect before stopping |
+| **max_unique_results_per_run** | integer | — | Maximum unique results across all tasks in the run |
+| **start_page** | integer | — | Page number to start scraping from (useful for resuming or skipping already-collected pages) |
+| **skip_collected_leads** | boolean | false | Skip leads already present in your results database — useful for incremental runs |
+| **split_search** | boolean | false | Split the search into smaller sub-searches to bypass Sales Navigator's 2,500-result cap. Use for broad searches that would otherwise be truncated. |
+| **fetch_since** | string | — | Stop scraping when leads older than this threshold are reached. Use a relative duration (`24h`, `7d`) or an absolute date (`YYYY-MM-DD HH:MM:SS`) |
+| **fetch_since_timezone** | string | UTC | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`) |
 
 ## Squid Settings
 
@@ -49,7 +56,7 @@ Configure general squid settings:
 </Tip>
 
 <Note>
-  Sales Navigator limits search results to 2,500 leads. Use more specific filters to access different lead segments.
+  Sales Navigator limits search results to 2,500 leads per search. Enable `split_search` to automatically break large searches into sub-searches and collect beyond this limit.
 </Note>
 
 <Note>

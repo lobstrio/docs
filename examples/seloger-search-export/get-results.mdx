@@ -258,3 +258,39 @@ Each result object contains the following fields:
 <ResponseField name="contact_is_private_seller" type="boolean">
   Whether the seller is a private individual (not an agency). Example: `false`
 </ResponseField>
+
+<ResponseField name="agency_company_name" type="string">
+  Legal company name of the listing agency (distinct from the contact person name). Example: `GEMALIA IMMOBILIER SARL`
+</ResponseField>
+
+<ResponseField name="agency_siret" type="string">
+  Agency SIRET registration number, extracted from legal information on SeLoger. Example: `89823412700016`
+</ResponseField>
+
+<ResponseField name="property_sub_type" type="string">
+  Property sub-type classification. Example: `MULTI_STOREY`, `HOUSE_VILLA`
+</ResponseField>
+
+<ResponseField name="is_new" type="boolean">
+  Whether the listing is a new-build or newly listed property. Example: `false`
+</ResponseField>
+
+<ResponseField name="plot_surface" type="float">
+  Land/plot surface area in square metres (relevant for houses and land). Example: `312.0`
+</ResponseField>
+
+<ResponseField name="transport" type="string">
+  Nearby public transport lines (metro and bus) closest to the property. Example: `M12, Bus 89`
+</ResponseField>
+
+<ResponseField name="has_brokerage_fee" type="boolean">
+  Whether the listing includes a brokerage fee (frais d'agence). Example: `true`
+</ResponseField>
+
+<ResponseField name="listing_creation_date" type="timestamp">
+  Date and time the listing was first published on SeLoger. Example: `2026-03-15 09:00:00`
+</ResponseField>
+
+<ResponseField name="listing_update_date" type="timestamp">
+  Date and time the listing was last updated on SeLoger. Example: `2026-05-10 14:30:00`
+</ResponseField>

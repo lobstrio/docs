@@ -1,0 +1,21 @@
+---
+title: "June 30, 2026"
+description: "API updates shipped June 30, 2026"
+---
+
+<Update label="June 30, 2026">
+
+### Improved
+- **SeLoger: new listing fields** — added `agency_company_name`, `agency_siret`, `property_sub_type`, `is_new`, `plot_surface`, `transport`, `has_brokerage_fee`, `listing_creation_date`, and `listing_update_date`. These fields are returned directly from search results without requiring `get_annonce_details`. Also added `max_unique_results_per_run` parameter.
+- **Sales Navigator Leads: `split_search`, `skip_collected_leads`, `fetch_since`, and more** — `split_search` breaks large searches into sub-searches to collect beyond the 2,500-lead cap; `skip_collected_leads` skips leads already in your database for faster incremental runs; `fetch_since` stops scraping when leads older than the threshold are reached (relative: `24h`, `7d`; absolute: `YYYY-MM-DD HH:MM:SS`). Also added `start_page`, `max_unique_results_per_run`, `fetch_since_timezone`, and `get_profile_details`. New result fields: `recently_hired`, `pending_invitation`, `current_role_description` (requires `get_profile_details`), and `banner_url` (requires `get_profile_details`).
+- **Realtor: improved scraper reliability** — updated bypass logic and listing detail extraction.
+
+### Fixed
+- **Google Maps Leads: email and website filter conflict** — enabling `extract_emails_from_website` alongside `website_filter: "without_website"` or `skip_without_email` produced conflicting conditions. Fixed.
+- **Google Maps Reviews: translated text extraction** — the `translated_text` and `original_text` fields were using incorrect field index offsets; both are now extracted correctly.
+- **Instagram Post Comments: cookie expiration** — expired session cookies now trigger a re-authentication instead of failing the run. Fixed.
+- **SeLoger: missing title and description on some listings** — `title`, `description`, `dpe`, and `bedrooms_count` were absent on results from classified-search paths. Fixed.
+- **Facebook Group Posts: session invalidation on proxy change** — runs using multiple accounts no longer rotate the proxy mid-session, preventing unexpected logouts. Fixed.
+- **Sales Navigator Companies: stale search parameter crash** — an expired `recentSearchParam` no longer causes a permanent 500 error; it is refreshed automatically. Fixed.
+
+</Update>
