@@ -4,14 +4,14 @@
 [![Next.js](https://img.shields.io/badge/Next.js-15-black)](https://nextjs.org)
 [![MCP](https://img.shields.io/badge/MCP-Server-red)](https://staging.docs.lobstr.io/docs/mcp)
 
-Official API documentation site for [lobstr.io](https://lobstr.io) — a web scraping automation platform with 50+ ready-made crawlers.
+Official API documentation site for [lobstr.io](https://lobstr.io) — a web scraping automation platform with 55+ ready-made crawlers.
 
 **Live:** [docs.lobstr.io](https://docs.lobstr.io)
 
 ## Features
 
 - **138 API endpoint docs** with cURL, Python examples, and response samples
-- **31 scraper examples** — Google Maps, Twitter, LinkedIn, Instagram, and more
+- **56 scraper examples** — Google Maps, Twitter, LinkedIn, Instagram, and more
 - **MCP Server** — AI assistants can search and retrieve docs via [Model Context Protocol](https://staging.docs.lobstr.io/docs/mcp)
 - **Python SDK** and **CLI** documentation pages
 - **Three-column layout** — sidebar navigation, content, code examples
@@ -75,7 +75,7 @@ components/
   docs/                 # CustomTable, ParametersList, ResponseFieldsList
 content/
   docs/                 # 138 documentation JSON files
-    examples/           # 31 scraper-specific examples
+    examples/           # 56 scraper-specific examples
   code-examples/
     curl/               # cURL examples
     python/             # Python examples

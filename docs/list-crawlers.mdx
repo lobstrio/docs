@@ -21,7 +21,7 @@ Use this endpoint to discover which crawlers are available for your data collect
 ## Response Structure
 
 <ResponseField name="total_results" type="integer">
-  Total number of crawlers available. Example: `47`
+  Total number of crawlers available. Example: `53`
 </ResponseField>
 
 <ResponseField name="limit" type="integer">
@@ -41,7 +41,7 @@ Use this endpoint to discover which crawlers are available for your data collect
 </ResponseField>
 
 <ResponseField name="result_to" type="integer">
-  Ending index of results in current page. Example: `47`
+  Ending index of results in current page. Example: `53`
 </ResponseField>
 
 <ResponseField name="data" type="array">
@@ -151,12 +151,12 @@ for crawler in data['data']:
 
 ```json 200
 {
-  "total_results": 47,
+  "total_results": 53,
   "limit": 50,
   "page": 1,
-  "total_pages": 1,
+  "total_pages": 2,
   "result_from": 1,
-  "result_to": 47,
+  "result_to": 50,
   "data": [
     {
       "id": "6c5227261fbbd3430f926d409f4c44bf",
