@@ -247,6 +247,22 @@ Each result object contains the following fields:
   Text content of the 15th comment on the post. Example: `{'text': 'cute 😭❤️', 'user': {'fbid_v2': '17841408283836383', 'user_id': '8371068127', 'username': 'starlight.avi', 'is_verified': False, 'profile_pic_url': 'https://scontent-lga3-2.cdninstagram.com/v/t51.2885-19/629369157_18302647696276128_4393177530793477705_n.jpg?stp=dst-jpg_s150x150_tt6&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLmRqYW5nby4xMDgwLmMyIn0&_nc_ht=scontent-lga3-2.cdninstagram.com&_nc_cat=100&_nc_oc=Q6cZ2QFy67K-2tJZVpc5mghVSGhSbb4B6q0X8AQWnVq63Wb3ERgK-pYb8h_HZrvycSa9eRY&_nc_ohc=xlepmkGd8fkQ7kNvwGnlNmR&_nc_gid=w_5zFa1XPB3CcA4Dp0HZrg&edm=APs17CUBAAAA&ccb=7-5&oh=00_AfvYUczQa8QuZoEyBeRS53glXXbNsi3CLgDN9AhX8kO_IA&oe=6997E71B&_nc_sid=10d13b'}, 'giphy_id': None, 'giphy_url': None, 'comment_id': '18102351191507791', 'created_at': 1771131487, 'is_covered': False, 'child_comment_count': 0}`
 </ResponseField>
 
+<ResponseField name="is_video" type="boolean">
+  Whether the post is a video (media type video or reel). Example: `false`
+</ResponseField>
+
+<ResponseField name="mentions" type="jsonb">
+  List of @usernames mentioned in the post caption. Example: `['thea_booysen']`
+</ResponseField>
+
+<ResponseField name="owner_profile_pic_url" type="string">
+  Profile picture URL of the post author. Example: `https://scontent-ber1-1.cdninstagram.com/v/t51.2885-19/...`
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  The input URL or username this post was collected from. Example: `https://www.instagram.com/mrbeast/`
+</ResponseField>
+
 <ResponseField name="functions" type="jsonb">
   Additional enrichment functions enabled for this record. Example: `{}`
 </ResponseField>

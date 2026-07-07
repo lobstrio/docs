@@ -27,6 +27,7 @@ Set these parameters in the `params` object:
 | **fetch_since** | string | unlimited | Stop scraping when items older than this threshold are reached (based on `published_at`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD) |
 | **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Only applies when `fetch_since` is an absolute date — ignored for relative values like `24h` or `7d`. See [supported timezones](/docs/timezones). |
 | **skip_pinned_posts** | boolean | false | If enabled, pinned posts will be excluded from the results |
+| **enrich_comments** | boolean | true | Collect up to 15 latest comments per post (1 extra request per post). Disable for much faster scraping |
 
 ## Squid Settings
 

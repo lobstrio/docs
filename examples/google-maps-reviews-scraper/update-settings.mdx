@@ -33,6 +33,7 @@ Set these parameters in the `params` object:
 | **min_rating_score** | integer | null | Minimum star rating to include (1–5). Used when `rating_filter` is `Minimum rating` or `Exact rating` |
 | **max_rating_score** | integer | null | Maximum star rating to include (1–5). Used with `min_rating_score` to define a range |
 | **language** | string | English (United States) | Language for extracted reviews |
+| **review_origin** | string | All sources | Filter reviews by source. `All sources` collects Google reviews and aggregator reviews. Pass a specific aggregator name to filter to that source only |
 | **functions.get_short_review_link** | boolean | false | Collect shortened review links (1 credit per review) |
 
 ## Squid Settings

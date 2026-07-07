@@ -294,3 +294,47 @@ Each result object contains the following fields:
 <ResponseField name="listing_update_date" type="timestamp">
   Date and time the listing was last updated on SeLoger. Example: `2026-05-10 14:30:00`
 </ResponseField>
+
+<ResponseField name="agency_address" type="string">
+  Street address of the agency office. Example: `12 Rue de la Paix`
+</ResponseField>
+
+<ResponseField name="agency_city" type="string">
+  City where the agency office is located. Example: `Paris`
+</ResponseField>
+
+<ResponseField name="agency_zipcode" type="string">
+  Postal code of the agency office. Example: `75001`
+</ResponseField>
+
+<ResponseField name="agency_rating" type="float">
+  Average customer rating of the agency. Example: `4.8`
+</ResponseField>
+
+<ResponseField name="agency_reviews" type="integer">
+  Number of customer reviews for the agency. Example: `142`
+</ResponseField>
+
+<ResponseField name="picture_classifications" type="string">
+  JSON array of photo objects, each with `url`, `classification` (AI scene label: LIVING_ROOM, KITCHEN, BATHROOM, BEDROOM, BALCONY, EXTERIOR_VIEW, EMPTY_ROOM, HOME_OFFICE, HALLWAY, COURTYARD, STAIRCASE, BUILDING_FACADE, CLOSET, LOGO, YARD, TERRACE, GMAP, FLOORPLAN), and `alt` text
+</ResponseField>
+
+<ResponseField name="floorplan_pictures" type="string">
+  Floorplan image URLs (separate from main photos), comma-separated
+</ResponseField>
+
+<ResponseField name="year_of_construction" type="integer">
+  Year the property was built. Example: `1972`
+</ResponseField>
+
+<ResponseField name="building_state" type="string">
+  Overall condition of the building. Values: `WELL_KEPT`, `MINT_CONDITION`, `NEED_OF_RENOVATION`, `FIRST_TIME_USE`, `REFURBISHED`
+</ResponseField>
+
+<ResponseField name="previous_price" type="string">
+  Previous listed price before the most recent price reduction. Example: `450000`
+</ResponseField>
+
+<ResponseField name="is_address_published" type="boolean">
+  Whether the listing shows a precise street address (`true`) or city-level location only (`false`). Example: `true`
+</ResponseField>

@@ -1,0 +1,22 @@
+---
+title: "July 7, 2026"
+description: "API updates shipped July 7, 2026"
+---
+
+<Update label="July 7, 2026">
+
+### Improved
+- **Google Maps Reviews: `review_origin` filter** — new parameter to filter reviews by source. `All sources` (default) collects both Google reviews and aggregator reviews; pass a specific aggregator name to restrict to that source only.
+- **Instagram Posts: `enrich_comments` toggle** — new boolean parameter (default `true`) that collects up to 15 latest comments per post. Disable for significantly faster runs when comments are not needed. New result fields: `is_video`, `mentions`, `owner_profile_pic_url`, and `source_url`.
+- **SeLoger: agency and property detail fields** — added `agency_address`, `agency_city`, `agency_zipcode`, `agency_rating`, `agency_reviews`, `picture_classifications` (AI-labelled photo array), `floorplan_pictures`, `year_of_construction`, `building_state`, `previous_price`, and `is_address_published`.
+- **Leboncoin: seller profile enrichment** — added `seller_registered_at`, `seller_reply_rate`, `seller_reply_time_text`, `seller_presence_status`, `seller_presence_last_activity`, `seller_badges`, `seller_total_ads`, `seller_feedback_scores`, `seller_profile_picture_url`, and `seller_description`. Applies to Leboncoin Iter Listings and Leboncoin Iter Listings With Phone.
+- **Leboncoin: vehicle detail fields** — extracted `mileage`, `regdate`, `fuel`, `gearbox`, `critair`, `issuance_date`, `condition`, `brand`, `model`, `vehicule_color`, `doors`, `seats`, `horse_power_din`, `horse_power`, `cubic_capacity`, `cycle_type`, and `cycle_licence` directly from listing details for vehicle category listings.
+
+### Fixed
+- **Reddit: 403 cookie handshake** — fixed Chrome version mismatch in the cookie handshake flow that caused 403 errors on Reddit scraping runs.
+- **Trustpilot Reviews: bad URL handling** — malformed or redirected Trustpilot URLs no longer crash the scraper; they are now detected and skipped with an error log.
+- **Realtor: too-long error** — fixed an issue where overly long listing descriptions triggered a field truncation error.
+- **Google Maps Reviews: browser improvements** — switched to SmartProxy datacenter pool and CurlCffiBrowser for improved response consistency and 100% owner response rate.
+- **Sales Navigator Leads: removed `fetch_since`** — the `fetch_since` and `fetch_since_timezone` parameters have been removed from the backend; they are no longer supported.
+
+</Update>

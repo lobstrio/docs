@@ -32,8 +32,6 @@ Set these parameters in the `params` object:
 | **start_page** | integer | — | Page number to start scraping from (useful for resuming or skipping already-collected pages) |
 | **skip_collected_leads** | boolean | false | Skip leads already present in your results database — useful for incremental runs |
 | **split_search** | boolean | false | Split the search into smaller sub-searches to bypass Sales Navigator's 2,500-result cap. Use for broad searches that would otherwise be truncated. |
-| **fetch_since** | string | — | Stop scraping when leads older than this threshold are reached. Use a relative duration (`24h`, `7d`) or an absolute date (`YYYY-MM-DD HH:MM:SS`) |
-| **fetch_since_timezone** | string | UTC | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`) |
 
 ## Squid Settings
 

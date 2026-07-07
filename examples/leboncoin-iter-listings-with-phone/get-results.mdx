@@ -261,3 +261,119 @@ Les informations sur les risques auxquels ce bien est exposé sont disponibles s
 <ResponseField name="hash_value" type="string">
   Internal hash used to identify this listing version. Example: `e3d8cc836e81c6a2488f8871f8d4502f`
 </ResponseField>
+
+## Seller Profile Fields
+
+Enriched seller profile data:
+
+<ResponseField name="seller_registered_at" type="string">
+  Date the seller's Leboncoin account was created (YYYY-MM-DD). Example: `2019-03-15`
+</ResponseField>
+
+<ResponseField name="seller_reply_rate" type="integer">
+  Percentage of messages answered by the seller (0–100). Example: `87`
+</ResponseField>
+
+<ResponseField name="seller_reply_time_text" type="string">
+  Typical reply time as a human-readable string. Example: `10 minutes`
+</ResponseField>
+
+<ResponseField name="seller_presence_status" type="string">
+  Current online presence status of the seller. Values: `ONLINE`, `OFFLINE`
+</ResponseField>
+
+<ResponseField name="seller_presence_last_activity" type="datetime">
+  Timestamp of the seller's last activity on Leboncoin. Example: `2025-07-04T03:45:00Z`
+</ResponseField>
+
+<ResponseField name="seller_badges" type="string">
+  JSON array of badge names awarded to the seller (e.g. `Responsiveness`, `RecommendedSeller`, `VerifiedPhoneNumber`)
+</ResponseField>
+
+<ResponseField name="seller_total_ads" type="integer">
+  Total number of active listings the seller currently has on Leboncoin. Example: `12`
+</ResponseField>
+
+<ResponseField name="seller_feedback_scores" type="string">
+  JSON object with seller feedback scores per category: COMMUNICATION, PACKAGE, PRODUCT, RECOMMENDATION, USER_ATTENTION
+</ResponseField>
+
+<ResponseField name="seller_profile_picture_url" type="string">
+  URL of the seller's Leboncoin profile picture (medium resolution). Example: `https://static.leboncoin.fr/img/user/...`
+</ResponseField>
+
+<ResponseField name="seller_description" type="string">
+  Bio or description text written by the seller on their Leboncoin profile
+</ResponseField>
+
+## Vehicle Fields
+
+Vehicle-specific fields (cars, motorbikes, utilities):
+
+<ResponseField name="mileage" type="integer">
+  Vehicle mileage in km. Example: `45000`
+</ResponseField>
+
+<ResponseField name="regdate" type="string">
+  Vehicle model year. Example: `2021`
+</ResponseField>
+
+<ResponseField name="fuel" type="string">
+  Fuel type. Example: `Essence`
+</ResponseField>
+
+<ResponseField name="gearbox" type="string">
+  Gearbox type. Example: `Automatique`
+</ResponseField>
+
+<ResponseField name="critair" type="string">
+  Crit'Air environmental sticker rating for the vehicle. Example: `1`
+</ResponseField>
+
+<ResponseField name="issuance_date" type="string">
+  Vehicle first registration date. Example: `06/2021`
+</ResponseField>
+
+<ResponseField name="condition" type="string">
+  Item condition (consumer goods). Example: `Très bon état`
+</ResponseField>
+
+<ResponseField name="brand" type="string">
+  Vehicle brand/make. Example: `Renault`
+</ResponseField>
+
+<ResponseField name="model" type="string">
+  Vehicle model name. Example: `Clio`
+</ResponseField>
+
+<ResponseField name="vehicule_color" type="string">
+  Vehicle color. Example: `Blanc`
+</ResponseField>
+
+<ResponseField name="doors" type="integer">
+  Number of doors (cars). Example: `5`
+</ResponseField>
+
+<ResponseField name="seats" type="integer">
+  Number of seats. Example: `5`
+</ResponseField>
+
+<ResponseField name="horse_power_din" type="integer">
+  DIN horsepower. Example: `90`
+</ResponseField>
+
+<ResponseField name="horse_power" type="integer">
+  Fiscal horsepower (CV). Example: `6`
+</ResponseField>
+
+<ResponseField name="cubic_capacity" type="integer">
+  Engine displacement in cc (motorbikes). Example: `650`
+</ResponseField>
+
+<ResponseField name="cycle_type" type="string">
+  Motorcycle type. Example: `Roadster`
+</ResponseField>
+
+<ResponseField name="cycle_licence" type="string">
+  Motorcycle licence category. Example: `A`
+</ResponseField>
