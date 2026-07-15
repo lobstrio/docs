@@ -210,6 +210,70 @@ Each result object contains the following fields:
   Instagram accounts suggested as similar to this profile. Example: `[{'username': 'complexmusic', 'full_name': 'Complex Music'}, {'username': 'xxl', 'full_name': 'XXL'}, {'username': 'rollingloud', 'full_name': 'Rolling Loud'}, {'username': 'nojumper', 'full_name': 'No Jumper 🏀'}, {'username': 'domislivenews', 'full_name': 'DomIsLive NEWS'}, {'username': 'concert', 'full_name': 'Concert'}, {'username': 'liluzivert', 'full_name': 'Lil Uzi Vert'}, {'username': 'rapcaviar', 'full_name': 'RapCaviar'}, {'username': 'liltecca', 'full_name': 'tec'}, {'username': 'rapdirect', 'full_name': 'Rap Direct'}, {'username': 'chieffkeeffsossa', 'full_name': 'Chief Keef'}, {'username': 'asaprocky', 'full_name': 'A$AP ROCKY'}, {'username': 'redbull', 'full_name': 'Red Bull'}, {'username': 'hotnewhiphop', 'full_name': 'HotNewHipHop®'}, {'username': 'champagnepapi', 'full_name': 'champagnepapi'}, {'username': 'akademiks', 'full_name': 'DJ Akademiks'}, {'username': 'spotify', 'full_name': 'Spotify'}, {'username': 'travisscott', 'full_name': 'flame'}, {'username': 'lyricalemonade', 'full_name': 'Lyrical Lemonade'}, {'username': '21savage', 'full_name': ''}, {'username': 'genius', 'full_name': 'Genius'}, {'username': 'rapmusic', 'full_name': 'RapMusic'}, {'username': 'hotfreestyle', 'full_name': 'Hot Freestyle'}, {'username': 'hiphop', 'full_name': 'HipHop'}, {'username': 'dontoliver', 'full_name': 'DON TOLIVER'}]`
 </ResponseField>
 
+<ResponseField name="latest_igtv_video_5" type="json">
+  URL of the 5th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_6" type="json">
+  URL of the 6th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_7" type="json">
+  URL of the 7th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_8" type="json">
+  URL of the 8th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_9" type="json">
+  URL of the 9th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_10" type="json">
+  URL of the 10th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_11" type="json">
+  URL of the 11th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="latest_igtv_video_12" type="json">
+  URL of the 12th most recent IGTV video
+</ResponseField>
+
+<ResponseField name="email_address" type="string">
+  Email address found on the profile: the business email when listed, otherwise extracted from the bio. Example: `contact@example.com`
+</ResponseField>
+
+<ResponseField name="avg_engagement" type="float">
+  Average engagement rate: mean likes + comments across the latest posts divided by followers. Example: `0.034`
+</ResponseField>
+
+<ResponseField name="bio_hashtags" type="json">
+  Hashtags extracted from the profile bio text. Example: `['creator', 'music']`
+</ResponseField>
+
+<ResponseField name="post_hashtags" type="json">
+  Unique hashtags extracted from the captions of the latest posts. Example: `['viral', 'trending', 'fyp']`
+</ResponseField>
+
+<ResponseField name="biography_with_entities" type="json">
+  Bio text with mentions and hashtags pre-tagged as structured entities (type, text, url)
+</ResponseField>
+
+<ResponseField name="business_address" type="json">
+  Business address listed on the profile, with city and coordinates when available
+</ResponseField>
+
+<ResponseField name="discovered_from" type="string">
+  Username of the input profile this row was discovered from (Discovery Mode). Empty for profiles you submitted directly. Example: `mrbeast`
+</ResponseField>
+
+<ResponseField name="hop_depth" type="integer">
+  Discovery Mode expansion depth: `0` for directly submitted profiles, `1` for their related profiles, `2` for the next level, etc. Example: `1`
+</ResponseField>
+
 <ResponseField name="functions" type="json">
   Additional enrichment functions enabled for this record. Example: `{}`
 </ResponseField>

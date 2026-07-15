@@ -32,6 +32,10 @@ Set these parameters in the `params` object:
 | **include_nsfw** | boolean | `false` | Include NSFW (adult) posts and comments in results |
 | **skip_comments** | boolean | `false` | Return only post rows — skip all comments |
 | **skip_posts** | boolean | `false` | Skip post rows. For post URLs: returns comments only. For user URLs: returns profile and comments. For subreddit URLs: returns subreddit metadata only |
+| **max_depth** | integer | unlimited | Maximum nesting depth of comments to collect. `0` = top-level comments only, `1` = top-level + first replies, etc. Leave empty for full thread |
+| **keyword** | string | null | Search keyword. Automatically constructs a Reddit search URL for the given keyword and subreddit(s) — no need to manually craft search URLs |
+| **post_type** | string | `any` | Filter search results by post type: `any`, `link`, `self`, `image`, `video`, `richvideo`. Only applies to search URLs and keyword searches |
+| **search_comments** | boolean | false | Search within comment bodies instead of post titles. Only applies to search URLs and keyword searches |
 
 ## Squid Settings
 

@@ -24,6 +24,7 @@ Set these parameters in the `params` object:
 | --- | --- | --- | --- |
 | **max_results** | integer | unlimited | Maximum number of profiles to collect per task |
 | **max_unique_results_per_run** | integer | unlimited | Maximum number of unique results retrieved across all tasks in the entire run |
+| **discovery_mode** | boolean | false | Expand from your input profiles: after scraping each profile, the crawler also scrapes its `related_profiles`. Use `hop_depth` and `discovered_from` in results to trace the expansion path |
 
 ## Squid Settings
 

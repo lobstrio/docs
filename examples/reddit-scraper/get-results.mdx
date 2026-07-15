@@ -159,3 +159,127 @@ Each result object contains the following fields:
 <ResponseField name="subreddit_resources" type="string">
   JSON array of community resource links, each with `text` and `url`. Populated for `type='subreddit'` rows only. Example: `[{"text": "Wiki", "url": "https://www.reddit.com/r/Bitcoin/wiki/"}]`
 </ResponseField>
+
+<ResponseField name="upvote_ratio" type="float">
+  Ratio of upvotes to total votes (0.0–1.0). Populated for post rows. Example: `0.97`
+</ResponseField>
+
+<ResponseField name="locked" type="boolean">
+  Whether the post has been locked by moderators (no new comments allowed). Example: `false`
+</ResponseField>
+
+<ResponseField name="archived" type="boolean">
+  Whether the post is archived (older than 6 months; no new votes or comments allowed). Example: `false`
+</ResponseField>
+
+<ResponseField name="stickied" type="boolean">
+  Whether the post is stickied (pinned) by a moderator. Example: `false`
+</ResponseField>
+
+<ResponseField name="over_18" type="boolean">
+  Whether the post is marked as NSFW (18+). Example: `false`
+</ResponseField>
+
+<ResponseField name="spoiler" type="boolean">
+  Whether the post is marked as a spoiler. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_video" type="boolean">
+  Whether the post is a native Reddit video. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_gallery" type="boolean">
+  Whether the post contains a gallery of images. Example: `false`
+</ResponseField>
+
+<ResponseField name="media_url" type="string">
+  Direct URL of the post's media (video or external image). Null for text and self posts.
+</ResponseField>
+
+<ResponseField name="thumbnail" type="string">
+  Preview thumbnail URL for image and video posts. Null for text posts.
+</ResponseField>
+
+<ResponseField name="body_html" type="string">
+  HTML-rendered body of the post. Populated only for direct post URL scrapes.
+</ResponseField>
+
+<ResponseField name="body_length" type="integer">
+  Character count of the plain-text post body. `0` for posts with no body (image, video, link). Example: `342`
+</ResponseField>
+
+<ResponseField name="comment_body_html" type="string">
+  HTML-rendered body of the comment. Null for non-comment rows.
+</ResponseField>
+
+<ResponseField name="age_hours" type="float">
+  Age of the post in hours at scraping time, derived from `created_at`. Example: `18.4`
+</ResponseField>
+
+<ResponseField name="score_per_hour" type="float">
+  Post score divided by age in hours — measures engagement velocity. Example: `245.3`
+</ResponseField>
+
+<ResponseField name="comment_to_score_ratio" type="float">
+  `comment_count` divided by `max(score, 1)`. High values indicate discussion-heavy posts. Example: `0.08`
+</ResponseField>
+
+<ResponseField name="is_high_engagement" type="boolean">
+  `true` if `score_per_hour > 50` or `comment_to_score_ratio > 0.1`. Example: `true`
+</ResponseField>
+
+<ResponseField name="distinguished_as" type="string">
+  Whether the post was made with special authority: `moderator`, `admin`, or null. Example: `null`
+</ResponseField>
+
+<ResponseField name="is_promoted" type="boolean">
+  Whether the post is a paid advertisement (sponsored/promoted). Example: `false`
+</ResponseField>
+
+<ResponseField name="is_self" type="boolean">
+  Whether the post is a text/self post (no external link). Example: `true`
+</ResponseField>
+
+<ResponseField name="shortlink" type="string">
+  Reddit short URL for the post (`https://redd.it/{post_id}`). Example: `https://redd.it/1rcbgsa`
+</ResponseField>
+
+<ResponseField name="edited" type="boolean">
+  Whether the post or comment has been edited after submission. Example: `false`
+</ResponseField>
+
+<ResponseField name="edited_at" type="string">
+  ISO timestamp of when the post was last edited. Null if never edited.
+</ResponseField>
+
+<ResponseField name="num_crossposts" type="integer">
+  Number of times this post has been crossposted to other subreddits. Example: `3`
+</ResponseField>
+
+<ResponseField name="author_flair" type="string">
+  The post author's flair text in the subreddit at the time of posting. Example: `OG Member`
+</ResponseField>
+
+<ResponseField name="author_premium" type="boolean">
+  Whether the post or comment author has Reddit Premium. Example: `false`
+</ResponseField>
+
+<ResponseField name="gilded" type="integer">
+  Number of times this post has been gilded (awarded Reddit Gold). Example: `0`
+</ResponseField>
+
+<ResponseField name="is_original_content" type="boolean">
+  Whether the post was marked as Original Content (OC) by the author. Example: `false`
+</ResponseField>
+
+<ResponseField name="subreddit_subscribers" type="integer">
+  Number of subscribers in the subreddit at scraping time. Example: `7234891`
+</ResponseField>
+
+<ResponseField name="crosspost_parent_id" type="string">
+  The `post_id` of the original post if this is a crosspost. Null otherwise.
+</ResponseField>
+
+<ResponseField name="suggested_sort" type="string">
+  Sort order suggested by the subreddit moderators for this post's comments. Example: `top`
+</ResponseField>

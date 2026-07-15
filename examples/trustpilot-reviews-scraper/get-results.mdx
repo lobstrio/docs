@@ -130,3 +130,39 @@ Each result object contains the following fields:
 <ResponseField name="scraping_time" type="datetime">
   Timestamp when the review was scraped. Example: `2026-03-22T12:57:40Z`
 </ResponseField>
+
+<ResponseField name="review_link" type="string">
+  Direct URL to the individual review on Trustpilot. Example: `https://www.trustpilot.com/reviews/abc123`
+</ResponseField>
+
+<ResponseField name="business_unit_id" type="string">
+  Trustpilot business unit ID of the company. Example: `4ba4e3da0000640005039fdc`
+</ResponseField>
+
+<ResponseField name="review_verification_source" type="string">
+  How the review was verified (e.g. `automatic`, `invitation`). Example: `automatic`
+</ResponseField>
+
+<ResponseField name="review_sentiment" type="string">
+  Sentiment of the review text as classified by Trustpilot AI: `positive`, `neutral`, or `negative`. Example: `positive`
+</ResponseField>
+
+<ResponseField name="owner_reply_updated_date" type="datetime">
+  Date the company reply was last updated. Example: `2026-03-10T08:00:00Z`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the company being reviewed. Example: `Amazon`
+</ResponseField>
+
+<ResponseField name="company_category" type="string">
+  Primary Trustpilot category of the company. Example: `Electronics & Technology`
+</ResponseField>
+
+<ResponseField name="company_page_url" type="string">
+  Trustpilot page URL for the company. Example: `https://www.trustpilot.com/review/amazon.com`
+</ResponseField>
+
+<ResponseField name="page_number" type="integer">
+  Page number where this review was found during scraping. Example: `1`
+</ResponseField>

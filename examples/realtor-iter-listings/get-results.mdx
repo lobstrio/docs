@@ -148,6 +148,506 @@ Retrieve scraped data from your **Realtor Listings Scraper** runs.
   Date the property was sold (if applicable). Example: `2026-03-28`
 </ResponseField>
 
+<ResponseField name="last_status_change_date" type="datetime">
+  Date the listing status last changed (e.g. listed → pending). Example: `2026-04-02`
+</ResponseField>
+
+<ResponseField name="year_built" type="integer">
+  Year the property was built. Example: `1998`
+</ResponseField>
+
+<ResponseField name="hoa_fee" type="integer">
+  Monthly HOA fee in USD. Example: `250`
+</ResponseField>
+
+<ResponseField name="price_per_sqft" type="integer">
+  Price per square foot. Example: `405`
+</ResponseField>
+
+<ResponseField name="agent_name" type="string">
+  Listing agent's display name. Example: `Jane Smith`
+</ResponseField>
+
+<ResponseField name="agent_phone" type="string">
+  Listing agent's phone number. Example: `+13105550142`
+</ResponseField>
+
+<ResponseField name="agent_email" type="string">
+  Listing agent email address. Example: `jane.smith@kw.com`
+</ResponseField>
+
+<ResponseField name="office_name" type="string">
+  Brokerage office name. Example: `Keller Williams Realty`
+</ResponseField>
+
+<ResponseField name="office_phone" type="string">
+  Brokerage office phone number. Example: `+13105550100`
+</ResponseField>
+
+<ResponseField name="builder_name" type="string">
+  Builder name for new-construction listings. Example: `Pulte Homes`
+</ResponseField>
+
+<ResponseField name="sub_type" type="string">
+  Property sub-type (e.g. `co_op`, `condo`, `townhouse`). Example: `townhouse`
+</ResponseField>
+
+<ResponseField name="garage" type="integer">
+  Number of garage spaces. Example: `2`
+</ResponseField>
+
+<ResponseField name="neighborhood" type="string">
+  Neighborhood name. Example: `Silver Lake`
+</ResponseField>
+
+<ResponseField name="neighborhoods" type="json">
+  All neighborhood names for the listing (when multiple apply). Example: `["Silver Lake", "Eastside"]`
+</ResponseField>
+
+<ResponseField name="county_fips_code" type="string">
+  County FIPS code, for joining to census or market data. Example: `06037`
+</ResponseField>
+
+<ResponseField name="street_view_url" type="string">
+  Google Street View image URL for the property.
+</ResponseField>
+
+<ResponseField name="virtual_tour_url" type="string">
+  Virtual tour / 3D walkthrough URL.
+</ResponseField>
+
+<ResponseField name="is_price_reduced" type="boolean">
+  Whether the price was recently reduced. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_contingent" type="boolean">
+  Whether the listing is contingent. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_coming_soon" type="boolean">
+  Whether the listing is marked as coming soon. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_new_listing" type="boolean">
+  Whether the listing was added in the last 14 days. Example: `true`
+</ResponseField>
+
+<ResponseField name="price_reduced_amount" type="integer">
+  Amount of the most recent price reduction in USD. Example: `25000`
+</ResponseField>
+
+<ResponseField name="open_houses" type="json">
+  Scheduled open house dates and times, when available.
+</ResponseField>
+
+<ResponseField name="mls_id" type="string">
+  MLS listing ID. Example: `SR26054321`
+</ResponseField>
+
+<ResponseField name="property_id" type="string">
+  Realtor.com internal property ID. Example: `M12345-67890`
+</ResponseField>
+
+<ResponseField name="stories" type="integer">
+  Number of stories in the property. Example: `2`
+</ResponseField>
+
+<ResponseField name="year_renovated" type="integer">
+  Year the property was last renovated. Example: `2018`
+</ResponseField>
+
+## Detail Fields
+
+These fields require `property_details: true`:
+
+<ResponseField name="photos" type="json">
+  Full photo gallery (list of image URLs). Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="photo_count" type="integer">
+  Total number of photos. Requires `property_details`. Example: `42`
+</ResponseField>
+
+<ResponseField name="photo_tags" type="json">
+  Per-photo metadata: AI-generated room tags (e.g. kitchen, bedroom), title and description for each photo. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="description_text" type="string">
+  Full listing description text. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="property_history" type="json">
+  Price and sale event timeline. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="tax_history" type="json">
+  Yearly tax, assessment and market valuations. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="building_permits_history" type="json">
+  Building permit history with project, type of work, project type, and effective date. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="schools" type="json">
+  Rated nearby schools with grades, ratings and distance. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="spec_details" type="json">
+  Full spec sheet grouped by category (interior, exterior, HOA, etc.). Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="amenity_tags" type="json">
+  Structured amenity tags, each with a stable `id` and human-readable `label`. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="baths_full" type="integer">
+  Number of full bathrooms. Requires `property_details`. Example: `2`
+</ResponseField>
+
+<ResponseField name="baths_half" type="integer">
+  Number of half bathrooms. Requires `property_details`. Example: `1`
+</ResponseField>
+
+<ResponseField name="baths_3qtr" type="integer">
+  Number of three-quarter bathrooms. Requires `property_details`. Example: `0`
+</ResponseField>
+
+<ResponseField name="baths_total" type="integer">
+  Total bathroom count. Requires `property_details`. Example: `3`
+</ResponseField>
+
+<ResponseField name="beds_max" type="integer">
+  Upper bound of bedroom count for multi-unit listings. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="beds_min" type="integer">
+  Lower bound of bedroom count for multi-unit listings. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="sqft_max" type="integer">
+  Upper bound of square footage for multi-unit listings. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="sqft_min" type="integer">
+  Lower bound of square footage for multi-unit listings. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="garage_type" type="string">
+  Garage type (e.g. `attached`, `detached`). Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="cooling" type="string">
+  Cooling system description. Requires `property_details`. Example: `Central Air`
+</ResponseField>
+
+<ResponseField name="heating" type="string">
+  Heating system description. Requires `property_details`. Example: `Forced Air`
+</ResponseField>
+
+<ResponseField name="roofing" type="string">
+  Roofing material. Requires `property_details`. Example: `Composition`
+</ResponseField>
+
+<ResponseField name="exterior" type="string">
+  Exterior material. Requires `property_details`. Example: `Stucco`
+</ResponseField>
+
+<ResponseField name="construction" type="string">
+  Construction material. Requires `property_details`. Example: `Wood Frame`
+</ResponseField>
+
+<ResponseField name="styles" type="string">
+  Architectural style. Requires `property_details`. Example: `Contemporary`
+</ResponseField>
+
+<ResponseField name="pool" type="string">
+  Pool features. Requires `property_details`. Example: `In Ground`
+</ResponseField>
+
+<ResponseField name="fireplace" type="string">
+  Fireplace features. Requires `property_details`. Example: `Gas`
+</ResponseField>
+
+<ResponseField name="rooms" type="string">
+  Total room count. Requires `property_details`. Example: `8`
+</ResponseField>
+
+<ResponseField name="units" type="string">
+  Number of units or unit type. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="zoning" type="string">
+  Zoning designation. Requires `property_details`. Example: `R1`
+</ResponseField>
+
+<ResponseField name="fema_zone" type="string">
+  FEMA flood zone designation(s), comma-separated. Requires `property_details`. Example: `X`
+</ResponseField>
+
+<ResponseField name="noise_score" type="integer">
+  Local noise score. Requires `property_details`. Example: `42`
+</ResponseField>
+
+<ResponseField name="noise_categories" type="json">
+  Noise source breakdown (e.g. traffic, airports). Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_factor_score" type="integer">
+  Flood Factor risk score 1–10. Requires `property_details`. Example: `2`
+</ResponseField>
+
+<ResponseField name="flood_factor_severity" type="string">
+  Flood Factor severity label. Requires `property_details`. Example: `Minimal`
+</ResponseField>
+
+<ResponseField name="flood_trend_direction" type="integer">
+  Direction of change in flood risk over time. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_trend" type="string">
+  Short summary of the flood risk trend. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_trend_paragraph" type="string">
+  Full paragraph describing the flood risk trend. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_insurance_text" type="string">
+  Narrative flood insurance guidance. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_insurance_requirement" type="string">
+  Whether flood insurance is required or recommended. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_firststreet_url" type="string">
+  Link to the First Street flood risk report. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_fsid" type="string">
+  First Street flood risk record ID. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="flood_insurance_rates" type="json">
+  Flood insurance quotes by provider. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="environmental_risk" type="integer">
+  Environmental flood risk score (similar scale to flood_factor_score). Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="fire_factor_score" type="integer">
+  Wildfire Factor risk score 1–10. Requires `property_details`. Example: `1`
+</ResponseField>
+
+<ResponseField name="fire_factor_severity" type="string">
+  Wildfire Factor severity label. Requires `property_details`. Example: `Minor`
+</ResponseField>
+
+<ResponseField name="fire_cumulative_30" type="string">
+  Cumulative wildfire risk over the next 30 years. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="fire_trend" type="string">
+  Short summary of the wildfire risk trend. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="fire_trend_paragraph" type="string">
+  Full paragraph describing the wildfire risk trend. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="fire_insurance_text" type="string">
+  Narrative wildfire insurance guidance. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="usfs_relative_risk" type="string">
+  US Forest Service relative wildfire risk narrative. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="fire_firststreet_url" type="string">
+  Link to the First Street wildfire risk report. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="fire_fsid" type="string">
+  First Street wildfire risk record ID. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="fire_insurance_rates" type="json">
+  Wildfire insurance quotes by provider. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="is_non_deeded" type="boolean">
+  Whether ownership is non-deeded (e.g. co-op share). Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="is_fractionally_owned" type="boolean">
+  Whether the property is fractionally owned. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="is_price_excludes_land" type="boolean">
+  Whether the listed price excludes the land. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="is_usda_eligible" type="boolean">
+  Whether the property is USDA loan eligible. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="is_short_sale" type="boolean">
+  Whether the listing is a short sale. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="is_auction" type="boolean">
+  Whether the listing is an auction. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="is_subdivision" type="boolean">
+  Whether the property is part of a subdivision. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="street_number" type="string">
+  Parsed street number. Requires `property_details`. Example: `123`
+</ResponseField>
+
+<ResponseField name="street_name" type="string">
+  Parsed street name. Requires `property_details`. Example: `Main`
+</ResponseField>
+
+<ResponseField name="street_suffix" type="string">
+  Parsed street suffix. Requires `property_details`. Example: `St`
+</ResponseField>
+
+<ResponseField name="street_direction" type="string">
+  Parsed street direction prefix. Requires `property_details`. Example: `N`
+</ResponseField>
+
+<ResponseField name="unit" type="string">
+  Parsed unit or apartment number. Requires `property_details`. Example: `4B`
+</ResponseField>
+
+<ResponseField name="search_areas" type="json">
+  Broader search areas (city/state/county) the listing belongs to. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="hot_market_badge" type="string">
+  Local housing market heat badge for the postal code. Requires `property_details`. Example: `Hot`
+</ResponseField>
+
+<ResponseField name="state_license" type="string">
+  Listing agent's state real estate license number. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_nrds_id" type="string">
+  Agent's NRDS ID — a stable identifier for deduping the same agent across listings. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_id" type="string">
+  Stable agent identifier. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_href" type="string">
+  URL to the agent's Realtor.com profile. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_slogan" type="string">
+  Agent's tagline or slogan. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_mls_set" type="string">
+  Agent's MLS set identifier. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_photo_url" type="string">
+  Agent's profile photo URL. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_address" type="json">
+  Agent's business address. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="agent_phones" type="json">
+  All agent phone numbers, typed (mobile, office, etc.) and flagged primary. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="team_id" type="string">
+  Stable team identifier when the agent belongs to a team. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="team_name" type="string">
+  Team name when the agent belongs to a team. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="broker_name" type="string">
+  Broker (brokerage company) name. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="broker_id" type="string">
+  Stable broker identifier. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="broker_logo" type="string">
+  Broker logo image URL. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="broker_accent_color" type="string">
+  Broker's brand accent color. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="broker_designations" type="json">
+  Broker designations or certifications. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_id" type="string">
+  Stable brokerage office identifier. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_name" type="string">
+  Brokerage office name. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_email" type="string">
+  Brokerage office contact email. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_href" type="string">
+  URL to the brokerage office's Realtor.com profile. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_slogan" type="string">
+  Brokerage office tagline or slogan. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_mls_set" type="string">
+  Brokerage office's MLS set identifier. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_application_url" type="string">
+  Office rental or application URL, when available. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_out_of_community" type="boolean">
+  Whether the office is outside the listing's community. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_hours" type="json">
+  Brokerage office business hours. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_lead_email" type="string">
+  Office's direct lead-contact email. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_photo_url" type="string">
+  Brokerage office photo or logo URL. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_address" type="json">
+  Brokerage office's full street address. Requires `property_details`.
+</ResponseField>
+
+<ResponseField name="office_phones" type="json">
+  All brokerage office phone numbers, typed and flagged primary. Requires `property_details`.
+</ResponseField>
+
 ## Code Examples
 
 <CodeGroup>

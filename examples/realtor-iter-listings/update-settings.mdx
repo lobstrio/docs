@@ -32,6 +32,14 @@ Update the configuration of your **Realtor Listings Scraper** squid. Pass crawle
   Maximum number of unique results across all tasks in a run. Leave empty for unlimited.
 </ParamField>
 
+<ParamField body="params.property_details" type="boolean">
+  Visit each listing detail page to collect the full photo gallery, agent and office details, description text, price/tax history, schools, spec sheet, risk scores, and more. Requires one additional request per listing.
+</ParamField>
+
+<ParamField body="params.keyword" type="string">
+  Filter listings by one or more keywords, comma-separated (e.g. `pool, ocean view`). Only listings whose description contains at least one keyword are returned.
+</ParamField>
+
 <ParamField body="params.fetch_since" type="string">
   Only collect listings published after this point (based on `published_at`). Accepts a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`"YYYY-MM-DD HH:MM"`).
 </ParamField>

@@ -1,0 +1,20 @@
+---
+title: "July 14, 2026"
+description: "API updates shipped July 14, 2026"
+---
+
+<Update label="July 14, 2026">
+
+### Improved
+- **Reddit: 4 new parameters and 33 new result fields** — new params: `max_depth` (limit comment nesting depth), `keyword` (auto-constructs search URLs), `post_type` (filter by link/image/video/self), `search_comments` (search inside comment bodies). New result fields include engagement metrics (`upvote_ratio`, `score_per_hour`, `comment_to_score_ratio`, `is_high_engagement`, `age_hours`), post metadata (`locked`, `archived`, `stickied`, `is_video`, `is_gallery`, `media_url`, `thumbnail`, `body_html`, `body_length`, `shortlink`, `edited`, `edited_at`, `num_crossposts`), author details (`author_flair`, `author_premium`, `gilded`, `is_original_content`), and subreddit stats (`subreddit_subscribers`, `suggested_sort`, `crosspost_parent_id`).
+- **Instagram Profile: `discovery_mode` and 10 new result fields** — new `discovery_mode` param expands scraping to each profile's related accounts (trace paths with `hop_depth` and `discovered_from`). New fields: `latest_igtv_video_5-12`, `email_address`, `avg_engagement`, `bio_hashtags`, `post_hashtags`, `biography_with_entities`, `business_address`, `discovered_from`, `hop_depth`.
+- **Trustpilot Reviews: 9 new result fields** — added `review_link`, `business_unit_id`, `review_verification_source`, `review_sentiment` (AI-classified: positive/neutral/negative), `owner_reply_updated_date`, `company_name`, `company_category`, `company_page_url`, `page_number`.
+- **Realtor: `property_details` mode with 120+ new result fields** — new `property_details` param triggers a detail-page fetch per listing to collect: full photo gallery with AI room tags (`photo_tags`), description text, price/tax history, building permits history, nearby schools, spec sheet, amenity tags, bath/bed/sqft breakdowns, risk scores (flood, fire, noise, FEMA zone), agent and broker metadata, geo extras (`street_direction`, `search_areas`, `hot_market_badge`), and deal flags. Also added `keyword` filter param.
+- **Facebook Group Posts: `max_results` and `max_unique_results_per_run` parameters** — control how many posts are collected per group and across the entire run.
+
+### Fixed
+- **TripAdvisor Restaurants: 401 and DataDome bypass** — updated session handling to resolve 401 errors and improve DataDome challenge bypass.
+- **XLSX export: silent column drops** — very long PICTURES or URL cell values were silently causing columns after them to be dropped from XLSX exports. Fixed.
+- **Google Maps Leads: review-count recovery** — when a listing omitted review counts from the search results page, the scraper now fetches them from the detail page.
+
+</Update>
