@@ -1,0 +1,101 @@
+---
+title: "Update Settings"
+description: "Configure settings for your Facebook Marketplace Scraper squid"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Update the configuration of your **Facebook Marketplace Scraper** squid. Pass crawler-specific settings inside the `params` object.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="params" type="object">
+  Crawler-specific settings. See fields below.
+</ParamField>
+
+## Settings Fields
+
+<ParamField body="params.max_results" type="integer">
+  Maximum number of listings to collect per task. Leave empty for unlimited.
+</ParamField>
+
+<ParamField body="params.max_unique_results_per_run" type="integer">
+  Maximum number of unique listings retrieved across all tasks in the entire run. Leave empty for unlimited.
+</ParamField>
+
+<ParamField body="params.listing_details" type="boolean">
+  Visit each listing's detail page to collect additional fields: full description, condition, precise location (latitude/longitude), seller profile, discount price, and structured listing attributes. Requires one additional request per listing.
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "Facebook Marketplace Paris",
+    "params": {
+      "max_results": 200,
+      "listing_details": false
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_hash = "YOUR_SQUID_HASH"
+
+response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
+    headers=headers,
+    json={
+        "name": "Facebook Marketplace Paris",
+        "params": {
+            "max_results": 200,
+            "listing_details": False
+        }
+    }
+)
+
+data = response.json()
+print(f"Squid updated: {data['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "id": "YOUR_SQUID_HASH",
+  "name": "Facebook Marketplace Paris",
+  "crawler": {
+    "id": "facebook-marketplace-scraper",
+    "name": "Facebook Marketplace Scraper",
+    "slug": "facebook-marketplace-scraper"
+  },
+  "params": {
+    "max_results": 200,
+    "listing_details": false
+  },
+  "concurrency": 1,
+  "export_unique_results": true,
+  "to_complete": true,
+  "no_line_breaks": false,
+  "status": "idle"
+}
+```

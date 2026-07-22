@@ -1,0 +1,89 @@
+---
+title: "Add Tasks"
+description: "Add Facebook Marketplace search URLs to your scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Facebook Marketplace search URLs as tasks to your **Facebook Marketplace Scraper** squid. Each task should be a Marketplace search URL with your desired filters applied.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects. Each task supports the fields below.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  Facebook Marketplace search URL. Navigate to Marketplace, apply your filters (location, category, price range, etc.), and copy the URL from your browser.
+
+  Example: `https://www.facebook.com/marketplace/paris/search?query=piano`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      { "url": "https://www.facebook.com/marketplace/paris/search?query=piano" },
+      { "url": "https://www.facebook.com/marketplace/newyork/search?query=sofa&minPrice=50&maxPrice=500" }
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}", "Content-Type": "application/json"}
+
+squid_hash = "YOUR_SQUID_HASH"
+
+response = requests.post(f"{BASE_URL}/tasks",
+    headers=headers,
+    json={
+        "squid": squid_hash,
+        "tasks": [
+            {"url": "https://www.facebook.com/marketplace/paris/search?query=piano"},
+            {"url": "https://www.facebook.com/marketplace/newyork/search?query=sofa&minPrice=50&maxPrice=500"},
+        ]
+    }
+)
+
+data = response.json()
+print(f"Tasks added: {len(data)}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+[
+  {
+    "id": "TASK_HASH",
+    "squid": "YOUR_SQUID_HASH",
+    "url": "https://www.facebook.com/marketplace/paris/search?query=piano",
+    "status": "pending"
+  }
+]
+```

@@ -1,0 +1,137 @@
+---
+title: "Get Results"
+description: "Retrieve scraped listings from Facebook Marketplace Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped listings from your **Facebook Marketplace Scraper** runs.
+
+## Headers
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1). Example: `1`
+</ParamField>
+
+## Result Fields
+
+Each result object contains the following fields:
+
+<ResponseField name="url" type="string">
+  Direct URL to the Marketplace listing. Example: `https://www.facebook.com/marketplace/item/123456789/`
+</ResponseField>
+
+<ResponseField name="internal_id" type="string">
+  Facebook's internal listing ID. Example: `123456789`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Listing title as shown on Marketplace. Example: `Yamaha upright piano — excellent condition`
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Price amount as a string (no currency symbol). Example: `450`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  ISO currency code. Example: `EUR`
+</ResponseField>
+
+<ResponseField name="formatted_price" type="string">
+  Price with currency symbol as displayed on Marketplace. Example: `€450`
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City where the item is located. Example: `Paris`
+</ResponseField>
+
+<ResponseField name="image_urls" type="array">
+  Array of listing image URLs.
+</ResponseField>
+
+<ResponseField name="creation_time" type="datetime">
+  Listing creation date and time (UTC). Example: `2026-07-10T14:23:00`
+</ResponseField>
+
+<ResponseField name="is_sold" type="boolean">
+  Whether the item has been marked as sold.
+</ResponseField>
+
+<ResponseField name="is_live" type="boolean">
+  Whether the listing is currently active.
+</ResponseField>
+
+<ResponseField name="delivery_types" type="string">
+  Available delivery methods, comma-separated. Example: `LOCAL_PICKUP, SHIPPING`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Marketplace category the listing belongs to. Example: `Musical Instruments`
+</ResponseField>
+
+## Detail Fields
+
+The following fields are only populated when `listing_details` is set to `true` in your squid settings.
+
+<ResponseField name="description" type="string">
+  Full listing description text from the detail page.
+</ResponseField>
+
+<ResponseField name="condition" type="string">
+  Item condition as listed by the seller. Example: `Used - Good`
+</ResponseField>
+
+<ResponseField name="location_text" type="string">
+  Precise location text from the listing detail page. Example: `11th arrondissement, Paris`
+</ResponseField>
+
+<ResponseField name="latitude" type="float">
+  Latitude coordinate of the listing location. Example: `48.8534`
+</ResponseField>
+
+<ResponseField name="longitude" type="float">
+  Longitude coordinate of the listing location. Example: `2.3488`
+</ResponseField>
+
+<ResponseField name="seller_name" type="string">
+  Display name of the seller. Example: `Marie L.`
+</ResponseField>
+
+<ResponseField name="seller_id" type="string">
+  Facebook ID of the seller.
+</ResponseField>
+
+<ResponseField name="is_pending" type="boolean">
+  Whether the listing is marked as pending (sale in progress).
+</ResponseField>
+
+<ResponseField name="is_hidden" type="boolean">
+  Whether the listing is hidden from public search.
+</ResponseField>
+
+<ResponseField name="is_viewer_seller" type="boolean">
+  Whether the authenticated scraping account is the seller of this listing.
+</ResponseField>
+
+<ResponseField name="strikethrough_price" type="string">
+  Original price before discount, as a numeric string. Example: `600`
+</ResponseField>
+
+<ResponseField name="strikethrough_price_formatted" type="string">
+  Original price before discount, formatted with currency symbol. Example: `€600`
+</ResponseField>
+
+<ResponseField name="listing_attributes" type="array">
+  Structured listing attributes provided by the seller (condition, brand, size, etc.).
+</ResponseField>

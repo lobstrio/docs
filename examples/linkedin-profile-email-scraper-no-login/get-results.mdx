@@ -108,6 +108,10 @@ Each result object contains the following fields:
   JSON array of organizations, clubs, or professional bodies the member is affiliated with.
 </ResponseField>
 
+<ResponseField name="test_scores" type="string">
+  JSON array of standardized test scores listed on the profile (e.g. TOEFL, TOEIC, GMAT).
+</ResponseField>
+
 <ResponseField name="languages" type="string">
   JSON array of languages with name and proficiency level.
 </ResponseField>
@@ -160,12 +164,32 @@ Each result object contains the following fields:
   Whether the profile has Creator Mode enabled.
 </ResponseField>
 
+<ResponseField name="show_premium_subscriber_badge" type="boolean">
+  Whether the LinkedIn Premium badge is displayed on the profile.
+</ResponseField>
+
+<ResponseField name="memorialized" type="boolean">
+  Whether the profile has been memorialized (account of a deceased member).
+</ResponseField>
+
 <ResponseField name="member_distance" type="string">
   Connection distance from the scraping account: `DISTANCE_1`, `DISTANCE_2`, `DISTANCE_3`, or `OUT_OF_NETWORK`.
 </ResponseField>
 
 <ResponseField name="primary_locale" type="string">
   Profile's primary display locale code. Example: `en_US`
+</ResponseField>
+
+<ResponseField name="supported_locales" type="string">
+  JSON array of all locales supported on the profile, each as `{country, language}`.
+</ResponseField>
+
+<ResponseField name="multi_locale_headline" type="string">
+  JSON array of the profile headline in each supported locale, each as `{headline, locale}`.
+</ResponseField>
+
+<ResponseField name="multi_locale_summary" type="string">
+  JSON array of the About/summary section in each supported locale, each as `{summary, locale}`.
 </ResponseField>
 
 <ResponseField name="more_profiles" type="string">

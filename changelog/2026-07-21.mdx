@@ -1,0 +1,22 @@
+---
+title: "July 21, 2026"
+description: "API updates shipped July 21, 2026"
+---
+
+<Update label="July 21, 2026">
+
+### Improved
+- **Facebook Marketplace Scraper: now publicly available** — the scraper is now open to all users. Collect listings from any Marketplace search URL, optional listing detail pages (description, seller info, precise location), and structured listing attributes. See the [Facebook Marketplace Scraper docs](/examples/facebook-marketplace-scraper/add-tasks).
+- **Sales Navigator Companies: custom list and All Saved Accounts support** — the scraper now accepts custom company list URLs (`/sales/lists/company/...`) and the All Saved Accounts dashboard URL (`/sales/accounts/dashboard`) in addition to search URLs.
+- **LinkedIn Profile (No Login): 6 new result fields** — added `test_scores`, `show_premium_subscriber_badge`, `memorialized`, `supported_locales`, `multi_locale_headline`, and `multi_locale_summary`.
+
+### Fixed
+- **Sales Navigator Leads: false cookie expiration** — fixed a regression that incorrectly flagged valid sessions as expired, causing unnecessary login retries.
+- **TripAdvisor Restaurants: 401 error** — resolved a session handling issue that caused 401 errors on restaurant scraping runs.
+- **TripAdvisor Reviews: 401 error** — same session fix applied to the reviews scraper.
+- **Trustpilot Reviews: 403 error** — fixed a 403 rejection caused by a stale request signature.
+- **TikTok Top Ads: transient error handling** — the scraper now pauses on TikTok 50004 transient errors instead of hard-failing the run.
+- **PAP: proxy and Cloudflare clearance** — restored CapSolver `cf_clearance` escalation for region pagination and fixed a `proxy_error` that could stall region-based crawls.
+- **Facebook: pipeline hardening** — hardened the shared Facebook crawler pipeline against session kills and account contention, reducing mid-run failures across all Facebook scrapers.
+
+</Update>

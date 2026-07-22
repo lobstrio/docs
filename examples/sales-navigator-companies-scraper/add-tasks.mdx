@@ -18,17 +18,19 @@ Add Sales Navigator company search URLs as tasks to your squid. The scraper will
 
 ## URL Format
 
-Use Sales Navigator company search URLs with your desired filters:
+The scraper accepts three types of Sales Navigator company URLs:
 
-`https://www.linkedin.com/sales/search/company?query=(keywords:technology)`
+- **Search URL** — a filtered company search: `https://www.linkedin.com/sales/search/company?query=(keywords:technology)`
+- **Custom list URL** — a saved company list: `https://www.linkedin.com/sales/lists/company/YOUR_LIST_ID`
+- **All Saved Accounts dashboard** — your full saved accounts list: `https://www.linkedin.com/sales/accounts/dashboard`
 
-Build your search in Sales Navigator with all desired filters, then copy the URL from your browser.
+Build your search or open a saved list in Sales Navigator, then copy the URL from your browser.
 
 ## Request Body
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| **url** | string | Yes | Sales Navigator Companies Search URL containing your search filters |
+| **url** | string | Yes | Sales Navigator company search URL, custom list URL, or All Saved Accounts dashboard URL |
 
 <Tip>
   Build your search in Sales Navigator first, apply all filters, then copy the URL to ensure accurate results.

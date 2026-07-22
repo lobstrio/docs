@@ -190,6 +190,14 @@
             ]
           },
           {
+            "group": "Facebook Marketplace Scraper",
+            "pages": [
+              "examples/facebook-marketplace-scraper/add-tasks",
+              "examples/facebook-marketplace-scraper/update-settings",
+              "examples/facebook-marketplace-scraper/get-results"
+            ]
+          },
+          {
             "group": "Google Maps Leads Scraper",
             "pages": [
               "examples/google-maps-leads-scraper/add-task-urls",
@@ -588,6 +596,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-07-21",
               "changelog/2026-07-14",
               "changelog/2026-07-07",
               "changelog/2026-06-30",
