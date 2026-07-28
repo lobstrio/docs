@@ -1,0 +1,18 @@
+---
+title: "July 28, 2026"
+description: "API updates shipped July 28, 2026"
+---
+
+<Update label="July 28, 2026">
+
+### Improved
+- **Google Maps Reviews: faster scraping** — reduced retry and warmup overhead, cutting per-run latency significantly for review collection jobs.
+
+### Fixed
+- **Google Maps: business name filter** — the name-match filter now uses a contains check instead of a starts-with check, so businesses whose names don't begin with the search term are no longer incorrectly excluded.
+- **Google News: proxy routing and rate limiting** — requests now route through the proxy pool with proper rate-limit retry handling, fixing reliability issues on high-volume news scraping runs.
+- **Trustpilot Reviews: persistent 403** — resolved a recurring 403 rejection caused by a stale AWS WAF token; the token is now refreshed on each run.
+- **SeLoger: sort order parameter** — fixed a crash caused by an unsanitized `paging.order` value being passed directly to the search API.
+- **Idealista: 406 client error** — fixed a request header mismatch that caused 406 Not Acceptable errors on Idealista listing scraping runs.
+
+</Update>
