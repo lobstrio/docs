@@ -40,7 +40,8 @@
             "group": "User",
             "pages": [
               "docs/user-me",
-              "docs/get-balance"
+              "docs/get-balance",
+              "docs/auto-billing-reset"
             ]
           },
           {
@@ -596,6 +597,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-08-04",
               "changelog/2026-07-28",
               "changelog/2026-07-21",
               "changelog/2026-07-14",

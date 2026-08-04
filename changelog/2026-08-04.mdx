@@ -1,0 +1,20 @@
+---
+title: "August 4, 2026"
+description: "API updates shipped August 4, 2026"
+---
+
+<Update label="August 4, 2026">
+
+### Improved
+- **Auto Billing Reset** — new `GET/POST /v1/plans/auto-reset` endpoint lets you configure automatic billing cycle resets when credit usage crosses a threshold (`threshold_pct`). A `max_resets_per_24h` cap limits spend within any rolling 24-hour window. If you enable the feature while already over threshold, a reset fires immediately. Failed payments (including 3D Secure cards) are suppressed for the rest of the billing cycle and trigger a failure email. See [Auto Billing Reset](/docs/auto-billing-reset).
+- **Google News: topic scraping and date filtering** — three new parameters: `topic_url` lets you scrape a predefined Google News topic (`WORLD`, `NATION`, `BUSINESS`, `TECHNOLOGY`, `ENTERTAINMENT`, `SPORTS`, `SCIENCE`, `HEALTH`) or any topic/section URL from news.google.com without managing keyword tasks; `fetch_since` and `fetch_since_timezone` add date-based filtering on top of the existing `time_range` filter. The task `keyword` field also now accepts predefined topic names in CAPS directly.
+
+### Fixed
+- **Instagram Post Comments: dead session handling** — a dead browser session no longer causes tasks to be misreported as `invalid_url`; the run now pauses for session recovery instead.
+- **Instagram Profile: famous public profiles skipped** — resolved an issue where high-follower public profiles were being incorrectly skipped during scraping.
+- **Sales Navigator Companies: deleted list handling** — the scraper no longer crashes the entire run when a custom list has been deleted; it logs the error and continues with remaining tasks.
+- **SeLoger: new listing route** — added support for a new `/annonce/` URL format that was returning errors on recent listing pages.
+- **TripAdvisor Restaurants: IP block** — resolved an IP-block error affecting TripAdvisor restaurant scraping runs.
+- **Google Maps Reviews: proxy rotation on rate limits** — the scraper now rotates proxy on place-fetch rate limits and retries on 500 server errors, reducing failed runs on high-volume review jobs.
+
+</Update>

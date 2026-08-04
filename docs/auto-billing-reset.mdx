@@ -1,0 +1,144 @@
+---
+title: "Auto Billing Reset"
+description: "Configure automatic billing cycle resets when credit usage crosses a threshold"
+api: "GET https://api.lobstr.io/v1/plans/auto-reset"
+---
+
+Automatically reset your billing cycle when credit usage crosses a configurable threshold — so your scrapers never stall waiting for a manual reset. A rolling 24-hour cap protects against runaway spending.
+
+## How it works
+
+When Auto Billing Reset is enabled, a background poller checks your credit usage periodically. Once your usage exceeds `threshold_pct`, it triggers a billing cycle reset: your plan renews immediately (charging your card on file) and your credits are restored to zero consumed. The `max_resets_per_24h` cap limits how many times this can happen in any rolling 24-hour window.
+
+If the payment fails (including 3D Secure cards, which cannot complete authentication unattended), the reset is suppressed for the rest of the current billing cycle and you receive a failure email.
+
+## Get settings
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+Returns your current Auto Billing Reset configuration and live usage status.
+
+### Response fields
+
+<ResponseField name="enabled" type="boolean">
+  Whether Auto Billing Reset is currently active.
+</ResponseField>
+
+<ResponseField name="threshold_pct" type="integer">
+  Credit usage percentage that triggers a reset. Example: `80` (reset when 80% of credits are consumed).
+</ResponseField>
+
+<ResponseField name="max_resets_per_24h" type="integer">
+  Maximum number of automatic resets allowed in any rolling 24-hour window (1–10).
+</ResponseField>
+
+<ResponseField name="resets_used_in_window" type="integer">
+  Number of resets that have already fired in the current 24-hour window.
+</ResponseField>
+
+<ResponseField name="window_resets_at" type="string | null">
+  UTC timestamp when the current 24-hour window expires and the counter resets, or `null` if no window is active.
+</ResponseField>
+
+<ResponseField name="current_usage_pct" type="number | null">
+  Your current credit usage as a percentage of your plan's allowance, or `null` if no active subscription.
+</ResponseField>
+
+## Update settings
+
+<api method="POST">https://api.lobstr.io/v1/plans/auto-reset</api>
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+<ParamField body="enabled" type="boolean" required>
+  Enable or disable Auto Billing Reset.
+</ParamField>
+
+<ParamField body="threshold_pct" type="integer">
+  Credit usage percentage that triggers a reset. Must be between 1 and 100. Defaults to your current setting.
+</ParamField>
+
+<ParamField body="max_resets_per_24h" type="integer">
+  Maximum automatic resets in any rolling 24-hour window. Must be between 1 and 10. Defaults to your current setting.
+</ParamField>
+
+<Note>
+  If you POST with `enabled: true` and your usage is already above `threshold_pct`, an immediate reset is triggered.
+</Note>
+
+<Warning>
+  Auto Billing Reset charges your card on file each time it fires. Ensure `max_resets_per_24h` is set to a value you're comfortable with before enabling.
+</Warning>
+
+## Code Examples
+
+<CodeGroup>
+```bash GET
+curl -X GET "https://api.lobstr.io/v1/plans/auto-reset" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```bash POST
+curl -X POST "https://api.lobstr.io/v1/plans/auto-reset" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "enabled": true,
+    "threshold_pct": 80,
+    "max_resets_per_24h": 2
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}", "Content-Type": "application/json"}
+
+# Get current settings
+res = requests.get(f"{BASE_URL}/plans/auto-reset", headers=headers)
+print(res.json())
+
+# Enable with threshold at 80%, max 2 resets per day
+res = requests.post(f"{BASE_URL}/plans/auto-reset",
+    headers=headers,
+    json={"enabled": True, "threshold_pct": 80, "max_resets_per_24h": 2}
+)
+print(res.json())
+```
+</CodeGroup>
+
+## GET Response
+
+```json 200
+{
+  "enabled": true,
+  "threshold_pct": 80,
+  "max_resets_per_24h": 2,
+  "resets_used_in_window": 1,
+  "window_resets_at": "2026-08-02T14:30:00Z",
+  "current_usage_pct": 73.4
+}
+```
+
+## POST Response
+
+```json 200
+{
+  "enabled": true,
+  "threshold_pct": 80,
+  "max_resets_per_24h": 2,
+  "resets_used_in_window": 0,
+  "window_resets_at": null,
+  "current_usage_pct": 73.4
+}
+```

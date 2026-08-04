@@ -1,10 +1,10 @@
 ---
 title: "Add Tasks"
-description: "Add keyword-based tasks to scrape Google News articles"
+description: "Add keyword or topic tasks to scrape Google News articles"
 api: "POST https://api.lobstr.io/v1/tasks"
 ---
 
-Add keyword-based tasks to scrape Google News articles. Each task represents a news search query that will fetch matching articles from Google News.
+Add keyword or topic tasks to scrape Google News articles. Each task represents a search query or topic that will fetch matching articles from Google News.
 
 ## Headers
 
@@ -27,14 +27,14 @@ Add keyword-based tasks to scrape Google News articles. Each task represents a n
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| **keyword** | string | Yes | The news search query (e.g., `crab`, `climate change`, `tech news`) |
+| **keyword** | string | Yes | A search query (e.g., `climate change`) **or** a predefined Google News topic in CAPS: `WORLD`, `NATION`, `BUSINESS`, `TECHNOLOGY`, `ENTERTAINMENT`, `SPORTS`, `SCIENCE`, `HEALTH` |
 
 <Tip>
-  Use specific keywords for more targeted news results.
+  To scrape a specific topic page or section URL from news.google.com, set `topic_url` in the squid settings instead — task keywords are ignored when `topic_url` is set.
 </Tip>
 
 <Note>
-  Configure time range and language in the squid settings to filter results.
+  Configure time range, language, and date filters in the squid settings.
 </Note>
 
 ## Code Examples

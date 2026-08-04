@@ -4,7 +4,7 @@ description: "Configure the Google News Search Export parameters"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
 ---
 
-Configure the scraper parameters to control how Google News articles are collected. These settings include language, recency filters, and result limits.
+Configure the scraper parameters to control how Google News articles are collected. These settings include language, recency filters, result limits, and topic-based scraping.
 
 ## Headers
 
@@ -20,26 +20,21 @@ Configure the scraper parameters to control how Google News articles are collect
 
 Set these parameters in the `params` object:
 
-| Parameter | Type | Description |
-| --- | --- | --- |
-| **language** | string | Country edition and UI language for Google News (e.g., `English (United States)`) |
-| **time_range** | string | Filter by recency: `Any time`, `Past hour`, `Past 24h`, `Past week`, `Past year` |
-| **max_results** | integer | Maximum articles to scrape. Leave blank to extract all news since 2005. |
-
-## Max Results Behavior
-
-The `max_results` setting affects how the scraper operates:
-
-- **≤ 100**: No date filter is applied, fetches recent articles
-- **> 100**: Scraper breaks the span into daily windows and fetches news day by day
-- **Blank**: Pulls every article back to 2005-01-01 (when combined with `Any time`)
-
-<Warning>
-  Leaving max_results blank with time_range as 'Any time' will pull every article back to 2005 - this can be very large.
-</Warning>
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **language** | string | — | Country edition and UI language for Google News (e.g., `English (United States)`) |
+| **time_range** | string | — | Filter by recency: `Any time`, `Past hour`, `Past 24h`, `Past week`, `Past year`. The tighter of `time_range` and `fetch_since` wins. |
+| **max_results** | integer | 100 | Maximum articles to scrape per task. For keyword tasks requesting more than 100, the scraper walks backwards day by day from today (~100 articles per day). For topic tasks, limited to what the topic page returns (~100–200 articles). |
+| **topic_url** | string | — | Scrape a Google News topic instead of task keywords. Accepts a predefined topic name (`WORLD`, `NATION`, `BUSINESS`, `TECHNOLOGY`, `ENTERTAINMENT`, `SPORTS`, `SCIENCE`, `HEALTH`) or a topic/section URL from news.google.com (`https://news.google.com/topics/{id}` or `.../sections/{sid}`). When set, task keywords are ignored — a single task is enough. |
+| **fetch_since** | string | — | Stop collecting articles older than this threshold. Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Combines with `time_range` — the tighter constraint wins. |
+| **fetch_since_timezone** | string | — | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values. |
 
 <Tip>
-  Use time_range filters like 'Past week' for recent news monitoring.
+  Use `topic_url: TECHNOLOGY` to monitor a full Google News topic section without managing individual keyword tasks.
+</Tip>
+
+<Tip>
+  Use `fetch_since: 7d` combined with `time_range: Past week` to ensure you only collect recent articles.
 </Tip>
 
 ## Code Examples
@@ -58,7 +53,8 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "params": {
       "language": "English (United States)",
       "time_range": "Past week",
-      "max_results": 100
+      "max_results": 100,
+      "fetch_since": "7d"
     }
   }'
 ```
@@ -84,7 +80,8 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
         "params": {
             "language": "English (United States)",
             "time_range": "Past week",
-            "max_results": 100
+            "max_results": 100,
+            "fetch_since": "7d"
         }
     }
 )
@@ -105,7 +102,8 @@ print(f"Max results: {data['params']['max_results']}")
   "params": {
     "language": "English (United States)",
     "time_range": "Past week",
-    "max_results": 100
+    "max_results": 100,
+    "fetch_since": "7d"
   },
   "to_complete": false,
   "export_unique_results": true
