@@ -1,10 +1,10 @@
 ---
 title: "Retry Run Task"
 description: "Retry a single failed or skipped task within a completed run"
-api: "POST https://api.lobstr.io/v1/runtasks/{runtask_hash}/retry"
+api: "POST https://api.lobstr.io/v1/runs/{run_hash}/tasks/{task_hash}/retry"
 ---
 
-Retry a single task from a completed run without restarting the entire run. The task is reset to `pending` and the run relaunches to process it. Only one retry can be queued at a time per squid — a new run must not already be active.
+Retry a single task from a completed run without restarting the entire run. The task is reset to `pending` and the run relaunches to process it. Only one retry can be queued at a time per squid — no other run may be active.
 
 ## Headers
 
@@ -14,21 +14,26 @@ Retry a single task from a completed run without restarting the entire run. The 
 
 ## Path Parameters
 
-<ParamField path="runtask_hash" type="string" required>
-  Hash ID of the run task to retry. Retrieve this from the [Get Run Tasks](/docs/get-run-tasks) endpoint.
+<ParamField path="run_hash" type="string" required>
+  Hash ID of the completed run. Retrieve this from the [List Runs](/docs/list-runs) endpoint.
+</ParamField>
+
+<ParamField path="task_hash" type="string" required>
+  Hash ID of the task to retry. Retrieve this from the [Get Run Tasks](/docs/get-run-tasks) endpoint (`data[].user_task`).
 </ParamField>
 
 ## Constraints
 
-- The run containing the task must be **completed** (`is_done: true`). Retrying a task while the run is still active returns a `RunInProgress` error.
-- No other run must be **active** for the same squid. If one is, a `ClusterBusy` error is returned.
-- A **5-minute cooldown** applies between retries of the same task. Retrying too soon returns a `RetryCooldown` error.
+- The run must be **completed** (`is_done: true`). Retrying while the run is still active returns `RunInProgress`.
+- No other run may be **active** for the same squid. If one is, `ClusterBusy` is returned.
+- The run must not have already reached its **`max_unique_results_per_run` cap** — if it has, retrying won't scrape anything new and `RunCapReached` is returned. Launch a new run instead.
+- A **5-minute cooldown** applies between retries of the same task. Retrying too soon returns `RetryCooldown`.
 
 ## Code Examples
 
 <CodeGroup>
 ```bash cURL
-curl -X POST "https://api.lobstr.io/v1/runtasks/RUNTASK_HASH/retry" \
+curl -X POST "https://api.lobstr.io/v1/runs/RUN_HASH/tasks/TASK_HASH/retry" \
   -H "Authorization: Token YOUR_API_KEY"
 ```
 
@@ -39,9 +44,10 @@ API_KEY = "YOUR_API_KEY"
 BASE_URL = "https://api.lobstr.io/v1"
 headers = {"Authorization": f"Token {API_KEY}"}
 
-runtask_hash = "RUNTASK_HASH"
+run_hash = "RUN_HASH"
+task_hash = "TASK_HASH"
 
-response = requests.post(f"{BASE_URL}/runtasks/{runtask_hash}/retry", headers=headers)
+response = requests.post(f"{BASE_URL}/runs/{run_hash}/tasks/{task_hash}/retry", headers=headers)
 data = response.json()
 print(f"Task status: {data['status']}")
 ```
@@ -77,6 +83,13 @@ print(f"Task status: {data['status']}")
 {
   "error": "ClusterBusy",
   "message": "Another run is currently active for this squid."
+}
+```
+
+```json 400 RunCapReached
+{
+  "error": "RunCapReached",
+  "message": "This run already reached its max unique results limit (200); retrying won't scrape anything new. Launch a new run instead."
 }
 ```
 
