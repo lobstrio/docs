@@ -1,0 +1,23 @@
+---
+title: "August 11, 2026"
+description: "API updates shipped August 11, 2026"
+---
+
+<Update label="August 11, 2026">
+
+### Improved
+- **PAP: `fetch_since` filter and 14 new result fields** — added `fetch_since` and `fetch_since_timezone` parameters to filter listings by publication date. New result fields: `price_per_sqm`, `produit`, `typebien`, `typebien_label`, `energy_description`, `ges_description`, `transports`, `visite_virtuelle`, `exclusive`, `has_email`, `prix_valide`, `affiche_demarchage_refuse`, `appel_video`, and `video`.
+- **Retry a single run task** — new `POST /v1/runtasks/{runtask_hash}/retry` endpoint lets you retry one failed or skipped task from a completed run without restarting the entire run. See [Retry Run Task](/docs/retry-run-task).
+
+### Fixed
+- **Trustpilot Reviews: "All languages" filter** — the "All languages" setting was incorrectly returning English-only reviews. It now returns reviews in all available languages.
+- **Google Maps: `ratings` field** — review count is now only populated when `collect_business_details` is enabled, matching the backend behavior (the field was unreliable for certain query shapes without a detail-page fetch).
+- **Google News: session reset on connection errors** — the scraper now resets its session on `connectionError` instead of stalling, preventing stuck runs on network interruptions.
+- **Google Maps Reviews: proxy rotation on CurlError** — added proxy rotation when a `CurlError` occurs during the batchexecute listing page fetch.
+- **SeLoger: assertion error on invalid URLs** — invalid listing URLs no longer raise an unhandled `AssertionError`; they are now caught and skipped.
+- **Facebook Business Page: connection failure mislabeling** — connection failures are no longer mislabeled as `invalid_url`; page names are now correctly extracted from `profile.php` fallback responses.
+- **Leboncoin: shared-account quota isolation** — the shared-account message quota for Leboncoin no longer gates unrelated scraper modules running on the same account.
+- **Vinted: non-JSON 200 crash** — listing pages that return a 200 with non-JSON content no longer crash the run.
+- **Duplicate success email** — fixed a case where a run completion email was sent twice when a task retry triggered `close_run` to re-fire.
+
+</Update>

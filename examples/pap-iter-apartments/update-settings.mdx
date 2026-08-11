@@ -22,8 +22,10 @@ Set these parameters in the `params` object:
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| **max_results** | integer | 200 | Maximum number of listings to collect per task |
+| **max_results** | integer | unlimited | Maximum number of listings to collect per task |
 | **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
+| **fetch_since** | string | — | Only keep listings published after this point (based on `publication_date`). Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`) |
+| **fetch_since_timezone** | string | — | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values. |
 
 ## Squid Settings
 

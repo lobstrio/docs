@@ -1,0 +1,88 @@
+---
+title: "Retry Run Task"
+description: "Retry a single failed or skipped task within a completed run"
+api: "POST https://api.lobstr.io/v1/runtasks/{runtask_hash}/retry"
+---
+
+Retry a single task from a completed run without restarting the entire run. The task is reset to `pending` and the run relaunches to process it. Only one retry can be queued at a time per squid — a new run must not already be active.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Path Parameters
+
+<ParamField path="runtask_hash" type="string" required>
+  Hash ID of the run task to retry. Retrieve this from the [Get Run Tasks](/docs/get-run-tasks) endpoint.
+</ParamField>
+
+## Constraints
+
+- The run containing the task must be **completed** (`is_done: true`). Retrying a task while the run is still active returns a `RunInProgress` error.
+- No other run must be **active** for the same squid. If one is, a `ClusterBusy` error is returned.
+- A **5-minute cooldown** applies between retries of the same task. Retrying too soon returns a `RetryCooldown` error.
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/runtasks/RUNTASK_HASH/retry" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+runtask_hash = "RUNTASK_HASH"
+
+response = requests.post(f"{BASE_URL}/runtasks/{runtask_hash}/retry", headers=headers)
+data = response.json()
+print(f"Task status: {data['status']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "id": "RUNTASK_HASH",
+  "status": "pending",
+  "is_done": false,
+  "has_errors": null,
+  "errors": null,
+  "done_reason": null,
+  "ended_at": null,
+  "params": {
+    "url": "https://example.com/listing/123"
+  }
+}
+```
+
+## Error Responses
+
+```json 400 RunInProgress
+{
+  "error": "RunInProgress",
+  "message": "Cannot retry a task while the run is still active."
+}
+```
+
+```json 400 ClusterBusy
+{
+  "error": "ClusterBusy",
+  "message": "Another run is currently active for this squid."
+}
+```
+
+```json 400 RetryCooldown
+{
+  "error": "RetryCooldown",
+  "message": "This task was retried too recently, please wait a few minutes."
+}
+```

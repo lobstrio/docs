@@ -102,3 +102,59 @@ Each result object contains the following fields:
 <ResponseField name="lng" type="string">
   Longitude coordinate of the property. Example: `5.228885`
 </ResponseField>
+
+<ResponseField name="price_per_sqm" type="integer">
+  Price per square metre as computed by PAP. Example: `2459`
+</ResponseField>
+
+<ResponseField name="produit" type="string">
+  Transaction type for the listing. Example: `vente`, `location`
+</ResponseField>
+
+<ResponseField name="typebien" type="string">
+  Property type as a lowercase slug. Example: `appartement`, `maison`
+</ResponseField>
+
+<ResponseField name="typebien_label" type="string">
+  Property type in display form as shown on PAP. Example: `Appartement`
+</ResponseField>
+
+<ResponseField name="energy_description" type="string">
+  Full sentence describing the energy performance (DPE) class. Example: `Logement très peu performant`
+</ResponseField>
+
+<ResponseField name="ges_description" type="string">
+  Full sentence describing the greenhouse gas emissions (GES) class. Example: `Émissions très élevées`
+</ResponseField>
+
+<ResponseField name="transports" type="string">
+  Nearby public transit stations and their lines.
+</ResponseField>
+
+<ResponseField name="visite_virtuelle" type="string">
+  URL of the listing's virtual tour, if any.
+</ResponseField>
+
+<ResponseField name="exclusive" type="boolean">
+  Whether the listing is marked as PAP-exclusive.
+</ResponseField>
+
+<ResponseField name="has_email" type="boolean">
+  Whether the owner can be contacted by email (some owners accept phone contact only).
+</ResponseField>
+
+<ResponseField name="prix_valide" type="boolean">
+  Whether PAP independently validated the listing's asking price.
+</ResponseField>
+
+<ResponseField name="affiche_demarchage_refuse" type="boolean">
+  Whether the owner's listing shows the "refuses commercial canvassing" flag.
+</ResponseField>
+
+<ResponseField name="appel_video" type="boolean">
+  Whether the owner offers a WhatsApp video-call viewing option.
+</ResponseField>
+
+<ResponseField name="video" type="string">
+  URL of the listing's YouTube video, if any.
+</ResponseField>
