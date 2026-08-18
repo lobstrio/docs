@@ -24,8 +24,27 @@ Set these parameters in the `params` object:
 | --- | --- | --- | --- |
 | **max_results** | integer | unlimited | Maximum number of tweets to scrape per search query |
 | **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
-| **fetch_since** | string | — | Stop scraping when tweets older than this threshold are reached. Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Works best with Latest search URLs (`&f=live`); Top results are relevance-ranked, so the task may stop on an older popular tweet. |
+| **fetch_since** | string | — | Stop scraping when tweets older than this threshold are reached. Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Works best with Latest search URLs (`&f=live`). |
 | **fetch_since_timezone** | string | UTC | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`) |
+| **sort** | string | From URL | Result ordering: `From URL` keeps whatever order is in the search URL, `Top` sorts by relevance, `Latest` sorts by recency |
+| **tweet_language** | string | — | Restrict to tweets in a specific language (ISO 639-1 code, e.g. `en`, `fr`, `de`) |
+| **only_verified_users** | boolean | false | Only collect tweets from verified accounts |
+| **only_twitter_blue** | boolean | false | Only collect tweets from Twitter Blue (X Premium) subscribers |
+| **only_image** | boolean | false | Only collect tweets that contain at least one image |
+| **only_video** | boolean | false | Only collect tweets that contain a video |
+| **only_quote** | boolean | false | Only collect quote tweets |
+| **author** | string | — | Only collect tweets from this author (`@handle`) |
+| **in_reply_to** | string | — | Only collect tweets that are replies to this user (`@handle`) |
+| **mentioning** | string | — | Only collect tweets that mention this user (`@handle`) |
+| **geotagged_near** | string | — | Only collect tweets geotagged near this place (city or place name) |
+| **within_radius** | string | — | Radius around `geotagged_near`, e.g. `15km` or `10mi` |
+| **geocode** | string | — | Only collect tweets from users within a radius of a lat/long point (format: `lat,lng,radius`) |
+| **place_object_id** | string | — | Only collect tweets tagged with this Twitter place object ID |
+| **minimum_retweets** | integer | — | Only collect tweets with at least this many retweets |
+| **minimum_favorites** | integer | — | Only collect tweets with at least this many likes |
+| **minimum_replies** | integer | — | Only collect tweets with at least this many replies |
+| **start_date** | string | — | Only collect tweets posted on or after this date (`YYYY-MM-DD`) |
+| **end_date** | string | — | Only collect tweets posted before this date (`YYYY-MM-DD`) |
 
 ## Squid Settings
 

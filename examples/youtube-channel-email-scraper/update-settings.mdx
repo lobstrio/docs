@@ -4,7 +4,7 @@ description: "Configure YouTube Channel Email Scraper settings"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
 ---
 
-Configure your YouTube Channel Email Scraper squid settings. This scraper uses only the general settings with no scraper-specific parameters.
+Configure your YouTube Channel Email Scraper squid settings. Use the scraper parameters to control which content types are collected per channel.
 
 ## Headers
 
@@ -15,6 +15,18 @@ Configure your YouTube Channel Email Scraper squid settings. This scraper uses o
 <ParamField header="Content-Type" type="string" required>
   Request body format. Value: `application/json`
 </ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **get_videos** | boolean | false | Collect up to 30 of the channel's most recent uploaded videos (title, URL, view count, published date, duration, thumbnail) |
+| **get_shorts** | boolean | false | Collect up to 30 of the channel's most recent Shorts (title, URL, view count, thumbnail) |
+| **get_streams** | boolean | false | Collect up to 30 of the channel's live and past streams (title, URL, view count, duration, thumbnail) |
+| **get_playlists** | boolean | false | Collect up to 30 of the channel's public playlists (title, URL, video count, thumbnail) |
+| **get_comments** | boolean | false | Collect comments for up to 5 of the videos/Shorts gathered by `get_videos`/`get_shorts` (up to 50 top-level comments + one reply page per thread). Requires `get_videos` or `get_shorts` to be enabled. |
 
 ## Squid Settings
 
@@ -27,10 +39,6 @@ Configure general squid settings:
 | **export_unique_results** | boolean | Export only unique results (deduplicated) |
 | **to_complete** | boolean | Run until all tasks complete |
 | **no_line_breaks** | boolean | Remove line breaks from results |
-
-<Note>
-  This scraper has no scraper-specific parameters - only general squid settings are available.
-</Note>
 
 <Tip>
   Keep concurrency low (1-2) to avoid rate limiting from YouTube.

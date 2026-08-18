@@ -4,7 +4,7 @@ description: "Configure Facebook Pages Search Export settings"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
 ---
 
-Configure your Facebook Pages Search Export squid settings. This scraper uses only the general settings with no scraper-specific parameters.
+Configure your Facebook Pages Search Export squid settings.
 
 ## Headers
 
@@ -15,6 +15,15 @@ Configure your Facebook Pages Search Export squid settings. This scraper uses on
 <ParamField header="Content-Type" type="string" required>
   Request body format. Value: `application/json`
 </ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **max_results** | integer | unlimited | Maximum number of pages to collect per task |
+| **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
 
 ## Squid Settings
 
@@ -27,10 +36,6 @@ Configure general squid settings:
 | **export_unique_results** | boolean | Export only unique results (deduplicated) |
 | **to_complete** | boolean | Run until all tasks complete |
 | **no_line_breaks** | boolean | Remove line breaks from results |
-
-<Note>
-  This scraper has no scraper-specific parameters - only general squid settings are available.
-</Note>
 
 ## Code Examples
 

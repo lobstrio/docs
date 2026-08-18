@@ -103,3 +103,23 @@ dianalarusse@yandex.ru`
 <ResponseField name="other_links" type="string">
   Other external links listed in the YouTube channel's About section. Example: `https://russe-facile-avec-diana.teachable.com/, https://www.paypal.me/dianarussie, https://www.tiktok.com/@russe_facile_avec_diana`
 </ResponseField>
+
+<ResponseField name="videos" type="json">
+  Up to 30 of the channel's most recent uploaded videos (title, URL, view count, published date, duration, thumbnail). Only populated when `get_videos` is enabled.
+</ResponseField>
+
+<ResponseField name="shorts" type="json">
+  Up to 30 of the channel's most recent Shorts (title, URL, view count, thumbnail). Only populated when `get_shorts` is enabled.
+</ResponseField>
+
+<ResponseField name="streams" type="json">
+  Up to 30 of the channel's live and past streams (title, URL, view count, duration, thumbnail). Only populated when `get_streams` is enabled; empty if the channel has no Live tab.
+</ResponseField>
+
+<ResponseField name="playlists" type="json">
+  Up to 30 of the channel's public playlists (title, URL, video count, thumbnail). Only populated when `get_playlists` is enabled.
+</ResponseField>
+
+<ResponseField name="comments" type="json">
+  Comments (up to 50 top-level + one reply page per thread) for up to 5 videos/Shorts. Only populated when `get_comments` is enabled alongside `get_videos` or `get_shorts`.
+</ResponseField>

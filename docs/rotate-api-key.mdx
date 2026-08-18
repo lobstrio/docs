@@ -1,0 +1,53 @@
+---
+title: "Rotate API Key"
+description: "Atomically replace your API token with a newly generated one"
+api: "POST https://api.lobstr.io/v1/me/rotate_token"
+---
+
+Generates a new API token and invalidates your current one in a single atomic operation. Use this to rotate credentials after exposure or as part of a regular security rotation policy.
+
+<Warning>
+  Your existing token stops working immediately. Update all integrations to the new token returned in the response before calling this endpoint.
+</Warning>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your current API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Rate Limiting
+
+This endpoint is throttled to **10 requests per hour** per account.
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/me/rotate_token" \
+  -H "Authorization: Token YOUR_CURRENT_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_CURRENT_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+response = requests.post(f"{BASE_URL}/me/rotate_token", headers=headers)
+data = response.json()
+
+new_token = data["token"]
+print(f"New token: {new_token}")
+# Update your stored token — the old one is now invalid
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "token": "YOUR_NEW_API_KEY"
+}
+```

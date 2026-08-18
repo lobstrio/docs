@@ -1,0 +1,25 @@
+---
+title: "August 18, 2026"
+description: "API updates shipped August 18, 2026"
+---
+
+<Update label="August 18, 2026">
+
+### Improved
+- **Twitter Search: 19 new filter parameters** — added `sort` (Top/Latest/From URL), `tweet_language`, `only_verified_users`, `only_twitter_blue`, `only_image`, `only_video`, `only_quote`, `author`, `in_reply_to`, `mentioning`, `geotagged_near`, `within_radius`, `geocode`, `place_object_id`, `minimum_retweets`, `minimum_favorites`, `minimum_replies`, `start_date`, and `end_date`.
+- **YouTube Channel Scraper: content-type toggles** — five new boolean parameters control what is collected per channel: `get_videos`, `get_shorts`, `get_streams`, `get_playlists`, and `get_comments` (comments for up to 5 videos/Shorts when combined with `get_videos`/`get_shorts`). Corresponding result fields added: `videos`, `shorts`, `streams`, `playlists`, `comments`.
+- **Facebook Pages Search: `max_results` and `max_unique_results_per_run`** — new parameters to cap how many pages are collected per task and across the run.
+- **API key rotation** — new `POST /v1/me/rotate_token` endpoint atomically replaces your API token with a freshly generated one (10 requests/hour limit). See [Rotate API Key](/docs/rotate-api-key).
+- **Resurrect aborted run** — new `POST /v1/runs/{run_hash}/resurrect` endpoint reopens an aborted run and resets interrupted tasks to `pending`, picking up from where the abort stopped without re-running already-completed tasks. See [Resurrect Run](/docs/resurrect-run).
+
+### Fixed
+- **Twitter User Tweets: full timeline and retweet fields** — the scraper now collects the complete timeline (not just the first page) and fixed retweet field extraction.
+- **Instagram Profile: rate-limit retry speed** — retry intervals on rate limits are now shorter, reducing wait time on large profile scraping runs.
+- **Instagram Reels: key error** — fixed a `KeyError` that caused certain reel records to fail silently.
+- **Sales Navigator Leads: proxy rotation on connection retries** — connection-layer retries now rotate the proxy, reducing stalls on persistent connection failures.
+- **Google Maps Reviews: premature empty page** — the scraper now retries when `batchexecute` returns an empty page prematurely instead of truncating the review list.
+- **SeLoger: `wl-cdp` short-link routing** — new short-link URL format (`wl-cdp`) is now correctly routed to the listing detail page.
+- **Google Search: sponsored results** — paid (`is_paid`) results are now correctly extracted via the serp-api backend.
+- **Google News: session reset on connection errors** — session is reset on `connectionError` in both keyword and topic result fetches.
+
+</Update>
