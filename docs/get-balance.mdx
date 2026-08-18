@@ -52,6 +52,14 @@ It's recommended to check your balance before starting large-scale data collecti
   Timestamp when rollover credits expire, or `null` if none. Example: `null`
 </ResponseField>
 
+<ResponseField name="community_reward_credit" type="integer">
+  Bonus credits earned through Community Story Rewards. Example: `500`
+</ResponseField>
+
+<ResponseField name="community_reward_credit_expires_at" type="string | null">
+  Timestamp when community reward credits expire, or `null` if none. Example: `null`
+</ResponseField>
+
 <ResponseField name="interval" type="string">
   Credit reset interval (`"monthly"` or `"daily"`). Example: `"monthly"`
 </ResponseField>

@@ -11,6 +11,7 @@ description: "API updates shipped August 18, 2026"
 - **Facebook Pages Search: `max_results` and `max_unique_results_per_run`** — new parameters to cap how many pages are collected per task and across the run.
 - **API key rotation** — new `POST /v1/me/rotate_token` endpoint atomically replaces your API token with a freshly generated one (10 requests/hour limit). See [Rotate API Key](/docs/rotate-api-key).
 - **Resurrect aborted run** — new `POST /v1/runs/{run_hash}/resurrect` endpoint reopens an aborted run and resets interrupted tasks to `pending`, picking up from where the abort stopped without re-running already-completed tasks. See [Resurrect Run](/docs/resurrect-run).
+- **Community Story Rewards** — earn bonus credits (20% of your plan allowance, once per quarter) by posting about your lobstr.io use case on an eligible subreddit. Submit via `POST /v1/community_rewards/submissions`, check eligible subreddits via `GET /v1/community_rewards/subreddits`, and check submission status via `GET /v1/community_rewards/submissions`. Reward credits appear as `community_reward_credit` in the [Get Balance](/docs/get-balance) response. See [Community Story Rewards](/docs/community-rewards).
 
 ### Fixed
 - **Twitter User Tweets: full timeline and retweet fields** — the scraper now collects the complete timeline (not just the first page) and fixed retweet field extraction.

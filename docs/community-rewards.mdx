@@ -1,0 +1,126 @@
+---
+title: "Community Story Rewards"
+description: "Earn bonus credits by sharing your lobstr.io story on Reddit"
+---
+
+Community Story Rewards lets you earn bonus credits — equal to 20% of your plan's credit allowance — by posting about your experience using lobstr.io on an eligible subreddit. One reward is available per billing quarter, per account.
+
+## How it works
+
+1. Write a genuine post or comment about your lobstr.io use case on one of the [eligible subreddits](#list-eligible-subreddits).
+2. Submit the Reddit URL via the API (or the dashboard). The post is automatically verified for content and liveness.
+3. If approved, bonus credits are added to your account and valid until the end of your current billing period.
+
+## List eligible subreddits
+
+<api method="GET">https://api.lobstr.io/v1/community_rewards/subreddits</api>
+
+Returns the list of subreddits that qualify for a reward submission.
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+```json 200
+{
+  "results": ["SaaS", "entrepreneur", "learnpython", "MachineLearning"]
+}
+```
+
+## Submit a story
+
+<api method="POST">https://api.lobstr.io/v1/community_rewards/submissions</api>
+
+Submit a Reddit post or comment URL for review.
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+<ParamField body="reddit_url" type="string" required>
+  Full URL of your Reddit post or comment. Must be in an eligible subreddit. Example: `https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/`
+</ParamField>
+
+<Note>
+  Only one submission per quarter is reviewed. If an earlier submission in the same quarter was rejected you may resubmit — the most recent submission takes precedence.
+</Note>
+
+## Check your submission
+
+<api method="GET">https://api.lobstr.io/v1/community_rewards/submissions</api>
+
+Returns your most recent submission for the current quarter, or `null` if you haven't submitted one yet.
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+```json 200
+{
+  "submission": {
+    "id": 42,
+    "reddit_url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/",
+    "status": "pending",
+    "submitted_at": "2026-08-15T10:30:00Z",
+    "quarter_key": "2026-Q3"
+  }
+}
+```
+
+Possible `status` values: `pending` (under review), `gifted` (approved, credits granted), `rejected`.
+
+## Code Example
+
+<CodeGroup>
+```bash cURL
+# Check eligible subreddits
+curl "https://api.lobstr.io/v1/community_rewards/subreddits" \
+  -H "Authorization: Token YOUR_API_KEY"
+
+# Submit your story
+curl -X POST "https://api.lobstr.io/v1/community_rewards/submissions" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"reddit_url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/"}'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+# List eligible subreddits
+subreddits = requests.get(f"{BASE_URL}/community_rewards/subreddits", headers=headers).json()
+print("Eligible:", subreddits["results"])
+
+# Submit your story
+response = requests.post(
+    f"{BASE_URL}/community_rewards/submissions",
+    headers={**headers, "Content-Type": "application/json"},
+    json={"reddit_url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/"}
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Error Responses
+
+```json 400 SubredditNotEligible
+{
+  "error": "SubredditNotEligible",
+  "message": "r/example isn't on the eligible-subreddit list for Community Story Rewards."
+}
+```
+
+```json 400 InvalidRedditUrl
+{
+  "error": "InvalidRedditUrl",
+  "message": "That doesn't look like a Reddit comment/post URL (expected a reddit.com/r/<subreddit>/... link)."
+}
+```
