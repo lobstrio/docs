@@ -573,6 +573,14 @@
               "examples/youtube-channel-email-scraper/update-settings",
               "examples/youtube-channel-email-scraper/get-results"
             ]
+          },
+          {
+            "group": "YouTube Comments Scraper",
+            "pages": [
+              "examples/youtube-comments-scraper/add-tasks",
+              "examples/youtube-comments-scraper/update-settings",
+              "examples/youtube-comments-scraper/get-results"
+            ]
           }
         ]
       },
@@ -601,6 +609,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-08-25",
               "changelog/2026-08-18",
               "changelog/2026-08-11",
               "changelog/2026-08-04",

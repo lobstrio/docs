@@ -1,0 +1,108 @@
+---
+title: "Update Settings"
+description: "Configure YouTube Comments Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **YouTube Comments Scraper** squid. Control sorting, reply collection, date filtering, and result limits.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Request body format. Value: `application/json`
+</ParamField>
+
+## Scraper Parameters
+
+Set these parameters in the `params` object:
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **max_results** | integer | unlimited | Maximum comments to collect per video |
+| **max_unique_results_per_run** | integer | null | Maximum unique comments across all tasks in the run |
+| **sort_by** | string | `top` | Comment sort order: `top` (most liked first) or `newest` (most recent first) |
+| **skip_pinned_comment** | boolean | false | Skip the pinned comment at the top of the thread |
+| **include_replies** | boolean | true | Collect replies to top-level comments |
+| **max_replies** | integer | unlimited | Maximum replies to collect per comment. Only applies when `include_replies` is `true` |
+| **fetch_since** | string | null | Only collect comments published after this date. Accepts `YYYY-MM-DD HH:MM:SS` or a relative value (`24h`, `7d`, `30d`) |
+| **fetch_since_timezone** | string | UTC | Timezone for `fetch_since`. Example: `Europe/Paris` |
+
+## Squid Settings
+
+| Setting | Type | Description |
+| --- | --- | --- |
+| **name** | string | Display name for your squid |
+| **concurrency** | integer | Number of parallel tasks (default: 1) |
+| **export_unique_results** | boolean | Export only unique comments |
+| **to_complete** | boolean | Run until all tasks complete |
+| **no_line_breaks** | boolean | Remove line breaks from text fields |
+
+<Note>
+  `max_replies` is only relevant when `include_replies` is `true`. Set it to cap reply collection on highly-commented threads.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "name": "YouTube Comments (1)",
+    "concurrency": 1,
+    "params": {
+      "sort_by": "top",
+      "include_replies": true,
+      "max_replies": 50,
+      "skip_pinned_comment": false,
+      "fetch_since": "7d"
+    }
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}", "Content-Type": "application/json"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+payload = {
+    "name": "YouTube Comments (1)",
+    "concurrency": 1,
+    "params": {
+        "sort_by": "top",
+        "include_replies": True,
+        "max_replies": 50,
+        "skip_pinned_comment": False,
+        "fetch_since": "7d",
+    },
+}
+
+response = requests.post(f"{BASE_URL}/squids/{squid_id}", headers=headers, json=payload)
+print(f"Settings updated: {response.json()['name']}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "name": "YouTube Comments (1)",
+  "concurrency": 1,
+  "params": {
+    "sort_by": "top",
+    "include_replies": true,
+    "max_replies": 50,
+    "skip_pinned_comment": false,
+    "fetch_since": "7d"
+  }
+}
+```

@@ -210,3 +210,135 @@ Each result object contains the following fields:
 <ResponseField name="external_reference" type="string">
   External reference number from the agency. Example: `REF-12345`
 </ResponseField>
+
+<ResponseField name="subtype" type="string">
+  Property subtype (e.g. STUDIO, DUPLEX, PENTHOUSE). Example: `APARTMENT`
+</ResponseField>
+
+<ResponseField name="room_count" type="integer">
+  Total number of rooms. Example: `4`
+</ResponseField>
+
+<ResponseField name="sale_status" type="string">
+  Sale availability status (e.g. AVAILABLE, SOLD_OUT). Example: `AVAILABLE`
+</ResponseField>
+
+<ResponseField name="price_per_sqm" type="float">
+  Price per square meter. Example: `2857.14`
+</ResponseField>
+
+<ResponseField name="old_price" type="integer">
+  Previous listed price, if reduced. Example: `220000`
+</ResponseField>
+
+<ResponseField name="picture_count" type="integer">
+  Total number of listing photos. Example: `12`
+</ResponseField>
+
+<ResponseField name="units" type="array | null">
+  Sub-unit breakdown for new-build projects. Each entry describes one apartment unit within the project. `null` for individual listings.
+</ResponseField>
+
+<ResponseField name="project_name" type="string | null">
+  Name of the new-build project, if applicable. Example: `Résidence Les Érables`
+</ResponseField>
+
+<ResponseField name="project_sold_percentage" type="float | null">
+  Percentage of units already sold in a new-build project. Example: `65.0`
+</ResponseField>
+
+<ResponseField name="carbon_emission" type="float | null">
+  CO₂ emission rating in kg CO₂/sqm/year. Example: `18.5`
+</ResponseField>
+
+<ResponseField name="primary_energy_consumption" type="float | null">
+  Primary energy consumption in kWh/sqm/year. Example: `142.0`
+</ResponseField>
+
+<ResponseField name="has_heat_pump" type="boolean">
+  Whether the property has a heat pump. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_photovoltaic_panels" type="boolean">
+  Whether the property has solar (PV) panels. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_double_glazing" type="boolean">
+  Whether the property has double-glazed windows. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_asbestos_certificate" type="boolean">
+  Whether an asbestos certificate is present. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_electrical_compliance" type="boolean">
+  Whether the electrical installation has a compliance certificate. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_valid_flood_certificate" type="boolean">
+  Whether a valid flood-risk certificate is present. Example: `true`
+</ResponseField>
+
+<ResponseField name="oil_tank_certificate_status" type="string | null">
+  Status of the oil-tank certificate, if applicable. Example: `COMPLIANT`
+</ResponseField>
+
+<ResponseField name="kitchen_type" type="string">
+  Kitchen type (e.g. INSTALLED, SEMI_EQUIPPED, NOT_INSTALLED). Example: `INSTALLED`
+</ResponseField>
+
+<ResponseField name="toilet_count" type="integer">
+  Number of separate toilets. Example: `1`
+</ResponseField>
+
+<ResponseField name="shower_room_count" type="integer">
+  Number of shower rooms (separate from bathrooms). Example: `0`
+</ResponseField>
+
+<ResponseField name="parking_count_indoor" type="integer">
+  Number of indoor parking spaces included. Example: `1`
+</ResponseField>
+
+<ResponseField name="parking_count_outdoor" type="integer">
+  Number of outdoor parking spaces included. Example: `0`
+</ResponseField>
+
+<ResponseField name="monthly_costs" type="integer | null">
+  Monthly co-ownership charges in the listing currency. Example: `150`
+</ResponseField>
+
+<ResponseField name="amenities" type="array">
+  List of amenity strings reported on the listing. Example: `["BARBECUE", "BIKE_STORAGE"]`
+</ResponseField>
+
+<ResponseField name="has_swimming_pool" type="boolean">
+  Whether the property has a swimming pool. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_air_conditioning" type="boolean">
+  Whether the property has air conditioning. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_disabled_access" type="boolean">
+  Whether the property has disabled-access provisions. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_internet" type="boolean">
+  Whether internet access is included. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_alarm" type="boolean">
+  Whether the property has an alarm system. Example: `false`
+</ResponseField>
+
+<ResponseField name="view_count" type="integer">
+  Number of times the listing has been viewed on Immoweb. Example: `847`
+</ResponseField>
+
+<ResponseField name="bookmark_count" type="integer">
+  Number of times the listing has been saved/bookmarked. Example: `23`
+</ResponseField>
+
+<ResponseField name="agency_website" type="string | null">
+  Website URL of the agency. Example: `https://www.agencyname.be`
+</ResponseField>

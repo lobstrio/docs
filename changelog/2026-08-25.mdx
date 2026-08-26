@@ -1,0 +1,20 @@
+---
+title: "August 25, 2026"
+description: "API updates shipped August 25, 2026"
+---
+
+<Update label="August 25, 2026">
+
+### New
+- **YouTube Comments Scraper** — now public. Scrape all top-level comments (and replies) from any YouTube video. Sort by top or newest, filter by date with `fetch_since`, cap reply depth with `max_replies`, and skip the pinned comment if needed. 0.5 credits per comment row. See [YouTube Comments Scraper](/examples/youtube-comments-scraper/add-tasks).
+
+### Improved
+- **Immoweb Listings & Phones Search Export: 33 new result fields** — the enriched schema now includes sub-unit breakdowns for new-build projects (`units`, `project_name`, `project_sold_percentage`), detailed energy and legal data (`carbon_emission`, `primary_energy_consumption`, `has_heat_pump`, `has_photovoltaic_panels`, `has_double_glazing`, `has_asbestos_certificate`, `has_electrical_compliance`, `has_valid_flood_certificate`, `oil_tank_certificate_status`), room and parking breakdown (`room_count`, `toilet_count`, `shower_room_count`, `parking_count_indoor`, `parking_count_outdoor`), amenity flags (`has_swimming_pool`, `has_air_conditioning`, `has_disabled_access`, `has_internet`, `has_alarm`, `amenities`), pricing extras (`price_per_sqm`, `old_price`, `monthly_costs`), and listing stats (`view_count`, `bookmark_count`, `agency_website`).
+- **Yelp Search Export: `min_star_rating` and `min_reviews` filters** — two new paid-filter parameters let you restrict results to businesses with a minimum star rating (e.g. `4.0`) or a minimum review count.
+
+### Fixed
+- **Reddit Scraper: comments-fetch 403 recovery** — retry backoff is now applied to `ClientError` responses so transient 403s on comment fetches clear within the same run instead of stalling.
+- **Sales Navigator (all scrapers): proxy country preservation** — the account proxy country is now correctly kept when rotating to a new proxy on connection retries, preventing country-mismatch blocks.
+- **Facebook Pages Search Export: account safety** — stopped burning the connected account on detail fetches; also fixed an anonymous-cookie leak when merging sessions back.
+
+</Update>

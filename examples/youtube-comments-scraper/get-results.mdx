@@ -1,0 +1,193 @@
+---
+title: "Get Results"
+description: "Retrieve scraped comments from YouTube Comments Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve comments collected by your **YouTube Comments Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="run" type="string">
+  Hash of a specific run (optional)
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="comment_id" type="string">
+  Unique YouTube comment ID. Example: `UgxZf7BbcN3mJlQkfvt4AaABAg`
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  Full text content of the comment. Example: `This video is amazing, learned so much!`
+</ResponseField>
+
+<ResponseField name="author" type="string">
+  Display name of the comment author. Example: `John Doe`
+</ResponseField>
+
+<ResponseField name="author_channel_id" type="string">
+  YouTube channel ID of the author. Example: `UCxxxxxxxxxxxxxxxxxxxxxx`
+</ResponseField>
+
+<ResponseField name="author_profile_url" type="string">
+  URL to the author's YouTube channel. Example: `https://www.youtube.com/channel/UCxxxxxxxxxxxxxxxxxxxxxx`
+</ResponseField>
+
+<ResponseField name="author_avatar" type="string">
+  URL to the author's profile picture. Example: `https://yt3.ggpht.com/...`
+</ResponseField>
+
+<ResponseField name="author_is_channel_owner" type="boolean">
+  Whether the commenter is the video's channel owner. Example: `false`
+</ResponseField>
+
+<ResponseField name="author_is_verified" type="boolean">
+  Whether the author's channel is verified. Example: `false`
+</ResponseField>
+
+<ResponseField name="author_badge" type="string | null">
+  Membership or sponsorship badge label, if any. Example: `null`
+</ResponseField>
+
+<ResponseField name="published_time_text" type="string">
+  Human-readable relative publish time as shown on YouTube. Example: `2 years ago`
+</ResponseField>
+
+<ResponseField name="published_at" type="string | null">
+  ISO 8601 timestamp of when the comment was published, if available. Example: `2022-08-15T14:30:00Z`
+</ResponseField>
+
+<ResponseField name="vote_count" type="integer">
+  Number of likes on the comment. Example: `342`
+</ResponseField>
+
+<ResponseField name="reply_count" type="integer">
+  Number of replies to this top-level comment. Always `0` for replies. Example: `12`
+</ResponseField>
+
+<ResponseField name="has_creator_heart" type="boolean">
+  Whether the video creator hearted this comment. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_pinned" type="boolean">
+  Whether this comment is pinned at the top. Example: `false`
+</ResponseField>
+
+<ResponseField name="type" type="string">
+  Comment type: `comment` for top-level or `reply` for a reply. Example: `comment`
+</ResponseField>
+
+<ResponseField name="reply_to_comment_id" type="string | null">
+  The `comment_id` of the parent comment this is a reply to. `null` for top-level comments. Example: `null`
+</ResponseField>
+
+<ResponseField name="video_id" type="string">
+  YouTube video ID the comment belongs to. Example: `dQw4w9WgXcQ`
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  Full URL of the video. Example: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+</ResponseField>
+
+<ResponseField name="video_title" type="string">
+  Title of the video. Example: `Rick Astley - Never Gonna Give You Up (Official Music Video)`
+</ResponseField>
+
+<ResponseField name="comments_count" type="integer">
+  Total number of comments on the video. Example: `2400000`
+</ResponseField>
+
+<ResponseField name="channel_name" type="string">
+  Name of the channel that uploaded the video. Example: `Rick Astley`
+</ResponseField>
+
+<ResponseField name="channel_id" type="string">
+  YouTube channel ID of the video uploader. Example: `UCuAXFkgsw1L7xaCfnd5JJOw`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=1" \
+  -H "Authorization: Token YOUR_API_KEY"
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}"}
+
+squid_id = "YOUR_SQUID_HASH"
+page = 1
+all_results = []
+
+while True:
+    response = requests.get(
+        f"{BASE_URL}/results",
+        headers=headers,
+        params={"squid": squid_id, "page": page},
+    )
+    data = response.json()
+    all_results.extend(data.get("results", []))
+    if not data.get("next"):
+        break
+    page += 1
+
+print(f"Total comments collected: {len(all_results)}")
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{
+  "count": 2,
+  "next": null,
+  "previous": null,
+  "results": [
+    {
+      "comment_id": "UgxZf7BbcN3mJlQkfvt4AaABAg",
+      "text": "This song never gets old.",
+      "author": "Jane Smith",
+      "author_channel_id": "UCxxxxxxxxxxxxxxxxxxxxxx",
+      "author_profile_url": "https://www.youtube.com/channel/UCxxxxxxxxxxxxxxxxxxxxxx",
+      "author_avatar": "https://yt3.ggpht.com/example",
+      "author_is_channel_owner": false,
+      "author_is_verified": false,
+      "author_badge": null,
+      "published_time_text": "3 years ago",
+      "published_at": "2021-06-10T09:15:00Z",
+      "vote_count": 1204,
+      "reply_count": 45,
+      "has_creator_heart": false,
+      "is_pinned": false,
+      "type": "comment",
+      "reply_to_comment_id": null,
+      "video_id": "dQw4w9WgXcQ",
+      "video_url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "video_title": "Rick Astley - Never Gonna Give You Up (Official Music Video)",
+      "comments_count": 2400000,
+      "channel_name": "Rick Astley",
+      "channel_id": "UCuAXFkgsw1L7xaCfnd5JJOw"
+    }
+  ]
+}
+```

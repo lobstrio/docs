@@ -1,0 +1,96 @@
+---
+title: "Add Tasks"
+description: "Add YouTube video URLs to scrape comments from"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+<Note>Crawler ID: `66e9fbe07ae0a543576dc6ff241c229c`</Note>
+
+Add YouTube video URLs to your **YouTube Comments Scraper** squid. Each task is one video; the scraper collects all top-level comments (and their replies if enabled) for that video.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash of the squid to add tasks to
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects to add
+</ParamField>
+
+<ParamField body="tasks[].url" type="string" required>
+  YouTube video URL. Example: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+</ParamField>
+
+## URL Format
+
+The `url` field accepts standard YouTube video URLs:
+
+```
+https://www.youtube.com/watch?v=VIDEO_ID
+https://youtu.be/VIDEO_ID
+```
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"},
+      {"url": "https://www.youtube.com/watch?v=ANOTHER_VIDEO_ID"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+API_KEY = "YOUR_API_KEY"
+BASE_URL = "https://api.lobstr.io/v1"
+headers = {"Authorization": f"Token {API_KEY}", "Content-Type": "application/json"}
+
+squid_id = "YOUR_SQUID_HASH"
+
+video_urls = [
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "https://www.youtube.com/watch?v=ANOTHER_VIDEO_ID",
+]
+
+payload = {
+    "squid": squid_id,
+    "tasks": [{"url": url} for url in video_urls],
+}
+
+response = requests.post(f"{BASE_URL}/tasks", headers=headers, json=payload)
+print(f"Tasks added: {len(response.json().get('tasks', []))}")
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{
+  "tasks": [
+    {
+      "id": "TASK_HASH",
+      "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+      "status": "pending"
+    }
+  ]
+}
+```
