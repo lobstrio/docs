@@ -15,7 +15,7 @@ Community Story Rewards lets you earn bonus credits — equal to 20% of your pla
 
 <api method="GET">https://api.lobstr.io/v1/community_rewards/subreddits</api>
 
-Returns the list of subreddits that qualify for a reward submission.
+Returns the list of subreddits that qualify for a reward submission, along with the exact credit amount the authenticated user would receive if approved.
 
 <ParamField header="Authorization" type="string" required>
   Your API authentication token. Value: `Token YOUR_API_KEY`
@@ -23,9 +23,12 @@ Returns the list of subreddits that qualify for a reward submission.
 
 ```json 200
 {
-  "results": ["SaaS", "entrepreneur", "learnpython", "MachineLearning"]
+  "results": ["SaaS", "entrepreneur", "learnpython", "MachineLearning"],
+  "estimated_reward_credits": 2000
 }
 ```
+
+`estimated_reward_credits` is the actual credit amount you would earn — 20% of your plan's execution credits, computed server-side using the same formula as the grant. `null` if you have no active subscription.
 
 ## Submit a story
 

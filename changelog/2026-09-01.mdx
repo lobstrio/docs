@@ -1,0 +1,16 @@
+---
+title: "September 1, 2026"
+description: "API updates shipped September 1, 2026"
+---
+
+<Update label="September 1, 2026">
+
+### Improved
+- **Community Story Rewards: `estimated_reward_credits` in subreddit list** — `GET /v1/community_rewards/subreddits` now also returns `estimated_reward_credits`: the exact number of credits you would earn if your submission is approved, computed server-side with the same formula as the actual grant (20% of your plan's execution credits). No more guessing from "20% of your plan." See [Community Story Rewards](/docs/community-rewards).
+
+### Fixed
+- **Sales Navigator Leads: email enrichment** — fixed a bug where the email enrichment step was not correctly resolving contact emails for certain lead profiles.
+- **Idealista: proxy rotation on 500 errors** — the scraper now rotates its proxy when the server returns a 500, reducing stalls on congested exit nodes.
+- **LaCentrale: anti-bot bypass updated** — switched to the ddbypass2 route targeting Chrome 152, resolving a recent uptick in DataDome challenges.
+
+</Update>
