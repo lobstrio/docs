@@ -592,7 +592,8 @@
             "pages": [
               "docs/sdk",
               "docs/cli",
-              "docs/mcp"
+              "docs/mcp",
+              "docs/docs-mcp"
             ]
           }
         ]
