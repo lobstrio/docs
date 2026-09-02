@@ -97,7 +97,7 @@ This endpoint retrieves detailed information about a specific run using its hash
 </ResponseField>
 
 <ResponseField name="mail_done" type="boolean">
-  Whether the email delivery was completed. Example: `false`
+  Whether the email delivery was completed. Example: `false`. Note: this specific endpoint names the field `mail_done`/`mail_time` — [List Runs](/docs/list-runs) and [Start Run](/docs/start-run) return the same data as `email_done`/`email_time` instead.
 </ResponseField>
 
 <ResponseField name="mail_time" type="string | null">

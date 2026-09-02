@@ -62,7 +62,23 @@ response = requests.post(
 squid = response.json()
 squid_id = squid["id"]
 print(f"Squid created: {squid_id}")
+
+# A squid isn't ready to run until you've configured its params at
+# least once, even if you're keeping every default value as-is.
+requests.post(
+    f"https://api.lobstr.io/v1/squids/{squid_id}",
+    headers={**headers, "Content-Type": "application/json"},
+    json={"params": {}}
+)
 ```
+
+<Warning>
+  `runs.start()` will fail with `SquidNotReady` if you skip the settings
+  update above, even when you don't want to change anything from the
+  crawler's defaults — a squid isn't considered ready to run until its
+  `params` have been explicitly submitted at least once. See [Update
+  Squid](/docs/update-squid).
+</Warning>
 
 ## Step 4: Add tasks
 
@@ -169,6 +185,13 @@ squid = requests.post(
     json={"name": "Quickstart squid", "crawler": CRAWLER_ID}
 ).json()
 squid_id = squid["id"]
+
+# Configure params (required before starting a run, even with no changes)
+requests.post(
+    f"https://api.lobstr.io/v1/squids/{squid_id}",
+    headers=json_headers,
+    json={"params": {}}
+)
 
 # Add tasks
 requests.post(
