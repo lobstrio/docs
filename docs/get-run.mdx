@@ -12,9 +12,9 @@ This endpoint retrieves detailed information about a specific run using its hash
   Your API authentication token. Value: `Token YOUR_API_KEY`
 </ParamField>
 
-## Query Parameters
+## Path Parameters
 
-<ParamField query="run_hash" type="string" required>
+<ParamField path="run_hash" type="string" required>
   The unique identifier (hash) of the run. Example: `0393be3ea6f74986906153df1c3f9894`
 </ParamField>
 
@@ -40,8 +40,8 @@ This endpoint retrieves detailed information about a specific run using its hash
   Date and time when the scraping run completed or stopped. Example: `"2025-02-04T10:26:52.222239"`
 </ResponseField>
 
-<ResponseField name="duration" type="string">
-  Duration of the scraping run as a formatted timedelta string. Example: `"0:00:50.183300"`
+<ResponseField name="duration" type="float">
+  Duration of the scraping run in seconds. Example: `50.1833`
 </ResponseField>
 
 <ResponseField name="credit_used" type="float">
@@ -96,11 +96,11 @@ This endpoint retrieves detailed information about a specific run using its hash
   Number of times results have been exported. Example: `1`
 </ResponseField>
 
-<ResponseField name="email_done" type="boolean">
+<ResponseField name="mail_done" type="boolean">
   Whether the email delivery was completed. Example: `false`
 </ResponseField>
 
-<ResponseField name="email_time" type="string | null">
+<ResponseField name="mail_time" type="string | null">
   Timestamp when email delivery completed. Example: `null`
 </ResponseField>
 
@@ -108,9 +108,9 @@ This endpoint retrieves detailed information about a specific run using its hash
   Email verification status for delivery. Example: `null`
 </ResponseField>
 
-<ResponseField name="is_done" type="boolean">
-  Shorthand flag indicating whether the run has completed (any terminal status). Example: `true`
-</ResponseField>
+<Note>
+  This endpoint does not return an `is_done` field. Use [Get Run Stats](/docs/get-run-stats) if you need a live `is_done` flag while a run is in progress.
+</Note>
 
 ## Run Statuses
 
@@ -197,12 +197,11 @@ if run['status'] in ['done', 'aborted', 'error']:
   "id": "0393be3ea6f74986906153df1c3f9894",
   "object": "run",
   "squid": "e445405ef4ab41208ef7d29b92a1a9dd",
-  "is_done": true,
   "created_at": "2025-02-04T10:26:50.847633",
   "started_at": "2025-02-04T10:25:41.623683",
   "ended_at": "2025-02-04T10:26:52.222239",
   "next_launch_at": null,
-  "duration": "0:00:50.183300",
+  "duration": 50.1833,
   "credit_used": 50.1833,
   "origin": "user",
   "force_launch": false,
@@ -210,8 +209,8 @@ if run['status'] in ['done', 'aborted', 'error']:
   "export_done": true,
   "export_count": 1,
   "export_time": "2025-02-04T10:26:53.780636",
-  "email_done": false,
-  "email_time": null,
+  "mail_done": false,
+  "mail_time": null,
   "email_verification": null,
   "total_results": 40,
   "total_unique_results": 40,

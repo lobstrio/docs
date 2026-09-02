@@ -24,7 +24,6 @@ Set these parameters in the `params` object:
 | --- | --- | --- | --- |
 | **max_results** | integer | 200 | Maximum number of reviews to collect per company page |
 | **max_unique_results_per_run** | integer | unlimited | Maximum unique reviews across all tasks in the run |
-| **sort_by** | string | recency | Sort order: `recency`, `relevance` |
 | **stars** | string | all | Filter by star rating: `all`, `1`, `2`, `3`, `4`, `5` |
 | **language** | string | All languages | Filter by review language. Allowed values: `All languages`, `Arabic`, `Chinese (Simplified)`, `Chinese (Traditional)`, `Danish`, `Dutch`, `English`, `Finnish`, `French`, `German`, `Greek`, `Hebrew`, `Indonesian`, `Italian`, `Japanese`, `Korean`, `Norwegian`, `Polish`, `Portuguese`, `Russian`, `Spanish`, `Swedish`, `Thai`, `Turkish`, `Vietnamese` |
 | **verified** | boolean | false | Only return reviews from verified purchases |
@@ -70,7 +69,6 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "no_line_breaks": true,
     "params": {
       "max_results": 200,
-      "sort_by": "recency",
       "stars": "all",
       "language": "English",
       "verified": false,
@@ -99,7 +97,6 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
         "no_line_breaks": True,
         "params": {
             "max_results": 200,
-            "sort_by": "recency",
             "stars": "all",
             "language": "English",
             "verified": False,
@@ -125,7 +122,6 @@ print(f"Settings updated: {data['name']}")
   "no_line_breaks": true,
   "params": {
     "max_results": 200,
-    "sort_by": "recency",
     "stars": "all",
     "language": "English",
     "verified": false,

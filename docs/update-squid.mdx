@@ -54,9 +54,9 @@ This endpoint updates an existing squid's settings using its hash ID. You can co
   Must be application/json. Value: `application/json`
 </ParamField>
 
-## Query Parameters
+## Path Parameters
 
-<ParamField query="squid_hash" type="string" required>
+<ParamField path="squid_hash" type="string" required>
   The unique identifier (hash) of the squid to update. Example: `e86b29c032024b66aff529e1d43c2bd7`
 </ParamField>
 
@@ -145,7 +145,7 @@ print(f"Notifications: {result.get('run_notify', 'None')}")
 
 ## Response
 
-```json 200
+```json 201
 {
   "name": "Updated Squid Name",
   "no_line_breaks": true,

@@ -58,13 +58,18 @@ print(response.json())
 
 ## Response
 
+A successful call confirms your token is valid and returns your profile. See [Get User Profile](/docs/user-me) for the full response schema.
+
 ```json 200
 {
-  "id": 12345,
-  "email": "user@example.com",
   "first_name": "John",
   "last_name": "Doe",
-  "is_active": true,
-  "date_joined": "2024-01-15T10:30:00Z"
+  "email": "user@example.com",
+  "email_verified": true,
+  "plan": [],
+  "login_count": 42,
+  "profile_image": null,
+  "is_staff": false,
+  "credit_interval": "monthly"
 }
 ```

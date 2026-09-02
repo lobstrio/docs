@@ -72,8 +72,8 @@ It's recommended to check your balance before starting large-scale data collecti
   Total concurrency slots available on the plan. Example: `20`
 </ResponseField>
 
-<ResponseField name="has_unpaid_bill" type="boolean">
-  Whether there is an outstanding unpaid invoice. Example: `false`
+<ResponseField name="has_unpaid_bill" type="object">
+  Outstanding unpaid invoice info. Empty object (`{}`) when there is no unpaid bill — despite the name, this is not a boolean.
 </ResponseField>
 
 <ResponseField name="reset_time" type="string">
@@ -135,10 +135,12 @@ print(f"Slots used: {balance_data['used_slots']} / {balance_data['total_availabl
   "bonus_credit": 0,
   "rollover_credit": 200,
   "rollover_credit_expires_at": null,
+  "community_reward_credit": 500,
+  "community_reward_credit_expires_at": null,
   "interval": "monthly",
   "used_slots": 3,
   "total_available_slots": 20,
-  "has_unpaid_bill": false,
+  "has_unpaid_bill": {},
   "reset_time": "2025-02-01T00:00:00Z"
 }
 ```

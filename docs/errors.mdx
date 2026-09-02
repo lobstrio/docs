@@ -3,11 +3,15 @@ title: "Errors"
 description: "HTTP status codes and error types returned by the lobstr.io API"
 ---
 
-The lobstr.io API uses standard HTTP status codes. All error responses include a `detail` field with a human-readable message.
+The lobstr.io API uses standard HTTP status codes. All error responses share one envelope: an `errors` object with `message` (human-readable), `type` (the error code from the tables below), and `code` (the HTTP status, repeated).
 
 ```json
 {
-  "detail": "A required parameter squid is missing from the route."
+  "errors": {
+    "message": "A required parameter squid is missing from the route.",
+    "type": "ParamsNeeded",
+    "code": 400
+  }
 }
 ```
 
@@ -76,7 +80,7 @@ These occur when the request is valid but the operation can't proceed due to acc
 | `NotEnoughBalance` | Insufficient credits to start the run |
 | `NoActiveSubscription` | Account has no active subscription |
 | `UsageLimitExceeded` | Plan usage limit has been reached |
-| `SlotsLimitExceeded` | Maximum concurrency slots in use |
+| `SlotsLimitExceeded` | Your plan's squid/slot allocation is exhausted (e.g. trying to create another squid with no free slots) — distinct from `ConcurrencyLimitExceeded` below, which is about a run's concurrency setting, not squid count |
 | `ConcurrencyLimitExceeded` | Requested concurrency exceeds plan limit |
 | `NoTasksPresent` | Squid has no active tasks to run |
 | `SquidNotReady` | Squid is not in a state that allows running |
@@ -134,11 +138,15 @@ These indicate a problem with the account attached to the squid. Re-sync or repl
 
 ## Rate limiting (429)
 
-Requests that exceed your plan's rate limit return a `429` response. See [Rate Limiting](/docs/rate-limiting) for limits and retry guidance.
+Requests that exceed your plan's rate limit return a `429` response, in the same `errors` envelope as every other error:
 
 ```json
 {
-  "detail": "Request was throttled. Expected available in 2 seconds."
+  "errors": {
+    "message": "Request was throttled. Expected available in 2 seconds.",
+    "type": "...",
+    "code": 429
+  }
 }
 ```
 
@@ -167,12 +175,12 @@ def api_request(method, url, **kwargs):
         raise Exception("Authentication failed — check your API key")
 
     if response.status_code == 404:
-        detail = response.json().get("detail", "Resource not found")
-        raise Exception(f"Not found: {detail}")
+        message = response.json().get("errors", {}).get("message", "Resource not found")
+        raise Exception(f"Not found: {message}")
 
     if response.status_code == 400:
-        detail = response.json().get("detail", "Bad request")
-        raise Exception(f"Bad request: {detail}")
+        message = response.json().get("errors", {}).get("message", "Bad request")
+        raise Exception(f"Bad request: {message}")
 
     if response.status_code == 429:
         raise Exception("Rate limit exceeded — slow down requests")

@@ -12,11 +12,13 @@ This endpoint generates a temporary download URL for the results of a specific r
   Your API authentication token. Value: `Token YOUR_API_KEY`
 </ParamField>
 
-## Query Parameters
+## Path Parameters
 
-<ParamField query="run_hash" type="string" required>
+<ParamField path="run_hash" type="string" required>
   The unique identifier (hash) of the run to download. Example: `300e9c5c127d421c90f431478d9a2cfb`
 </ParamField>
+
+## Query Parameters
 
 <ParamField query="file_format" type="string">
   Export file format. One of `csv`, `xlsx`, `json`, `jsonl`. Defaults to `csv` — omit this parameter to get CSV.

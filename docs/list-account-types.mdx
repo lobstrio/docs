@@ -98,14 +98,18 @@ for account_type in data['data']:
 
 ## Response
 
+<Note>
+  There are 20 account types at the time of writing (Facebook, LinkedIn, Sales Navigator, Twitter/X, Instagram, Leboncoin, and more platform-specific ones). The example below shows 4 for brevity — `total_results` reflects the real full count.
+</Note>
+
 ```json 200
 {
-  "total_results": 4,
+  "total_results": 20,
   "limit": 50,
   "page": 1,
   "total_pages": 1,
   "result_from": 1,
-  "result_to": 5,
+  "result_to": 20,
   "data": [
     {
       "id": "16f5b7f91e8fc533eab88be973273a02",
@@ -118,6 +122,26 @@ for account_type in data['data']:
       "cookies": [
         {"name": "c_user", "required": true},
         {"name": "xs", "required": true}
+      ]
+    },
+    {
+      "id": "77472acc63e41abde1fa2afd24bece4c",
+      "object": "account_type",
+      "name": "linkedin-sync",
+      "icon": "<base64 image data>",
+      "domain": "Linkedin",
+      "params": {
+        "profiles": {
+          "max": 1000,
+          "default": 800,
+          "display": "Profiles per day",
+          "description": "Maximum number of profiles the account can scrape per day. Once this limit is reached, the run linked to this account pauses for 24 hours."
+        }
+      },
+      "baseurl": "https://www.linkedin.com",
+      "cookies": [
+        {"name": "li_at", "required": true},
+        {"name": "JSESSIONID", "required": true}
       ]
     },
     {
