@@ -17,7 +17,7 @@ This endpoint retrieves a paginated list of tasks for a specific squid. You can 
 | Parameter | Type | Required | Description |
 | --- | --- | --- | --- |
 | **squid** | string | Yes | The squid hash ID to list tasks for |
-| **type** | string | No | Response detail level: 'url' (basic) or 'params' (detailed). Default: 'url' |
+| **type** | string | No | Filters by how the task was submitted, not a detail level: 'url' returns only tasks created with a `url` field; 'params' returns only tasks created with structured parameters instead (e.g. Google Maps Leads Scraper's city/category/country mode). These are mutually exclusive result sets. Omit `type` to get all tasks regardless of shape. For crawlers that only ever accept a `url` (most of them), `type=params` will always return an empty list — that's expected, not a bug. |
 | **page** | integer | No | Page number for pagination. Default: 1 |
 | **limit** | integer | No | Results per page. Default: 50, Max: 100 |
 
@@ -68,7 +68,7 @@ This endpoint retrieves a paginated list of tasks for a specific squid. You can 
 </ResponseField>
 
 <Tip>
-  Use type=url for a quick overview of tasks, or type=params when you need full parameter details.
+  Omit `type` unless you specifically need to isolate one task shape — most squids only ever use one or the other, so filtering by `type` on a URL-only crawler will just return nothing.
 </Tip>
 
 <Note>
@@ -96,7 +96,7 @@ headers = {
 }
 params = {
     "squid": "a1b2c3d4e5f6g7h8i9j0",
-    "type": "params",  # Use "url" for basic info, "params" for full details
+    "type": "params",  # Only tasks created with structured params, not a url
     "page": 1,
     "limit": 50
 }
