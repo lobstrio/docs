@@ -114,3 +114,10 @@ lobstr whoami
 | `delivery email <squid> --email user@example.com` | Configure email delivery for a squid |
 | `delivery webhook <squid> --url https://...` | Configure webhook delivery for a squid |
 | `delivery s3 <squid> --bucket my-bucket` | Configure Amazon S3 delivery for a squid |
+| `delivery googlesheet <squid> --url https://...` | Configure Google Sheet delivery for a squid |
+| `delivery sftp <squid> --host ... --username ... --password ... --directory ...` | Configure SFTP delivery for a squid |
+| `delivery test-email --email user@example.com` | Test an email delivery config before activating it |
+| `delivery test-webhook --url https://...` | Test a webhook delivery config before activating it |
+| `delivery test-s3 --bucket my-bucket` | Test an S3 delivery config before activating it |
+| `delivery test-googlesheet --url https://...` | Test a Google Sheet delivery config before activating it |
+| `delivery test-sftp --host ... --username ... --password ... --directory ...` | Test an SFTP delivery config before activating it |

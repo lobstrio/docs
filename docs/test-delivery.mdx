@@ -1,10 +1,10 @@
 ---
 title: "Test Delivery Configuration"
 description: "Verify delivery configurations before activating them"
-api: "POST https://api.lobstr.io/v1/delivery/test-{route}"
+api: "POST https://api.lobstr.io/v1/delivery/test-webhook"
 ---
 
-Test endpoints allow you to verify your delivery configurations work correctly before activating automatic delivery. Each delivery method has its own test endpoint.
+Test endpoints allow you to verify your delivery configurations work correctly before activating automatic delivery. Each delivery method has its own distinct endpoint — there is no shared endpoint with a channel query parameter.
 
 ### Available Test Endpoints
 
@@ -24,12 +24,6 @@ Test endpoints allow you to verify your delivery configurations work correctly b
 
 <ParamField header="Content-Type" type="string" required>
   Must be application/json. Value: `application/json`
-</ParamField>
-
-## Query Parameters
-
-<ParamField query="route" type="string" required>
-  The delivery method to test: 'email', 'googlesheet', 'webhook', 's3', or 'sftp'. Example: `email`
 </ParamField>
 
 ## Test Email - Request Body

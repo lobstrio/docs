@@ -160,51 +160,44 @@ API_KEY = os.environ["LOBSTR_API_KEY"]
 CRAWLER_ID = "YOUR_CRAWLER_ID"
 
 headers = {"Authorization": f"Token {API_KEY}"}
-json_headers = {\*\*headers, "Content-Type": "application/json"}
+json_headers = {**headers, "Content-Type": "application/json"}
 
 # Create squid
-
 squid = requests.post(
-"https://api.lobstr.io/v1/squids",
-headers=json_headers,
-json={"name": "Quickstart squid", "crawler": CRAWLER_ID}
+    "https://api.lobstr.io/v1/squids",
+    headers=json_headers,
+    json={"name": "Quickstart squid", "crawler": CRAWLER_ID}
 ).json()
 squid_id = squid["id"]
 
 # Add tasks
-
 requests.post(
-"https://api.lobstr.io/v1/tasks",
-headers=json_headers,
-json={"squid": squid_id, "tasks": [{"url": "https://example.com"}]}
+    "https://api.lobstr.io/v1/tasks",
+    headers=json_headers,
+    json={"squid": squid_id, "tasks": [{"url": "https://example.com"}]}
 )
 
 # Start run
-
 run_id = requests.post(
-"https://api.lobstr.io/v1/runs",
-headers=json_headers,
-json={"squid": squid_id}
+    "https://api.lobstr.io/v1/runs",
+    headers=json_headers,
+    json={"squid": squid_id}
 ).json()["id"]
 
 # Poll until done
-
 while True:
-run = requests.get(f"https://api.lobstr.io/v1/runs/{run_id}", headers=headers).json()
-if run["status"] in {"done", "aborted", "error"}:
-break
-time.sleep(10)
+    run = requests.get(f"https://api.lobstr.io/v1/runs/{run_id}", headers=headers).json()
+    if run["status"] in {"done", "aborted", "error"}:
+        break
+    time.sleep(10)
 
 # Fetch results
-
 results = requests.get(
-"https://api.lobstr.io/v1/results",
-headers=headers,
-params={"squid": squid_id, "limit": 100, "page": 1}
+    "https://api.lobstr.io/v1/results",
+    headers=headers,
+    params={"squid": squid_id, "page_size": 100, "page": 1}
 ).json()
 
 print(f"Done — {results['total_results']} results collected")
-
 ```
 </CodeGroup>
-```
