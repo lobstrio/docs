@@ -26,7 +26,7 @@ Retrieve scraped data from your **ParuVendu Listings Scraper** runs.
   Page number (default: 1).
 </ParamField>
 
-<ParamField query="limit" type="integer">
+<ParamField query="page_size" type="integer">
   Results per page (default: 50, max: 100).
 </ParamField>
 
@@ -160,7 +160,7 @@ Retrieve scraped data from your **ParuVendu Listings Scraper** runs.
 
 <CodeGroup>
 ```bash cURL
-curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=1&limit=50" \
+curl -X GET "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=1&page_size=50" \
   -H "Authorization: Token YOUR_API_KEY"
 ```
 
@@ -174,7 +174,7 @@ headers = {"Authorization": f"Token {API_KEY}"}
 params = {
     "squid": "YOUR_SQUID_HASH",
     "page": 1,
-    "limit": 50
+    "page_size": 50
 }
 
 all_results = []
@@ -237,7 +237,7 @@ for listing in all_results[:5]:
       "scraping_time": "2026-03-20T09:15:00.000Z"
     }
   ],
-  "next": "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=2&limit=50",
+  "next": "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_HASH&page=2&page_size=50",
   "previous": null
 }
 ```

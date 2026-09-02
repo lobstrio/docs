@@ -36,13 +36,17 @@ Every paginated endpoint returns the same envelope:
 | Parameter | Default | Max | Description |
 |-----------|---------|-----|-------------|
 | `page` | `1` | — | Page number to retrieve |
-| `limit` | `10` | `100` | Number of results per page |
+| `page_size` | `10` | `100` | Number of results per page |
 
 Pass these as query parameters:
 
 ```bash
-GET /v1/results?squid=abc123&page=2&limit=50
+GET /v1/results?squid=abc123&page=2&page_size=50
 ```
+
+<Note>
+  The page-size query parameter's name varies by endpoint — Get Results uses `page_size`, while List Accounts uses `limit`. Check the specific endpoint's own page if you're unsure.
+</Note>
 
 ## Iterating through all pages
 
@@ -56,13 +60,13 @@ headers = {"Authorization": f"Token {API_KEY}"}
 def get_all_results(squid_id):
     all_data = []
     page = 1
-    limit = 100
+    page_size = 100
 
     while True:
         response = requests.get(
             "https://api.lobstr.io/v1/results",
             headers=headers,
-            params={"squid": squid_id, "page": page, "limit": limit}
+            params={"squid": squid_id, "page": page, "page_size": page_size}
         )
         body = response.json()
 
@@ -82,11 +86,11 @@ print(f"Total records fetched: {len(results)}")
 
 ```bash cURL
 # Page 1
-curl "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_ID&page=1&limit=100" \
+curl "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_ID&page=1&page_size=100" \
   -H "Authorization: Token YOUR_API_KEY"
 
 # Page 2
-curl "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_ID&page=2&limit=100" \
+curl "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_ID&page=2&page_size=100" \
   -H "Authorization: Token YOUR_API_KEY"
 ```
 </CodeGroup>
@@ -117,5 +121,5 @@ Upgrade your plan to remove this restriction.
 | List Accounts | `GET /v1/accounts` |
 
 <Tip>
-  Use `limit=100` (the maximum) to minimize the number of requests when fetching large datasets.
+  Use the maximum page size (`page_size=100` for Get Results; check each endpoint's own parameter name) to minimize the number of requests when fetching large datasets.
 </Tip>
