@@ -39,3 +39,31 @@ Each result object contains the following fields:
 <ResponseField name="status_code" type="integer">
   HTTP status code returned by LaCentrale. `200` = active, `404`/`410` = deactivated or expired. Example: `200`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 81123,
+      "object": "result",
+      "squid": "2c7e9144973963a1e1bede62ac7e60ef",
+      "run": "f454b74115e20e4aca88312cd76d035c",
+      "url": "https://www.lacentrale.fr/auto-occasion-annonce-66103802227.html",
+      "status": "active",
+      "status_code": 200,
+      "functions": null,
+      "native_id": 81123
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

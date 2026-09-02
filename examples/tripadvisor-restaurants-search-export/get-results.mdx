@@ -94,3 +94,45 @@ Each result object contains the following fields:
 <ResponseField name="is_michelin" type="boolean">
   Whether the restaurant appears in the Michelin Guide. Example: `false`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 30880,
+      "object": "result",
+      "squid": "ca2852c60196302c6e4c1e18001a204b",
+      "run": "93284ed660634fd6d188365ce304cf35",
+      "url": "https://www.tripadvisor.fr/Restaurant_Review-g187147-d12182791-Reviews-Restaurant_La_Pie_Noir-Paris_Ile_de_France.html",
+      "internal_id": "d12182791",
+      "name": "Restaurant La Pie Noir",
+      "score": 4.7,
+      "ratings": 665,
+      "price": "€€-€€€",
+      "features": "Française, Européenne",
+      "full_address": "5 Rue de la Montagne Sainte Genevieve, Paris, Île-de-France, 75005, FR",
+      "lat": 48.849335,
+      "lng": 2.34875,
+      "phone": "+33 1 43 54 08 99",
+      "website": null,
+      "menu": null,
+      "mail": "restaurant.lapienoir.bzh@gmail.com",
+      "image_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/7a/08/cf/side-view-from-the-street.jpg",
+      "is_claimed": false,
+      "is_michelin": false,
+      "functions": null,
+      "native_id": 30880
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

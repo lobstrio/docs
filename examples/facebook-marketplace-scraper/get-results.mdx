@@ -135,3 +135,63 @@ The following fields are only populated when `listing_details` is set to `true` 
 <ResponseField name="listing_attributes" type="array">
   Structured listing attributes provided by the seller (condition, brand, size, etc.).
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 89438,
+      "object": "result",
+      "squid": "9f9d8c985d467622ba04fd2a54932402",
+      "run": "0efdbe4671e8df2cc1265ddb7324bf8f",
+      "url": "https://www.facebook.com/marketplace/item/1323925843091629/",
+      "internal_id": "1323925843091629",
+      "title": "Télévision très bon état",
+      "price": "55.00",
+      "currency": "EUR",
+      "formatted_price": "€55",
+      "city": "Lyon",
+      "image_urls": [
+        "https://scontent.fbcdn.net/img1.jpg",
+        "https://scontent.fbcdn.net/img2.jpg"
+      ],
+      "creation_time": "2025-01-15 14:30:00+00:00",
+      "is_sold": false,
+      "is_live": true,
+      "delivery_types": "IN_PERSON",
+      "category": "TVs",
+      "description": "Piano rock jam rj661.\nPour les enfants, en bon état.",
+      "condition": "Usado — em boas condições",
+      "location_text": "Lapeyrouse-Mornay, ARA",
+      "latitude": 45.326843,
+      "longitude": 4.993286,
+      "seller_name": "Angelique Przybylski",
+      "seller_id": "1057237320",
+      "is_pending": false,
+      "is_hidden": false,
+      "is_viewer_seller": false,
+      "strikethrough_price": "300",
+      "strikethrough_price_formatted": "£300",
+      "listing_attributes": [
+        {
+          "attribute_name": "item_condition",
+          "value": "USED_GOOD",
+          "label": "Used - Good"
+        }
+      ],
+      "functions": null,
+      "native_id": 89438
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

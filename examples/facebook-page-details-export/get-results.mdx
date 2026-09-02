@@ -230,9 +230,42 @@ for page in data["data"]:
       "scraping_time": "2025-05-02T08:17:12.353Z",
       "functions": null,
       "native_id": 50017
+    },
+    {
+      "id": 50018,
+      "object": "result",
+      "squid": "05d966bcc86f48b6afca3de8a0a0dc5e",
+      "run": "401314a9bf2547c984a3c5d335273a56",
+      "name": null,
+      "category": null,
+      "about": null,
+      "address": null,
+      "phone": null,
+      "email": null,
+      "wesbite": null,
+      "instagram": null,
+      "likes": null,
+      "followers": null,
+      "reviews": null,
+      "score": null,
+      "visits": null,
+      "image_url": null,
+      "menu": null,
+      "price": null,
+      "internal_id": "SpaceX",
+      "slug": null,
+      "url": "https://www.facebook.com/SpaceX/",
+      "status": "login_required",
+      "scraping_time": "2025-07-20T17:07:24.078Z",
+      "functions": null,
+      "native_id": 50018
     }
   ],
   "next": null,
   "previous": null
 }
 ```
+
+<Note>
+  Fields other than `url`, `status`, and `internal_id` come back empty when `status` isn't `valid_page` — the page requires login before its details can be scraped.
+</Note>

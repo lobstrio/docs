@@ -86,3 +86,43 @@ Each result object contains the following fields:
 <ResponseField name="page" type="integer">
   Search results page number (1 = first page of results). Example: `1`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 77331,
+      "object": "result",
+      "squid": "f6bcb5d88a53ddd90e0ea0944f0433ae",
+      "run": "bbdefdfc8d2f9c05bcbdd805c24c6cf6",
+      "title": "Coffee",
+      "url": "https://en.wikipedia.org/wiki/Coffee",
+      "displayed_url": "https://en.wikipedia.org › wiki › Coffee",
+      "description": "Coffee is a beverage brewed from roasted, ground coffee beans. Darkly colored, bitter, and slightly acidic, coffee has a stimulating effect on humans, primarily ...",
+      "snippet_segments": null,
+      "question": "What is the 15-15-15 coffee rule?",
+      "answer": null,
+      "is_question_answer": false,
+      "is_related_query": false,
+      "is_organic": true,
+      "is_paid": false,
+      "total_results": "3190000000",
+      "date": null,
+      "emphasized_keywords": "coffee",
+      "page": 1,
+      "functions": null,
+      "native_id": 77331
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

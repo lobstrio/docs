@@ -50,3 +50,34 @@ Each result object contains the following fields:
 <ResponseField name="image" type="string">
   URL of the article's thumbnail or cover image. Example: `https://i.guim.co.uk/img/media/47c48e5316362bd18c7904f551dd75ebde952c63/0_0_7008_4672/master/7008.jpg?width=465&dpr=1&s=none&crop=none`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 68697,
+      "object": "result",
+      "squid": "4cb2f1c78f37217ff259a9fc178b96d5",
+      "run": "f30902df7baa23de90ad80222a80b115",
+      "title": "A robust future? Why Brazil's 'bitter' coffee is thriving as the climate crisis hits global crops",
+      "short_description": "Long seen as the poor relation to arabica, small growers in the Amazon are rebooting robusta's bitter reputation, which can thrive in higher...",
+      "published_at": "2026-03-18 13:12:00",
+      "url": "https://www.theguardian.com/global-development/2026/mar/18/a-robust-future-why-brazils-bitter-coffee-is-thriving-as-the-climate-crisis-hits-global-crops",
+      "source": "The Guardian",
+      "image": "https://i.guim.co.uk/img/media/47c48e5316362bd18c7904f551dd75ebde952c63/0_0_7008_4672/master/7008.jpg?width=465&dpr=1&s=none&crop=none",
+      "functions": null,
+      "native_id": 68697
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

@@ -184,3 +184,67 @@ Averaging across our evaluations designed to induce misbehavior, the probability
 <ResponseField name="_json" type="json">
   Raw JSON tweet data returned by the Twitter/X API
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 19211,
+      "object": "result",
+      "squid": "d7f6258b2a43ab78cf0dca3a237c49f8",
+      "run": "082110ac9afc9d87f75894a0261a3e38",
+      "internal_unique_id": "1996281178668876214",
+      "tweet_url": "https://twitter.com/OpenAI/status/1996281178668876214",
+      "original_tweet_url": null,
+      "original_tweet_id": null,
+      "name": "OpenAI",
+      "user_id": "4398626122",
+      "username": "OpenAI",
+      "published_at": "2025-12-03T18:11:36+00:00",
+      "content": "In our tests, we found that the confessions method significantly improves the visibility of model misbehavior.\n\nAveraging across our evaluations designed to induce misbehavior, the probability of \"false negatives\" (i.e., the model not complying with instructions and then not confessing to it) is only 4.4%.",
+      "in_reply_to_screen_name": "OpenAI",
+      "in_reply_to_status_id_str": "1996281175770599447",
+      "in_reply_to_user_id_str": "4398626122",
+      "views_count": 105130,
+      "retweet_count": 31,
+      "likes": 408,
+      "quote_count": 2,
+      "reply_count": 31,
+      "bookmarks_count": 48,
+      "media_0_thumbnail": "https://pbs.twimg.com/media/G7Q1aWgb0AAuhN-.jpg",
+      "media_0_type": "photo",
+      "media_0_url": "https://pbs.twimg.com/media/G7Q1aWgb0AAuhN-.jpg",
+      "media_1_thumbnail": "https://pbs.twimg.com/media/G7Q1aWZbMAAxa4c.jpg",
+      "media_1_type": "photo",
+      "media_1_url": "https://pbs.twimg.com/media/G7Q1aWZbMAAxa4c.jpg",
+      "media_2_thumbnail": "",
+      "media_2_type": "",
+      "media_2_url": "",
+      "media_3_thumbnail": "",
+      "media_3_type": "",
+      "media_3_url": "",
+      "binded_media_url": "",
+      "binded_media_domain": "",
+      "binded_media_thumbnail_url": "",
+      "binded_media_title": "",
+      "binded_media_description": "",
+      "is_retweeted": false,
+      "is_quoted": false,
+      "is_pinned": false,
+      "_json": null,
+      "functions": null,
+      "native_id": 19211
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

@@ -199,3 +199,114 @@ Each result object contains the following fields:
 <ResponseField name="scraping_time" type="string">
   UTC timestamp when the profile was scraped.
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 81732,
+      "object": "result",
+      "squid": "e35dbeaaa8053607b4acc68ce18f479c",
+      "run": "2edbe230bc318e0c262749985ddeafac",
+      "full_name": "Bill Gates",
+      "first_name": "Bill",
+      "last_name": "Gates",
+      "email": "bill@gatesfoundation.org",
+      "email_status": "valid",
+      "headline": "Co-chair, Bill & Melinda Gates Foundation",
+      "summary": "Co-chair of the Bill & Melinda Gates Foundation…",
+      "top_skills": "Pharmacology • Patient Counseling",
+      "location_name": "Seattle, Washington, United States",
+      "country_code": "US",
+      "industry_name": "Pharmaceutical Manufacturing",
+      "positions": [],
+      "educations": [],
+      "skills": [],
+      "certifications": [],
+      "courses": [],
+      "projects": [],
+      "publications": [],
+      "honors_and_awards": [],
+      "organizations": [
+        {
+          "name": "Forum ENSAE Paristech",
+          "position_held": "Treasurer",
+          "description": "…",
+          "date_range": {}
+        }
+      ],
+      "test_scores": [
+        {
+          "name": "TOEFL IBT",
+          "score": "111/120",
+          "date": {
+            "year": 2019,
+            "month": 10
+          },
+          "description": null
+        }
+      ],
+      "languages": [],
+      "volunteer_experiences": [],
+      "volunteer_causes": [
+        "HEALTH",
+        "ANIMAL_WELFARE"
+      ],
+      "featured_items": [
+        {
+          "title": "…",
+          "description": "…",
+          "provider_name": "Vogue",
+          "url": "…",
+          "image_url": "…"
+        }
+      ],
+      "profile_picture_url": "https://media.licdn.com/dms/image/v2/.../profile-displayphoto-shrink_800_800/...",
+      "background_image_url": "https://media.licdn.com/dms/image/v2/.../profile-displaybackgroundimage-shrink_350_1400/...",
+      "linkedin_url": "https://www.linkedin.com/in/williamhgates",
+      "slug": "williamhgates",
+      "entity_urn": "urn:li:fsd_profile:ACoAACLevxsBfWQoDUYkHyCP2jzl81cDAvckQEI",
+      "object_urn": "urn:li:member:585023259",
+      "premium": false,
+      "influencer": false,
+      "is_creator": false,
+      "show_premium_subscriber_badge": false,
+      "memorialized": false,
+      "member_distance": "OUT_OF_NETWORK",
+      "primary_locale": "en_US",
+      "supported_locales": [
+        {
+          "country": "US",
+          "language": "en"
+        }
+      ],
+      "multi_locale_headline": [
+        {
+          "headline": "Co-chair, Bill & Melinda Gates Foundation",
+          "locale": "en_US"
+        }
+      ],
+      "multi_locale_summary": [
+        {
+          "summary": "Co-chair…",
+          "locale": "en_US"
+        }
+      ],
+      "more_profiles": [],
+      "scraping_time": "2026-05-06T15:11:14Z",
+      "functions": null,
+      "native_id": 81732
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

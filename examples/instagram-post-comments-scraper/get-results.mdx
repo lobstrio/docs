@@ -94,3 +94,45 @@ Each result object contains the following fields:
 <ResponseField name="parent_comment_id" type="string">
   Unique identifier of the parent comment this is a reply to
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 96249,
+      "object": "result",
+      "squid": "a22ca0a0a292c72cdb1a1990822f1863",
+      "run": "b874687c8f14b83f5cc5f59c1f4c113c",
+      "comment_id": "18397500988178795",
+      "comment_url": "https://www.instagram.com/p/DDIJAfeyemG/c/18397500988178795",
+      "post_url": "https://www.instagram.com/reel/DDIJAfeyemG",
+      "text": "I LOVE INSTAGRAM #instagram",
+      "giphy_media_info": null,
+      "owner_username": "mohsinjamindar07",
+      "owner_full_name": "Mohsin Jamindar",
+      "owner_id": "40564582835",
+      "owner_profile_pic_url": "https://scontent-iad3-2.cdninstagram.com/v/t51.2885-19/455119162_509085271605404.jpg",
+      "owner_is_verified": false,
+      "owner_is_private": false,
+      "timestamp": "2026-02-15T06:27:58.000Z",
+      "likes_count": 0,
+      "replies_count": 0,
+      "owner_profile_url": "https://instagram.com/sai_jonov",
+      "is_child_comment": false,
+      "parent_comment_id": null,
+      "functions": null,
+      "native_id": 96249
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

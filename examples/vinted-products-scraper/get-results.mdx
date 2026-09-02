@@ -152,5 +152,86 @@ Each result object contains the following fields:
 </ResponseField>
 
 <ResponseField name="status" type="string">
-  Current status of the listing on Vinted (e.g. active, sold, reserved). Example: `New with tags`
+  Condition of the item as listed by the seller, not its sale/availability status. One of `New with tags`, `New without tags`, `Very good condition`, `Good condition`, `Satisfactory condition` (exact wording may appear in the seller's own locale, e.g. `Très bon état`). Example: `New with tags`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 84,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 2,
+  "data": [
+    {
+      "internal_id": "8381892452",
+      "url": "https://www.vinted.com/items/8381892452-air-jordan-5-wolf-grey",
+      "title": "Air Jordan 5  wolf grey",
+      "price": 291,
+      "is_visible": 1,
+      "discount": "",
+      "currency": "USD",
+      "brand_title": "Jordan",
+      "is_for_swap": false,
+      "promoted": false,
+      "image_url": "https://images1.vinted.net/t/01_01a39_zLtBDgLdFFsi75ds1PDdGcQe/f800/1773400288.webp?s=08f8c6b85155c02fa5358a303ccd36bfb44fabf9",
+      "image_dominant_color": "#545962",
+      "favourite_count": 0,
+      "is_favourite": false,
+      "favourite_group_id": "",
+      "badge": "",
+      "conversion": null,
+      "service_fee": 15.25,
+      "total_item_price": 306.25,
+      "view_count": 0,
+      "size_title": "10",
+      "content_source": "catalog",
+      "user_id": "223926023",
+      "user_login": "saf0921",
+      "user_business": false,
+      "user_profile_url": "https://www.vinted.com/member/223926023-saf0921",
+      "user_photo_url": "https://images1.vinted.net/t/06_00766_fgANGTQTXdbSuyxoBr4DrCQD/f800/1765632251.webp?s=41905c4cbb60f2d60151d0c4bf1039bd6a4e4863",
+      "user_is_sus": false,
+      "user_orientation": "men",
+      "user_is_hidden": false,
+      "description": "Air Jordan 5  wolf grey, brand: Jordan, condition: New with tags, size: 10, $291.00, $306.25 includes Buyer Protection",
+      "status": "New with tags"
+    },
+    {
+      "internal_id": "6703908171",
+      "url": "https://www.vinted.com/items/6703908171-cropped-tank-top",
+      "title": "Cropped tank top",
+      "price": 6,
+      "is_visible": 1,
+      "discount": "",
+      "currency": "EUR",
+      "brand_title": "Pull & Bear",
+      "is_for_swap": false,
+      "promoted": false,
+      "image_url": "https://images1.vinted.net/t/01_020d0_BjtV6XdKS7u9y2GKBR7R82gh/f800/1752829032.jpeg?s=f93b1a95e2303af55d0a1fa8689ccc6d17ce596a",
+      "image_dominant_color": "#8C8271",
+      "favourite_count": 0,
+      "is_favourite": false,
+      "favourite_group_id": "",
+      "badge": "",
+      "conversion": null,
+      "service_fee": 1,
+      "total_item_price": 7,
+      "view_count": 0,
+      "size_title": "XS / 34 / 6",
+      "content_source": "catalog",
+      "user_id": "15167827",
+      "user_login": "ofrzrfrazier",
+      "user_business": false,
+      "user_profile_url": "https://www.vinted.com/member/15167827-ofrzrfrazier",
+      "user_photo_url": "https://images1.vinted.net/t/02_00d60_iK5xoZLZYfDPApkachVv7owN/f800/1605256954.jpeg?s=ef5fd21e845124b78dcdf5e2996192b695dfa82b",
+      "user_is_sus": false,
+      "user_orientation": "",
+      "user_is_hidden": false,
+      "description": "Cropped tank top, brand: Pull & Bear, condition: Very good condition, size: XS / 34 / 6, €6.00, €7.00 includes Buyer Protection",
+      "status": "Very good condition"
+    }
+  ]
+}
+```

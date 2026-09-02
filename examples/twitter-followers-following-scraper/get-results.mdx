@@ -130,3 +130,54 @@ Each result object contains the following fields:
 <ResponseField name="_json" type="json">
   Raw JSON user data returned by the Twitter/X API
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 55956,
+      "object": "result",
+      "squid": "8f10fa2b9b3429006afaecebd572624f",
+      "run": "d5316f954b21c55e87579ac984497a1f",
+      "internal_unique_id": "769922298715537408_following",
+      "user_id": "769922298715537408",
+      "name": "Elon Musk",
+      "screen_name": "elonmusk",
+      "profile_url": "https://x.com/elonmusk",
+      "bio": "Tech entrepreneur",
+      "location": "San Francisco, CA",
+      "website": "https://example.com",
+      "followers_count": 180000000,
+      "following_count": 500,
+      "tweets_count": 50000,
+      "media_count": 1200,
+      "likes_count": 30000,
+      "listed_count": 5000,
+      "created_at": "2016-08-24T10:00:00+00:00",
+      "profile_image_url": "https://pbs.twimg.com/profile_images/12345/photo_normal.jpg",
+      "profile_banner_url": "https://pbs.twimg.com/profile_banners/12345/1234567890",
+      "is_blue_verified": false,
+      "is_verified": false,
+      "is_protected": false,
+      "possibly_sensitive": false,
+      "profile_image_shape": "Circle",
+      "professional_type": "Creator",
+      "professional_category": "Author",
+      "relationship_type": "following",
+      "_json": null,
+      "functions": null,
+      "native_id": 55956
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

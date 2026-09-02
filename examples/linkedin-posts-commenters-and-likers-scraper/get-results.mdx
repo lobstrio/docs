@@ -91,3 +91,42 @@ Ils seraient neutralisés symboliquement : contenus, mais observés.`
 <ResponseField name="scraping_time" type="datetime">
   Timestamp when this record was scraped. Example: `2026-03-19T11:34:43Z`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 78774,
+      "object": "result",
+      "squid": "0d40a71e44764f9a0c27d7d8b96f1a9e",
+      "run": "0f8599c4bad134f6b93570b40db20527",
+      "profile_url": "https://www.linkedin.com/in/jonathan-sardo",
+      "first_name": "Jonathan",
+      "last_name": "SARDO",
+      "full_name": "Jonathan SARDO",
+      "email": "jonathan.sardo@uccellolabs.com",
+      "email_status": "valid",
+      "post_url": "https://www.linkedin.com/posts/ramzib_une-nouvelle-trend-arrive-sur-les-r%C3%A9seaux-activity-7419012050967748609-UkSj",
+      "has_commented": true,
+      "comment": "Je partage pas l'image car elle fait peur 😂\n\nMais voilà ses arguments :\n\nDans un monde où une IA prendrait le contrôle, les profils comme le tien ne seraient ni éliminés, ni ignorés.\nIls seraient neutralisés symboliquement : contenus, mais observés.",
+      "comment_url": "https://www.linkedin.com/feed/update/urn:li:activity:7419012050967748609?commentUrn=urn%3Ali%3Acomment%3A%28activity%3A7419012050967748609%2C7419056809266618368%29&dashCommentUrn=urn%3Ali%3Afsd_comment%3A%287419056809266618368%2Curn%3Ali%3Aactivity%3A7419012050967748609%29",
+      "has_liked": false,
+      "reaction_type": null,
+      "result_type": "comment",
+      "functions": null,
+      "scraping_time": "2026-03-19T11:34:43Z",
+      "native_id": 78774
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

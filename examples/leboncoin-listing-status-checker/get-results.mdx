@@ -38,3 +38,31 @@ Each result object contains the following fields:
 <ResponseField name="status_code" type="integer">
   HTTP status code returned by Leboncoin. Example: `200`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 34245,
+      "object": "result",
+      "squid": "75db5660a5f61ec94803af91f45097b0",
+      "run": "a0766aca18784d68c2067f409e6e733e",
+      "url": "https://www.leboncoin.fr/ad/voitures/3172676206",
+      "status": "active",
+      "status_code": 200,
+      "functions": null,
+      "native_id": 34245
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

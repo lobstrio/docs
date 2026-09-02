@@ -75,3 +75,37 @@ Sasha`
 <ResponseField name="hash_value" type="string">
   Internal hash used to deduplicate messages across runs. Example: `1679091c5a880faf6fb5e6087eb1b2dc`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 1,
+      "object": "result",
+      "squid": "0edb27ee3753f6a9cc04fe723532f667",
+      "run": "b4c057e086be2a3bb9a11bff058d7728",
+      "annonce_id": "3165893393",
+      "url": "https://www.leboncoin.fr/ad/ventes_immobilieres/3165893393",
+      "message": "Hello toutong972,\n\nJe viens de voir votre article qui porte le nom:\nTerrain à vendre Plassac 970M2\n\nL'offre m'intéresse?\nEst-ce que vous pouvez me recontacter via la messagerie leboncoin?\n\nA très vite,\nSasha",
+      "message_hash": "",
+      "is_deactivated": false,
+      "is_sent": false,
+      "was_already_sent": false,
+      "last_publication_date": "2026-03-21T21:10:58+00:00",
+      "hash_value": "1679091c5a880faf6fb5e6087eb1b2dc",
+      "functions": null,
+      "native_id": 12856
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

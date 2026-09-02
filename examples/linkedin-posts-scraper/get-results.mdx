@@ -187,3 +187,125 @@ Each result object contains the following fields:
 <ResponseField name="scraping_time" type="string">
   Timestamp when this record was scraped. Example: `2026-04-21T15:55:00Z`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 24544,
+      "object": "result",
+      "squid": "7ec19092d4f836fc9515441257ab2aff",
+      "run": "488bc2ee86a324eb6ef20be18e71b824",
+      "urn": "urn:li:activity:7202146404788580353",
+      "post_url": "https://www.linkedin.com/feed/update/urn:li:activity:7202146404788580353",
+      "text": "Carmix lovers\nMax Galante Manuela Galante Alberto Parodi De La Cuadra Victor Saldaña Blanco",
+      "posted_at": "2024-05-31T03:18:32Z",
+      "posted_at_timestamp": 1717125512311,
+      "time_since_posted": "2w",
+      "is_repost": false,
+      "post_type": "image",
+      "image": "https://media.licdn.com/dms/image/D4E22AQFsIJ8c-Cf6tA/feedshare-shrink_2048_1536/0/1717125507406",
+      "images": [
+        "https://media.licdn.com/dms/image/D4E22AQFsIJ8c-Cf6tA/feedshare-shrink_2048_1536/0/1717125507406"
+      ],
+      "author_type": "Person",
+      "author_profile_url": "https://www.linkedin.com/in/mariela-garcia-de-fabbri",
+      "author_profile_id": "ACoAACDe59sBx8ChxT_OJagid6rniBLlYctSmFg",
+      "author_public_id": "mariela-garcia-de-fabbri",
+      "author_full_name": "Mariela Garcia de Fabbri",
+      "author_first_name": "Mariela",
+      "author_last_name": "Garcia de Fabbri",
+      "author_headline": "Peruana. Economista. Líder empresarial. Amante de la familia",
+      "author_picture": "https://media.licdn.com/dms/image/D4E03AQHGA2JeAKPGtA/profile-displayphoto-shrink_100_100/0/1691852952911",
+      "author_background_image": "https://media.licdn.com/dms/image/C4E16AQHTeQPBMnMOdg/profile-displaybackgroundimage-shrink_200_800/0/1636434126831",
+      "author": {
+        "firstName": "Mariela",
+        "lastName": "Garcia de Fabbri",
+        "occupation": "Peruana. Economista. Líder empresarial. Amante de la familia",
+        "id": "551479259",
+        "publicId": "mariela-garcia-de-fabbri",
+        "profileId": "ACoAACDe59sBx8ChxT_OJagid6rniBLlYctSmFg"
+      },
+      "num_likes": 62,
+      "num_comments": 1,
+      "num_shares": 0,
+      "reaction_counts": {
+        "LIKE": 27,
+        "PRAISE": 3,
+        "EMPATHY": 1
+      },
+      "hashtags": [
+        "opentowork",
+        "hiring"
+      ],
+      "mentions": [
+        {
+          "public_id": "salihoff",
+          "first_name": "Akmal",
+          "last_name": "Salikhov",
+          "start": 1383,
+          "length": 14,
+          "type": "PROFILE_MENTION"
+        }
+      ],
+      "attributes": [
+        {
+          "start": 14,
+          "length": 11,
+          "type": "PROFILE_MENTION",
+          "profile": {
+            "firstName": "Max",
+            "lastName": "Galante",
+            "publicId": "massimilianogalante"
+          }
+        }
+      ],
+      "top_comments": [
+        {
+          "text": "Great post!",
+          "author_name": "John Doe",
+          "author_url": "https://www.linkedin.com/in/john",
+          "author_picture": null,
+          "date_published": "2026-01-30T16:00:00Z",
+          "num_likes": 3
+        }
+      ],
+      "reshared_post": {
+        "urn": "urn:li:activity:7422993022872612864",
+        "share_urn": "urn:li:ugcPost:7422993022872612864",
+        "author_name": "Original Author",
+        "author_profile_url": "https://www.linkedin.com/in/original",
+        "text": "Original post text"
+      },
+      "media_details": {
+        "type": "article",
+        "title": "Example Article",
+        "subtitle": "example.com",
+        "url": "https://example.com/article",
+        "thumbnail": "https://..."
+      },
+      "share_audience": "PUBLIC",
+      "commenting_disabled": false,
+      "allowed_commenters_scope": "ALL",
+      "can_react": true,
+      "can_post_comments": true,
+      "can_share": true,
+      "root_share": true,
+      "profile_input_url": "https://www.linkedin.com/in/gaspard-lezin/",
+      "scraping_time": "2026-04-21T15:55:00Z",
+      "functions": null,
+      "native_id": 24544
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

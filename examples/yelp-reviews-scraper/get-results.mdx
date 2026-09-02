@@ -159,3 +159,61 @@ Each result object contains the following fields:
 <ResponseField name="business_review_count" type="integer">
   Total number of reviews on the business at the time of scraping. Example: `7375`
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 49687,
+      "object": "result",
+      "squid": "7e905dc61cfdd7df956da0871fcca9ce",
+      "run": "af1982e76d7b14e9be9b94e217488d1f",
+      "review_id": "E2HrRt6Pf_l2lzaB_eDc5Q",
+      "url": "https://www.yelp.com/biz/olio-e-piu-new-york-7?hrid=E2HrRt6Pf_l2lzaB_eDc5Q",
+      "rating": 5,
+      "text": "Really great service, food, and ambiance!! I especially recommend the calamari appetizer.",
+      "time_modified": "2026-04-04 10:40:18",
+      "language": "en",
+      "is_featured": false,
+      "helpful_count": 12,
+      "thanks_count": 4,
+      "love_this_count": 8,
+      "oh_no_count": 0,
+      "reply_text": null,
+      "reply_datetime": null,
+      "reply_timestamp": null,
+      "photo_count": 2,
+      "photos": "https://s3-media0.fl.yelpcdn.com/bphoto/aaa/o.jpg, https://s3-media0.fl.yelpcdn.com/bphoto/bbb/o.jpg",
+      "video_count": 0,
+      "user_name": "Diana H.",
+      "user_id": "KrnCBHS68nvCDyLOjC7TwQ",
+      "user_location": "Manhattan, New York, NY",
+      "user_review_count": 1,
+      "user_friend_count": 12,
+      "user_check_in_count": 0,
+      "user_photo_count": 2,
+      "user_member_since": "2019-09-05",
+      "has_user_paid_through_yelp": false,
+      "is_elite": false,
+      "user_elite_years": null,
+      "business_url": "https://www.yelp.com/biz/olio-e-piu-new-york-7",
+      "business_id": "16ZnHpuaaBt92XWeJHCC5A",
+      "business_name": "Olio e Più",
+      "business_avg_rating": 4.5,
+      "business_review_count": 7375,
+      "functions": null,
+      "native_id": 49687
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```

@@ -25,7 +25,8 @@ Retrieve scraped data from your **Sales Navigator Leads Scraper** runs.
 </ParamField>
 
 ## Result Fields
-Each result object contains the following fields:
+
+Each result object represents one person. Most fields are populated directly from the Sales Navigator search results; `positions`, `education`, `websites`, and `company` are nested groups only populated when the `get_profile_details` enrichment function is enabled on the squid.
 
 <ResponseField name="id" type="string">
   Unique internal identifier for the record. Example: `21e281488adf43086782b731d9c19e0b`
@@ -137,7 +138,7 @@ I am the person you come to when you want a really thought-provoking speech on l
   Unique LinkedIn Sales Navigator identifier for this person. Example: `344632`
 </ResponseField>
 
-<ResponseField name="degree" type="integer">
+<ResponseField name="degree" type="string">
   Degree of connection between this person and the scraping account (1st, 2nd, 3rd). Example: `2nd`
 </ResponseField>
 
@@ -185,199 +186,341 @@ I am the person you come to when you want a really thought-provoking speech on l
   URL of the person's LinkedIn profile banner/background image. Requires `get_profile_details`.
 </ResponseField>
 
-<ResponseField name="position_id" type="string">
-  Unique identifier for this position. Example: `344632796142`
+<ResponseField name="positions" type="array">
+  Work history. Requires `get_profile_details`.
+
+  <Expandable title="position item">
+    <ResponseField name="position_id" type="string">
+      Unique identifier for this position. Example: `344632796142`
+    </ResponseField>
+
+    <ResponseField name="new" type="boolean">
+      Whether this is a newly added position. Example: `false`
+    </ResponseField>
+
+    <ResponseField name="current" type="boolean">
+      Whether this is the current active position. Example: `true`
+    </ResponseField>
+
+    <ResponseField name="company_name" type="string">
+      Company name for this position. Example: `Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders`
+    </ResponseField>
+
+    <ResponseField name="company_id" type="string">
+      LinkedIn company identifier for this position. Example: `796142`
+    </ResponseField>
+
+    <ResponseField name="description" type="string">
+      Description of responsibilities in this position
+    </ResponseField>
+
+    <ResponseField name="location" type="string">
+      Location of this position. Example: `Nice, Provence-Alpes-Côte d'Azur, France`
+    </ResponseField>
+
+    <ResponseField name="title" type="string">
+      Job title for this position. Example: `Founder and CEO`
+    </ResponseField>
+
+    <ResponseField name="started_on" type="timestamp">
+      Start date of this position. Example: `2002-12-01 00:00:00+00`
+    </ResponseField>
+
+    <ResponseField name="ended_on" type="timestamp">
+      End date of this position (null if current)
+    </ResponseField>
+
+    <ResponseField name="period" type="float">
+      Duration of this position in years. Example: `22.83`
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
-<ResponseField name="new" type="boolean">
-  Whether this is a newly added position. Example: `false`
+<ResponseField name="education" type="array">
+  Education history. Requires `get_profile_details`.
+
+  <Expandable title="education item">
+    <ResponseField name="education_id" type="string">
+      Unique identifier for this education entry
+    </ResponseField>
+
+    <ResponseField name="school" type="string">
+      Name of the educational institution
+    </ResponseField>
+
+    <ResponseField name="degree" type="string">
+      Degree or qualification obtained. Example: `Doctor of Business Administration`
+    </ResponseField>
+
+    <ResponseField name="fields_of_study" type="string">
+      Fields or subjects studied. Example: `Business Administration`
+    </ResponseField>
+
+    <ResponseField name="started_on" type="datetime">
+      Start date of this education. Example: `2005-01-01`
+    </ResponseField>
+
+    <ResponseField name="ended_on" type="datetime">
+      End date of this education. Example: `2010-01-01`
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
-<ResponseField name="current" type="boolean">
-  Whether this is the current active position. Example: `true`
+<ResponseField name="websites" type="array">
+  Websites listed on the person's LinkedIn profile. Requires `get_profile_details`.
+
+  <Expandable title="website item">
+    <ResponseField name="category" type="string">
+      Category type of the website (e.g. COMPANY, PERSONAL). Example: `COMPANY`
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      Website URL. Example: `https://gugin.com`
+    </ResponseField>
+
+    <ResponseField name="company_id" type="integer">
+      LinkedIn company identifier, if the website is tied to a company. Example: `796142`
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
-<ResponseField name="company_name" type="string">
-  Company name for this position. Example: `Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders`
+<ResponseField name="company" type="object">
+  Detailed data on the person's current company. Requires `get_profile_details`.
+
+  <Expandable title="company fields">
+    <ResponseField name="elapsed" type="float">
+      Time elapsed since last company data update
+    </ResponseField>
+
+    <ResponseField name="formatted_revenue_amount" type="float">
+      Revenue amount formatted for display. Example: `1.0`
+    </ResponseField>
+
+    <ResponseField name="formatted_revenue_unit" type="string">
+      Unit of formatted revenue (e.g. millions, billions). Example: `mil`
+    </ResponseField>
+
+    <ResponseField name="formatted_revenue_currency_code" type="string">
+      Currency code for formatted revenue. Example: `USD`
+    </ResponseField>
+
+    <ResponseField name="description" type="string">
+      Company description. Example: `Gugins core competence is to help companies around the world taking advantage of cultural diversity. 2/3 of all M&A's fail to meet their objectives due to cultural clashes. This is what we do: cultural due diligence, post merger integration, damage control after failed M&A's, develop and deploy cultural intelligence, develop internationalisation strategies, develop and carry out global management training on cross-cultural management, coaching of senior executive management teams.`
+    </ResponseField>
+
+    <ResponseField name="industry" type="string">
+      Company industry. Example: `Business Consulting and Services`
+    </ResponseField>
+
+    <ResponseField name="employees_count" type="integer">
+      Total number of employees
+    </ResponseField>
+
+    <ResponseField name="revenue_amount" type="integer">
+      Raw revenue amount
+    </ResponseField>
+
+    <ResponseField name="revenue_currency_code" type="string">
+      Currency code for revenue. Example: `USD`
+    </ResponseField>
+
+    <ResponseField name="flagship_url" type="string">
+      URL to the company's LinkedIn flagship page. Example: `https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/`
+    </ResponseField>
+
+    <ResponseField name="url" type="string">
+      Company LinkedIn URL. Example: `https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/`
+    </ResponseField>
+
+    <ResponseField name="domain" type="string">
+      Company website domain. Example: `gugin.com`
+    </ResponseField>
+
+    <ResponseField name="website" type="string">
+      Company website URL. Example: `https://gugin.com`
+    </ResponseField>
+
+    <ResponseField name="employees_count_range" type="string">
+      Employee count range (e.g. 1001-5000). Example: `11-50`
+    </ResponseField>
+
+    <ResponseField name="hq_country" type="string">
+      Country of company headquarters. Example: `France`
+    </ResponseField>
+
+    <ResponseField name="hq_geographical_area" type="string">
+      Geographical area of company headquarters. Example: `Provence-Alpes-Côte d'Azur`
+    </ResponseField>
+
+    <ResponseField name="hq_city" type="string">
+      City of company headquarters. Example: `Nice`
+    </ResponseField>
+
+    <ResponseField name="hq_postal_code" type="string">
+      Postal code of company headquarters
+    </ResponseField>
+
+    <ResponseField name="hq_address" type="string">
+      Street address of company headquarters
+    </ResponseField>
+
+    <ResponseField name="name" type="string">
+      Company name. Example: `Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders`
+    </ResponseField>
+
+    <ResponseField name="location" type="string">
+      Company location. Example: `Nice, Provence-Alpes-Côte d'Azur, France`
+    </ResponseField>
+
+    <ResponseField name="was_not_available" type="boolean">
+      Whether company data was unavailable at scrape time. Example: `false`
+    </ResponseField>
+
+    <ResponseField name="is_detailed" type="boolean">
+      Whether detailed company data was collected. Example: `true`
+    </ResponseField>
+
+    <ResponseField name="detailed_time" type="datetime">
+      Timestamp when detailed data was collected
+    </ResponseField>
+
+    <ResponseField name="last_scraping_time" type="datetime">
+      Timestamp of the last scraping
+    </ResponseField>
+
+    <ResponseField name="no_company_found" type="boolean">
+      Whether the company was not found on LinkedIn. Example: `false`
+    </ResponseField>
+
+    <ResponseField name="no_employees_details" type="boolean">
+      Whether employee details were unavailable. Example: `true`
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
-<ResponseField name="company_id" type="string">
-  LinkedIn company identifier for this position. Example: `796142`
-</ResponseField>
+## Response
 
-<ResponseField name="description" type="string">
-  Description of responsibilities in this position
-</ResponseField>
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": "21e281488adf43086782b731d9c19e0b",
+      "object": "result",
+      "squid": "YOUR_SQUID_HASH",
+      "run": "RUN_HASH",
+      "collected_at": "2026-03-19 10:36:09.000000+00",
+      "company_name": "Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders",
+      "company_id": "796142",
+      "email": "fm@gugin.com",
+      "email_status": "valid",
+      "mobile_phone": null,
+      "first_name": "Dr. Finn",
+      "last_name": "Majlergaard",
+      "location": "Greater Nice Metropolitan Area",
+      "position": "Founder and CEO",
+      "years_in_position": 22,
+      "years_in_company": 22,
+      "months_in_position": 10,
+      "sales_navigator_profile_url": "https://www.linkedin.com/sales/people/ACwAAAAFQjgBtNxy28alABzs_jj2meNVjFO0AUs,NAME_SEARCH,nwRo",
+      "picture_url": "https://media.licdn.com/dms/image/v2/D4D03AQEwqlTdXSN6Rg/profile-displayphoto-shrink_800_800/B4DZQ7HXczHUAo-/0/1736158574857",
+      "started_on": "2002-11-30 23:00:00+00",
+      "industry": "Higher Education",
+      "headline": "Author of: The Dangerous AI Gamble in Education. I/we help organisations develop winning company culture. I/we Gugin train leaders to become culturally and emotionally intelligent. Professor. Keynote speaker",
+      "summary": "Founder and CEO @ Gugin | Creating Winning Corporate Cultures. I am the person you come to when your organisation is falling apart because of a toxic workplace culture.",
+      "connections": 500,
+      "linkedin_profile_url": "https://www.linkedin.com/in/ACwAAAAFQjgBtNxy28alABzs_jj2meNVjFO0AUs",
+      "job_seeker": false,
+      "open_to_work": false,
+      "twitter_url": null,
+      "person_id": "344632",
+      "degree": "2nd",
+      "company_industry": "Business Consulting and Services",
+      "is_open": false,
+      "is_saved": false,
+      "is_premium": false,
+      "match_filters": true,
+      "no_match_reason": null,
+      "seniority": "CXO, Senior",
+      "recently_hired": false,
+      "pending_invitation": false,
+      "current_role_description": "Leading Gugin's mission to help organisations build winning, culturally intelligent workplace cultures.",
+      "banner_url": "https://media.licdn.com/dms/image/v2/example-banner.jpg",
+      "positions": [
+        {
+          "position_id": "344632796142",
+          "new": false,
+          "current": true,
+          "company_name": "Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders",
+          "company_id": "796142",
+          "description": null,
+          "location": "Nice, Provence-Alpes-Côte d'Azur, France",
+          "title": "Founder and CEO",
+          "started_on": "2002-12-01 00:00:00+00",
+          "ended_on": null,
+          "period": 22.83
+        }
+      ],
+      "education": [
+        {
+          "education_id": "344632-edu-1",
+          "school": "EAE Business School",
+          "degree": "Doctor of Business Administration",
+          "fields_of_study": "Business Administration",
+          "started_on": "2005-01-01",
+          "ended_on": "2010-01-01"
+        }
+      ],
+      "websites": [
+        {
+          "category": "COMPANY",
+          "url": "https://gugin.com",
+          "company_id": 796142
+        }
+      ],
+      "company": {
+        "elapsed": 0.42,
+        "formatted_revenue_amount": 1.0,
+        "formatted_revenue_unit": "mil",
+        "formatted_revenue_currency_code": "USD",
+        "description": "Gugins core competence is to help companies around the world taking advantage of cultural diversity. 2/3 of all M&A's fail to meet their objectives due to cultural clashes.",
+        "industry": "Business Consulting and Services",
+        "employees_count": 14,
+        "revenue_amount": 1000000,
+        "revenue_currency_code": "USD",
+        "flagship_url": "https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/",
+        "url": "https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/",
+        "domain": "gugin.com",
+        "website": "https://gugin.com",
+        "employees_count_range": "11-50",
+        "hq_country": "France",
+        "hq_geographical_area": "Provence-Alpes-Côte d'Azur",
+        "hq_city": "Nice",
+        "hq_postal_code": "06000",
+        "hq_address": null,
+        "name": "Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders",
+        "location": "Nice, Provence-Alpes-Côte d'Azur, France",
+        "was_not_available": false,
+        "is_detailed": true,
+        "detailed_time": "2026-03-19T10:36:09.000Z",
+        "last_scraping_time": "2026-03-19T10:36:09.000Z",
+        "no_company_found": false,
+        "no_employees_details": true
+      },
+      "functions": null,
+      "native_id": "21e281488adf43086782b731d9c19e0b"
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```
 
-<ResponseField name="location" type="string">
-  Location of this position. Example: `Nice, Provence-Alpes-Côte d'Azur, France`
-</ResponseField>
-
-<ResponseField name="title" type="string">
-  Job title for this position. Example: `Founder and CEO`
-</ResponseField>
-
-<ResponseField name="started_on" type="timestamp">
-  Start date of this position. Example: `2002-12-01 00:00:00+00`
-</ResponseField>
-
-<ResponseField name="ended_on" type="timestamp">
-  End date of this position (null if current)
-</ResponseField>
-
-<ResponseField name="period" type="float">
-  Duration of this position in years. Example: `22.83`
-</ResponseField>
-
-<ResponseField name="education_id" type="string">
-  Unique identifier for this education entry
-</ResponseField>
-
-<ResponseField name="school" type="string">
-  Name of the educational institution. Example: `DBA (Doctor of Business Administration)`
-</ResponseField>
-
-<ResponseField name="degree" type="string">
-  Degree or qualification obtained. Example: `Doctor of Business Administration`
-</ResponseField>
-
-<ResponseField name="fields_of_study" type="string">
-  Fields or subjects studied. Example: `Business Administration`
-</ResponseField>
-
-<ResponseField name="started_on" type="datetime">
-  Start date of this education. Example: `2005-01-01`
-</ResponseField>
-
-<ResponseField name="ended_on" type="datetime">
-  End date of this education. Example: `2010-01-01`
-</ResponseField>
-
-<ResponseField name="category" type="string">
-  Category type of the website (e.g. COMPANY, PERSONAL). Example: `COMPANY`
-</ResponseField>
-
-<ResponseField name="url" type="string">
-  Website URL. Example: `https://gugin.com`
-</ResponseField>
-
-<ResponseField name="company_id" type="integer">
-  LinkedIn company identifier. Example: `796142`
-</ResponseField>
-
-<ResponseField name="elapsed" type="float">
-  Time elapsed since last company data update
-</ResponseField>
-
-<ResponseField name="formatted_revenue_amount" type="float">
-  Revenue amount formatted for display. Example: `1.0`
-</ResponseField>
-
-<ResponseField name="formatted_revenue_unit" type="string">
-  Unit of formatted revenue (e.g. millions, billions). Example: `mil`
-</ResponseField>
-
-<ResponseField name="formatted_revenue_currency_code" type="string">
-  Currency code for formatted revenue. Example: `USD`
-</ResponseField>
-
-<ResponseField name="description" type="string">
-  Company description. Example: `Gugins core competence is to help companies around the world taking advantage of cultural diversity. 2/3 of all M&A's fail to meet their objectives due to cultural clashes.
-
-This is what we do:
-- Cultural due diligence
-- Post merger integration
-- Damage control after failed M&A's
-- Develop and deploy cultural intelligence
-- Develop internationalisation strategies
-- Develop and carry out global management training on cross-cultural management
-- Coaching of senior executive management teams`
-</ResponseField>
-
-<ResponseField name="industry" type="string">
-  Company industry. Example: `Business Consulting and Services`
-</ResponseField>
-
-<ResponseField name="employees_count" type="integer">
-  Total number of employees
-</ResponseField>
-
-<ResponseField name="revenue_amount" type="integer">
-  Raw revenue amount
-</ResponseField>
-
-<ResponseField name="revenue_currency_code" type="string">
-  Currency code for revenue. Example: `USD`
-</ResponseField>
-
-<ResponseField name="flagship_url" type="string">
-  URL to the company's LinkedIn flagship page. Example: `https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/`
-</ResponseField>
-
-<ResponseField name="url" type="string">
-  Company LinkedIn URL. Example: `https://www.linkedin.com/company/gugin---delivering-cultural-intelligence/`
-</ResponseField>
-
-<ResponseField name="domain" type="string">
-  Company website domain. Example: `gugin.com`
-</ResponseField>
-
-<ResponseField name="website" type="string">
-  Company website URL. Example: `https://gugin.com`
-</ResponseField>
-
-<ResponseField name="employees_count_range" type="string">
-  Employee count range (e.g. 1001-5000). Example: `11-50`
-</ResponseField>
-
-<ResponseField name="hq_country" type="string">
-  Country of company headquarters. Example: `France`
-</ResponseField>
-
-<ResponseField name="hq_geographical_area" type="string">
-  Geographical area of company headquarters. Example: `Provence-Alpes-Côte d'Azur`
-</ResponseField>
-
-<ResponseField name="hq_city" type="string">
-  City of company headquarters. Example: `Nice`
-</ResponseField>
-
-<ResponseField name="hq_postal_code" type="string">
-  Postal code of company headquarters
-</ResponseField>
-
-<ResponseField name="hq_address" type="string">
-  Street address of company headquarters
-</ResponseField>
-
-<ResponseField name="name" type="string">
-  Company name. Example: `Gugin - Creating Winning Corporate Cultures and culturally intelligent leaders`
-</ResponseField>
-
-<ResponseField name="location" type="string">
-  Company location. Example: `Nice, Provence-Alpes-Côte d'Azur, France`
-</ResponseField>
-
-<ResponseField name="was_not_available" type="boolean">
-  Whether company data was unavailable at scrape time. Example: `false`
-</ResponseField>
-
-<ResponseField name="is_detailed" type="boolean">
-  Whether detailed company data was collected. Example: `true`
-</ResponseField>
-
-<ResponseField name="detailed_time" type="datetime">
-  Timestamp when detailed data was collected
-</ResponseField>
-
-<ResponseField name="last_scraping_time" type="datetime">
-  Timestamp of the last scraping
-</ResponseField>
-
-<ResponseField name="no_company_found" type="boolean">
-  Whether the company was not found on LinkedIn. Example: `false`
-</ResponseField>
-
-<ResponseField name="no_employees_details" type="boolean">
-  Whether employee details were unavailable. Example: `true`
-</ResponseField>
+<Note>
+  `positions`, `education`, `websites`, and `company` are only populated when the squid has `get_profile_details` enabled. Without it, these come back as empty arrays / `null`.
+</Note>

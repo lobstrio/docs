@@ -143,3 +143,57 @@ Each result object contains the following fields:
 <ResponseField name="user_id" type="string">
   Owner UUID on Leboncoin.
 </ResponseField>
+
+## Response
+
+```json 200
+{
+  "total_results": 1,
+  "limit": 50,
+  "page": 1,
+  "total_pages": 1,
+  "result_from": 1,
+  "result_to": 1,
+  "data": [
+    {
+      "id": 81595,
+      "object": "result",
+      "squid": "54fc6a2a0fcad579aa37da48ab1085c2",
+      "run": "dab2c43091ea6e1677f9f6427ce9fb14",
+      "online_store_id": "2599946",
+      "online_store_name": "ACL RENAULT",
+      "url": "https://www.leboncoin.fr/boutique/2599946/acl_renault.htm",
+      "phone": "0561787878",
+      "is_mobile": false,
+      "has_phone": true,
+      "active_since": "2011-11-24T00:00:00",
+      "address": "3 Route d'Aussonne",
+      "zipcode": "31700",
+      "city": "Cornebarrieu",
+      "department": "31",
+      "department_label": "Haute-Garonne",
+      "region": "16",
+      "region_label": "Midi-Pyrénées",
+      "lat": 43.65559,
+      "lng": 1.32267,
+      "siren": "485064760",
+      "siret": "48506476000039",
+      "slogan": "Achat et vente de véhicules",
+      "description": "Tous nos véhicules sont disponibles sur notre parc.",
+      "opening_hours": "Du lundi au vendredi : 8h00 - 18h00",
+      "rating_value": 4.5,
+      "rating_count": 138,
+      "logo_url": "https://img.leboncoin.fr/api/v1/lbcpb1/images/4c/81/9f/4c819f72-8166-421e-9755-e801e785da5d?rule=bo-tiny",
+      "sector": "vehicles",
+      "sector_id": 1,
+      "hide_address": false,
+      "hide_contact_form": false,
+      "user_id": "d54740a9-215e-4c8a-a1cc-bd124f3b4c3f",
+      "functions": null,
+      "native_id": 81595
+    }
+  ],
+  "next": null,
+  "previous": null
+}
+```
