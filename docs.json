@@ -31,6 +31,7 @@
             "group": "Core Concepts",
             "pages": [
               "docs/concepts",
+              "docs/pricing",
               "docs/pagination",
               "docs/errors",
               "docs/timezones"
@@ -143,7 +144,8 @@
             "pages": [
               "examples/amazon-reviews-scraper/add-tasks",
               "examples/amazon-reviews-scraper/update-settings",
-              "examples/amazon-reviews-scraper/get-results"
+              "examples/amazon-reviews-scraper/get-results",
+              "examples/amazon-reviews-scraper/credit-cost"
             ]
           },
           {
@@ -151,7 +153,8 @@
             "pages": [
               "examples/autoscout24-listings-scraper/add-tasks",
               "examples/autoscout24-listings-scraper/update-settings",
-              "examples/autoscout24-listings-scraper/get-results"
+              "examples/autoscout24-listings-scraper/get-results",
+              "examples/autoscout24-listings-scraper/credit-cost"
             ]
           },
           {
@@ -159,7 +162,8 @@
             "pages": [
               "examples/bienici-listings-search-export/add-tasks",
               "examples/bienici-listings-search-export/update-settings",
-              "examples/bienici-listings-search-export/get-results"
+              "examples/bienici-listings-search-export/get-results",
+              "examples/bienici-listings-search-export/credit-cost"
             ]
           },
           {
@@ -167,7 +171,8 @@
             "pages": [
               "examples/facebook-business-page-scraper/add-tasks",
               "examples/facebook-business-page-scraper/update-settings",
-              "examples/facebook-business-page-scraper/get-results"
+              "examples/facebook-business-page-scraper/get-results",
+              "examples/facebook-business-page-scraper/credit-cost"
             ]
           },
           {
@@ -175,7 +180,8 @@
             "pages": [
               "examples/facebook-private-group-posts/add-tasks",
               "examples/facebook-private-group-posts/update-settings",
-              "examples/facebook-private-group-posts/get-results"
+              "examples/facebook-private-group-posts/get-results",
+              "examples/facebook-private-group-posts/credit-cost"
             ]
           },
           {
@@ -183,7 +189,8 @@
             "pages": [
               "examples/facebook-group-posts-scraper/add-tasks",
               "examples/facebook-group-posts-scraper/update-settings",
-              "examples/facebook-group-posts-scraper/get-results"
+              "examples/facebook-group-posts-scraper/get-results",
+              "examples/facebook-group-posts-scraper/credit-cost"
             ]
           },
           {
@@ -191,7 +198,8 @@
             "pages": [
               "examples/facebook-pages-search-export/add-tasks",
               "examples/facebook-pages-search-export/update-settings",
-              "examples/facebook-pages-search-export/get-results"
+              "examples/facebook-pages-search-export/get-results",
+              "examples/facebook-pages-search-export/credit-cost"
             ]
           },
           {
@@ -199,7 +207,8 @@
             "pages": [
               "examples/facebook-marketplace-scraper/add-tasks",
               "examples/facebook-marketplace-scraper/update-settings",
-              "examples/facebook-marketplace-scraper/get-results"
+              "examples/facebook-marketplace-scraper/get-results",
+              "examples/facebook-marketplace-scraper/credit-cost"
             ]
           },
           {
@@ -210,7 +219,8 @@
               "examples/google-maps-leads-scraper/add-task-params",
               "examples/google-maps-leads-scraper/update-settings",
               "examples/google-maps-leads-scraper/get-results",
-              "examples/google-maps-leads-scraper/configure-chain"
+              "examples/google-maps-leads-scraper/configure-chain",
+              "examples/google-maps-leads-scraper/credit-cost"
             ]
           },
           {
@@ -218,7 +228,8 @@
             "pages": [
               "examples/google-maps-reviews-scraper/add-tasks",
               "examples/google-maps-reviews-scraper/update-settings",
-              "examples/google-maps-reviews-scraper/get-results"
+              "examples/google-maps-reviews-scraper/get-results",
+              "examples/google-maps-reviews-scraper/credit-cost"
             ]
           },
           {
@@ -226,7 +237,8 @@
             "pages": [
               "examples/google-news-search-export/add-tasks",
               "examples/google-news-search-export/update-settings",
-              "examples/google-news-search-export/get-results"
+              "examples/google-news-search-export/get-results",
+              "examples/google-news-search-export/credit-cost"
             ]
           },
           {
@@ -235,7 +247,8 @@
               "examples/google-search-scraper/add-tasks",
               "examples/google-search-scraper/get-geolocation",
               "examples/google-search-scraper/update-settings",
-              "examples/google-search-scraper/get-results"
+              "examples/google-search-scraper/get-results",
+              "examples/google-search-scraper/credit-cost"
             ]
           },
           {
@@ -243,7 +256,8 @@
             "pages": [
               "examples/idealista-listings-search-export/add-tasks",
               "examples/idealista-listings-search-export/update-settings",
-              "examples/idealista-listings-search-export/get-results"
+              "examples/idealista-listings-search-export/get-results",
+              "examples/idealista-listings-search-export/credit-cost"
             ]
           },
           {
@@ -251,7 +265,8 @@
             "pages": [
               "examples/immoweb-listings-phone-search-export/add-tasks",
               "examples/immoweb-listings-phone-search-export/update-settings",
-              "examples/immoweb-listings-phone-search-export/get-results"
+              "examples/immoweb-listings-phone-search-export/get-results",
+              "examples/immoweb-listings-phone-search-export/credit-cost"
             ]
           },
           {
@@ -259,7 +274,8 @@
             "pages": [
               "examples/instagram-post-comments-scraper/add-tasks",
               "examples/instagram-post-comments-scraper/update-settings",
-              "examples/instagram-post-comments-scraper/get-results"
+              "examples/instagram-post-comments-scraper/get-results",
+              "examples/instagram-post-comments-scraper/credit-cost"
             ]
           },
           {
@@ -267,7 +283,8 @@
             "pages": [
               "examples/instagram-posts-scraper/add-tasks",
               "examples/instagram-posts-scraper/update-settings",
-              "examples/instagram-posts-scraper/get-results"
+              "examples/instagram-posts-scraper/get-results",
+              "examples/instagram-posts-scraper/credit-cost"
             ]
           },
           {
@@ -275,7 +292,8 @@
             "pages": [
               "examples/instagram-profile-scraper/add-tasks",
               "examples/instagram-profile-scraper/update-settings",
-              "examples/instagram-profile-scraper/get-results"
+              "examples/instagram-profile-scraper/get-results",
+              "examples/instagram-profile-scraper/credit-cost"
             ]
           },
           {
@@ -283,7 +301,8 @@
             "pages": [
               "examples/instagram-reels-scraper/add-tasks",
               "examples/instagram-reels-scraper/update-settings",
-              "examples/instagram-reels-scraper/get-results"
+              "examples/instagram-reels-scraper/get-results",
+              "examples/instagram-reels-scraper/credit-cost"
             ]
           },
           {
@@ -291,7 +310,8 @@
             "pages": [
               "examples/lacentrale-cars-scraper/add-tasks",
               "examples/lacentrale-cars-scraper/update-settings",
-              "examples/lacentrale-cars-scraper/get-results"
+              "examples/lacentrale-cars-scraper/get-results",
+              "examples/lacentrale-cars-scraper/credit-cost"
             ]
           },
           {
@@ -299,7 +319,8 @@
             "pages": [
               "examples/lacentrale-listing-status-checker/add-tasks",
               "examples/lacentrale-listing-status-checker/update-settings",
-              "examples/lacentrale-listing-status-checker/get-results"
+              "examples/lacentrale-listing-status-checker/get-results",
+              "examples/lacentrale-listing-status-checker/credit-cost"
             ]
           },
           {
@@ -307,7 +328,8 @@
             "pages": [
               "examples/leboncoin-boutique/add-tasks",
               "examples/leboncoin-boutique/update-settings",
-              "examples/leboncoin-boutique/get-results"
+              "examples/leboncoin-boutique/get-results",
+              "examples/leboncoin-boutique/credit-cost"
             ]
           },
           {
@@ -315,7 +337,8 @@
             "pages": [
               "examples/leboncoin-auto-message-sender/add-tasks",
               "examples/leboncoin-auto-message-sender/update-settings",
-              "examples/leboncoin-auto-message-sender/get-results"
+              "examples/leboncoin-auto-message-sender/get-results",
+              "examples/leboncoin-auto-message-sender/credit-cost"
             ]
           },
           {
@@ -323,7 +346,8 @@
             "pages": [
               "examples/leboncoin-listing-scraper/add-tasks",
               "examples/leboncoin-listing-scraper/update-settings",
-              "examples/leboncoin-listing-scraper/get-results"
+              "examples/leboncoin-listing-scraper/get-results",
+              "examples/leboncoin-listing-scraper/credit-cost"
             ]
           },
           {
@@ -331,7 +355,8 @@
             "pages": [
               "examples/leboncoin-listing-status-checker/add-tasks",
               "examples/leboncoin-listing-status-checker/update-settings",
-              "examples/leboncoin-listing-status-checker/get-results"
+              "examples/leboncoin-listing-status-checker/get-results",
+              "examples/leboncoin-listing-status-checker/credit-cost"
             ]
           },
           {
@@ -339,7 +364,8 @@
             "pages": [
               "examples/leboncoin-iter-listings-with-phone/add-tasks",
               "examples/leboncoin-iter-listings-with-phone/update-settings",
-              "examples/leboncoin-iter-listings-with-phone/get-results"
+              "examples/leboncoin-iter-listings-with-phone/get-results",
+              "examples/leboncoin-iter-listings-with-phone/credit-cost"
             ]
           },
           {
@@ -347,7 +373,8 @@
             "pages": [
               "examples/leboncoin-listings-search-export/add-tasks",
               "examples/leboncoin-listings-search-export/update-settings",
-              "examples/leboncoin-listings-search-export/get-results"
+              "examples/leboncoin-listings-search-export/get-results",
+              "examples/leboncoin-listings-search-export/credit-cost"
             ]
           },
           {
@@ -355,7 +382,8 @@
             "pages": [
               "examples/linkedin-leads-scraper/add-tasks",
               "examples/linkedin-leads-scraper/update-settings",
-              "examples/linkedin-leads-scraper/get-results"
+              "examples/linkedin-leads-scraper/get-results",
+              "examples/linkedin-leads-scraper/credit-cost"
             ]
           },
           {
@@ -363,7 +391,8 @@
             "pages": [
               "examples/linkedin-posts-scraper/add-tasks",
               "examples/linkedin-posts-scraper/update-settings",
-              "examples/linkedin-posts-scraper/get-results"
+              "examples/linkedin-posts-scraper/get-results",
+              "examples/linkedin-posts-scraper/credit-cost"
             ]
           },
           {
@@ -371,7 +400,8 @@
             "pages": [
               "examples/linkedin-posts-commenters-and-likers-scraper/add-tasks",
               "examples/linkedin-posts-commenters-and-likers-scraper/update-settings",
-              "examples/linkedin-posts-commenters-and-likers-scraper/get-results"
+              "examples/linkedin-posts-commenters-and-likers-scraper/get-results",
+              "examples/linkedin-posts-commenters-and-likers-scraper/credit-cost"
             ]
           },
           {
@@ -379,7 +409,8 @@
             "pages": [
               "examples/linkedin-profile-email-scraper-no-login/add-tasks",
               "examples/linkedin-profile-email-scraper-no-login/update-settings",
-              "examples/linkedin-profile-email-scraper-no-login/get-results"
+              "examples/linkedin-profile-email-scraper-no-login/get-results",
+              "examples/linkedin-profile-email-scraper-no-login/credit-cost"
             ]
           },
           {
@@ -387,7 +418,8 @@
             "pages": [
               "examples/linkedin-profile-scraper/add-tasks",
               "examples/linkedin-profile-scraper/update-settings",
-              "examples/linkedin-profile-scraper/get-results"
+              "examples/linkedin-profile-scraper/get-results",
+              "examples/linkedin-profile-scraper/credit-cost"
             ]
           },
           {
@@ -395,7 +427,8 @@
             "pages": [
               "examples/paruvendu-listings-scraper/add-tasks",
               "examples/paruvendu-listings-scraper/update-settings",
-              "examples/paruvendu-listings-scraper/get-results"
+              "examples/paruvendu-listings-scraper/get-results",
+              "examples/paruvendu-listings-scraper/credit-cost"
             ]
           },
           {
@@ -403,7 +436,8 @@
             "pages": [
               "examples/pages-jaunes-iter-companies/add-tasks",
               "examples/pages-jaunes-iter-companies/update-settings",
-              "examples/pages-jaunes-iter-companies/get-results"
+              "examples/pages-jaunes-iter-companies/get-results",
+              "examples/pages-jaunes-iter-companies/credit-cost"
             ]
           },
           {
@@ -411,7 +445,8 @@
             "pages": [
               "examples/pap-iter-apartments/add-tasks",
               "examples/pap-iter-apartments/update-settings",
-              "examples/pap-iter-apartments/get-results"
+              "examples/pap-iter-apartments/get-results",
+              "examples/pap-iter-apartments/credit-cost"
             ]
           },
           {
@@ -419,7 +454,8 @@
             "pages": [
               "examples/sales-nav-profile-scraper/add-tasks",
               "examples/sales-nav-profile-scraper/update-settings",
-              "examples/sales-nav-profile-scraper/get-results"
+              "examples/sales-nav-profile-scraper/get-results",
+              "examples/sales-nav-profile-scraper/credit-cost"
             ]
           },
           {
@@ -427,7 +463,8 @@
             "pages": [
               "examples/sales-navigator-companies-scraper/add-tasks",
               "examples/sales-navigator-companies-scraper/update-settings",
-              "examples/sales-navigator-companies-scraper/get-results"
+              "examples/sales-navigator-companies-scraper/get-results",
+              "examples/sales-navigator-companies-scraper/credit-cost"
             ]
           },
           {
@@ -435,7 +472,8 @@
             "pages": [
               "examples/sales-navigator-leads-scraper/add-tasks",
               "examples/sales-navigator-leads-scraper/update-settings",
-              "examples/sales-navigator-leads-scraper/get-results"
+              "examples/sales-navigator-leads-scraper/get-results",
+              "examples/sales-navigator-leads-scraper/credit-cost"
             ]
           },
           {
@@ -443,7 +481,8 @@
             "pages": [
               "examples/realtor-iter-listings/add-tasks",
               "examples/realtor-iter-listings/update-settings",
-              "examples/realtor-iter-listings/get-results"
+              "examples/realtor-iter-listings/get-results",
+              "examples/realtor-iter-listings/credit-cost"
             ]
           },
           {
@@ -451,7 +490,8 @@
             "pages": [
               "examples/reddit-scraper/add-tasks",
               "examples/reddit-scraper/update-settings",
-              "examples/reddit-scraper/get-results"
+              "examples/reddit-scraper/get-results",
+              "examples/reddit-scraper/credit-cost"
             ]
           },
           {
@@ -459,7 +499,8 @@
             "pages": [
               "examples/seloger-search-export/add-tasks",
               "examples/seloger-search-export/update-settings",
-              "examples/seloger-search-export/get-results"
+              "examples/seloger-search-export/get-results",
+              "examples/seloger-search-export/credit-cost"
             ]
           },
           {
@@ -467,7 +508,8 @@
             "pages": [
               "examples/tiktok-video-scraper/add-tasks",
               "examples/tiktok-video-scraper/update-settings",
-              "examples/tiktok-video-scraper/get-results"
+              "examples/tiktok-video-scraper/get-results",
+              "examples/tiktok-video-scraper/credit-cost"
             ]
           },
           {
@@ -475,7 +517,8 @@
             "pages": [
               "examples/tiktok-comments-scraper/add-tasks",
               "examples/tiktok-comments-scraper/update-settings",
-              "examples/tiktok-comments-scraper/get-results"
+              "examples/tiktok-comments-scraper/get-results",
+              "examples/tiktok-comments-scraper/credit-cost"
             ]
           },
           {
@@ -483,7 +526,8 @@
             "pages": [
               "examples/tiktok-top-ads-scraper/add-tasks",
               "examples/tiktok-top-ads-scraper/update-settings",
-              "examples/tiktok-top-ads-scraper/get-results"
+              "examples/tiktok-top-ads-scraper/get-results",
+              "examples/tiktok-top-ads-scraper/credit-cost"
             ]
           },
           {
@@ -491,7 +535,8 @@
             "pages": [
               "examples/tripadvisor-restaurants-search-export/add-tasks",
               "examples/tripadvisor-restaurants-search-export/update-settings",
-              "examples/tripadvisor-restaurants-search-export/get-results"
+              "examples/tripadvisor-restaurants-search-export/get-results",
+              "examples/tripadvisor-restaurants-search-export/credit-cost"
             ]
           },
           {
@@ -499,7 +544,8 @@
             "pages": [
               "examples/tripadvisor-reviews-scraper/add-tasks",
               "examples/tripadvisor-reviews-scraper/update-settings",
-              "examples/tripadvisor-reviews-scraper/get-results"
+              "examples/tripadvisor-reviews-scraper/get-results",
+              "examples/tripadvisor-reviews-scraper/credit-cost"
             ]
           },
           {
@@ -507,7 +553,8 @@
             "pages": [
               "examples/trustpilot-reviews-scraper/add-tasks",
               "examples/trustpilot-reviews-scraper/update-settings",
-              "examples/trustpilot-reviews-scraper/get-results"
+              "examples/trustpilot-reviews-scraper/get-results",
+              "examples/trustpilot-reviews-scraper/credit-cost"
             ]
           },
           {
@@ -515,7 +562,8 @@
             "pages": [
               "examples/twitter-followers-following-scraper/add-tasks",
               "examples/twitter-followers-following-scraper/update-settings",
-              "examples/twitter-followers-following-scraper/get-results"
+              "examples/twitter-followers-following-scraper/get-results",
+              "examples/twitter-followers-following-scraper/credit-cost"
             ]
           },
           {
@@ -523,7 +571,8 @@
             "pages": [
               "examples/twitter-profile-scraper/add-tasks",
               "examples/twitter-profile-scraper/update-settings",
-              "examples/twitter-profile-scraper/get-results"
+              "examples/twitter-profile-scraper/get-results",
+              "examples/twitter-profile-scraper/credit-cost"
             ]
           },
           {
@@ -531,7 +580,8 @@
             "pages": [
               "examples/twitter-search-results-scraper/add-tasks",
               "examples/twitter-search-results-scraper/update-settings",
-              "examples/twitter-search-results-scraper/get-results"
+              "examples/twitter-search-results-scraper/get-results",
+              "examples/twitter-search-results-scraper/credit-cost"
             ]
           },
           {
@@ -539,7 +589,8 @@
             "pages": [
               "examples/twitter-user-tweets-scraper/add-tasks",
               "examples/twitter-user-tweets-scraper/update-settings",
-              "examples/twitter-user-tweets-scraper/get-results"
+              "examples/twitter-user-tweets-scraper/get-results",
+              "examples/twitter-user-tweets-scraper/credit-cost"
             ]
           },
           {
@@ -547,7 +598,8 @@
             "pages": [
               "examples/vinted-products-scraper/add-tasks",
               "examples/vinted-products-scraper/update-settings",
-              "examples/vinted-products-scraper/get-results"
+              "examples/vinted-products-scraper/get-results",
+              "examples/vinted-products-scraper/credit-cost"
             ]
           },
           {
@@ -555,7 +607,8 @@
             "pages": [
               "examples/yelp-search-export/add-tasks",
               "examples/yelp-search-export/update-settings",
-              "examples/yelp-search-export/get-results"
+              "examples/yelp-search-export/get-results",
+              "examples/yelp-search-export/credit-cost"
             ]
           },
           {
@@ -563,7 +616,8 @@
             "pages": [
               "examples/yelp-reviews-scraper/add-tasks",
               "examples/yelp-reviews-scraper/update-settings",
-              "examples/yelp-reviews-scraper/get-results"
+              "examples/yelp-reviews-scraper/get-results",
+              "examples/yelp-reviews-scraper/credit-cost"
             ]
           },
           {
@@ -571,7 +625,8 @@
             "pages": [
               "examples/youtube-channel-email-scraper/add-tasks",
               "examples/youtube-channel-email-scraper/update-settings",
-              "examples/youtube-channel-email-scraper/get-results"
+              "examples/youtube-channel-email-scraper/get-results",
+              "examples/youtube-channel-email-scraper/credit-cost"
             ]
           },
           {
@@ -579,7 +634,8 @@
             "pages": [
               "examples/youtube-comments-scraper/add-tasks",
               "examples/youtube-comments-scraper/update-settings",
-              "examples/youtube-comments-scraper/get-results"
+              "examples/youtube-comments-scraper/get-results",
+              "examples/youtube-comments-scraper/credit-cost"
             ]
           }
         ]

@@ -4,7 +4,11 @@ description: "Add Twitter search scraping tasks by providing search URLs"
 api: "POST https://api.lobstr.io/v1/tasks"
 ---
 
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
 Add Twitter search results to scrape by providing search URLs from X.com (Twitter). The scraper will extract tweets matching your search query.
+
+<AccountSyncRequired platform="Twitter/X" />
 
 <Note>Crawler ID: `1b16ff414d27920fb325b68436dbf5fc`</Note>
 

@@ -4,7 +4,11 @@ description: "Add LinkedIn post URLs to scrape commenters and likers using the l
 api: "POST https://api.lobstr.io/v2/squid/{squid_id}/task"
 ---
 
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
 Add LinkedIn post URLs as tasks to your squid. The scraper will extract all users who commented on or reacted to the post, along with their profile information.
+
+<AccountSyncRequired platform="LinkedIn" />
 
 <Note>Crawler ID: `8a309e0e0df48511111a9da6382b2ef8`</Note>
 

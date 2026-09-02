@@ -4,7 +4,11 @@ description: "Add Twitter user tweets scraping tasks by screen name"
 api: "POST https://api.lobstr.io/v1/tasks"
 ---
 
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
 Add Twitter users to scrape tweets from by providing their screen names (usernames). The scraper will retrieve tweets from the specified user's timeline.
+
+<AccountSyncRequired platform="Twitter/X" />
 
 <Note>Crawler ID: `9d6b83aaf1ae9d5b4a775d223e3eb5df`</Note>
 
