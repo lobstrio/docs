@@ -4,9 +4,13 @@ description: "Add Leboncoin listing URLs to send automated messages"
 api: "POST https://api.lobstr.io/v1/tasks"
 ---
 
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
 Add Leboncoin listing URLs to send automated messages to sellers. Each task represents a listing that will receive your templated message.
 
 Unlike search export scrapers, this tool takes direct listing URLs rather than search result pages. You can obtain listing URLs from the Leboncoin Listings Search Export scraper results.
+
+<AccountSyncRequired platform="Leboncoin" />
 
 <Note>Crawler ID: `fa9c988768a3d61f358916400f3c4b65`</Note>
 

@@ -18,10 +18,22 @@ This endpoint generates a temporary download URL for the results of a specific r
   The unique identifier (hash) of the run to download. Example: `300e9c5c127d421c90f431478d9a2cfb`
 </ParamField>
 
+<ParamField query="file_format" type="string">
+  Export file format. One of `csv`, `xlsx`, `json`, `jsonl`. Defaults to `csv` — omit this parameter to get CSV.
+</ParamField>
+
+<ParamField query="fields" type="string">
+  Comma-separated list of result columns to include, e.g. `fields=name,url,email`. Omit to include all columns.
+</ParamField>
+
+<ParamField query="omit" type="string">
+  Comma-separated list of result columns to exclude, e.g. `omit=raw_html`. Ignored if `fields` is also set.
+</ParamField>
+
 ## Response Field Explanations
 
 <ResponseField name="s3" type="string">
-  Temporary signed URL to download the results file (CSV format). Example: `"https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/..."`
+  Temporary signed URL to download the results file, in the requested `file_format`. Example: `"https://s3.eu-west-1.amazonaws.com/api.lobstr.io/temporary/..."`
 </ResponseField>
 
 <Warning>
@@ -37,7 +49,7 @@ This endpoint generates a temporary download URL for the results of a specific r
 </Tip>
 
 <Tip>
-  Results are exported in CSV format by default.
+  Results are exported in CSV format by default. Pass `file_format` to get XLSX, JSON, or JSONL (newline-delimited JSON) instead.
 </Tip>
 
 ## Code Examples
@@ -70,6 +82,11 @@ with open("results.csv", "wb") as f:
     f.write(file_response.content)
 
 print("Results saved to results.csv")
+```
+
+```bash cURL (JSON, selected columns)
+curl -X GET "https://api.lobstr.io/v1/runs/300e9c5c127d421c90f431478d9a2cfb/download?file_format=json&fields=name,url,email" \
+  -H "Authorization: Token YOUR_API_KEY"
 ```
 </CodeGroup>
 

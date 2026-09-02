@@ -4,9 +4,13 @@ description: "Add LinkedIn profile URLs to scrape using the lobstr.io API"
 api: "POST https://api.lobstr.io/v2/squid/{squid_id}/task"
 ---
 
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
 Add LinkedIn profile URLs as tasks to your squid. The scraper will extract comprehensive profile data from each LinkedIn profile you provide.
 
 You can use various LinkedIn profile URL formats, including international versions.
+
+<AccountSyncRequired platform="LinkedIn" />
 
 <Note>Crawler ID: `5c11752d8687df2332c08247c4fb655a`</Note>
 
