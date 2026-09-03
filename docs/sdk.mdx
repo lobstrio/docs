@@ -73,6 +73,8 @@ def on_progress(stats):
 run = client.runs.start(squid=squid.id)
 print(f"Run {run.id} started")
 run = client.runs.wait(run.id, callback=on_progress)
+# Shortcut: client.runs.call(squid=squid.id, callback=on_progress) does the
+# start + wait in one call. Add timeout=<seconds> to either to bound the wait.
 print(f"Run complete — {run.total_results} results, {run.credit_used} credits used")
 
 # 6. Wait for export to be ready before fetching results
@@ -136,7 +138,8 @@ client.squids.delete(squid.id)
 
 | SDK Method | HTTP | Endpoint | Description |
 |---|---|---|---|
-| `client.runs.start(squid)` | POST | `/v1/runs` | Start a new run for a squid |
+| `client.runs.start(squid)` | POST | `/v1/runs` | Start a new run and return the `Run` right away, without waiting |
+| `client.runs.call(squid, timeout=None, callback=None)` | POST + poll | `/v1/runs` | Start a run **and wait** for it to finish — returns the finished run. Combines `start()` + `wait()` |
 | `client.runs.list(squid)` | GET | `/v1/runs` | List all runs for a squid |
 | `client.runs.get(hash)` | GET | `/v1/runs/{hash}` | Get run details by hash |
 | `client.runs.stats(hash)` | GET | `/v1/runs/{hash}/stats` | Get statistics for a run |
@@ -144,7 +147,24 @@ client.squids.delete(squid.id)
 | `client.runs.abort(hash)` | POST | `/v1/runs/{hash}/abort` | Abort an in-progress run |
 | `client.runs.download_url(hash)` | GET | `/v1/runs/{hash}/download` | Get S3 download URL for run results |
 | `client.runs.download(hash, dest)` | GET | `/v1/runs/{hash}/download` | Download run results to a local file |
-| `client.runs.wait(hash, callback=None)` | — | — | Poll until run completes; optional `callback(RunStats)` for progress |
+| `client.runs.wait(hash, timeout=None, callback=None)` | — | — | Poll until the run completes; optional `callback(RunStats)` for progress. Pass `timeout` (seconds) to bound the wait |
+
+<Note>
+  **`start()` vs `call()`.** `start()` launches a run and hands back the `Run` immediately — you poll its progress or come back to it later. `call()` launches a run and waits until it finishes, returning the finished `Run` (the same as `start()` followed by `wait()`). Both accept `timeout` on the waiting side.
+</Note>
+
+<Note>
+  **Timeouts.** `wait()` and `call()` wait indefinitely by default (`timeout=None`). Set `timeout` to a number of seconds to give up waiting — a `RunTimeout` (a subclass of the built-in `TimeoutError`) is raised. The run is **not** aborted; it keeps running server-side, so you can re-attach later with `runs.wait(run_id)` or `runs.get(run_id)`.
+
+  ```python
+  from lobstrio import RunTimeout
+
+  try:
+      run = client.runs.call(squid=squid.id, timeout=300)  # give up after 5 min
+  except RunTimeout as e:
+      print(f"Still running — re-attach later with runs.wait('{e.run_id}')")
+  ```
+</Note>
 
 ### Results
 

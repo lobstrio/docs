@@ -11,6 +11,17 @@ pip install lobstrio
 
 Requires Python 3.10+.
 
+## Environment variables
+
+| Variable | Description |
+|---|---|
+| `LOBSTR_TOKEN` | API token, overriding the one saved by `lobstr config set-token`. |
+| `LOBSTR_API_BASE` | Point the CLI at a different API base URL (e.g. a staging or self-hosted instance). Defaults to production (`https://api.lobstr.io/v1/`) when unset. |
+
+```bash
+export LOBSTR_TOKEN=your_api_key
+```
+
 <CardGroup cols={4}>
   <Card title="lobstr go" icon="terminal">
     Combines create, configure, add tasks, run, and download into a single command.
@@ -94,12 +105,19 @@ lobstr whoami
 
 | Command | Description |
 |---|---|
-| `run start <squid> --wait` | Start a new run and optionally wait for completion |
+| `run start <squid>` | Start a new run and return immediately |
+| `run start <squid> --wait` | Start a run and poll until it completes |
+| `run start <squid> --wait --timeout <s> --poll <s>` | Wait with a time limit and custom poll interval — on timeout, exits non-zero and the run keeps going |
+| `run watch <id> [--timeout <s>] [--poll <s>]` | Attach to a running run and follow its progress |
 | `run ls <squid>` | List all runs for a squid |
 | `run show <id>` | Get run details by ID |
 | `run stats <id>` | Get statistics for a run |
 | `run abort <id>` | Abort an in-progress run |
 | `run download <id> -o results.csv` | Download run results to a file |
+
+<Note>
+  `--wait`, `--timeout` and `--download` all follow the run to completion. `--timeout <seconds>` bounds the wait — if the run hasn't finished by then, the command exits non-zero and prints how to re-attach (`lobstr run watch <id>`); the run is **not** aborted and keeps running server-side. `--poll <seconds>` sets how often status is checked (default 3).
+</Note>
 
 ### Results
 
