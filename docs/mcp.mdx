@@ -125,16 +125,24 @@ configured from it. A **run** is one execution of a squid.
 | `get_results` | read | One page of results for a run (row-capped, with field selection). |
 | `get_results_url` | read | A signed URL to download the full result set as a file. |
 
-#### Your account & connected accounts
+#### Your account
 
 | Tool | Type | Description |
 |---|---|---|
 | `check_credits` | read | Your credit balance and concurrency slots. |
 | `whoami` | read | Your account identity (email, name, plan). |
-| `list_accounts` | read | The platform accounts (LinkedIn, Facebook, …) scrapers log in with, and their status. |
+
+#### Connected accounts
+
+The platform logins your scrapers authenticate with (LinkedIn, Facebook, …) —
+distinct from your lobstr.io account above.
+
+| Tool | Type | Description |
+|---|---|---|
+| `list_accounts` | read | The platform accounts scrapers log in with, and their status. |
 | `get_account` | read | One connected account's status and which scrapers use it. |
 
-Connected-account tools return **metadata only** — never credentials or cookies.
+These return **metadata only** — never credentials or cookies.
 
 New scrapers work automatically — `get_scraper_details` reads each scraper's
 live input schema, so nothing here needs updating when lobstr.io adds one.
