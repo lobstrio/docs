@@ -10,8 +10,9 @@ results — without leaving the chat and without manual CSV export/import.
 **Endpoint:** `https://mcp.lobstr.io/mcp`
 
 <CardGroup cols={3}>
-  <Card title="7 Tools" icon="wrench">
-    Search scrapers, read their schema, run them, monitor runs, and fetch results.
+  <Card title="15 Tools" icon="wrench">
+    Discover scrapers, run and monitor them, fetch results, and check your
+    credits and connected platform accounts.
   </Card>
   <Card title="OAuth" icon="lock">
     Connect with your own lobstr.io login. You approve on lobstr.io — no password
@@ -88,22 +89,60 @@ You choose what to allow, per these scopes:
 | `crawlers:read` | Discover scrapers and read their settings |
 | `runs:read` | Check the status of your runs |
 | `results:read` | Read your scraped results |
-| `account:read` | View your account and credit balance |
+| `account:read` | View your account, credit balance, and connected platform accounts |
 | `runs:execute` | Run scrapers on your behalf (spends credits) |
 
 You can revoke access at any time from your lobstr.io account.
 
 ## Tools
 
+A **crawler** is a scraper template (e.g. "Google Maps"); a **squid** is one you've
+configured from it. A **run** is one execution of a squid.
+
+#### Discover & inspect
+
 | Tool | Type | Description |
 |---|---|---|
-| `search_scrapers` | read | Find the most relevant scrapers for a request. |
+| `search_scrapers` | read | Find the most relevant scrapers (crawlers) for a request. |
 | `get_scraper_details` | read | A scraper's input schema, output fields, and pricing. |
-| `list_my_scrapers` | read | Your saved scraper configurations. |
-| `get_my_scraper` | read | Inspect one saved configuration. |
+| `list_my_scrapers` | read | Your saved scrapers (squids) — paged, with name / crawler filters. |
+| `get_my_scraper` | read | Inspect one saved scraper's configuration. |
+
+#### Run & monitor
+
+| Tool | Type | Description |
+|---|---|---|
 | `run_scraper` | **write · spends credits** | Configure and start a run. Returns a `run_id`. |
 | `get_run` | read | Status and progress of a run. |
+| `list_runs` | read | Recent runs for a scraper. |
+| `abort_run` | write | Stop a running job. |
+| `empty_scraper` | write | Clear a scraper's tasks so it can be reused with new inputs. |
+
+#### Results
+
+| Tool | Type | Description |
+|---|---|---|
 | `get_results` | read | One page of results for a run (row-capped, with field selection). |
+| `get_results_url` | read | A signed URL to download the full result set as a file. |
+
+#### Your account
+
+| Tool | Type | Description |
+|---|---|---|
+| `check_credits` | read | Your credit balance and concurrency slots. |
+| `whoami` | read | Your account identity (email, name, plan). |
+
+#### Connected accounts
+
+The platform logins your scrapers authenticate with (LinkedIn, Facebook, …) —
+distinct from your lobstr.io account above.
+
+| Tool | Type | Description |
+|---|---|---|
+| `list_accounts` | read | The platform accounts scrapers log in with, and their status. |
+| `get_account` | read | One connected account's status and which scrapers use it. |
+
+These return **metadata only** — never credentials or cookies.
 
 New scrapers work automatically — `get_scraper_details` reads each scraper's
 live input schema, so nothing here needs updating when lobstr.io adds one.
