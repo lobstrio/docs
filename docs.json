@@ -621,7 +621,7 @@
             ]
           },
           {
-            "group": "YouTube Channel Email Scraper",
+            "group": "YouTube Channel Scraper",
             "pages": [
               "examples/youtube-channel-email-scraper/add-tasks",
               "examples/youtube-channel-email-scraper/update-settings",
@@ -666,6 +666,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-09-08",
               "changelog/2026-09-01",
               "changelog/2026-08-25",
               "changelog/2026-08-18",

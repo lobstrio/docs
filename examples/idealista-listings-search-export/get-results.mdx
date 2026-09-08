@@ -67,6 +67,110 @@ Each result object contains the following fields:
   URL of the property's main listing image on Idealista. Example: `https://img4.idealista.com/blur/WEB_DETAIL/0/id.pro.es.image.master/00/63/2d/1326662095.jpg`
 </ResponseField>
 
+<ResponseField name="has_parking_space" type="boolean">
+  Whether the listing includes a garage or parking space. Example: `true`
+</ResponseField>
+
+<ResponseField name="parking_space_included_in_price" type="boolean">
+  Whether the garage or parking space is included in the listed price. Example: `true`
+</ResponseField>
+
+<ResponseField name="parking_space_price" type="float | null">
+  Extra price of the parking space when not included in the listed price. `null` if included or not applicable. Example: `15000`
+</ResponseField>
+
+### Detail Fields
+
+The following fields are populated only when `get_property_details: true` is set. They require an additional page visit per listing.
+
+<ResponseField name="year_built" type="int | null">
+  Year of construction of the property. Example: `1985`
+</ResponseField>
+
+<ResponseField name="orientation" type="string | null">
+  Orientation of the property (e.g. north, south, east, west or combinations). Example: `south, east`
+</ResponseField>
+
+<ResponseField name="heating" type="string | null">
+  Heating type and energy source as displayed on the listing. Example: `individual gas`
+</ResponseField>
+
+<ResponseField name="condition" type="string | null">
+  Interior condition of the property (e.g. second hand/good condition, to renovate). Example: `second hand/good condition`
+</ResponseField>
+
+<ResponseField name="energy_certificate" type="string | null">
+  Energy certificate consumption rating letter (A–G). Example: `C`
+</ResponseField>
+
+<ResponseField name="energy_consumption" type="float | null">
+  Energy consumption in kWh/m² per year from the energy performance certificate. Example: `142.5`
+</ResponseField>
+
+<ResponseField name="energy_emissions_rating" type="string | null">
+  Energy certificate emissions rating letter (A–G). Example: `D`
+</ResponseField>
+
+<ResponseField name="energy_emissions" type="float | null">
+  CO₂ emissions in kg CO₂/m² per year from the energy performance certificate. Example: `28.3`
+</ResponseField>
+
+<ResponseField name="community_costs" type="float | null">
+  Monthly community / homeowner association costs in the listing currency. Example: `85.0`
+</ResponseField>
+
+<ResponseField name="constructed_area" type="int | null">
+  Constructed area in square metres. Example: `115`
+</ResponseField>
+
+<ResponseField name="usable_area" type="float | null">
+  Usable interior area in square metres. Example: `99.0`
+</ResponseField>
+
+<ResponseField name="plot_of_land" type="int | null">
+  Plot or land size in square metres (houses). Example: `300`
+</ResponseField>
+
+<ResponseField name="furnished" type="string | null">
+  Furnishing status of the property (rental listings). Example: `furnished`
+</ResponseField>
+
+<ResponseField name="has_fitted_wardrobes" type="boolean | null">
+  Whether the property has fitted wardrobes. Example: `true`
+</ResponseField>
+
+<ResponseField name="chalet_type" type="string | null">
+  House sub-type for chalets (e.g. independantHouse, semidetachedHouse, terracedHouse). Example: `independantHouse`
+</ResponseField>
+
+<ResponseField name="is_duplex" type="boolean | null">
+  Whether the property is a duplex. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_top_floor" type="boolean | null">
+  Whether the property is on the top floor. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_auction" type="boolean | null">
+  Whether the property is sold at auction. Example: `false`
+</ResponseField>
+
+<ResponseField name="agency_is_a_bank" type="boolean | null">
+  Whether the advertiser is a bank (bank-owned property). Example: `false`
+</ResponseField>
+
+<ResponseField name="floors_number" type="int | null">
+  Number of floors of the building or house. Example: `6`
+</ResponseField>
+
+<ResponseField name="property_characteristics" type="json | null">
+  Full raw characteristics of the listing grouped by section, as returned by Idealista's detail page. Example: `{"Basics": {"Bedrooms": "2", "Floor": "3rd"}, ...}`
+</ResponseField>
+
+<ResponseField name="detail_modification_date" type="string | null">
+  Last modification date of the listing as returned by the detail page (UTC). Example: `2026-08-20T12:00:00Z`
+</ResponseField>
+
 ## Response
 
 ```json 200

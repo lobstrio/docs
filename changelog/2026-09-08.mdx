@@ -1,0 +1,27 @@
+---
+title: "September 8, 2026"
+description: "Idealista property details add-on, Community Rewards now includes LinkedIn, and several bug fixes"
+---
+
+<Update label="September 8, 2026" description="Idealista property details add-on, Community Rewards LinkedIn support, bug fixes">
+
+## Improved
+
+**Idealista Listings Search Export — property details add-on**
+
+Enable `get_property_details: true` in your squid settings to collect the full property characteristics page for each listing: year built, orientation, heating type, energy certificate, community costs, constructed and usable area, furnished status, duplex/top-floor flags, and more (22 extra fields). Three new fields are now always populated regardless of this setting: `has_parking_space`, `parking_space_included_in_price`, and `parking_space_price`.
+
+**Community Story Rewards — LinkedIn posts now eligible**
+
+You can now submit a LinkedIn post to earn your quarterly bonus credits in addition to Reddit. Pass `platform: "linkedin"` and your post URL when submitting. LinkedIn comment permalinks are rejected — only standalone posts qualify. The reward amount is the same as for Reddit.
+
+## Fixed
+
+- **Reddit Scraper** — `body` and `media_url` fields are now correctly populated on subreddit-listing posts (were empty on that post type despite being set for others).
+- **Reddit Scraper** — tasks no longer crash when a comment thread is partially blocked; blocked comments are skipped and the rest of the thread is returned.
+- **Instagram Reels Scraper** — profiles were being skipped during iteration; the scraper now correctly processes all profiles.
+- **Instagram Followers Scraper** — fixed 401 authentication errors that were intermittently causing task failures.
+- **Instagram Profile Scraper** — fixed 401 Sentry errors.
+- **Google Maps Reviews Scraper** — proxy is now rotated on CurlError for place pages, reducing failed tasks caused by proxy blocks.
+
+</Update>

@@ -1,14 +1,14 @@
 ---
 title: "Community Story Rewards"
-description: "Earn bonus credits by sharing your lobstr.io story on Reddit"
+description: "Earn bonus credits by sharing your lobstr.io story on Reddit or LinkedIn"
 ---
 
-Community Story Rewards lets you earn bonus credits — equal to 20% of your plan's credit allowance — by posting about your experience using lobstr.io on an eligible subreddit. One reward is available per billing quarter, per account.
+Community Story Rewards lets you earn bonus credits — equal to 20% of your plan's credit allowance — by posting about your experience using lobstr.io on an eligible subreddit or as a LinkedIn post. One reward is available per billing quarter, per account.
 
 ## How it works
 
-1. Write a genuine post or comment about your lobstr.io use case on one of the [eligible subreddits](#list-eligible-subreddits).
-2. Submit the Reddit URL via the API (or the dashboard). The post is automatically verified for content and liveness.
+1. Write a genuine post about your lobstr.io use case on one of the [eligible subreddits](#list-eligible-subreddits) **or** publish a standalone LinkedIn post.
+2. Submit the Reddit or LinkedIn URL via the API (or the dashboard). The post is automatically verified for content and liveness.
 3. If approved, bonus credits are added to your account and valid until the end of your current billing period.
 
 ## List eligible subreddits
@@ -34,7 +34,7 @@ Returns the list of subreddits that qualify for a reward submission, along with 
 
 <api method="POST">https://api.lobstr.io/v1/community_rewards/submissions</api>
 
-Submit a Reddit post or comment URL for review.
+Submit a Reddit or LinkedIn post URL for review.
 
 <ParamField header="Authorization" type="string" required>
   Your API authentication token. Value: `Token YOUR_API_KEY`
@@ -44,8 +44,12 @@ Submit a Reddit post or comment URL for review.
   Must be application/json. Value: `application/json`
 </ParamField>
 
-<ParamField body="reddit_url" type="string" required>
-  Full URL of your Reddit post or comment. Must be in an eligible subreddit. Example: `https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/`
+<ParamField body="url" type="string" required>
+  Full URL of your Reddit post or LinkedIn post. For Reddit, must be in an eligible subreddit. Example: `https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/` or `https://www.linkedin.com/posts/yourname_activity-123456789/`
+</ParamField>
+
+<ParamField body="platform" type="string">
+  Platform of the submission: `reddit` (default) or `linkedin`. When omitted, `reddit` is assumed. LinkedIn posts have no subreddit allowlist — any public standalone post is eligible.
 </ParamField>
 
 <Note>
@@ -66,6 +70,8 @@ Returns your most recent submission for the current quarter, or `null` if you ha
 {
   "submission": {
     "id": 42,
+    "platform": "reddit",
+    "url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/",
     "reddit_url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/",
     "status": "pending",
     "submitted_at": "2026-08-15T10:30:00Z",
@@ -84,11 +90,17 @@ Possible `status` values: `pending` (under review), `gifted` (approved, credits 
 curl "https://api.lobstr.io/v1/community_rewards/subreddits" \
   -H "Authorization: Token YOUR_API_KEY"
 
-# Submit your story
+# Submit a Reddit story
 curl -X POST "https://api.lobstr.io/v1/community_rewards/submissions" \
   -H "Authorization: Token YOUR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"reddit_url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/"}'
+  -d '{"url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/", "platform": "reddit"}'
+
+# Submit a LinkedIn story
+curl -X POST "https://api.lobstr.io/v1/community_rewards/submissions" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"url": "https://www.linkedin.com/posts/yourname_activity-123456789/", "platform": "linkedin"}'
 ```
 
 ```python Python
@@ -102,11 +114,19 @@ headers = {"Authorization": f"Token {API_KEY}"}
 subreddits = requests.get(f"{BASE_URL}/community_rewards/subreddits", headers=headers).json()
 print("Eligible:", subreddits["results"])
 
-# Submit your story
+# Submit a Reddit story
 response = requests.post(
     f"{BASE_URL}/community_rewards/submissions",
     headers={**headers, "Content-Type": "application/json"},
-    json={"reddit_url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/"}
+    json={"url": "https://www.reddit.com/r/SaaS/comments/abc123/my_lobstr_experience/", "platform": "reddit"}
+)
+print(response.json())
+
+# Submit a LinkedIn story
+response = requests.post(
+    f"{BASE_URL}/community_rewards/submissions",
+    headers={**headers, "Content-Type": "application/json"},
+    json={"url": "https://www.linkedin.com/posts/yourname_activity-123456789/", "platform": "linkedin"}
 )
 print(response.json())
 ```
@@ -125,5 +145,19 @@ print(response.json())
 {
   "error": "InvalidRedditUrl",
   "message": "That doesn't look like a Reddit comment/post URL (expected a reddit.com/r/<subreddit>/... link)."
+}
+```
+
+```json 400 InvalidLinkedinUrl
+{
+  "error": "InvalidLinkedinUrl",
+  "message": "That doesn't look like a LinkedIn post URL (expected a linkedin.com/posts/... or linkedin.com/feed/update/urn:li:activity:... link)."
+}
+```
+
+```json 400 LinkedinCommentNotEligible
+{
+  "error": "LinkedinCommentNotEligible",
+  "message": "That's a link to a comment. The LinkedIn program is for standalone posts only — please submit the URL of your post itself."
 }
 ```
