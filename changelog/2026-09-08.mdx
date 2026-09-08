@@ -7,6 +7,18 @@ description: "Idealista property details add-on, Community Rewards now includes 
 
 ## Improved
 
+**SDK — `runs.call()` and timeout support**
+
+`runs.call()` is a new synchronous shortcut that starts a run and waits for it to finish, returning the completed run object. `runs.wait()` and `runs.call()` now both accept a `timeout` parameter (seconds); a `RunTimeout` exception is raised if the run doesn't finish in time. The `LOBSTR_API_BASE` environment variable lets you target a staging or self-hosted API without modifying your code.
+
+**CLI — `run start --timeout`, `run watch`, and `LOBSTR_API_BASE`**
+
+`lobstr run start` now accepts `--timeout` (abort after N seconds) and `--poll` (polling interval). `lobstr run watch` streams live run events to the terminal. `LOBSTR_API_BASE` is supported as an environment variable alongside `LOBSTR_TOKEN`.
+
+**MCP — expanded from 7 to 15 tools**
+
+The lobstr.io MCP server now exposes 15 tools grouped into four categories: Discover & inspect, Run & monitor, Results, and Account. New tools: `list_runs`, `abort_run`, `empty_scraper`, `get_results_url`, `check_credits`, `whoami`, `list_accounts`, `get_account`. The `account:read` scope now covers connected platform accounts.
+
 **Idealista Listings Search Export — property details add-on**
 
 Enable `get_property_details: true` in your squid settings to collect the full property characteristics page for each listing: year built, orientation, heating type, energy certificate, community costs, constructed and usable area, furnished status, duplex/top-floor flags, and more (22 extra fields). Three new fields are now always populated regardless of this setting: `has_parking_space`, `parking_space_included_in_price`, and `parking_space_price`.
