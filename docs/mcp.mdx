@@ -10,7 +10,7 @@ results — without leaving the chat and without manual CSV export/import.
 **Endpoint:** `https://mcp.lobstr.io/mcp`
 
 <CardGroup cols={3}>
-  <Card title="15 Tools" icon="wrench">
+  <Card title="20 Tools" icon="wrench">
     Discover scrapers, run and monitor them, fetch results, and check your
     credits and connected platform accounts.
   </Card>
@@ -91,7 +91,7 @@ You choose what to allow, per these scopes:
 | `results:read` | Read your scraped results |
 | `profile:read` | View your profile (name, email, plan) and credit balance |
 | `account:read` | View your connected platform accounts (LinkedIn, Facebook, …) and their status |
-| `runs:execute` | Run scrapers on your behalf (spends credits) |
+| `runs:execute` | Run scrapers on your behalf (spends credits); together with `account:read`, also lets the client attach a connected account to a squid |
 
 You can revoke access at any time from your lobstr.io account.
 
@@ -118,6 +118,18 @@ configured from it. A **run** is one execution of a squid.
 | `list_runs` | read | Recent runs for a scraper. |
 | `abort_run` | write | Stop a running job. |
 | `empty_scraper` | write | Clear a scraper's tasks so it can be reused with new inputs. |
+| `deactivate_scraper` | write | Free a saved scraper's concurrency slot without deleting it; stops any run in progress. |
+
+#### Build a run step by step
+
+An alternative to `run_scraper` for building up a squid across several calls
+instead of one — useful for large or incremental task lists.
+
+| Tool | Type | Description |
+|---|---|---|
+| `create_squid` | write | Create a saved scraper (squid) from a crawler, without running it. |
+| `add_tasks` | write | Add input rows to a squid; callable repeatedly to build up a batch. |
+| `estimate_run` | read | Credit cost, projected results, and estimated time for a squid's current tasks. |
 
 #### Results
 
@@ -142,8 +154,10 @@ distinct from your lobstr.io account above.
 |---|---|---|
 | `list_accounts` | read | The platform accounts scrapers log in with, and their status. |
 | `get_account` | read | One connected account's status and which scrapers use it. |
+| `attach_account` | write | Link a connected account to a squid so it can launch a run. See [account-backed scrapers](#account-backed-scrapers) below. |
 
-These return **metadata only** — never credentials or cookies.
+`list_accounts` and `get_account` return **metadata only** — never credentials
+or cookies. `attach_account` only ever sends account ids it looked up itself.
 
 New scrapers work automatically — `get_scraper_details` reads each scraper's
 live input schema, so nothing here needs updating when lobstr.io adds one.
@@ -155,6 +169,32 @@ the total isn't known until the run completes. `run_scraper` estimates the cost
 and, when it's above a threshold or unknown, returns a confirmation request
 instead of running; the client asks you, and only then does it execute. The read
 tools never spend credits.
+
+## Account-backed scrapers
+
+Some scrapers log in to a platform on your behalf — the LinkedIn Leads Scraper
+and Sales Navigator Leads Scraper, for example — and need a **connected
+account** synced in your lobstr.io dashboard first. Without one, the run
+starts but fails immediately with no account available to launch it.
+
+- **The account type must match the scraper.** An account is linked to one
+  platform (LinkedIn, Facebook, …); it can only run a scraper for that same
+  platform.
+- **`run_scraper` attaches one automatically** when exactly one connected
+  account of the right type is healthy and not rate limited. With several
+  matching accounts, or none, it asks you to choose instead of guessing —
+  connect an account from your dashboard, or call `attach_account` with the
+  one you want.
+- **Attaching only adds.** An account already on a squid is never replaced,
+  and automatic selection never runs on a squid that already has one.
+- A rate-limited account is reported as temporarily locked, not missing —
+  these locks are routine and clear on their own.
+
+Call `attach_account` directly when you want to add, switch, or confirm an
+account before running — for example, re-running an existing squid with a
+different account than the one that was auto-picked. See
+[Link Account to Squid](/docs/link-account-to-squid) for how account linking
+works at the API level.
 
 ## A typical conversation
 
