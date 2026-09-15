@@ -1,0 +1,285 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Threads Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Threads Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="post_url" type="string">
+  Direct URL of the post. Example: `https://www.threads.net/@zuck/post/Cabcde12345`
+</ResponseField>
+
+<ResponseField name="post_id" type="string">
+  Numeric identifier of the post. Example: `3456789012345`
+</ResponseField>
+
+<ResponseField name="post_code" type="string">
+  Short code of the post used in its URL. Example: `Cabcde12345`
+</ResponseField>
+
+<ResponseField name="record_type" type="string">
+  Row type: post or reply. Example: `post`
+</ResponseField>
+
+<ResponseField name="source_tab" type="string">
+  Where the row came from: posts, search, or permalink. Example: `posts`
+</ResponseField>
+
+<ResponseField name="search_keyword" type="string">
+  Keyword or tag searched for (search rows only). Example: `AI`
+</ResponseField>
+
+<ResponseField name="scraped_at" type="datetime">
+  UTC timestamp at which the row was collected. Example: `2026-09-15T10:00:00Z`
+</ResponseField>
+
+<ResponseField name="text_content" type="string">
+  Full text of the post. Example: `Just launched something new!`
+</ResponseField>
+
+<ResponseField name="published_at" type="datetime">
+  Publication date of the post in UTC. Example: `2026-09-14T20:00:00Z`
+</ResponseField>
+
+<ResponseField name="language" type="string">
+  Language detected by Threads for the post. Example: `en`
+</ResponseField>
+
+<ResponseField name="topic_tag" type="string">
+  Topic/community tag attached to the post. Example: `Technology`
+</ResponseField>
+
+<ResponseField name="hashtags" type="json">
+  Hashtags found in the post text.
+</ResponseField>
+
+<ResponseField name="mentions" type="json">
+  Handles mentioned in the post text.
+</ResponseField>
+
+<ResponseField name="mentioned_users" type="json">
+  Handles that Threads itself resolved as mentions.
+</ResponseField>
+
+<ResponseField name="mentioned_accounts" type="json">
+  Accounts Threads resolved as mentions, with user ids.
+</ResponseField>
+
+<ResponseField name="like_count" type="bigint">
+  Number of likes. Example: `45231`
+</ResponseField>
+
+<ResponseField name="reply_count" type="bigint">
+  Number of direct replies. Example: `1847`
+</ResponseField>
+
+<ResponseField name="repost_count" type="bigint">
+  Number of reposts. Example: `3210`
+</ResponseField>
+
+<ResponseField name="quote_count" type="bigint">
+  Number of quote posts. Example: `892`
+</ResponseField>
+
+<ResponseField name="share_count" type="bigint">
+  Number of shares. Example: `5612`
+</ResponseField>
+
+<ResponseField name="view_count" type="bigint">
+  Number of views (only on single-post crawls). Example: `1200000`
+</ResponseField>
+
+<ResponseField name="has_media" type="boolean">
+  True when the post carries at least one image, video, or carousel. Example: `false`
+</ResponseField>
+
+<ResponseField name="media_type" type="string">
+  Kind of media: text, image, video, carousel, or audio. Example: `text`
+</ResponseField>
+
+<ResponseField name="media_urls" type="json">
+  URLs of the post media.
+</ResponseField>
+
+<ResponseField name="media_width" type="integer">
+  Width in pixels of the post media. Example: `1080`
+</ResponseField>
+
+<ResponseField name="media_height" type="integer">
+  Height in pixels of the post media. Example: `1080`
+</ResponseField>
+
+<ResponseField name="has_audio" type="boolean">
+  True when the attached video carries audio. Example: `false`
+</ResponseField>
+
+<ResponseField name="accessibility_caption" type="string">
+  Alt text of the media.
+</ResponseField>
+
+<ResponseField name="is_gif" type="boolean">
+  True when the post attaches a GIF. Example: `false`
+</ResponseField>
+
+<ResponseField name="music_title" type="string">
+  Title of the music track attached to the post.
+</ResponseField>
+
+<ResponseField name="music_artist" type="string">
+  Artist of the music track.
+</ResponseField>
+
+<ResponseField name="urls" type="json">
+  External links in the post.
+</ResponseField>
+
+<ResponseField name="link_title" type="string">
+  Title of the link preview attached to the post.
+</ResponseField>
+
+<ResponseField name="is_paid_partnership" type="boolean">
+  True when the post is flagged as a paid partnership. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_pinned" type="boolean">
+  True when the post is pinned. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_edited" type="boolean">
+  True when the post text was edited. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_spoiler" type="boolean">
+  True when the media is marked as a spoiler. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_ai_generated" type="boolean">
+  True when Threads flags the post as AI-generated. Example: `false`
+</ResponseField>
+
+<ResponseField name="reply_control" type="string">
+  Who is allowed to reply to the post. Example: `everyone`
+</ResponseField>
+
+<ResponseField name="is_reply" type="boolean">
+  True when the post is a reply to another post. Example: `false`
+</ResponseField>
+
+<ResponseField name="reply_to_username" type="string">
+  Handle of the account this post replies to.
+</ResponseField>
+
+<ResponseField name="is_quote_post" type="boolean">
+  True when the post quotes another post. Example: `false`
+</ResponseField>
+
+<ResponseField name="quoted_post_url" type="string">
+  URL of the quoted post.
+</ResponseField>
+
+<ResponseField name="is_repost" type="boolean">
+  True when the post is a repost. Example: `false`
+</ResponseField>
+
+<ResponseField name="reposted_post_url" type="string">
+  URL of the reposted post.
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  Handle of the post author. Example: `zuck`
+</ResponseField>
+
+<ResponseField name="user_id" type="string">
+  Numeric identifier of the post author. Example: `314216`
+</ResponseField>
+
+<ResponseField name="display_name" type="string">
+  Display name of the post author. Example: `Mark Zuckerberg`
+</ResponseField>
+
+<ResponseField name="profile_url" type="string">
+  URL of the post author profile. Example: `https://www.threads.net/@zuck`
+</ResponseField>
+
+<ResponseField name="profile_pic_url" type="string">
+  Profile picture of the post author. Example: `https://scontent.example.com/v/t51.2885-19/zuck_profile.jpg`
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  True when the post author is verified. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_private" type="boolean">
+  True when the post author account is private. Example: `false`
+</ResponseField>
+
+<ResponseField name="followers_count" type="bigint">
+  Number of followers (profile crawls only). Example: `12500000`
+</ResponseField>
+
+<ResponseField name="bio" type="string">
+  Biography of the crawled profile (profile crawls only).
+</ResponseField>
+
+<ResponseField name="bio_links" type="json">
+  Links listed in the profile biography.
+</ResponseField>
+
+<ResponseField name="profile_tags" type="json">
+  Topic tags displayed on the profile.
+</ResponseField>
+
+<ResponseField name="profile_pic_hd_url" type="string">
+  Highest resolution profile picture (profile crawls only).
+</ResponseField>
+
+<ResponseField name="fediverse_enabled" type="boolean">
+  True when the profile is reachable on the fediverse. Example: `true`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=7308ae543e6abc70438d6b968d3a1b38" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "7308ae543e6abc70438d6b968d3a1b38", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"post_id": "3456789012345", "text_content": "Just launched something new!", "username": "zuck", "like_count": 45231, "reply_count": 1847, "published_at": "2026-09-14T20:00:00Z", "is_verified": true}]}
+```

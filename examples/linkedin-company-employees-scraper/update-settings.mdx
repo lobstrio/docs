@@ -1,0 +1,62 @@
+---
+title: "Update Settings"
+description: "Configure LinkedIn Company Employees Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **LinkedIn Company Employees Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| keyword | string | — | Free-text filter applied to the employee search, e.g. 'engineer' or 'sales' |
+| max_results | integer | 1000 | Maximum number of employees to scrape per company |
+| max_unique_results_per_run | integer | — | Max unique results across all tasks in the run |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/08ac061ab290b5ae0f831e086c98d4b5 \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "keyword": "engineer",
+    "max_results": 1000
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/08ac061ab290b5ae0f831e086c98d4b5",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "keyword": "engineer",
+        "max_results": 1000,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"keyword": "engineer", "max_results": 1000}}
+```

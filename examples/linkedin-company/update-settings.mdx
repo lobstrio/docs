@@ -1,0 +1,48 @@
+---
+title: "Update Settings"
+description: "Configure LinkedIn Company Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **LinkedIn Company Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **url** | string | — | LinkedIn company URL, showcase page URL, or company slug |
+| **max_results** | integer | — | Caps rows collected per task |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"params": {"max_results": 100}}'
+```
+
+```python Python
+import requests
+requests.post("https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={"Authorization": "Token YOUR_API_KEY", "Content-Type": "application/json"},
+    json={"params": {"max_results": 100}})
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"max_results": 100}}
+```

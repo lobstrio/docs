@@ -25,6 +25,11 @@ Set these parameters in the `params` object:
 | **max_pages** | integer | 100 | Maximum number of search result pages to scrape (max: 100) |
 | **max_results** | integer | unlimited | Maximum companies to collect per task (max: 5000) |
 | **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
+| **get_details** | boolean | false | Collect extra details for each company: website, domain, LinkedIn page URL, exact employee count, founded year, specialties, company type, revenue range, and headquarters location |
+
+<Note>
+  Setting `get_details: true` enables additional company detail fields in results.
+</Note>
 
 ## Squid Settings
 
@@ -67,7 +72,8 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "no_line_breaks": true,
     "params": {
       "max_pages": 50,
-      "max_results": 1000
+      "max_results": 1000,
+      "get_details": false
     }
   }'
 ```
@@ -89,8 +95,9 @@ payload = {
     "to_complete": False,
     "no_line_breaks": True,
     "params": {
-        "max_pages": 50,      # Limit search result pages
-        "max_results": 1000   # Max companies per task
+        "max_pages": 50,
+        "max_results": 1000,
+        "get_details": False
     }
 }
 
@@ -114,7 +121,8 @@ print(f"Settings updated: {response.json()['name']}")
   "no_line_breaks": true,
   "params": {
     "max_pages": 50,
-    "max_results": 1000
+    "max_results": 1000,
+    "get_details": false
   }
 }
 ```

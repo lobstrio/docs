@@ -1,0 +1,83 @@
+---
+title: "Update Settings"
+description: "Configure Zillow Property Listings Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Zillow Property Listings Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| price_min | integer | — | Only collect homes at or above this price, in USD |
+| price_max | integer | — | Only collect homes at or below this price, in USD |
+| beds | string | Any | Minimum number of bedrooms (Any, 1+, 2+, 3+, 4+, 5+) |
+| baths | string | Any | Minimum number of bathrooms |
+| home_type | string | Any | Property type filter |
+| status | string | For sale | For sale, Sold, or For rent |
+| days_on_site | string | Any | Only listings published within this window |
+| max_results | integer | 1000 | Max listings per search (Zillow serves ~980 per search) |
+| max_unique_results_per_run | integer | — | Max unique results across all tasks in the run |
+| property_details | boolean | false | Visit each listing page to collect full description, agent contacts, MLS info, year built, HOA fees, price history |
+
+<Note>
+  Setting `property_details: true` enables additional detail fields in results.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/ed06bb5ca6544bbb638c544bac48ede1 \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "price_min": 500000,
+    "price_max": 1000000,
+    "beds": "2+",
+    "home_type": "CONDO",
+    "status": "For sale",
+    "property_details": true,
+    "max_results": 1000
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/ed06bb5ca6544bbb638c544bac48ede1",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "price_min": 500000,
+        "price_max": 1000000,
+        "beds": "2+",
+        "home_type": "CONDO",
+        "status": "For sale",
+        "property_details": True,
+        "max_results": 1000,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"price_min": 500000, "price_max": 1000000, "beds": "2+", "home_type": "CONDO", "status": "For sale", "property_details": true, "max_results": 1000}}
+```

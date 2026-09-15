@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="icon">
+    <rect data-layer="tile" width="40" height="40" rx="9" fill="#6FDA44"/>
+    <g data-layer="glyph" transform="translate(8.000,9.000) scale(1.00000)" fill="none" stroke="#FFFFFF" stroke-width="2.000" stroke-linecap="round" stroke-linejoin="round"><path d="M16 20V4a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16" />
+  <rect width="20" height="14" x="2" y="6" rx="2" /></g>
+  </g>
+</svg>

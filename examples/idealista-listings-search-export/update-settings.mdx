@@ -22,7 +22,7 @@ The following parameters can be configured in the `params` object:
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| **max_pages** | integer | 100 | Maximum number of search result pages to scrape (max: 100) |
+| **max_pages** | integer | 60 | Maximum number of search result pages to scrape (max: 100) |
 | **get_property_details** | boolean | false | Visit each listing page to collect full property characteristics (year built, orientation, energy certificate, community costs, etc.). Increases credit usage. |
 
 ## General Settings
@@ -38,7 +38,7 @@ Standard squid settings that apply to all scrapers:
 | **no_line_breaks** | boolean | Remove line breaks from results |
 
 <Tip>
-  Idealista typically shows 30 listings per page. Setting max_pages to 100 can yield up to 3,000 listings per search URL.
+  Idealista typically shows 30 listings per page. Setting max_pages to 60 can yield up to 1,800 listings per search URL.
 </Tip>
 
 <Note>
@@ -59,7 +59,7 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "to_complete": false,
     "no_line_breaks": true,
     "params": {
-      "max_pages": 100,
+      "max_pages": 60,
       "get_property_details": false
     }
   }'
@@ -84,7 +84,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
         "to_complete": False,
         "no_line_breaks": True,
         "params": {
-            "max_pages": 100,
+            "max_pages": 60,
             "get_property_details": False
         }
     }
@@ -106,7 +106,7 @@ print(f"Max pages: {data['params']['max_pages']}")
   "to_complete": false,
   "no_line_breaks": true,
   "params": {
-    "max_pages": 100,
+    "max_pages": 60,
     "get_property_details": false
   }
 }

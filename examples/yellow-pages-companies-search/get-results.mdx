@@ -1,0 +1,147 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Yellow Pages Companies Search Export"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Yellow Pages Companies Search Export** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="item_id" type="string">
+  Unique Yellow Pages identifier (ypid). Example: `560515561`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Business name. Example: `ABC Plumbing Co.`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the listing.
+</ResponseField>
+
+<ResponseField name="is_ad" type="boolean">
+  Whether the business is sponsored.
+</ResponseField>
+
+<ResponseField name="categories" type="string">
+  Comma-separated Yellow Pages categories. Example: `Plumbers, Water Heater Repair`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Phone number. Example: `(512) 555-0123`
+</ResponseField>
+
+<ResponseField name="full_address" type="string">
+  Full formatted address.
+</ResponseField>
+
+<ResponseField name="street_address" type="string">
+  Street address.
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City. Example: `Austin`
+</ResponseField>
+
+<ResponseField name="state" type="string">
+  US state code. Example: `TX`
+</ResponseField>
+
+<ResponseField name="zip_code" type="string">
+  ZIP code. Example: `78701`
+</ResponseField>
+
+<ResponseField name="rating" type="float">
+  Average customer rating. Example: `4.7`
+</ResponseField>
+
+<ResponseField name="review_count" type="integer">
+  Total customer reviews. Example: `89`
+</ResponseField>
+
+<ResponseField name="years_in_business" type="integer">
+  Years operating.
+</ResponseField>
+
+<ResponseField name="opening_hours" type="string">
+  Opening hours rule.
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Business website. Example: `https://abcplumbing.com`
+</ResponseField>
+
+<ResponseField name="snippet" type="text">
+  Short snippet from the search page.
+</ResponseField>
+
+<ResponseField name="thumbnail" type="string">
+  Thumbnail image URL.
+</ResponseField>
+
+### Detail Fields
+
+The following fields require `results_details: true` in settings.
+
+<ResponseField name="latitude" type="float">
+  Latitude.
+</ResponseField>
+
+<ResponseField name="longitude" type="float">
+  Longitude.
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Email address on the business page.
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full business description.
+</ResponseField>
+
+<ResponseField name="founding_date" type="string">
+  Year founded.
+</ResponseField>
+
+<ResponseField name="photos" type="text">
+  Comma-separated list of business photo URLs.
+</ResponseField>
+
+<ResponseField name="facebook" type="string">
+  Facebook page URL.
+</ResponseField>
+
+<ResponseField name="instagram" type="string">
+  Instagram profile URL.
+</ResponseField>
+
+<ResponseField name="twitter" type="string">
+  Twitter / X profile URL.
+</ResponseField>
+
+<ResponseField name="linkedin" type="string">
+  LinkedIn page URL.
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"name": "ABC Plumbing Co.", "city": "Austin", "state": "TX", "phone": "(512) 555-0123", "rating": 4.7, "review_count": 89, "website": "https://abcplumbing.com"}]}
+```

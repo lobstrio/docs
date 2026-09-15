@@ -1,0 +1,84 @@
+---
+title: "Update Settings"
+description: "Configure Naukri Jobs Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Naukri Jobs Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| keyword | string | — | Job title, skill or company to search for (used when no task URL) |
+| location | string | — | City or region to search in, e.g. 'bangalore' |
+| experience | string | Any | Years of experience filter. '0' means fresher |
+| salary_range | string | Any | Yearly package band filter |
+| job_type | string | Any | Company Jobs or Recruiter Jobs |
+| work_mode | string | Any | Work from office, Hybrid, or Remote |
+| date_posted | string | Any time | Only return jobs posted within this window |
+| sort_by | string | Relevance | Relevance or Date posted |
+| max_results | integer | 1000 | Max jobs per search |
+| max_unique_results_per_run | integer | — | Max unique results across all tasks in the run |
+| fetch_since | string | — | Only collect jobs posted after this threshold |
+| fetch_since_timezone | string | — | Timezone for fetch_since (e.g. Asia/Kolkata) |
+| job_details | boolean | false | Open each job posting to collect full description, applicant and view counts, education requirements |
+
+<Note>
+  Setting `job_details: true` enables additional detail fields in results.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/28ca7564a332a081a1dabda552d5c35b \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "keyword": "python developer",
+    "location": "bangalore",
+    "experience": "3",
+    "work_mode": "Hybrid",
+    "job_details": true,
+    "max_results": 1000
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/28ca7564a332a081a1dabda552d5c35b",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "keyword": "python developer",
+        "location": "bangalore",
+        "experience": "3",
+        "work_mode": "Hybrid",
+        "job_details": True,
+        "max_results": 1000,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"keyword": "python developer", "location": "bangalore", "experience": "3", "work_mode": "Hybrid", "job_details": true, "max_results": 1000}}
+```

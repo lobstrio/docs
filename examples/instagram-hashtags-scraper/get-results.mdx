@@ -1,0 +1,199 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Instagram Search & Hashtags Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Instagram Search & Hashtags Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="url" type="string">
+  Canonical URL of the post or reel.
+</ResponseField>
+
+<ResponseField name="reel_url" type="string">
+  Direct reel URL (reels only).
+</ResponseField>
+
+<ResponseField name="post_id" type="string">
+  Unique numeric identifier. Example: `3123456789`
+</ResponseField>
+
+<ResponseField name="shortcode" type="string">
+  Shortcode used in the Instagram URL. Example: `C1a2b3c4d`
+</ResponseField>
+
+<ResponseField name="input_search" type="string">
+  The hashtag or keyword this item was discovered under. Example: `travel`
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  The Instagram hashtag/search page URL.
+</ResponseField>
+
+<ResponseField name="rank" type="integer">
+  Position within results.
+</ResponseField>
+
+<ResponseField name="media_type" type="string">
+  Type of media. Example: `image`
+</ResponseField>
+
+<ResponseField name="product_type" type="string">
+  Instagram product type. Example: `feed`
+</ResponseField>
+
+<ResponseField name="is_video" type="boolean">
+  Whether the media is a video/reel.
+</ResponseField>
+
+<ResponseField name="is_carousel" type="boolean">
+  Whether the media is a multi-slide carousel.
+</ResponseField>
+
+<ResponseField name="caption" type="string">
+  Full caption text.
+</ResponseField>
+
+<ResponseField name="hashtags" type="json">
+  Hashtags found in the caption.
+</ResponseField>
+
+<ResponseField name="mentions" type="json">
+  @-mentions found in the caption.
+</ResponseField>
+
+<ResponseField name="owner_username" type="string">
+  Instagram username of the author. Example: `travel_blogger`
+</ResponseField>
+
+<ResponseField name="owner_full_name" type="string">
+  Display name of the author.
+</ResponseField>
+
+<ResponseField name="owner_id" type="string">
+  Unique Instagram identifier of the author.
+</ResponseField>
+
+<ResponseField name="owner_is_verified" type="boolean">
+  Whether the author account is verified.
+</ResponseField>
+
+<ResponseField name="owner_profile_pic_url" type="string">
+  Profile picture URL of the author.
+</ResponseField>
+
+<ResponseField name="likes_count" type="bigint">
+  Number of likes. Example: `4821`
+</ResponseField>
+
+<ResponseField name="comments_count" type="bigint">
+  Number of comments. Example: `93`
+</ResponseField>
+
+<ResponseField name="views_count" type="bigint">
+  Video play count (reels/videos only).
+</ResponseField>
+
+<ResponseField name="reshare_count" type="bigint">
+  Number of reshares (reels only).
+</ResponseField>
+
+<ResponseField name="timestamp" type="bigint">
+  Unix timestamp of publication.
+</ResponseField>
+
+<ResponseField name="timestamp_datetime" type="datetime">
+  Publication date and time (ISO 8601). Example: `2026-09-10T14:23:00`
+</ResponseField>
+
+<ResponseField name="display_url" type="string">
+  URL of the main image or video thumbnail.
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  Direct video URL (videos/reels only).
+</ResponseField>
+
+<ResponseField name="video_duration_seconds" type="float">
+  Video duration in seconds.
+</ResponseField>
+
+<ResponseField name="dimensions" type="string">
+  Width x height of the media in pixels. Example: `1080x1350`
+</ResponseField>
+
+<ResponseField name="carousel_media_count" type="integer">
+  Number of slides in a carousel post.
+</ResponseField>
+
+<ResponseField name="child_post_1 through child_post_10" type="json">
+  Media details of each carousel slide.
+</ResponseField>
+
+<ResponseField name="image_1 through image_5" type="string">
+  Image URL of carousel slides.
+</ResponseField>
+
+<ResponseField name="coauthors" type="json">
+  Accounts listed as co-authors.
+</ResponseField>
+
+<ResponseField name="tagged_users" type="json">
+  Instagram users tagged in the media.
+</ResponseField>
+
+<ResponseField name="music" type="json">
+  Music/audio info.
+</ResponseField>
+
+<ResponseField name="alt" type="string">
+  Accessibility alt text.
+</ResponseField>
+
+<ResponseField name="location_id" type="string">
+  Instagram location identifier.
+</ResponseField>
+
+<ResponseField name="location_name" type="string">
+  Name of the tagged location.
+</ResponseField>
+
+<ResponseField name="location_lat" type="float">
+  Latitude of the tagged location.
+</ResponseField>
+
+<ResponseField name="location_lng" type="float">
+  Longitude of the tagged location.
+</ResponseField>
+
+### Detail Fields
+
+The following fields require `enrich_comments: true` in settings.
+
+<ResponseField name="comment_1 through comment_10" type="json">
+  Latest comments on the post or reel.
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"post_id": "3123456789", "shortcode": "C1a2b3c4d", "input_search": "travel", "owner_username": "travel_blogger", "likes_count": 4821, "comments_count": 93, "timestamp_datetime": "2026-09-10T14:23:00"}]}
+```

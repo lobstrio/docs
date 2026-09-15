@@ -1,0 +1,313 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Glassdoor Jobs Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Glassdoor Jobs Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="job_id" type="string">
+  Glassdoor's unique identifier for the job listing. Example: `JV_KO0,25_KE26,32.htm`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Job title as published by the employer. Example: `Senior Python Developer`
+</ResponseField>
+
+<ResponseField name="normalized_title" type="string">
+  Glassdoor's normalised version of the job title. Example: `Software Engineer`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct link to the job listing on Glassdoor. Example: `https://www.glassdoor.com/job-listing/senior-python-developer-acme-corp-JV_KO0,25_KE26,32.htm`
+</ResponseField>
+
+<ResponseField name="seo_url" type="string">
+  Canonical SEO link to the job listing. Example: `https://www.glassdoor.com/job-listing/senior-python-developer-acme-corp-JV_KO0,25_KE26,32.htm`
+</ResponseField>
+
+<ResponseField name="posted_at" type="datetime">
+  Date the job was posted. Example: `2026-09-13T00:00:00Z`
+</ResponseField>
+
+<ResponseField name="posted_at_age_days" type="integer">
+  Age of the listing in whole days. Example: `2`
+</ResponseField>
+
+<ResponseField name="easy_apply" type="boolean">
+  True when the job can be applied to directly on Glassdoor. Example: `false`
+</ResponseField>
+
+<ResponseField name="expired" type="boolean">
+  True when Glassdoor flags the listing as expired. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_sponsored_job" type="boolean">
+  True when the listing is a paid placement. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_sponsored_employer" type="boolean">
+  True when the employer is a paid advertiser. Example: `false`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Job location as displayed on Glassdoor. Example: `New York, NY`
+</ResponseField>
+
+<ResponseField name="location_type" type="string">
+  Granularity of location: C (city), S (state), N (country). Example: `C`
+</ResponseField>
+
+<ResponseField name="location_country_id" type="integer">
+  Glassdoor's internal country identifier. Example: `1`
+</ResponseField>
+
+<ResponseField name="salary_min" type="float">
+  Low end of Glassdoor's pay estimate (10th percentile). Example: `120000`
+</ResponseField>
+
+<ResponseField name="salary_median" type="float">
+  Median of Glassdoor's pay estimate (50th percentile). Example: `150000`
+</ResponseField>
+
+<ResponseField name="salary_max" type="float">
+  High end of Glassdoor's pay estimate (90th percentile). Example: `180000`
+</ResponseField>
+
+<ResponseField name="salary_period" type="string">
+  Period of salary figures, e.g. ANNUAL or HOURLY. Example: `ANNUAL`
+</ResponseField>
+
+<ResponseField name="salary_currency" type="string">
+  ISO currency code of the salary figures. Example: `USD`
+</ResponseField>
+
+<ResponseField name="salary_source" type="string">
+  Where the salary comes from (EMPLOYER_PROVIDED or Glassdoor estimate). Example: `EMPLOYER_PROVIDED`
+</ResponseField>
+
+<ResponseField name="employer_salary" type="boolean">
+  True when salary was provided by the employer. Example: `true`
+</ResponseField>
+
+<ResponseField name="company_id" type="integer">
+  Glassdoor's identifier for the hiring company. Example: `1234567`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the hiring company. Example: `Acme Corp`
+</ResponseField>
+
+<ResponseField name="company_short_name" type="string">
+  Short display name of the hiring company. Example: `Acme`
+</ResponseField>
+
+<ResponseField name="company_rating" type="float">
+  Overall Glassdoor rating, from 0 to 5. Example: `4.2`
+</ResponseField>
+
+<ResponseField name="company_logo_url" type="string">
+  URL of the company logo. Example: `https://media.glassdoor.com/sql/1234567/acme-squareLogo.png`
+</ResponseField>
+
+<ResponseField name="job_category" type="string">
+  Glassdoor's occupation category for the job. Example: `Software Engineer`
+</ResponseField>
+
+<ResponseField name="job_category_id" type="integer">
+  Glassdoor's numeric identifier for the occupation category. Example: `10014`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full job description (HTML included).
+</ResponseField>
+
+<ResponseField name="description_text" type="text">
+  Full job description as plain text.
+</ResponseField>
+
+<ResponseField name="job_type" type="string">
+  Employment type(s), comma separated. Example: `FULL_TIME`
+</ResponseField>
+
+<ResponseField name="remote_work_type" type="string">
+  Remote-work flag(s), comma separated. Example: `REMOTE`
+</ResponseField>
+
+<ResponseField name="education_required" type="string">
+  Education requirements, comma separated. Example: `Bachelor's Degree`
+</ResponseField>
+
+<ResponseField name="experience_required" type="string">
+  Years of experience required. Example: `3-5 years`
+</ResponseField>
+
+<ResponseField name="skills" type="text">
+  Skills attached to the listing, comma separated. Example: `Python, Django, REST API`
+</ResponseField>
+
+<ResponseField name="discover_date" type="datetime">
+  Date Glassdoor last (re)discovered the listing. Example: `2026-09-13T08:00:00Z`
+</ResponseField>
+
+<ResponseField name="apply_url" type="string">
+  Link that starts the application. Example: `https://www.acme.com/careers/apply/12345`
+</ResponseField>
+
+<ResponseField name="location_state" type="string">
+  State or region of the job. Example: `NY`
+</ResponseField>
+
+<ResponseField name="location_country" type="string">
+  Country of the job. Example: `United States`
+</ResponseField>
+
+<ResponseField name="location_postal_code" type="string">
+  Postal code of the job location. Example: `10001`
+</ResponseField>
+
+<ResponseField name="location_latitude" type="float">
+  Latitude of the job location. Example: `40.7128`
+</ResponseField>
+
+<ResponseField name="location_longitude" type="float">
+  Longitude of the job location. Example: `-74.006`
+</ResponseField>
+
+<ResponseField name="company_url" type="string">
+  Link to the company's Glassdoor profile. Example: `https://www.glassdoor.com/Overview/Working-at-Acme-Corp-EI_IE1234567.htm`
+</ResponseField>
+
+<ResponseField name="company_address" type="string">
+  Headquarters of the company. Example: `123 Main St, New York, NY 10001`
+</ResponseField>
+
+<ResponseField name="company_type" type="string">
+  Type of company, e.g. Company - Private. Example: `Company - Private`
+</ResponseField>
+
+<ResponseField name="company_year_founded" type="integer">
+  Year the company was founded. Example: `2005`
+</ResponseField>
+
+<ResponseField name="company_employee_count" type="string">
+  Company size bucket. Example: `1001 to 5000 Employees`
+</ResponseField>
+
+<ResponseField name="company_size_category" type="string">
+  Glassdoor's company size category. Example: `MID_SIZE`
+</ResponseField>
+
+<ResponseField name="company_estimated_revenue" type="string">
+  Estimated revenue bucket. Example: `$100 to $500 million (USD)`
+</ResponseField>
+
+<ResponseField name="company_industry_type" type="string">
+  Industry of the company. Example: `Software Development`
+</ResponseField>
+
+<ResponseField name="company_industry_sector" type="string">
+  Sector of the company. Example: `Information Technology`
+</ResponseField>
+
+<ResponseField name="company_corporate_link" type="string">
+  The company's own website. Example: `https://www.acme.com`
+</ResponseField>
+
+<ResponseField name="company_worklife_balance_rating" type="float">
+  Work-life balance rating, from 0 to 5. Example: `3.8`
+</ResponseField>
+
+<ResponseField name="company_compensation_rating" type="float">
+  Compensation and benefits rating, from 0 to 5. Example: `3.9`
+</ResponseField>
+
+<ResponseField name="company_management_rating" type="float">
+  Senior management rating, from 0 to 5. Example: `3.5`
+</ResponseField>
+
+<ResponseField name="company_culture_rating" type="float">
+  Culture and values rating, from 0 to 5. Example: `4.0`
+</ResponseField>
+
+<ResponseField name="company_career_opportunities_rating" type="float">
+  Career opportunities rating, from 0 to 5. Example: `3.7`
+</ResponseField>
+
+<ResponseField name="company_ceo_rating" type="float">
+  Share of reviewers who approve of the CEO, 0 to 1. Example: `0.72`
+</ResponseField>
+
+<ResponseField name="company_ceo_ratings_count" type="integer">
+  Number of reviews behind the CEO approval score. Example: `312`
+</ResponseField>
+
+<ResponseField name="company_ceo_name" type="string">
+  Name of the company CEO. Example: `Jane Smith`
+</ResponseField>
+
+<ResponseField name="company_recommend_to_friend_rating" type="float">
+  Share who would recommend the company, 0 to 1. Example: `0.68`
+</ResponseField>
+
+<ResponseField name="company_total_reviews" type="integer">
+  Total number of company reviews on Glassdoor. Example: `1847`
+</ResponseField>
+
+<ResponseField name="company_benefits_rating" type="float">
+  Benefits rating, from 0 to 5. Example: `3.9`
+</ResponseField>
+
+<ResponseField name="company_benefits_reviews_count" type="integer">
+  Number of benefit reviews. Example: `423`
+</ResponseField>
+
+<ResponseField name="company_review_highlights" type="json">
+  Review highlight sentences from company reviews.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=4bc153aae1e138d894b630bf165825ee" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "4bc153aae1e138d894b630bf165825ee", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"job_id": "JV_KO0,25_KE26,32.htm", "title": "Senior Python Developer", "company_name": "Acme Corp", "location": "New York, NY", "salary_min": 120000, "salary_median": 150000, "salary_max": 180000, "salary_currency": "USD", "company_rating": 4.2, "posted_at": "2026-09-13T00:00:00Z"}]}
+```

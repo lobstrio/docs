@@ -1,0 +1,433 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Zillow Property Listings Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Zillow Property Listings Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="zpid" type="string">
+  Zillow Property ID, the stable identifier. Example: `37544670`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL of the listing on Zillow. Example: `https://www.zillow.com/homedetails/123-main-st-brooklyn-ny-11201/37544670_zpid/`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Listing status: FOR_SALE, SOLD, FOR_RENT, etc. Example: `FOR_SALE`
+</ResponseField>
+
+<ResponseField name="price" type="integer">
+  Asking price as a number. Example: `850000`
+</ResponseField>
+
+<ResponseField name="price_formatted" type="string">
+  Price exactly as displayed by Zillow. Example: `$850,000`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency of the price. Example: `USD`
+</ResponseField>
+
+<ResponseField name="sold_price" type="integer">
+  Sale price when the listing is sold. Example: `820000`
+</ResponseField>
+
+<ResponseField name="date_sold" type="datetime">
+  Date the home was sold (UTC). Example: `2026-06-15T00:00:00Z`
+</ResponseField>
+
+<ResponseField name="full_address" type="string">
+  Full address on one line. Example: `123 Main St, Brooklyn, NY 11201`
+</ResponseField>
+
+<ResponseField name="street" type="string">
+  Street part of the address. Example: `123 Main St`
+</ResponseField>
+
+<ResponseField name="unit" type="string">
+  Unit or apartment number. Example: `Apt 4B`
+</ResponseField>
+
+<ResponseField name="city" type="string">
+  City. Example: `Brooklyn`
+</ResponseField>
+
+<ResponseField name="state" type="string">
+  State code. Example: `NY`
+</ResponseField>
+
+<ResponseField name="zip_code" type="string">
+  ZIP code. Example: `11201`
+</ResponseField>
+
+<ResponseField name="country" type="string">
+  Country code. Example: `USA`
+</ResponseField>
+
+<ResponseField name="latitude" type="float">
+  Latitude. Example: `40.6928`
+</ResponseField>
+
+<ResponseField name="longitude" type="float">
+  Longitude. Example: `-73.9903`
+</ResponseField>
+
+<ResponseField name="bed" type="integer">
+  Number of bedrooms. Example: `3`
+</ResponseField>
+
+<ResponseField name="bath" type="float">
+  Number of bathrooms (half baths counted as 0.5). Example: `2.0`
+</ResponseField>
+
+<ResponseField name="living_area" type="integer">
+  Living area in square feet. Example: `1450`
+</ResponseField>
+
+<ResponseField name="lot_area_value" type="float">
+  Lot size in lot_area_unit. Example: `2000.0`
+</ResponseField>
+
+<ResponseField name="lot_area_unit" type="string">
+  Unit of lot_area_value: sqft or acres. Example: `sqft`
+</ResponseField>
+
+<ResponseField name="home_type" type="string">
+  Property type: SINGLE_FAMILY, CONDO, TOWNHOUSE, MULTI_FAMILY, etc. Example: `CONDO`
+</ResponseField>
+
+<ResponseField name="days_on_zillow" type="integer">
+  Number of days the listing has been on Zillow. Example: `14`
+</ResponseField>
+
+<ResponseField name="zestimate" type="integer">
+  Zillow's estimated market value. Example: `860000`
+</ResponseField>
+
+<ResponseField name="rent_zestimate" type="integer">
+  Zillow's estimated monthly rent. Example: `3800`
+</ResponseField>
+
+<ResponseField name="tax_assessed_value" type="integer">
+  Tax assessed value from the county. Example: `720000`
+</ResponseField>
+
+<ResponseField name="price_change" type="integer">
+  Last price change amount (negative = price cut). Example: `-25000`
+</ResponseField>
+
+<ResponseField name="price_changed_at" type="datetime">
+  Date of the last price change. Example: `2026-09-01T00:00:00Z`
+</ResponseField>
+
+<ResponseField name="price_reduction" type="string">
+  Price reduction as displayed by Zillow. Example: `Price cut: -$25,000`
+</ResponseField>
+
+<ResponseField name="main_image" type="string">
+  Cover photo of the listing. Example: `https://photos.zillowstatic.com/fp/abc123-cc_ft_960.webp`
+</ResponseField>
+
+<ResponseField name="photos" type="json">
+  All photos of the listing card.
+</ResponseField>
+
+<ResponseField name="photo_count" type="integer">
+  Number of photos. Example: `32`
+</ResponseField>
+
+<ResponseField name="broker_name" type="string">
+  Brokerage that published the listing. Example: `Compass`
+</ResponseField>
+
+<ResponseField name="is_zillow_owned" type="boolean">
+  True when owned by Zillow. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_showcase_listing" type="boolean">
+  True for Zillow Showcase listings. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_featured_listing" type="boolean">
+  True when promoted by Zillow. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_3d_model" type="boolean">
+  True when a 3D home tour is available. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_video" type="boolean">
+  True when a video is available. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_image" type="boolean">
+  True when the listing has at least one photo. Example: `true`
+</ResponseField>
+
+<ResponseField name="open_house_description" type="string">
+  Open house as displayed by Zillow. Example: `Sat, Sep 20 11:00 AM - 1:00 PM`
+</ResponseField>
+
+<ResponseField name="open_house_start_date" type="datetime">
+  Start of the next open house (UTC). Example: `2026-09-20T15:00:00Z`
+</ResponseField>
+
+<ResponseField name="open_house_end_date" type="datetime">
+  End of the next open house (UTC). Example: `2026-09-20T17:00:00Z`
+</ResponseField>
+
+<ResponseField name="marketing_tagline" type="string">
+  Marketing label Zillow prints on the listing card. Example: `Open House`
+</ResponseField>
+
+<ResponseField name="listing_source_label" type="string">
+  How the listing reached Zillow. Example: `Listed by Compass`
+</ResponseField>
+
+<ResponseField name="is_fsba" type="boolean">
+  For sale by agent. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_fsbo" type="boolean">
+  For sale by owner. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_open_house" type="boolean">
+  An open house is scheduled. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_new_home" type="boolean">
+  New construction. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_coming_soon" type="boolean">
+  Coming soon. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_pending" type="boolean">
+  Pending or under contract. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_for_auction" type="boolean">
+  Sold at auction. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_foreclosure" type="boolean">
+  Foreclosure. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_bank_owned" type="boolean">
+  Bank owned (REO). Example: `false`
+</ResponseField>
+
+### Detail Fields
+
+The following fields require `property_details: true` in settings.
+
+<ResponseField name="description" type="text">
+  Full listing description.
+</ResponseField>
+
+<ResponseField name="agent_name" type="string">
+  Listing agent name. Example: `John Doe`
+</ResponseField>
+
+<ResponseField name="agent_email" type="string">
+  Listing agent email. Example: `john.doe@compass.com`
+</ResponseField>
+
+<ResponseField name="agent_phone" type="string">
+  Listing agent phone. Example: `+12125551234`
+</ResponseField>
+
+<ResponseField name="broker_phone" type="string">
+  Phone for the listing brokerage. Example: `+12125559876`
+</ResponseField>
+
+<ResponseField name="mls_id" type="string">
+  MLS number of the listing. Example: `REBNY-5678901`
+</ResponseField>
+
+<ResponseField name="mls_name" type="string">
+  Name of the MLS. Example: `RealPlus`
+</ResponseField>
+
+<ResponseField name="mls_last_checked" type="string">
+  When Zillow last checked the MLS. Example: `2026-09-15T08:00:00Z`
+</ResponseField>
+
+<ResponseField name="mls_last_updated" type="string">
+  When the MLS record last changed. Example: `2026-09-01T12:00:00Z`
+</ResponseField>
+
+<ResponseField name="year_built" type="integer">
+  Year the home was built. Example: `2003`
+</ResponseField>
+
+<ResponseField name="price_per_sqft" type="float">
+  Price per square foot. Example: `586.21`
+</ResponseField>
+
+<ResponseField name="page_view_count" type="integer">
+  Number of views of the listing page. Example: `4821`
+</ResponseField>
+
+<ResponseField name="favorite_count" type="integer">
+  Number of users who saved the listing. Example: `87`
+</ResponseField>
+
+<ResponseField name="property_tax_rate" type="float">
+  Effective property tax rate, in percent. Example: `1.24`
+</ResponseField>
+
+<ResponseField name="monthly_hoa_fee" type="float">
+  Monthly HOA fee. Example: `650.0`
+</ResponseField>
+
+<ResponseField name="listing_provider" type="json">
+  Provider block Zillow attaches to the listing.
+</ResponseField>
+
+<ResponseField name="date_posted" type="datetime">
+  Date the listing was posted (UTC). Example: `2026-09-01T00:00:00Z`
+</ResponseField>
+
+<ResponseField name="last_sold_price" type="integer">
+  Price of the previous sale of this home. Example: `720000`
+</ResponseField>
+
+<ResponseField name="time_zone" type="string">
+  Time zone of the property. Example: `America/New_York`
+</ResponseField>
+
+<ResponseField name="neighborhood" type="string">
+  Neighborhood name. Example: `DUMBO`
+</ResponseField>
+
+<ResponseField name="living_area_unit" type="string">
+  Unit of living_area. Example: `Square Feet`
+</ResponseField>
+
+<ResponseField name="bathrooms_full" type="integer">
+  Number of full bathrooms. Example: `2`
+</ResponseField>
+
+<ResponseField name="bathrooms_half" type="integer">
+  Number of half bathrooms. Example: `0`
+</ResponseField>
+
+<ResponseField name="bathrooms_three_quarter" type="integer">
+  Number of three-quarter bathrooms. Example: `0`
+</ResponseField>
+
+<ResponseField name="bathrooms_one_quarter" type="integer">
+  Number of quarter bathrooms. Example: `0`
+</ResponseField>
+
+<ResponseField name="parking_capacity" type="integer">
+  Total number of parking spaces. Example: `1`
+</ResponseField>
+
+<ResponseField name="garage_parking_capacity" type="integer">
+  Number of garage spaces. Example: `1`
+</ResponseField>
+
+<ResponseField name="has_garage" type="boolean">
+  True when the home has a garage. Example: `true`
+</ResponseField>
+
+<ResponseField name="has_attached_garage" type="boolean">
+  True when the garage is attached. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_carport" type="boolean">
+  True when the home has a carport. Example: `false`
+</ResponseField>
+
+<ResponseField name="has_open_parking" type="boolean">
+  True when the home has open parking. Example: `false`
+</ResponseField>
+
+<ResponseField name="parking_features" type="json">
+  Parking features from the MLS record.
+</ResponseField>
+
+<ResponseField name="property_sub_type" type="json">
+  Property sub types.
+</ResponseField>
+
+<ResponseField name="virtual_tour_url" type="string">
+  Virtual tour link. Example: `https://my.matterport.com/show/?m=abc123`
+</ResponseField>
+
+<ResponseField name="at_a_glance_facts" type="json">
+  Zillow's at-a-glance fact table.
+</ResponseField>
+
+<ResponseField name="home_insights" type="json">
+  Short highlight phrases from Zillow.
+</ResponseField>
+
+<ResponseField name="mortgage_rate_30y" type="float">
+  Zillow 30-year fixed rate quoted on the listing. Example: `6.75`
+</ResponseField>
+
+<ResponseField name="mortgage_rate_15y" type="float">
+  Zillow 15-year fixed rate quoted on the listing. Example: `6.12`
+</ResponseField>
+
+<ResponseField name="mortgage_rate_5y_arm" type="float">
+  Zillow 5-year ARM rate quoted on the listing. Example: `6.35`
+</ResponseField>
+
+<ResponseField name="price_history" type="json">
+  Price history: list of {date, price, event}.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=ed06bb5ca6544bbb638c544bac48ede1" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "ed06bb5ca6544bbb638c544bac48ede1", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"zpid": "37544670", "status": "FOR_SALE", "price": 850000, "full_address": "123 Main St, Brooklyn, NY 11201", "bed": 3, "bath": 2.0, "living_area": 1450, "home_type": "CONDO", "days_on_zillow": 14, "zestimate": 860000}]}
+```

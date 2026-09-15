@@ -1,0 +1,113 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from LinkedIn Company Employees Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **LinkedIn Company Employees Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="member_id" type="string">
+  LinkedIn internal profile id, stable across name/URL changes. Example: `ACoAAABcDefGHIjklMNOpQRSTUVwXyz`
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Full name of the employee as displayed by LinkedIn. Example: `Alice Johnson`
+</ResponseField>
+
+<ResponseField name="public_id" type="string">
+  Public profile slug used in the profile URL. Example: `alice-johnson-12345`
+</ResponseField>
+
+<ResponseField name="profile_url" type="string">
+  Direct URL to the employee's LinkedIn profile. Example: `https://www.linkedin.com/in/alice-johnson-12345`
+</ResponseField>
+
+<ResponseField name="headline" type="string">
+  Profile headline. Example: `Senior Software Engineer at Google`
+</ResponseField>
+
+<ResponseField name="location_text" type="string">
+  Location as displayed by LinkedIn. Example: `San Francisco Bay Area`
+</ResponseField>
+
+<ResponseField name="avatar_url" type="string">
+  URL of the employee profile picture. Example: `https://media.licdn.com/dms/image/v2/Cabcde/profile-displayphoto-shrink_200_200/0/1234567890?e=1234567890&v=beta&t=abc`
+</ResponseField>
+
+<ResponseField name="connection_degree" type="string">
+  Connection degree between the connected account and this employee (1st, 2nd, 3rd+). Example: `2nd`
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether LinkedIn displays the verified member badge. Example: `false`
+</ResponseField>
+
+<ResponseField name="is_premium" type="boolean">
+  Whether LinkedIn displays the premium member badge. Example: `false`
+</ResponseField>
+
+<ResponseField name="member_urn" type="string">
+  LinkedIn member URN (numeric member id). Example: `urn:li:member:123456789`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the company the employee was matched on. Example: `Google`
+</ResponseField>
+
+<ResponseField name="company_url" type="string">
+  URL of the company LinkedIn page. Example: `https://www.linkedin.com/company/google`
+</ResponseField>
+
+<ResponseField name="company_slug" type="string">
+  Slug of the company LinkedIn page. Example: `google`
+</ResponseField>
+
+<ResponseField name="company_id" type="string">
+  Numeric LinkedIn id of the company. Example: `1441`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=08ac061ab290b5ae0f831e086c98d4b5" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "08ac061ab290b5ae0f831e086c98d4b5", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"full_name": "Alice Johnson", "headline": "Senior Software Engineer at Google", "location_text": "San Francisco Bay Area", "profile_url": "https://www.linkedin.com/in/alice-johnson-12345", "connection_degree": "2nd", "company_name": "Google"}]}
+```

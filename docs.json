@@ -167,6 +167,22 @@
             ]
           },
           {
+            "group": "Contact Details Scraper",
+            "pages": [
+              "examples/contact-details/add-tasks",
+              "examples/contact-details/update-settings",
+              "examples/contact-details/get-results"
+            ]
+          },
+          {
+            "group": "Facebook Ad Library Scraper",
+            "pages": [
+              "examples/facebook-ad-library-scraper/add-tasks",
+              "examples/facebook-ad-library-scraper/update-settings",
+              "examples/facebook-ad-library-scraper/get-results"
+            ]
+          },
+          {
             "group": "Facebook Business Page Scraper",
             "pages": [
               "examples/facebook-business-page-scraper/add-tasks",
@@ -203,12 +219,28 @@
             ]
           },
           {
+            "group": "Facebook Comments Scraper",
+            "pages": [
+              "examples/facebook-comments-scraper/add-tasks",
+              "examples/facebook-comments-scraper/update-settings",
+              "examples/facebook-comments-scraper/get-results"
+            ]
+          },
+          {
             "group": "Facebook Marketplace Scraper",
             "pages": [
               "examples/facebook-marketplace-scraper/add-tasks",
               "examples/facebook-marketplace-scraper/update-settings",
               "examples/facebook-marketplace-scraper/get-results",
               "examples/facebook-marketplace-scraper/credit-cost"
+            ]
+          },
+          {
+            "group": "Glassdoor Jobs Scraper",
+            "pages": [
+              "examples/glassdoor-jobs-scraper/add-tasks",
+              "examples/glassdoor-jobs-scraper/update-settings",
+              "examples/glassdoor-jobs-scraper/get-results"
             ]
           },
           {
@@ -306,6 +338,14 @@
             ]
           },
           {
+            "group": "Instagram Search & Hashtags Scraper",
+            "pages": [
+              "examples/instagram-hashtags-scraper/add-tasks",
+              "examples/instagram-hashtags-scraper/update-settings",
+              "examples/instagram-hashtags-scraper/get-results"
+            ]
+          },
+          {
             "group": "LaCentrale Cars Scraper",
             "pages": [
               "examples/lacentrale-cars-scraper/add-tasks",
@@ -378,6 +418,22 @@
             ]
           },
           {
+            "group": "LinkedIn Company Employees Scraper",
+            "pages": [
+              "examples/linkedin-company-employees-scraper/add-tasks",
+              "examples/linkedin-company-employees-scraper/update-settings",
+              "examples/linkedin-company-employees-scraper/get-results"
+            ]
+          },
+          {
+            "group": "LinkedIn Company Scraper",
+            "pages": [
+              "examples/linkedin-company/add-tasks",
+              "examples/linkedin-company/update-settings",
+              "examples/linkedin-company/get-results"
+            ]
+          },
+          {
             "group": "LinkedIn Leads Scraper",
             "pages": [
               "examples/linkedin-leads-scraper/add-tasks",
@@ -420,6 +476,14 @@
               "examples/linkedin-profile-scraper/update-settings",
               "examples/linkedin-profile-scraper/get-results",
               "examples/linkedin-profile-scraper/credit-cost"
+            ]
+          },
+          {
+            "group": "Naukri Jobs Scraper",
+            "pages": [
+              "examples/naukri-jobs-scraper/add-tasks",
+              "examples/naukri-jobs-scraper/update-settings",
+              "examples/naukri-jobs-scraper/get-results"
             ]
           },
           {
@@ -477,6 +541,14 @@
             ]
           },
           {
+            "group": "Quora Scraper",
+            "pages": [
+              "examples/quora-scraper/add-tasks",
+              "examples/quora-scraper/update-settings",
+              "examples/quora-scraper/get-results"
+            ]
+          },
+          {
             "group": "Realtor Listings Scraper",
             "pages": [
               "examples/realtor-iter-listings/add-tasks",
@@ -504,12 +576,28 @@
             ]
           },
           {
+            "group": "Threads Scraper",
+            "pages": [
+              "examples/threads-scraper/add-tasks",
+              "examples/threads-scraper/update-settings",
+              "examples/threads-scraper/get-results"
+            ]
+          },
+          {
             "group": "TikTok Video Scraper",
             "pages": [
               "examples/tiktok-video-scraper/add-tasks",
               "examples/tiktok-video-scraper/update-settings",
               "examples/tiktok-video-scraper/get-results",
               "examples/tiktok-video-scraper/credit-cost"
+            ]
+          },
+          {
+            "group": "TikTok Profile Scraper",
+            "pages": [
+              "examples/tiktok-profile-scraper/add-tasks",
+              "examples/tiktok-profile-scraper/update-settings",
+              "examples/tiktok-profile-scraper/get-results"
             ]
           },
           {
@@ -558,6 +646,14 @@
             ]
           },
           {
+            "group": "Upwork Jobs Scraper",
+            "pages": [
+              "examples/upwork-jobs-scraper/add-tasks",
+              "examples/upwork-jobs-scraper/update-settings",
+              "examples/upwork-jobs-scraper/get-results"
+            ]
+          },
+          {
             "group": "Twitter Followers/Following Scraper",
             "pages": [
               "examples/twitter-followers-following-scraper/add-tasks",
@@ -603,6 +699,14 @@
             ]
           },
           {
+            "group": "Yellow Pages Companies Search Export",
+            "pages": [
+              "examples/yellow-pages-companies-search/add-tasks",
+              "examples/yellow-pages-companies-search/update-settings",
+              "examples/yellow-pages-companies-search/get-results"
+            ]
+          },
+          {
             "group": "Yelp Search Export",
             "pages": [
               "examples/yelp-search-export/add-tasks",
@@ -637,6 +741,22 @@
               "examples/youtube-comments-scraper/get-results",
               "examples/youtube-comments-scraper/credit-cost"
             ]
+          },
+          {
+            "group": "YouTube Transcript Scraper",
+            "pages": [
+              "examples/youtube-transcript-scraper/add-tasks",
+              "examples/youtube-transcript-scraper/update-settings",
+              "examples/youtube-transcript-scraper/get-results"
+            ]
+          },
+          {
+            "group": "Zillow Property Listings Scraper",
+            "pages": [
+              "examples/zillow-property-listings-scraper/add-tasks",
+              "examples/zillow-property-listings-scraper/update-settings",
+              "examples/zillow-property-listings-scraper/get-results"
+            ]
           }
         ]
       },
@@ -666,6 +786,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-09-15",
               "changelog/2026-09-08",
               "changelog/2026-09-01",
               "changelog/2026-08-25",

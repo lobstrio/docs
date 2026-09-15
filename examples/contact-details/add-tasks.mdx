@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Contact Details Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **Contact Details Scraper** squid.
+
+<Note>Crawler ID: `7d83eacc7b94f14d5ffda28c6d357961`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  Website to crawl. A bare domain or full URL. Example: `https://lobstr.io`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "7d83eacc7b94f14d5ffda28c6d357961",
+    "tasks": [
+      {"url": "https://lobstr.io"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "7d83eacc7b94f14d5ffda28c6d357961",
+        "tasks": [
+            {"url": "https://lobstr.io"}
+        ]
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://lobstr.io"}, "object": "task"}]}
+```

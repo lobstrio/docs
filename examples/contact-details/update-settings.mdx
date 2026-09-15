@@ -1,0 +1,67 @@
+---
+title: "Update Settings"
+description: "Configure Contact Details Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Contact Details Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| rows | integer | — | Number of rows returned per API page |
+| max_pages_per_site | integer | 10 | Max pages fetched per website, homepage included |
+| follow_contact_pages | boolean | true | Follow contact, about, imprint and legal notice pages from the homepage |
+| same_domain_only | boolean | true | Only crawl pages on the same domain |
+| max_results | integer | — | Max rows collected per task |
+| max_unique_results_per_run | integer | — | Max unique results across all tasks in the run |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/7d83eacc7b94f14d5ffda28c6d357961 \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "max_pages_per_site": 20,
+    "follow_contact_pages": true,
+    "same_domain_only": true
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/7d83eacc7b94f14d5ffda28c6d357961",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "max_pages_per_site": 20,
+        "follow_contact_pages": True,
+        "same_domain_only": True
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"max_pages_per_site": 20, "follow_contact_pages": true, "same_domain_only": true}}
+```

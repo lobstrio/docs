@@ -1,0 +1,131 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Contact Details Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Contact Details Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="website" type="string">
+  Normalised website identity, lowercased. Example: `lobstr.io`
+</ResponseField>
+
+<ResponseField name="domain" type="string">
+  Registrable domain of the crawled website. Example: `lobstr.io`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Company or site name, from og:site_name or JSON-LD. Example: `Lobstr`
+</ResponseField>
+
+<ResponseField name="emails" type="json">
+  Email addresses published on the crawled pages. Example: `["hello@lobstr.io"]`
+</ResponseField>
+
+<ResponseField name="phones" type="json">
+  High confidence phone numbers, from tel: links
+</ResponseField>
+
+<ResponseField name="phones_uncertain" type="json">
+  Phone-shaped values that failed validation
+</ResponseField>
+
+<ResponseField name="linkedin_urls" type="json">
+  Company LinkedIn pages found. Example: `["https://www.linkedin.com/company/lobstr-io"]`
+</ResponseField>
+
+<ResponseField name="linkedin_personal_urls" type="json">
+  Personal LinkedIn profiles found
+</ResponseField>
+
+<ResponseField name="twitter_urls" type="json">
+  Twitter / X profile URLs
+</ResponseField>
+
+<ResponseField name="instagram_urls" type="json">
+  Instagram profile URLs
+</ResponseField>
+
+<ResponseField name="facebook_urls" type="json">
+  Facebook page URLs
+</ResponseField>
+
+<ResponseField name="youtube_urls" type="json">
+  YouTube channel URLs
+</ResponseField>
+
+<ResponseField name="tiktok_urls" type="json">
+  TikTok profile URLs
+</ResponseField>
+
+<ResponseField name="pinterest_urls" type="json">
+  Pinterest profile URLs
+</ResponseField>
+
+<ResponseField name="discord_urls" type="json">
+  Discord invite URLs
+</ResponseField>
+
+<ResponseField name="snapchat_urls" type="json">
+  Snapchat profile URLs
+</ResponseField>
+
+<ResponseField name="threads_urls" type="json">
+  Threads profile URLs
+</ResponseField>
+
+<ResponseField name="telegram_urls" type="json">
+  Telegram profile or channel URLs
+</ResponseField>
+
+<ResponseField name="reddit_urls" type="json">
+  Reddit profile or subreddit URLs
+</ResponseField>
+
+<ResponseField name="whatsapp_urls" type="json">
+  WhatsApp click-to-chat URLs
+</ResponseField>
+
+<ResponseField name="contact_sources" type="json">
+  Maps every contact value to the URL of the first page it was found on
+</ResponseField>
+
+<ResponseField name="crawled_urls" type="json">
+  Pages actually fetched, in fetch order
+</ResponseField>
+
+<ResponseField name="pages_crawled" type="integer">
+  Number of pages fetched. Example: `4`
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  Crawl outcome: `ok`, `no_contacts`, or `unreachable`. Example: `ok`
+</ResponseField>
+
+<ResponseField name="status_detail" type="string">
+  Reason behind the status (empty when the crawl succeeded)
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"domain": "lobstr.io", "company_name": "Lobstr", "emails": ["hello@lobstr.io"], "linkedin_urls": ["https://www.linkedin.com/company/lobstr-io"], "pages_crawled": 4, "status": "ok"}]}
+```

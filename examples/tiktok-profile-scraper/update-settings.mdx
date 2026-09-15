@@ -1,0 +1,64 @@
+---
+title: "Update Settings"
+description: "Configure TikTok Profile Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **TikTok Profile Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| rows | integer | — | Number of rows returned per API page |
+| profile_only | boolean | false | Collect only the account's profile stats as a single row, without videos |
+| max_unique_results_per_run | integer | — | Max unique videos across all tasks in the run |
+| max_results | integer | — | Cap on the number of videos per profile |
+| fetch_since | string | — | Stop scraping when videos older than this threshold are reached |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/089d76c66c2fd5c57d7ce7338d9ae7de \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "max_results": 100,
+    "fetch_since": "30d"
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/089d76c66c2fd5c57d7ce7338d9ae7de",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "max_results": 100,
+        "fetch_since": "30d"
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"profile_only": false, "max_results": 100, "fetch_since": "30d"}}
+```

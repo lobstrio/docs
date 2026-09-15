@@ -1,0 +1,59 @@
+---
+title: "Update Settings"
+description: "Configure Instagram Search & Hashtags Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Instagram Search & Hashtags Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **url** | string | — | Instagram hashtag, keyword, hashtag URL, or search keyword |
+| **get_posts** | boolean | true | Include image and carousel posts |
+| **get_reels** | boolean | true | Include video reels |
+| **search_type** | string | recent | Which tab to scrape: 'recent' or 'top' |
+| **max_results** | integer | — | Total posts/reels to collect per hashtag |
+| **max_unique_results_per_run** | integer | — | Max unique posts across all tasks in the run |
+| **fetch_since** | string | — | Only keep media published after this point (YYYY-MM-DD or 24h, 7d) |
+| **fetch_since_timezone** | string | — | Timezone for interpreting fetch_since date |
+| **enrich_comments** | boolean | false | Collect up to 10 latest comments per post/reel |
+
+<Note>
+  Setting `enrich_comments: true` enables additional comment fields (`comment_1` through `comment_10`) in results.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"params": {"get_posts": true, "get_reels": true, "search_type": "top", "max_results": 500}}'
+```
+
+```python Python
+import requests
+requests.post("https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={"Authorization": "Token YOUR_API_KEY", "Content-Type": "application/json"},
+    json={"params": {"get_posts": true, "get_reels": true, "search_type": "top", "max_results": 500}})
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"get_posts": true, "get_reels": true, "search_type": "top", "max_results": 500}}
+```

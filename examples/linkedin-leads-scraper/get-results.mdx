@@ -123,6 +123,46 @@ Each result object contains the following fields:
   List of skills listed on the member's profile. Example: `['Software Development', 'Philanthropy']`
 </ResponseField>
 
+<ResponseField name="certifications" type="json">
+  Certifications listed on the member's profile. Example: `[{"name": "AWS Solutions Architect", "authority": "Amazon Web Services"}]`
+</ResponseField>
+
+<ResponseField name="languages" type="json">
+  Languages listed on the member's profile. Example: `[{"name": "English", "proficiency": "NATIVE_OR_BILINGUAL"}]`
+</ResponseField>
+
+<ResponseField name="honors" type="json">
+  Honors and awards listed on the member's profile.
+</ResponseField>
+
+<ResponseField name="projects" type="json">
+  Projects listed on the member's profile.
+</ResponseField>
+
+<ResponseField name="publications" type="json">
+  Publications listed on the member's profile.
+</ResponseField>
+
+<ResponseField name="patents" type="json">
+  Patents listed on the member's profile.
+</ResponseField>
+
+<ResponseField name="organizations" type="json">
+  Organizations listed on the member's profile.
+</ResponseField>
+
+<ResponseField name="courses" type="json">
+  Courses listed on the member's profile.
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether the member has LinkedIn's verified badge. Example: `false`
+</ResponseField>
+
+<ResponseField name="hiring" type="boolean">
+  Whether the member is actively hiring (shows a hiring frame on their profile picture). Example: `false`
+</ResponseField>
+
 <ResponseField name="job_1" type="json">
   Most recent job position (structured object). Example: `{}`
 </ResponseField>
@@ -293,6 +333,78 @@ Each result object contains the following fields:
 
 <ResponseField name="educations" type="json">
   Full list of all education entries (raw array). Example: `[]`
+</ResponseField>
+
+### Company Enrichment Fields
+
+The following fields require `enrich_company: true` in settings.
+
+<ResponseField name="company_id" type="string">
+  LinkedIn numeric identifier of the lead's current company.
+</ResponseField>
+
+<ResponseField name="company_universal_name" type="string">
+  LinkedIn vanity slug of the lead's current company. Example: `microsoft`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the lead's current company as listed on LinkedIn. Example: `Microsoft`
+</ResponseField>
+
+<ResponseField name="company_website" type="string">
+  Company website URL as listed on LinkedIn. Example: `https://www.microsoft.com`
+</ResponseField>
+
+<ResponseField name="company_domain" type="string">
+  Apex domain of the company's website. Example: `microsoft.com`
+</ResponseField>
+
+<ResponseField name="company_industry" type="string">
+  LinkedIn industry of the company. Example: `Software Development`
+</ResponseField>
+
+<ResponseField name="company_size" type="string">
+  Employee count range declared by the company. Example: `10,001+ employees`
+</ResponseField>
+
+<ResponseField name="company_headcount" type="integer">
+  Exact number of LinkedIn members listing this company. Example: `228000`
+</ResponseField>
+
+<ResponseField name="company_followers" type="integer">
+  Number of LinkedIn followers of the company. Example: `18000000`
+</ResponseField>
+
+<ResponseField name="company_hq" type="string">
+  Headquarters location as displayed on the company page. Example: `Redmond, Washington, United States`
+</ResponseField>
+
+<ResponseField name="company_hq_city" type="string">
+  City of the company headquarters. Example: `Redmond`
+</ResponseField>
+
+<ResponseField name="company_hq_country" type="string">
+  Country code of the company headquarters. Example: `US`
+</ResponseField>
+
+<ResponseField name="company_description" type="string">
+  Full 'About us' description of the company.
+</ResponseField>
+
+<ResponseField name="company_tagline" type="string">
+  Short tagline displayed under the company name. Example: `Empowering every person and organization on the planet to achieve more.`
+</ResponseField>
+
+<ResponseField name="company_specialties" type="json">
+  List of specialties declared by the company. Example: `["Business Software", "Developer Tools", "Cloud Computing"]`
+</ResponseField>
+
+<ResponseField name="company_logo" type="string">
+  URL of the company logo image. Example: `https://media.licdn.com/dms/image/v2/microsoft-logo.jpg`
+</ResponseField>
+
+<ResponseField name="company_verified" type="boolean">
+  Whether LinkedIn displays the verified badge on the company page. Example: `true`
 </ResponseField>
 
 <ResponseField name="functions" type="json">

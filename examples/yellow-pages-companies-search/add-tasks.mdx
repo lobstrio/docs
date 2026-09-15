@@ -1,0 +1,60 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Yellow Pages Companies Search Export squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **Yellow Pages Companies Search Export** squid.
+
+<Note>Crawler ID: `03fcec3e9345dbf9e42a0a2f2f04c017`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  Yellow Pages search URL. Example: `https://www.yellowpages.com/search?search_terms=plumber&geo_location_terms=Austin%2C+TX`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"squid": "YOUR_SQUID_HASH", "tasks": [{"url": "https://www.yellowpages.com/search?search_terms=plumber&geo_location_terms=Austin%2C+TX"}]}'
+```
+
+```python Python
+import requests
+headers = {"Authorization": "Token YOUR_API_KEY", "Content-Type": "application/json"}
+response = requests.post("https://api.lobstr.io/v1/tasks", headers=headers,
+    json={"squid": "YOUR_SQUID_HASH", "tasks": [{"url": "https://www.yellowpages.com/search?search_terms=plumber&geo_location_terms=Austin%2C+TX"}]})
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.yellowpages.com/search?search_terms=plumber&geo_location_terms=Austin%2C+TX"}, "object": "task"}]}
+```

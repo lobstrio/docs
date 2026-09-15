@@ -1,0 +1,67 @@
+---
+title: "Update Settings"
+description: "Configure Threads Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Threads Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| sort | string | top | Ranking for keyword/tag searches: top (most relevant) or recent (newest first) |
+| include_replies | boolean | false | Only applies to single post URLs — if true, also returns replies |
+| fetch_since | string | — | Only collect posts published after this point |
+| fetch_since_timezone | string | — | Timezone for interpreting an absolute fetch_since date |
+| max_results | integer | — | Max posts per input |
+| max_unique_results_per_run | integer | — | Max unique posts across all inputs in the run |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/7308ae543e6abc70438d6b968d3a1b38 \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sort": "recent",
+    "include_replies": false,
+    "max_results": 500
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/7308ae543e6abc70438d6b968d3a1b38",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "sort": "recent",
+        "include_replies": False,
+        "max_results": 500,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"sort": "recent", "include_replies": false, "max_results": 500}}
+```

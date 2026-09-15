@@ -1,0 +1,62 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your LinkedIn Company Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **LinkedIn Company Scraper** squid.
+
+<Note>Crawler ID: `a6fab652671e54f962ce9ebe48d5ffed`</Note>
+
+<Note>No LinkedIn account required — this scraper works without cookies or login.</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  LinkedIn company URL or company slug. Example: `https://www.linkedin.com/company/google`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/tasks" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"squid": "YOUR_SQUID_HASH", "tasks": [{"url": "https://www.linkedin.com/company/google"}]}'
+```
+
+```python Python
+import requests
+headers = {"Authorization": "Token YOUR_API_KEY", "Content-Type": "application/json"}
+response = requests.post("https://api.lobstr.io/v1/tasks", headers=headers,
+    json={"squid": "YOUR_SQUID_HASH", "tasks": [{"url": "https://www.linkedin.com/company/google"}]})
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.linkedin.com/company/google"}, "object": "task"}]}
+```

@@ -23,6 +23,8 @@ Set these parameters in the `params` object:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | **max_results** | integer | 1000 | Maximum number of leads to collect per task |
+| **max_unique_results_per_run** | integer | — | Maximum unique results across all tasks in the entire run |
+| **skip_collected_leads** | boolean | false | Skip profiles already collected by this squid in a previous run, so each run returns only new leads |
 
 ## Optional Functions
 
@@ -32,6 +34,8 @@ Enable these in the `params.functions` object:
 | --- | --- | --- | --- |
 | **email_enrichment** | boolean | true | Find email addresses for each profile (9 credits per profile where an email is found) |
 | **scrape_profile_details** | boolean | true | Collect additional profile details from each LinkedIn profile page (1 credit per profile) |
+| **extended_profile_data** | boolean | true | Also collect the companies and groups each person follows, and their featured posts (requires scrape_profile_details) |
+| **enrich_company** | boolean | false | Enrich each lead's current company from its LinkedIn company page: website, domain, industry, headcount, and more (1 credit per lead) |
 
 ## Squid Settings
 

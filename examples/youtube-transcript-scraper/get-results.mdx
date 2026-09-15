@@ -1,0 +1,167 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from YouTube Transcript Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **YouTube Transcript Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="video_id" type="string">
+  YouTube video identifier. Example: `dQw4w9WgXcQ`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Canonical URL of the video. Example: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Video title. Example: `Rick Astley - Never Gonna Give You Up`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full video description.
+</ResponseField>
+
+<ResponseField name="keywords" type="json">
+  Keywords (tags) set by the creator.
+</ResponseField>
+
+<ResponseField name="duration_seconds" type="integer">
+  Video length in seconds. Example: `212`
+</ResponseField>
+
+<ResponseField name="view_count" type="bigint">
+  View count at collection time. Example: `1400000000`
+</ResponseField>
+
+<ResponseField name="like_count" type="bigint">
+  Like count (null when likes are hidden). Example: `15000000`
+</ResponseField>
+
+<ResponseField name="comment_count_text" type="string">
+  Approximate comment count as displayed by YouTube. Example: `2.1M`
+</ResponseField>
+
+<ResponseField name="published_at" type="datetime">
+  Publish date and time (UTC). Example: `2009-10-25T06:57:33Z`
+</ResponseField>
+
+<ResponseField name="published_time_text" type="string">
+  Relative publish time as displayed by YouTube. Example: `16 years ago`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  YouTube category. Example: `Music`
+</ResponseField>
+
+<ResponseField name="is_unlisted" type="boolean">
+  Whether the video is unlisted.
+</ResponseField>
+
+<ResponseField name="is_family_safe" type="boolean">
+  Whether YouTube flags the video as family safe.
+</ResponseField>
+
+<ResponseField name="is_live_content" type="boolean">
+  Whether the video is or was a live broadcast.
+</ResponseField>
+
+<ResponseField name="thumbnail_url" type="string">
+  Highest resolution thumbnail URL.
+</ResponseField>
+
+<ResponseField name="channel_id" type="string">
+  YouTube channel identifier. Example: `UCuAXFkgsw1L7xaCfnd5JJOw`
+</ResponseField>
+
+<ResponseField name="channel_name" type="string">
+  Channel name. Example: `Rick Astley`
+</ResponseField>
+
+<ResponseField name="channel_url" type="string">
+  Channel URL. Example: `https://www.youtube.com/channel/UCuAXFkgsw1L7xaCfnd5JJOw`
+</ResponseField>
+
+<ResponseField name="channel_handle" type="string">
+  Channel handle. Example: `@RickAstleyYT`
+</ResponseField>
+
+<ResponseField name="channel_avatar_url" type="string">
+  Channel avatar image URL.
+</ResponseField>
+
+<ResponseField name="channel_subscriber_count_text" type="string">
+  Subscriber count as displayed by YouTube. Example: `3.8M subscribers`
+</ResponseField>
+
+<ResponseField name="requested_language" type="string">
+  Language setting used for this row. Example: `en`
+</ResponseField>
+
+<ResponseField name="language" type="string">
+  Language code of the primary transcript. Example: `en`
+</ResponseField>
+
+<ResponseField name="language_name" type="string">
+  Display name of the primary transcript track. Example: `English`
+</ResponseField>
+
+<ResponseField name="is_auto_generated" type="boolean">
+  Whether the primary transcript is auto-generated.
+</ResponseField>
+
+<ResponseField name="segments" type="json">
+  Primary transcript as timestamped segments (start, duration, text).
+</ResponseField>
+
+<ResponseField name="full_text" type="text">
+  Primary transcript as plain text. Example: `We're no strangers to love...`
+</ResponseField>
+
+<ResponseField name="word_count" type="integer">
+  Number of words in full_text. Example: `312`
+</ResponseField>
+
+<ResponseField name="tracks" type="json">
+  Every downloaded caption track.
+</ResponseField>
+
+<ResponseField name="tracks_count" type="integer">
+  Number of downloaded tracks. Example: `3`
+</ResponseField>
+
+<ResponseField name="available_languages" type="json">
+  Every caption track the video offers.
+</ResponseField>
+
+<ResponseField name="status" type="string">
+  'ok' when at least one track was downloaded, 'no_captions' when none available. Example: `ok`
+</ResponseField>
+
+<ResponseField name="transcript_found" type="boolean">
+  Whether a transcript was downloaded.
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"video_id": "dQw4w9WgXcQ", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "title": "Rick Astley - Never Gonna Give You Up", "language": "en", "full_text": "We're no strangers to love...", "word_count": 312, "tracks_count": 3, "status": "ok"}]}
+```

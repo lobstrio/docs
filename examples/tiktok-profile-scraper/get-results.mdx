@@ -1,0 +1,295 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TikTok Profile Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TikTok Profile Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="video_rank" type="integer">
+  Position of this video in the profile's feed at scrape time
+</ResponseField>
+
+<ResponseField name="video_id" type="string">
+  Unique TikTok video identifier. Example: `7123456789012345678`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Caption of the TikTok video. Example: `Crazy experiment gone wrong!`
+</ResponseField>
+
+<ResponseField name="text_language" type="string">
+  Detected language code of the caption
+</ResponseField>
+
+<ResponseField name="hashtags" type="json">
+  Hashtags in the caption
+</ResponseField>
+
+<ResponseField name="mentions" type="json">
+  @-mentions in the caption
+</ResponseField>
+
+<ResponseField name="created_at" type="datetime">
+  Date and time the video was published (UTC). Example: `2026-09-12T18:00:00Z`
+</ResponseField>
+
+<ResponseField name="play_count" type="bigint">
+  Total number of plays. Example: `45000000`
+</ResponseField>
+
+<ResponseField name="like_count" type="bigint">
+  Total number of likes. Example: `3200000`
+</ResponseField>
+
+<ResponseField name="comment_count" type="bigint">
+  Total number of comments
+</ResponseField>
+
+<ResponseField name="share_count" type="bigint">
+  Total number of shares
+</ResponseField>
+
+<ResponseField name="collect_count" type="bigint">
+  Total number of saves to collection
+</ResponseField>
+
+<ResponseField name="repost_count" type="bigint">
+  Total number of reposts
+</ResponseField>
+
+<ResponseField name="duration" type="integer">
+  Duration of the video in seconds
+</ResponseField>
+
+<ResponseField name="width" type="integer">
+  Width of the video in pixels
+</ResponseField>
+
+<ResponseField name="height" type="integer">
+  Height of the video in pixels
+</ResponseField>
+
+<ResponseField name="definition" type="string">
+  Video resolution. Example: `1080p`
+</ResponseField>
+
+<ResponseField name="video_format" type="string">
+  Container format of the video file
+</ResponseField>
+
+<ResponseField name="bitrate" type="integer">
+  Video bitrate in bits per second
+</ResponseField>
+
+<ResponseField name="file_size" type="bigint">
+  File size in bytes
+</ResponseField>
+
+<ResponseField name="is_ad" type="boolean">
+  Whether the video is a paid advertisement
+</ResponseField>
+
+<ResponseField name="is_slideshow" type="boolean">
+  True when the post is a photo slideshow
+</ResponseField>
+
+<ResponseField name="slideshow_image_urls" type="json">
+  Ordered list of image URLs when is_slideshow is true
+</ResponseField>
+
+<ResponseField name="duet_enabled" type="boolean">
+  Whether the author has enabled duets
+</ResponseField>
+
+<ResponseField name="stitch_enabled" type="boolean">
+  Whether the author has enabled stitches
+</ResponseField>
+
+<ResponseField name="location_created" type="string">
+  ISO country code of where the video was created
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  Canonical TikTok video page URL
+</ResponseField>
+
+<ResponseField name="play_url" type="string">
+  Direct streaming URL (signed, tied to the proxy)
+</ResponseField>
+
+<ResponseField name="download_url" type="string">
+  Direct download URL (signed, tied to the proxy)
+</ResponseField>
+
+<ResponseField name="cover_url" type="string">
+  URL of the video thumbnail
+</ResponseField>
+
+<ResponseField name="origin_cover" type="string">
+  Original unprocessed cover image URL
+</ResponseField>
+
+<ResponseField name="dynamic_cover" type="string">
+  URL of the animated dynamic cover
+</ResponseField>
+
+<ResponseField name="subtitles" type="json">
+  Subtitle/caption tracks available for the video
+</ResponseField>
+
+<ResponseField name="effect_stickers" type="json">
+  Visual effects/stickers applied to the video
+</ResponseField>
+
+<ResponseField name="music_id" type="string">
+  Unique identifier of the music track
+</ResponseField>
+
+<ResponseField name="music_title" type="string">
+  Title of the music track
+</ResponseField>
+
+<ResponseField name="music_author" type="string">
+  Artist name of the music track
+</ResponseField>
+
+<ResponseField name="music_play_url" type="string">
+  Direct URL to stream the audio track
+</ResponseField>
+
+<ResponseField name="music_cover_url" type="string">
+  URL of the music track's cover art
+</ResponseField>
+
+<ResponseField name="music_duration" type="integer">
+  Duration of the music track in seconds
+</ResponseField>
+
+<ResponseField name="music_original" type="boolean">
+  Whether the audio is an original sound
+</ResponseField>
+
+<ResponseField name="music_is_copyrighted" type="boolean">
+  Whether the music track is under copyright
+</ResponseField>
+
+<ResponseField name="author_id" type="string">
+  TikTok numeric user id of the profile
+</ResponseField>
+
+<ResponseField name="author_sec_uid" type="string">
+  TikTok secUid of the profile
+</ResponseField>
+
+<ResponseField name="author_username" type="string">
+  Profile handle (uniqueId), lowercase, without @. Example: `mrbeast`
+</ResponseField>
+
+<ResponseField name="author_nickname" type="string">
+  Display name of the profile
+</ResponseField>
+
+<ResponseField name="author_bio" type="string">
+  Profile bio
+</ResponseField>
+
+<ResponseField name="author_bio_link" type="string">
+  External link in the profile bio
+</ResponseField>
+
+<ResponseField name="author_avatar" type="string">
+  Profile picture URL
+</ResponseField>
+
+<ResponseField name="author_verified" type="boolean">
+  Whether the profile carries TikTok's verified badge
+</ResponseField>
+
+<ResponseField name="author_private_account" type="boolean">
+  Whether the profile is private
+</ResponseField>
+
+<ResponseField name="author_follower_count" type="bigint">
+  Number of followers. Example: `200000000`
+</ResponseField>
+
+<ResponseField name="author_following_count" type="bigint">
+  Number of accounts followed
+</ResponseField>
+
+<ResponseField name="author_total_likes" type="bigint">
+  Total likes received by the profile
+</ResponseField>
+
+<ResponseField name="author_video_count" type="bigint">
+  Number of videos on the profile
+</ResponseField>
+
+<ResponseField name="author_friend_count" type="bigint">
+  Number of mutual follows
+</ResponseField>
+
+<ResponseField name="author_digg_count" type="bigint">
+  Number of likes the profile has given
+</ResponseField>
+
+<ResponseField name="author_is_commerce_user" type="boolean">
+  Whether flagged as commerce account
+</ResponseField>
+
+<ResponseField name="author_tt_seller" type="boolean">
+  Whether profile is a TikTok Shop seller
+</ResponseField>
+
+<ResponseField name="author_is_organization" type="boolean">
+  Whether flagged as organization account
+</ResponseField>
+
+<ResponseField name="author_room_id" type="string">
+  Id of the profile's live room
+</ResponseField>
+
+<ResponseField name="author_created_at" type="datetime">
+  Date and time the TikTok account was created
+</ResponseField>
+
+<ResponseField name="author_language" type="string">
+  Profile's interface language code
+</ResponseField>
+
+<ResponseField name="author_profile_url" type="string">
+  Canonical TikTok profile URL
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  The profile URL or handle given as task input
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Date and time when this row was scraped
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"video_id": "7123456789012345678", "description": "Crazy experiment gone wrong!", "play_count": 45000000, "like_count": 3200000, "author_username": "mrbeast", "author_follower_count": 200000000, "created_at": "2026-09-12T18:00:00Z"}]}
+```

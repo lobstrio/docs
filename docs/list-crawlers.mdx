@@ -21,7 +21,7 @@ Use this endpoint to discover which crawlers are available for your data collect
 ## Response Structure
 
 <ResponseField name="total_results" type="integer">
-  Total number of crawlers available. Example: `56`
+  Total number of crawlers available. Example: `71`
 </ResponseField>
 
 <ResponseField name="limit" type="integer">
@@ -41,7 +41,7 @@ Use this endpoint to discover which crawlers are available for your data collect
 </ResponseField>
 
 <ResponseField name="result_to" type="integer">
-  Ending index of results in current page. Example: `53`
+  Ending index of results in current page. Example: `71`
 </ResponseField>
 
 <ResponseField name="data" type="array">
@@ -123,11 +123,15 @@ Quick reference of all public crawlers and their IDs. Use the **Crawler ID** as 
 | Amazon Reviews Scraper | `787abfafd394be3b12ee2ac7d14303fe` |
 | AutoScout24 Listings Scraper | `0a09add2a3c455037a972db81b1c0219` |
 | Bien'Ici Search Export | `53317cbe332e408c5c46372a18e4fc76` |
+| Contact Details Scraper | `7d83eacc7b94f14d5ffda28c6d357961` |
+| Facebook Ad Library Scraper | `f667dfc7398156ba2359836105184825` |
 | Facebook Business Page Scraper | `c80e36ed76bfae3c332e8983971403d7` |
+| Facebook Comments Scraper | `3cf27be3402dbc529ed0db7d18135e8c` |
 | Facebook Marketplace Scraper | `640e3d2f62769800fdb05f957f3a2415` |
 | Facebook Pages Search Export | `c47dfc2beba9fdc2472d3b3321b06b66` |
 | Facebook Private Group Posts Scraper | `3eea12bc7d80cf05b6fc38eaf9f28f77` |
 | Facebook Public Group Posts Scraper | `9b0bb2e04c6f7c475a9da9bb20530dac` |
+| Glassdoor Jobs Scraper | `4bc153aae1e138d894b630bf165825ee` |
 | Google Maps Leads Scraper | `4734d096159ef05210e0e1677e8be823` |
 | Google Maps Reviews Scraper | `e625ce52e98a6d4d1b53ef36dff7dacb` |
 | Google News Search Export | `06faf01896336c01ffb5e96d13dd406c` |
@@ -139,6 +143,7 @@ Quick reference of all public crawlers and their IDs. Use the **Crawler ID** as 
 | Instagram Post Scraper | `d25fddae52eb78eb385e60bc2adb6d1e` |
 | Instagram Profile Scraper | `5c55ffbf10fbbc7ee63ebb2bcaa332b7` |
 | Instagram Reels Scraper | `4aad3ef0de6a5cea65b48dd575531a8c` |
+| Instagram Search & Hashtags Scraper | `84adfa9c253a9a481b2f093a81e019e2` |
 | LaCentrale Cars Scraper | `665c260fd9139121a4530d23b35b26db` |
 | LaCentrale Listing Status Checker | `1d7fbb550feb1cf93e3e439039bcd687` |
 | Leboncoin Auto Message Sender | `fa9c988768a3d61f358916400f3c4b65` |
@@ -147,21 +152,27 @@ Quick reference of all public crawlers and their IDs. Use the **Crawler ID** as 
 | Leboncoin Listing Status Checker | `0c60c33b95db65c86d5c9fc127b7b2aa` |
 | Leboncoin Listings & Phone Search Export | `7bc4acdb18f2b90fdd5eb42b8e8251e9` |
 | Leboncoin Listings Search Export | `33db1ca85160105eeb84d5aa51cfad10` |
+| LinkedIn Company Employees Scraper | `08ac061ab290b5ae0f831e086c98d4b5` |
+| LinkedIn Company Scraper | `a6fab652671e54f962ce9ebe48d5ffed` |
 | LinkedIn Leads Scraper | `aa164b3c44d4f435fe5e04ddf6757296` |
 | LinkedIn Posts Commenters and Likers Scraper | `8a309e0e0df48511111a9da6382b2ef8` |
 | LinkedIn Posts Scraper | `6a9159b682cfb187977ae5c645e4df7a` |
 | LinkedIn Profile & Email Scraper (No Login) | `e7c4200bab5942e5329f711e26c0666b` |
 | LinkedIn Profile Scraper | `5c11752d8687df2332c08247c4fb655a` |
+| Naukri Jobs Scraper | `28ca7564a332a081a1dabda552d5c35b` |
 | Pages Jaunes Companies Search Export | `cd3e6b39d78365cd9d0ffbe1c7f5e5bd` |
 | PAP Search Export | `9980d62d6a23161a08d1134c0cabdf5c` |
 | ParuVendu Listings Scraper | `6a564030e814e6de4931637f7fb0c06e` |
+| Quora Scraper | `7a8473daa49fb96711016aa655384bb3` |
 | Realtor Property Listings Scraper | `f388a9866f943bc5c29bde8b33587bd3` |
 | Reddit Scraper | `6f99262f742b533d96936bf4088fba3e` |
 | Sales Navigator Companies Scraper | `6b66cba236b64604581864230e1f4d36` |
 | Sales Navigator Leads Scraper | `a1d243d3824a1ac773414416eb80362d` |
 | Sales Navigator Profile Scraper | `40d08f9bfec4a8775bb5586ce7b33a35` |
 | SeLoger Search Export | `78f5839ee4b97c30e67eec391b907dd0` |
+| Threads Scraper | `7308ae543e6abc70438d6b968d3a1b38` |
 | TikTok Comments Scraper | `5fc7b468267ec881344a11ac05c15a76` |
+| TikTok Profile Scraper | `089d76c66c2fd5c57d7ce7338d9ae7de` |
 | TikTok Top Ads Scraper | `b5079ede3002655d286a03ad29604ac6` |
 | TikTok Video Scraper | `1e6cba50f2713539a2b0ac784184ed92` |
 | TripAdvisor Restaurants Search Export | `f781435f026b36b19ef74d591a077cb7` |
@@ -171,11 +182,15 @@ Quick reference of all public crawlers and their IDs. Use the **Crawler ID** as 
 | Twitter Profile Scraper | `6c5227261fbbd3430f926d409f4c44bf` |
 | Twitter Search Results Scraper | `1b16ff414d27920fb325b68436dbf5fc` |
 | Twitter User Tweets Scraper | `9d6b83aaf1ae9d5b4a775d223e3eb5df` |
+| Upwork Jobs Scraper | `681a0d2e2641326f7b87cda35513618a` |
 | Vinted Products Scraper | `ffd34f9b42a79b7323a048f09fc158e6` |
+| Yellow Pages Companies Search Export | `03fcec3e9345dbf9e42a0a2f2f04c017` |
 | Yelp Reviews Scraper | `ea1c83f60e32a4e1de91a1ed1e41b268` |
 | Yelp Search Export | `ac92974d3c1c9f8d3997767f090fa0b8` |
 | YouTube Channel Scraper | `8dce74bb8c2330fdafee70baa22b4709` |
 | YouTube Comments Scraper | `66e9fbe07ae0a543576dc6ff241c229c` |
+| YouTube Transcript Scraper | `7a9835f866cd42905e75aaeadebe6aba` |
+| Zillow Property Listings Scraper | `ed06bb5ca6544bbb638c544bac48ede1` |
 
 ## Code Examples
 
@@ -214,7 +229,7 @@ for crawler in data['data']:
 
 ```json 200
 {
-  "total_results": 56,
+  "total_results": 71,
   "limit": 50,
   "page": 1,
   "total_pages": 2,

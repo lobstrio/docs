@@ -1,0 +1,94 @@
+---
+title: "September 15, 2026"
+description: "15 new public scrapers, LinkedIn Leads company enrichment, Sales Navigator company details, and bug fixes"
+---
+
+<Update label="September 15, 2026" description="15 new public scrapers, LinkedIn Leads company enrichment, Sales Navigator company details, bug fixes">
+
+## New Scrapers
+
+**YouTube Transcript Scraper**
+
+Download captions and full transcripts from any YouTube video, playlist, or channel. Supports all caption languages, auto-generated tracks, and timestamped segments. Each row includes the full transcript as plain text plus every downloaded track in structured form.
+
+**LinkedIn Company Scraper**
+
+Scrape LinkedIn company pages without a LinkedIn account. Collects name, description, website, industry, employee count, follower count, headquarters, specialties, locations, affiliated pages, and products.
+
+**Quora Scraper**
+
+Collect answers, posts, profiles, and topics from Quora. The scraper handles multiple URL types (questions, profiles, spaces, topics) and returns a unified record per row with a `record_type` field to distinguish them.
+
+**Yellow Pages Companies Search Export**
+
+Export business listings from Yellow Pages search results. Supports keyword + location search or a direct search URL. Enable `results_details` to also collect latitude/longitude, email, full description, and social links from each business page.
+
+**Instagram Search & Hashtags Scraper**
+
+Collect posts and reels from Instagram hashtag pages and keyword searches. Filter by recent or top posts, set a date window with `fetch_since`, and optionally enrich each item with up to 10 latest comments.
+
+**Upwork Jobs Scraper**
+
+Export job listings from Upwork search results. Filter by category, experience level, job type, budget, client location, and posting date. Enable `job_details` to collect client history, spend, rating, and proposal counts from each posting page.
+
+**Facebook Comments Scraper**
+
+Scrape all comments (and optionally replies) from any Facebook post, photo, video, or reel. Includes full reaction breakdown, author info, and comment language detection.
+
+**Contact Details Scraper**
+
+Crawl any website to extract contact information: email addresses, phone numbers, and social profiles across 15+ platforms (LinkedIn, Twitter, Instagram, Facebook, YouTube, TikTok, Telegram, WhatsApp, and more). Automatically follows contact, about, and imprint pages.
+
+**Facebook Ad Library Scraper**
+
+Export ads from the Meta Ad Library by keyword search or advertiser page. Filter by country, ad status, media type, date range, and platform. Enable `ad_details` to collect EU targeting data, payer/beneficiary info, and lifetime spend.
+
+**TikTok Profile Scraper**
+
+Export all videos from any TikTok profile with full engagement metrics, video metadata, music info, and complete author profile data. Use `profile_only: true` to collect just the profile stats without videos.
+
+**Glassdoor Jobs Scraper**
+
+Export job listings from Glassdoor with salary estimates (employer-provided or Glassdoor estimate), company ratings across six dimensions, and full job descriptions. Collect up to 900 jobs per search URL.
+
+**Naukri Jobs Scraper**
+
+Export job listings from Naukri, India's largest job portal. Includes salary data, experience requirements, key skills, AmbitionBox ratings, and walk-in interview details. Enable `job_details` for full descriptions, applicant counts, and company profiles.
+
+**Zillow Property Listings Scraper**
+
+Export property listings from Zillow search results with price, address, bedrooms, bathrooms, lot size, Zestimate, and listing status. Enable `property_details` to collect full description, agent contacts, MLS info, year built, HOA fees, and price history.
+
+**LinkedIn Company Employees Scraper**
+
+Export employees from any LinkedIn company page. Filter by keyword (job title, skill, department) and collect profile URL, headline, location, and connection degree. Requires a synced LinkedIn account.
+
+**Threads Scraper**
+
+Scrape posts, profiles, and keyword/hashtag searches from Threads. Collects full engagement metrics, media, music, quote/repost chains, and profile data. Use `include_replies: true` on single post URLs to also return reply threads.
+
+## Improved
+
+**LinkedIn Leads Scraper — company enrichment and new profile fields**
+
+Enable `enrich_company: true` to collect 17 company-level fields for each lead's current employer: website, domain, industry, employee headcount, followers, headquarters (city, country, full), description, tagline, specialties, logo, and verified status.
+
+Ten new profile fields are now collected when `scrape_profile_details` is enabled: `certifications`, `languages`, `honors`, `projects`, `publications`, `patents`, `organizations`, `courses`, `is_verified`, and `hiring`.
+
+The new `skip_collected_leads` param (default: false) skips profiles already collected by this squid in a previous run, so each run returns only new leads.
+
+**Sales Navigator Companies Scraper — company details add-on**
+
+Enable `get_details: true` to collect nine additional fields per company: `company_domain`, `company_website`, `company_linkedin_url`, `employee_count` (exact), `founded_year`, `specialties`, `company_type`, `revenue_range`, and `headquarters_location`.
+
+**Idealista Listings Search Export — max_pages default lowered**
+
+The default value of `max_pages` has been updated from 100 to 60 to better match Idealista's typical result depth.
+
+## Fixed
+
+- **YouTube Comments Scraper** — fixed an edge case where comments with no replies were causing task failures.
+- **LinkedIn Leads Scraper** — resolved intermittent 429 errors when processing large search result sets.
+- **TikTok Video Scraper** — private account videos no longer cause the task to fail; they are skipped and collection continues.
+
+</Update>

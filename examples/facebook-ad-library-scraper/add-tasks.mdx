@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Facebook Ad Library Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **Facebook Ad Library Scraper** squid.
+
+<Note>Crawler ID: `f667dfc7398156ba2359836105184825`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  Meta Ad Library URL (keyword search, advertiser page, or single ad). Example: `https://www.facebook.com/ads/library/?q=apple&search_type=keyword_unordered`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "f667dfc7398156ba2359836105184825",
+    "tasks": [
+      {"url": "https://www.facebook.com/ads/library/?q=apple&search_type=keyword_unordered"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "f667dfc7398156ba2359836105184825",
+        "tasks": [
+            {"url": "https://www.facebook.com/ads/library/?q=apple&search_type=keyword_unordered"}
+        ]
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.facebook.com/ads/library/?q=apple&search_type=keyword_unordered"}, "object": "task"}]}
+```

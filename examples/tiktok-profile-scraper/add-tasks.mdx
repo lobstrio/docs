@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your TikTok Profile Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **TikTok Profile Scraper** squid.
+
+<Note>Crawler ID: `089d76c66c2fd5c57d7ce7338d9ae7de`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  TikTok profile URL or handle. Example: `https://www.tiktok.com/@mrbeast`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "089d76c66c2fd5c57d7ce7338d9ae7de",
+    "tasks": [
+      {"url": "https://www.tiktok.com/@mrbeast"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "089d76c66c2fd5c57d7ce7338d9ae7de",
+        "tasks": [
+            {"url": "https://www.tiktok.com/@mrbeast"}
+        ]
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.tiktok.com/@mrbeast"}, "object": "task"}]}
+```

@@ -1,0 +1,143 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Facebook Comments Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Facebook Comments Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="comment_id" type="string">
+  Unique Facebook identifier of the comment. Example: `123456789_987654321`
+</ResponseField>
+
+<ResponseField name="comment_url" type="string">
+  Direct URL to the comment
+</ResponseField>
+
+<ResponseField name="post_id" type="string">
+  Facebook identifier of the post
+</ResponseField>
+
+<ResponseField name="post_url" type="string">
+  Canonical URL of the post
+</ResponseField>
+
+<ResponseField name="text" type="text">
+  Full text content of the comment. Example: `Great post! Thanks for sharing.`
+</ResponseField>
+
+<ResponseField name="created_at" type="datetime">
+  Date and time the comment was posted, in UTC. Example: `2026-09-14T16:45:00Z`
+</ResponseField>
+
+<ResponseField name="comment_language" type="string">
+  Language Facebook detected for the comment
+</ResponseField>
+
+<ResponseField name="author_name" type="string">
+  Display name of the comment author. Example: `Jane Smith`
+</ResponseField>
+
+<ResponseField name="author_id" type="string">
+  Facebook identifier of the comment author
+</ResponseField>
+
+<ResponseField name="author_profile_url" type="string">
+  URL of the comment author's Facebook profile
+</ResponseField>
+
+<ResponseField name="author_avatar" type="string">
+  URL of the comment author's profile picture
+</ResponseField>
+
+<ResponseField name="author_is_page_owner" type="boolean">
+  Whether the comment was written by the Page owner
+</ResponseField>
+
+<ResponseField name="author_is_verified" type="boolean">
+  Whether the comment author has a verified badge
+</ResponseField>
+
+<ResponseField name="likes_count" type="integer">
+  Total number of reactions on the comment (all types). Example: `12`
+</ResponseField>
+
+<ResponseField name="reaction_like_count" type="integer">
+  Number of Like reactions
+</ResponseField>
+
+<ResponseField name="reaction_love_count" type="integer">
+  Number of Love reactions
+</ResponseField>
+
+<ResponseField name="reaction_haha_count" type="integer">
+  Number of Haha reactions
+</ResponseField>
+
+<ResponseField name="reaction_wow_count" type="integer">
+  Number of Wow reactions
+</ResponseField>
+
+<ResponseField name="reaction_sad_count" type="integer">
+  Number of Sad reactions
+</ResponseField>
+
+<ResponseField name="reaction_angry_count" type="integer">
+  Number of Angry reactions
+</ResponseField>
+
+<ResponseField name="reaction_care_count" type="integer">
+  Number of Care reactions
+</ResponseField>
+
+<ResponseField name="replies_count" type="integer">
+  Number of replies to this comment
+</ResponseField>
+
+<ResponseField name="is_reply" type="boolean">
+  Whether this row is a reply to another comment. Example: `false`
+</ResponseField>
+
+<ResponseField name="depth" type="integer">
+  Nesting depth — 0 for top-level, 1 for a reply. Example: `0`
+</ResponseField>
+
+<ResponseField name="parent_comment_id" type="string">
+  Identifier of the comment this reply answers
+</ResponseField>
+
+<ResponseField name="parent_author_name" type="string">
+  Display name of the parent comment author
+</ResponseField>
+
+<ResponseField name="attachment_type" type="string">
+  Type of media attached (photo, animated_image, etc.)
+</ResponseField>
+
+<ResponseField name="attachment_url" type="string">
+  URL of the media attached to the comment
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"comment_id": "123456789_987654321", "text": "Great post! Thanks for sharing.", "author_name": "Jane Smith", "created_at": "2026-09-14T16:45:00Z", "likes_count": 12, "is_reply": false, "depth": 0}]}
+```

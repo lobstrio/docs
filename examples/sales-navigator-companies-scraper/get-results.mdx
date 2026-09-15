@@ -67,6 +67,46 @@ Our world-class teams operate with a non-conventional philosophy of inter-discip
   Whether the company is saved as a lead in LinkedIn Sales Navigator. Example: `false`
 </ResponseField>
 
+### Detail Fields
+
+The following fields require `get_details: true` in settings.
+
+<ResponseField name="company_domain" type="string">
+  Clean apex domain of the company's own website, lowercased. Example: `tesla.com`
+</ResponseField>
+
+<ResponseField name="company_website" type="string">
+  The company's own website URL, exactly as listed on LinkedIn. Example: `https://www.tesla.com`
+</ResponseField>
+
+<ResponseField name="company_linkedin_url" type="string">
+  LinkedIn company page URL built on the company slug. Example: `https://www.linkedin.com/company/tesla-motors`
+</ResponseField>
+
+<ResponseField name="employee_count" type="integer">
+  Exact number of employees listed on LinkedIn. Example: `127855`
+</ResponseField>
+
+<ResponseField name="founded_year" type="integer">
+  Year the company was founded. Example: `2003`
+</ResponseField>
+
+<ResponseField name="specialties" type="string">
+  Comma-separated list of the company's specialties. Example: `Electric Vehicles, Clean Energy, Battery Storage`
+</ResponseField>
+
+<ResponseField name="company_type" type="string">
+  Company type, e.g. Public Company, Privately Held, Nonprofit. Example: `Public Company`
+</ResponseField>
+
+<ResponseField name="revenue_range" type="string">
+  Estimated yearly revenue range. Example: `$10+ billion`
+</ResponseField>
+
+<ResponseField name="headquarters_location" type="string">
+  Location of the company headquarters. Example: `Austin, Texas, United States`
+</ResponseField>
+
 ## Response
 
 ```json 200

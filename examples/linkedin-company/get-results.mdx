@@ -1,0 +1,143 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from LinkedIn Company Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **LinkedIn Company Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="universal_name" type="string">
+  LinkedIn vanity slug for the company. Example: `google`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Company name. Example: `Google`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Canonical LinkedIn URL. Example: `https://www.linkedin.com/company/google`
+</ResponseField>
+
+<ResponseField name="company_id" type="string">
+  LinkedIn internal numeric identifier. Example: `1441`
+</ResponseField>
+
+<ResponseField name="tagline" type="string">
+  Short tagline.
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full 'About us' description.
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Company website. Example: `https://about.google`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  LinkedIn industry. Example: `Technology, Information and Internet`
+</ResponseField>
+
+<ResponseField name="company_size" type="string">
+  Employee count range declared by the company. Example: `10,001+ employees`
+</ResponseField>
+
+<ResponseField name="employees_count" type="integer">
+  Exact number of LinkedIn members listing this company. Example: `306912`
+</ResponseField>
+
+<ResponseField name="followers_count" type="integer">
+  Number of LinkedIn followers. Example: `23481902`
+</ResponseField>
+
+<ResponseField name="founded_year" type="integer">
+  Year founded. Example: `1998`
+</ResponseField>
+
+<ResponseField name="headquarters" type="string">
+  Headquarters as displayed. Example: `Mountain View, CA`
+</ResponseField>
+
+<ResponseField name="hq_street" type="string">
+  Street address.
+</ResponseField>
+
+<ResponseField name="hq_locality" type="string">
+  City. Example: `Mountain View`
+</ResponseField>
+
+<ResponseField name="hq_region" type="string">
+  State or region. Example: `CA`
+</ResponseField>
+
+<ResponseField name="hq_postal_code" type="string">
+  Postal code. Example: `94043`
+</ResponseField>
+
+<ResponseField name="hq_country" type="string">
+  Country code. Example: `US`
+</ResponseField>
+
+<ResponseField name="locations" type="json">
+  Every office location listed.
+</ResponseField>
+
+<ResponseField name="specialties" type="json">
+  Specialties declared by the company.
+</ResponseField>
+
+<ResponseField name="company_type" type="string">
+  Type of company. Example: `Public Company`
+</ResponseField>
+
+<ResponseField name="logo" type="string">
+  URL of the company logo.
+</ResponseField>
+
+<ResponseField name="cover_image" type="string">
+  URL of the cover image.
+</ResponseField>
+
+<ResponseField name="affiliated_pages" type="json">
+  Affiliated company pages.
+</ResponseField>
+
+<ResponseField name="showcase_pages" type="json">
+  Showcase pages of the company.
+</ResponseField>
+
+<ResponseField name="similar_pages" type="json">
+  Pages LinkedIn shows as similar.
+</ResponseField>
+
+<ResponseField name="products" type="json">
+  Products showcased.
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Company phone number (only visible to logged-in members).
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"universal_name": "google", "name": "Google", "url": "https://www.linkedin.com/company/google", "industry": "Technology, Information and Internet", "employees_count": 306912, "followers_count": 23481902, "founded_year": 1998, "hq_country": "US"}]}
+```

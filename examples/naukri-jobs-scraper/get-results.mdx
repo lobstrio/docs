@@ -1,0 +1,345 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Naukri Jobs Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Naukri Jobs Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="job_id" type="string">
+  Naukri's unique identifier for the job posting. Example: `19999911`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Job title as published by the employer. Example: `Senior Python Developer`
+</ResponseField>
+
+<ResponseField name="job_url" type="string">
+  Direct link to the job posting on Naukri. Example: `https://www.naukri.com/job-listings-senior-python-developer-infosys-bangalore-3-to-6-years-140926500456`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the hiring company. Example: `Infosys`
+</ResponseField>
+
+<ResponseField name="company_id" type="integer">
+  Naukri's internal identifier for the hiring company. Example: `3456`
+</ResponseField>
+
+<ResponseField name="company_url" type="string">
+  Link to the company's job page on Naukri. Example: `https://www.naukri.com/infosys-jobs`
+</ResponseField>
+
+<ResponseField name="company_logo" type="string">
+  URL of the company logo. Example: `https://static.naukimg.com/s/4/100/i/infosys.png`
+</ResponseField>
+
+<ResponseField name="group_id" type="integer">
+  Naukri group identifier for multi-branch employers. Example: `100`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Job location(s), comma separated. Example: `Bangalore, Hyderabad`
+</ResponseField>
+
+<ResponseField name="experience_text" type="string">
+  Required experience as displayed on Naukri. Example: `3 to 6 Yrs`
+</ResponseField>
+
+<ResponseField name="min_experience" type="integer">
+  Minimum years of experience required. Example: `3`
+</ResponseField>
+
+<ResponseField name="max_experience" type="integer">
+  Maximum years of experience required. Example: `6`
+</ResponseField>
+
+<ResponseField name="salary_text" type="string">
+  Salary as displayed on Naukri (often 'Not disclosed'). Example: `8-14 Lacs PA`
+</ResponseField>
+
+<ResponseField name="salary_min" type="float">
+  Minimum yearly salary. Example: `800000`
+</ResponseField>
+
+<ResponseField name="salary_max" type="float">
+  Maximum yearly salary. Example: `1400000`
+</ResponseField>
+
+<ResponseField name="salary_currency" type="string">
+  Currency of the salary figures. Example: `INR`
+</ResponseField>
+
+<ResponseField name="salary_min_monthly" type="float">
+  Minimum monthly salary. Example: `66667`
+</ResponseField>
+
+<ResponseField name="salary_max_monthly" type="float">
+  Maximum monthly salary. Example: `116667`
+</ResponseField>
+
+<ResponseField name="salary_variable_percentage" type="float">
+  Share of the package that is variable pay, in percent. Example: `15.0`
+</ResponseField>
+
+<ResponseField name="salary_hidden" type="boolean">
+  True when the employer chose to hide the salary. Example: `false`
+</ResponseField>
+
+<ResponseField name="salary_source" type="string">
+  Where the structured salary comes from. Example: `EMPLOYER_PROVIDED`
+</ResponseField>
+
+<ResponseField name="key_skills" type="text">
+  Skills tagged on the posting, comma separated. Example: `Python, Django, REST API`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Job description as plain text.
+</ResponseField>
+
+<ResponseField name="description_html" type="text">
+  Job description with original HTML formatting.
+</ResponseField>
+
+<ResponseField name="posted_at" type="datetime">
+  Date and time the job was posted, in UTC. Example: `2026-09-14T06:00:00Z`
+</ResponseField>
+
+<ResponseField name="posted_time_ago" type="string">
+  How long ago the job was posted, as displayed on Naukri. Example: `1 Day Ago`
+</ResponseField>
+
+<ResponseField name="openings" type="integer">
+  Number of positions to fill. Example: `5`
+</ResponseField>
+
+<ResponseField name="is_walkin" type="boolean">
+  True when the job is a walk-in interview. Example: `false`
+</ResponseField>
+
+<ResponseField name="job_type" type="string">
+  Type tag shown on the listing. Example: `Full Time, Permanent`
+</ResponseField>
+
+<ResponseField name="is_consultant" type="boolean">
+  True when the posting comes from a recruitment consultancy. Example: `false`
+</ResponseField>
+
+<ResponseField name="hiring_for" type="string">
+  End client the consultancy is hiring for. Example: `Acme Corp`
+</ResponseField>
+
+<ResponseField name="apply_url" type="string">
+  External application link. Example: `https://www.infosys.com/careers/apply/19999911`
+</ResponseField>
+
+<ResponseField name="is_company_apply" type="boolean">
+  True when applying redirects to the company's own site. Example: `true`
+</ResponseField>
+
+<ResponseField name="role_category_id" type="string">
+  Naukri role-category identifier. Example: `7`
+</ResponseField>
+
+<ResponseField name="ambitionbox_rating" type="float">
+  Company rating on AmbitionBox, out of 5. Example: `3.9`
+</ResponseField>
+
+<ResponseField name="ambitionbox_review_count" type="integer">
+  Number of AmbitionBox employee reviews. Example: `28461`
+</ResponseField>
+
+<ResponseField name="ambitionbox_url" type="string">
+  Link to the company's AmbitionBox reviews. Example: `https://www.ambitionbox.com/reviews/infosys-reviews`
+</ResponseField>
+
+<ResponseField name="is_top_company" type="boolean">
+  True when Naukri flags the employer as a top company. Example: `true`
+</ResponseField>
+
+<ResponseField name="is_exclusive" type="boolean">
+  True when the posting is exclusive to Naukri. Example: `false`
+</ResponseField>
+
+<ResponseField name="diversity_tag" type="string">
+  Diversity preference stated on the posting. Example: `Women-friendly workplace`
+</ResponseField>
+
+<ResponseField name="branding_tags" type="string">
+  Branding tags attached to the posting, comma separated. Example: `Work From Home, Flexi Working`
+</ResponseField>
+
+<ResponseField name="walkin_venue" type="string">
+  Walk-in venue address.
+</ResponseField>
+
+<ResponseField name="walkin_start_date" type="datetime">
+  First day of the walk-in.
+</ResponseField>
+
+<ResponseField name="walkin_end_date" type="datetime">
+  Last day of the walk-in.
+</ResponseField>
+
+<ResponseField name="walkin_timing" type="string">
+  Daily walk-in timing.
+</ResponseField>
+
+<ResponseField name="total_results_for_search" type="integer">
+  Total jobs Naukri reports for this search. Example: `4328`
+</ResponseField>
+
+### Detail Fields
+
+The following fields require `job_details: true` in settings.
+
+<ResponseField name="apply_count" type="integer">
+  Number of candidates who already applied. Example: `342`
+</ResponseField>
+
+<ResponseField name="view_count" type="integer">
+  Number of times the posting was viewed. Example: `5120`
+</ResponseField>
+
+<ResponseField name="employment_type" type="string">
+  Employment type, e.g. Full Time, Permanent. Example: `Full Time, Permanent`
+</ResponseField>
+
+<ResponseField name="work_mode" type="string">
+  Work arrangement: Work from office, Hybrid or Remote. Example: `Hybrid`
+</ResponseField>
+
+<ResponseField name="job_role" type="string">
+  Standardised job role. Example: `Software Developer`
+</ResponseField>
+
+<ResponseField name="role_category" type="string">
+  Role category label. Example: `Engineering - Software & QA`
+</ResponseField>
+
+<ResponseField name="functional_area" type="string">
+  Department / functional area. Example: `Engineering - Software & QA`
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Industry of the hiring company. Example: `IT Services & Consulting`
+</ResponseField>
+
+<ResponseField name="education_ug" type="string">
+  Accepted undergraduate degrees. Example: `B.Tech/B.E. in Any Specialization`
+</ResponseField>
+
+<ResponseField name="education_pg" type="string">
+  Accepted postgraduate degrees. Example: `MCA in Any Specialization`
+</ResponseField>
+
+<ResponseField name="skills_preferred" type="text">
+  Skills Naukri marks as preferred. Example: `FastAPI, PostgreSQL`
+</ResponseField>
+
+<ResponseField name="skills_other" type="text">
+  Other skills listed on the posting. Example: `Docker, Kubernetes`
+</ResponseField>
+
+<ResponseField name="short_description" type="text">
+  Naukri's own highlights of the posting.
+</ResponseField>
+
+<ResponseField name="reference_code" type="string">
+  Employer's internal reference code. Example: `INF-PY-BLR-2026`
+</ResponseField>
+
+<ResponseField name="is_microsite" type="boolean">
+  True when published on a company microsite. Example: `false`
+</ResponseField>
+
+<ResponseField name="company_website" type="string">
+  Company website. Example: `https://www.infosys.com`
+</ResponseField>
+
+<ResponseField name="company_address" type="text">
+  Company address. Example: `Electronics City, Bangalore, Karnataka 560100`
+</ResponseField>
+
+<ResponseField name="company_description" type="text">
+  About the company.
+</ResponseField>
+
+<ResponseField name="company_tags" type="string">
+  Tags Naukri displays next to the company. Example: `MNC, IT Product`
+</ResponseField>
+
+<ResponseField name="company_overall_rating" type="float">
+  Company rating on the branded job page. Example: `3.9`
+</ResponseField>
+
+<ResponseField name="company_follow_count" type="integer">
+  Number of Naukri users following the company. Example: `182340`
+</ResponseField>
+
+<ResponseField name="locations_detail" type="json">
+  Structured list of job locations with Naukri links.
+</ResponseField>
+
+<ResponseField name="job_branding_banner" type="string">
+  Banner image of the employer's branded page. Example: `https://static.naukimg.com/s/4/100/i/infosys-banner.jpg`
+</ResponseField>
+
+<ResponseField name="ambitionbox_reviews" type="json">
+  Recent AmbitionBox employee reviews.
+</ResponseField>
+
+<ResponseField name="ambitionbox_salaries" type="json">
+  AmbitionBox salary benchmark for this job profile.
+</ResponseField>
+
+<ResponseField name="ambitionbox_benefits" type="json">
+  AmbitionBox benefits reported for the company.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=28ca7564a332a081a1dabda552d5c35b" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "28ca7564a332a081a1dabda552d5c35b", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"job_id": "19999911", "title": "Senior Python Developer", "company_name": "Infosys", "location": "Bangalore, Hyderabad", "experience_text": "3 to 6 Yrs", "salary_text": "8-14 Lacs PA", "key_skills": "Python, Django, REST API", "posted_at": "2026-09-14T06:00:00Z"}]}
+```
