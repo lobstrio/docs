@@ -112,6 +112,10 @@ client.squids.delete(squid.id)
 | `client.crawlers.params(hash)` | GET | `/v1/crawlers/{hash}/params` | Get supported parameters for a crawler |
 | `client.crawlers.attributes(hash)` | GET | `/v1/crawlers/{hash}/attributes` | Get output attributes for a crawler |
 
+<Note>
+  A `Crawler` has both `account` (bool — needs an account or not) and `account_type` (the account type slug it needs, e.g. `linkedin-sync`, `sales-nav-sync`, or `None` if it needs no account). Two crawlers for the same platform can need different account types, so match a connected account on `account_type`, not on the crawler's name.
+</Note>
+
 ### Squids
 
 | SDK Method | HTTP | Endpoint | Description |
@@ -119,9 +123,14 @@ client.squids.delete(squid.id)
 | `client.squids.create(crawler, name)` | POST | `/v1/squids` | Create a new squid for a crawler |
 | `client.squids.list()` | GET | `/v1/squids` | List all squids in your account |
 | `client.squids.get(hash)` | GET | `/v1/squids/{hash}` | Get squid details by hash |
-| `client.squids.update(hash, ...)` | POST | `/v1/squids/{hash}` | Update squid settings or parameters |
+| `client.squids.update(hash, ..., accounts=[...])` | POST | `/v1/squids/{hash}` | Update squid settings, parameters, or the linked account list |
+| `client.squids.attach_accounts(hash, accounts, replace=False)` | GET + POST | `/v1/squids/{hash}` | Link one or more connected accounts to a squid without dropping the ones already there |
 | `client.squids.empty(hash)` | POST | `/v1/squids/{hash}/empty` | Remove all tasks from a squid |
 | `client.squids.delete(hash)` | DELETE | `/v1/squids/{hash}` | Permanently delete a squid |
+
+<Note>
+  **Linking an account.** `accounts` on `update()` is a direct mirror of the API field, which is **full-replace** — sending it detaches any account not included, and leaving it unset (the default) leaves the squid's accounts untouched. `attach_accounts()` is the safe way to add one: it reads the squid's current accounts first and sends the union, so nothing already attached is dropped. Pass `replace=True` to set the list outright instead, including `[]` to detach everything. Both are available on `LobstrClient` and `AsyncLobstrClient`. The read and the write inside `attach_accounts()` are two separate requests, not atomic — a concurrent attach on the same squid between them can still drop one addition.
+</Note>
 
 ### Tasks
 
@@ -182,6 +191,10 @@ client.squids.delete(squid.id)
 | `client.accounts.types()` | GET | `/v1/accounts/types` | List supported account types |
 | `client.accounts.sync(type, cookies)` | POST | `/v1/accounts/cookies` | Sync an account using cookies |
 | `client.accounts.delete(hash)` | DELETE | `/v1/accounts/{hash}` | Delete a connected account |
+
+<Note>
+  An `Account` also carries `status`, `resets_in`, and `lock_time` — what a client needs to tell whether the account is healthy and available, or currently locked by a run on another squid, before picking it to attach. There is no attach call on `AccountsResource` itself; link an account to a squid with `client.squids.attach_accounts()` above.
+</Note>
 
 ### Delivery
 

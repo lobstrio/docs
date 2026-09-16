@@ -55,6 +55,13 @@ lobstr go google-maps-leads-scraper url1 url2 \
 
 # Don't download, just kick off
 lobstr go twitter-profile-scraper @elonmusk --no-download
+
+# Account-backed crawler (e.g. Sales Navigator): auto-picks the one
+# healthy, unlocked matching account if there's exactly one
+lobstr go sales-navigator-leads-scraper "https://linkedin.com/..."
+
+# ...or name it explicitly (needed when there's more than one candidate)
+lobstr go sales-navigator-leads-scraper "https://linkedin.com/..." --account jane@example.com
 ```
 
 ```bash Step by step
@@ -69,6 +76,10 @@ lobstr whoami
 ```
 </CodeGroup>
 
+<Note>
+  **Account-backed crawlers** (LinkedIn, Sales Navigator, …) need a connected account before they can run. `go` links one automatically when exactly one healthy, unlocked account matches the crawler's account type; when it can't, it names the matching candidates, or the account type to connect, so you can pass `--account` yourself. It never auto-picks onto a squid that already has an account, so a reused squid (`go --name`) keeps what it had. A wrong-type account, an unknown account, or `--account` on a crawler that doesn't need one each fail with a clear message before anything is created; if linking fails after the squid is created, or the command is interrupted before the run starts, the squid is removed rather than left behind.
+</Note>
+
 ## Command Reference
 
 ### Crawlers
@@ -81,6 +92,10 @@ lobstr whoami
 | `crawlers params <slug>` | Get supported parameters for a crawler |
 | `crawlers attrs <slug>` | Get output attributes for a crawler |
 
+<Note>
+  `crawlers ls`, `show`, and `search` show which account type a crawler needs (for example `sales-nav-sync`) in the "Needs Account" column, in place of a plain yes or no — that's the value to look for when picking a matching account for `--account` below. A crawler that needs no account still shows "no". `--json` output is unchanged.
+</Note>
+
 ### Squids
 
 | Command | Description |
@@ -89,8 +104,14 @@ lobstr whoami
 | `squid ls` | List all squids in your account |
 | `squid show <id>` | Get squid details by ID |
 | `squid update <id> --param key=value` | Update squid settings or parameters |
+| `squid update <id> --account <username or hash>` | Link a connected account to the squid, in addition to any it already has |
+| `squid update <id> --replace-accounts --account <username or hash>` | Set the squid's account list outright, detaching any account not passed |
 | `squid empty <id>` | Remove all tasks from a squid |
 | `squid rm <id>` | Permanently delete a squid |
+
+<Note>
+  **Linking an account.** `--account` (repeatable) takes either an account's username or a hash — a hash prefix is enough. It's additive: the account is added to whatever the squid already has. `--replace-accounts` sets the list outright instead, printing which accounts it's about to detach before doing it; passed with no `--account` at all, it detaches every account. `squid create` has no `--account` — the API only accepts an account list on `squid update`.
+</Note>
 
 ### Tasks
 

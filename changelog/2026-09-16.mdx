@@ -1,0 +1,34 @@
+---
+title: "September 16, 2026"
+description: "MCP, CLI, and SDK can all now attach a connected platform account to a squid"
+---
+
+<Update label="September 16, 2026" description="MCP, CLI, and SDK can all now attach a connected platform account to a squid">
+
+## Improved
+
+**MCP — attach a connected account to a squid**
+
+The lobstr.io MCP server can now attach a synced platform account (LinkedIn, Sales Navigator, …) to a squid: a new `attach_account` tool, and an optional account on `run_scraper`. Before this, a squid created through the MCP had no account attached and nothing could add one, so any account-backed scraper (Sales Navigator Leads Scraper, LinkedIn Leads Scraper, …) failed immediately with no accounts available to launch the run.
+
+Attaching only ever adds — an account already on the squid stays attached. With no account specified, `attach_account` picks one automatically, but only when exactly one connected account matches the scraper's required account type, is healthy, and isn't rate limited; otherwise it lists the available accounts to choose from. Automatic selection never runs on a squid that already has an account. A rate-limited account is reported as temporarily locked rather than missing, since those locks clear on their own. An account of the wrong type is refused, with a message naming both types. An account with an expired session can still be attached deliberately, with a warning, in case you're about to re-sync it.
+
+The MCP server now exposes 20 tools.
+
+**CLI — `--account` on `squid update` and `go`**
+
+`lobstr squid update` and `lobstr go` now take `--account` (repeatable), taking either an account's username or a hash — a hash prefix is enough. Linking is additive: the account is added to whatever the squid already has. `squid update --replace-accounts` sets the account list outright instead, and prints which accounts it's about to detach before doing it; with no `--account` at all, it detaches everything.
+
+For an account-backed crawler, `go` picks the account for you when exactly one healthy, unlocked account matches the crawler's account type. When it can't, it names the matching candidates, or the account type to connect, so you can pass `--account` yourself. It never picks for a squid that already has an account, so a reused squid keeps what it had. A wrong-type account, an unknown account, or `--account` on a crawler that doesn't use one each fail with a clear message before anything is created; if linking fails after the squid is created, or the command is interrupted before the run starts, the squid is removed instead of left behind.
+
+`crawlers ls`, `show`, and `search` now show which account type a crawler needs (for example `sales-nav-sync`) in place of a plain yes or no, so you can see what to pass `--account`. `--json` output is unchanged.
+
+**SDK — `squids.attach_accounts()`**
+
+`client.squids.attach_accounts(squid_id, accounts, replace=False)`, available on both the sync and async client, links one or more connected accounts to a squid without dropping the ones already there — it reads the squid's current accounts and sends the union. Pass `replace=True` to set the list outright, including `[]` to detach everything. `squids.update(..., accounts=[...])` is also available as a direct mirror of the API field; unlike `attach_accounts()`, it's full-replace, so sending it without first reading the squid's current accounts can detach ones you meant to keep.
+
+New fields: a squid's linked accounts (`Squid.accounts`), an account's status and lock state (`Account.status`, `Account.resets_in`, `Account.lock_time`), and the account type slug a crawler needs (`Crawler.account_type`, for example `linkedin-sync`) — the existing `Crawler.account` boolean is unchanged.
+
+The read and the write inside `attach_accounts()` are two separate requests, not atomic, so a concurrent attach on the same squid between them can still drop one addition.
+
+</Update>
