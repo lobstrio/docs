@@ -65,11 +65,11 @@ It's recommended to check your balance before starting large-scale data collecti
 </ResponseField>
 
 <ResponseField name="used_slots" type="integer">
-  Number of concurrency slots currently in use. Example: `3`
+  Runs executing right now, summed by the concurrency each one was given. Squids that exist but are not running count for nothing. Example: `3`
 </ResponseField>
 
 <ResponseField name="total_available_slots" type="integer">
-  Total concurrency slots available on the plan. Example: `20`
+  How many the plan allows at once. Example: `20`
 </ResponseField>
 
 <ResponseField name="has_unpaid_bill" type="object">

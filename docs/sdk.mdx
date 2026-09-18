@@ -86,7 +86,7 @@ while not run.export_done:
 for place in client.results.iter(squid=squid.id):
     print(f"{place['name']} — {place.get('score', 'N/A')}★  {place.get('phone', '')}")
 
-# 8. Clean up — delete the squid to free the slot
+# 8. Clean up — delete the squid (optional: keeping it costs nothing)
 client.squids.delete(squid.id)
 ```
 

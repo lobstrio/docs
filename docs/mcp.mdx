@@ -118,7 +118,7 @@ configured from it. A **run** is one execution of a squid.
 | `list_runs` | read | Recent runs for a scraper. |
 | `abort_run` | write | Stop a running job. |
 | `empty_scraper` | write | Clear a scraper's tasks so it can be reused with new inputs. |
-| `deactivate_scraper` | write | Free a saved scraper's concurrency slot without deleting it; stops any run in progress. |
+| `deactivate_scraper` | write | Stop a saved scraper's run and take it out of its schedule, without deleting it. |
 
 #### Build a run step by step
 
@@ -142,7 +142,7 @@ instead of one — useful for large or incremental task lists.
 
 | Tool | Type | Description |
 |---|---|---|
-| `check_credits` | read | Your credit balance and concurrency slots. |
+| `check_credits` | read | Your credit balance, and how many runs are going against what the plan allows at once. |
 | `whoami` | read | Your account identity (email, name, plan). |
 
 #### Connected accounts

@@ -14,6 +14,12 @@ lobstr.io runs on a credit system: every plan includes a monthly credit allowanc
 | Pro | $100 | $960 | 100,000 | 10 | 28 days |
 | Team | $500 | $4,800 | 1,000,000 | 50 | 28 days |
 
+Concurrent slots cap how many runs execute **at the same time**, not how many squids you
+can have. Create as many squids as you like — an idle one costs nothing. When every slot
+is busy, starting another run returns `SlotsLimitExceeded`; wait for one to finish, or
+upgrade. [Get Balance](/docs/get-balance) reports your current usage as `used_slots` of
+`total_available_slots`.
+
 <Note>
   Need more than the Team plan offers? Custom/Enterprise pricing is available — contact us.
 </Note>
