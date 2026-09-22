@@ -1,0 +1,35 @@
+---
+title: "September 22, 2026"
+description: "Five scrapers newly documented, Jobs category in the store, created-via badges on squids, and scraper reliability fixes"
+---
+
+<Update label="September 22, 2026" description="Five scrapers newly documented, Jobs category in the store, created-via badges on squids, scraper reliability fixes">
+
+## Now Documented
+
+Five scrapers that are live in the store had no API documentation. They now have full reference pages — task inputs, squid settings, result fields, and credit cost.
+
+- **[LinkedIn Jobs Scraper](/examples/linkedin-jobs-scraper/add-tasks)** — export job postings from a LinkedIn jobs search URL with full description, structured salary, recruiter and company details. No LinkedIn account required.
+- **[TikTok Hashtag Scraper](/examples/tiktok-hashtag-scraper/add-tasks)** — export every video published under a hashtag, with author details, engagement metrics and music info.
+- **[YouTube Search Scraper](/examples/youtube-search-scraper/add-tasks)** — search YouTube, or export a video, channel, playlist or hashtag, with optional comments and subtitles.
+- **[Instagram Comments Scraper](/examples/instagram-comments-scraper/add-tasks)** — collect comments from any public post or reel without an account. Replaces the older Instagram Post Comments Scraper.
+- **[Instagram Followers Scraper](/examples/instagram-followers-scraper/add-tasks)** — export every follower of a public account. Requires a synced Instagram account.
+
+## Improved
+
+**Squids — see where each squid was created from**
+
+Squids created outside the dashboard now carry a badge next to their name showing the surface they came from: `cli`, `sdk`, `api`, or `mcp`. The badge appears both in the squids list and on the squid page, so an account driven by several integrations at once stays readable at a glance.
+
+**Store — new Jobs category**
+
+The store Target filter has a new **Jobs** category, grouping the Naukri Jobs, Glassdoor Jobs and Upwork Jobs scrapers. They previously carried no category and were only reachable by scrolling the full scraper grid.
+
+## Fixed
+
+- **YouTube Channel Scraper** — channel pages no longer fail with an assertion error. YouTube moved its initial payload from an inline `ytInitialData` variable to a separate `yt-initial-data` script tag; both formats are now parsed.
+- **TikTok Hashtag Scraper** — hashtag pages no longer return partial results or fail outright under load. Pagination retries a scroll up to three times before accepting a page, response bodies are read as soon as they arrive instead of being evicted from the browser buffer, and a page that loads without the hashtag feed is reloaded once before the task gives up (previously reported as a misleading "hashtag may not exist" error).
+- **Glassdoor Jobs Scraper** — fixed a SQL error on the `apply_url` field that was failing tasks mid-run.
+- **Contact Details Scraper** — removed the stray lowercase `website` entry from the store Domain filter, which is now brand-only.
+
+</Update>
