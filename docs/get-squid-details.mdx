@@ -20,8 +20,16 @@ This endpoint retrieves comprehensive details about a specific squid, including 
   Timestamp when the squid was created. Example: `"2024-01-15T10:30:00Z"`
 </ResponseField>
 
+<ResponseField name="created_via" type="string | null">
+  Which surface created this squid — `"api"`, `"sdk"`, `"cli"`, or `"mcp"`. `null` for squids created in the dashboard. The dashboard shows this as a badge next to the squid's name. Example: `"api"`
+</ResponseField>
+
 <ResponseField name="is_active" type="boolean">
   Whether the squid is active and can run. Example: `true`
+</ResponseField>
+
+<ResponseField name="deactivation_reason" type="string | null">
+  Why the squid was deactivated, or `null` while it is active. Example: `null`
 </ResponseField>
 
 <ResponseField name="is_ready" type="boolean">
@@ -42,6 +50,14 @@ This endpoint retrieves comprehensive details about a specific squid, including 
 
 <ResponseField name="concurrency" type="integer">
   Number of concurrent tasks the squid runs. Example: `2`
+</ResponseField>
+
+<ResponseField name="accounts" type="array | null">
+  Connected platform accounts linked to this squid. Empty (or `null`) for crawlers that need no account — see [Link Account to Squid](/docs/link-account-to-squid). Example: `[]`
+</ResponseField>
+
+<ResponseField name="auto_verify_emails" type="boolean">
+  Whether found email addresses are verified automatically. Set it under the squid's advanced settings; only applies to crawlers whose `has_email_verification` is true. Example: `false`
 </ResponseField>
 
 <ResponseField name="params" type="object">
@@ -255,9 +271,11 @@ print(f"  Webhook: {squid['webhook_fields']['is_active']}")
 {
   "id": "c106a44a98044ef18acc59986ae10967",
   "created_at": "2025-02-25T09:01:13.575329",
+  "created_via": "api",
   "name": "my-cool-squid",
   "is_ready": true,
   "is_active": true,
+  "deactivation_reason": null,
   "concurrency": 1,
   "params": {
     "country": "United States",

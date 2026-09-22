@@ -90,8 +90,40 @@ Use this endpoint to discover which crawlers are available for your data collect
   Maximum number of concurrent tasks allowed for this crawler. Example: `20`
 </ResponseField>
 
-<ResponseField name="data[].credits_per_row" type="number">
-  Credits charged per result row. Example: `0.5`
+<ResponseField name="data[].credits_per_row" type="object">
+  Credits charged per result row, keyed by plan type: `current` is the rate on today's plans, `legacy` the rate kept by grandfathered subscriptions. Example: `{"legacy": 1, "current": 1}`
+</ResponseField>
+
+<ResponseField name="data[].credits_per_email" type="object">
+  Credits charged per email found, keyed the same way as `credits_per_row`. Only meaningful for crawlers with an email enrichment function. Example: `{"legacy": 100, "current": 2}`
+</ResponseField>
+
+<ResponseField name="data[].has_email_verification" type="boolean">
+  Whether this crawler can verify the email addresses it finds. Example: `true`
+</ResponseField>
+
+<ResponseField name="data[].description" type="string">
+  What the crawler collects, as shown in the store. Example: `"Export every follower of a public Instagram account"`
+</ResponseField>
+
+<ResponseField name="data[].help_article" type="string | null">
+  Link to the crawler's help article, or `null` when it has none. Example: `null`
+</ResponseField>
+
+<ResponseField name="data[].rank" type="integer | null">
+  Position in the public store listing. `null` for crawlers that are not ranked. Example: `1`
+</ResponseField>
+
+<ResponseField name="data[].default_worker_stats" type="object | null">
+  Throughput profile of the crawler's default worker — `success_ratio`, `min_rate_per_worker`, and `max_rate_per_worker`. `null` when no profile is published.
+</ResponseField>
+
+<ResponseField name="data[].email_worker_stats" type="object | null">
+  Same throughput profile for the email enrichment worker. `null` when the crawler has no email function.
+</ResponseField>
+
+<ResponseField name="data[].chains" type="array">
+  Crawlers this one can chain into. Empty when the crawler supports no chaining — see [Get Crawler Details](/docs/get-crawler-details) for the shape of each entry.
 </ResponseField>
 
 <ResponseField name="data[].account" type="object | null">
@@ -220,7 +252,7 @@ for crawler in data['data']:
     premium = " [PREMIUM]" if crawler['is_premium'] else ""
     print(f"{status} {crawler['name']}{premium}")
     print(f"   ID: {crawler['id']}")
-    print(f"   Credits: {crawler['credits_per_row']} per row")
+    print(f"   Credits: {crawler['credits_per_row']['current']} per row")
     print()
 ```
 </CodeGroup>
@@ -229,10 +261,10 @@ for crawler in data['data']:
 
 ```json 200
 {
-  "total_results": 71,
+  "total_results": 198,
   "limit": 50,
   "page": 1,
-  "total_pages": 2,
+  "total_pages": 4,
   "result_from": 1,
   "result_to": 50,
   "data": [
@@ -242,13 +274,21 @@ for crawler in data['data']:
       "account": null,
       "name": "Twitter Profile Scraper",
       "slug": "twitter-profile-scraper",
+      "description": "Scrape Twitter profile informations from a given username.",
+      "help_article": null,
+      "rank": 11,
       "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
       "is_public": true,
       "is_available": true,
       "is_premium": false,
       "has_issues": false,
       "max_concurrency": 20,
-      "credits_per_row": 2
+      "credits_per_row": { "legacy": 2, "current": 1 },
+      "credits_per_email": { "legacy": 2, "current": 2 },
+      "has_email_verification": false,
+      "default_worker_stats": null,
+      "email_worker_stats": null,
+      "chains": []
     },
     {
       "id": "c47dfc2beba9fdc2472d3b3321b06b66",
@@ -270,13 +310,21 @@ for crawler in data['data']:
       },
       "name": "Facebook Pages Search Export",
       "slug": "facebook-pages-search-export",
+      "description": "Collect all facebook pages from a keyword",
+      "help_article": null,
+      "rank": 14,
       "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
       "is_public": true,
       "is_available": true,
       "is_premium": false,
       "has_issues": false,
       "max_concurrency": 20,
-      "credits_per_row": 20
+      "credits_per_row": { "legacy": 20, "current": 1 },
+      "credits_per_email": { "legacy": 2, "current": 2 },
+      "has_email_verification": false,
+      "default_worker_stats": null,
+      "email_worker_stats": null,
+      "chains": []
     },
     {
       "id": "a1d243d3824a1ac773414416eb80362d",
@@ -298,13 +346,21 @@ for crawler in data['data']:
       },
       "name": "Sales Navigator Leads Scraper",
       "slug": "sales-navigator-leads-scraper",
+      "description": "Give us your properly built Sales Navigator Leads search URL(s). Grab all profiles available. Use our third-party service, and get mails!",
+      "help_article": null,
+      "rank": 4,
       "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
       "is_public": true,
       "is_available": true,
       "is_premium": false,
       "has_issues": false,
-      "max_concurrency": 10,
-      "credits_per_row": 3
+      "max_concurrency": 20,
+      "credits_per_row": { "legacy": 5, "current": 1 },
+      "credits_per_email": { "legacy": 2, "current": 2 },
+      "has_email_verification": false,
+      "default_worker_stats": null,
+      "email_worker_stats": null,
+      "chains": []
     }
   ],
   "next": null,

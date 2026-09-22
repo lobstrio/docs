@@ -116,6 +116,18 @@ This endpoint retrieves a paginated list of all connected platform accounts (lik
   Base64 encoded platform icon. Example: `"<base64 image data>"`
 </ResponseField>
 
+<ResponseField name="primary_color" type="string">
+  The platform's brand colour, as a hex code — used to render the account in the dashboard. Example: `"#FF9900"`
+</ResponseField>
+
+<ResponseField name="lock_time" type="integer | null">
+  Unix timestamp at which a locked account unlocks again, or `null` when the account is not locked. Example: `null`
+</ResponseField>
+
+<ResponseField name="resets_in" type="integer | null">
+  Seconds remaining until this account's usage limit resets, or `null` when no limit has been reached. Example: `null`
+</ResponseField>
+
 <Tip>
   Use this endpoint to check which platform accounts are currently synced and their status before running squids that require authentication.
 </Tip>

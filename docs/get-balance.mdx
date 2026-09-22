@@ -72,8 +72,12 @@ It's recommended to check your balance before starting large-scale data collecti
   Total concurrency slots available on the plan. Example: `20`
 </ResponseField>
 
+<ResponseField name="export_cap_lifted_until" type="string | null">
+  Timestamp until which the account's export cap is lifted, or `null` when no lift is active. Example: `null`
+</ResponseField>
+
 <ResponseField name="has_unpaid_bill" type="object">
-  Outstanding unpaid invoice info. Empty object (`{}`) when there is no unpaid bill — despite the name, this is not a boolean.
+  Outstanding unpaid invoice info. Empty object (`{}`) when there is no unpaid bill — despite the name, this is not a boolean. When a bill is outstanding it carries `status` (boolean) and `created_on` (Unix timestamp). Example: `{"status": true, "created_on": 1777545119}`
 </ResponseField>
 
 <ResponseField name="reset_time" type="string">
@@ -137,6 +141,7 @@ print(f"Slots used: {balance_data['used_slots']} / {balance_data['total_availabl
   "rollover_credit_expires_at": null,
   "community_reward_credit": 500,
   "community_reward_credit_expires_at": null,
+  "export_cap_lifted_until": null,
   "interval": "monthly",
   "used_slots": 3,
   "total_available_slots": 20,

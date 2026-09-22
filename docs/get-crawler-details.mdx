@@ -33,7 +33,19 @@ This endpoint retrieves detailed information about a specific crawler using its 
 </ResponseField>
 
 <ResponseField name="slug" type="string">
-  URL-friendly identifier. Example: `""`
+  URL-friendly identifier. Example: `"google-maps-leads-scraper"`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  What the crawler collects, as shown in the store. Example: `"Give us your properly built Google Maps Search URL(s). Grab all results available. Phone, rating, website included!"`
+</ResponseField>
+
+<ResponseField name="help_article" type="string | null">
+  Link to the crawler's help article, or `null` when it has none. Example: `null`
+</ResponseField>
+
+<ResponseField name="rank" type="integer | null">
+  Position in the public store listing. `null` for crawlers that are not ranked. Example: `1`
 </ResponseField>
 
 <ResponseField name="is_public" type="boolean">
@@ -62,6 +74,34 @@ This endpoint retrieves detailed information about a specific crawler using its 
 
 <ResponseField name="result" type="array">
   Array of output field names this crawler collects. Example: `[]`
+</ResponseField>
+
+<ResponseField name="max_concurrency" type="integer">
+  Maximum number of workers that can run this crawler in parallel. Example: `20`
+</ResponseField>
+
+<ResponseField name="credits_per_row" type="object">
+  Credits charged per result row, keyed by plan type: `current` is the rate on today's plans, `legacy` the rate kept by grandfathered subscriptions. Example: `{"legacy": 1, "current": 1}`
+</ResponseField>
+
+<ResponseField name="credits_per_email" type="object">
+  Credits charged per email found, keyed the same way as `credits_per_row`. Only meaningful for crawlers with an email enrichment function. Example: `{"legacy": 100, "current": 2}`
+</ResponseField>
+
+<ResponseField name="has_email_verification" type="boolean">
+  Whether this crawler can verify the email addresses it finds. Example: `true`
+</ResponseField>
+
+<ResponseField name="default_worker_stats" type="object | null">
+  Throughput profile of the crawler's default worker — `success_ratio`, `min_rate_per_worker`, and `max_rate_per_worker`. Used to project how long a run will take. `null` when no profile is published. Example: `{"success_ratio": 1, "max_rate_per_worker": 200, "min_rate_per_worker": 100}`
+</ResponseField>
+
+<ResponseField name="email_worker_stats" type="object | null">
+  Same throughput profile for the email enrichment worker, which is typically slower and has a lower success ratio. `null` when the crawler has no email function. Example: `{"success_ratio": 0.3, "max_rate_per_worker": 30, "min_rate_per_worker": 20}`
+</ResponseField>
+
+<ResponseField name="chains" type="array">
+  Crawlers this one can chain into — each entry describes the target crawler, how its fields map from this crawler's output (`field_map`), whether it autostarts by default, and the squid-level parameters it accepts. Empty when the crawler supports no chaining. See [Configure Chain](/examples/google-maps-leads-scraper/configure-chain) for a worked example.
 </ResponseField>
 
 ## Understanding Input Parameters
@@ -141,7 +181,10 @@ crawler = response.json()
 print(f"Crawler: {crawler['name']}")
 print(f"Status: {'Available' if crawler['is_available'] else 'Unavailable'}")
 print(f"Has Issues: {crawler['has_issues']}")
-print(f"Credits per row: {crawler['credits_per_row']}\n")
+
+# credits_per_row is keyed by plan type — use "current" unless you're on a
+# grandfathered plan, in which case use "legacy".
+print(f"Credits per row: {crawler['credits_per_row']['current']}\n")
 
 # Display task-level inputs
 print("Task-level parameters:")
@@ -170,8 +213,11 @@ print(", ".join(crawler['result'][:10]) + "...")
   "id": "4734d096159ef05210e0e1677e8be823",
   "object": "crawler",
   "account": null,
-  "name": "Google Maps Search Export",
-  "slug": "google-maps-search-export",
+  "name": "Google Maps Leads Scraper",
+  "slug": "google-maps-leads-scraper",
+  "description": "Give us your properly built Google Maps Search URL(s). Grab all results available. Phone, rating, website included!",
+  "help_article": null,
+  "rank": 1,
   "icon": "PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MCIgaGVpZ2h0PSI1MCI+PC9zdmc+",
   "is_public": true,
   "is_available": true,
@@ -266,6 +312,40 @@ print(", ".join(crawler['result'][:10]) + "...")
     "instagram"
   ],
   "max_concurrency": 20,
-  "credits_per_row": 2
+  "credits_per_row": {
+    "legacy": 1,
+    "current": 1
+  },
+  "credits_per_email": {
+    "legacy": 100,
+    "current": 2
+  },
+  "has_email_verification": true,
+  "default_worker_stats": {
+    "success_ratio": 1,
+    "max_rate_per_worker": 200,
+    "min_rate_per_worker": 100
+  },
+  "email_worker_stats": {
+    "success_ratio": 0.3,
+    "max_rate_per_worker": 30,
+    "min_rate_per_worker": 20
+  },
+  "chains": [
+    {
+      "title": "Google Maps Reviews Scraper",
+      "subtitle": "Collect all reviews from a GoogleMaps Etablishment URL!",
+      "target": "googlemapreviews_matrix",
+      "target_module_id": "e625ce52e98a6d4d1b53ef36dff7dacb",
+      "field_map": { "url": "url" },
+      "autostart_default": true
+    }
+  ]
 }
 ```
+
+<Note>
+  The `input` and `result` arrays above are abridged. At the time of writing this
+  crawler exposes 25 input parameters and 87 result fields — always read them
+  from the live response rather than hard-coding them.
+</Note>
