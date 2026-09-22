@@ -1,0 +1,219 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from LinkedIn Jobs Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **LinkedIn Jobs Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Export Jobs
+
+<ResponseField name="job_id" type="string">
+  Unique LinkedIn job posting identifier. Example: `4448124252`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the job posting on LinkedIn. Example: `https://www.linkedin.com/jobs/view/4448124252`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Job position title. Example: `Software Engineer`
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the hiring company. Example: `Cohere`
+</ResponseField>
+
+<ResponseField name="company_url" type="string">
+  LinkedIn page URL of the hiring company. Example: `https://www.linkedin.com/company/cohere-ai`
+</ResponseField>
+
+<ResponseField name="company_logo" type="string">
+  URL of the hiring company's logo image. Example: `https://media.licdn.com/dms/image/v2/C560BAQGI_GYoDekJsQ/company-logo_100_100/0/1680024442682`
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Job location as displayed on the posting. Example: `Paris, Île-de-France, France`
+</ResponseField>
+
+<ResponseField name="posted_at" type="datetime">
+  Date the job was posted (daily granularity). Example: `2026-08-03 00:00:00`
+</ResponseField>
+
+<ResponseField name="posted_time_ago" type="string">
+  Human-readable posting age as displayed on LinkedIn. Example: `1 week ago`
+</ResponseField>
+
+<ResponseField name="salary" type="string">
+  Salary information as displayed on the posting, when available. Example: `$110,000.00/yr - $130,000.00/yr`
+</ResponseField>
+
+<ResponseField name="benefits" type="string">
+  Badges displayed on the job card (e.g. Actively Hiring, Be an early applicant). Example: `Actively Hiring`
+</ResponseField>
+
+### Full Job Details
+
+<ResponseField name="description" type="text">
+  Full job description as plain text. Example: `Who are we? Cohere is the leading security-first enterprise AI company...`
+</ResponseField>
+
+<ResponseField name="description_html" type="text">
+  Full job description with HTML formatting preserved. Example: `<p>Who are we?</p><p>Cohere is the leading security-first enterprise AI company...</p>`
+</ResponseField>
+
+<ResponseField name="seniority_level" type="string">
+  Required seniority level as listed on the posting. Example: `Mid-Senior level`
+</ResponseField>
+
+<ResponseField name="employment_type" type="string">
+  Employment type (e.g. Full-time, Contract, Internship). Example: `Full-time`
+</ResponseField>
+
+<ResponseField name="job_function" type="string">
+  Main job function / department. Example: `Engineering and Information Technology`
+</ResponseField>
+
+<ResponseField name="industries" type="string">
+  Industries of the hiring company for this job. Example: `Software Development`
+</ResponseField>
+
+<ResponseField name="applicants_count" type="integer">
+  Number of applicants so far (LinkedIn shows exact counts below 200, then 'Over 200'). Example: `25`
+</ResponseField>
+
+<ResponseField name="apply_type" type="string">
+  How applications are handled: `easy_apply` (on LinkedIn) or `external` (company site). Example: `external`
+</ResponseField>
+
+<ResponseField name="apply_url" type="string">
+  URL where candidates actually apply (external application URL when the job redirects off LinkedIn). Example: `https://jobs.lever.co/cohere/12345`
+</ResponseField>
+
+<ResponseField name="salary_min" type="float">
+  Lower bound of the salary range, parsed as a number. Example: `110000.0`
+</ResponseField>
+
+<ResponseField name="salary_max" type="float">
+  Upper bound of the salary range, parsed as a number. Example: `130000.0`
+</ResponseField>
+
+<ResponseField name="salary_currency" type="string">
+  Currency of the salary range. Example: `USD`
+</ResponseField>
+
+<ResponseField name="salary_period" type="string">
+  Period the salary range refers to (yearly, monthly, weekly, hourly). Example: `yearly`
+</ResponseField>
+
+<ResponseField name="poster_name" type="string">
+  Name of the recruiter or person who posted the job, when publicly shown. Example: `Andrea Cowan`
+</ResponseField>
+
+<ResponseField name="poster_title" type="string">
+  LinkedIn headline of the job poster, when publicly shown. Example: `Technical Recruiter at Meta`
+</ResponseField>
+
+<ResponseField name="poster_profile_url" type="string">
+  LinkedIn profile URL of the job poster, when publicly shown. Example: `https://www.linkedin.com/in/andrea-cowan-458b5423b`
+</ResponseField>
+
+<ResponseField name="poster_photo" type="string">
+  Profile photo URL of the job poster, when publicly shown. Example: `https://media.licdn.com/dms/image/C5603AQErv53vemaq_A/profile-displayphoto-shrink_100_100/0/1657753132661`
+</ResponseField>
+
+<ResponseField name="company_id" type="string">
+  LinkedIn internal identifier of the hiring company. Example: `24024765`
+</ResponseField>
+
+### Company Details
+
+<ResponseField name="company_website" type="string">
+  External website of the hiring company. Example: `https://cohere.com`
+</ResponseField>
+
+<ResponseField name="company_description" type="text">
+  About section of the hiring company's LinkedIn page. Example: `Cohere is the leading security-first enterprise AI company...`
+</ResponseField>
+
+<ResponseField name="company_industry" type="string">
+  Industry of the hiring company as listed on its LinkedIn page. Example: `Software Development`
+</ResponseField>
+
+<ResponseField name="company_size" type="string">
+  Company size bracket as listed on its LinkedIn page. Example: `201-500 employees`
+</ResponseField>
+
+<ResponseField name="company_employees_count" type="integer">
+  Number of employees on LinkedIn. Example: `1019`
+</ResponseField>
+
+<ResponseField name="company_followers_count" type="integer">
+  Number of LinkedIn followers of the hiring company. Example: `253257`
+</ResponseField>
+
+<ResponseField name="company_founded" type="string">
+  Year the hiring company was founded. Example: `2019`
+</ResponseField>
+
+<ResponseField name="company_headquarters" type="string">
+  Headquarters location of the hiring company. Example: `Toronto, Ontario`
+</ResponseField>
+
+<ResponseField name="company_specialties" type="string">
+  Specialties listed on the hiring company's LinkedIn page. Example: `Natural Language Processing, Machine Learning, Artificial Intelligence`
+</ResponseField>
+
+<ResponseField name="company_tagline" type="string">
+  Tagline of the hiring company's LinkedIn page. Example: `The leading security-first enterprise AI company`
+</ResponseField>
+
+<ResponseField name="company_type" type="string">
+  Organization type of the hiring company (e.g. Privately Held, Public Company). Example: `Privately Held`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"job_id": "4448124252", "url": "https://www.linkedin.com/jobs/view/4448124252", "title": "Software Engineer", "company_name": "Cohere", "company_url": "https://www.linkedin.com/company/cohere-ai", "company_logo": "https://media.licdn.com/dms/image/v2/C560BAQGI_GYoDekJsQ/company-logo_100_100/0/1680024442682", "location": "Paris, \u00cele-de-France, France", "posted_at": "2026-08-03 00:00:00", "posted_time_ago": "1 week ago", "salary": "$110,000.00/yr - $130,000.00/yr"}]}
+```

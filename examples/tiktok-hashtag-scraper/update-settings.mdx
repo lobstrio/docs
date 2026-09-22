@@ -1,0 +1,61 @@
+---
+title: "Update Settings"
+description: "Configure TikTok Hashtag Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **TikTok Hashtag Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| max_unique_results_per_run | int | — | Maximum number of unique videos retrieved across all tasks in the entire run. Leave empty for unlimited. |
+| max_results | integer | — | Optional cap on the number of videos retrieved per hashtag. TikTok's own hashtag feed practically maxes out around 400-800 videos. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "max_results": 500,
+    "max_unique_results_per_run": 2000
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "max_results": 500,
+        "max_unique_results_per_run": 2000,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"max_results": 500, "max_unique_results_per_run": 2000}}
+```

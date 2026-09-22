@@ -1,0 +1,101 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Instagram Followers Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Instagram Followers Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="profile_url" type="string">
+  Direct URL to the follower's Instagram profile. Example: `https://www.instagram.com/kholiq__off/`
+</ResponseField>
+
+<ResponseField name="username" type="string">
+  Instagram username of the follower. Example: `kholiq__off`
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Display name of the follower. Example: `Abduxoliqjon`
+</ResponseField>
+
+<ResponseField name="profile_pic_url" type="string">
+  URL of the follower's Instagram profile picture. Example: `https://instagram.ftas5-1.fna.fbcdn.net/v/t51.82787-19/658962059_18050684966719677_5091061884162648088_n.jpg`
+</ResponseField>
+
+<ResponseField name="profile_id" type="bigint">
+  Unique internal Instagram identifier (pk) for the follower account. Example: `51385255676`
+</ResponseField>
+
+<ResponseField name="fbid" type="bigint">
+  Internal Facebook/Meta identifier linked to the follower account. Example: `17841451590283156`
+</ResponseField>
+
+<ResponseField name="is_private" type="boolean">
+  Whether the follower's account is set to private. Example: `False`
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether the follower's account has a verified badge on Instagram. Example: `False`
+</ResponseField>
+
+<ResponseField name="has_anonymous_profile_picture" type="boolean">
+  Whether the follower is using the default (anonymous) Instagram profile picture. Example: `False`
+</ResponseField>
+
+<ResponseField name="latest_reel_media" type="bigint">
+  Unix timestamp of the follower's most recent story/reel media (0 if none). Example: `1776351955`
+</ResponseField>
+
+<ResponseField name="third_party_downloads_enabled" type="boolean">
+  Whether the follower has third-party downloads enabled on their account. Example: `True`
+</ResponseField>
+
+<ResponseField name="functions" type="json">
+  Additional enrichment functions enabled for this record. Example: `{}`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"profile_url": "https://www.instagram.com/kholiq__off/", "username": "kholiq__off", "full_name": "Abduxoliqjon", "profile_pic_url": "https://instagram.ftas5-1.fna.fbcdn.net/v/t51.82787-19/658962059_18050684966719677_5091061884162648088_n.jpg", "profile_id": 51385255676, "fbid": 17841451590283156, "is_private": false, "is_verified": false, "has_anonymous_profile_picture": false, "latest_reel_media": 1776351955}]}
+```

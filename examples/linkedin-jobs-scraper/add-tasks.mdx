@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your LinkedIn Jobs Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **LinkedIn Jobs Scraper** squid.
+
+<Note>Crawler ID: `b5a5fc71ba325dc507bc302e02327d9b`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  A LinkedIn jobs search URL, or a link to a single job posting. **How to get one:** open a private browsing window, go to https://www.linkedin.com/jobs, type your job title and location, apply any filters you want, then copy the URL from the address bar. The filters below still apply on top of the URL for anything the URL itself does not already set. Example: `https://www.linkedin.com/jobs/search?keywords=Software%20Engineer&location=United%20States&f_TPR=r604800`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url": "https://www.linkedin.com/jobs/search?keywords=Software%20Engineer&location=United%20States&f_TPR=r604800"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "YOUR_SQUID_HASH",
+        "tasks": [
+            {"url": "https://www.linkedin.com/jobs/search?keywords=Software%20Engineer&location=United%20States&f_TPR=r604800"}
+        ],
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.linkedin.com/jobs/search?keywords=Software%20Engineer&location=United%20States&f_TPR=r604800"}, "object": "task"}]}
+```

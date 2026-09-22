@@ -171,7 +171,8 @@
             "pages": [
               "examples/contact-details/add-tasks",
               "examples/contact-details/update-settings",
-              "examples/contact-details/get-results"
+              "examples/contact-details/get-results",
+              "examples/contact-details/credit-cost"
             ]
           },
           {
@@ -179,7 +180,8 @@
             "pages": [
               "examples/facebook-ad-library-scraper/add-tasks",
               "examples/facebook-ad-library-scraper/update-settings",
-              "examples/facebook-ad-library-scraper/get-results"
+              "examples/facebook-ad-library-scraper/get-results",
+              "examples/facebook-ad-library-scraper/credit-cost"
             ]
           },
           {
@@ -223,7 +225,8 @@
             "pages": [
               "examples/facebook-comments-scraper/add-tasks",
               "examples/facebook-comments-scraper/update-settings",
-              "examples/facebook-comments-scraper/get-results"
+              "examples/facebook-comments-scraper/get-results",
+              "examples/facebook-comments-scraper/credit-cost"
             ]
           },
           {
@@ -240,7 +243,8 @@
             "pages": [
               "examples/glassdoor-jobs-scraper/add-tasks",
               "examples/glassdoor-jobs-scraper/update-settings",
-              "examples/glassdoor-jobs-scraper/get-results"
+              "examples/glassdoor-jobs-scraper/get-results",
+              "examples/glassdoor-jobs-scraper/credit-cost"
             ]
           },
           {
@@ -302,12 +306,21 @@
             ]
           },
           {
-            "group": "Instagram Post Comments Scraper",
+            "group": "Instagram Comments Scraper",
             "pages": [
-              "examples/instagram-post-comments-scraper/add-tasks",
-              "examples/instagram-post-comments-scraper/update-settings",
-              "examples/instagram-post-comments-scraper/get-results",
-              "examples/instagram-post-comments-scraper/credit-cost"
+              "examples/instagram-comments-scraper/add-tasks",
+              "examples/instagram-comments-scraper/update-settings",
+              "examples/instagram-comments-scraper/get-results",
+              "examples/instagram-comments-scraper/credit-cost"
+            ]
+          },
+          {
+            "group": "Instagram Followers Scraper",
+            "pages": [
+              "examples/instagram-followers-scraper/add-tasks",
+              "examples/instagram-followers-scraper/update-settings",
+              "examples/instagram-followers-scraper/get-results",
+              "examples/instagram-followers-scraper/credit-cost"
             ]
           },
           {
@@ -342,7 +355,8 @@
             "pages": [
               "examples/instagram-hashtags-scraper/add-tasks",
               "examples/instagram-hashtags-scraper/update-settings",
-              "examples/instagram-hashtags-scraper/get-results"
+              "examples/instagram-hashtags-scraper/get-results",
+              "examples/instagram-hashtags-scraper/credit-cost"
             ]
           },
           {
@@ -422,7 +436,8 @@
             "pages": [
               "examples/linkedin-company-employees-scraper/add-tasks",
               "examples/linkedin-company-employees-scraper/update-settings",
-              "examples/linkedin-company-employees-scraper/get-results"
+              "examples/linkedin-company-employees-scraper/get-results",
+              "examples/linkedin-company-employees-scraper/credit-cost"
             ]
           },
           {
@@ -430,7 +445,17 @@
             "pages": [
               "examples/linkedin-company/add-tasks",
               "examples/linkedin-company/update-settings",
-              "examples/linkedin-company/get-results"
+              "examples/linkedin-company/get-results",
+              "examples/linkedin-company/credit-cost"
+            ]
+          },
+          {
+            "group": "LinkedIn Jobs Scraper",
+            "pages": [
+              "examples/linkedin-jobs-scraper/add-tasks",
+              "examples/linkedin-jobs-scraper/update-settings",
+              "examples/linkedin-jobs-scraper/get-results",
+              "examples/linkedin-jobs-scraper/credit-cost"
             ]
           },
           {
@@ -483,7 +508,8 @@
             "pages": [
               "examples/naukri-jobs-scraper/add-tasks",
               "examples/naukri-jobs-scraper/update-settings",
-              "examples/naukri-jobs-scraper/get-results"
+              "examples/naukri-jobs-scraper/get-results",
+              "examples/naukri-jobs-scraper/credit-cost"
             ]
           },
           {
@@ -545,7 +571,8 @@
             "pages": [
               "examples/quora-scraper/add-tasks",
               "examples/quora-scraper/update-settings",
-              "examples/quora-scraper/get-results"
+              "examples/quora-scraper/get-results",
+              "examples/quora-scraper/credit-cost"
             ]
           },
           {
@@ -580,7 +607,8 @@
             "pages": [
               "examples/threads-scraper/add-tasks",
               "examples/threads-scraper/update-settings",
-              "examples/threads-scraper/get-results"
+              "examples/threads-scraper/get-results",
+              "examples/threads-scraper/credit-cost"
             ]
           },
           {
@@ -597,7 +625,8 @@
             "pages": [
               "examples/tiktok-profile-scraper/add-tasks",
               "examples/tiktok-profile-scraper/update-settings",
-              "examples/tiktok-profile-scraper/get-results"
+              "examples/tiktok-profile-scraper/get-results",
+              "examples/tiktok-profile-scraper/credit-cost"
             ]
           },
           {
@@ -607,6 +636,15 @@
               "examples/tiktok-comments-scraper/update-settings",
               "examples/tiktok-comments-scraper/get-results",
               "examples/tiktok-comments-scraper/credit-cost"
+            ]
+          },
+          {
+            "group": "TikTok Hashtag Scraper",
+            "pages": [
+              "examples/tiktok-hashtag-scraper/add-tasks",
+              "examples/tiktok-hashtag-scraper/update-settings",
+              "examples/tiktok-hashtag-scraper/get-results",
+              "examples/tiktok-hashtag-scraper/credit-cost"
             ]
           },
           {
@@ -650,7 +688,8 @@
             "pages": [
               "examples/upwork-jobs-scraper/add-tasks",
               "examples/upwork-jobs-scraper/update-settings",
-              "examples/upwork-jobs-scraper/get-results"
+              "examples/upwork-jobs-scraper/get-results",
+              "examples/upwork-jobs-scraper/credit-cost"
             ]
           },
           {
@@ -703,7 +742,8 @@
             "pages": [
               "examples/yellow-pages-companies-search/add-tasks",
               "examples/yellow-pages-companies-search/update-settings",
-              "examples/yellow-pages-companies-search/get-results"
+              "examples/yellow-pages-companies-search/get-results",
+              "examples/yellow-pages-companies-search/credit-cost"
             ]
           },
           {
@@ -743,11 +783,21 @@
             ]
           },
           {
+            "group": "YouTube Search Scraper",
+            "pages": [
+              "examples/youtube-search-scraper/add-tasks",
+              "examples/youtube-search-scraper/update-settings",
+              "examples/youtube-search-scraper/get-results",
+              "examples/youtube-search-scraper/credit-cost"
+            ]
+          },
+          {
             "group": "YouTube Transcript Scraper",
             "pages": [
               "examples/youtube-transcript-scraper/add-tasks",
               "examples/youtube-transcript-scraper/update-settings",
-              "examples/youtube-transcript-scraper/get-results"
+              "examples/youtube-transcript-scraper/get-results",
+              "examples/youtube-transcript-scraper/credit-cost"
             ]
           },
           {
@@ -755,7 +805,8 @@
             "pages": [
               "examples/zillow-property-listings-scraper/add-tasks",
               "examples/zillow-property-listings-scraper/update-settings",
-              "examples/zillow-property-listings-scraper/get-results"
+              "examples/zillow-property-listings-scraper/get-results",
+              "examples/zillow-property-listings-scraper/credit-cost"
             ]
           }
         ]
@@ -786,6 +837,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-09-22",
               "changelog/2026-09-16",
               "changelog/2026-09-15",
               "changelog/2026-09-08",

@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your YouTube Search Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **YouTube Search Scraper** squid.
+
+<Note>Crawler ID: `2bfd28f2e9d6012d6d557072fda474da`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url/keyword" type="string" required>
+  A YouTube video URL, a YouTube channel URL (@handle, /c/Name, /channel/UC..., /user/Name, or a bare custom URL -- optionally with a /videos, /shorts, /streams, or /playlists suffix to list that tab instead of the channel's profile), a hashtag URL, a playlist URL, a YouTube search-results URL, or just plain search-query text. Anything not recognized as a supported YouTube URL is searched verbatim, exactly like typing it into YouTube's search bar (this deliberately includes non-YouTube URLs, e.g. "google.com" is searched as text, not rejected). Example: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url/keyword": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "YOUR_SQUID_HASH",
+        "tasks": [
+            {"url/keyword": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}
+        ],
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url/keyword": "https://www.youtube.com/watch?v=dQw4w9WgXcQ"}, "object": "task"}]}
+```

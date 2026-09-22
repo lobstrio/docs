@@ -1,0 +1,83 @@
+---
+title: "Update Settings"
+description: "Configure LinkedIn Jobs Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **LinkedIn Jobs Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| date_posted | string | `Any time` | Only return jobs posted within this time window. Applied on top of your URL, unless the URL already carries a date filter. One of: `Any time`, `Past month`, `Past week`, `Past 24 hours`. |
+| job_type | string | `Any` | Filter by employment type. Applied on top of your URL. NB: LinkedIn's new AI search treats this as search intent (like typing it in the search box), so close matches may occasionally appear. One of: `Any`, `Full-time`, `Part-time`, `Contract`, `Temporary`, `Internship`, `Volunteer`, `Other`. |
+| experience_level | string | `Any` | Filter by required experience level. Applied on top of your URL. NB: LinkedIn's new AI search treats this as search intent (like typing it in the search box), so close matches may occasionally appear. One of: `Any`, `Internship`, `Entry level`, `Associate`, `Mid-Senior level`, `Director`, `Executive`. |
+| workplace_type | string | `Any` | Filter by workplace arrangement. Applied on top of your URL. NB: LinkedIn's new AI search treats this as search intent (like typing it in the search box), so close matches may occasionally appear. One of: `Any`, `On-site`, `Remote`, `Hybrid`. |
+| easy_apply | boolean | false | Only return jobs that can be applied to directly on LinkedIn. Applied on top of your URL, unless the URL already carries this filter. |
+| under_10_applicants | boolean | false | Only return jobs with fewer than 10 applicants. Applied on top of your URL, unless the URL already carries this filter. |
+| distance | string | `Any distance` | Maximum search radius around the location in the URL. Applied unless the URL already carries a distance. One of: `Any distance`, `5 miles`, `10 miles`, `25 miles`, `50 miles`, `100 miles`. |
+| sort_by | string | `Relevance` | How results are ordered. `Most recent` sorts by listing time. Applied unless the URL already carries a sort. One of: `Relevance`, `Most recent`. |
+| exclude_job_titles | string | — | Comma-separated words. Jobs whose title contains any of them are skipped before collection, so they never consume credits (e.g. `senior, manager, director`). |
+| exclude_companies | string | — | Comma-separated company names. Jobs posted by these companies are skipped before collection, so they never consume credits (e.g. `Randstad, Adecco`). |
+| max_results | int | `1000` | Max number of jobs to scrape per search. NB: LinkedIn displays up to 1,000 jobs per search URL, no more. To collect more, split your search by location or keyword. |
+| max_unique_results_per_run | int | — | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
+| fetch_since | fetch_since | — | Only collect jobs posted after this threshold (based on `posted_at`) — applied directly in the LinkedIn search, so filtered-out jobs cost nothing. Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM:SS). NB: LinkedIn exposes posting dates with daily granularity. |
+| fetch_since_timezone | string | — | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values. |
+| job_details | boolean | true | Visit each job posting page to collect the full description, structured salary, seniority, industries, recruiter and apply link. Disable for faster, listing-only runs. |
+| company_details | boolean | false | Visit each hiring company's LinkedIn page to collect website, industry, headcount, followers, founding year, headquarters and specialties. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "date_posted": "Past week",
+    "job_type": "Full-time",
+    "experience_level": "Mid-Senior level",
+    "workplace_type": "Remote",
+    "max_results": 500,
+    "job_details": true
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "date_posted": "Past week",
+        "job_type": "Full-time",
+        "experience_level": "Mid-Senior level",
+        "workplace_type": "Remote",
+        "max_results": 500,
+        "job_details": True,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"date_posted": "Past week", "job_type": "Full-time", "experience_level": "Mid-Senior level", "workplace_type": "Remote", "max_results": 500, "job_details": true}}
+```

@@ -1,0 +1,219 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from YouTube Search Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **YouTube Search Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Export Results
+
+<ResponseField name="result_type" type="string">
+  What this row represents: 'video', 'channel', 'short', 'stream', or 'playlist'. Example: `video`
+</ResponseField>
+
+<ResponseField name="content_id" type="string">
+  YouTube's own identifier for this video, channel, or playlist -- unique on its own since video/channel/playlist id formats never collide. Example: `dQw4w9WgXcQ`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Video title, or channel display name for a channel row. Example: `Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the video or channel. Example: `https://www.youtube.com/watch?v=dQw4w9WgXcQ`
+</ResponseField>
+
+<ResponseField name="thumbnail_url" type="string">
+  Video thumbnail, or channel avatar for a channel row. Example: `https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full video description, or full channel About text for a channel row. Example: `The official video for “Never Gonna Give You Up” by Rick Astley.`
+</ResponseField>
+
+<ResponseField name="hashtags" type="json">
+  Hashtags found on the video. Empty for a channel row or a search-listing video row (only populated when the video itself was fetched directly). Example: `["#RickAstley", "#NeverGonnaGiveYouUp"]`
+</ResponseField>
+
+<ResponseField name="published_at" type="datetime">
+  Exact publish date. Only populated when the video itself was fetched directly -- a search-listing row only has published_time_text (see below). Example: `2009-10-24T23:57:33-07:00`
+</ResponseField>
+
+<ResponseField name="published_time_text" type="string">
+  Approximate, relative publish time as shown on a search-listing row. Only populated for search-listing video rows. Example: `14 years ago`
+</ResponseField>
+
+<ResponseField name="duration_seconds" type="integer">
+  Exact video duration in seconds. Only populated when the video itself was fetched directly. Example: `213`
+</ResponseField>
+
+<ResponseField name="duration_text" type="string">
+  Video duration as shown on a search-listing row (e.g. "3:32"). Only populated for search-listing video rows. Example: `3:32`
+</ResponseField>
+
+<ResponseField name="view_count" type="bigint">
+  Exact view count when the video was fetched directly; parsed from listing text otherwise. bigint -- some videos already exceed the ~2.147B int32 range. Example: `1805080053`
+</ResponseField>
+
+<ResponseField name="view_count_text" type="string">
+  View count as shown on a search-listing row. Only populated for search-listing video rows. Example: `48,467,121 views`
+</ResponseField>
+
+<ResponseField name="like_count" type="bigint">
+  Exact like count. Only populated when the video itself was fetched directly -- not available on a search-listing row at all. bigint -- some videos already exceed the ~2.147B int32 range. Example: `19337903`
+</ResponseField>
+
+<ResponseField name="comment_count_text" type="string">
+  Approximate comment count text. YouTube exposes no exact comment count anywhere. Only populated when the video itself was fetched directly. Example: `2.4M`
+</ResponseField>
+
+<ResponseField name="channel_id" type="string">
+  Channel identifier -- the video's channel, or the channel itself for a channel row. Example: `UCuAXFkgsw1L7xaCfnd5JJOw`
+</ResponseField>
+
+<ResponseField name="channel_name" type="string">
+  Channel display name. Example: `Rick Astley`
+</ResponseField>
+
+<ResponseField name="channel_url" type="string">
+  Direct URL to the channel. Example: `https://www.youtube.com/@RickAstleyYT`
+</ResponseField>
+
+<ResponseField name="channel_avatar_url" type="string">
+  Channel avatar. On a video row this is the small avatar shown next to the video; on a channel row it's the same as thumbnail_url. Example: `https://yt3.ggpht.com/example=s88-c-k-c0x00ffffff-no-rj`
+</ResponseField>
+
+<ResponseField name="channel_verified" type="boolean">
+  Whether the channel has YouTube's verified (or Official Artist Channel) badge. Example: `True`
+</ResponseField>
+
+<ResponseField name="channel_subscriber_count_text" type="string">
+  Approximate subscriber count text -- YouTube exposes no exact subscriber count anywhere. Example: `4.53M subscribers`
+</ResponseField>
+
+<ResponseField name="channel_banner_url" type="string">
+  Channel banner image. Only populated for a channel row. Example: `https://yt3.googleusercontent.com/example=w2560-fcrop64=1,00005a57ffffa5a8-k-c0xffffffff-no-nd-rj`
+</ResponseField>
+
+<ResponseField name="channel_handle" type="string">
+  Channel handle. Only populated for a channel row. Example: `@MrBeast`
+</ResponseField>
+
+<ResponseField name="channel_video_count_text" type="string">
+  Approximate total video count text. Only populated for a channel row. Example: `997 videos`
+</ResponseField>
+
+<ResponseField name="channel_country" type="string">
+  Channel's claimed country, from its About tab. Only populated for a channel row. Example: `United States`
+</ResponseField>
+
+<ResponseField name="channel_join_date" type="datetime">
+  Date the channel joined YouTube, from its About tab. Only populated for a channel row. Example: `2012-02-20`
+</ResponseField>
+
+<ResponseField name="channel_external_links" type="json">
+  External/social links listed on the channel's About tab. Only populated for a channel row. Example: `["https://www.instagram.com/mrbeast/", "https://x.com/MrBeast"]`
+</ResponseField>
+
+<ResponseField name="is_live" type="boolean">
+  Whether the video is currently a live broadcast. Example: `False`
+</ResponseField>
+
+<ResponseField name="is_upcoming" type="boolean">
+  Whether the video is an upcoming/scheduled premiere. Only populated when the video itself was fetched directly. Example: `False`
+</ResponseField>
+
+<ResponseField name="live_start_time" type="datetime">
+  Live broadcast start time, if is_live is true. Only populated when the video itself was fetched directly.
+</ResponseField>
+
+<ResponseField name="captions_available" type="boolean">
+  Whether the video has any captions/subtitles (auto-generated or user-added). Only populated when the video itself was fetched directly. Example: `True`
+</ResponseField>
+
+<ResponseField name="caption_languages" type="json">
+  Language codes of the video's available caption tracks. Only populated when the video itself was fetched directly. Example: `["en", "de-DE"]`
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Video category. Only populated when the video itself was fetched directly. Example: `Music`
+</ResponseField>
+
+<ResponseField name="is_family_safe" type="boolean">
+  Whether the video or channel is flagged family-safe by YouTube. Example: `True`
+</ResponseField>
+
+<ResponseField name="is_unlisted" type="boolean">
+  Whether the video is unlisted. Only populated when the video itself was fetched directly. Example: `False`
+</ResponseField>
+
+<ResponseField name="source_input" type="string">
+  The task's original input string (URL or search text) that produced this row. Example: `rick astley`
+</ResponseField>
+
+<ResponseField name="position" type="integer">
+  1-based position of this row within its task's results (always 1 for a video/channel URL task). Example: `1`
+</ResponseField>
+
+### Get Comments
+
+<ResponseField name="top_comments" type="json">
+  First page of top-level comments (up to 10). Only populated when Get Comments is enabled. Example: `[{"comment_id": "UgzABC123", "author": "@SomeUser", "author_channel_id": "UCabc123", "text": "This is amazing!", "published_time_text": "2 days ago", "vote_count": 214}]`
+</ResponseField>
+
+### Get Subtitles
+
+<ResponseField name="subtitles_language" type="string">
+  Language code of the caption track subtitles_text was fetched from. Only populated when Get Subtitles is enabled. Example: `en`
+</ResponseField>
+
+<ResponseField name="subtitles_text" type="string">
+  Transcript text of one caption track (see subtitles_language). Only populated when Get Subtitles is enabled, and empty if the video has no captions. Example: `[Music playing] Welcome back to the channel...`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"result_type": "video", "content_id": "dQw4w9WgXcQ", "title": "Rick Astley - Never Gonna Give You Up (Official Video) (4K Remaster)", "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ", "thumbnail_url": "https://i.ytimg.com/vi/dQw4w9WgXcQ/maxresdefault.jpg", "description": "The official video for \u201cNever Gonna Give You Up\u201d by Rick Astley.", "hashtags": ["#RickAstley", "#NeverGonnaGiveYouUp"], "published_at": "2009-10-24T23:57:33-07:00", "published_time_text": "14 years ago", "duration_seconds": 213}]}
+```

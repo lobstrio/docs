@@ -1,0 +1,84 @@
+---
+title: "Update Settings"
+description: "Configure YouTube Search Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **YouTube Search Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| max_unique_results_per_run | int | — | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. Only meaningful for a search/listing task -- a video or channel URL always returns exactly one row. |
+| max_results | integer | — | Maximum number of videos to collect for a single search task, paginating as needed. Leave empty to collect as many as YouTube returns. Only meaningful for a search/listing task -- a video or channel URL always returns exactly one row. |
+| type | string | — | Only for a search/plain-text task (ignored for a pasted search-results URL that already has its own filter, and for hashtag/playlist/channel-tab tasks). Restrict results to one content type. One of: `video`, `short`, `channel`, `playlist`, `movie`. |
+| upload_date | string | — | Only for a search/plain-text task. Restrict results to videos uploaded within this window. One of: `today`, `this_week`, `this_month`, `this_year`. |
+| duration | string | — | Only for a search/plain-text task. Restrict results by video length. One of: `under_4_minutes`, `4_to_20_minutes`, `over_20_minutes`. |
+| live | boolean | false | Only for a search/plain-text task. Restrict results to currently-live broadcasts. |
+| sort | string | `relevance` | Only for a search/plain-text task. YouTube's own search only offers these two today -- "upload date" and "rating" sort options some older tools reference no longer do anything. One of: `relevance`, `popularity`. |
+| subtitles | boolean | false | Only for a search/plain-text task. Restrict results to videos with subtitles or closed captions. |
+| hd | boolean | false | Only for a search/plain-text task. Restrict results to HD video. |
+| four_k | boolean | false | Only for a search/plain-text task. Restrict results to 4K video. |
+| hdr | boolean | false | Only for a search/plain-text task. Restrict results to HDR video. |
+| three_sixty | boolean | false | Only for a search/plain-text task. Restrict results to 360° video. |
+| vr180 | boolean | false | Only for a search/plain-text task. Restrict results to VR180 video. |
+| three_d | boolean | false | Only for a search/plain-text task. Restrict results to 3D video. |
+| creative_commons | boolean | false | Only for a search/plain-text task. Restrict results to Creative Commons-licensed video. |
+| enrich_results | boolean | false | For a search, hashtag, playlist, or channel-tab task: fetch each video/Short/stream directly too, filling in the fields a listing alone doesn't have (full description, hashtags, exact view/like counts, captions, ...). One extra request per result -- off by default to keep a listing task cheap. |
+| get_comments | boolean | false | Collect the first page of top-level comments (up to 10) for a video. Applies directly to a video-URL task, and to a search/hashtag/playlist/channel-tab task only when Enrich Results is also on (comments require the same per-video fetch enrichment already does). One extra request per video on top of that. |
+| get_subtitles | boolean | false | Download the transcript text of one caption track for a video. Applies directly to a video-URL task, and to a search/hashtag/playlist/channel-tab task's video/Short/stream items only when Enrich Results is also on. Each fetch needs a real browser session (seconds to minutes) -- fine for a handful of videos, genuinely slow across a large listing. Empty if the video has no captions. |
+| subtitle_language | string | — | Only used when Get Subtitles is on. YouTube's own language code for the caption track to download -- see the result's caption_languages field for what a given video actually offers. Left blank, whichever language the video's captions default to is used. If the requested language isn't available for a video, falls back to the default rather than failing. One of: `en`, `en-US`, `en-GB`, `en-CA`, `en-AU`, `en-IN`, `es`, `es-ES`, `es-419`, `es-US`, `fr`, `fr-FR`, `fr-CA`, `de`, `de-DE`, `de-AT`, `de-CH`, `it`, `it-IT`, `pt`, `pt-BR`, `pt-PT`, `nl`, `nl-NL`, `ru`, `ru-RU`, `ja`, `ja-JP`, `ko`, `ko-KR`, `zh-Hans`, `zh-Hant`, `zh-CN`, `zh-TW`, `zh-HK`, `ar`, `ar-SA`, `hi`, `hi-IN`, `bn`, `bn-IN`, `bn-BD`, `id`, `id-ID`, `vi`, `vi-VN`, `th`, `th-TH`, `tr`, `tr-TR`, `pl`, `pl-PL`, `sv`, `sv-SE`, `da`, `da-DK`, `no`, `nb`, `nn`, `fi`, `fi-FI`, `el`, `el-GR`, `he`, `he-IL`, `cs`, `cs-CZ`, `ro`, `ro-RO`, `hu`, `hu-HU`, `uk`, `uk-UA`, `bg`, `bg-BG`, `sk`, `sk-SK`, `hr`, `hr-HR`, `sr`, `sr-RS`, `sl`, `sl-SI`, `lt`, `lt-LT`, `lv`, `lv-LV`, `et`, `et-EE`, `fil`, `fil-PH`, `ms`, `ms-MY`, `sw`, `sw-KE`, `af`, `af-ZA`, `am`, `am-ET`, `gu`, `gu-IN`, `kn`, `kn-IN`, `ml`, `ml-IN`, `mr`, `mr-IN`, `ne`, `ne-NP`, `pa`, `pa-IN`, `si`, `si-LK`, `ta`, `ta-IN`, `te`, `te-IN`, `ur`, `ur-PK`, `zu`, `zu-ZA`. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "type": "video",
+    "upload_date": "this_month",
+    "duration": "4_to_20_minutes",
+    "sort": "popularity",
+    "max_results": 200
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "type": "video",
+        "upload_date": "this_month",
+        "duration": "4_to_20_minutes",
+        "sort": "popularity",
+        "max_results": 200,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"type": "video", "upload_date": "this_month", "duration": "4_to_20_minutes", "sort": "popularity", "max_results": 200}}
+```

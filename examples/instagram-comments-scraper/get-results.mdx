@@ -1,0 +1,133 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Instagram Comments Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Instagram Comments Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="comment_id" type="string">
+  Unique identifier for the Instagram comment. Example: `18397500988178795`
+</ResponseField>
+
+<ResponseField name="comment_url" type="string">
+  Direct URL to the comment on Instagram. Example: `https://www.instagram.com/p/DDIJAfeyemG/c/18397500988178795`
+</ResponseField>
+
+<ResponseField name="post_url" type="string">
+  URL of the Instagram post this comment belongs to. Example: `https://www.instagram.com/reel/DDIJAfeyemG`
+</ResponseField>
+
+<ResponseField name="text" type="string">
+  Full text content of the comment. Example: `I LOVE INSTAGRAM #instagram`
+</ResponseField>
+
+<ResponseField name="giphy_media_info" type="json">
+  Details of a Giphy GIF or sticker attached to the comment.
+</ResponseField>
+
+<ResponseField name="owner_username" type="string">
+  Instagram username of the comment author. Example: `mohsinjamindar07`
+</ResponseField>
+
+<ResponseField name="owner_id" type="string">
+  Unique Instagram identifier of the comment author. Example: `40564582835`
+</ResponseField>
+
+<ResponseField name="owner_profile_pic_url" type="string">
+  URL of the comment author's Instagram profile picture. Example: `https://scontent.cdninstagram.com/v/t51.2885-19/x.jpg`
+</ResponseField>
+
+<ResponseField name="owner_is_verified" type="boolean">
+  Whether the comment author has a verified badge on Instagram. Example: `False`
+</ResponseField>
+
+<ResponseField name="timestamp" type="datetime">
+  Timestamp of when the comment was posted. Example: `2026-02-15T06:27:58.000Z`
+</ResponseField>
+
+<ResponseField name="likes_count" type="integer">
+  Number of likes the comment received. Example: `0`
+</ResponseField>
+
+<ResponseField name="replies_count" type="integer">
+  Number of replies to this comment. Example: `0`
+</ResponseField>
+
+<ResponseField name="owner_profile_url" type="string">
+  URL of the comment author's Instagram profile. Example: `https://instagram.com/sai_jonov`
+</ResponseField>
+
+<ResponseField name="is_child_comment" type="boolean">
+  Whether this is a reply to another comment (nested comment). Example: `False`
+</ResponseField>
+
+<ResponseField name="parent_comment_id" type="string">
+  Unique identifier of the parent comment this is a reply to.
+</ResponseField>
+
+<ResponseField name="post_owner_username" type="string">
+  Username of the account that posted the post or reel. Example: `cristiano`
+</ResponseField>
+
+<ResponseField name="post_owner_id" type="string">
+  Instagram id of the account that posted the post or reel. Example: `173560420`
+</ResponseField>
+
+<ResponseField name="post_owner_full_name" type="string">
+  Display name of the account that posted the post or reel. Example: `Cristiano Ronaldo`
+</ResponseField>
+
+<ResponseField name="post_owner_is_verified" type="boolean">
+  Whether the account that posted has a verified badge. Example: `True`
+</ResponseField>
+
+<ResponseField name="is_edited" type="boolean">
+  Whether the comment was edited after posting. Example: `False`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"comment_id": "18397500988178795", "comment_url": "https://www.instagram.com/p/DDIJAfeyemG/c/18397500988178795", "post_url": "https://www.instagram.com/reel/DDIJAfeyemG", "text": "I LOVE INSTAGRAM #instagram", "giphy_media_info": null, "owner_username": "mohsinjamindar07", "owner_id": "40564582835", "owner_profile_pic_url": "https://scontent.cdninstagram.com/v/t51.2885-19/x.jpg", "owner_is_verified": false, "timestamp": "2026-02-15T06:27:58.000Z"}]}
+```

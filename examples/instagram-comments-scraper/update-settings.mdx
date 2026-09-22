@@ -1,0 +1,67 @@
+---
+title: "Update Settings"
+description: "Configure Instagram Comments Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Instagram Comments Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| max_unique_results_per_run | int | — | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
+| max_results | integer | — | Total comments the crawler will collect per post. |
+| sort_order | string | `recent` | Sort comments by most recent or most popular. `recent` paginates the full comment thread; `popular` returns only the top comments Instagram surfaces publicly. One of: `recent`, `popular`. |
+| fetch_since | fetch_since | — | Stop scraping when comments older than this threshold are reached (based on `timestamp`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM:SS). If not provided, no time filtering is applied. |
+| fetch_since_timezone | string | — | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values. |
+| include_child_comments | boolean | false | Also collect replies to comments. Each reply counts as a separate result. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sort_order": "popular",
+    "include_child_comments": true,
+    "max_results": 200
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "sort_order": "popular",
+        "include_child_comments": True,
+        "max_results": 200,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"sort_order": "popular", "include_child_comments": true, "max_results": 200}}
+```
