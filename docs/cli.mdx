@@ -53,6 +53,10 @@ lobstr go google-search-scraper "pizza delivery" --key keyword
 lobstr go google-maps-leads-scraper url1 url2 \
   --param max_results=200 --concurrency 3
 
+# With add-ons (extra credits)
+lobstr go youtube-channel-scraper "https://www.youtube.com/@YouTube" \
+  --function get_videos
+
 # Don't download, just kick off
 lobstr go twitter-profile-scraper @elonmusk --no-download
 
@@ -104,6 +108,7 @@ lobstr whoami
 | `squid ls` | List all squids in your account |
 | `squid show <id>` | Get squid details by ID |
 | `squid update <id> --param key=value` | Update squid settings or parameters |
+| `squid update <id> --function <name>` | Turn an add-on on (`<name>=false` turns it off). Repeatable; names from `crawlers params <crawler>`. Also on `go`. |
 | `squid update <id> --account <username or hash>` | Link a connected account to the squid, in addition to any it already has |
 | `squid update <id> --replace-accounts --account <username or hash>` | Set the squid's account list outright, detaching any account not passed |
 | `squid empty <id>` | Remove all tasks from a squid |
