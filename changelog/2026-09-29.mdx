@@ -1,0 +1,93 @@
+---
+title: "September 29, 2026"
+description: "Six scrapers newly documented, AutoScout24 gets 24 new fields, Yelp not-recommended reviews, Reddit filters that actually filter, and a week of reliability fixes"
+---
+
+<Update label="September 29, 2026" description="Six scrapers newly documented, AutoScout24 gets 24 new fields, Yelp not-recommended reviews, Reddit filters that actually filter, and a week of reliability fixes">
+
+## Now Documented
+
+Six scrapers that went public in the store last week had no API documentation. They now have full reference pages — task inputs, squid settings, result fields, and credit cost.
+
+- **[Pinterest Scraper](/examples/pinterest-scraper/add-tasks)** — export pins from a Pinterest keyword, search URL, board, profile or single pin, no account needed. 40+ fields per pin including engagement counts, board and pinner details, plus an optional Full Pin Details add-on.
+- **[Google Play Store Scraper](/examples/google-play-scraper/add-tasks)** — export any Play Store app listing and its reviews from an app URL, package id or search keyword. App metadata (developer, category, installs, rating breakdown, screenshots, changelog) plus reviews with the developer reply, no Google account needed.
+- **[LinkedIn Search Scraper](/examples/linkedin-search-scraper/add-tasks)** — export people, company and post search results from a LinkedIn search URL, using your own synced LinkedIn account. Optional Profile Details, Company Details and Post Engagement add-ons open each result for the full record.
+- **[Similarweb Scraper](/examples/similarweb-scraper/add-tasks)** — export the full Similarweb profile of any domain or ranking: traffic, ranks with 3-month history, keywords, audience, referrals, technologies, competitors and company firmographics. Optional add-ons bring exact monthly visit counts, AI-assistant referral traffic and the full metrics of the 10 closest competitors.
+- **[Crunchbase Companies Scraper](/examples/crunchbase-companies-scraper/add-tasks)** — export company profiles from a Crunchbase company URL or search: description, industries, headquarters, employee range, founders, investors, funding rounds, acquisitions, growth and heat scores, plus the technology and intent data Crunchbase publishes. No account, no cookies.
+- **[Leboncoin Messages Reader](/examples/leboncoin-messages-reader/add-tasks)** — read the messages in your Leboncoin inbox (whole inbox or one conversation), one row per message, with the conversation, listing and other party on every row. Pairs with the Leboncoin Auto Message Sender to close the send → reply loop on the same `annonce_id`.
+
+## New
+
+**AutoScout24 Listings Scraper — 24 new fields**
+
+The AutoScout24 Listings Scraper now exposes AutoScout24's own price intelligence (rating band 0–6, label, VAT-deductible flag, full price bands), the dealer's identity and reputation (id, profile URL, "customer since" year, rating, review count, recommend share), the vehicle's exact GPS coordinates, CO2 emissions read from AutoScout24's structured field (with a flag that surfaces estimates and self-contradicting zeros), the publication timestamp, equipment split into AutoScout24's own four categories (Safety, Comfort, Media, Extras), a second seller phone number and its line type, and three tri-state condition flags (accident-damaged, full service history, non-smoking) plus cabin-cleanliness. See the [AutoScout24 result fields](/examples/autoscout24-listings-scraper/get-results) for the full list.
+
+**Yelp Reviews Scraper — collect the "not currently recommended" reviews**
+
+A new `collect_not_recommended_reviews` toggle collects the reviews Yelp hides under "reviews that are not currently recommended" at the bottom of the biz page. Every row now also carries `is_recommended` — `false` on those hidden reviews, `true` on regular ones. Yelp shows fewer details on hidden rows (no votes, photos, language or member-since), and `sort` does not apply to them. See [update-settings](/examples/yelp-reviews-scraper/update-settings) and [get-results](/examples/yelp-reviews-scraper/get-results).
+
+**Run estimates now line-item email verification and paid filters**
+
+`estimate_run` (the "Ready to launch?" recap and the API's `/squid/{hash}/estimate`) used to omit the email-verification cost and the paid result filters on the Google Maps Leads Scraper, so the displayed cost read lower than what was actually billed. The estimate now line-items email verification on every row and the paid filters ("exclude listings without email", "collect business details") separately, so the announced total matches what the run ends up costing.
+
+**MCP — open source, and `search_scrapers` finds partial matches**
+
+- The lobstr.io MCP server is now a public GitHub repository — [lobstrio/lobstr-mcp](https://github.com/lobstrio/lobstr-mcp), Apache-2.0, the same licence as the SDK and CLI. Production and the Test Server deploy from it.
+- `search_scrapers` used to require every word of the query to appear in a scraper's name, description or slug, so "reddit search posts comments" returned zero and agents wrongly concluded no Reddit scraper existed. `results` still returns exact matches only; a new `similar` key returns up to 5 near-miss scrapers with the `matched` / `missing` words for each, ranked by relevance.
+- `run_scraper` no longer refuses admin runs the public API would accept — the client-side credit-affordability check has been dropped; the API stays the authority. Explanatory prose has also been trimmed on refusals, since the structured fields already carry the same information.
+
+**Crawler attributes now describe JSON sub-fields**
+
+`GET /v1/crawlers/{hash}/attributes` used to return a single opaque line per JSON column (e.g. `top_comments`, `videos`, `equipment_safety`). It now expands the described sub-fields where the crawler publishes them, so agents and SDKs can see the shape of each JSON column without a live run. Applies to the YouTube Channel Scraper's collector columns and to every new scraper whose lobstr.json declares sub-fields.
+
+## Improved
+
+**Reddit Scraper — filters that filter**
+
+- `post_type` used to advertise `link`, `self`, `image`, `video` — values Reddit's search does not actually accept. The scraper silently returned every post, whatever the filter said. The allowed set is now `any`, `image`, `video`, wired to Reddit's real media tabs, and the docs match. See [update-settings](/examples/reddit-scraper/update-settings).
+- Comment search (`search_comments: true`, or any task URL carrying `type=comments`) used to return 0 rows because Reddit stopped emitting the `data-testid="search-sdui-comment"` selector the scraper looked for. The selector has been updated and comment searches return rows again.
+- Comment rows now report the comment's own URL and score, not the parent post's.
+- Search continuation pages that answer 429 no longer crash the run — the run pauses and resumes on a fresh proxy instead.
+
+**Instagram Search & Hashtags Scraper — real web keyword search**
+
+The hashtag scraper now hits the same GraphQL keyword search Instagram's own web UI calls (Chrome 153 headers and fingerprint), which Instagram serves cleanly. The web grid does not carry 16 of the fields the older mobile-API path did (`product_type`, `reshare_count`, `coauthors`, `tagged_users`, `music`, `location_id`, `location_name`, `location_lat`, `location_lng`, and 7 others) — they have been removed from the result schema. The duplicate-stop rule was also tightened: pagination now requires 10 consecutive pages with posts but no new results before stopping, up from a single page. Older-than filter and the Newer/Older date pickers were also brought into line in the squid form.
+
+**YouTube Search Scraper — reliability**
+
+- Tasks created since 2026-09-22 returned 0 rows on every input after the task-input rename. The renamed input is now read correctly, old `url` tasks keep working, and an empty input is refused up front with a `wrong_input` error instead of a silent 0-row success.
+- A broken connection while saving a page (`IncompleteRead`, `ChunkedEncodingError`) no longer ends the run in ERROR. Network errors, 429s and 5xx switch to a fresh proxy, YouTube is checked before pausing, both YouTube page layouts are parsed, and dates are returned in UTC.
+
+**Yellow Pages US Scraper — Safari fingerprint**
+
+Yellow Pages runs used to pause for hours on Cloudflare "Attention Required!" 403 walls, retrying the same profile every 30 minutes with zero results. The scraper now presents a Safari TLS fingerprint (Chrome and Firefox got hard-blocked and are now on the blocklist), with a retry budget sized on the measured pass rate, an overall deadline per page, and a circuit breaker on the detail step.
+
+**Google Maps Leads Scraper — email extraction and verification**
+
+- Extracted emails no longer keep a stray `20` from a URL-encoded space — the address comes out clean (`hello@…` instead of `20hello@…`), so verification and contact use the real address.
+- Non-business addresses picked up from a website's source code (font licences, site-builder credit lines, template author emails) are now filtered out of the results. A 100-listing Austin plumbers benchmark dropped its noise rate from 17% to zero without missing any real business email.
+- Email verification verdicts stay with their own address instead of crossing between two addresses of the same listing.
+- Finished runs are frozen: each run keeps a snapshot of its email fields at completion time, so a later run touching the same business can never rewrite the verdicts of a run already marked done.
+- Verification credits are no longer billed on reused verdicts (a re-run that reuses every verdict from a previous run now costs 0 verification credits, down from 1 per address).
+- The `description` field is filled again — Google Maps moved it to a new place-data slot; the scraper reads it there, and back-fills it on repeat rows that skip the details step. Fixes the empty-description bug reported on the "Collect Business Details" option.
+- Run estimates were calibrated from production so the announced time and credit figures match real runs.
+
+**Squid forms — labels, tooltips, and where each setting lives**
+
+Nine scrapers had their squid form audited. Notable changes:
+
+- **Crunchbase Companies Scraper** — Industry and Location now accept plain names (resolved via Crunchbase's own autocomplete); the search filters were moved to Basic settings.
+- **Pinterest Scraper** — Max Results moved out of Advanced settings; keyword-first URL tooltip.
+- **Threads Scraper** — a single word is now searched as a keyword (profiles are reached via the profile link or `@handle`); Max Results moved to Basic.
+- **Yellow Pages US Scraper** — Search URL, Keyword and Location tooltips now name each other; filters and "Collect Additional Details" moved to Basic.
+- **Instagram Search & Hashtags Scraper** — Older than uses the same date picker as Newer than and sits next to it; Max Results Per Input rewording.
+- **Google Play Store Scraper** — form labels, tooltips and the country/reviews claim rewritten.
+
+## Fixed
+
+- **SeLoger Search Export** — a 502 on `classifiedList` pagination no longer hammers the same dead proxy in a retry loop.
+- **AutoScout24 Listings Scraper** — the `fetch_since` date filter actually limits results now; a transient dealer-profile failure no longer poisons that dealer for the whole run; a detail page without a price rating no longer blanks the one carried by the search card; search pages are paced ~3s apart instead of ~13s; runs no longer crash when the total page count is unknown (missing `has_next_page`).
+- **TikTok Hashtag Scraper** — a transient "no items returned" from the bridge task now retries instead of failing the whole task.
+- **YouTube Channel Scraper** — the API attributes endpoint now describes the sub-fields of the `videos`, `shorts`, `streams`, `playlists` and `comments` JSON columns.
+
+</Update>
