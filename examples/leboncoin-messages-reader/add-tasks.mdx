@@ -1,0 +1,80 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Leboncoin Messages Reader squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
+Add Leboncoin messaging URLs to your **Leboncoin Messages Reader** squid.
+
+<AccountSyncRequired platform="Leboncoin" />
+
+<Note>Crawler ID: `dd8d063c6af13ff80ea5da2d03976f31`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  The Leboncoin messaging URL to read. Use `https://www.leboncoin.fr/messages` to read the whole inbox of the connected account, or `https://www.leboncoin.fr/messages/id/{conversation_id}` to read one conversation only.
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url": "https://www.leboncoin.fr/messages"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "YOUR_SQUID_HASH",
+        "tasks": [
+            {"url": "https://www.leboncoin.fr/messages"}
+        ],
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.leboncoin.fr/messages"}, "object": "task"}]}
+```

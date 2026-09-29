@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Crunchbase Companies Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add company URLs or company search URLs to your **Crunchbase Companies Scraper** squid.
+
+<Note>Crawler ID: `f8209af58c212db5d8468d068e09ce02`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  A Crunchbase company URL (`https://www.crunchbase.com/organization/github`) for one company, or a company search URL (`https://www.crunchbase.com/discover/organization.companies`) to collect a list. Logged out, Crunchbase serves at most 15 companies per search, so use the search filters in the Settings tab to aim each search, or feed one company URL per task to collect companies in volume. Filters written inside a pasted search URL are not applied — Crunchbase does not serve them to a logged-out session, so set the search filters below (`industry`, `location`, `employee_count`, `founded_year_min`/`_max`, `funding_stage`, `operating_status`, `company_type`, `ipo_status`) instead.
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url": "https://www.crunchbase.com/organization/github"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "YOUR_SQUID_HASH",
+        "tasks": [
+            {"url": "https://www.crunchbase.com/organization/github"}
+        ],
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.crunchbase.com/organization/github"}, "object": "task"}]}
+```

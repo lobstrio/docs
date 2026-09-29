@@ -1,0 +1,433 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Similarweb Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Similarweb Scraper** runs. One row per website. Add-on fields are only populated when the matching add-on (`company_details`, `ai_traffic`, `competitor_details`) is enabled.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Export Websites
+
+<ResponseField name="domain_name" type="string">
+  Domain the row describes, as Similarweb indexes it. Example: `github.com`
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  Similarweb page this row was collected from.
+</ResponseField>
+
+<ResponseField name="scraped_at" type="datetime">
+  UTC timestamp of the collection.
+</ResponseField>
+
+<ResponseField name="snapshot_date" type="datetime">
+  Month Similarweb's snapshot covers. Similarweb publishes one snapshot per month.
+</ResponseField>
+
+<ResponseField name="has_traffic_data" type="boolean">
+  False when Similarweb tracks no traffic for this domain: the row is kept but every metric is empty.
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Website description as published by Similarweb.
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Similarweb category the website is ranked in.
+</ResponseField>
+
+<ResponseField name="icon" type="string">
+  Favicon of the website.
+</ResponseField>
+
+<ResponseField name="preview_desktop" type="string">
+  Desktop screenshot of the website.
+</ResponseField>
+
+<ResponseField name="preview_mobile" type="string">
+  Mobile screenshot of the website.
+</ResponseField>
+
+<ResponseField name="global_rank" type="integer">
+  Worldwide traffic rank, all categories.
+</ResponseField>
+
+<ResponseField name="global_rank_change" type="integer">
+  Change of the global rank versus the previous month.
+</ResponseField>
+
+<ResponseField name="global_rank_previous" type="integer">
+  Global rank of the previous month.
+</ResponseField>
+
+<ResponseField name="global_rank_history" type="json">
+  Global rank of the last 3 months.
+</ResponseField>
+
+<ResponseField name="country_code" type="string">
+  Country the country rank refers to (the website's leading country).
+</ResponseField>
+
+<ResponseField name="country_rank" type="integer">
+  Traffic rank inside the leading country.
+</ResponseField>
+
+<ResponseField name="country_rank_change" type="integer">
+  Change of the country rank versus the previous month.
+</ResponseField>
+
+<ResponseField name="country_rank_previous" type="integer">
+  Country rank of the previous month.
+</ResponseField>
+
+<ResponseField name="country_rank_history" type="json">
+  Country rank of the last 3 months.
+</ResponseField>
+
+<ResponseField name="category_rank" type="integer">
+  Traffic rank inside the website's category.
+</ResponseField>
+
+<ResponseField name="category_rank_change" type="integer">
+  Change of the category rank versus the previous month.
+</ResponseField>
+
+<ResponseField name="category_rank_previous" type="integer">
+  Category rank of the previous month.
+</ResponseField>
+
+<ResponseField name="category_rank_history" type="json">
+  Category rank of the last 3 months.
+</ResponseField>
+
+<ResponseField name="visits" type="float">
+  Estimated visits over the snapshot month.
+</ResponseField>
+
+<ResponseField name="visits_change" type="float">
+  Change of the monthly visits versus the previous month.
+</ResponseField>
+
+<ResponseField name="bounce_rate" type="float">
+  Share of visits that bounce, between 0 and 1.
+</ResponseField>
+
+<ResponseField name="pages_per_visit" type="float">
+  Average number of pages seen per visit.
+</ResponseField>
+
+<ResponseField name="avg_visit_duration" type="integer">
+  Average visit duration in seconds.
+</ResponseField>
+
+<ResponseField name="avg_visit_duration_formatted" type="string">
+  Average visit duration as published (`HH:MM:SS`).
+</ResponseField>
+
+<ResponseField name="traffic_history" type="json">
+  3-month traffic trend. Similarweb publishes it as a percentage of the chart scale, not as visit counts.
+</ResponseField>
+
+<ResponseField name="graph_visits_grade" type="string">
+  Scale of the traffic chart Similarweb draws for this website. Example: `<1B`
+</ResponseField>
+
+<ResponseField name="traffic_sources" type="json">
+  The 10 marketing channels with their ranking. Similarweb only discloses the share of the leading channel to logged-out callers: the other channels carry rank only and a null percentage.
+</ResponseField>
+
+<ResponseField name="organic_search_share" type="float">
+  Share of search traffic that is organic.
+</ResponseField>
+
+<ResponseField name="paid_search_share" type="float">
+  Share of search traffic that is paid.
+</ResponseField>
+
+<ResponseField name="keywords_total_count" type="bigint">
+  Number of keywords the website ranks on.
+</ResponseField>
+
+<ResponseField name="top_keywords" type="json">
+  5 top keywords with their cost per click. Volume and estimated value are paywalled by Similarweb for logged-out callers and always come back empty.
+</ResponseField>
+
+<ResponseField name="top_countries" type="json">
+  5 countries sending the most traffic.
+</ResponseField>
+
+<ResponseField name="countries_total_count" type="integer">
+  Number of countries sending traffic to the website.
+</ResponseField>
+
+<ResponseField name="age_distribution" type="json">
+  Age brackets of the audience with their share.
+</ResponseField>
+
+<ResponseField name="gender_male" type="float">
+  Share of male visitors.
+</ResponseField>
+
+<ResponseField name="gender_female" type="float">
+  Share of female visitors.
+</ResponseField>
+
+<ResponseField name="top_social_networks" type="json">
+  5 social networks sending the most traffic.
+</ResponseField>
+
+<ResponseField name="social_networks_total_count" type="integer">
+  Number of social networks sending traffic.
+</ResponseField>
+
+<ResponseField name="top_referral_sites" type="json">
+  6 websites sending the most referral traffic. Similarweb hides the domain of the top rows from logged-out callers (`is_locked`), the share is always given.
+</ResponseField>
+
+<ResponseField name="referral_sites_total_count" type="integer">
+  Number of websites sending referral traffic.
+</ResponseField>
+
+<ResponseField name="top_incoming_categories" type="json">
+  Categories the referral traffic comes from.
+</ResponseField>
+
+<ResponseField name="top_outgoing_sites" type="json">
+  6 websites receiving the most outgoing traffic.
+</ResponseField>
+
+<ResponseField name="outgoing_sites_total_count" type="integer">
+  Number of websites receiving outgoing traffic.
+</ResponseField>
+
+<ResponseField name="top_outgoing_categories" type="json">
+  Categories the outgoing traffic goes to.
+</ResponseField>
+
+<ResponseField name="top_ads_sites" type="json">
+  5 websites sending the most display-ads traffic.
+</ResponseField>
+
+<ResponseField name="ads_sites_total_count" type="integer">
+  Number of websites sending display-ads traffic.
+</ResponseField>
+
+<ResponseField name="ads_networks_total_count" type="integer">
+  Number of ad networks used.
+</ResponseField>
+
+<ResponseField name="technologies" type="json">
+  Leading technology per technology category.
+</ResponseField>
+
+<ResponseField name="technologies_total_count" type="integer">
+  Number of technologies detected on the website.
+</ResponseField>
+
+<ResponseField name="top_interested_categories" type="json">
+  Categories this audience is also interested in.
+</ResponseField>
+
+<ResponseField name="top_interested_topics" type="json">
+  Topics this audience is also interested in.
+</ResponseField>
+
+<ResponseField name="top_interested_websites" type="json">
+  Websites this audience also visits.
+</ResponseField>
+
+<ResponseField name="similar_competitors" type="json">
+  10 closest competitors with their affinity score.
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Company operating the website.
+</ResponseField>
+
+<ResponseField name="company_year_founded" type="integer">
+  Year the company was founded.
+</ResponseField>
+
+<ResponseField name="company_employees_min" type="integer">
+  Lower bound of the employee range.
+</ResponseField>
+
+<ResponseField name="company_employees_max" type="integer">
+  Upper bound of the employee range.
+</ResponseField>
+
+<ResponseField name="company_revenue_min" type="bigint">
+  Lower bound of the yearly revenue range.
+</ResponseField>
+
+<ResponseField name="company_revenue_max" type="bigint">
+  Upper bound of the yearly revenue range.
+</ResponseField>
+
+<ResponseField name="company_revenue_currency" type="string">
+  Currency of the revenue range.
+</ResponseField>
+
+<ResponseField name="company_headquarter_city" type="string">
+  City of the company headquarters.
+</ResponseField>
+
+<ResponseField name="company_headquarter_country_code" type="string">
+  Country of the company headquarters.
+</ResponseField>
+
+<ResponseField name="company_headquarter_state_code" type="integer">
+  Similarweb internal code of the headquarters state.
+</ResponseField>
+
+<ResponseField name="company_category" type="string">
+  Category of the company.
+</ResponseField>
+
+<ResponseField name="company_parent_domain" type="string">
+  Parent domain of the company.
+</ResponseField>
+
+<ResponseField name="is_data_from_ga" type="boolean">
+  True when the figures come from a Google Analytics account connected by the website owner.
+</ResponseField>
+
+<ResponseField name="is_invalid_traffic_data" type="boolean">
+  True when Similarweb flags the traffic data as invalid.
+</ResponseField>
+
+### Company Details
+
+<ResponseField name="monthly_visits" type="json">
+  Exact monthly visit counts of the last 3 months.
+</ResponseField>
+
+<ResponseField name="monthly_avg_duration" type="json">
+  Average visit duration of the last 3 months.
+</ResponseField>
+
+<ResponseField name="monthly_pages_per_visit" type="json">
+  Pages per visit of the last 3 months.
+</ResponseField>
+
+<ResponseField name="revenue_by_year" type="json">
+  Yearly revenue estimate per year.
+</ResponseField>
+
+<ResponseField name="company_type" type="string">
+  Private or public company.
+</ResponseField>
+
+<ResponseField name="company_email" type="string">
+  Public contact email of the company.
+</ResponseField>
+
+<ResponseField name="company_phone" type="string">
+  Public phone number of the company.
+</ResponseField>
+
+<ResponseField name="company_twitter" type="string">
+  Twitter profile of the company.
+</ResponseField>
+
+<ResponseField name="company_facebook" type="string">
+  Facebook page of the company.
+</ResponseField>
+
+<ResponseField name="company_linkedin" type="string">
+  LinkedIn page of the company.
+</ResponseField>
+
+<ResponseField name="stocks_tickers" type="string">
+  Stock tickers of the company when it is listed.
+</ResponseField>
+
+<ResponseField name="subsidiaries" type="json">
+  Domains owned by the company.
+</ResponseField>
+
+<ResponseField name="signals" type="json">
+  Dated company news Similarweb collects.
+</ResponseField>
+
+<ResponseField name="company_competitors" type="json">
+  Competing companies with their firmographics and total visits.
+</ResponseField>
+
+### AI Traffic
+
+<ResponseField name="ai_referral_traffic_share" type="float">
+  Share of the website traffic referred by AI assistants.
+</ResponseField>
+
+<ResponseField name="ai_total_visits" type="float">
+  Visits referred by AI assistants over the month.
+</ResponseField>
+
+<ResponseField name="ai_traffic_split" type="json">
+  The 7 AI assistants ranked by the traffic they send.
+</ResponseField>
+
+<ResponseField name="ai_engine_distribution" type="json">
+  Share of the AI referral traffic per assistant, in percent. Similarweb only values the top 3.
+</ResponseField>
+
+<ResponseField name="ai_engine_history" type="json">
+  3-month history of the share per AI assistant.
+</ResponseField>
+
+<ResponseField name="ai_distribution_boundary" type="string">
+  Scale of the AI traffic chart.
+</ResponseField>
+
+### Competitor Details
+
+<ResponseField name="competitors_detailed" type="json">
+  The 10 closest competitors with their full metrics (description, screenshots, bounce rate, visit duration, pages per visit, global/country/category ranks and their monthly change, category, company name, affinity).
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"domain_name": "github.com", "source_url": "https://www.similarweb.com/website/github.com/", "snapshot_date": "2026-08-01T00:00:00+00:00", "description": "Join the world's most widely adopted, AI-powered developer platform", "category": "computers_electronics_and_technology/programming_and_developer_software", "global_rank": 50, "country_code": "US", "country_rank": 81, "visits": 649321442.0, "bounce_rate": 0.3665509655, "pages_per_visit": 5.767678566, "avg_visit_duration": 384}]}
+```

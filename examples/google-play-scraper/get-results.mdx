@@ -1,0 +1,279 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Google Play Store Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Google Play Store Scraper** runs. Two row types share the same table: `record_type = "app"` for app listings, `record_type = "review"` for their reviews. Fields marked "App rows only" or "Review rows only" are left empty on the other type.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Common
+
+<ResponseField name="record_type" type="string">
+  Type of row: `app` for an app listing, `review` for one of its reviews.
+</ResponseField>
+
+<ResponseField name="record_id" type="string">
+  Identifier of the row: the package id on an app row, the review id on a review row.
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  The task input that produced this row (app URL, package id, search URL or keyword).
+</ResponseField>
+
+<ResponseField name="package_id" type="string">
+  Android package id of the app this row belongs to. Example: `com.whatsapp`
+</ResponseField>
+
+<ResponseField name="app_url" type="string">
+  Google Play URL of the app this row belongs to.
+</ResponseField>
+
+<ResponseField name="app_title" type="string">
+  Title of the app this row belongs to, filled on review rows as well. Example: `WhatsApp Messenger`
+</ResponseField>
+
+### App rows
+
+<ResponseField name="title" type="string">
+  Title of the app. App rows only.
+</ResponseField>
+
+<ResponseField name="developer" type="string">
+  Name of the developer publishing the app.
+</ResponseField>
+
+<ResponseField name="developer_id" type="string">
+  Google Play developer id, usable as `https://play.google.com/store/apps/dev?id=<developer_id>`.
+</ResponseField>
+
+<ResponseField name="developer_url" type="string">
+  Developer website declared on the listing.
+</ResponseField>
+
+<ResponseField name="developer_email" type="string">
+  Support email declared by the developer.
+</ResponseField>
+
+<ResponseField name="developer_address" type="text">
+  Postal address declared by the developer.
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Primary Google Play category of the app. Example: `Communication`
+</ResponseField>
+
+<ResponseField name="category_id" type="string">
+  Google Play identifier of the primary category. Example: `COMMUNICATION`
+</ResponseField>
+
+<ResponseField name="price" type="float">
+  Price of the app in the selected storefront, 0 when the app is free.
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency the price is expressed in.
+</ResponseField>
+
+<ResponseField name="is_free" type="boolean">
+  True when the app costs nothing to install.
+</ResponseField>
+
+<ResponseField name="in_app_purchases" type="string">
+  Price range of the in-app purchases the app offers, empty when it offers none. Example: `$0.99 - $49.99 per item`
+</ResponseField>
+
+<ResponseField name="installs" type="string">
+  Install count as displayed on the listing. Example: `10,000,000,000+`
+</ResponseField>
+
+<ResponseField name="installs_min" type="bigint">
+  Lower bound of the displayed install count, as a number.
+</ResponseField>
+
+<ResponseField name="installs_exact" type="bigint">
+  Precise install count Google Play carries in the page payload.
+</ResponseField>
+
+<ResponseField name="score" type="float">
+  Average rating of the app, empty when the app has no rating yet.
+</ResponseField>
+
+<ResponseField name="ratings_count" type="bigint">
+  Number of star ratings the app received.
+</ResponseField>
+
+<ResponseField name="reviews_count" type="bigint">
+  Number of written reviews the app received, always smaller than `ratings_count`.
+</ResponseField>
+
+<ResponseField name="rating_histogram" type="json">
+  Number of ratings per star level, from 1 to 5.
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full store description of the app, as plain text.
+</ResponseField>
+
+<ResponseField name="summary" type="text">
+  Short tagline shown under the app title.
+</ResponseField>
+
+<ResponseField name="version" type="string">
+  Current version of the app. Google Play leaves it empty for apps that publish device-specific builds; the version of the most recent review is used when available.
+</ResponseField>
+
+<ResponseField name="android_version" type="string">
+  Minimum Android version the app requires (`8.0`, `7.0`, `6.0`...). Empty for apps that ship device-specific builds.
+</ResponseField>
+
+<ResponseField name="updated_at" type="datetime">
+  Date the app was last updated on Google Play (UTC).
+</ResponseField>
+
+<ResponseField name="released_at" type="datetime">
+  Date the app was first released on Google Play (UTC).
+</ResponseField>
+
+<ResponseField name="content_rating" type="string">
+  Content rating of the app, e.g. `Everyone`, `Teen`, `Mature 17+`.
+</ResponseField>
+
+<ResponseField name="content_rating_detail" type="string">
+  Reason given for the content rating, e.g. `Users Interact`.
+</ResponseField>
+
+<ResponseField name="screenshots" type="json">
+  Screenshot URLs published on the listing, in display order.
+</ResponseField>
+
+<ResponseField name="icon" type="string">
+  App icon URL.
+</ResponseField>
+
+<ResponseField name="header_image" type="string">
+  Feature graphic shown at the top of the listing.
+</ResponseField>
+
+<ResponseField name="privacy_policy_url" type="string">
+  Privacy policy URL declared by the developer.
+</ResponseField>
+
+<ResponseField name="video" type="string">
+  Promo video published on the listing, empty when the app has none.
+</ResponseField>
+
+<ResponseField name="video_image" type="string">
+  Thumbnail of the promo video.
+</ResponseField>
+
+<ResponseField name="ad_supported" type="boolean">
+  True when Google Play shows the "Contains ads" badge on the listing.
+</ResponseField>
+
+<ResponseField name="recent_changes" type="text">
+  Changelog of the latest update, as plain text.
+</ResponseField>
+
+<ResponseField name="ranking" type="string">
+  Chart position of the app on Google Play when it is ranked. Example: `#1 top free communication`
+</ResponseField>
+
+### Review rows
+
+<ResponseField name="review_id" type="string">
+  Google Play identifier of the review.
+</ResponseField>
+
+<ResponseField name="review_url" type="string">
+  Direct link to the review on the app listing.
+</ResponseField>
+
+<ResponseField name="author" type="string">
+  Display name of the reviewer.
+</ResponseField>
+
+<ResponseField name="author_id" type="string">
+  Google identifier of the reviewer.
+</ResponseField>
+
+<ResponseField name="author_image" type="string">
+  Profile picture of the reviewer.
+</ResponseField>
+
+<ResponseField name="rating" type="integer">
+  Star rating given by the reviewer, 1 to 5.
+</ResponseField>
+
+<ResponseField name="text" type="text">
+  Body of the review.
+</ResponseField>
+
+<ResponseField name="thumbs_up" type="integer">
+  Number of users who marked the review as helpful.
+</ResponseField>
+
+<ResponseField name="review_date" type="datetime">
+  Date the review was posted (UTC).
+</ResponseField>
+
+<ResponseField name="app_version" type="string">
+  Version of the app the reviewer had installed.
+</ResponseField>
+
+<ResponseField name="developer_reply" type="text">
+  Reply the developer posted to the review, empty when there is none.
+</ResponseField>
+
+<ResponseField name="reply_date" type="datetime">
+  Date the developer replied (UTC).
+</ResponseField>
+
+<ResponseField name="review_criterias" type="json">
+  Sub-ratings the reviewer gave on the app's own criteria, mostly on games. Empty on most reviews.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"record_type": "review", "record_id": "d40bb75a-d1a5-44b3-863d-c8624445efe9", "source_url": "https://play.google.com/store/apps/details?id=com.whatsapp", "package_id": "com.whatsapp", "app_title": "WhatsApp Messenger", "author": "Jonathan Spencer", "rating": 1, "text": "The most useless app I've encountered since the last update.", "thumbs_up": 5, "review_date": "2026-08-28 20:40:15", "app_version": "2.26.33.74"}]}
+```

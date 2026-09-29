@@ -176,6 +176,15 @@
             ]
           },
           {
+            "group": "Crunchbase Companies Scraper",
+            "pages": [
+              "examples/crunchbase-companies-scraper/add-tasks",
+              "examples/crunchbase-companies-scraper/update-settings",
+              "examples/crunchbase-companies-scraper/get-results",
+              "examples/crunchbase-companies-scraper/credit-cost"
+            ]
+          },
+          {
             "group": "Facebook Ad Library Scraper",
             "pages": [
               "examples/facebook-ad-library-scraper/add-tasks",
@@ -245,6 +254,15 @@
               "examples/glassdoor-jobs-scraper/update-settings",
               "examples/glassdoor-jobs-scraper/get-results",
               "examples/glassdoor-jobs-scraper/credit-cost"
+            ]
+          },
+          {
+            "group": "Google Play Store Scraper",
+            "pages": [
+              "examples/google-play-scraper/add-tasks",
+              "examples/google-play-scraper/update-settings",
+              "examples/google-play-scraper/get-results",
+              "examples/google-play-scraper/credit-cost"
             ]
           },
           {
@@ -387,6 +405,15 @@
             ]
           },
           {
+            "group": "Leboncoin Messages Reader",
+            "pages": [
+              "examples/leboncoin-messages-reader/add-tasks",
+              "examples/leboncoin-messages-reader/update-settings",
+              "examples/leboncoin-messages-reader/get-results",
+              "examples/leboncoin-messages-reader/credit-cost"
+            ]
+          },
+          {
             "group": "Leboncoin Auto Message Sender",
             "pages": [
               "examples/leboncoin-auto-message-sender/add-tasks",
@@ -504,12 +531,30 @@
             ]
           },
           {
+            "group": "LinkedIn Search Scraper",
+            "pages": [
+              "examples/linkedin-search-scraper/add-tasks",
+              "examples/linkedin-search-scraper/update-settings",
+              "examples/linkedin-search-scraper/get-results",
+              "examples/linkedin-search-scraper/credit-cost"
+            ]
+          },
+          {
             "group": "Naukri Jobs Scraper",
             "pages": [
               "examples/naukri-jobs-scraper/add-tasks",
               "examples/naukri-jobs-scraper/update-settings",
               "examples/naukri-jobs-scraper/get-results",
               "examples/naukri-jobs-scraper/credit-cost"
+            ]
+          },
+          {
+            "group": "Pinterest Scraper",
+            "pages": [
+              "examples/pinterest-scraper/add-tasks",
+              "examples/pinterest-scraper/update-settings",
+              "examples/pinterest-scraper/get-results",
+              "examples/pinterest-scraper/credit-cost"
             ]
           },
           {
@@ -600,6 +645,15 @@
               "examples/seloger-search-export/update-settings",
               "examples/seloger-search-export/get-results",
               "examples/seloger-search-export/credit-cost"
+            ]
+          },
+          {
+            "group": "Similarweb Scraper",
+            "pages": [
+              "examples/similarweb-scraper/add-tasks",
+              "examples/similarweb-scraper/update-settings",
+              "examples/similarweb-scraper/get-results",
+              "examples/similarweb-scraper/credit-cost"
             ]
           },
           {
@@ -837,6 +891,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-09-29",
               "changelog/2026-09-22",
               "changelog/2026-09-16",
               "changelog/2026-09-15",

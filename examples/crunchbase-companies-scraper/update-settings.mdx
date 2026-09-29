@@ -1,0 +1,76 @@
+---
+title: "Update Settings"
+description: "Configure Crunchbase Companies Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Crunchbase Companies Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| max_results | integer | — | Maximum number of companies collected per task. Leave empty to collect everything the task serves. A company URL always yields one company; a search serves at most 15 companies because Crunchbase gates pagination behind its paid plan. |
+| industry | string | — | Only keep companies in these industries, e.g. `Financial Services` or `Artificial Intelligence`. Separate several with commas. Applies to search pages only. |
+| location | string | — | Only keep companies based in these places, e.g. `San Francisco`, `France` or `United States`. Separate several with commas. Applies to search pages only. |
+| founded_year_min | integer | — | Only collect companies founded in this year or later. Crunchbase keeps the founding date itself behind its paid plan, so it filters the search but never appears in the exported row. Search URLs only. |
+| founded_year_max | integer | — | Only collect companies founded in this year or earlier. Same paywall caveat as `founded_year_min`. Search URLs only. |
+| funding_stage | string | — | Only keep companies whose latest funding round is this stage. One of: `pre_seed`, `seed`, `series_a`, `series_b`, `series_c`, `series_d`, `series_e`, `series_f`, `series_g`, `series_h`, `series_i`, `series_j`, `series_unknown`, `private_equity`, `debt_financing`, `post_ipo_equity`, `secondary_market`, `non_equity_assistance`, `undisclosed`. Search pages only. |
+| employee_count | string | — | Only keep companies in this employee count range. One of: `1-10`, `11-50`, `51-100`, `101-250`, `251-500`, `501-1000`, `1001-5000`, `5001-10000`, `10001+`. Search pages only. |
+| operating_status | string | — | Only collect companies that are still `active`, or only the ones Crunchbase marks as `closed`. Search URLs only. |
+| company_type | string | — | Only collect `for_profit` companies or only `non_profit` organizations. Search URLs only. |
+| ipo_status | string | — | Only collect `public` or `private` companies. Search URLs only. |
+| company_details | boolean | false | Open every company found by a search to add its website, contacts, founders, investors, funding rounds, acquisitions, products and technology profile. Company URLs already include all of this at no extra cost. Costs 1 extra credit per company on a search. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "industry": "Financial Services",
+    "location": "San Francisco",
+    "employee_count": "11-50",
+    "funding_stage": "series_a",
+    "company_details": true
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "industry": "Financial Services",
+        "location": "San Francisco",
+        "employee_count": "11-50",
+        "funding_stage": "series_a",
+        "company_details": True,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"industry": "Financial Services", "location": "San Francisco", "employee_count": "11-50", "funding_stage": "series_a", "company_details": true}}
+```
