@@ -1,0 +1,225 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Pinterest Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Pinterest Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Export Pins
+
+<ResponseField name="pin_id" type="string">
+  Pinterest's unique identifier for the pin. Example: `37858453110553201`
+</ResponseField>
+
+<ResponseField name="pin_url" type="string">
+  Direct link to the pin on Pinterest. Example: `https://www.pinterest.com/pin/37858453110553201/`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Title of the pin. Frequently empty: most Pinterest pins carry only a description. Example: `Bright Living Room with Windows and Window Sill`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Plain-text description (caption) of the pin.
+</ResponseField>
+
+<ResponseField name="description_html" type="text">
+  Description with Pinterest's own HTML markup (hashtag and mention links). Served on profile inputs, and on any pin when Full Pin Details is on.
+</ResponseField>
+
+<ResponseField name="alt_text" type="text">
+  Alternative text of the pin image. Uses the text written by the pinner when there is one, otherwise the text Pinterest generated automatically.
+</ResponseField>
+
+<ResponseField name="created_at" type="datetime">
+  Date and time (UTC) the pin was created. Not served by Pinterest on board inputs unless Full Pin Details is on. Example: `2023-06-07 12:38:53+00:00`
+</ResponseField>
+
+<ResponseField name="is_video" type="boolean">
+  True when the pin carries a video. Left blank (not False) on keyword-search rows: that surface only proves videos, it never says a pin has none — turn on Full Pin Details for a definitive answer on those rows.
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  Playable video stream of the pin (HLS playlist, MP4 when Pinterest serves no playlist). Empty on image pins.
+</ResponseField>
+
+<ResponseField name="is_promoted" type="boolean">
+  True when the pin is a paid Pinterest ad.
+</ResponseField>
+
+<ResponseField name="is_repin" type="boolean">
+  True when the pin was saved from another pin rather than uploaded. Served on board and profile inputs, and on any pin when Full Pin Details is on.
+</ResponseField>
+
+<ResponseField name="domain" type="string">
+  Domain the pin links to, or `Uploaded by user` for a direct upload. Example: `potterybarn.com`
+</ResponseField>
+
+<ResponseField name="destination_url" type="string">
+  Outbound link the pin points to.
+</ResponseField>
+
+<ResponseField name="save_count" type="integer">
+  Number of times the underlying image was saved on Pinterest (the "saves" figure shown in the UI). Example: `3920`
+</ResponseField>
+
+<ResponseField name="repin_count" type="integer">
+  Number of times this exact pin was re-pinned. A different counter from `save_count`, which aggregates every copy of the image.
+</ResponseField>
+
+<ResponseField name="comment_count" type="integer">
+  Number of comments on the pin. Served on profile inputs, and on any pin when Full Pin Details is on.
+</ResponseField>
+
+<ResponseField name="favorite_count" type="integer">
+  Number of users who favourited the pin. Served on board inputs, and on any pin when Full Pin Details is on.
+</ResponseField>
+
+<ResponseField name="reaction_count" type="integer">
+  Total number of reactions on the pin. Pinterest currently ships a single reaction type.
+</ResponseField>
+
+<ResponseField name="dominant_color" type="string">
+  Dominant colour of the pin image, as computed by Pinterest. Example: `#8e4a2c`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  Full resolution image of the pin.
+</ResponseField>
+
+<ResponseField name="image_width" type="integer">
+  Width in pixels of the full resolution image.
+</ResponseField>
+
+<ResponseField name="image_height" type="integer">
+  Height in pixels of the full resolution image.
+</ResponseField>
+
+<ResponseField name="image_sizes" type="json">
+  Every image size Pinterest serves for the pin, keyed by size label, with url, width and height.
+</ResponseField>
+
+<ResponseField name="price_value" type="float">
+  Price attached to the pin when it is a product pin. Served on profile inputs, and on any pin when Full Pin Details is on.
+</ResponseField>
+
+<ResponseField name="price_currency" type="string">
+  Currency of `price_value`.
+</ResponseField>
+
+<ResponseField name="pin_privacy" type="string">
+  Visibility of the pin itself, e.g. `public`. Served on profile inputs, and on any pin when Full Pin Details is on.
+</ResponseField>
+
+<ResponseField name="pinner_id" type="string">
+  Pinterest identifier of the account that owns the pin.
+</ResponseField>
+
+<ResponseField name="pinner_username" type="string">
+  Handle of the account that owns the pin. Example: `potterybarn`
+</ResponseField>
+
+<ResponseField name="pinner_full_name" type="string">
+  Display name of the account that owns the pin. Example: `Pottery Barn`
+</ResponseField>
+
+<ResponseField name="pinner_url" type="string">
+  Link to the profile of the account that owns the pin.
+</ResponseField>
+
+<ResponseField name="pinner_follower_count" type="integer">
+  Follower count of the account that owns the pin. Pinterest only ships it on some surfaces; filled from the profile header on a profile input.
+</ResponseField>
+
+<ResponseField name="pinner_avatar_url" type="string">
+  Profile picture of the account that owns the pin.
+</ResponseField>
+
+<ResponseField name="pinner_is_verified_merchant" type="boolean">
+  True when the account that owns the pin is a Pinterest verified merchant.
+</ResponseField>
+
+<ResponseField name="board_id" type="string">
+  Pinterest identifier of the board the pin is saved on.
+</ResponseField>
+
+<ResponseField name="board_name" type="string">
+  Name of the board the pin is saved on. Example: `Instagram Inspiration`
+</ResponseField>
+
+<ResponseField name="board_url" type="string">
+  Link to the board the pin is saved on.
+</ResponseField>
+
+<ResponseField name="board_privacy" type="string">
+  Visibility of the board, e.g. `public`. Pinterest omits it from the keyword search payload.
+</ResponseField>
+
+<ResponseField name="visual_annotations" type="json">
+  Topic labels Pinterest attaches to the pin, e.g. `Flex Room Design Ideas`. Free on keyword searches; on board and profile pins Pinterest only serves them with Full Pin Details.
+</ResponseField>
+
+<ResponseField name="carousel_images" type="json">
+  Every slide of a carousel pin, in order, with its own image url, width, height, outbound link and video url when the slide is a video. Empty for single-image pins. Free on board and profile pins; keyword searches only carry it with Full Pin Details.
+</ResponseField>
+
+### Full Pin Details
+
+<ResponseField name="share_count" type="integer">
+  Number of times the pin was shared. Only Pinterest's pin page carries it, so it needs Full Pin Details.
+</ResponseField>
+
+<ResponseField name="dominant_interest" type="string">
+  Interest label Pinterest attaches to the pin, e.g. `Room Decor`. Only Pinterest's pin page carries it, so it needs Full Pin Details.
+</ResponseField>
+
+<ResponseField name="visual_objects" type="json">
+  Objects Pinterest detected inside the pin image. Only Pinterest's pin page carries it, so it needs Full Pin Details. Frequently an empty list.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"pin_id": "37858453110553201", "pin_url": "https://www.pinterest.com/pin/37858453110553201/", "title": "Bright Living Room with Windows and Window Sill", "description": "This deserves another spot on the grid.", "domain": "potterybarn.com", "destination_url": "https://www.potterybarn.com/products/printers-writing-large-desk/", "save_count": 3920, "image_url": "https://i.pinimg.com/originals/c3/df/7f/c3df7f6f591485da278cb5a44aeff0be.jpg", "pinner_username": "potterybarn", "board_name": "Instagram Inspiration"}]}
+```

@@ -1,0 +1,71 @@
+---
+title: "Update Settings"
+description: "Configure Leboncoin Messages Reader settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
+Configure your **Leboncoin Messages Reader** squid settings.
+
+<AccountSyncRequired platform="Leboncoin" />
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| received_only | boolean | false | Collect only the messages written by the other party. When false, the messages sent by the connected account are collected too, as the context of the reply. |
+| unread_only | boolean | false | Collect only the conversations that have at least one unread message at run time. Reading messages with this crawler never marks them as read. |
+| fetch_since | string | — | Only collect messages sent after this threshold (based on `message_sent_at`). Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Conversations whose last message is older than the threshold are skipped entirely. |
+| fetch_since_timezone | string | — | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values. |
+| max_results | integer | — | Maximum number of messages to collect per task. Leave empty to collect every message found. |
+| max_unique_results_per_run | integer | — | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "received_only": true,
+    "unread_only": false,
+    "fetch_since": "7d"
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "received_only": True,
+        "unread_only": False,
+        "fetch_since": "7d",
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"received_only": true, "unread_only": false, "fetch_since": "7d"}}
+```

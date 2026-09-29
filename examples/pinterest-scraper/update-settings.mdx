@@ -1,0 +1,65 @@
+---
+title: "Update Settings"
+description: "Configure Pinterest Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Pinterest Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| video_only | boolean | false | Only keep pins that come with a playable video. Idea pins are not included. |
+| pin_details | boolean | false | Open each pin to add its share, comment and save counts, price, alt text, full description and the topics Pinterest detected. Included at no extra cost when the task is a single pin link. Costs 1 extra credit per pin otherwise. |
+| max_results | integer | — | The most pins to collect from each keyword, board or profile. Leave empty to collect everything Pinterest shows. |
+| max_unique_results_per_run | integer | — | Maximum number of unique pins retrieved across all tasks in the entire run. Leave empty for unlimited. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "video_only": false,
+    "pin_details": true,
+    "max_results": 100
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "video_only": False,
+        "pin_details": True,
+        "max_results": 100,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"video_only": false, "pin_details": true, "max_results": 100}}
+```

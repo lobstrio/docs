@@ -1,0 +1,341 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from LinkedIn Search Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **LinkedIn Search Scraper** runs. Three row types share the same table, one per search: `person`, `company`, `post`. Fields marked "people rows", "company rows" or "post rows" are left empty on the other types.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Common
+
+<ResponseField name="record_type" type="string">
+  Type of row: `person`, `company` or `post`, following the LinkedIn search that was given as input.
+</ResponseField>
+
+<ResponseField name="record_id" type="string">
+  Stable LinkedIn id of the row, prefixed by its type so people, companies and posts never collide: `person:{member id or public identifier}`, `company:{company id or universal name}`, `post:{activity id}`.
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  The LinkedIn search URL that was given as task input and produced this row.
+</ResponseField>
+
+<ResponseField name="search_keywords" type="string">
+  Keywords actually sent to LinkedIn for this search.
+</ResponseField>
+
+<ResponseField name="location" type="string">
+  Location as displayed on the search card: member location for people rows, headquarters city for company rows.
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether LinkedIn displays the verified badge on the person or the company.
+</ResponseField>
+
+<ResponseField name="followers_text" type="string">
+  Follower count exactly as written on the search card, free text (e.g. `35K followers`). Filled on company rows, and on people rows where LinkedIn shows the social proof line (roughly a quarter of them, rounded).
+</ResponseField>
+
+### People rows
+
+<ResponseField name="profile_id" type="string">
+  LinkedIn internal member id of the profile.
+</ResponseField>
+
+<ResponseField name="public_identifier" type="string">
+  Public profile slug used in the profile URL.
+</ResponseField>
+
+<ResponseField name="profile_url" type="string">
+  Direct URL to the LinkedIn profile.
+</ResponseField>
+
+<ResponseField name="full_name" type="string">
+  Full name of the person as displayed by LinkedIn.
+</ResponseField>
+
+<ResponseField name="first_name" type="string">
+  First name, split from the full name on the first space.
+</ResponseField>
+
+<ResponseField name="last_name" type="string">
+  Last name, split from the full name on the first space.
+</ResponseField>
+
+<ResponseField name="headline" type="text">
+  Profile headline, free text as written by the member.
+</ResponseField>
+
+<ResponseField name="photo_url" type="string">
+  URL of the profile picture, empty when the member has none.
+</ResponseField>
+
+<ResponseField name="connection_degree" type="string">
+  Connection degree between the connected LinkedIn account and the person (`1st`, `2nd`, `3rd+`).
+</ResponseField>
+
+<ResponseField name="is_premium" type="boolean">
+  Whether LinkedIn displays the premium badge on the person.
+</ResponseField>
+
+<ResponseField name="open_to_work" type="boolean">
+  Whether LinkedIn shows the Open To Work badge for this person. Read for free from every people search row; the Profile Details add-on can also confirm it from the profile page.
+</ResponseField>
+
+<ResponseField name="about" type="text">
+  About section of the profile. Filled by the Profile Details add-on.
+</ResponseField>
+
+<ResponseField name="current_position" type="text">
+  Current job title and company. Filled by the Profile Details add-on.
+</ResponseField>
+
+<ResponseField name="is_creator" type="boolean">
+  Whether the profile is in LinkedIn creator mode. Filled by the Profile Details add-on.
+</ResponseField>
+
+<ResponseField name="background_photo_url" type="string">
+  Cover photo of the profile. Filled by the Profile Details add-on.
+</ResponseField>
+
+<ResponseField name="experience" type="json">
+  Work experience entries. Filled by the Profile Details add-on.
+</ResponseField>
+
+<ResponseField name="education" type="json">
+  Education entries. Filled by the Profile Details add-on.
+</ResponseField>
+
+<ResponseField name="skills" type="json">
+  Skills listed on the profile. Filled by the Profile Details add-on.
+</ResponseField>
+
+### Company rows
+
+<ResponseField name="company_id" type="string">
+  Numeric LinkedIn id of the company.
+</ResponseField>
+
+<ResponseField name="universal_name" type="string">
+  Slug of the company LinkedIn page.
+</ResponseField>
+
+<ResponseField name="company_url" type="string">
+  URL of the company LinkedIn page.
+</ResponseField>
+
+<ResponseField name="company_name" type="string">
+  Name of the company as displayed by LinkedIn.
+</ResponseField>
+
+<ResponseField name="logo_url" type="string">
+  URL of the company logo.
+</ResponseField>
+
+<ResponseField name="industry" type="string">
+  Industry line shown on the company search card, and the company page industry when the Company Details add-on is on.
+</ResponseField>
+
+<ResponseField name="employee_count_text" type="string">
+  Employee count exactly as written on the company search card, free text (e.g. `10,001+ employees`).
+</ResponseField>
+
+<ResponseField name="description_snippet" type="text">
+  Short description shown on the company search card.
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Company website. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="tagline" type="text">
+  Company tagline. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full About text of the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="founded_year" type="integer">
+  Year the company was founded. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="employee_count" type="integer">
+  Number of employees LinkedIn associates with the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="followers_count" type="integer">
+  Number of followers, as an integer. Filled by the Company Details add-on for companies, and on a people row only when the search card shows an exact, unrounded number.
+</ResponseField>
+
+<ResponseField name="company_size" type="string">
+  Company size range as written by LinkedIn (e.g. `5,001-10,000 employees`). Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="company_type" type="string">
+  Company type (`Privately Held`, `Public Company`...). Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="headquarters" type="string">
+  Headquarters as written on the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="hq_street" type="string">
+  Headquarters street address. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="hq_locality" type="string">
+  Headquarters city. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="hq_region" type="string">
+  Headquarters region or state. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="hq_postal_code" type="string">
+  Headquarters postal code. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="hq_country" type="string">
+  Headquarters country. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Phone number published on the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="cover_image" type="string">
+  Cover image of the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="locations" type="json">
+  Offices listed on the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="specialties" type="json">
+  Specialties listed on the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="similar_pages" type="json">
+  Similar company pages suggested by LinkedIn. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="showcase_pages" type="json">
+  Showcase pages of the company. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="affiliated_pages" type="json">
+  Affiliated pages of the company. Filled by the Company Details add-on.
+</ResponseField>
+
+<ResponseField name="products" type="json">
+  Products listed on the company page. Filled by the Company Details add-on.
+</ResponseField>
+
+### Post rows
+
+<ResponseField name="post_id" type="string">
+  LinkedIn activity id of the post.
+</ResponseField>
+
+<ResponseField name="post_url" type="string">
+  Permalink of the post.
+</ResponseField>
+
+<ResponseField name="share_url" type="string">
+  Pretty share URL of the post, as used by the LinkedIn share button.
+</ResponseField>
+
+<ResponseField name="post_content" type="text">
+  Full text of the post.
+</ResponseField>
+
+<ResponseField name="posted_at" type="datetime">
+  Publication date and time of the post in UTC, decoded from its LinkedIn activity id.
+</ResponseField>
+
+<ResponseField name="author_name" type="string">
+  Name of the post author, person or company.
+</ResponseField>
+
+<ResponseField name="author_public_identifier" type="string">
+  Public slug of the post author.
+</ResponseField>
+
+<ResponseField name="author_url" type="string">
+  LinkedIn URL of the post author.
+</ResponseField>
+
+<ResponseField name="author_headline" type="text">
+  Headline of the post author as shown above the post.
+</ResponseField>
+
+<ResponseField name="author_avatar_url" type="string">
+  Profile picture of the post author.
+</ResponseField>
+
+<ResponseField name="author_type" type="string">
+  Whether the post author is a `person` or a `company`.
+</ResponseField>
+
+<ResponseField name="post_images" type="json">
+  Images attached to the post.
+</ResponseField>
+
+<ResponseField name="shares_count" type="integer">
+  Number of reposts of the post. Read from the post card when greater than zero, refreshed by the Post Engagement add-on.
+</ResponseField>
+
+<ResponseField name="likes_count" type="integer">
+  Number of reactions on the post. Filled by the Post Engagement add-on.
+</ResponseField>
+
+<ResponseField name="comments_count" type="integer">
+  Number of comments on the post. Filled by the Post Engagement add-on.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"record_type": "person", "record_id": "person:ACoAACrQ6T4BqCXCOj_ofEXvV9FS46fRs4o2I6o", "profile_url": "https://www.linkedin.com/in/nada-adel-mohamady", "full_name": "Nada Adel", "headline": "Software Engineer @ Microsoft", "location": "Egypt", "connection_degree": "3rd+", "search_keywords": "software engineer"}]}
+```

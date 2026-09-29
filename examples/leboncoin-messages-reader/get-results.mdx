@@ -1,0 +1,169 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Leboncoin Messages Reader"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Leboncoin Messages Reader** runs. One row per message, with the conversation, the listing and the other party on every row.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="message_id" type="string">
+  Unique identifier of the message on Leboncoin.
+</ResponseField>
+
+<ResponseField name="message_text" type="text">
+  Full text of the message, line breaks preserved.
+</ResponseField>
+
+<ResponseField name="message_type" type="string">
+  Message kind as returned by Leboncoin: `ApiTextMessage` for a regular message, `ApiTemplateMessage` for a templated one.
+</ResponseField>
+
+<ResponseField name="template_id" type="string">
+  Identifier of the Leboncoin message template when the message was sent from a template, empty otherwise.
+</ResponseField>
+
+<ResponseField name="message_sent_at" type="datetime">
+  Date and time (UTC) the message was sent.
+</ResponseField>
+
+<ResponseField name="direction" type="string">
+  `received` when the message was written by the other party, `sent` when it was written by the connected Leboncoin account.
+</ResponseField>
+
+<ResponseField name="is_outgoing" type="boolean">
+  True when the message was sent by the connected Leboncoin account.
+</ResponseField>
+
+<ResponseField name="is_read" type="boolean">
+  True when the message has been read by the connected Leboncoin account.
+</ResponseField>
+
+<ResponseField name="is_partner_read" type="boolean">
+  True when the other party has read the message (read receipt on messages you sent).
+</ResponseField>
+
+<ResponseField name="attachments_count" type="integer">
+  Number of files attached to the message.
+</ResponseField>
+
+<ResponseField name="attachments" type="json">
+  Raw attachment objects attached to the message, as returned by Leboncoin.
+</ResponseField>
+
+<ResponseField name="sender_id" type="string">
+  Leboncoin user id of the message sender.
+</ResponseField>
+
+<ResponseField name="sender_name" type="string">
+  Display name of the message sender.
+</ResponseField>
+
+<ResponseField name="conversation_id" type="string">
+  Unique identifier of the conversation the message belongs to.
+</ResponseField>
+
+<ResponseField name="conversation_url" type="string">
+  Direct URL of the conversation in the Leboncoin messaging inbox.
+</ResponseField>
+
+<ResponseField name="annonce_id" type="string">
+  Identifier of the Leboncoin listing the conversation is about. Same identifier as the `annonce_id` of the Leboncoin Auto Message Sender, so replies can be joined back to the messages sent.
+</ResponseField>
+
+<ResponseField name="ad_title" type="string">
+  Title of the listing the conversation is about.
+</ResponseField>
+
+<ResponseField name="ad_status" type="string">
+  Current status of the listing: `active` or `deleted`.
+</ResponseField>
+
+<ResponseField name="ad_category_id" type="string">
+  Leboncoin category id of the listing (e.g. `9` = Ventes immobilières).
+</ResponseField>
+
+<ResponseField name="ad_image" type="string">
+  Thumbnail image of the listing.
+</ResponseField>
+
+<ResponseField name="ad_owner_id" type="string">
+  Leboncoin user id of the listing owner.
+</ResponseField>
+
+<ResponseField name="ad_owner_type" type="string">
+  Type of the listing owner, `private` for a private seller. Empty when Leboncoin does not return it.
+</ResponseField>
+
+<ResponseField name="counterparty_id" type="string">
+  Leboncoin user id of the other party in the conversation.
+</ResponseField>
+
+<ResponseField name="counterparty_name" type="string">
+  Display name of the other party in the conversation.
+</ResponseField>
+
+<ResponseField name="last_message_sent_at" type="datetime">
+  Date and time (UTC) of the most recent message of the conversation at collection time.
+</ResponseField>
+
+<ResponseField name="last_message_preview" type="text">
+  Preview of the most recent message of the conversation at collection time.
+</ResponseField>
+
+<ResponseField name="last_message_attachments_count" type="integer">
+  Number of files attached to the most recent message of the conversation.
+</ResponseField>
+
+<ResponseField name="unseen_counter" type="integer">
+  Number of unread messages in the conversation at collection time.
+</ResponseField>
+
+<ResponseField name="is_unread" type="boolean">
+  True when the conversation had at least one unread message at collection time.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"message_id": "b07ce020-6be6-11f1-8080-808080808080", "message_text": "Hello Sasha, toutes les infos utiles sont dans l'annonce !\nMichel.", "message_type": "ApiTextMessage", "message_sent_at": "2026-06-19T13:56:37.282000+00:00", "direction": "received", "is_outgoing": false, "is_read": true, "conversation_id": "c2d7efff-5f3e-4898-8d49-979f94260003", "conversation_url": "https://www.leboncoin.fr/messages/id/c2d7efff-5f3e-4898-8d49-979f94260003", "annonce_id": "3196445542", "ad_title": "Maison individuelle de plein-pied proche Louhans", "counterparty_name": "deschamps"}]}
+```

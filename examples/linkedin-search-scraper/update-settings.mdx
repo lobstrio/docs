@@ -1,0 +1,85 @@
+---
+title: "Update Settings"
+description: "Configure LinkedIn Search Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+import { AccountSyncRequired } from '/snippets/account-sync-required.mdx';
+
+Configure your **LinkedIn Search Scraper** squid settings.
+
+<AccountSyncRequired platform="LinkedIn" />
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| keywords | string | — | Free-text search keywords. Overrides the keywords of the pasted URL when set. Works on people, company and post searches. |
+| first_name | string | — | People search only. Keeps only profiles whose first name matches. |
+| last_name | string | — | People search only. Keeps only profiles whose last name matches. |
+| title | string | — | People search only. Free-text job title filter. LinkedIn matches it against the current title. |
+| company | string | — | People search only. Free-text company filter. For an exact company page use `current_company_url` instead. |
+| current_company_url | string | — | People search only. LinkedIn company page URL or slug. Resolved to LinkedIn's company id; keeps only people currently working there. Costs one extra request per task. |
+| school | string | — | People search only. Free-text school filter. |
+| network | string | — | People search only. Connection degrees to keep, comma separated: `F` (1st), `S` (2nd), `O` (3rd+). Example: `F,S`. |
+| profile_language | string | — | People search only. Two-letter profile language codes, comma separated (e.g. `fr` or `en,fr`). |
+| location | string | — | LinkedIn numeric geo id, comma separated for several (e.g. `103644278` for the United States). Applies to people (member location) and companies (headquarters location). The id is the `geoUrn` value of a LinkedIn search URL. |
+| industry | string | — | Company search only. LinkedIn numeric industry id, comma separated (e.g. `6` for Software Development). The id is the `industryCompanyVertical` value of a LinkedIn company search URL. |
+| max_results | integer | 1000 | Maximum number of rows to collect per search URL. LinkedIn never returns more than about 1,000 results for one search, whatever this is set to. |
+| max_unique_results_per_run | integer | — | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
+| profile_details | boolean | false | People search only. Opens each profile once to add the About text, current position, full experience, education, skills, open-to-work and creator flags and the cover photo. Costs 1 extra credit per profile. |
+| company_details | boolean | false | Company search only. Opens each company page once to add the website, description, tagline, founding year, employee and follower counts, size, type, headquarters and offices, specialties, cover image, similar/showcase/affiliated pages, products and phone. Costs 1 extra credit per company. |
+| post_engagement | boolean | false | Post search only. Opens each post once to add its like, comment and repost counts. Costs 1 extra credit per post. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "title": "CEO",
+    "location": "103644278",
+    "network": "F,S",
+    "max_results": 500,
+    "profile_details": true
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "title": "CEO",
+        "location": "103644278",
+        "network": "F,S",
+        "max_results": 500,
+        "profile_details": True,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"title": "CEO", "location": "103644278", "network": "F,S", "max_results": 500, "profile_details": true}}
+```

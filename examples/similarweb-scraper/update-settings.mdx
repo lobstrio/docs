@@ -1,0 +1,71 @@
+---
+title: "Update Settings"
+description: "Configure Similarweb Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Similarweb Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| country | string | `worldwide` | Country of the ranking, used only when the task URL is the bare `https://www.similarweb.com/top-websites/` ranking. Ignored for a single website, and ignored when the ranking URL already names a country. Example values: `united-states`, `france`, `germany`. |
+| category | string | `all-categories` | Category of the ranking, used only when the task URL is the bare `top-websites` ranking. Ignored for a single website, and ignored when the ranking URL already names a category. Similarweb returns 50 websites for a country-only or category-only ranking, but only 5 when both are set. Example: `news-and-media`. |
+| max_results | integer | 50 | Maximum number of websites collected per task. A single website is always one row, so this only matters on a ranking URL, where Similarweb serves at most 50 websites. |
+| company_details | boolean | false | Add the company profile: exact monthly visit counts, revenue per year, company type, public email and phone, social profiles, subsidiaries, dated company news and competing companies with their firmographics. Costs 1 extra credit per website. |
+| ai_traffic | boolean | false | Add the AI assistant traffic: share of the traffic referred by ChatGPT, Gemini, Claude, Perplexity, DeepSeek, Grok and Copilot, their ranking and their 3-month history. Costs 1 extra credit per website. |
+| competitor_details | boolean | false | Add the full metrics of the 10 closest competitors: description, screenshots, bounce rate, visit duration, pages per visit, global/country/category ranks with their monthly change. Costs 1 extra credit per website. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "country": "france",
+    "category": "news-and-media",
+    "max_results": 50,
+    "company_details": true,
+    "ai_traffic": true
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "country": "france",
+        "category": "news-and-media",
+        "max_results": 50,
+        "company_details": True,
+        "ai_traffic": True,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"country": "france", "category": "news-and-media", "max_results": 50, "company_details": true, "ai_traffic": true}}
+```
