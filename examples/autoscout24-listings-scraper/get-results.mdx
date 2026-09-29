@@ -215,6 +215,106 @@ Each result object contains the following fields:
   Date the listing was first published on AutoScout24. Example: `2026-03-22T13:00:19+00:00`
 </ResponseField>
 
+<ResponseField name="published_at" type="datetime">
+  Date and time the listing was published on AutoScout24 (UTC), as reported by AutoScout24 itself. Only available when `get_listing_details` is enabled.
+</ResponseField>
+
+<ResponseField name="price_rating" type="int">
+  AutoScout24's price evaluation band for this listing, from 0 (far below the market median) to 6 (far above it). Empty when AutoScout24 has no comparable vehicles to rate this listing against.
+</ResponseField>
+
+<ResponseField name="price_rating_label" type="string">
+  AutoScout24's own wording for the price evaluation, in the language of the searched AutoScout24 domain. AutoScout24 only publishes a label for its three "good deal" bands (`price_rating` 1, 2 and 3).
+</ResponseField>
+
+<ResponseField name="price_tax_deductible" type="boolean">
+  Whether VAT on this price is deductible (TVA récupérable), as declared by the seller.
+</ResponseField>
+
+<ResponseField name="price_evaluation_ranges" type="json">
+  The price bands AutoScout24 computed for this vehicle's market cohort: one entry per `price_rating` band, with its minimum and maximum price. Empty when AutoScout24 has no comparable vehicles.
+</ResponseField>
+
+<ResponseField name="had_accident" type="boolean">
+  Whether the seller declared the vehicle as accident-damaged. Empty when the seller did not answer: an empty value means unknown, not "no accident".
+</ResponseField>
+
+<ResponseField name="has_full_service_history" type="boolean">
+  Whether the seller declared a complete service history. Empty when the seller did not answer.
+</ResponseField>
+
+<ResponseField name="non_smoking" type="boolean">
+  Whether the seller declared the vehicle as non-smoking. Empty when the seller did not answer.
+</ResponseField>
+
+<ResponseField name="is_cabin_clean" type="boolean">
+  Whether the seller declared the cabin as clean/undamaged. Empty when the seller did not answer.
+</ResponseField>
+
+<ResponseField name="equipment_safety" type="json">
+  Equipment AutoScout24 files under Safety & Security, in the language of the searched AutoScout24 domain. Subset of the flat `equipment` list.
+</ResponseField>
+
+<ResponseField name="equipment_comfort" type="json">
+  Equipment AutoScout24 files under Comfort & Convenience. Subset of the flat `equipment` list.
+</ResponseField>
+
+<ResponseField name="equipment_media" type="json">
+  Equipment AutoScout24 files under Entertainment & Media. Subset of the flat `equipment` list.
+</ResponseField>
+
+<ResponseField name="equipment_extras" type="json">
+  Equipment AutoScout24 files under Extras. Subset of the flat `equipment` list.
+</ResponseField>
+
+<ResponseField name="phone_2" type="string">
+  The seller's second phone number, when they published more than one. Empty when the seller only published one number.
+</ResponseField>
+
+<ResponseField name="phone_2_type" type="string">
+  The kind of line `phone_2` is, as labelled by the seller (e.g. `Office`, `Mobile`).
+</ResponseField>
+
+<ResponseField name="dealer_id" type="string">
+  AutoScout24's customer id for the dealer selling this vehicle. Stable across all of that dealer's listings. Empty for private sellers.
+</ResponseField>
+
+<ResponseField name="dealer_url" type="string">
+  URL of the dealer's own AutoScout24 profile page. Empty for private sellers.
+</ResponseField>
+
+<ResponseField name="dealer_active_since_year" type="int">
+  The year the dealer became an AutoScout24 customer. AutoScout24 only publishes the year, not a full date. Empty for private sellers.
+</ResponseField>
+
+<ResponseField name="co2_emissions" type="int">
+  Combined CO2 emissions in g/km, exactly as AutoScout24 publishes them. Empty when AutoScout24 reports no value. AutoScout24 returns a literal `0` for a share of combustion-engine listings — see `co2_is_estimated`.
+</ResponseField>
+
+<ResponseField name="co2_is_estimated" type="boolean">
+  True when the CO2 figure should not be read as a measurement. Carries AutoScout24's own "fallback estimate" flag, and is also set when `co2_emissions` is 0 while AutoScout24 itself describes the vehicle as a combustion engine.
+</ResponseField>
+
+<ResponseField name="lat" type="float">
+  Latitude of the vehicle's location, as published by AutoScout24. Only available when `get_listing_details` is enabled.
+</ResponseField>
+
+<ResponseField name="lng" type="float">
+  Longitude of the vehicle's location, as published by AutoScout24. Only available when `get_listing_details` is enabled.
+</ResponseField>
+
+<ResponseField name="dealer_rating" type="float">
+  The dealer's average customer rating on AutoScout24, out of 5. Empty when the dealer has no ratings yet — a dealer nobody has rated is never reported as a 0.
+</ResponseField>
+
+<ResponseField name="dealer_review_count" type="int">
+  How many customer reviews the dealer has on AutoScout24. `0` is a real value here: the dealer has no reviews.
+</ResponseField>
+
+<ResponseField name="dealer_recommend_percentage" type="float">
+  Share of the dealer's reviewers who recommend them, in percent. Empty when the dealer has no ratings yet.
+</ResponseField>
+
 ## Response
 
 ```json 200

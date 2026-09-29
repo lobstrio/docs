@@ -56,10 +56,6 @@ Retrieve scraped data from your **Instagram Search & Hashtags Scraper** runs.
   Type of media. Example: `image`
 </ResponseField>
 
-<ResponseField name="product_type" type="string">
-  Instagram product type. Example: `feed`
-</ResponseField>
-
 <ResponseField name="is_video" type="boolean">
   Whether the media is a video/reel.
 </ResponseField>
@@ -112,8 +108,8 @@ Retrieve scraped data from your **Instagram Search & Hashtags Scraper** runs.
   Video play count (reels/videos only).
 </ResponseField>
 
-<ResponseField name="reshare_count" type="bigint">
-  Number of reshares (reels only).
+<ResponseField name="like_and_view_counts_disabled" type="boolean">
+  True when the author disabled like and view counts on the post.
 </ResponseField>
 
 <ResponseField name="timestamp" type="bigint">
@@ -152,36 +148,8 @@ Retrieve scraped data from your **Instagram Search & Hashtags Scraper** runs.
   Image URL of carousel slides.
 </ResponseField>
 
-<ResponseField name="coauthors" type="json">
-  Accounts listed as co-authors.
-</ResponseField>
-
-<ResponseField name="tagged_users" type="json">
-  Instagram users tagged in the media.
-</ResponseField>
-
-<ResponseField name="music" type="json">
-  Music/audio info.
-</ResponseField>
-
 <ResponseField name="alt" type="string">
   Accessibility alt text.
-</ResponseField>
-
-<ResponseField name="location_id" type="string">
-  Instagram location identifier.
-</ResponseField>
-
-<ResponseField name="location_name" type="string">
-  Name of the tagged location.
-</ResponseField>
-
-<ResponseField name="location_lat" type="float">
-  Latitude of the tagged location.
-</ResponseField>
-
-<ResponseField name="location_lng" type="float">
-  Longitude of the tagged location.
 </ResponseField>
 
 ### Detail Fields

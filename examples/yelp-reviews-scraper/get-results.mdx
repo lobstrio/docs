@@ -160,6 +160,10 @@ Each result object contains the following fields:
   Total number of reviews on the business at the time of scraping. Example: `7375`
 </ResponseField>
 
+<ResponseField name="is_recommended" type="boolean">
+  `false` for reviews Yelp lists under "not currently recommended" (only when `collect_not_recommended_reviews` is on), `true` for regular reviews. Example: `true`
+</ResponseField>
+
 ## Response
 
 ```json 200

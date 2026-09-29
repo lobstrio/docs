@@ -29,6 +29,7 @@ Set these parameters in the `params` object:
 | **language** | string | — | Filter reviews by language (ISO 639-1 code, e.g. `en`, `fr`, `de`). Leave empty to collect all languages. |
 | **fetch_since** | string | — | Stop scraping when reviews older than this threshold are reached. Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Works best with `sort: "Newest First"`. |
 | **term** | string | — | Keyword to search inside review text (e.g. `great service`). When set, `sort` and `rating` filters are ignored. |
+| **collect_not_recommended_reviews** | boolean | false | Also collect the reviews Yelp hides under "reviews that are not currently recommended". They are collected first and marked `is_recommended = false`. Yelp shows fewer details for them (no votes, photos, language or member-since), and `sort` does not apply to them. |
 
 ## Squid Settings
 
