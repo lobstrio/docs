@@ -1,6 +1,6 @@
 ---
 title: "MCP Server"
-description: "Connect Claude, ChatGPT, Cursor, or any MCP client to lobstr.io and run web scrapers in your account — discover, configure, run, monitor, and retrieve results, all in the conversation."
+description: "Connect Claude, ChatGPT, Cursor, Grok, or any MCP client to lobstr.io and run web scrapers in your account — discover, configure, run, monitor, and retrieve results, all in the conversation."
 ---
 
 The lobstr.io **MCP Server** lets an AI client operate your lobstr.io account
@@ -10,7 +10,7 @@ results — without leaving the chat and without manual CSV export/import.
 **Endpoint:** `https://mcp.lobstr.io/mcp`
 
 <CardGroup cols={3}>
-  <Card title="20 Tools" icon="wrench">
+  <Card title="22 Tools" icon="wrench">
     Discover scrapers, run and monitor them, fetch results, and check your
     credits and connected platform accounts.
   </Card>
@@ -19,7 +19,7 @@ results — without leaving the chat and without manual CSV export/import.
     ever reaches the AI client.
   </Card>
   <Card title="Streamable HTTP" icon="globe">
-    Standard MCP transport, compatible with Claude, ChatGPT, Cursor, and Codex.
+    Standard MCP transport, compatible with Claude, ChatGPT, Cursor, Grok, and Codex.
   </Card>
 </CardGroup>
 
@@ -33,7 +33,7 @@ results — without leaving the chat and without manual CSV export/import.
 
 - A [lobstr.io account](https://app.lobstr.io) with credits — running a scraper
   spends credits from your balance.
-- An MCP-capable client (Claude, ChatGPT, Cursor, Codex, …).
+- An MCP-capable client (Claude, ChatGPT, Cursor, Grok, Codex, …).
 
 No client ID or secret to paste: the server supports Dynamic Client
 Registration, so your client registers itself.
@@ -115,6 +115,7 @@ configured from it. A **run** is one execution of a squid.
 |---|---|---|
 | `run_scraper` | **write · spends credits** | Configure and start a run. Returns a `run_id`. |
 | `get_run` | read | Status and progress of a run. |
+| `wait_for_run` | read | Wait for a run to finish, up to 50 seconds per call; call again if it's still going. |
 | `list_runs` | read | Recent runs for a scraper. |
 | `abort_run` | write | Stop a running job. |
 | `empty_scraper` | write | Clear a scraper's tasks so it can be reused with new inputs. |
@@ -129,6 +130,7 @@ instead of one — useful for large or incremental task lists.
 |---|---|---|
 | `create_squid` | write | Create a saved scraper (squid) from a crawler, without running it. |
 | `add_tasks` | write | Add input rows to a squid; callable repeatedly to build up a batch. |
+| `update_scraper` | write | Change a squid's name, settings, or concurrency without running it or touching its tasks. |
 | `estimate_run` | read | Credit cost, projected results, and estimated time for a squid's current tasks. |
 
 #### Results
