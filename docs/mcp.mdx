@@ -66,13 +66,35 @@ claude mcp add --transport http lobstr https://mcp.lobstr.io/mcp
   }
 }
 ```
+
+```bash Codex CLI
+codex mcp add lobstr --url https://mcp.lobstr.io/mcp
+```
+
+```toml Codex (~/.codex/config.toml)
+[mcp_servers.lobstr]
+url = "https://mcp.lobstr.io/mcp"
+```
 </CodeGroup>
 
 **Claude.ai and ChatGPT** — add it as a **custom connector** in settings, using
 `https://mcp.lobstr.io/mcp`. Both drive the sign-in flow for you.
 
-**Codex CLI** — register it as a remote MCP server in `~/.codex/config.toml`
-using the same URL (key names vary by version; check the Codex docs).
+**Codex** — `codex mcp add` starts the sign-in right away. If you added the
+server through `config.toml`, or need to sign in again, run
+`codex mcp login lobstr`.
+
+**Grok** — available to Grok Bots with a SuperGrok plan or through a Cursor
+subscription:
+
+1. In any Bot, send: *Add a custom mcp server called lobstr.io, it's at
+   https://mcp.lobstr.io/mcp* (keep the trailing `/mcp`).
+2. When the Bot asks to add the lobstr.io connector, choose **Add it**.
+3. Use the connect card the Bot posts to open the lobstr.io consent page, and click **Allow**.
+4. Ask the Bot *Who am I?* to check the connection.
+
+The server then shows for all your Bots under **Settings → Plugins → Yours**.
+More in the [Grok guide](https://help.lobstr.io/integrations/grok).
 
 After adding the server, your client opens the lobstr.io consent page: you're
 already signed in, you click **Allow**, and you're returned to the client. On a
