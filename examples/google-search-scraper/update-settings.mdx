@@ -4,7 +4,7 @@ description: "Configure the Google Search Scraper parameters"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
 ---
 
-Configure the scraper parameters to control how Google Search results are collected. These settings include pagination, location, language, and device type options.
+Configure the scraper parameters to control how Google Search results are collected. These settings include pagination, location and language.
 
 ## Headers
 
@@ -23,11 +23,11 @@ Set these parameters in the `params` object:
 | Parameter | Type | Description |
 | --- | --- | --- |
 | **max_pages** | integer | Maximum search result pages to crawl per keyword. Google limits to ~300-400 total results. |
+| **max_unique_results_per_run** | integer | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
 | **results_per_page** | integer | Results per page: 10, 20, 30, 40, 50, or 100. Default: 10 |
 | **country** | string | Sets IP origin country and Google domain (e.g., `google.fr` for France). Default: `United States` |
 | **location** | string | Geographic bias for results (state, city). Use Get Geolocation to find valid values. |
 | **language** | string | Language for search results. Defaults to English for the chosen country. |
-| **mobile_results** | boolean | If `true`, returns mobile device results; otherwise desktop results. |
 
 <Tip>
   Use the Get Geolocation endpoint to discover valid `location` values.
@@ -54,7 +54,7 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
       "country": "United States",
       "language": "English",
       "max_pages": 4,
-      "mobile_results": false,
+      "max_unique_results_per_run": 500,
       "results_per_page": 10,
       "location": "Alabama"
     }
@@ -83,7 +83,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
             "country": "United States",
             "language": "English",
             "max_pages": 4,
-            "mobile_results": False,
+            "max_unique_results_per_run": 500,
             "results_per_page": 10,
             "location": "Alabama"
         }
@@ -107,7 +107,7 @@ print(f"Location: {data['params']['location']}")
     "country": "United States",
     "language": "English",
     "max_pages": 4,
-    "mobile_results": false,
+    "max_unique_results_per_run": 500,
     "results_per_page": 10,
     "location": "Alabama"
   },
