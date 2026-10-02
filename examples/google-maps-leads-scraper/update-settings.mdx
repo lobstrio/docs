@@ -31,26 +31,31 @@ Set these parameters in the `params` object:
 | **phone_filter** | string | all | Filter by phone presence: `all`, `with_phone`, `without_phone` |
 | **verified_filter** | string | all | Filter by owner-claimed status: `all`, `verified_only`, `unverified_only` |
 | **language** | string | — | Language for place names and metadata (e.g., `English (United States)`) |
-| **max_results** | integer | unlimited | Maximum places to collect before task ends |
-| **geo_match** | boolean | true | Only return results that geographically match the searched location |
+| **max_results** | integer | unlimited | Maximum places to collect before the task ends. Leave empty to collect everything Google Maps returns (hard cap: 200 per search). |
+| **geo_match** | boolean | true | Keep and bill only results in the target postal area. When the task's `city` carries a postal code (returned by `/v1/googlemaps/locations` as `City 12345`), results outside that ZIP are dropped. If no postal code is provided, falls back to a 50 km radius around the search center. |
 | **category_match** | boolean | true | Only return results that match the searched business category |
 | **skip_closed** | boolean | false | Skip permanently closed businesses |
 | **website_filter** | string | all | Filter by website presence: `all`, `with_website`, `without_website` |
 | **skip_without_email** | boolean | false | Skip businesses where no email address was found |
+| **auto_verify_emails** | boolean | false | After each run finishes, verify every email extracted by `extract_emails_from_website`. The run only reports `DONE` once verification finishes, so the credit total shown at `DONE` already includes verification charges. If the same email was verified in a prior run of this squid, its previous verdict is reused and not re-billed. |
 
 ## Optional Functions
 
 Enable these in the `params.functions` object:
 
-| Function | Type | Description |
-| --- | --- | --- |
-| **extract_emails_from_website** | boolean | Visit business website to extract email, Facebook, Instagram, and additional phone |
-| **fetch_business_images** | boolean | Collect all image URLs from the Google Place page |
-| **collect_business_details** | boolean | Collect additional metadata like plus_code, poi, health, and last_opening_hours_updated_at |
+| Function | Type | Default | Description |
+| --- | --- | --- | --- |
+| **extract_emails_from_website** | boolean | false | Visit business website to extract email, Facebook, Instagram, and additional phone |
+| **fetch_business_images** | boolean | false | Collect all image URLs from the Google Place page |
+| **collect_business_details** | boolean | false | Collect additional metadata like plus_code, poi, health, and last_opening_hours_updated_at |
 
 <Warning>
   Enabling `extract_emails_from_website`, `fetch_business_images`, or `collect_business_details` may incur additional credits.
 </Warning>
+
+<Note>
+  **Concurrency scales across tasks, not within one.** A squid's `max_concurrency` controls how many tasks of this squid run in parallel across the cluster — a single task still processes its businesses serially. Split your work into multiple tasks to make use of concurrency.
+</Note>
 
 <Note>
   **Backward compatibility:** The old function names `collect_contacts`, `images`, and `details` are still accepted but deprecated. Migrate to the new names listed above.

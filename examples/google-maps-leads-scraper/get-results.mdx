@@ -24,6 +24,14 @@ Retrieve scraped data from your **Google Maps Leads Scraper** runs.
   Page number (default: 1). Example: `1`
 </ParamField>
 
+<ParamField query="page_size" type="integer">
+  Rows per page (default: 10, max: 100). Example: `50`
+</ParamField>
+
+<Note>
+  **One row per email.** When `extract_emails_from_website` is on, a business with N verified emails is returned as N rows — one per email, each carrying that email's `email_status`. Paging still counts businesses, so one page may hold more rows than `page_size` when leads have multiple emails. `next` is set whenever more business pages remain.
+</Note>
+
 ## Result Fields
 Each result object contains the following fields:
 

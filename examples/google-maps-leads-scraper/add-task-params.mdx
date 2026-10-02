@@ -40,7 +40,7 @@ Use this format to dynamically define search inputs using structured metadata li
 </Tip>
 
 <Note>
-  The `city` field must include the postal code (e.g., `Anaheim 92801`).
+  The `city` field must include the postal code (e.g., `Anaheim 92801`). The trailing postal code is also what the `geo_match` filter uses to drop results outside the target ZIP — without it, `geo_match` falls back to a 50 km radius around the search center.
 </Note>
 
 ## Code Examples
