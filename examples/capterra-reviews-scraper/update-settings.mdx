@@ -1,0 +1,73 @@
+---
+title: "Update Settings"
+description: "Configure Capterra Reviews Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Capterra Reviews Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| sort | string | `Most Recent` | Order in which the reviews are collected. `Most Recent` returns the newest reviews first, so `max_results` keeps the latest ones. `Most Helpful` is Capterra's own default order. Ignored when `fetch_since` is set, because that setting always collects newest first. Regional Capterra sites (e.g. `capterra.co.uk`) only offer `Most Recent` and `Most Helpful`: a task on a regional site with `Highest Rating` or `Lowest Rating` stops with an error — use the `rating` filter instead (e.g. `1-2 stars`). One of: `Most Recent`, `Most Helpful`, `Highest Rating`, `Lowest Rating`. |
+| rating | string | `Any` | Only collect reviews with this overall rating. Applied by Capterra itself, so filtered-out reviews cost nothing. Use `1-2 stars` or `1-3 stars` to focus on the product's weaknesses. On regional sites Capterra filters one exact star value only, so `1 star`, `4-5 stars`, `1-2 stars` and `1-3 stars` are checked by us on each review: more pages are read, but a filtered-out review is never billed. One of: `Any`, `5 stars`, `4 stars`, `3 stars`, `2 stars`, `1 star`, `4-5 stars`, `1-2 stars`, `1-3 stars`. |
+| company_size | string | `Any` | Only collect reviews written by people working in a company of this size. Applied by Capterra itself. One of: `Any`, `Self-employed`, `1-10 employees`, `11-50 employees`, `51-200 employees`, `201-500 employees`, `501-1,000 employees`, `1,001-5,000 employees`, `5,001-10,000 employees`, `10,001+ employees`. |
+| reviewer_role | string | `Any` | Only collect reviews from reviewers with this role towards the product, as declared to Capterra. `Other` covers team members and people who helped with the purchase. A reviewer can declare several roles. Applied by Capterra itself. Not available on Capterra's regional sites: a task on a regional site with this filter set stops with an error. One of: `Any`, `User`, `Administrator`, `Other`. |
+| time_used_product | string | `Any` | Only collect reviews from reviewers who used the product for this long. Applied by Capterra itself. One of: `Any`, `Free Trial`, `Less than 6 months`, `6-12 months`, `1-2 years`, `2+ years`. |
+| frequency_of_use | string | `Any` | Only collect reviews from reviewers who use the product this often. Applied by Capterra itself. Not available on Capterra's regional sites: a task on a regional site with this filter set stops with an error. One of: `Any`, `Daily`, `Weekly`, `Monthly`, `Other`. |
+| fetch_since | fetch_since | — | Only collect reviews written on or after this threshold (based on `written_on`). Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Capterra dates reviews to the day, so every review written on the threshold day is kept. When this is set the reviews are always collected newest first, whatever `sort` says, and the collection stops at the first older review. |
+| fetch_since_timezone | string | — | Timezone used to read an absolute `fetch_since` date, e.g. `America/New_York`. Ignored for relative values. |
+| max_results | integer | — | Maximum number of reviews collected per product URL. Leave empty to collect every review Capterra shows for the product. |
+| max_unique_results_per_run | integer | — | Maximum number of unique reviews retrieved across all tasks in the entire run. Leave empty for unlimited. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "sort": "Lowest Rating",
+    "rating": "1-2 stars",
+    "company_size": "11-50 employees",
+    "max_results": 100
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "sort": "Lowest Rating",
+        "rating": "1-2 stars",
+        "company_size": "11-50 employees",
+        "max_results": 100,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"sort": "Lowest Rating", "rating": "1-2 stars", "company_size": "11-50 employees", "max_results": 100}}
+```
