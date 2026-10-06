@@ -1,0 +1,183 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TripAdvisor Restaurant Details Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TripAdvisor Restaurant Details Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Export Details
+
+<ResponseField name="url" type="string">
+  TripAdvisor URL of the restaurant. When the same restaurant is submitted on several TripAdvisor domains, the first URL collected is kept. Example: `https://www.tripadvisor.com/Restaurant_Review-g187175-d806529-Reviews-Michel_Sarran-Toulouse_Haute_Garonne_Occitanie.html`
+</ResponseField>
+
+<ResponseField name="place_id" type="integer">
+  TripAdvisor internal identifier of the restaurant, identical on every TripAdvisor domain. One row per `place_id`. Example: `806529`
+</ResponseField>
+
+<ResponseField name="name" type="string">
+  Name of the restaurant as listed on TripAdvisor. Example: `Michel Sarran`
+</ResponseField>
+
+<ResponseField name="is_closed" type="boolean">
+  Whether TripAdvisor flags the restaurant as permanently closed. Example: `false`
+</ResponseField>
+
+<ResponseField name="ranking_rank" type="integer">
+  Position of the restaurant in its city ranking. Empty when the listing is closed or delisted. Example: `13`
+</ResponseField>
+
+<ResponseField name="ranking_denominator" type="integer">
+  Total number of restaurants the city ranking is computed against. Example: `1996`
+</ResponseField>
+
+<ResponseField name="ranking_city" type="string">
+  City the ranking refers to. Example: `Toulouse`
+</ResponseField>
+
+<ResponseField name="ranking_text" type="string">
+  Raw ranking sentence as displayed by TripAdvisor. Empty when the listing is closed or delisted. Example: `#13 of 1,996 Restaurants in Toulouse`
+</ResponseField>
+
+<ResponseField name="overall_rating" type="float">
+  Average TripAdvisor rating out of 5. Example: `4.7`
+</ResponseField>
+
+<ResponseField name="review_count" type="integer">
+  Total number of reviews on TripAdvisor. Example: `1636`
+</ResponseField>
+
+<ResponseField name="rating_count_1" type="integer">
+  Number of 1-star reviews. Example: `4`
+</ResponseField>
+
+<ResponseField name="rating_count_2" type="integer">
+  Number of 2-star reviews. Example: `19`
+</ResponseField>
+
+<ResponseField name="rating_count_3" type="integer">
+  Number of 3-star reviews. Example: `90`
+</ResponseField>
+
+<ResponseField name="rating_count_4" type="integer">
+  Number of 4-star reviews. Example: `196`
+</ResponseField>
+
+<ResponseField name="rating_count_5" type="integer">
+  Number of 5-star reviews. Example: `1327`
+</ResponseField>
+
+<ResponseField name="subrating_food" type="float">
+  Aggregate food sub-rating out of 5. `0` means the dimension has never been rated. Example: `4.75`
+</ResponseField>
+
+<ResponseField name="subrating_service" type="float">
+  Aggregate service sub-rating out of 5. `0` means the dimension has never been rated. Example: `4.72`
+</ResponseField>
+
+<ResponseField name="subrating_value" type="float">
+  Aggregate value-for-money sub-rating out of 5. `0` means the dimension has never been rated. Example: `4.35`
+</ResponseField>
+
+<ResponseField name="subrating_atmosphere" type="float">
+  Aggregate atmosphere sub-rating out of 5. `0` means the dimension has never been rated. Example: `4.37`
+</ResponseField>
+
+<ResponseField name="travelers_choice_award_type" type="string">
+  TripAdvisor Travelers' Choice award code for the active year (e.g. `COE`, `BOTB`). Empty when the restaurant has no award. Example: `COE`
+</ResponseField>
+
+<ResponseField name="travelers_choice_year" type="integer">
+  Year of the Travelers' Choice award. Empty when the restaurant has no award. Example: `2026`
+</ResponseField>
+
+<ResponseField name="is_michelin" type="boolean">
+  Whether the restaurant carries a MICHELIN Guide award on its TripAdvisor page. Example: `true`
+</ResponseField>
+
+<ResponseField name="michelin_stars" type="integer">
+  Number of MICHELIN stars. Empty for a MICHELIN distinction that is not a star (e.g. Bib Gourmand). Example: `1`
+</ResponseField>
+
+<ResponseField name="michelin_year" type="integer">
+  Year of the MICHELIN award. Example: `2026`
+</ResponseField>
+
+<ResponseField name="cuisines" type="json">
+  Cuisine types listed on TripAdvisor. Example: `["French", "European", "Healthy"]`
+</ResponseField>
+
+<ResponseField name="price_range" type="string">
+  Price range indicator. Example: `$$$$`
+</ResponseField>
+
+<ResponseField name="address" type="string">
+  Full formatted address of the restaurant. Example: `21 Boulevard Armand Duportal, 31000, Toulouse France`
+</ResponseField>
+
+<ResponseField name="phone" type="string">
+  Contact phone number of the restaurant. Example: `+33 5 61 12 32 32`
+</ResponseField>
+
+<ResponseField name="email" type="string">
+  Contact email address published by the restaurant on TripAdvisor. Empty when the restaurant has not published one. Example: `contact@michel-sarran.com`
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Official website URL of the restaurant. Example: `http://www.michel-sarran.com`
+</ResponseField>
+
+<ResponseField name="lat" type="float">
+  Latitude coordinate of the restaurant. Example: `43.607277`
+</ResponseField>
+
+<ResponseField name="lng" type="float">
+  Longitude coordinate of the restaurant. Example: `1.434596`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"url": "https://www.tripadvisor.com/Restaurant_Review-g187175-d806529-Reviews-Michel_Sarran-Toulouse_Haute_Garonne_Occitanie.html", "place_id": 806529, "name": "Michel Sarran", "is_closed": false, "ranking_rank": 13, "ranking_denominator": 1996, "ranking_city": "Toulouse", "ranking_text": "#13 of 1,996 Restaurants in Toulouse", "overall_rating": 4.7, "review_count": 1636, "rating_count_1": 4, "rating_count_2": 19, "rating_count_3": 90, "rating_count_4": 196, "rating_count_5": 1327, "subrating_food": 4.75, "subrating_service": 4.72, "subrating_value": 4.35, "subrating_atmosphere": 4.37, "travelers_choice_award_type": "COE", "travelers_choice_year": 2026, "is_michelin": true, "michelin_stars": 1, "michelin_year": 2026, "cuisines": ["French", "European", "Healthy"], "price_range": "$$$$", "address": "21 Boulevard Armand Duportal, 31000, Toulouse France", "phone": "+33 5 61 12 32 32", "email": "contact@michel-sarran.com", "website": "http://www.michel-sarran.com", "lat": 43.607277, "lng": 1.434596}]}
+```

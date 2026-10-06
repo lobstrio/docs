@@ -26,7 +26,7 @@ Configure your **Zillow Property Listings Scraper** squid settings.
 | baths | string | Any | Minimum number of bathrooms |
 | home_type | string | Any | Property type filter |
 | status | string | For sale | For sale, Sold, or For rent |
-| days_on_site | string | Any | Only listings published within this window |
+| days_on_site | string | Any | "Listed or Sold Within" filter: only listings published (or sold, in Sold mode) within this window. The API param name stays `days_on_site`. |
 | max_results | integer | 1000 | Max listings per search (Zillow serves ~980 per search) |
 | max_unique_results_per_run | integer | — | Max unique results across all tasks in the run |
 | property_details | boolean | false | Visit each listing page to collect full description, agent contacts, MLS info, year built, HOA fees, price history |

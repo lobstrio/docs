@@ -48,11 +48,27 @@ Each result object contains the following fields:
 </ResponseField>
 
 <ResponseField name="subscribers_count" type="string">
-  Total number of channel subscribers. Example: `183K`
+  Total number of channel subscribers as text (handy for display, but not sortable). Example: `183K`
+</ResponseField>
+
+<ResponseField name="subscribers_number" type="integer">
+  Total number of channel subscribers as an exact integer, so results can be sorted and filtered. `0` for an empty channel. Example: `183000`
 </ResponseField>
 
 <ResponseField name="creation_date" type="datetime">
   Date the YouTube channel was created. Example: `2017-02-16`
+</ResponseField>
+
+<ResponseField name="banner_url" type="string">
+  URL of the channel's banner image. Empty when the channel has no banner.
+</ResponseField>
+
+<ResponseField name="is_verified" type="boolean">
+  Whether the channel has YouTube's verified (or Official Artist Channel) badge. Example: `true`
+</ResponseField>
+
+<ResponseField name="email_source" type="string">
+  Where the email was found: `channel` when it came from the channel's About tab, `video_descriptions` when it was extracted from a video description (including obfuscated forms like `name [at] domain.com`). Empty when no email was found. Example: `channel`
 </ResponseField>
 
 <ResponseField name="country" type="string">

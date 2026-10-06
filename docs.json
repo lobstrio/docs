@@ -167,6 +167,15 @@
             ]
           },
           {
+            "group": "Capterra Reviews Scraper",
+            "pages": [
+              "examples/capterra-reviews-scraper/add-tasks",
+              "examples/capterra-reviews-scraper/update-settings",
+              "examples/capterra-reviews-scraper/get-results",
+              "examples/capterra-reviews-scraper/credit-cost"
+            ]
+          },
+          {
             "group": "Contact Details Scraper",
             "pages": [
               "examples/contact-details/add-tasks",
@@ -729,6 +738,15 @@
             ]
           },
           {
+            "group": "TripAdvisor Restaurant Details Scraper",
+            "pages": [
+              "examples/tripadvisor-details-scraper/add-tasks",
+              "examples/tripadvisor-details-scraper/update-settings",
+              "examples/tripadvisor-details-scraper/get-results",
+              "examples/tripadvisor-details-scraper/credit-cost"
+            ]
+          },
+          {
             "group": "Trustpilot Reviews Scraper",
             "pages": [
               "examples/trustpilot-reviews-scraper/add-tasks",
@@ -891,6 +909,7 @@
           {
             "group": "2026",
             "pages": [
+              "changelog/2026-10-06",
               "changelog/2026-09-29",
               "changelog/2026-09-22",
               "changelog/2026-09-16",

@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your TripAdvisor Restaurant Details Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add TripAdvisor restaurant URLs to your **TripAdvisor Restaurant Details Scraper** squid.
+
+<Note>Crawler ID: `be5fc6c070c94f1606c99c2f1f488033`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  URL of a TripAdvisor restaurant page. Supported TripAdvisor domains: `.com`, `.fr`, `.co.uk`, `.it`, `.de`, `.es`, `.ca`, `.in`, `.jp`. For the fastest runs, group URLs that share the same TripAdvisor domain (all `.com` together, all `.fr` together, …) in the same squid: each switch between domains forces a new anti-bot challenge and slows the run down. Ranking details (city, position) are richest on `.com` URLs. Example: `https://www.tripadvisor.com/Restaurant_Review-g187175-d806529-Reviews-Michel_Sarran-Toulouse_Haute_Garonne_Occitanie.html`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url": "https://www.tripadvisor.com/Restaurant_Review-g187175-d806529-Reviews-Michel_Sarran-Toulouse_Haute_Garonne_Occitanie.html"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "YOUR_SQUID_HASH",
+        "tasks": [
+            {"url": "https://www.tripadvisor.com/Restaurant_Review-g187175-d806529-Reviews-Michel_Sarran-Toulouse_Haute_Garonne_Occitanie.html"}
+        ],
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.tripadvisor.com/Restaurant_Review-g187175-d806529-Reviews-Michel_Sarran-Toulouse_Haute_Garonne_Occitanie.html"}, "object": "task"}]}
+```
