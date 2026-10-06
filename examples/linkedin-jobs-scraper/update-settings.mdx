@@ -34,8 +34,8 @@ Configure your **LinkedIn Jobs Scraper** squid settings.
 | max_unique_results_per_run | int | — | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
 | fetch_since | fetch_since | — | Only collect jobs posted after this threshold (based on `posted_at`) — applied directly in the LinkedIn search, so filtered-out jobs cost nothing. Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM:SS). NB: LinkedIn exposes posting dates with daily granularity. |
 | fetch_since_timezone | string | — | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values. |
-| job_details | boolean | true | Visit each job posting page to collect the full description, structured salary, seniority, industries, recruiter and apply link. Disable for faster, listing-only runs. |
-| company_details | boolean | false | Visit each hiring company's LinkedIn page to collect website, industry, headcount, followers, founding year, headquarters and specialties. |
+| job_details | boolean | false | Paid add-on. Visit each job posting page to collect the full description, structured salary, seniority, industries, recruiter and apply link. When off, you get the fields shown in the search results only. Free when the task input is a single job URL, since that posting page is already scraped in full. Costs 1 extra credit per job. |
+| company_details | boolean | false | Paid add-on. Visit each hiring company's LinkedIn page to collect website, industry, headcount, followers, founding year, headquarters and specialties. Costs 1 extra credit per job. |
 
 ## Code Examples
 

@@ -28,13 +28,13 @@ Configure your **LinkedIn Search Scraper** squid settings.
 | first_name | string | — | People search only. Keeps only profiles whose first name matches. |
 | last_name | string | — | People search only. Keeps only profiles whose last name matches. |
 | title | string | — | People search only. Free-text job title filter. LinkedIn matches it against the current title. |
-| company | string | — | People search only. Free-text company filter. For an exact company page use `current_company_url` instead. |
+| company | string | — | People search only. Free-text company filter. For an exact company page use `current_company_url` instead — if both are filled, `current_company_url` wins. |
 | current_company_url | string | — | People search only. LinkedIn company page URL or slug. Resolved to LinkedIn's company id; keeps only people currently working there. Costs one extra request per task. |
 | school | string | — | People search only. Free-text school filter. |
-| network | string | — | People search only. Connection degrees to keep, comma separated: `F` (1st), `S` (2nd), `O` (3rd+). Example: `F,S`. |
+| network | string | — | People search only. Connection degrees to keep, from `1st`, `2nd`, `3rd+`. Comma separated for several (e.g. `1st,2nd`). |
 | profile_language | string | — | People search only. Two-letter profile language codes, comma separated (e.g. `fr` or `en,fr`). |
-| location | string | — | LinkedIn numeric geo id, comma separated for several (e.g. `103644278` for the United States). Applies to people (member location) and companies (headquarters location). The id is the `geoUrn` value of a LinkedIn search URL. |
-| industry | string | — | Company search only. LinkedIn numeric industry id, comma separated (e.g. `6` for Software Development). The id is the `industryCompanyVertical` value of a LinkedIn company search URL. |
+| location | string | — | A place name (e.g. `France`, `Paris`, or `Paris Texas` to pick one city among namesakes). LinkedIn's numeric geo id still works (e.g. `103644278` for the United States). Comma separated for several. Applies to people (member location) and companies (headquarters location). |
+| industry | string | — | Company search only. An industry name as LinkedIn lists it (e.g. `Software Development`, `Hospitals and Health Care`). LinkedIn's numeric industry id still works. Comma separated for several. |
 | max_results | integer | 1000 | Maximum number of rows to collect per search URL. LinkedIn never returns more than about 1,000 results for one search, whatever this is set to. |
 | max_unique_results_per_run | integer | — | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
 | profile_details | boolean | false | People search only. Opens each profile once to add the About text, current position, full experience, education, skills, open-to-work and creator flags and the cover photo. Costs 1 extra credit per profile. |
@@ -50,8 +50,8 @@ curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
   -H "Content-Type: application/json" \
   -d '{
     "title": "CEO",
-    "location": "103644278",
-    "network": "F,S",
+    "location": "United States",
+    "network": "1st,2nd",
     "max_results": 500,
     "profile_details": true
   }'
@@ -68,8 +68,8 @@ response = requests.post(
     },
     json={
         "title": "CEO",
-        "location": "103644278",
-        "network": "F,S",
+        "location": "United States",
+        "network": "1st,2nd",
         "max_results": 500,
         "profile_details": True,
     },
@@ -81,5 +81,5 @@ print(response.json())
 ## Response
 
 ```json 201
-{"params": {"title": "CEO", "location": "103644278", "network": "F,S", "max_results": 500, "profile_details": true}}
+{"params": {"title": "CEO", "location": "United States", "network": "1st,2nd", "max_results": 500, "profile_details": true}}
 ```

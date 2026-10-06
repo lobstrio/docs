@@ -87,6 +87,44 @@ Each result object contains the following fields:
   Search results page number (1 = first page of results). Example: `1`
 </ResponseField>
 
+### Collect Shopping Results
+
+<ResponseField name="is_shopping" type="boolean">
+  `true` on a shopping row, `false` on an organic row. Only populated when `collect_shopping_results` is on.
+</ResponseField>
+
+<ResponseField name="seller" type="string">
+  Shopping seller / merchant name. Only populated on shopping rows. Example: `Amazon.com`
+</ResponseField>
+
+<ResponseField name="price" type="string">
+  Shopping price as shown by Google (with currency symbol). Only populated on shopping rows. Example: `$29.99`
+</ResponseField>
+
+<ResponseField name="price_amount" type="float">
+  Shopping price as a number. Only populated on shopping rows. Example: `29.99`
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Shopping price currency code. Only populated on shopping rows. Example: `USD`
+</ResponseField>
+
+<ResponseField name="rating" type="float">
+  Shopping product rating out of 5. Only populated on shopping rows when Google shows one. Example: `4.5`
+</ResponseField>
+
+<ResponseField name="rating_count" type="integer">
+  Shopping product rating count. Only populated on shopping rows when Google shows one. Example: `2314`
+</ResponseField>
+
+<ResponseField name="image_url" type="string">
+  Shopping product image URL. Only populated on shopping rows.
+</ResponseField>
+
+<ResponseField name="product_id" type="string">
+  Google's own identifier for the shopping product. Only populated on shopping rows.
+</ResponseField>
+
 ## Response
 
 ```json 200

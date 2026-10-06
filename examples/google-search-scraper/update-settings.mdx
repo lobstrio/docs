@@ -22,12 +22,12 @@ Set these parameters in the `params` object:
 
 | Parameter | Type | Description |
 | --- | --- | --- |
-| **max_pages** | integer | Maximum search result pages to crawl per keyword. Google limits to ~300-400 total results. |
+| **max_pages** | integer | Maximum search result pages to crawl per keyword. Google limits to ~300-400 total results. The scraper always requests 10 results per page and paginates. |
 | **max_unique_results_per_run** | integer | Maximum number of unique results retrieved across all tasks in the entire run. Leave empty for unlimited. |
-| **results_per_page** | integer | Results per page: 10, 20, 30, 40, 50, or 100. Default: 10 |
 | **country** | string | Sets IP origin country and Google domain (e.g., `google.fr` for France). Default: `United States` |
 | **location** | string | Geographic bias for results (state, city). Use Get Geolocation to find valid values. |
 | **language** | string | Language for search results. Defaults to English for the chosen country. |
+| **collect_shopping_results** | boolean | Also collect the Google Shopping results for each keyword (first page, up to 40 products): seller, price, rating, reviews and image. Uses the same country, language and location as the search. Billed at 1 credit per shopping result. Default: `false` |
 
 <Tip>
   Use the Get Geolocation endpoint to discover valid `location` values.
@@ -55,8 +55,8 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
       "language": "English",
       "max_pages": 4,
       "max_unique_results_per_run": 500,
-      "results_per_page": 10,
-      "location": "Alabama"
+      "location": "Alabama",
+      "collect_shopping_results": false
     }
   }'
 ```
@@ -84,8 +84,8 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
             "language": "English",
             "max_pages": 4,
             "max_unique_results_per_run": 500,
-            "results_per_page": 10,
-            "location": "Alabama"
+            "location": "Alabama",
+            "collect_shopping_results": False
         }
     }
 )
@@ -108,8 +108,8 @@ print(f"Location: {data['params']['location']}")
     "language": "English",
     "max_pages": 4,
     "max_unique_results_per_run": 500,
-    "results_per_page": 10,
-    "location": "Alabama"
+    "location": "Alabama",
+    "collect_shopping_results": false
   },
   "to_complete": false,
   "export_unique_results": true
