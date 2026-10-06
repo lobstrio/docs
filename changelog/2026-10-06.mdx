@@ -1,0 +1,103 @@
+---
+title: "October 6, 2026"
+description: "Two new scrapers documented, Google Search Shopping add-on, Trustpilot and YouTube Channel gain new fields, LinkedIn Jobs Full Job Details becomes a paid add-on, MCP now ships 22 tools with Grok and Codex"
+---
+
+<Update label="October 6, 2026" description="Two new scrapers documented, Google Search Shopping add-on, Trustpilot and YouTube Channel gain new fields, LinkedIn Jobs Full Job Details becomes a paid add-on, MCP now ships 22 tools with Grok and Codex">
+
+## Now Documented
+
+Two scrapers that went public in the store had no API documentation. They now have full reference pages — task inputs, squid settings, result fields, and credit cost.
+
+- **[TripAdvisor Restaurant Details Scraper](/examples/tripadvisor-details-scraper/add-tasks)** — paste a list of TripAdvisor restaurant URLs and get one row per place with city ranking, Travelers' Choice and MICHELIN awards, four sub-ratings, the full 1-to-5-star rating distribution, cuisines, price range, address, phone, email, website and GPS coordinates. No account needed.
+- **[Capterra Reviews Scraper](/examples/capterra-reviews-scraper/add-tasks)** — paste a Capterra product URL and export every review of that product: the full pros, cons and overall comments, the reasons for switching and for choosing it, the products the reviewer considered or switched from, all five ratings plus likelihood to recommend, the incentive disclosure, the vendor's public reply and the reviewer's profile (job title, industry, company size, time using the product, LinkedIn verification). Capterra's regional sites (`.co.uk`, `.fr`, `.de`, `.com.br`, …) are supported too. No account, no login.
+
+## New
+
+**Google Search Scraper — Shopping add-on**
+
+A new `collect_shopping_results` setting also collects the Google Shopping results for each keyword (first page, up to 40 products), using the same country, language and location as the organic search. Nine new fields are added to the result schema when the add-on is on: `is_shopping`, `seller`, `price`, `price_amount`, `currency`, `rating`, `rating_count`, `image_url`, `product_id`. Billed at 1 credit per shopping result (on top of the usual 1 credit per organic result). See [update-settings](/examples/google-search-scraper/update-settings) and [get-results](/examples/google-search-scraper/get-results).
+
+**Trustpilot Reviews Scraper — sentiment, topics, review lifecycle, company profile and stats**
+
+The scraper now returns Trustpilot's own sentiment analysis and topic tagging on every review (`review_sentiment`, `review_sentiment_spans`, `review_topics`), the review lifecycle flags (`is_latest_by_consumer`, `is_latest_by_consumer_on_location`, `review_status`, `is_pending`, `is_filtered`, `owner_reply_updated_date`), and the full company profile and stats once per company (`company_name`, `company_category`, `company_page_url`, `company_website`, `company_domain`, `company_country`, `company_claimed`, `company_actively_inviting`, `company_paid_plan`, `company_category_rank`, `company_phone`, `company_email`, `company_address`, `company_description`, `company_logo`, `company_verification`, `company_location_count`, `company_business_closed`, `company_rating_breakdown`, `company_language_breakdown`, `company_reply_percentage`, `company_average_days_to_reply`, `company_negative_reviews_count`, `company_negative_reviews_replied`, `company_last_reply_to_negative`). Timestamps (`date_published`, `experience_date`, `owner_reply_date`, `updated_date`) now come back as true UTC instead of Paris-local time wrongly labelled `Z`. New squid settings: `topics` (filter by topic), `search_mode` ("Any of the words" / "Exact phrase"), `review_mode` ("Latest review per consumer" / "Full history"), `include_regional_domains`, `reviewer_country`, `sample_size`, `start_page`. The `url` task input now also accepts a bare domain or brand name. See [update-settings](/examples/trustpilot-reviews-scraper/update-settings) and [get-results](/examples/trustpilot-reviews-scraper/get-results).
+
+**LinkedIn Jobs Scraper — Full Job Details becomes a paid add-on**
+
+Opening each job's full page to collect the structured description, salary, seniority, industries, recruiter and apply link is now a billed add-on (`job_details`) at 1 credit per job, and off by default. The lightweight listing fields (title, company, location, posted date, apply link, snippet) stay included at the base 1 credit per job. If the task input is a single job URL, Full Job Details is free (the posting page is already fetched in full). See [update-settings](/examples/linkedin-jobs-scraper/update-settings) and [credit-cost](/examples/linkedin-jobs-scraper/credit-cost).
+
+**YouTube Channel Scraper — four new fields**
+
+New columns on every channel row: `subscribers_number` (exact integer, so you can finally sort and filter — the old `subscribers_count` text like "21.3M subscribers" is still there), `banner_url`, `is_verified`, and `email_source` (`"channel"` when the email came from the channel About tab, `"video_descriptions"` when it was found in a video description). The database migration repairs the previously malformed `url` values (`https://www.youtube.com/c/http%3A%2F%2Fwww.youtube.com%2F%40handle` → `https://www.youtube.com/@handle`) and the one-day-early `creation_date` values on all historic rows. See [get-results](/examples/youtube-channel-email-scraper/get-results).
+
+**MCP — 22 tools, Grok support, Codex setup**
+
+- The lobstr.io MCP server now exposes 22 tools, up from 20: `update_scraper` to change a squid's settings in place, and `wait_for_run` to block until a run finishes (success, error, or timeout) instead of polling.
+- Grok is now a supported client (Grok Bots on a SuperGrok plan, or via a Cursor/Codex bridge). See [the MCP page](/docs/mcp#5-connect-your-client) and the step-by-step [Grok guide](https://help.lobstr.io/integrations/grok).
+- Codex CLI setup is documented end-to-end: `codex mcp add` for the quick path, or a `~/.codex/config.toml` entry for the long-lived one.
+
+## Improved
+
+**Google Search Scraper — keyword input only, filters that filter**
+
+- The task input is now a Google Search **keyword**, not a URL. The field is `keyword`; Google search links are rejected at submission time. Example: `{"keyword": "crab"}`.
+- `results_per_page` was removed from the squid settings — Google ignores `num>10`, so a request for 100 silently returned 10, over-charged pagination, and misled users. The scraper now always requests 10 per page and paginates as needed.
+- `RESULT POSITION` is now the organic rank counted across pages — page 2's first organic result is 11 (not 23), and People Also Ask / related-search rows no longer eat positions 11–22.
+- `PAGE` is now served from the row's own run, so a result deduplicated across runs no longer swaps page numbers between runs.
+
+See [add-tasks](/examples/google-search-scraper/add-tasks) and [update-settings](/examples/google-search-scraper/update-settings).
+
+**LinkedIn Search Scraper — Network Degree pick list, Location and Industry by name**
+
+- `network` is now a pick list with the values LinkedIn's own filter uses: `1st`, `2nd`, `3rd+` (comma-separated for several, e.g. `1st,2nd`). The previous `F`, `S`, `O` codes are no longer accepted.
+- `location` now accepts a place name (e.g. `France`, `Paris`, or `Paris Texas` to pick one city among namesakes). The LinkedIn numeric id still works, and so does a comma-separated list.
+- `industry` now accepts an industry name as LinkedIn lists it (e.g. `Software Development`, `Hospitals and Health Care`). The LinkedIn numeric id still works, and so does a comma-separated list.
+- The `company` tooltip now spells out the precedence rule: if both `company` and `current_company_url` are filled, Current Company URL wins.
+
+See [update-settings](/examples/linkedin-search-scraper/update-settings).
+
+**Crunchbase Companies Scraper — multi-select filters**
+
+`funding_stage` and `employee_count` now accept several values at once, comma-separated (e.g. `funding_stage: "seed,series_a"`, `employee_count: "11-50,51-100"`). The underlying API validation was fixed so comma-separated allowed-list inputs are stored as a clean comma string instead of being rejected as "not one of the allowed values". See [update-settings](/examples/crunchbase-companies-scraper/update-settings).
+
+**Zillow Property Listings Scraper — Settings merge correctly with the URL, cleaner filter labels**
+
+- Settings filters now merge correctly with the pasted URL's filters: Sold or For rent switches the opposite market off, Home Type forces the chosen type on (so Only-Houses no longer silently keeps apartments), and setting one price or bedroom bound keeps the URL's other bound instead of clearing it.
+- The `days_on_site` setting was renamed to `Listed or Sold Within` (API param name unchanged). Tooltips on every filter now state which of the URL and the Settings wins.
+
+See [update-settings](/examples/zillow-property-listings-scraper/update-settings).
+
+**Instagram Search & Hashtags Scraper — "both off" collects both**
+
+When both `get_posts` and `get_reels` are off, the scraper now collects both (the sensible default) instead of silently returning zero rows. If you really want only one, turn one on. See [update-settings](/examples/instagram-hashtags-scraper/update-settings).
+
+**Squid forms — labels, tooltips, and where each setting lives**
+
+Fifteen scrapers had their squid form audited this week. Changes are label- and tooltip-only — no API param names were renamed, so existing integrations keep working.
+
+- Scrapers reworked: LinkedIn Jobs, LinkedIn Search, LinkedIn Company, LinkedIn Company Employees, YouTube Search, YouTube Transcript, TikTok Profile, TikTok Hashtag, Contact Details, Zillow, Naukri Jobs, Facebook Comments, Facebook Ad Library, Similarweb, Glassdoor Jobs, Upwork Jobs, Leboncoin Messages Reader, Quora.
+- The Add tasks form and modal now show each task field's display label (e.g. "Website" on Contact Details, "Profile URL or handle" on TikTok Profile, "Video, channel, playlist or search" on YouTube Search) instead of the raw field name.
+- `Max Results Per Task` moved to Basic Settings on scrapers where it is the main cost cap. `Max Results Per Task` on Contact Details is now hidden (it never did anything there — one website, one row).
+- Similarweb: `Competitor Details` setting relabelled `Competitor Metrics`.
+- YouTube Search: `Get Subtitles` relabelled `Download transcript`, `Subtitle Language` relabelled `Transcript language`, `Has Subtitles/CC` relabelled `Only videos with captions`.
+- Quora: `Resolve Most Viewed Writers` relabelled `Flag Answers From Most-Viewed Writers`.
+
+**Trustpilot Reviews Scraper — brand matching and reviewer_country reliability**
+
+Brand names containing `&` or `+` (e.g. `Procter & Gamble`) are kept intact across every page. The reviewer_country enrichment is now bounded (no runaway scans), and a flaky request now retries on a softer path instead of failing the task.
+
+## Fixed
+
+- **LinkedIn Connections Export** — the `/voyager/.../profileContactInfo` endpoint moved; the module now reads emails from LinkedIn's current profile request, and `410 Gone`, `400`, `429`, `403` on the `/feed/` login check and a repeated `401` or `999` all pause the run (with the account marked `cookies_expired` where appropriate) instead of ending it in ERROR. The connections search also uses LinkedIn's live `queryId` (looked up from the feed scripts, or falls back to the last known one), fixing the empty 400 responses. Email and profile lookups now count under the account's daily profiles limit.
+- **Sales Navigator Leads Scraper** — a LinkedIn `429 Too Many Requests` now pauses the run while the account cools down, instead of raising `AssertionError` and ending the run in ERROR.
+- **Sales Navigator Profile Scraper** — same `429` fix; saved-search tasks no longer swallow a run-level pause.
+- **YouTube Channel Scraper** — items on the Playlists tab that are podcasts or shows now link to their playlist page (`/playlist?list=...`), not to a `/watch?v=PL...` URL that doesn't open. Shorts, playlist links, creation date, non-English handles and emails obfuscated as `name [at] domain.com` are now handled; the collector pages past 30 items and no longer leaks the previous channel after a 404.
+- **TikTok Comments Scraper** — a proxy or network failure now rotates to a new proxy exit before each retry. After five failed exits in a row, the run pauses for an hour instead of crashing.
+- **TikTok Hashtag Scraper** — waits up to 200 s for page 1 (TikTok is slow on cold hashtags), rotates proxy on retry, and `NotFound` is only raised on TikTok's own "video currently not available" response.
+- **Idealista Listings Search Export** — new-build units no longer come back with an empty `condition`; the parser now reads Idealista's "New home development" phrase.
+- **Google Maps Leads Scraper** — `geo_match` is tightened to postal code, parses two-part UK postcodes, tolerates partial codes, and drops results without a ZIP when the task has one. The duplicate `auto_verify_emails` squid param (two entries with the same name in `lobstr.json`) was dropped. Finished runs are frozen so a later run never rewrites the email-verification verdicts of a completed one (placeholder/template emails are short-circuited before the verifier call; template local-parts are only dropped on freemail domains).
+- **SeLoger Search Export** — `short_description` now defaults to `None` when the listing has no description, fixing the `ItemNotFound` crash.
+- **Trustpilot Reviews Scraper** — the WAF token minter runs on both Node 18 and Node 20.
+- **Yelp Reviews Scraper** — `not_recommended` reviews now show up on biz pages whose URL alias differs from Yelp's canonical alias.
+
+</Update>
