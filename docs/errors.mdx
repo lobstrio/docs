@@ -124,7 +124,7 @@ These indicate a problem with the account attached to the squid. Re-sync or repl
 | `tasks_done` | All tasks completed successfully |
 | `no_credits_left` | Account ran out of lobstr.io credits |
 | `deactivated` | Run was deactivated |
-| `website_inaccessible` | Target website is currently down |
+| `website_inaccessible` | Target website blocked requests (403/429) or is down (5xx) — run paused 10 minutes, then resumes |
 | `premium_plan_needed` | A premium plan is required to run this module |
 | `module_under_maintenance` | Module is temporarily under maintenance |
 | `request_failed` | A request failed — run paused for 6 hours |

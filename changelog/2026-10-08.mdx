@@ -1,9 +1,9 @@
 ---
 title: "October 8, 2026"
-description: "Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field; Pinterest pins with an encoded id no longer stop the run"
+description: "Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field; a blocked or down website now pauses the run instead of ending it in error; Pinterest pins with an encoded id no longer stop the run"
 ---
 
-<Update label="October 8, 2026" description="Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field; Pinterest pins with an encoded id no longer stop the run">
+<Update label="October 8, 2026" description="Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field; a blocked or down website now pauses the run instead of ending it in error; Pinterest pins with an encoded id no longer stop the run">
 
 ## New
 
@@ -31,6 +31,10 @@ Reddit serves about 1,000 posts per feed at most (new, top, controversial, searc
 **Facebook Marketplace Scraper — Get Listing Details cost spelled out**
 
 Get Listing Details is billed once per squid: on later runs, the listings this squid already enriched are skipped and not billed again. This was already the behaviour; the [credit cost](/examples/facebook-marketplace-scraper/credit-cost) page now says so.
+
+**All scrapers — a blocked or down website pauses the run instead of ending it in error**
+
+When the website being scraped refused our requests (HTTP 403 or 429) or did not answer properly (HTTP 5xx) even after retries, the run used to end as `ERROR`. It now pauses for 10 minutes with `done_reason` `website_inaccessible` and resumes on its own, picking up only the unfinished tasks, up to 3 times per run; a fourth time it ends as `ERROR` as before. Runs you poll or receive by webhook will show `PAUSED` then `RUNNING` again instead of `ERROR`. See [errors](/docs/errors).
 
 ## Fixed
 
