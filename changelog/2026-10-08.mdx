@@ -1,9 +1,9 @@
 ---
 title: "October 8, 2026"
-description: "Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field"
+description: "Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field; Pinterest pins with an encoded id no longer stop the run"
 ---
 
-<Update label="October 8, 2026" description="Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field">
+<Update label="October 8, 2026" description="Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field; Pinterest pins with an encoded id no longer stop the run">
 
 ## New
 
@@ -31,5 +31,11 @@ Reddit serves about 1,000 posts per feed at most (new, top, controversial, searc
 **Facebook Marketplace Scraper — Get Listing Details cost spelled out**
 
 Get Listing Details is billed once per squid: on later runs, the listings this squid already enriched are skipped and not billed again. This was already the behaviour; the [credit cost](/examples/facebook-marketplace-scraper/credit-cost) page now says so.
+
+## Fixed
+
+**Pinterest Scraper — pins with an encoded id**
+
+Pinterest now gives some pins an encoded id such as `e1_AfqPShzqO1C7_LEkrAbtoIWUe2MoGdDTj5vU32Lr9gXn25qs1FpIvg` instead of a number. These pins made the run stop with an error; they are now collected like any other pin. `pin_id` stays a string: store it as text, not as a number. See [get-results](/examples/pinterest-scraper/get-results).
 
 </Update>
