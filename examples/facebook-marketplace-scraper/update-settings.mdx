@@ -49,7 +49,7 @@ Update the configuration of your **Facebook Marketplace Scraper** squid. Pass cr
 </ParamField>
 
 <Tip>
-  To collect only new listings on a schedule, set `fetch_since` to the schedule interval (`"24h"` for a daily run, `"7d"` for a weekly one) and `exclude_outside_search` to `true`. Each run then collects, and bills, only the listings published since the previous run.
+  To collect only new listings on a schedule, set `fetch_since` to the schedule interval (`"24h"` for a daily run, `"7d"` for a weekly one). It also applies to the listings under "Results from outside your search", so each run collects, and bills, only the listings published since the previous run. Set `exclude_outside_search` to `true` only if you don't want those listings at all.
 </Tip>
 
 ## Code Examples
