@@ -1,0 +1,24 @@
+---
+title: "October 8, 2026"
+description: "Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field"
+---
+
+<Update label="October 8, 2026" description="Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field">
+
+## New
+
+**Facebook Marketplace Scraper — Newer than and Exclude Results Outside Your Search**
+
+- `fetch_since` (Newer than) keeps only listings published after a point in time: a relative duration (`"24h"`, `"7d"`, `"2w"`) or a date (`YYYY-MM-DD`, read in `fetch_since_timezone` when set). On search URLs, Facebook's matching Date listed filter (last 24 hours, 7 days or 30 days) is added for you, and the older listings Facebook still returns are skipped one by one and not billed. Set it to your schedule interval to collect, and pay for, only the new listings of each run.
+- `exclude_outside_search` (off by default) skips the listings Facebook shows under "Results from outside your search" (outside your search area, or only loosely related to your query) and stops paging once that section starts. Skipped listings are not billed.
+- New result field `is_outside_search`: `true` for the listings under that section, `false` before it, empty on browse and category URLs.
+
+See [update-settings](/examples/facebook-marketplace-scraper/update-settings) and [get-results](/examples/facebook-marketplace-scraper/get-results).
+
+## Improved
+
+**Facebook Marketplace Scraper — Get Listing Details cost spelled out**
+
+Get Listing Details is billed once per squid: on later runs, the listings this squid already enriched are skipped and not billed again. This was already the behaviour; the [credit cost](/examples/facebook-marketplace-scraper/credit-cost) page now says so.
+
+</Update>

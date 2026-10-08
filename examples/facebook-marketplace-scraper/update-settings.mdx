@@ -32,9 +32,25 @@ Update the configuration of your **Facebook Marketplace Scraper** squid. Pass cr
   Maximum number of unique listings retrieved across all tasks in the entire run. Leave empty for unlimited.
 </ParamField>
 
+<ParamField body="params.fetch_since" type="string">
+  Only collect listings published after this point (based on `creation_time`). Use a relative duration (e.g. `"24h"`, `"7d"`, `"2w"`) or an absolute date (`YYYY-MM-DD` or `YYYY-MM-DD HH:MM`). On search URLs, Facebook's matching Date listed filter (last 24 hours, 7 days or 30 days) is added for you. Older listings are skipped and not billed.
+</ParamField>
+
+<ParamField body="params.fetch_since_timezone" type="string">
+  Timezone for interpreting an absolute `fetch_since` date (e.g. `"Europe/Paris"`). Only applies when `fetch_since` is an absolute date — ignored for relative values like `"24h"` or `"7d"`.
+</ParamField>
+
+<ParamField body="params.exclude_outside_search" type="boolean">
+  Skip the listings Facebook shows under "Results from outside your search" (outside your search area, or only loosely related to your query) and stop paging once that section starts. Skipped listings are not billed. Default: `false`.
+</ParamField>
+
 <ParamField body="params.listing_details" type="boolean">
   Visit each listing's detail page to collect additional fields: full description, condition, precise location (latitude/longitude), seller profile, discount price, and structured listing attributes. Requires one additional request per listing.
 </ParamField>
+
+<Tip>
+  To collect only new listings on a schedule, set `fetch_since` to the schedule interval (`"24h"` for a daily run, `"7d"` for a weekly one) and `exclude_outside_search` to `true`. Each run then collects, and bills, only the listings published since the previous run.
+</Tip>
 
 ## Code Examples
 
@@ -47,6 +63,8 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "name": "Facebook Marketplace Paris",
     "params": {
       "max_results": 200,
+      "fetch_since": "24h",
+      "exclude_outside_search": true,
       "listing_details": false
     }
   }'
@@ -67,6 +85,8 @@ response = requests.post(f"{BASE_URL}/squids/{squid_hash}",
         "name": "Facebook Marketplace Paris",
         "params": {
             "max_results": 200,
+            "fetch_since": "24h",
+            "exclude_outside_search": True,
             "listing_details": False
         }
     }
@@ -90,6 +110,8 @@ print(f"Squid updated: {data['name']}")
   },
   "params": {
     "max_results": 200,
+    "fetch_since": "24h",
+    "exclude_outside_search": true,
     "listing_details": false
   },
   "concurrency": 1,

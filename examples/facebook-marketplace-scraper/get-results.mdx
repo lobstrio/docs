@@ -80,6 +80,10 @@ Each result object contains the following fields:
   Marketplace category the listing belongs to. Example: `Musical Instruments`
 </ResponseField>
 
+<ResponseField name="is_outside_search" type="boolean">
+  `true` when Facebook lists the listing under "Results from outside your search" (outside your search area, or only loosely related to your query), `false` before that section. Empty on browse and category URLs. To skip these listings, set `exclude_outside_search` in your squid settings.
+</ResponseField>
+
 ## Detail Fields
 
 The following fields are only populated when `listing_details` is set to `true` in your squid settings.
@@ -168,6 +172,7 @@ The following fields are only populated when `listing_details` is set to `true` 
       "is_live": true,
       "delivery_types": "IN_PERSON",
       "category": "TVs",
+      "is_outside_search": false,
       "description": "Piano rock jam rj661.\nPour les enfants, en bon état.",
       "condition": "Usado — em boas condições",
       "location_text": "Lapeyrouse-Mornay, ARA",
