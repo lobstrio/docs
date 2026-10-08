@@ -27,8 +27,9 @@ Set these parameters in the `params` object:
 | **fetch_since** | string | null | Stop collecting content older than this threshold. The task ends at the first older post, so use it with `sort_subreddit` set to `new`. Use a relative duration (`24h`, `7d`, `2w`) or absolute date (`YYYY-MM-DD HH:MM:SS`) |
 | **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values |
 | **sort_comments** | string | `best` | Sort order for post thread comments: `best`, `top`, `new`, `controversial`, `old`, `q&a` |
-| **sort_search** | string | `relevance` | Sort order for search results: `relevance`, `hot`, `top`, `new`, `comments` |
-| **sort_subreddit** | string | `hot` | Sort order for subreddit feeds: `hot`, `new`, `top`, `rising`, `controversial`. `top` and `controversial` cover the last 24 hours (Reddit's default period). For another period, keep `hot` and put the sort in the URL (`https://www.reddit.com/r/Bitcoin/top/?t=all`, `?t=year`, `?t=month`) |
+| **sort_search** | string | `relevance` | Sort order for search results: `relevance`, `hot`, `top`, `new`, `comments`. With `relevance`, `top` or `comments`, the time window is set by `sort_period` |
+| **sort_subreddit** | string | `hot` | Sort order for subreddit feeds: `hot`, `new`, `top`, `rising`, `controversial`. With `top` and `controversial`, the time window is set by `sort_period` |
+| **sort_period** | string | `all` | Time window of the ranking: `all`, `year`, `month`, `week`, `day`, `hour`. Applies to subreddit feeds sorted by `top` or `controversial`, and to searches sorted by `relevance`, `top` or `comments`. A `t` already in the task URL (e.g. `https://www.reddit.com/r/Bitcoin/top/?t=year`) wins |
 | **include_nsfw** | boolean | `false` | Include NSFW (adult) posts and comments in results |
 | **skip_comments** | boolean | `false` | Return only post rows — skip all comments |
 | **skip_posts** | boolean | `false` | Skip post rows. For post URLs: returns comments only. For user URLs: returns profile and comments. For subreddit URLs: returns subreddit metadata only |

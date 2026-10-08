@@ -1,11 +1,18 @@
 ---
 title: "October 8, 2026"
-description: "Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field"
+description: "Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field"
 ---
 
-<Update label="October 8, 2026" description="Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field">
+<Update label="October 8, 2026" description="Reddit Scraper gains Sort Period; Facebook Marketplace Scraper gains Newer than, an option to exclude results outside your search, and a new is_outside_search field">
 
 ## New
+
+**Reddit Scraper — Sort Period**
+
+- `sort_period` sets the time window of a ranking: `all` (default), `year`, `month`, `week`, `day` or `hour`. It applies to subreddit feeds sorted by `top` or `controversial`, and to searches sorted by `relevance`, `top` or `comments`. A `t` already in the task URL (e.g. `https://www.reddit.com/r/Bitcoin/top/?t=year`) wins.
+- Squids already set to `top` or `controversial` now rank over all time. Reddit's own default for these feeds is the last 24 hours, which is what they returned until now: set `sort_period` to `day` to keep that.
+
+See [update-settings](/examples/reddit-scraper/update-settings).
 
 **Facebook Marketplace Scraper — Newer than and Exclude Results Outside Your Search**
 
@@ -16,6 +23,10 @@ description: "Facebook Marketplace Scraper gains Newer than, an option to exclud
 See [update-settings](/examples/facebook-marketplace-scraper/update-settings) and [get-results](/examples/facebook-marketplace-scraper/get-results).
 
 ## Improved
+
+**Reddit Scraper — feed limits spelled out**
+
+Reddit serves about 1,000 posts per feed at most (new, top, controversial, search), so on a busy subreddit `new` only reaches back a few weeks. The [update-settings](/examples/reddit-scraper/update-settings) page now explains how to go further back (several sorts and periods, plus keyword searches scoped to the subreddit), and that `fetch_since` ends the task at the first older post, so it belongs with `sort_subreddit` set to `new`.
 
 **Facebook Marketplace Scraper — Get Listing Details cost spelled out**
 
