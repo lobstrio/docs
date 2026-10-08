@@ -24,11 +24,11 @@ Set these parameters in the `params` object:
 | --- | --- | --- | --- |
 | **max_results** | integer | unlimited | Maximum number of rows (posts + comments) to collect per task |
 | **max_unique_results_per_run** | integer | unlimited | Maximum unique results across all tasks in the run |
-| **fetch_since** | string | null | Stop collecting content older than this threshold. Use a relative duration (`24h`, `7d`, `2w`) or absolute date (`YYYY-MM-DD HH:MM:SS`) |
+| **fetch_since** | string | null | Stop collecting content older than this threshold. The task ends at the first older post, so use it with `sort_subreddit` set to `new`. Use a relative duration (`24h`, `7d`, `2w`) or absolute date (`YYYY-MM-DD HH:MM:SS`) |
 | **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values |
 | **sort_comments** | string | `best` | Sort order for post thread comments: `best`, `top`, `new`, `controversial`, `old`, `q&a` |
 | **sort_search** | string | `relevance` | Sort order for search results: `relevance`, `hot`, `top`, `new`, `comments` |
-| **sort_subreddit** | string | `hot` | Sort order for subreddit feeds: `hot`, `new`, `top`, `rising`, `controversial` |
+| **sort_subreddit** | string | `hot` | Sort order for subreddit feeds: `hot`, `new`, `top`, `rising`, `controversial`. `top` and `controversial` cover the last 24 hours (Reddit's default period). For another period, keep `hot` and put the sort in the URL (`https://www.reddit.com/r/Bitcoin/top/?t=all`, `?t=year`, `?t=month`) |
 | **include_nsfw** | boolean | `false` | Include NSFW (adult) posts and comments in results |
 | **skip_comments** | boolean | `false` | Return only post rows — skip all comments |
 | **skip_posts** | boolean | `false` | Skip post rows. For post URLs: returns comments only. For user URLs: returns profile and comments. For subreddit URLs: returns subreddit metadata only |
@@ -53,6 +53,10 @@ Set these parameters in the `params` object:
 
 <Note>
   `fetch_since` filters based on the `created_at` field of each post or comment. It is useful for incremental runs to avoid re-collecting old content.
+</Note>
+
+<Note>
+  Reddit serves about 1,000 posts per feed at most (new, top, controversial, search). On a busy subreddit, `new` only reaches back a few weeks. To go back further, add the same subreddit several times with different sorts and periods in the URL, plus keyword searches scoped to it, then dedupe on `post_id`.
 </Note>
 
 ## Code Examples
