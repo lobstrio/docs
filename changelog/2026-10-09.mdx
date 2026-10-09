@@ -1,0 +1,14 @@
+---
+title: "October 9, 2026"
+description: "Facebook Marketplace Scraper: Get Listing Details no longer gives a listing the date of a suggested listing, and Newer than no longer ends the run early because of it"
+---
+
+<Update label="October 9, 2026" description="Facebook Marketplace Scraper: Get Listing Details no longer gives a listing the date of a suggested listing, and Newer than no longer ends the run early because of it">
+
+## Fixed
+
+**Facebook Marketplace Scraper — `creation_time` with Get Listing Details**
+
+A listing page also shows listings Facebook suggests, each with its own date, and some listing pages (real estate, such as mobile homes) carry no date for the listing itself. With Get Listing Details on, a listing could get the `creation_time` of a suggested listing. With `fetch_since` (Newer than) set, that wrong date could end the task early, as if older listings had been reached. Listings now keep their own `creation_time`, and older listings are skipped one by one without ending the task. See [get-results](/examples/facebook-marketplace-scraper/get-results).
+
+</Update>
