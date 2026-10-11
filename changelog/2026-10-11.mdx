@@ -1,0 +1,14 @@
+---
+title: "October 11, 2026"
+description: "A proxy, network or browser failure on our side now pauses the run for 10 minutes with the new done_reason temporary_issue, instead of ending it in error"
+---
+
+<Update label="October 11, 2026" description="A proxy, network or browser failure on our side now pauses the run for 10 minutes with the new done_reason temporary_issue, instead of ending it in error">
+
+## Improved
+
+**All scrapers — a temporary failure on our side pauses the run instead of ending it in error**
+
+When a proxy dropped the connection, the network cut out, or the browser that loads pages for some scrapers (such as TikTok Hashtag Scraper) timed out, even after retries, the run used to end as `ERROR` until our team relaunched it. It now pauses for 10 minutes with the new `done_reason` `temporary_issue` and resumes on its own, picking up only the unfinished tasks. These pauses count together with `website_inaccessible`: up to 3 per run, and a fourth stop ends the run as `ERROR` as before. Runs you poll or receive by webhook will show `PAUSED` then `RUNNING` again instead of `ERROR`. See [errors](/docs/errors).
+
+</Update>
