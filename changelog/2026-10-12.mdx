@@ -1,0 +1,20 @@
+---
+title: "October 12, 2026"
+description: "Sales Navigator Leads Scraper: split_search covers the whole search again, on LinkedIn's current seniority and industry ids, and says when it cannot"
+---
+
+<Update label="October 12, 2026" description="Sales Navigator Leads Scraper: split_search covers the whole search again, on LinkedIn's current seniority and industry ids, and says when it cannot">
+
+## Fixed
+
+**Sales Navigator Leads Scraper — `split_search` returned a fraction of large searches**
+
+`split_search` cut a search over 2,500 leads into sub-searches on seniority ids LinkedIn no longer uses, so the sub-searches covered only part of the search: a 2,504-lead search came back with 482 unique leads. It now splits on LinkedIn's current seniority values (In Training to Owner / Partner), and by industry on LinkedIn's 20 top-level industries, each with its sub-industries. A last sub-search collects the leads that have none of those values (a lead with no seniority, for example). Runs that used `split_search` between late September and October 12, 2026 may have missed leads: rerun them.
+
+## Improved
+
+**Sales Navigator Leads Scraper — the run log says when `split_search` cannot reach every lead**
+
+When one sub-search still holds more than 2,500 leads, or when the sub-searches add up to less than the search, the run log now shows a line starting with ⚠️ instead of returning fewer leads without a word. See [Split Search](https://help.lobstr.io/guides/sales-navigator/split-search).
+
+</Update>
