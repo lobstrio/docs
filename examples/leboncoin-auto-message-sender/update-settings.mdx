@@ -23,7 +23,7 @@ Configure the message content and targeting:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | **message** | string | — | Template for the message sent to sellers. Supports dynamic variables (see below) |
-| **one_message_per_seller** | boolean | false | Send at most one message per seller in this squid: a listing is skipped when this squid already messaged its seller on another listing, for example a listing the seller deleted and posted again. Matched on the seller's Leboncoin account (`owner_id` in the results), not the pseudo. Skipped listings are not billed and do not count toward `max_results` |
+| **one_message_per_seller** | boolean | false | Send at most one message per seller in this squid: a listing is skipped when this squid already messaged its seller on another listing, for example a listing the seller deleted and posted again. Matched on the seller's Leboncoin account (`owner_id` in the results), not the pseudo. Skipped listings are not billed, do not count toward `max_results` and are left out of the results (the run log lists them) |
 | **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `last_publication_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM:SS) |
 | **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Only applies when `fetch_since` is an absolute date — ignored for relative values like `24h` or `7d`. See [supported timezones](/docs/timezones). |
 | **max_results** | integer | null | Maximum number of listings to process before stopping |
