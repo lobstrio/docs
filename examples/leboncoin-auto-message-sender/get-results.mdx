@@ -35,6 +35,10 @@ Each result object contains the following fields:
   Unique identifier for the Leboncoin listing this message was sent to. Example: `3165893393`
 </ResponseField>
 
+<ResponseField name="owner_id" type="string">
+  Leboncoin identifier of the seller's account. It stays the same when the seller changes pseudo or posts the listing again, and is what `one_message_per_seller` matches on. Empty on messages sent before October 2026. Example: `5f0c2a7e-3b1d-4c8e-9a6f-2d4b7e1c0a93`
+</ResponseField>
+
 <ResponseField name="url" type="string">
   Direct URL to the listing on Leboncoin. Example: `https://www.leboncoin.fr/ad/ventes_immobilieres/3165893393`
 </ResponseField>
@@ -65,7 +69,7 @@ Sasha`
 </ResponseField>
 
 <ResponseField name="was_already_sent" type="boolean">
-  Whether this message was already sent in a previous run. Example: `false`
+  `true` when no new message was sent because this squid had already messaged this listing, or its seller on another listing (`one_message_per_seller`). Example: `false`
 </ResponseField>
 
 <ResponseField name="last_publication_date" type="datetime">
@@ -93,6 +97,7 @@ Sasha`
       "squid": "0edb27ee3753f6a9cc04fe723532f667",
       "run": "b4c057e086be2a3bb9a11bff058d7728",
       "annonce_id": "3165893393",
+      "owner_id": "5f0c2a7e-3b1d-4c8e-9a6f-2d4b7e1c0a93",
       "url": "https://www.leboncoin.fr/ad/ventes_immobilieres/3165893393",
       "message": "Hello toutong972,\n\nJe viens de voir votre article qui porte le nom:\nTerrain à vendre Plassac 970M2\n\nL'offre m'intéresse?\nEst-ce que vous pouvez me recontacter via la messagerie leboncoin?\n\nA très vite,\nSasha",
       "message_hash": "",

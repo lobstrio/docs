@@ -1,9 +1,18 @@
 ---
 title: "October 12, 2026"
-description: "Sales Navigator Leads Scraper: split_search covers the whole search again, on LinkedIn's current seniority and industry ids, and says when it cannot"
+description: "Leboncoin Auto Message Sender gains One Message Per Seller and a new owner_id field; Sales Navigator Leads Scraper: split_search covers the whole search again, on LinkedIn's current seniority and industry ids, and says when it cannot"
 ---
 
-<Update label="October 12, 2026" description="Sales Navigator Leads Scraper: split_search covers the whole search again, on LinkedIn's current seniority and industry ids, and says when it cannot">
+<Update label="October 12, 2026" description="Leboncoin Auto Message Sender gains One Message Per Seller and a new owner_id field; Sales Navigator Leads Scraper: split_search covers the whole search again, on LinkedIn's current seniority and industry ids, and says when it cannot">
+
+## New
+
+**Leboncoin Auto Message Sender — One Message Per Seller**
+
+- `one_message_per_seller` (off by default) sends at most one message per seller in a squid. A seller who deletes a listing and posts it again gets a new listing id, so until now they could receive the same message twice. With the option on, a listing is skipped when the squid already messaged its seller on another listing: no message, not billed, not counted toward `max_results`, and left out of the results (the run log names it).
+- New result field `owner_id`: the seller's Leboncoin account identifier, which stays the same when the seller changes pseudo or posts again. It is stored from today on: messages sent earlier have no `owner_id`, so for them only the per-listing check applies.
+
+See [update-settings](/examples/leboncoin-auto-message-sender/update-settings) and [get-results](/examples/leboncoin-auto-message-sender/get-results).
 
 ## Fixed
 

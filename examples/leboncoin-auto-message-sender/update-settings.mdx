@@ -23,6 +23,7 @@ Configure the message content and targeting:
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
 | **message** | string | — | Template for the message sent to sellers. Supports dynamic variables (see below) |
+| **one_message_per_seller** | boolean | false | Send at most one message per seller in this squid: a listing is skipped when this squid already messaged its seller on another listing, for example a listing the seller deleted and posted again. Matched on the seller's Leboncoin account (`owner_id` in the results), not the pseudo. Skipped listings are not billed and do not count toward `max_results` |
 | **fetch_since** | string | null | Stop scraping when items older than this threshold are reached (based on `last_publication_date`). Use a relative duration (24h, 7d, 2w) or an absolute date (YYYY-MM-DD HH:MM:SS) |
 | **fetch_since_timezone** | string | null | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Only applies when `fetch_since` is an absolute date — ignored for relative values like `24h` or `7d`. See [supported timezones](/docs/timezones). |
 | **max_results** | integer | null | Maximum number of listings to process before stopping |
@@ -58,7 +59,7 @@ Configure general squid settings:
 </Warning>
 
 <Note>
-  The same message will not be sent twice to the same listing (duplicate detection via message_hash).
+  A squid never messages the same listing twice, even after you edit the message template. Set `one_message_per_seller` to `true` to also skip the other listings of a seller this squid already messaged. Both checks are per squid: two squids can message the same seller. Messages sent before October 2026 were stored without the seller's `owner_id`, so for those only the per-listing check applies.
 </Note>
 
 ## Code Examples
@@ -76,6 +77,7 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "no_line_breaks": true,
     "params": {
       "message": "Hello #pseudo#,\n\nI want to enquire about #title#.",
+      "one_message_per_seller": true,
       "fetch_since": 1,
       "max_results": 3,
       "max_unique_results_per_run": 10
@@ -104,6 +106,7 @@ response = requests.post(f"{BASE_URL}/squids/{squid_id}",
         "params": {
             # Message template with dynamic variables
             "message": "Hello #pseudo#,\n\nI want to enquire about #title#.",
+            "one_message_per_seller": True,  # Skip sellers this squid already messaged
             "fetch_since": 1,           # Only listings from last hour
             "max_results": 3,          # Process max 3 listings
             "max_unique_results_per_run": 10  # Max 10 per run
@@ -126,6 +129,7 @@ print(response.json())
   "no_line_breaks": true,
   "params": {
     "message": "Hello #pseudo#,\n\nI want to enquire about #title#.",
+    "one_message_per_seller": true,
     "max_unique_results_per_run": 20,
     "fetch_since": 1,
     "max_results": 3
