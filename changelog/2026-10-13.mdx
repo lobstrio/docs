@@ -1,0 +1,20 @@
+---
+title: "October 13, 2026"
+description: "Sales Navigator Leads Scraper: split_search no longer stops a sub-search on a page of fewer than 25 leads"
+---
+
+<Update label="October 13, 2026" description="Sales Navigator Leads Scraper: split_search no longer stops a sub-search on a page of fewer than 25 leads">
+
+## Fixed
+
+**Sales Navigator Leads Scraper — `split_search` stopped a sub-search on a short page**
+
+LinkedIn sometimes returns 24 leads on a page in the middle of a search. `split_search` took any page of fewer than 25 leads for the last one, so a sub-search could stop long before its total: a 2,504-lead search came back with 496 unique leads, its 2,383-lead sub-search stopped at 149. A sub-search now runs to its total (up to LinkedIn's 2,500), or until LinkedIn returns an empty page. The same fix applies to a search without `split_search` when LinkedIn returns no usable total. This stop dates from the first version of `split_search` (June 2026): a run that used it before October 13, 2026 may have missed leads, rerun it.
+
+## Improved
+
+**Sales Navigator Leads Scraper — the run log says when a sub-search ends short of its total**
+
+When LinkedIn stops returning leads for a sub-search well before its total, the run log shows `⚠️ Sub-search 2/11 ended with 150 of its 2383 leads: LinkedIn returned no more.` See [Split Search](https://help.lobstr.io/guides/sales-navigator/split-search).
+
+</Update>
