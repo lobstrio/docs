@@ -70,6 +70,10 @@ This endpoint creates new tasks within a specified squid. Tasks define the speci
   Duplicate tasks (same parameters) are automatically detected and not added. Check duplicated_count in the response.
 </Note>
 
+<Note>
+  Tasks you add while a run is in progress join that run: it checks the task list again each time a scraper finishes a task. If the run has already finished, start a new one with Start Run.
+</Note>
+
 <Warning>
   Task parameters vary by crawler. Using invalid keys will result in task creation failure.
 </Warning>
