@@ -522,15 +522,6 @@
             ]
           },
           {
-            "group": "LinkedIn Profile & Email Scraper (No Login)",
-            "pages": [
-              "examples/linkedin-profile-email-scraper-no-login/add-tasks",
-              "examples/linkedin-profile-email-scraper-no-login/update-settings",
-              "examples/linkedin-profile-email-scraper-no-login/get-results",
-              "examples/linkedin-profile-email-scraper-no-login/credit-cost"
-            ]
-          },
-          {
             "group": "LinkedIn Profile Scraper",
             "pages": [
               "examples/linkedin-profile-scraper/add-tasks",
@@ -969,5 +960,11 @@
       "label": "Get Started",
       "href": "https://app.lobstr.io"
     }
-  }
+  },
+  "redirects": [
+    { "source": "/examples/linkedin-profile-email-scraper-no-login/add-tasks", "destination": "/examples/linkedin-profile-scraper/add-tasks" },
+    { "source": "/examples/linkedin-profile-email-scraper-no-login/update-settings", "destination": "/examples/linkedin-profile-scraper/update-settings" },
+    { "source": "/examples/linkedin-profile-email-scraper-no-login/get-results", "destination": "/examples/linkedin-profile-scraper/get-results" },
+    { "source": "/examples/linkedin-profile-email-scraper-no-login/credit-cost", "destination": "/examples/linkedin-profile-scraper/credit-cost" }
+  ]
 }
