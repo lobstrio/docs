@@ -90,6 +90,11 @@ This endpoint retrieves a paginated list of all connected platform accounts (lik
 
 <ResponseField name="params" type="object">
   Account parameters (default and user-specific). Example: `{"default": {}, "user": {}}`
+  <Expandable title="params.user fields">
+    <ResponseField name="user.is_pro" type="boolean">
+      Leboncoin accounts only. `true` for a professional Leboncoin account, `false` for a personal one. Absent until the account sends a message or is synchronized again.
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
 <ResponseField name="updated_at" type="string | null">

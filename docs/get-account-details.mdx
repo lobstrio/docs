@@ -58,6 +58,11 @@ This endpoint retrieves detailed information about a specific platform account u
 
 <ResponseField name="params" type="object">
   Account parameters with default and user-specific settings. Example: `{"default": {}, "user": {}}`
+  <Expandable title="params.user fields">
+    <ResponseField name="user.is_pro" type="boolean">
+      Leboncoin accounts only. `true` for a professional Leboncoin account, `false` for a personal one. Absent until the account sends a message or is synchronized again.
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
 <ResponseField name="updated_at" type="string | null">

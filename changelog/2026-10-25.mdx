@@ -1,0 +1,28 @@
+---
+title: "October 25, 2026"
+description: "Leboncoin Auto Message Sender: temporary preparation failures pause and resume, new waiting_sending_slot reason, account kind in /v1/accounts"
+---
+
+<Update label="October 25, 2026" description="Leboncoin Auto Message Sender: temporary preparation failures pause and resume, new waiting_sending_slot reason, account kind in /v1/accounts">
+
+## Fixed
+
+**Leboncoin Auto Message Sender — temporary preparation failures no longer end the run**
+
+Since October 21, 2026, part of the runs ended with `done_reason = message_preparation_stopped` (`preparation_or_account_check_failed` in the run log) because the step that prepares each message failed for a moment on lobstr.io's side. The run now pauses about 10 minutes and resumes by itself. A run that ended this way before October 25 can be launched again; a scheduled squid whose last run ended in error stays suspended until it is launched once by hand.
+
+## Improved
+
+**Leboncoin Auto Message Sender — `waiting_sending_slot` replaces `temporary_issue` while a send waits**
+
+When the message preparation is busy, the run pauses with `done_reason = waiting_sending_slot` ("Waiting for a free sending slot.") instead of `temporary_issue`, then resumes in about 10 minutes. See [Errors](/docs/errors).
+
+**Leboncoin Auto Message Sender — `done_reason_desc` on stopped preparations**
+
+`message_preparation_stopped` now comes with a `done_reason_desc`. The run log gives the exact reason, for example a professional account contacting a private holiday rental host, which Leboncoin does not allow.
+
+**Accounts — Leboncoin account kind in `/v1/accounts`**
+
+`params.user.is_pro` is `true` for a professional Leboncoin account and `false` for a personal one. It is filled each time the account sends a message, and at each synchronization. See [List accounts](/docs/list-accounts).
+
+</Update>
