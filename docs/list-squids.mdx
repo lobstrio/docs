@@ -26,6 +26,10 @@ This endpoint returns a paginated list of all squids belonging to the authentica
   Page number for pagination. Example: `2`
 </ParamField>
 
+<ParamField query="sort" type="string">
+  Order of the list, applied before pagination. Omit it for the default order, newest squid first. `activity` lists squids with a run in progress first, then by their latest run, then newest first: the order the dashboard uses. Example: `activity`
+</ParamField>
+
 ## Response Structure
 
 <ResponseField name="total_results" type="integer">
