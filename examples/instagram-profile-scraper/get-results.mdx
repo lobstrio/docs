@@ -267,11 +267,11 @@ Each result object contains the following fields:
 </ResponseField>
 
 <ResponseField name="discovered_from" type="string">
-  Always empty: every row is a profile you submitted. Kept so existing integrations keep the same fields; Discovery Mode was removed on October 26, 2026. Example: `null`
+  Deprecated: always `null` since October 26, 2026, when Discovery Mode was removed. No longer in CSV and other exports. Example: `null`
 </ResponseField>
 
 <ResponseField name="hop_depth" type="integer">
-  Always `0`: every row is a profile you submitted. Kept so existing integrations keep the same fields; Discovery Mode was removed on October 26, 2026. Example: `0`
+  Deprecated: always `null` since October 26, 2026, when Discovery Mode was removed. No longer in CSV and other exports. Example: `null`
 </ResponseField>
 
 <ResponseField name="functions" type="json">
@@ -800,7 +800,7 @@ Each result object contains the following fields:
         "zip_code": null
       },
       "discovered_from": null,
-      "hop_depth": 0,
+      "hop_depth": null,
       "functions": null,
       "native_id": 31297
     }
