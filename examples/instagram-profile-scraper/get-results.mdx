@@ -267,11 +267,11 @@ Each result object contains the following fields:
 </ResponseField>
 
 <ResponseField name="discovered_from" type="string">
-  Username of the input profile this row was discovered from (Discovery Mode). Empty for profiles you submitted directly. Example: `mrbeast`
+  Always empty: every row is a profile you submitted. Kept so existing integrations keep the same fields; Discovery Mode was removed on October 26, 2026. Example: `null`
 </ResponseField>
 
 <ResponseField name="hop_depth" type="integer">
-  Discovery Mode expansion depth: `0` for directly submitted profiles, `1` for their related profiles, `2` for the next level, etc. Example: `1`
+  Always `0`: every row is a profile you submitted. Kept so existing integrations keep the same fields; Discovery Mode was removed on October 26, 2026. Example: `0`
 </ResponseField>
 
 <ResponseField name="functions" type="json">

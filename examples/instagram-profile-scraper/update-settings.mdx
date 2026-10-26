@@ -4,7 +4,7 @@ description: "Configure the Instagram Profile Scraper settings"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
 ---
 
-Configure your Instagram Profile Scraper squid settings. Control the maximum number of profiles collected per task and across the entire run.
+Configure your Instagram Profile Scraper squid settings. Each task returns one profile, the one you submitted; `max_unique_results_per_run` caps the number of profiles across the entire run.
 
 ## Headers
 
@@ -22,9 +22,11 @@ Set these parameters in the `params` object:
 
 | Parameter | Type | Default | Description |
 | --- | --- | --- | --- |
-| **max_results** | integer | unlimited | Maximum number of profiles to collect per task |
 | **max_unique_results_per_run** | integer | unlimited | Maximum number of unique results retrieved across all tasks in the entire run |
-| **discovery_mode** | boolean | false | Expand from your input profiles: after scraping each profile, the crawler also scrapes its `related_profiles`. Use `hop_depth` and `discovered_from` in results to trace the expansion path |
+
+<Warning>
+  `max_results` and `discovery_mode` were removed on October 26, 2026. Sending either one returns `400` with `The specified parameter max_results is invalid.` (or `discovery_mode`).
+</Warning>
 
 ## Squid Settings
 
@@ -60,7 +62,6 @@ curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
     "to_complete": false,
     "no_line_breaks": true,
     "params": {
-      "max_results": 100,
       "max_unique_results_per_run": 1000
     }
   }'
@@ -83,7 +84,6 @@ payload = {
     "to_complete": False,
     "no_line_breaks": True,
     "params": {
-        "max_results": 100,                # Max profiles per task
         "max_unique_results_per_run": 1000 # Total unique profiles limit
     }
 }
@@ -107,7 +107,6 @@ print(f"Settings updated: {response.json()['name']}")
   "to_complete": false,
   "no_line_breaks": true,
   "params": {
-    "max_results": 100,
     "max_unique_results_per_run": 1000
   }
 }

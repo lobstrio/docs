@@ -1,0 +1,22 @@
+---
+title: "October 26, 2026"
+description: "Instagram Profile Scraper: one profile per task, max_results and discovery_mode removed"
+---
+
+<Update label="October 26, 2026" description="Instagram Profile Scraper: one profile per task, max_results and discovery_mode removed">
+
+## Breaking
+
+**Instagram Profile Scraper — `discovery_mode` and `max_results` removed**
+
+`discovery_mode` added the related profiles Instagram suggests for each input profile. Instagram suggests them for only about 1 profile in 8, so most tasks returned nothing more and the cost of a run could not be known in advance. It is gone, and `max_results` (which only capped that expansion) with it. Each task now returns exactly one profile: the one you submitted. Sending either parameter to `POST /v1/squids/{squid_hash}` returns `400` with `The specified parameter discovery_mode is invalid.`; remove it from your payload. Existing squids were updated, nothing else to change. See [Update Settings](/examples/instagram-profile-scraper/update-settings).
+
+`discovered_from` and `hop_depth` stay in the results so integrations keep the same fields: they are always empty and `0`.
+
+## Fixed
+
+**Instagram Profile Scraper — the launch estimate counts one profile per task**
+
+The estimate before a launch assumed up to 100 results per task, so one profile showed about 40 results and 40 credits. It now shows 1 result and 1 credit per task, which is what the run costs.
+
+</Update>
