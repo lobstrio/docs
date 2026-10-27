@@ -1,0 +1,20 @@
+---
+title: "October 27, 2026"
+description: "Google Maps Leads Scraper: Geo Match keeps in-town results in every country"
+---
+
+<Update label="October 27, 2026" description="Google Maps Leads Scraper: Geo Match keeps in-town results in every country">
+
+## Fixed
+
+**Google Maps Leads Scraper: `geo_match` dropped almost every result in Argentina, Luxembourg and Ireland**
+
+When a task's city carries a postal code (`MENDOZA 5500`), `geo_match` keeps only results with the same postal code. Google writes Argentine codes as `M5500` or `C1425ABC`, Luxembourg codes without the `L-` of our city list, and Irish Eircodes in full (`D09 X285` for `Dublin 9 D09`), so these results never matched and were skipped. All three formats now match.
+
+## Improved
+
+**Google Maps Leads Scraper: `geo_match` adds a 10 km radius where postal codes don't line up**
+
+We compared the postal codes of our city list with the ones Google returns, country by country. In the US, Canada, the UK, Ireland, France, Germany, Spain, Italy, the Netherlands, Belgium, Luxembourg, Switzerland, Austria, Poland, Czechia, Slovakia, Monaco and Australia they agree, and the postal code alone still decides. In every other country (Brazil, Chile, Argentina...) a result within 10 km of the city center is now kept too, even when its postal code differs or is missing. Tasks without a postal code, and Google Maps URLs, keep the 50 km radius around the search center. See [Update Settings](/examples/google-maps-leads-scraper/update-settings).
+
+</Update>

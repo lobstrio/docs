@@ -32,7 +32,7 @@ Set these parameters in the `params` object:
 | **verified_filter** | string | all | Filter by owner-claimed status: `all`, `verified_only`, `unverified_only` |
 | **language** | string | — | Language for place names and metadata (e.g., `English (United States)`) |
 | **max_results** | integer | unlimited | Maximum places to collect before task ends |
-| **geo_match** | boolean | true | Only return results that geographically match the searched location |
+| **geo_match** | boolean | true | Only return results located where you searched: same postal code as the task's city (`City 12345`), plus results within 10 km of the city center outside US, CA, GB, IE, FR, DE, ES, IT, NL, BE, LU, CH, AT, PL, CZ, SK, MC, AU; 50 km around the search center when the task has no postal code |
 | **category_match** | boolean | true | Only return results that match the searched business category |
 | **skip_closed** | boolean | false | Skip permanently closed businesses |
 | **website_filter** | string | all | Filter by website presence: `all`, `with_website`, `without_website` |
