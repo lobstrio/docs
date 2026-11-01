@@ -26,6 +26,11 @@ Each task should contain a URL from an Idealista search results page. You can se
 
 The scraper supports Idealista search URLs from various property categories:
 
+- a town or zone: `https://www.idealista.com/en/venta-viviendas/vizcaya/`
+- several zones picked on the map: `https://www.idealista.com/en/multi/venta-viviendas/<zones>/`
+- an area drawn on the map: `https://www.idealista.com/en/areas/venta-viviendas/?shape=...`
+- any of these in map view (ending in `/mapa-google`): the scraper returns the same listings as the list view
+
 <Tip>
   Apply filters on Idealista (price range, property type, number of bedrooms) before copying the URL to get more targeted results.
 </Tip>

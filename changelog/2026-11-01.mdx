@@ -1,0 +1,22 @@
+---
+title: "November 1, 2026"
+description: "Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://"
+---
+
+<Update label="November 1, 2026" description="Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://">
+
+## Fixed
+
+**Idealista Listings Search Export: an area drawn on the map ended as `invalid_url`**
+
+A search drawn on Idealista's map (`/areas/venta-viviendas/...?shape=...`) has no town in its URL, so the task ended with 0 results and `invalid_url`. The drawn area is now searched as it is and returns the listings Idealista shows for it. See [Add Tasks](/examples/idealista-listings-search-export/add-tasks).
+
+**Idealista Listings Search Export: a search in map view ended as `invalid_url`**
+
+The map view of a search (URL ending in `/mapa-google`) is now read like its list view and returns the same listings.
+
+**Facebook Business Page Scraper: a page link without `https://` ended as `not_found`**
+
+A task URL such as `facebook.com/YourPage/` ended as `not_found` within seconds. The scraper now adds `https://` itself.
+
+</Update>
