@@ -72,6 +72,10 @@ This endpoint retrieves detailed information about a specific run using its hash
   Date and time when export was generated. Example: `"2025-02-04T10:26:53.780636"`
 </ResponseField>
 
+<ResponseField name="expires_at" type="string | null">
+  When this run's results stop being downloadable (UTC): the first midnight UTC after `export_time` plus the days your plan keeps results (Free 7, paid plans 45, plans of 1,000,000 credits a month or more 90). From then on [Download Run](/docs/download-run) answers `DataRetentionPeriodExceeded`. Your current plan counts: upgrading opens older runs again, within 90 days of their export. `null` when the run has no results or is not exported yet. Example: `"2025-03-22T00:00:00Z"`
+</ResponseField>
+
 <ResponseField name="done_reason" type="string | null">
   Reason indicating why the run finished (see done reasons table). Example: `"tasks_done"`
 </ResponseField>
@@ -211,6 +215,7 @@ if run['status'] in ['done', 'aborted', 'error']:
   "export_done": true,
   "export_count": 1,
   "export_time": "2025-02-04T10:26:53.780636",
+  "expires_at": "2025-03-22T00:00:00Z",
   "mail_done": false,
   "mail_time": null,
   "email_verification": null,
