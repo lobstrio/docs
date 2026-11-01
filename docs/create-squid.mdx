@@ -34,6 +34,16 @@ A squid acts as a project workspace for your scraping tasks:
   Custom name for the squid. If not provided, an auto-generated name will be used. Example: `"My Google Maps Scraper"`
 </ParamField>
 
+<ParamField body="params" type="object">
+  The crawler's squid-level settings, set at creation. Unset ones keep the crawler's defaults. Example: `{"received_only": true, "fetch_since": "7d"}`
+</ParamField>
+
+<ParamField body="accounts" type="array">
+  Hashes of the connected accounts the squid uses, for crawlers that need one. Example: `["0ecdae5e8cdd4a2c53c034a3047ea9b1"]`
+</ParamField>
+
+Any other field of [Update Squid](/docs/update-squid) (`concurrency`, `cron_expression`, `timezone`...) can be sent too. They are checked like an update: if one is refused, the creation fails with that error and no squid is created.
+
 ## Response Field Explanations
 
 <ResponseField name="id" type="string">
@@ -69,7 +79,7 @@ A squid acts as a project workspace for your scraping tasks:
 </ResponseField>
 
 <Tip>
-  After creating a squid, you can update its parameters and settings using the Update Squid endpoint before adding tasks.
+  Send the squid's settings and accounts with the creation, or change them later with the Update Squid endpoint.
 </Tip>
 
 <Note>

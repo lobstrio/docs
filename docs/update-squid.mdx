@@ -44,6 +44,14 @@ This endpoint updates an existing squid's settings using its hash ID. You can co
   Timezone identifier for schedule execution. Example: `"Europe/Paris"`
 </ParamField>
 
+<ParamField body="params" type="object">
+  The crawler's squid-level settings, from [Get Crawler Parameters](/docs/get-crawler-parameters). **Merged** into the squid's current params: send only what changes, and `functions` merges too. An unknown name is refused with a 400 `InvalidParam`. Example: `{"received_only": true, "fetch_since": "7d"}`
+</ParamField>
+
+<ParamField body="accounts" type="array">
+  Hashes of the connected accounts the squid uses, from [List Accounts](/docs/list-accounts). **Replaces** the squid's accounts: send every account you want, `[]` removes them all. See [Link Account to Squid](/docs/link-account-to-squid). Example: `["0ecdae5e8cdd4a2c53c034a3047ea9b1"]`
+</ParamField>
+
 ## Headers
 
 <ParamField header="Authorization" type="string" required>
