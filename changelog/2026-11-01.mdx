@@ -1,9 +1,9 @@
 ---
 title: "November 1, 2026"
-description: "Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://"
+description: "Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://; Sales Navigator: Email Enrichment off by default"
 ---
 
-<Update label="November 1, 2026" description="Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://">
+<Update label="November 1, 2026" description="Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://; Sales Navigator: Email Enrichment off by default">
 
 ## Fixed
 
@@ -18,5 +18,11 @@ The map view of a search (URL ending in `/mapa-google`) is now read like its lis
 **Facebook Business Page Scraper: a page link without `https://` ended as `not_found`**
 
 A task URL such as `facebook.com/YourPage/` ended as `not_found` within seconds. The scraper now adds `https://` itself.
+
+## Improved
+
+**Sales Navigator Leads Scraper and Sales Navigator Profile Scraper: `email_enrichment` is off by default on new squids**
+
+Email Enrichment costs 9 credits per profile where an email is found, and it was on by default, so a first run could spend most of its credits on emails nobody asked for. New squids now start with `functions.email_enrichment` set to `false`. Existing squids keep their setting. To find emails on a new squid, send `"email_enrichment": true` in `params.functions`. See [Update Settings](/examples/sales-nav-profile-scraper/update-settings).
 
 </Update>
