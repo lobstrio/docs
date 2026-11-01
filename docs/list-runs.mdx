@@ -66,6 +66,10 @@ This endpoint retrieves a paginated list of all runs for a specific squid. Use t
   Credits consumed. Example: `3.1849`
 </ResponseField>
 
+<ResponseField name="data[].expires_at" type="string | null">
+  When this run's results stop being downloadable (UTC): the first midnight UTC after `export_time` plus the days your plan keeps results (Free 7, paid plans 45, plans of 1,000,000 credits a month or more 90). From then on [Download Run](/docs/download-run) answers `DataRetentionPeriodExceeded`. Your current plan counts: upgrading opens older runs again, within 90 days of their export. `null` when the run has no results or is not exported yet. Example: `"2025-03-22T00:00:00Z"`
+</ResponseField>
+
 <ResponseField name="data[].done_reason" type="string | null">
   Reason for completion. Example: `"tasks_done"`
 </ResponseField>
@@ -157,6 +161,7 @@ for run in data['data']:
       "export_done": true,
       "export_count": 1,
       "export_time": "2025-02-04T10:25:25Z",
+      "expires_at": "2025-03-22T00:00:00Z",
       "email_done": null,
       "email_time": null,
       "created_at": "2025-02-04T10:25:13Z",
@@ -181,6 +186,7 @@ for run in data['data']:
       "export_done": true,
       "export_count": 1,
       "export_time": "2025-01-29T09:53:37Z",
+      "expires_at": null,
       "email_done": null,
       "email_time": null,
       "created_at": "2025-01-29T09:53:27Z",

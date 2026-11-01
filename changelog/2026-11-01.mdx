@@ -1,9 +1,9 @@
 ---
 title: "November 1, 2026"
-description: "Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://; Sales Navigator: Email Enrichment off by default"
+description: "Runs: expires_at, when results stop being downloadable; Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://; Sales Navigator: Email Enrichment off by default"
 ---
 
-<Update label="November 1, 2026" description="Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://; Sales Navigator: Email Enrichment off by default">
+<Update label="November 1, 2026" description="Runs: expires_at, when results stop being downloadable; Idealista: areas drawn on the map and map view; Facebook Business Page: links without https://; Sales Navigator: Email Enrichment off by default">
 
 ## Fixed
 
@@ -24,5 +24,9 @@ A task URL such as `facebook.com/YourPage/` ended as `not_found` within seconds.
 **Sales Navigator Leads Scraper and Sales Navigator Profile Scraper: `email_enrichment` is off by default on new squids**
 
 Email Enrichment costs 9 credits per profile where an email is found, and it was on by default, so a first run could spend most of its credits on emails nobody asked for. New squids now start with `functions.email_enrichment` set to `false`. Existing squids keep their setting. To find emails on a new squid, send `"email_enrichment": true` in `params.functions`. See [Update Settings](/examples/sales-nav-profile-scraper/update-settings).
+
+**Runs: `expires_at` says when a run's results stop being downloadable**
+
+Results used to disappear without notice. Every run object now has `expires_at` ([Get Run](/docs/get-run), [List Runs](/docs/list-runs)): the first midnight UTC after `export_time` plus the days your plan keeps results (Free 7, paid plans 45, plans of 1,000,000 credits a month or more 90), `null` for a run without results. From that date [Download Run](/docs/download-run) answers `DataRetentionPeriodExceeded` with the date in its message, for example `Your plan keeps results 45 days: this run's expired on 29 Oct 2026.` Your current plan counts: upgrading opens older runs again, within 90 days of their export. The app shows the same date on each run.
 
 </Update>

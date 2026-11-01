@@ -39,7 +39,11 @@ This endpoint generates a temporary download URL for the results of a specific r
 </ResponseField>
 
 <Warning>
-  Download URLs are temporary and expire after a short period. Generate a new URL if the link expires.
+  Download URLs are temporary: they work for 7 days at most, and never past the run's `expires_at`. Generate a new URL if the link expires.
+</Warning>
+
+<Warning>
+  Results are kept as long as your plan says: Free 7 days, paid plans 45, plans of 1,000,000 credits a month or more 90. Each run's `expires_at` ([Get Run](/docs/get-run), [List Runs](/docs/list-runs)) gives the date. From that date this endpoint answers `400` with `DataRetentionPeriodExceeded`, and a message with the date: `Your plan keeps results 45 days: this run's expired on 22 Mar 2025.` Upgrading opens older runs again, within 90 days of their export.
 </Warning>
 
 <Note>
@@ -106,6 +110,16 @@ curl -X GET "https://api.lobstr.io/v1/runs/300e9c5c127d421c90f431478d9a2cfb/down
     "message": "Run not found or export not ready",
     "type": "not_found_error",
     "param": "run_hash"
+  }
+}
+```
+
+```json 400
+{
+  "errors": {
+    "message": "Your plan keeps results 45 days: this run's expired on 22 Mar 2025.",
+    "type": "DataRetentionPeriodExceeded",
+    "code": 400
   }
 }
 ```
