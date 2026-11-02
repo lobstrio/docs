@@ -16,3 +16,22 @@ A launch is refused with `SlotsLimitExceeded` when your other runs in progress a
 [Get Balance](/docs/get-balance): `used_slots` now counts the slots of your runs in progress, and two fields are new, `squids` and `max_squids`. Your existing squids and schedules behave as before: you never had more active squids than slots, so your runs never used more than your plan's slots.
 
 </Update>
+
+<Update label="November 2, 2026" description="Instagram Comments Scraper: latest comments only, no sort order, no replies">
+
+## Breaking
+
+**Instagram Comments Scraper: latest comments only, no sort order, no replies**
+
+Instagram no longer gives visitors without an account a sort order, replies or reply counts, and it serves only a post's most recent comments: all of them on a small post, the last few hundred on a busy one. The scraper works without an account, so:
+
+- `sort_order` and `include_child_comments` are removed from the [Update Squid](/docs/update-squid) parameters. Sent anyway, they are ignored.
+- `replies_count` is `null`, `is_child_comment` is always `false` and `parent_comment_id` is always empty.
+
+## Fixed
+
+**Instagram Comments Scraper returns comments again**
+
+Since about October 7, every run ended with `invalid_url`: Instagram had closed the address the scraper used to read comments. It now reads them the way instagram.com's own post page does.
+
+</Update>

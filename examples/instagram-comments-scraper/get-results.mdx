@@ -69,7 +69,7 @@ Retrieve scraped data from your **Instagram Comments Scraper** runs.
 </ResponseField>
 
 <ResponseField name="replies_count" type="integer">
-  Number of replies to this comment. Example: `0`
+  Number of replies to this comment. Empty: Instagram no longer shows it to visitors without an account. Example: `null`
 </ResponseField>
 
 <ResponseField name="owner_profile_url" type="string">
@@ -77,11 +77,11 @@ Retrieve scraped data from your **Instagram Comments Scraper** runs.
 </ResponseField>
 
 <ResponseField name="is_child_comment" type="boolean">
-  Whether this is a reply to another comment (nested comment). Example: `False`
+  Whether this is a reply to another comment. Always `False`: replies are not collected, Instagram no longer shows them to visitors without an account. Example: `False`
 </ResponseField>
 
 <ResponseField name="parent_comment_id" type="string">
-  Unique identifier of the parent comment this is a reply to.
+  Unique identifier of the parent comment this is a reply to. Always empty: replies are not collected.
 </ResponseField>
 
 <ResponseField name="post_owner_username" type="string">
