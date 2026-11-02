@@ -1,0 +1,18 @@
+---
+title: "November 2, 2026"
+description: "Slots: only runs in progress use them; squids capped at 100 per slot"
+---
+
+<Update label="November 2, 2026" description="Slots: only runs in progress use them; squids capped at 100 per slot">
+
+## Improved
+
+**Slots: only runs in progress use them, so you can create as many squids as you need**
+
+A squid used its `concurrency` in slots for as long as it stayed active, running or not: on the Free plan (1 slot), creating a second squid answered `SlotsLimitExceeded` until the first was deleted or deactivated. Slots now count the runs in progress only. Creating or activating a squid uses no slot, and a plan holds up to 100 squids per slot (Free 100, Starter 200, Pro 1,000, Team 5,000); past that, [Create Squid](/docs/create-squid) answers `SquidsLimitExceeded`.
+
+A launch is refused with `SlotsLimitExceeded` when your other runs in progress already use your plan's slots, and nothing is queued: launch again when a run finishes, or stop one. The same applies to resuming, resurrecting or retrying a run, and to raising a running squid's `concurrency`. A scheduled run due while your slots are busy ends with the `slots_limit_exceeded` done reason.
+
+[Get Balance](/docs/get-balance): `used_slots` now counts the slots of your runs in progress, and two fields are new, `squids` and `max_squids`. Your existing squids and schedules behave as before: you never had more active squids than slots, so your runs never used more than your plan's slots.
+
+</Update>

@@ -80,7 +80,8 @@ These occur when the request is valid but the operation can't proceed due to acc
 | `NotEnoughBalance` | Insufficient credits to start the run |
 | `NoActiveSubscription` | Account has no active subscription |
 | `UsageLimitExceeded` | Plan usage limit has been reached |
-| `SlotsLimitExceeded` | Your plan's squid/slot allocation is exhausted (e.g. trying to create another squid with no free slots) — distinct from `ConcurrencyLimitExceeded` below, which is about a run's concurrency setting, not squid count |
+| `SlotsLimitExceeded` | Your runs in progress already use your plan's slots: launching, resuming, resurrecting or retrying a run, or raising a running squid's `concurrency`, would go past them. Nothing is queued: launch again when a run finishes, or stop one. Also returned when a squid's `concurrency` is set above the plan's slots |
+| `SquidsLimitExceeded` | Your plan holds up to 100 squids per slot (Free 100, Starter 200, Pro 1,000, Team 5,000): delete squids you no longer need, or upgrade |
 | `ConcurrencyLimitExceeded` | Requested concurrency exceeds plan limit |
 | `NoTasksPresent` | Squid has no active tasks to run |
 | `SquidNotReady` | Squid is not in a state that allows running |

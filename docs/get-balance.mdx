@@ -65,11 +65,19 @@ It's recommended to check your balance before starting large-scale data collecti
 </ResponseField>
 
 <ResponseField name="used_slots" type="integer">
-  Number of concurrency slots currently in use. Example: `3`
+  Slots used by your runs in progress right now: the `concurrency` of each `PENDING` or `RUNNING` run, added up. Squids that are not running use none. Example: `3`
 </ResponseField>
 
 <ResponseField name="total_available_slots" type="integer">
-  Total concurrency slots available on the plan. Example: `20`
+  Slots on your plan: how many scrapers run at the same time across your squids. A launch that would go past them is refused with `SlotsLimitExceeded`. Example: `10`
+</ResponseField>
+
+<ResponseField name="squids" type="integer">
+  Squids on your account, running or not. Example: `12`
+</ResponseField>
+
+<ResponseField name="max_squids" type="integer">
+  Squids your plan holds: 100 per slot. Past it, creating a squid answers `SquidsLimitExceeded`. Example: `1000`
 </ResponseField>
 
 <ResponseField name="export_cap_lifted_until" type="string | null">
@@ -144,7 +152,9 @@ print(f"Slots used: {balance_data['used_slots']} / {balance_data['total_availabl
   "export_cap_lifted_until": null,
   "interval": "monthly",
   "used_slots": 3,
-  "total_available_slots": 20,
+  "total_available_slots": 10,
+  "squids": 12,
+  "max_squids": 1000,
   "has_unpaid_bill": {},
   "reset_time": "2025-02-01T00:00:00Z"
 }
