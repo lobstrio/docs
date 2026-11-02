@@ -3,6 +3,18 @@ title: "November 2, 2026"
 description: "Slots: only runs in progress use them; squids capped at 100 per slot"
 ---
 
+<Update label="November 2, 2026" description="Google Maps Leads Scraper: geo_match keeps results within 10 km, everywhere">
+
+## Improved
+
+**Google Maps Leads Scraper: `geo_match` keeps results within 10 km of the search point, in every country**
+
+`geo_match` now has a single rule: a result is kept when it lies within 10 km of the search point, which is the coordinates of the task's city, or the `@lat,lng` center of a Google Maps URL. Postal codes are no longer checked, and Google Maps URLs go from 50 km to 10 km.
+
+The postal code rule dropped real places: a postal code often spans several towns, business-only codes (French `CEDEX`) never match a place, places that hide their address have no postal code, and a search on one city lost the business 2 km away in the next town. On recent runs, 96.8% of the places kept were within 10 km of a search point. To cover a large area, add one task per city. See [Update Settings](/examples/google-maps-leads-scraper/update-settings).
+
+</Update>
+
 <Update label="November 2, 2026" description="Slots: only runs in progress use them; squids capped at 100 per slot">
 
 ## Improved
