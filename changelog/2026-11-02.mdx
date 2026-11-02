@@ -13,6 +13,10 @@ description: "Slots: only runs in progress use them; squids capped at 100 per sl
 
 The postal code rule dropped real places: a postal code often spans several towns, business-only codes (French `CEDEX`) never match a place, places that hide their address have no postal code, and a search on one city lost the business 2 km away in the next town. On recent runs, 96.8% of the places kept were within 10 km of a search point. To cover a large area, add one task per city. See [Update Settings](/examples/google-maps-leads-scraper/update-settings).
 
+**Google Maps locations: one city per point on the map**
+
+[Get Geolocation](/examples/google-maps-leads-scraper/get-geolocation) now returns one city per coordinates. Several postal codes of a town often share the town's coordinates (business-only `CEDEX` codes in France, several codes per town in Portugal), so a task per entry ran the same search again: 28% of the French entries and 43% worldwide. The list of a region gets shorter (Provence-Alpes-Côte d'Azur: 2,190 to 997 cities) for the same results. City names you already use in tasks keep working.
+
 </Update>
 
 <Update label="November 2, 2026" description="Slots: only runs in progress use them; squids capped at 100 per slot">

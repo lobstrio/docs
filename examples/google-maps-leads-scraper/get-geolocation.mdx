@@ -51,6 +51,10 @@ The value you leave empty determines what the API returns:
   Use the returned values for `region`, `district`, and `city` in parameter-based tasks.
 </Tip>
 
+<Note>
+  The city list has one entry per point on the map. Several postal codes of the same town often share its coordinates (for example `Aix-en-Provence 13080`, `13090`, `13100` and its business-only `CEDEX` codes): only one of them is returned, because every task searches around the city's coordinates and keeps results within 10 km of them. Cities with their own coordinates, even close to each other, are all returned.
+</Note>
+
 <Tip>
   Combine location values with `category` to generate accurate search inputs.
 </Tip>
