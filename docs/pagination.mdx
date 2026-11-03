@@ -95,19 +95,9 @@ curl "https://api.lobstr.io/v1/results?squid=YOUR_SQUID_ID&page=2&page_size=100"
 ```
 </CodeGroup>
 
-## Free plan limit
+## Free plan
 
-On free plans, paginated endpoints cap results at a fixed limit regardless of `total_results`. When this cap is hit, the response includes a `warning` field:
-
-```json
-{
-  "total_results": 500,
-  "data": [...],
-  "warning": "Export limit reached - only 50 results returned. Upgrade to premium to access the full dataset: https://app.lobstr.io/dashboard/pricing."
-}
-```
-
-Upgrade your plan to remove this restriction.
+Every plan, the free plan included, pages through every result: there is no row cap since November 3, 2026, and no `warning` field on the response.
 
 ## Endpoints that support pagination
 

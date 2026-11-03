@@ -1,0 +1,16 @@
+---
+title: "November 3, 2026"
+description: "Free plan: every result, no 30-row export cap"
+---
+
+<Update label="November 3, 2026" description="Free plan: every result, no 30-row export cap">
+
+## Improved
+
+**Free plan: every result, on every endpoint and delivery**
+
+The free plan read and exported the first 30 rows of a run only: [Get Results](/docs/get-results) refused page 2 and beyond with `ExportLimitReached` and added a `warning` field, [Download Run](/docs/download-run) handed out a file cut to 30 rows, and S3, FTP and Google Sheets deliveries stopped at 30 rows. The cap is gone: every plan pages through, downloads and delivers every result. The free plan's 100 credits a month stay its only limit.
+
+`ExportLimitReached` and the `warning` field are no longer returned. [Get Balance](/docs/get-balance) keeps `export_cap_lifted_until` for compatibility; it no longer means anything.
+
+</Update>

@@ -81,7 +81,7 @@ It's recommended to check your balance before starting large-scale data collecti
 </ResponseField>
 
 <ResponseField name="export_cap_lifted_until" type="string | null">
-  Timestamp until which the account's export cap is lifted, or `null` when no lift is active. Example: `null`
+  Deprecated, always `null` in practice: it dated the end of a temporary lift of the free plan's 30-row export cap, removed on November 3, 2026 (every plan exports every result). Example: `null`
 </ResponseField>
 
 <ResponseField name="has_unpaid_bill" type="object">
