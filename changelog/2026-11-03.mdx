@@ -1,9 +1,9 @@
 ---
 title: "November 3, 2026"
-description: "Free plan: every result, no 30-row export cap"
+description: "Free plan: every result, no 30-row export cap. Community Story Rewards retired"
 ---
 
-<Update label="November 3, 2026" description="Free plan: every result, no 30-row export cap">
+<Update label="November 3, 2026" description="Free plan: every result, no 30-row export cap. Community Story Rewards retired">
 
 ## Improved
 
@@ -11,6 +11,12 @@ description: "Free plan: every result, no 30-row export cap"
 
 The free plan read and exported the first 30 rows of a run only: [Get Results](/docs/get-results) refused page 2 and beyond with `ExportLimitReached` and added a `warning` field, [Download Run](/docs/download-run) handed out a file cut to 30 rows, and S3, FTP and Google Sheets deliveries stopped at 30 rows. The cap is gone: every plan pages through, downloads and delivers every result. The free plan's 100 credits a month stay its only limit.
 
-`ExportLimitReached` and the `warning` field are no longer returned. [Get Balance](/docs/get-balance) keeps `export_cap_lifted_until` for compatibility; it no longer means anything.
+`ExportLimitReached` and the `warning` field are no longer returned.
+
+## Breaking
+
+**Community Story Rewards retired**
+
+The program that granted bonus credits for a Reddit comment or a LinkedIn post about lobstr.io has ended. Its endpoints are gone: `GET /v1/community_rewards/subreddits`, `GET /v1/community_rewards/submissions` and `POST /v1/community_rewards/submissions` now answer 404. [Get Balance](/docs/get-balance) no longer returns `community_reward_credit`, `community_reward_credit_expires_at` or `export_cap_lifted_until`: no account held reward credits, and the export cap they related to is gone. Available credits are your plan's credits plus bonus and rollover credits.
 
 </Update>

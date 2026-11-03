@@ -52,14 +52,6 @@ It's recommended to check your balance before starting large-scale data collecti
   Timestamp when rollover credits expire, or `null` if none. Example: `null`
 </ResponseField>
 
-<ResponseField name="community_reward_credit" type="integer">
-  Bonus credits earned through Community Story Rewards. Example: `500`
-</ResponseField>
-
-<ResponseField name="community_reward_credit_expires_at" type="string | null">
-  Timestamp when community reward credits expire, or `null` if none. Example: `null`
-</ResponseField>
-
 <ResponseField name="interval" type="string">
   Credit reset interval (`"monthly"` or `"daily"`). Example: `"monthly"`
 </ResponseField>
@@ -78,10 +70,6 @@ It's recommended to check your balance before starting large-scale data collecti
 
 <ResponseField name="max_squids" type="integer">
   Squids your plan holds: 100 per slot. Past it, creating a squid answers `SquidsLimitExceeded`. Example: `1000`
-</ResponseField>
-
-<ResponseField name="export_cap_lifted_until" type="string | null">
-  Deprecated, always `null` in practice: it dated the end of a temporary lift of the free plan's 30-row export cap, removed on November 3, 2026 (every plan exports every result). Example: `null`
 </ResponseField>
 
 <ResponseField name="has_unpaid_bill" type="object">
@@ -147,9 +135,6 @@ print(f"Slots used: {balance_data['used_slots']} / {balance_data['total_availabl
   "bonus_credit": 0,
   "rollover_credit": 200,
   "rollover_credit_expires_at": null,
-  "community_reward_credit": 500,
-  "community_reward_credit_expires_at": null,
-  "export_cap_lifted_until": null,
   "interval": "monthly",
   "used_slots": 3,
   "total_available_slots": 10,

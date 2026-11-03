@@ -43,8 +43,7 @@
               "docs/user-me",
               "docs/get-balance",
               "docs/auto-billing-reset",
-              "docs/rotate-api-key",
-              "docs/community-rewards"
+              "docs/rotate-api-key"
             ]
           },
           {
@@ -971,6 +970,7 @@
     { "source": "/examples/linkedin-profile-email-scraper-no-login/add-tasks", "destination": "/examples/linkedin-profile-scraper/add-tasks" },
     { "source": "/examples/linkedin-profile-email-scraper-no-login/update-settings", "destination": "/examples/linkedin-profile-scraper/update-settings" },
     { "source": "/examples/linkedin-profile-email-scraper-no-login/get-results", "destination": "/examples/linkedin-profile-scraper/get-results" },
-    { "source": "/examples/linkedin-profile-email-scraper-no-login/credit-cost", "destination": "/examples/linkedin-profile-scraper/credit-cost" }
+    { "source": "/examples/linkedin-profile-email-scraper-no-login/credit-cost", "destination": "/examples/linkedin-profile-scraper/credit-cost" },
+    { "source": "/docs/community-rewards", "destination": "/docs/get-balance" }
   ]
 }
