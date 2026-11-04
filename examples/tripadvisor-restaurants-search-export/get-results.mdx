@@ -92,7 +92,11 @@ Each result object contains the following fields:
 </ResponseField>
 
 <ResponseField name="is_michelin" type="boolean">
-  Whether the restaurant appears in the Michelin Guide. Example: `false`
+  Whether the restaurant is in the MICHELIN Guide, stars and Bib Gourmand included. Example: `false`
+</ResponseField>
+
+<ResponseField name="michelin_award" type="string">
+  The restaurant's MICHELIN Guide distinction, as TripAdvisor names it: `MICHELIN 3 Stars`, `MICHELIN 2 Stars`, `MICHELIN 1 Star`, `MICHELIN Bib Gourmand`, or `MICHELIN Guide` for a selected restaurant without a star. `null` when the restaurant is not in the guide. Example: `MICHELIN 1 Star`
 </ResponseField>
 
 ## Response
@@ -128,6 +132,7 @@ Each result object contains the following fields:
       "image_url": "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/19/7a/08/cf/side-view-from-the-street.jpg",
       "is_claimed": false,
       "is_michelin": false,
+      "michelin_award": null,
       "functions": null,
       "native_id": 30880
     }
