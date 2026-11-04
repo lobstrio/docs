@@ -1,0 +1,26 @@
+---
+title: "November 4, 2026"
+description: "Errors that say what to do: the crawler that has a setting, the task format expected"
+---
+
+<Update label="November 4, 2026" description="Errors that say what to do: the crawler that has a setting, the task format expected">
+
+## Improved
+
+**`InvalidParam` names the crawler that has the setting**
+
+A setting the crawler does not have was refused with "The specified parameter phone is invalid." The message now says which crawler of the same site has it, and how to write it there: "The specified parameter phone is invalid: Leboncoin Listings Search Export has no such setting. Leboncoin Listings & Phone Search Export has it, as functions.get_phone_numbers (it needs a connected Leboncoin account)." See [Update Squid](/docs/update-squid).
+
+**`TaskNotValidError` shows what it got and what it expects**
+
+A task in the wrong format was refused with "The 'url' format is not valid." The message now carries the value received and the crawler's own example: "The 'url' format is not valid for Facebook Public Group Posts Scraper: got https://www.facebook.com/somepage. Expected something like https://www.facebook.com/groups/211270969394435/". See [Add Tasks](/docs/add-tasks).
+
+Error types and status codes are unchanged (`InvalidParam`, `TaskNotValidError`, 400).
+
+## Fixed
+
+**Leboncoin Listings & Phone Search Export: no `phone` alias**
+
+The settings page said the old function name `phone` was still accepted. It is not: use `functions.get_phone_numbers`. See [Update Settings](/examples/leboncoin-iter-listings-with-phone/update-settings).
+
+</Update>
