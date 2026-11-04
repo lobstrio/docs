@@ -1,21 +1,31 @@
 ---
 title: "November 4, 2026"
-description: "Errors that say what to do: the crawler that has a setting, the task format expected"
+description: "Errors that say what to do, with the fields an agent needs"
 ---
 
-<Update label="November 4, 2026" description="Errors that say what to do: the crawler that has a setting, the task format expected">
+<Update label="November 4, 2026" description="Errors that say what to do, with the fields an agent needs">
 
 ## Improved
 
-**`InvalidParam` names the crawler that has the setting**
+**Error responses carry structured hints**
 
-A setting the crawler does not have was refused with "The specified parameter phone is invalid." The message now says which crawler of the same site has it, and how to write it there: "The specified parameter phone is invalid: Leboncoin Listings Search Export has no such setting. Leboncoin Listings & Phone Search Export has it, as functions.get_phone_numbers (it needs a connected Leboncoin account)." See [Update Squid](/docs/update-squid).
+Some errors now add fields to the `errors` object, next to `message`, `type` and `code`, which do not change. A client that ignores them keeps working.
 
-**`TaskNotValidError` shows what it got and what it expects**
+- `InvalidParam` on a setting the crawler does not have: when another crawler of the same site has it, the message says so ("Unknown parameter: phone. Did you mean functions.get_phone_numbers on Leboncoin Listings & Phone Search Export?") and the response adds `param` and `suggestion`, with the `crawler` id and the `param` to send there. See [Update Squid](/docs/update-squid).
+- `TaskNotValidError`: the message shows the value received and the crawler's own example ("The 'url' format is not valid for Facebook Public Group Posts Scraper: got https://www.facebook.com/somepage. Expected something like https://www.facebook.com/groups/211270969394435/"), and the response adds `param` and `example`. See [Add Tasks](/docs/add-tasks).
+- `DuplicateSquid`: squid names are unique per account. The message names the squid ("A squid named Reviews already exists.") and the response adds `squid`, the id of the squid that has the name, to reuse it instead of creating it again. See [Create Squid](/docs/create-squid).
 
-A task in the wrong format was refused with "The 'url' format is not valid." The message now carries the value received and the crawler's own example: "The 'url' format is not valid for Facebook Public Group Posts Scraper: got https://www.facebook.com/somepage. Expected something like https://www.facebook.com/groups/211270969394435/". See [Add Tasks](/docs/add-tasks).
-
-Error types and status codes are unchanged (`InvalidParam`, `TaskNotValidError`, 400).
+```json
+{
+  "errors": {
+    "message": "Unknown parameter: phone. Did you mean functions.get_phone_numbers on Leboncoin Listings & Phone Search Export?",
+    "type": "InvalidParam",
+    "code": 400,
+    "param": "phone",
+    "suggestion": { "crawler": "7bc4acdb18f2b90fdd5eb42b8e8251e9", "param": "functions.get_phone_numbers" }
+  }
+}
+```
 
 ## Fixed
 
