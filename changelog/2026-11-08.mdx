@@ -1,0 +1,28 @@
+---
+title: "November 8, 2026"
+description: "Empty Squid reads its type from the body, unknown paths answer 404, Google Maps URLs without a map position"
+---
+
+<Update label="November 8, 2026" description="Empty Squid reads its type from the body, unknown paths answer 404, Google Maps URLs without a map position">
+
+## Fixed
+
+**Empty Squid: `type` sent in the body is read**
+
+`POST /v1/squids/{squid_hash}/empty` read `type` from the query string only, while this documentation sends it in the body. A body `{"type": "url"}` was ignored and every task of the squid was removed. `type` is now read from the body, then from the query string; without it, every task is removed, as before. `deleted_count` is now the number of tasks removed: it also counted each task's run records. See [Empty Squid](/docs/empty-squid).
+
+**Unknown paths answer 404 whatever the method**
+
+A POST, PUT, PATCH or DELETE on a path that does not exist answered 405 `MethodNotAllowed`, as if the route existed with another method. It now answers 404 `HTTPNotFound`, like a GET. Tasks are added with `POST /v1/tasks` and runs started with `POST /v1/runs`.
+
+**Google Maps Leads Scraper: search URLs without a map position**
+
+A search URL without `@lat,lng` (`google.com/maps/search/plumber+Moreton+Bay+QLD+Australia`) names no search point. Geo Match, on by default, measured places from the map's default view instead and dropped them all, so these runs returned 0. Geo Match no longer applies to such URLs, and the run log says so: "No map position in this URL: Geo Match skipped."
+
+## Improved
+
+**Every run processes every task of the squid**
+
+The documentation now says it, and how to run only new inputs: a new squid, or remove the done tasks first. [Delete Task](/docs/delete-task) and [Empty Squid](/docs/empty-squid) remove tasks only: the results of earlier runs stay downloadable, by run and by squid. See [Add Tasks](/docs/add-tasks).
+
+</Update>
