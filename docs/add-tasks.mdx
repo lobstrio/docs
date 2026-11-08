@@ -75,6 +75,10 @@ This endpoint creates new tasks within a specified squid. Tasks define the speci
 </Note>
 
 <Warning>
+  A run processes every task of the squid, including the ones an earlier run already did, and their results are charged again. To run only new inputs, put them in a new squid, or first remove the done tasks with [Delete Task](/docs/delete-task) (one task) or [Empty Squid](/docs/empty-squid) (every task): the results of earlier runs stay downloadable.
+</Warning>
+
+<Warning>
   Task parameters vary by crawler. Using invalid keys will result in task creation failure.
 </Warning>
 

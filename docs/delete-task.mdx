@@ -4,7 +4,7 @@ description: "Permanently delete a specific task from a squid"
 api: "DELETE https://api.lobstr.io/v1/tasks/{task_hash}"
 ---
 
-This endpoint permanently deletes a specific task using its hash ID. The task and its associated data will be removed from the system.
+This endpoint deletes a task from its squid using its hash ID, so later runs no longer process it. The results it brought in earlier runs stay downloadable, by run and by squid.
 
 ## Headers
 
@@ -33,7 +33,7 @@ This endpoint permanently deletes a specific task using its hash ID. The task an
 </ResponseField>
 
 <Warning>
-  This action is permanent and cannot be undone. Task data and results will be lost.
+  A deleted task cannot be restored. Its results from earlier runs are kept. Deleting is refused while a run of the squid is in progress (`RunInProgress`).
 </Warning>
 
 <Tip>
@@ -41,7 +41,7 @@ This endpoint permanently deletes a specific task using its hash ID. The task an
 </Tip>
 
 <Note>
-  Deleting a task does not affect results that have already been exported or delivered.
+  A run processes every task of the squid. To run only new inputs, delete the done tasks first: their results stay downloadable.
 </Note>
 
 <Tip>
@@ -87,10 +87,10 @@ else:
 
 ```json 404
 {
-  "error": {
-    "message": "Task not found",
-    "type": "not_found_error",
-    "param": "task_hash"
+  "errors": {
+    "message": "The specified task does not exist.",
+    "type": "HTTPNotFound",
+    "code": 404
   }
 }
 ```

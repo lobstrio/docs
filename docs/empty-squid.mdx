@@ -1,20 +1,21 @@
 ---
 title: "Empty Squid"
-description: "Remove all tasks and results from a squid while keeping its configuration intact"
+description: "Remove the tasks of a squid, keeping its settings and the results of its earlier runs"
 api: "POST https://api.lobstr.io/v1/squids/{squid_hash}/empty"
 ---
 
-This endpoint removes all tasks and their associated results from a specified squid, returning the number of deleted items while keeping the squid's configuration intact.
+This endpoint removes the tasks of a squid, all of them or one kind, and returns how many it removed. The squid keeps its settings, and the results of its earlier runs stay downloadable, by run and by squid.
 
-## What Gets Deleted
+## What Gets Removed
 
-Depending on the `type` parameter:
-- **url**: Removes all URL-based tasks and their results
-- **params**: Removes all parameter-based tasks and their results
+Only tasks, depending on the `type` parameter:
+- no `type`: every task
+- **url**: the URL tasks
+- **params**: the parameter tasks (city, keyword...)
 
-The squid itself remains with all its settings (name, parameters, integrations, schedule) preserved. This is useful when you want to:
-- Clear old tasks before adding new ones
-- Reset a squid without losing its configuration
+The squid itself remains with all its settings (name, parameters, integrations, schedule). This is useful when you want to:
+- Remove the done tasks before adding new ones, so the next run only processes the new ones (a run processes every task of the squid)
+- Reset a squid without losing its configuration or its results
 - Remove tasks that are no longer needed
 
 ## Headers
@@ -35,8 +36,8 @@ The squid itself remains with all its settings (name, parameters, integrations, 
 
 ## Request Body
 
-<ParamField body="type" type="string" required>
-  Type of tasks to remove: 'url' for URL-based tasks or 'params' for parameter-based tasks. Example: `"url"`
+<ParamField body="type" type="string">
+  Kind of tasks to remove: `url` for URL tasks or `params` for parameter tasks. Leave it out to remove every task. Also accepted in the query string (`?type=url`). Example: `"url"`
 </ParamField>
 
 ## Response Field Explanations
@@ -54,11 +55,11 @@ The squid itself remains with all its settings (name, parameters, integrations, 
 </ResponseField>
 
 <ResponseField name="deleted_count" type="integer">
-  Number of tasks deleted. Example: `150`
+  Number of tasks removed. Example: `150`
 </ResponseField>
 
 <Warning>
-  This action is irreversible. All tasks and results of the specified type will be permanently deleted.
+  Removed tasks cannot be restored. The results of earlier runs are kept.
 </Warning>
 
 <Tip>
@@ -66,7 +67,7 @@ The squid itself remains with all its settings (name, parameters, integrations, 
 </Tip>
 
 <Note>
-  The squid's configuration (parameters, integrations, schedule) is preserved. Only tasks and results are removed.
+  The squid's settings (parameters, integrations, schedule) and the results of its earlier runs are kept. Only tasks are removed.
 </Note>
 
 <Tip>
@@ -74,7 +75,7 @@ The squid itself remains with all its settings (name, parameters, integrations, 
 </Tip>
 
 <Warning>
-  If a run is currently active, stop it before emptying the squid to avoid conflicts.
+  Emptying is refused while a run of the squid is in progress (`RunInProgress`): wait for it to end, or abort it first.
 </Warning>
 
 ## Code Examples
@@ -99,7 +100,7 @@ headers = {
     "Content-Type": "application/json"
 }
 payload = {
-    "type": "url"  # or "params" for parameter-based tasks
+    "type": "url"  # or "params"; leave it out to remove every task
 }
 
 response = requests.post(url, headers=headers, json=payload)
