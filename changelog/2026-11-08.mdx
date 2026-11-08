@@ -1,9 +1,9 @@
 ---
 title: "November 8, 2026"
-description: "Empty Squid reads its type from the body, unknown paths answer 404, Google Maps URLs without a map position"
+description: "Empty Squid reads its type from the body, unknown paths answer 404, Google Maps URLs without a map position, up to about 330 places per Google Maps search"
 ---
 
-<Update label="November 8, 2026" description="Empty Squid reads its type from the body, unknown paths answer 404, Google Maps URLs without a map position">
+<Update label="November 8, 2026" description="Empty Squid reads its type from the body, unknown paths answer 404, Google Maps URLs without a map position, up to about 330 places per Google Maps search">
 
 ## Fixed
 
@@ -19,7 +19,15 @@ A POST, PUT, PATCH or DELETE on a path that does not exist answered 405 `MethodN
 
 A search URL without `@lat,lng` (`google.com/maps/search/plumber+Moreton+Bay+QLD+Australia`) names no search point. Geo Match, on by default, measured places from the map's default view instead and dropped them all, so these runs returned 0. Geo Match no longer applies to such URLs, and the run log says so: "No map position in this URL: Geo Match skipped."
 
+**A place set aside after enrichment is not enriched again in the same run**
+
+With a filter applied after enrichment (Google Maps Skip without email, Without website or Without phone; PAP and Pinterest filters of the same kind), a place set aside came back each time a neighbouring search returned it, and paid Business Details and email extraction again. It was never billed, but it slowed the run down: on a sweep of neighbouring zip codes, 12,305 of 15,149 enrichments were repeats. A run now remembers the places it set aside, and the run log says `Skipped '<name>' — Already filtered out.`
+
 ## Improved
+
+**Google Maps Leads Scraper: up to about 330 places per search**
+
+Google serves a dense search over two pages of results; the scraper stopped after the first 200. It now reads the second page too: up to about 330 places where the map is dense (278 for restaurants in central Paris, 257 for gyms in Manhattan), fewer elsewhere. The second page is only read when Max Results Per Task is empty or above 200. `max_results` now accepts up to 500.
 
 **Every run processes every task of the squid**
 

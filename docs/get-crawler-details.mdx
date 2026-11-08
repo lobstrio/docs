@@ -246,15 +246,15 @@ print(", ".join(crawler['result'][:10]) + "...")
       "description": "The activity of the search location."
     },
     {
-      "max": 200,
+      "max": 500,
       "name": "max_results",
       "type": "int",
       "level": "squid",
-      "default": 200,
+      "default": "",
       "example": 200,
       "required": false,
       "is_details": true,
-      "description": "Google Maps restricts search results to a maximum of 200. To access a larger dataset, consider utilizing our URL generator."
+      "description": "Maximum number of results retrieved *per task*. Leave empty to collect everything Google Maps returns for the search: up to about 330 places where the map is dense, fewer elsewhere."
     },
     {
       "name": "extract_emails_from_website",
