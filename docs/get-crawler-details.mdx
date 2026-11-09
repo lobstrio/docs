@@ -122,8 +122,12 @@ This endpoint retrieves detailed information about a specific crawler using its 
   If true, this is an optional add-on feature with extra credit costs. Example: `""`
 </ResponseField>
 
-<ResponseField name="input[].credits_per_function" type="string">
-  Extra credits charged per row when this optional function is enabled. Example: `""`
+<ResponseField name="input[].credits_per_function" type="object">
+  Extra credits per result when this function is on, keyed by plan type like `credits_per_row`: `current` is the rate on today's plans, `legacy` the rate kept by grandfathered subscriptions ([Get User Profile](/docs/user-me) → `plan[].is_legacy`). Example: `{"legacy": 80, "current": 4}`
+</ResponseField>
+
+<ResponseField name="input[].credits_per_filter" type="object">
+  Credits per result checked when this filter is on, keyed the same way. Example: `{"legacy": 0.2, "current": 0.2}`
 </ResponseField>
 
 <ResponseField name="input[].name" type="string">
@@ -147,7 +151,7 @@ This endpoint retrieves detailed information about a specific crawler using its 
 </Tip>
 
 <Note>
-  Parameters with 'function: true' are optional add-ons that cost extra credits per row (specified in 'credits_per_function').
+  Parameters with 'function: true' are optional add-ons that cost extra credits per result (specified in 'credits_per_function', keyed by plan type).
 </Note>
 
 <Warning>
@@ -197,7 +201,7 @@ for param in task_inputs:
 print("\nSquid-level parameters:")
 squid_inputs = [i for i in crawler['input'] if i['level'] == 'squid']
 for param in squid_inputs:
-    cost = f" (+{param['credits_per_function']} credits)" if param.get('function') else ""
+    cost = f" (+{param['credits_per_function']['current']} credits)" if param.get('function') else ""
     print(f"  - {param['name']}{cost}")
 
 # Display output fields
@@ -260,14 +264,14 @@ print(", ".join(crawler['result'][:10]) + "...")
       "name": "extract_emails_from_website",
       "type": "boolean",
       "level": "squid",
-      "default": true,
+      "default": false,
       "display": "Extract Emails From Website",
       "function": true,
       "priority": 3,
       "required": false,
       "is_details": true,
       "description": "Extract email addresses from the business's website.",
-      "credits_per_function": 10
+      "credits_per_function": { "legacy": 10, "current": 1 }
     },
     {
       "name": "collect_business_details",
@@ -280,7 +284,7 @@ print(", ".join(crawler['result'][:10]) + "...")
       "required": false,
       "is_details": true,
       "description": "Extract attributes like plus_code, poi, health, and last_opening_hours_updated_at.",
-      "credits_per_function": 10
+      "credits_per_function": { "legacy": 10, "current": 1 }
     }
   ],
   "result": [

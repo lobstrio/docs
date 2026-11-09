@@ -40,6 +40,10 @@ This is typically the first endpoint you'll call after authentication to confirm
   List of active subscription plan objects for the user.
 </ResponseField>
 
+<ResponseField name="plan[].is_legacy" type="boolean">
+  `true` on a grandfathered plan: crawler costs (`credits_per_row`, `credits_per_function`, `credits_per_filter`) then use their `legacy` rate, otherwise their `current` one. Example: `false`
+</ResponseField>
+
 <ResponseField name="login_count" type="integer">
   Total number of times the user has logged in. Example: `42`
 </ResponseField>

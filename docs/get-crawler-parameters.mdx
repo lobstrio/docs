@@ -75,8 +75,12 @@ The response contains:
   Whether the function is enabled by default. Example: `false`
 </ResponseField>
 
-<ResponseField name="squid.functions.{function_name}.credits_per_function" type="number">
-  Extra credits charged per row when this function is enabled. Example: `0.5`
+<ResponseField name="squid.functions.{function_name}.credits_per_function" type="object">
+  Extra credits per result when this function is on, keyed by plan type like `credits_per_row`: `current` is the rate on today's plans, `legacy` the rate kept by grandfathered subscriptions ([Get User Profile](/docs/user-me) → `plan[].is_legacy`). Example: `{"legacy": 80, "current": 4}`
+</ResponseField>
+
+<ResponseField name="squid.functions.{function_name}.skip_squid" type="boolean">
+  If `true`, a result this squid already ran the function on is not processed again, and not charged again, on later runs. Example: `true`
 </ResponseField>
 
 ## Headers
@@ -100,7 +104,7 @@ The response contains:
 </Tip>
 
 <Note>
-  Functions under squid.functions are optional add-ons. Each function has a credits_per_function cost applied per result row when enabled.
+  Functions under squid.functions are optional add-ons. Each function adds its credits_per_function cost (the `current` or `legacy` rate) to every result it runs on.
 </Note>
 
 <Warning>
@@ -162,7 +166,8 @@ if 'functions' in params['squid']:
     for func_name, func_config in params['squid']['functions'].items():
         enabled = " (Enabled by default)" if func_config['default'] else ""
         print(f"\n{func_name}{enabled}")
-        print(f"  Credits per function: {func_config['credits_per_function']}")
+        # credits_per_function is keyed by plan type: "current" unless your plan is legacy
+        print(f"  Credits per result: {func_config['credits_per_function']['current']}")
         print(f"  Sort order: {func_config['sort']}")
 ```
 </CodeGroup>
@@ -280,17 +285,20 @@ if 'functions' in params['squid']:
       "fetch_business_images": {
         "sort": 1,
         "default": false,
-        "credits_per_function": 10
+        "skip_squid": true,
+        "credits_per_function": { "legacy": 10, "current": 1 }
       },
       "collect_business_details": {
         "sort": 0,
         "default": false,
-        "credits_per_function": 10
+        "skip_squid": true,
+        "credits_per_function": { "legacy": 10, "current": 1 }
       },
       "extract_emails_from_website": {
         "sort": 2,
-        "default": true,
-        "credits_per_function": 10
+        "default": false,
+        "skip_squid": true,
+        "credits_per_function": { "legacy": 10, "current": 1 }
       }
     }
   }
