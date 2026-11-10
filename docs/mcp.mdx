@@ -150,9 +150,9 @@ instead of one — useful for large or incremental task lists.
 
 | Tool | Type | Description |
 |---|---|---|
-| `create_squid` | write | Create a saved scraper (squid) from a crawler, without running it. |
+| `create_squid` | write | Create a saved scraper (squid) from a crawler, without running it, with an optional webhook. |
 | `add_tasks` | write | Add input rows to a squid; callable repeatedly to build up a batch. |
-| `update_scraper` | write | Change a squid's name, settings, or concurrency without running it or touching its tasks. |
+| `update_scraper` | write | Change a squid's name, settings, concurrency, or webhook without running it or touching its tasks. |
 | `estimate_run` | read | Credit cost, projected results, and estimated time for a squid's current tasks. |
 
 #### Results
