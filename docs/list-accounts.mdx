@@ -130,7 +130,37 @@ This endpoint retrieves a paginated list of all connected platform accounts (lik
 </ResponseField>
 
 <ResponseField name="resets_in" type="integer | null">
-  Seconds remaining until this account's usage limit resets, or `null` when no limit has been reached. Example: `null`
+  Seconds until runs paused by a full limit of this account resume (the next free slot), or `null` when no limit is reached. Example: `null`
+</ResponseField>
+
+<ResponseField name="limits" type="array">
+  The account's limits, each over a rolling 24 hours: an action (a profile, a search, a message) frees its slot 24 hours after it was counted, so there is no daily reset. One object per limit. The Leboncoin message sender's batch (messages sent in one go, then a pause) is not a 24-hour limit and stays in `params`.
+  <Expandable title="limit fields">
+    <ResponseField name="key" type="string">
+      The limit, as named in `params`. Example: `"profiles"`
+    </ResponseField>
+    <ResponseField name="display" type="string">
+      Its label. Example: `"Profiles per 24h"`
+    </ResponseField>
+    <ResponseField name="max" type="integer">
+      The account's limit. Example: `100`
+    </ResponseField>
+    <ResponseField name="used_24h" type="integer">
+      Actions counted in the last 24 hours. Example: `53`
+    </ResponseField>
+    <ResponseField name="remaining" type="integer">
+      Actions still possible now. Example: `47`
+    </ResponseField>
+    <ResponseField name="next_capacity_at" type="string | null">
+      While the limit is full, when the next slot frees (UTC): runs paused by this limit resume then. `null` while there is room. Example: `null`
+    </ResponseField>
+    <ResponseField name="full_capacity_at" type="string | null">
+      When everything counted now has left the 24 hours (UTC). `null` when nothing is counted. Example: `"2026-11-12T13:35:00Z"`
+    </ResponseField>
+    <ResponseField name="by_hour" type="array">
+      The last 24 hours, one item per hour, oldest first. Example: `[{"hour": "2026-11-11T13:00:00Z", "count": 53}, ...]`
+    </ResponseField>
+  </Expandable>
 </ResponseField>
 
 <Tip>

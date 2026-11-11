@@ -4,7 +4,7 @@ description: "Configure account-specific operational limits for rate limiting an
 api: "POST https://api.lobstr.io/v1/accounts"
 ---
 
-To update account-specific operational limits (like daily profile visits, search limits, or batch size), use this endpoint. The `params` object contains the updated values for batch size, daily limits per action, or time gaps between batches.
+To update account-specific operational limits (like profile visits, searches, or batch size), use this endpoint. The `params` object contains the updated values for batch size, limits per action over a rolling 24 hours, or time gaps between batches.
 
 ### Parameter Keys
 
@@ -12,7 +12,7 @@ To update account-specific operational limits (like daily profile visits, search
 | --- | --- | --- |
 | **batch** | integer | (Optional) Updated batch size per launch. Controls how many actions run per batch |
 | **batch_hours** | integer | (Optional) Delay in hours between each batch run |
-| **[attribute]** | integer | (Optional) Daily limit for the specific attribute like profiles, searches, or messages |
+| **[attribute]** | integer | (Optional) Limit for the attribute, like profiles, searches, or messages, in any 24 hours: each action frees its slot 24 hours after it was counted |
 
 ## Headers
 
@@ -57,11 +57,7 @@ To update account-specific operational limits (like daily profile visits, search
 </ResponseField>
 
 <ResponseField name="params.user.[attribute].value" type="integer">
-  Current usage count for this attribute today. Example: `0`
-</ResponseField>
-
-<ResponseField name="params.user.[attribute].timestamp" type="integer">
-  Unix timestamp when the daily counter resets. Example: `1716508800`
+  Actions counted for this attribute in the last 24 hours, when the account was last used. For a live count, read `limits` on the account. Example: `0`
 </ResponseField>
 
 <Tip>
@@ -73,7 +69,7 @@ To update account-specific operational limits (like daily profile visits, search
 </Warning>
 
 <Note>
-  The params.user object tracks real-time usage. Use it to monitor how close you are to daily limits.
+  `limits` on the account ([List Accounts](/docs/list-accounts)) gives each limit's live use over the last 24 hours, what remains, and when capacity returns.
 </Note>
 
 <Tip>
@@ -114,8 +110,8 @@ payload = {
     "type": "sales-nav-sync",
     "params": {
         "batch": 20,          # Profiles per launch
-        "profiles": 150,      # Daily profile limit
-        "searches": 199,      # Daily search limit
+        "profiles": 150,      # Profiles per 24h
+        "searches": 199,      # Searches per 24h
         "batch_hours": 2      # Hours between batches
     }
 }

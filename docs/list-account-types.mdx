@@ -31,7 +31,7 @@ Some account types include a `params` object that defines limits or batch config
 
 | Parameter | Type | Description |
 | --- | --- | --- |
-| **[attribute]** | object | Represents the daily limit for a specific attribute (e.g., messages, profiles, searches) |
+| **[attribute]** | object | A limit for a specific attribute (e.g., messages, profiles, searches) over a rolling 24 hours: each action frees its slot 24 hours after it was counted |
 | **batch** | object | (Optional) Defines the maximum number of actions per launch based on the attribute (e.g., messages, profiles) |
 | **batch_hours** | object | (Optional) Defines the delay in hours between batch launches during the day |
 

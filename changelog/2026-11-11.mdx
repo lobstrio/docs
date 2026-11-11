@@ -1,0 +1,26 @@
+---
+title: "November 11, 2026"
+description: "Account limits over a rolling 24 hours, limits on accounts, LinkedIn Company Employees reads only the rows it keeps"
+---
+
+<Update label="November 11, 2026" description="Account limits over a rolling 24 hours, limits on accounts, LinkedIn Company Employees reads only the rows it keeps">
+
+## New
+
+**`limits` on accounts**
+
+[List Accounts](/docs/list-accounts) and [Get Account Details](/docs/get-account-details) return `limits`: for each limit, `max`, `used_24h`, `remaining`, `next_capacity_at` (while it is full, when the next slot frees), `full_capacity_at` and `by_hour`, the last 24 hours hour by hour. `resets_in` is the wait until the next free slot.
+
+## Improved
+
+**Account limits count over a rolling 24 hours**
+
+Every account limit (profiles and searches on LinkedIn and Sales Navigator, requests on Instagram and Facebook, messages on Leboncoin...) now allows at most its number in any 24 hours: each action frees its slot 24 hours after it was counted. A limit used to reset 24 hours after its first action: a daily job started a few seconds earlier the next day found it not reset yet, and right after a reset the whole limit was available again at once. A run that reaches a limit now resumes as soon as a slot frees, not 24 hours later; the run log's "Run will be next launched at" line gives the time. The Leboncoin message limit already worked this way.
+
+## Fixed
+
+**LinkedIn Company Employees reads only the rows it keeps**
+
+Every search page asked LinkedIn for 50 employees, and every row read counts against the account's profiles per 24h: a run keeping 3 employees counted 50. A page now asks for the rows still needed, up to 50, and the run's Max Unique Results counts too.
+
+</Update>
