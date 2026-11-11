@@ -134,8 +134,8 @@ for account_type in data['data']:
         "profiles": {
           "max": 1000,
           "default": 800,
-          "display": "Profiles per day",
-          "description": "Maximum number of profiles the account can scrape per day. Once this limit is reached, the run linked to this account pauses for 24 hours."
+          "display": "Profiles per 24h",
+          "description": "Maximum number of profiles the account can scrape in any 24 hours: each profile frees its slot 24 hours after it was counted. When the limit is reached, runs using this account pause and resume as soon as a slot frees."
         }
       },
       "baseurl": "https://www.linkedin.com",
@@ -160,12 +160,12 @@ for account_type in data['data']:
         "profiles": {
           "max": 150,
           "default": 150,
-          "description": "Maximum number of profile requests per day"
+          "description": "Maximum number of profiles the account can scrape in any 24 hours: each profile frees its slot 24 hours after it was counted."
         },
         "searches": {
           "max": 200,
           "default": 200,
-          "description": "Maximum number of searches per day"
+          "description": "Maximum number of searches the account can run in any 24 hours: each search frees its slot 24 hours after it was run."
         },
         "batch_hours": {
           "max": 2,
