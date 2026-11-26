@@ -13,7 +13,7 @@ description: "API updates shipped July 14, 2026"
 - **Facebook Group Posts: `max_results` and `max_unique_results_per_run` parameters** — control how many posts are collected per group and across the entire run.
 
 ### Fixed
-- **TripAdvisor Restaurants: 401 and DataDome bypass** — updated session handling to resolve 401 errors and improve DataDome challenge bypass.
+- **TripAdvisor Restaurants: 401 errors** — updated session handling to resolve 401 errors.
 - **XLSX export: silent column drops** — very long PICTURES or URL cell values were silently causing columns after them to be dropped from XLSX exports. Fixed.
 - **Google Maps Leads: review-count recovery** — when a listing omitted review counts from the search results page, the scraper now fetches them from the detail page.
 

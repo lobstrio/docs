@@ -13,8 +13,8 @@ description: "API updates shipped June 9, 2026"
 ### Fixed
 - **Google Maps Leads: neighborhood and structured attribute columns** — the `neighborhood`, `tiktok`, `whatsapp`, `pinterest`, `service_options`, `accessibility`, `highlights`, and `payment_methods` fields were present in results but not placed correctly in the exported columns. Fixed.
 - **Yelp scrapers: proxy tunnel errors** — Yelp Reviews and Yelp Search now retry automatically on Cloudflare proxy tunnel errors (521–524).
-- **TikTok Video: header sanitization after WAF solve** — residual solver headers were leaking into post-challenge requests. Fixed.
-- **PAP: Cloudflare managed challenge on pagination** — region-search paginated pages that hit a Cloudflare managed challenge are now solved and retried correctly.
+- **TikTok Video: request headers** — leftover headers broke some requests. Fixed.
+- **PAP: pagination** — region-search pages that failed are now retried correctly.
 - **Instagram Profile: inaccessible profiles** — profiles that return an access-restricted page no longer cause the run to error; they are now skipped gracefully.
 
 </Update>

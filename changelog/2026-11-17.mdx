@@ -1,0 +1,62 @@
+---
+title: "November 17, 2026"
+description: "Leboncoin Auto Message Sender replies in a conversation, sends only to sellers without a phone, and only by day; email change with a confirmation link; 3-D Secure on upgrades; Reddit, Bien'ici and Instagram Followers fixes"
+---
+
+<Update label="November 17, 2026" description="Leboncoin Auto Message Sender replies in a conversation, sends only to sellers without a phone, and only by day; email change with a confirmation link; 3-D Secure on upgrades; Reddit, Bien'ici and Instagram Followers fixes">
+
+## New
+
+**Leboncoin Auto Message Sender: reply in an existing conversation**
+
+A task can now be a conversation of your account's messaging (`https://www.leboncoin.fr/messages/id/<id>`, the `conversation_url` of [Leboncoin Messages Reader](/examples/leboncoin-messages-reader/get-results)): the message is posted in it, as Leboncoin's messaging does, without the contact form. `#pseudo#` and `#title#` come from the conversation. One Message Per Seller and the phone setting do not apply to a reply. See [Leboncoin Auto Message Sender](/examples/leboncoin-auto-message-sender/add-tasks).
+
+**Leboncoin Auto Message Sender: Send Only To Sellers With No Phone**
+
+`only_sellers_without_phone`, off by default: on, only the listings whose seller shows no phone number get the message, and the others are skipped with no row and no credit. The run log says why: "Skipped '<title>' — Phone number shown."
+
+**Leboncoin Auto Message Sender: sending hours**
+
+`daytime_only` sends from 8 AM to 8 PM, Paris time, and pauses the run outside those hours. It is on for squids created from now on; a squid created before keeps sending as it did, until you turn it on.
+
+**Change your email from Settings**
+
+The new address gets a link, valid 24 hours, after you confirm your password; the email changes once the link is opened, your invoices follow, and the former address is told. Through the API, `POST /v1/me` no longer changes the email at once: it answers `EmailChangeNeedsConfirmation`.
+
+## Improved
+
+**Google Maps Leads Scraper: whole-area estimates in seconds**
+
+A squid's estimates for whole-area tasks took minutes, and a run launched meanwhile kept the default estimate. They now take seconds.
+
+**Upgrades and manual resets ask your bank for 3-D Secure**
+
+A bank that wanted 3-D Secure declined the payment instead of asking for it, and Stripe then blocked the next tries. You are now asked to confirm in your bank's window. The checkout also pays with the card you picked.
+
+## Fixed
+
+**Reddit Scraper: post URLs without their slug, and fewer runs in error**
+
+A post URL without its slug returned 0 rows since early November: it is loaded through its short address again. A busy answer (429) or a proxy failure on a post's comments is tried again, then pauses the run, instead of ending it in error; Reddit's checks are passed through a fresh session. See [Reddit Scraper](/examples/reddit-scraper/add-tasks).
+
+**Instagram Followers Scraper: a locked or suspended account**
+
+An account Instagram locked or suspended put the run in error. The run now ends on the account, saying it is blocked.
+
+**Bien'ici: a search answered 404 by one of the site's servers**
+
+The run failed with 0 results; the search is now asked again, up to three times.
+
+**Yellow Pages: an empty first page is checked again**
+
+Yellow Pages can answer a suspected bot with an empty page of results, and the task ended with 0 results. An empty first page is now asked again from another exit, and only believed when it comes back empty again.
+
+**Leboncoin Messages Reader: Leboncoin's notices left out**
+
+Leboncoin's own notices are no longer returned as messages.
+
+**Upload status keeps its counts**
+
+[Check Upload Status](/docs/check-upload-status) answered `meta: null` once an upload had finished: it now keeps the tasks inserted, duplicated and invalid. In the app, an upload waiting its turn no longer reads failed.
+
+</Update>
