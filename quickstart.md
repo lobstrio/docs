@@ -27,7 +27,7 @@ curl https://api.lobstr.io/v2/run \
     "source": "google_maps",
     "operation": "places/get",
     "options": {
-      "place": "Le Bouchon des Filles, Lyon"
+      "place": "Gramercy Tavern, New York"
     }
   }'
 ```
@@ -42,7 +42,7 @@ r = requests.post(
         "source": "google_maps",
         "operation": "places/get",
         "options": {
-            "place": "Le Bouchon des Filles, Lyon",
+            "place": "Gramercy Tavern, New York",
         },
     },
 )
@@ -60,7 +60,7 @@ const r = await fetch('https://api.lobstr.io/v2/run', {
     source: 'google_maps',
     operation: 'places/get',
     options: {
-      place: 'Le Bouchon des Filles, Lyon',
+      place: 'Gramercy Tavern, New York',
     },
   }),
 })
@@ -77,7 +77,7 @@ The data is in the answer: no job to poll, no webhook to wait for. Shortened:
 ```json
 {
   "object": "run",
-  "id": "run_p4mhm5p5yff6hghsas6wqpwusa",
+  "id": "run_dl7jwl63crdabo5iazs7iax7oa",
   "source": "google_maps",
   "operation": "places/get",
   "status": "succeeded",
@@ -87,16 +87,16 @@ The data is in the answer: no job to poll, no webhook to wait for. Shortened:
   "cost": {
     "credits": 1
   },
-  "duration_ms": 1652,
+  "duration_ms": 1542,
   "results": [
     {
       "object": "place",
-      "name": "Le Bouchon des Filles",
-      "phone": "+33478304044",
+      "name": "Gramercy Tavern",
+      "phone": "+12124770777",
       "rating": {
         "value": 4.6,
         "scale": 5,
-        "count": 2237
+        "count": 5091
       }
     }
   ]

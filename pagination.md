@@ -12,10 +12,10 @@ A search or a list answers one page of the site, as the site shows it: 20 places
     "source": "google_maps",
     "operation": "reviews/list",
     "options": {
-      "place": "ChIJc_459AHr9EcRd0ALc7vrjcI",
+      "place": "ChIJCar0f49ZwokR6ozLV-dHNTE",
       "sort": "newest",
       "language": "en",
-      "cursor": "gAAAAABq_G0yXBz0j4bINFws…"
+      "cursor": "gAAAAABrCFL6TJJm0YaD4o…"
     }
   }
 }
@@ -32,7 +32,7 @@ call = {
     "source": "google_maps",
     "operation": "reviews/list",
     "options": {
-        "place": "ChIJc_459AHr9EcRd0ALc7vrjcI",
+        "place": "ChIJCar0f49ZwokR6ozLV-dHNTE",
     },
 }
 reviews = []
@@ -53,7 +53,7 @@ let call = {
   source: 'google_maps',
   operation: 'reviews/list',
   options: {
-    place: 'ChIJc_459AHr9EcRd0ALc7vrjcI',
+    place: 'ChIJCar0f49ZwokR6ozLV-dHNTE',
   },
 }
 const reviews = []

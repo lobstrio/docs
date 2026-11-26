@@ -13,7 +13,7 @@ curl https://api.lobstr.io/v2/run \
     "source": "google_maps",
     "operation": "reviews/list",
     "options": {
-      "place": "ChIJc_459AHr9EcRd0ALc7vrjcI"
+      "place": "ChIJCar0f49ZwokR6ozLV-dHNTE"
     },
     "fields": ["rating", "author.name"],
     "limit": 2
@@ -21,7 +21,7 @@ curl https://api.lobstr.io/v2/run \
 ```
 
 <ParamField body="source" type="string" required>
-The site, as the catalog names it: `google_maps`, `leboncoin`, `x`...
+The site, as the catalog names it: `google_maps`, `realtor`, `x`...
 </ParamField>
 <ParamField body="operation" type="string" required>
 What to do on it, `resource/verb`: `places/search`, `listings/get`, `tweets/search`...
@@ -44,20 +44,20 @@ Makes a retry safe: 1 to 255 printable characters, a UUID for instance. See [Ret
 
 ## The answer
 
-The envelope first, the records last, in `results`. A real answer, its cursor and the review id shortened:
+The envelope first, the records last, in `results`. A real answer, shortened: its cursor and the review id cut, one of its two reviews, its `balance` (the credits left) left out:
 
 ```json
 {
   "object": "run",
-  "id": "run_dp5kejuoabgahbabqw4p77jqi4",
-  "created_at": "2026-11-17T15:05:22.867Z",
+  "id": "run_g4fujoita5bddp3vpnio2nffb4",
+  "created_at": "2026-11-26T15:40:42.509Z",
   "livemode": true,
   "source": "google_maps",
   "operation": "reviews/list",
-  "version": "1.1.0",
+  "version": "1.2.2",
   "schema_url": "https://api.lobstr.io/v2/catalog/google_maps/reviews/list",
   "options": {
-    "place": "ChIJc_459AHr9EcRd0ALc7vrjcI",
+    "place": "ChIJCar0f49ZwokR6ozLV-dHNTE",
     "sort": "newest",
     "language": "en"
   },
@@ -73,10 +73,10 @@ The envelope first, the records last, in `results`. A real answer, its cursor an
     "source": "google_maps",
     "operation": "reviews/list",
     "options": {
-      "place": "ChIJc_459AHr9EcRd0ALc7vrjcI",
+      "place": "ChIJCar0f49ZwokR6ozLV-dHNTE",
       "sort": "newest",
       "language": "en",
-      "cursor": "gAAAAABq_G0yXBz0j4bINFws…"
+      "cursor": "gAAAAABrCFL6TJJm0YaD4o…"
     },
     "fields": [
       "rating",
@@ -85,13 +85,10 @@ The envelope first, the records last, in `results`. A real answer, its cursor an
     "limit": 2
   },
   "cost": {
-    "credits": 2
+    "credits": 4
   },
-  "balance": {
-    "credits": 9998
-  },
-  "duration_ms": 1083,
-  "request_id": "req_mskls2ziorfjfoll32bisidhra",
+  "duration_ms": 1176,
+  "request_id": "req_7jnlgmgf7ng35bvwdltexonqsm",
   "results": [
     {
       "object": "review",
@@ -102,7 +99,7 @@ The envelope first, the records last, in `results`. A real answer, its cursor an
         "scale": 5
       },
       "author": {
-        "name": "Cédric Chapal"
+        "name": "The350zfreak"
       }
     }
   ]

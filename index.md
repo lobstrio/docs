@@ -15,7 +15,7 @@ curl https://api.lobstr.io/v2/run \
     "source": "google_maps",
     "operation": "places/search",
     "options": {
-      "query": "bakeries in Lyon"
+      "query": "bakeries in Austin, TX"
     }
   }'
 ```
