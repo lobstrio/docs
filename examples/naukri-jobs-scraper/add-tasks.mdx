@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Naukri Jobs Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add URLs or inputs to your **Naukri Jobs Scraper** squid.
+
+<Note>Crawler ID: `28ca7564a332a081a1dabda552d5c35b`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  Naukri job search URL or a link to a single job posting. Example: `https://www.naukri.com/python-developer-jobs`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "28ca7564a332a081a1dabda552d5c35b",
+    "tasks": [
+      {"url": "https://www.naukri.com/python-developer-jobs"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "28ca7564a332a081a1dabda552d5c35b",
+        "tasks": [
+            {"url": "https://www.naukri.com/python-developer-jobs"}
+        ],
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.naukri.com/python-developer-jobs"}, "object": "task"}]}
+```

@@ -51,16 +51,16 @@ A new `collect_not_recommended_reviews` toggle collects the reviews Yelp hides u
 
 **Instagram Search & Hashtags Scraper — real web keyword search**
 
-The hashtag scraper now hits the same GraphQL keyword search Instagram's own web UI calls, which Instagram serves cleanly. The web grid does not carry 16 of the fields the older mobile-API path did (`product_type`, `reshare_count`, `coauthors`, `tagged_users`, `music`, `location_id`, `location_name`, `location_lat`, `location_lng`, and 7 others) — they have been removed from the result schema. The duplicate-stop rule was also tightened: pagination now requires 10 consecutive pages with posts but no new results before stopping, up from a single page. Older-than filter and the Newer/Older date pickers were also brought into line in the squid form.
+The hashtag scraper now hits the same GraphQL keyword search Instagram's own web UI calls (Chrome 153 headers and fingerprint), which Instagram serves cleanly. The web grid does not carry 16 of the fields the older mobile-API path did (`product_type`, `reshare_count`, `coauthors`, `tagged_users`, `music`, `location_id`, `location_name`, `location_lat`, `location_lng`, and 7 others) — they have been removed from the result schema. The duplicate-stop rule was also tightened: pagination now requires 10 consecutive pages with posts but no new results before stopping, up from a single page. Older-than filter and the Newer/Older date pickers were also brought into line in the squid form.
 
 **YouTube Search Scraper — reliability**
 
 - Tasks created since 2026-09-22 returned 0 rows on every input after the task-input rename. The renamed input is now read correctly, old `url` tasks keep working, and an empty input is refused up front with a `wrong_input` error instead of a silent 0-row success.
 - A broken connection while saving a page (`IncompleteRead`, `ChunkedEncodingError`) no longer ends the run in ERROR. Network errors, 429s and 5xx switch to a fresh proxy, YouTube is checked before pausing, both YouTube page layouts are parsed, and dates are returned in UTC.
 
-**Yellow Pages US Scraper — no more long pauses**
+**Yellow Pages US Scraper — Safari fingerprint**
 
-Yellow Pages runs used to pause for hours on 403 errors, retrying every 30 minutes with zero results. They now go through, with a retry budget, an overall deadline per page, and a circuit breaker on the detail step.
+Yellow Pages runs used to pause for hours on Cloudflare "Attention Required!" 403 walls, retrying the same profile every 30 minutes with zero results. The scraper now presents a Safari TLS fingerprint (Chrome and Firefox got hard-blocked and are now on the blocklist), with a retry budget sized on the measured pass rate, an overall deadline per page, and a circuit breaker on the detail step.
 
 **Google Maps Leads Scraper — email extraction and verification**
 

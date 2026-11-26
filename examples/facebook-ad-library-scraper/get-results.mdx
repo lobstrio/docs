@@ -1,0 +1,279 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Facebook Ad Library Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Facebook Ad Library Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="ad_archive_id" type="string">
+  Unique Meta Ad Library identifier. Example: `1234567890123456`
+</ResponseField>
+
+<ResponseField name="ad_url" type="string">
+  Direct Ad Library URL of this ad
+</ResponseField>
+
+<ResponseField name="ad_id" type="string">
+  Meta's internal ad id
+</ResponseField>
+
+<ResponseField name="page_id" type="string">
+  Numeric identifier of the Facebook Page
+</ResponseField>
+
+<ResponseField name="page_name" type="string">
+  Name of the Facebook Page running the ad. Example: `Apple`
+</ResponseField>
+
+<ResponseField name="page_url" type="string">
+  URL of the Facebook Page
+</ResponseField>
+
+<ResponseField name="page_likes" type="integer">
+  Number of likes of the Page
+</ResponseField>
+
+<ResponseField name="page_categories" type="json">
+  Categories of the Page
+</ResponseField>
+
+<ResponseField name="page_profile_picture" type="string">
+  Profile picture of the Page
+</ResponseField>
+
+<ResponseField name="page_is_deleted" type="boolean">
+  Whether the Page has been deleted
+</ResponseField>
+
+<ResponseField name="page_owner_name" type="string">
+  Legal name of the confirmed page owner
+</ResponseField>
+
+<ResponseField name="page_owner_id" type="string">
+  Meta identifier of the confirmed owner
+</ResponseField>
+
+<ResponseField name="ad_text" type="text">
+  Main body text of the ad creative. Example: `Introducing iPhone 17. The most advanced iPhone yet.`
+</ResponseField>
+
+<ResponseField name="headline" type="text">
+  Headline of the ad creative
+</ResponseField>
+
+<ResponseField name="link_description" type="text">
+  Link description shown under the headline
+</ResponseField>
+
+<ResponseField name="caption" type="string">
+  Display link (domain shown on the creative)
+</ResponseField>
+
+<ResponseField name="cta_text" type="string">
+  Label of the call-to-action button
+</ResponseField>
+
+<ResponseField name="cta_type" type="string">
+  Type of the call-to-action button
+</ResponseField>
+
+<ResponseField name="link_url" type="string">
+  Destination URL of the ad
+</ResponseField>
+
+<ResponseField name="display_format" type="string">
+  Creative format: `IMAGE`, `VIDEO`, `MEME`, `DCO`, `DPA`, `CAROUSEL`
+</ResponseField>
+
+<ResponseField name="byline" type="string">
+  Paid-for-by byline (political/issue ads)
+</ResponseField>
+
+<ResponseField name="images" type="json">
+  Images of the creative
+</ResponseField>
+
+<ResponseField name="videos" type="json">
+  Videos of the creative
+</ResponseField>
+
+<ResponseField name="cards" type="json">
+  Cards of a multi-card creative
+</ResponseField>
+
+<ResponseField name="is_reshared" type="boolean">
+  Whether the ad reshares an existing post
+</ResponseField>
+
+<ResponseField name="start_date" type="datetime">
+  Date and time the ad started running. Example: `2026-09-01T00:00:00Z`
+</ResponseField>
+
+<ResponseField name="end_date" type="datetime">
+  Date and time the ad stopped running
+</ResponseField>
+
+<ResponseField name="total_active_time" type="integer">
+  Total time active, in seconds
+</ResponseField>
+
+<ResponseField name="is_active" type="boolean">
+  Whether the ad is currently running. Example: `true`
+</ResponseField>
+
+<ResponseField name="publisher_platforms" type="json">
+  Meta platforms the ad runs on
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency of the spend range
+</ResponseField>
+
+<ResponseField name="spend" type="string">
+  Spend range as a range string (political ads only)
+</ResponseField>
+
+<ResponseField name="impressions_text" type="string">
+  Impressions range (political ads only)
+</ResponseField>
+
+<ResponseField name="impressions_index" type="integer">
+  Meta's internal impressions index. Example: `4`
+</ResponseField>
+
+<ResponseField name="categories" type="json">
+  Ad Library categories
+</ResponseField>
+
+<ResponseField name="collation_count" type="integer">
+  Number of ads Meta collated with this one
+</ResponseField>
+
+<ResponseField name="gated_type" type="string">
+  Whether the ad is eligible or was taken down
+</ResponseField>
+
+<ResponseField name="contains_sensitive_content" type="boolean">
+  Whether Meta flags the creative as sensitive
+</ResponseField>
+
+<ResponseField name="contains_digitally_created_media" type="boolean">
+  Whether the creative contains AI-generated or altered media
+</ResponseField>
+
+<ResponseField name="total_ads" type="integer">
+  Total ads Meta reports for this advertiser
+</ResponseField>
+
+<ResponseField name="search_keyword" type="string">
+  Keyword the ad was found with
+</ResponseField>
+
+### Detail Fields
+
+The following fields require `ad_details: true` in settings.
+
+<ResponseField name="payer" type="string">
+  Declared payer of the ad
+</ResponseField>
+
+<ResponseField name="beneficiary" type="string">
+  Declared beneficiary of the ad
+</ResponseField>
+
+<ResponseField name="targets_eu" type="boolean">
+  Whether the ad targets the EU
+</ResponseField>
+
+<ResponseField name="eu_total_reach" type="integer">
+  Total EU accounts reached
+</ResponseField>
+
+<ResponseField name="eu_location_audience" type="json">
+  Locations targeted in the EU
+</ResponseField>
+
+<ResponseField name="eu_gender_audience" type="string">
+  Gender targeted in the EU
+</ResponseField>
+
+<ResponseField name="eu_age_min" type="integer">
+  Lower bound of age range targeted in EU
+</ResponseField>
+
+<ResponseField name="eu_age_max" type="integer">
+  Upper bound of age range targeted in EU
+</ResponseField>
+
+<ResponseField name="eu_age_country_gender_breakdown" type="json">
+  EU reach broken down by country, age and gender
+</ResponseField>
+
+<ResponseField name="is_ad_taken_down" type="boolean">
+  Whether Meta has taken the ad down
+</ResponseField>
+
+<ResponseField name="page_about" type="text">
+  About text of the advertiser's Page
+</ResponseField>
+
+<ResponseField name="page_alias" type="string">
+  Vanity alias of the advertiser's Page
+</ResponseField>
+
+<ResponseField name="page_category" type="string">
+  Category of the advertiser's Page
+</ResponseField>
+
+<ResponseField name="page_verification" type="string">
+  Verification status of the advertiser's Page
+</ResponseField>
+
+<ResponseField name="instagram_followers" type="integer">
+  Number of followers of the advertiser's Instagram account
+</ResponseField>
+
+<ResponseField name="instagram_username" type="string">
+  Username of the advertiser's Instagram account
+</ResponseField>
+
+<ResponseField name="insights_age_gender" type="json">
+  Share of impressions by age and gender (political ads)
+</ResponseField>
+
+<ResponseField name="insights_location" type="json">
+  Share of impressions by region (political ads)
+</ResponseField>
+
+<ResponseField name="page_spend_lifetime" type="json">
+  Lifetime ad spend of the advertiser
+</ResponseField>
+
+<ResponseField name="violation_types" type="json">
+  Policy violations Meta records on the ad
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"ad_archive_id": "1234567890123456", "page_name": "Apple", "ad_text": "Introducing iPhone 17. The most advanced iPhone yet.", "is_active": true, "start_date": "2026-09-01T00:00:00Z", "impressions_index": 4}]}
+```

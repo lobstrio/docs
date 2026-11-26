@@ -1,0 +1,78 @@
+---
+title: "Update Settings"
+description: "Configure Google Play Store Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Google Play Store Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| country | string | `us` | The Play Store country to read from. Changes price, currency and availability on app rows, and which reviews Google Play serves. Use `language` to pick the review language. |
+| language | string | `en` | The language of the reviews you get, and of the app description. |
+| sort | string | `helpfulness` | Order the reviews are collected in. One of: `helpfulness`, `newest`, `rating`. `helpfulness` is Google Play's Most Relevant ranking. Only applies when Collect Reviews is on; ignored while Newer than is set (which always collects newest first). |
+| rating_filter | string | `all` | Only collect reviews with this star rating. One of: `all`, `1`, `2`, `3`, `4`, `5`. Google Play applies the filter itself, so filtered-out reviews are never fetched. Only applies when Collect Reviews is on. |
+| collect_reviews | boolean | true | Collect each app's reviews as well as its listing, one row per review. A review row costs one credit, the same as an app row. Turn this off to collect app listings only. |
+| fetch_since | string | — | Only collect reviews posted after this point. Use a relative duration (`24h`, `7d`, `2w`) or an absolute date (`YYYY-MM-DD HH:MM:SS`). Google Play publishes reviews about a day late, so a window shorter than a day usually returns none. App rows are always included. Only applies when Collect Reviews is on. |
+| fetch_since_timezone | string | — | Timezone for interpreting an absolute `fetch_since` date (e.g. `Europe/Paris`). Ignored for relative values. |
+| max_results | integer | — | Maximum number of rows collected per input, app rows and review rows counted together. Leave empty to collect everything available. |
+| max_unique_results_per_run | integer | — | Maximum number of unique rows retrieved across all inputs in the entire run. Leave empty for unlimited. |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "country": "us",
+    "language": "en",
+    "sort": "newest",
+    "rating_filter": "1",
+    "collect_reviews": true,
+    "fetch_since": "7d",
+    "max_results": 500
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "country": "us",
+        "language": "en",
+        "sort": "newest",
+        "rating_filter": "1",
+        "collect_reviews": True,
+        "fetch_since": "7d",
+        "max_results": 500,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"country": "us", "language": "en", "sort": "newest", "rating_filter": "1", "collect_reviews": true, "fetch_since": "7d", "max_results": 500}}
+```

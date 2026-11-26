@@ -1,0 +1,50 @@
+---
+title: "Update Settings"
+description: "Configure Quora Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Quora Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **url** | string | — | URL of a Quora question, profile, space or topic |
+| **max_results** | integer | — | Maximum rows to collect per task |
+| **max_unique_results_per_run** | integer | — | Max unique results across all tasks in a run |
+| **resolve_most_viewed_writers** | boolean | false | Fetch question's topic page to get most-viewed-writer status for each answerer |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"params": {"max_results": 100, "resolve_most_viewed_writers": false}}'
+```
+
+```python Python
+import requests
+requests.post("https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={"Authorization": "Token YOUR_API_KEY", "Content-Type": "application/json"},
+    json={"params": {"max_results": 100, "resolve_most_viewed_writers": false}})
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"max_results": 100, "resolve_most_viewed_writers": false}}
+```

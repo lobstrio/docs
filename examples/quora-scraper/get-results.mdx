@@ -1,0 +1,231 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Quora Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Quora Scraper** runs.
+
+<Note>
+  Each row has a `record_type` field indicating what was scraped: `answer`, `profile`, `profile_answer`, `profile_post`, or `topic`. Fields are populated based on the record type.
+</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="record_type" type="string">
+  Row type — answer, profile, profile_answer, profile_post, or topic. Example: `answer`
+</ResponseField>
+
+<ResponseField name="record_id" type="string">
+  Quora opaque base64 node id.
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Canonical URL of this record.
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  The Quora URL given as task input.
+</ResponseField>
+
+<ResponseField name="question_id" type="bigint">
+  Quora numeric question id.
+</ResponseField>
+
+<ResponseField name="question_title" type="text">
+  Plain-text title of the question. Example: `What is the best programming language to learn first?`
+</ResponseField>
+
+<ResponseField name="question_url" type="string">
+  Canonical URL of the question.
+</ResponseField>
+
+<ResponseField name="question_answer_count" type="integer">
+  Number of answers Quora reports.
+</ResponseField>
+
+<ResponseField name="question_follower_count" type="integer">
+  Number of followers of the question.
+</ResponseField>
+
+<ResponseField name="question_slug" type="string">
+  URL slug of the question.
+</ResponseField>
+
+<ResponseField name="topics" type="json">
+  Topics the question is filed under.
+</ResponseField>
+
+<ResponseField name="related_questions" type="json">
+  Related questions Quora surfaces.
+</ResponseField>
+
+<ResponseField name="answer_id" type="bigint">
+  Quora numeric answer id.
+</ResponseField>
+
+<ResponseField name="answer_content" type="text">
+  Plain-text body of the answer. Example: `Python is widely considered the best first language due to its clear syntax...`
+</ResponseField>
+
+<ResponseField name="answer_posted_at" type="datetime">
+  UTC datetime the answer was posted.
+</ResponseField>
+
+<ResponseField name="answer_upvote_count" type="integer">
+  Number of upvotes. Example: `1842`
+</ResponseField>
+
+<ResponseField name="answer_comment_count" type="integer">
+  Number of displayed comments.
+</ResponseField>
+
+<ResponseField name="answer_view_count" type="integer">
+  Number of views. Example: `42301`
+</ResponseField>
+
+<ResponseField name="answer_share_count" type="integer">
+  Number of shares.
+</ResponseField>
+
+<ResponseField name="author_id" type="bigint">
+  Quora numeric user id of the author.
+</ResponseField>
+
+<ResponseField name="author_name" type="string">
+  Display name of the author. Example: `John Doe`
+</ResponseField>
+
+<ResponseField name="author_url" type="string">
+  URL of the author's Quora profile.
+</ResponseField>
+
+<ResponseField name="author_credential" type="text">
+  Credential displayed under the author's name.
+</ResponseField>
+
+<ResponseField name="is_author_anonymous" type="boolean">
+  True when posted anonymously.
+</ResponseField>
+
+<ResponseField name="is_most_viewed_writer" type="boolean">
+  True when author is listed as a most-viewed writer for the question's topic.
+</ResponseField>
+
+<ResponseField name="post_id" type="bigint">
+  Quora numeric post id (Space/Post rows).
+</ResponseField>
+
+<ResponseField name="post_title" type="text">
+  Title of the post.
+</ResponseField>
+
+<ResponseField name="post_content" type="text">
+  Plain-text body of the post.
+</ResponseField>
+
+<ResponseField name="post_images" type="json">
+  Image URLs embedded in the post.
+</ResponseField>
+
+<ResponseField name="post_posted_at" type="datetime">
+  UTC datetime the post was published.
+</ResponseField>
+
+<ResponseField name="post_view_count" type="integer">
+  Number of views.
+</ResponseField>
+
+<ResponseField name="post_upvote_count" type="integer">
+  Number of upvotes.
+</ResponseField>
+
+<ResponseField name="post_comment_count" type="integer">
+  Number of displayed comments.
+</ResponseField>
+
+<ResponseField name="post_share_count" type="integer">
+  Number of shares.
+</ResponseField>
+
+<ResponseField name="space_name" type="string">
+  Name of the Quora Space the post was published in.
+</ResponseField>
+
+<ResponseField name="space_tribe_id" type="bigint">
+  Quora numeric Space id.
+</ResponseField>
+
+<ResponseField name="profile_url" type="string">
+  URL of the scraped profile.
+</ResponseField>
+
+<ResponseField name="profile_name" type="string">
+  Display name on the profile.
+</ResponseField>
+
+<ResponseField name="profile_bio" type="text">
+  Plain-text profile description.
+</ResponseField>
+
+<ResponseField name="profile_credential" type="text">
+  Top-line credential shown on the profile.
+</ResponseField>
+
+<ResponseField name="profile_follower_count" type="integer">
+  Number of followers.
+</ResponseField>
+
+<ResponseField name="profile_answer_count" type="integer">
+  Number of public answers.
+</ResponseField>
+
+<ResponseField name="profile_top_topics" type="json">
+  Topic node ids the profile claims expertise in.
+</ResponseField>
+
+<ResponseField name="topic_id" type="bigint">
+  Quora numeric topic id.
+</ResponseField>
+
+<ResponseField name="topic_name" type="string">
+  Name of the topic.
+</ResponseField>
+
+<ResponseField name="topic_url" type="string">
+  URL of the topic.
+</ResponseField>
+
+<ResponseField name="topic_follower_count" type="integer">
+  Number of topic followers.
+</ResponseField>
+
+<ResponseField name="related_topics" type="json">
+  Related topics listed on the topic page.
+</ResponseField>
+
+<ResponseField name="most_viewed_authors" type="json">
+  Most-viewed writers leaderboard of the topic.
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"record_type": "answer", "question_title": "What is the best programming language to learn first?", "answer_content": "Python is widely considered the best first language due to its clear syntax...", "author_name": "John Doe", "answer_upvote_count": 1842, "answer_view_count": 42301}]}
+```

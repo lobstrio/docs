@@ -97,7 +97,7 @@ Brand names containing `&` or `+` (e.g. `Procter & Gamble`) are kept intact acro
 - **Idealista Listings Search Export** — new-build units no longer come back with an empty `condition`; the parser now reads Idealista's "New home development" phrase.
 - **Google Maps Leads Scraper** — `geo_match` is tightened to postal code, parses two-part UK postcodes, tolerates partial codes, and drops results without a ZIP when the task has one. The duplicate `auto_verify_emails` squid param (two entries with the same name in `lobstr.json`) was dropped. Finished runs are frozen so a later run never rewrites the email-verification verdicts of a completed one (placeholder/template emails are short-circuited before the verifier call; template local-parts are only dropped on freemail domains).
 - **SeLoger Search Export** — `short_description` now defaults to `None` when the listing has no description, fixing the `ItemNotFound` crash.
-- **Trustpilot Reviews Scraper** — runs on both Node 18 and Node 20.
+- **Trustpilot Reviews Scraper** — the WAF token minter runs on both Node 18 and Node 20.
 - **Yelp Reviews Scraper** — `not_recommended` reviews now show up on biz pages whose URL alias differs from Yelp's canonical alias.
 
 </Update>

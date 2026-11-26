@@ -1,0 +1,273 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from TikTok Hashtag Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **TikTok Hashtag Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="hashtag" type="string">
+  The hashtag this video was collected from (without the leading #). Example: `lobstr`
+</ResponseField>
+
+<ResponseField name="hashtag_rank" type="integer">
+  Position of this video in the hashtag's video feed at scrape time. Example: `1`
+</ResponseField>
+
+<ResponseField name="video_id" type="string">
+  Unique TikTok video identifier. Example: `7680941891700935944`
+</ResponseField>
+
+<ResponseField name="description" type="string">
+  Caption or description of the TikTok video. Example: `GoPro POV: I found a party inside the lobster den #lobster #underwater #pov #party #higgsfield `
+</ResponseField>
+
+<ResponseField name="text_language" type="string">
+  Detected language code of the video's caption. Example: `en`
+</ResponseField>
+
+<ResponseField name="hashtags" type="json">
+  List of hashtags used in the video's own caption. Example: `["lobster", "underwater", "pov", "party", "higgsfield"]`
+</ResponseField>
+
+<ResponseField name="mentions" type="json">
+  List of TikTok accounts (@mentions) tagged in the video's caption. Example: `[]`
+</ResponseField>
+
+<ResponseField name="created_at" type="datetime">
+  Date and time the video was published. Example: `2026-09-02T12:17:29Z`
+</ResponseField>
+
+<ResponseField name="play_count" type="integer">
+  Total number of times the video has been played. Example: `1500000`
+</ResponseField>
+
+<ResponseField name="like_count" type="integer">
+  Total number of likes on the video. Example: `60900`
+</ResponseField>
+
+<ResponseField name="comment_count" type="integer">
+  Total number of comments on the video. Example: `662`
+</ResponseField>
+
+<ResponseField name="share_count" type="integer">
+  Total number of times the video has been shared. Example: `23300`
+</ResponseField>
+
+<ResponseField name="collect_count" type="integer">
+  Total number of times the video has been saved to collections. Example: `4940`
+</ResponseField>
+
+<ResponseField name="repost_count" type="integer">
+  Total number of times the video has been reposted. Example: `0`
+</ResponseField>
+
+<ResponseField name="duration" type="integer">
+  Duration of the video in seconds. Example: `12`
+</ResponseField>
+
+<ResponseField name="width" type="integer">
+  Width of the video in pixels. Example: `576`
+</ResponseField>
+
+<ResponseField name="height" type="integer">
+  Height of the video in pixels. Example: `1024`
+</ResponseField>
+
+<ResponseField name="definition" type="string">
+  Video resolution definition (e.g. 540p, 720p, 1080p). Example: `540p`
+</ResponseField>
+
+<ResponseField name="video_format" type="string">
+  Container format of the video file. Example: `mp4`
+</ResponseField>
+
+<ResponseField name="bitrate" type="integer">
+  Video bitrate in bits per second. Example: `641117`
+</ResponseField>
+
+<ResponseField name="file_size" type="integer">
+  File size of the video in bytes. Example: `988443`
+</ResponseField>
+
+<ResponseField name="is_ad" type="boolean">
+  Whether the video is a paid advertisement. Example: `False`
+</ResponseField>
+
+<ResponseField name="duet_enabled" type="boolean">
+  Whether the author has enabled duets for this video. Example: `True`
+</ResponseField>
+
+<ResponseField name="stitch_enabled" type="boolean">
+  Whether the author has enabled stitches for this video. Example: `True`
+</ResponseField>
+
+<ResponseField name="location_created" type="string">
+  ISO country code of where the video was created.
+</ResponseField>
+
+<ResponseField name="video_url" type="string">
+  Canonical TikTok video page URL. Unlike play_url/download_url (signed CDN links tied to the proxy IP that fetched them, and unusable elsewhere), this always works. Example: `https://www.tiktok.com/@kennyslowbird/video/7680941891700935944`
+</ResponseField>
+
+<ResponseField name="play_url" type="string">
+  Direct streaming URL for the video. Signed and tied to the proxy IP that fetched it -- confirmed to 403 from any other network, even with full browser TLS impersonation. Use video_url for a link guaranteed to keep working. Example: `https://v16-webapp-prime.tiktok.com/video/tos/alisg/tos-alisg-pve-0037c001/osPMAPFpquB5whsYB2iigfBnEmARMIREIyfDUC/?a=1988&bti=ODszNWYuMDE6&&bt=626&ft=-Csk_m.MPD12NpP3Jn-Uxl7FSY3W3wv25ycAp&mime_type=video_mp4&rc=NmQ6Mzk5ODNkZDs7ZGk7N0BpajRqNnA5cm01ZDMzODczNEBiLjIxX19eNl4xLl40YmIwYSNoNHFtMmRzc2BhLS1kMTFzcw%3D%3D&expire=1788988144&l=202609072108521145CE1BA5A6675D4565&ply_type=2&policy=2&signature=3a1dd0cf1932bd6dffda58177499342f&tk=tt_chain_token&btag=e000b0000`
+</ResponseField>
+
+<ResponseField name="download_url" type="string">
+  Direct download URL for the video. Same IP-binding limitation as play_url -- use video_url for a link guaranteed to keep working.
+</ResponseField>
+
+<ResponseField name="cover_url" type="string">
+  URL of the video thumbnail (cover image). Example: `https://p19-common-sign.tiktokcdn-eu.com/tos-alisg-p-0037/ocGMEGfYAbdQDHfqSLQLI8HYQFfesTwwcAGXRI~tplv-tiktokx-origin.image?dr=10395&x-expires=1788987600&x-signature=o7cWRDAV2XzbPvIXQ%2FcYS24BwIc%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=no1a`
+</ResponseField>
+
+<ResponseField name="dynamic_cover" type="string">
+  URL of the animated dynamic cover (GIF-like preview). Example: `https://p16-common-sign.tiktokcdn-eu.com/tos-alisg-p-0037/o4QwQEGJGXYYAyGqILEReDTfS8bRfIjAQHLfF2~tplv-tiktokx-origin.image?dr=10395&x-expires=1788987600&x-signature=mzIZiNAQrJvIOm40dm1XaHHQpvU%3D&t=4d5b0474&ps=13740610&shp=81f88b70&shcp=43f4a2f9&idc=no1a`
+</ResponseField>
+
+<ResponseField name="music_id" type="string">
+  Unique identifier of the music track used in the video. Example: `7639424214639167489`
+</ResponseField>
+
+<ResponseField name="music_title" type="string">
+  Title of the music track used in the video. Example: `Movin' To The Sun`
+</ResponseField>
+
+<ResponseField name="music_author" type="string">
+  Artist name of the music track used in the video. Example: `HUGEL & Imael Angel & Ultra Naté`
+</ResponseField>
+
+<ResponseField name="music_play_url" type="string">
+  Direct URL to stream the audio track. Example: `https://sf16-music.tiktokcdn-eu.com/obj/tos-alisg-ve-2774/owYPQBSopi5XcEAa58MUvAixnPAWIp93tiLnr`
+</ResponseField>
+
+<ResponseField name="music_cover_url" type="string">
+  URL of the music track's cover art. Example: `https://p77-sg.tiktokcdn.com/aweme/200x200/tos-alisg-v-2774/oYmBAs9EvpUPMEAiAHxSsYrqAWiBAmAQCawAV.jpeg`
+</ResponseField>
+
+<ResponseField name="music_duration" type="integer">
+  Duration of the music track in seconds. Example: `48`
+</ResponseField>
+
+<ResponseField name="music_original" type="boolean">
+  Whether the audio is an original sound created by the author. Example: `False`
+</ResponseField>
+
+<ResponseField name="music_is_copyrighted" type="boolean">
+  Whether the music track is under copyright protection. Example: `False`
+</ResponseField>
+
+<ResponseField name="author_id" type="string">
+  Unique numeric identifier of the video author. Example: `6829825193482929158`
+</ResponseField>
+
+<ResponseField name="author_sec_uid" type="string">
+  Secondary unique identifier of the author (used in API calls). Example: `MS4wLjABAAAAzeLkt1OZZGvXNE4urbCiOvdjecJhZuPMjTzCM_RZYVnW9gG0AiIOEQiv7u75lmX0`
+</ResponseField>
+
+<ResponseField name="author_username" type="string">
+  TikTok username (handle) of the video author. Example: `kennyslowbird`
+</ResponseField>
+
+<ResponseField name="author_nickname" type="string">
+  Display name of the video author. Example: `Kenny`
+</ResponseField>
+
+<ResponseField name="author_verified" type="boolean">
+  Whether the author's account is verified by TikTok. Example: `False`
+</ResponseField>
+
+<ResponseField name="author_private_account" type="boolean">
+  Whether the author's account is set to private. Example: `False`
+</ResponseField>
+
+<ResponseField name="author_bio" type="string">
+  Biography or description on the author's TikTok profile Example: `⬆️ 2.7 million across all platforms
+🔥Music Release & Collabs & partnerships🔥
+📩 kennyslowbird@gmail.com 📩
+🔥 Higgsfield Partner 🔥
+⬇️ buy my secret ⬇️`
+</ResponseField>
+
+<ResponseField name="author_follower_count" type="integer">
+  Number of followers the author has. Example: `1700000`
+</ResponseField>
+
+<ResponseField name="author_following_count" type="integer">
+  Number of accounts the author is following. Example: `381`
+</ResponseField>
+
+<ResponseField name="author_total_likes" type="integer">
+  Total likes received by the author across all their videos. Example: `67900000`
+</ResponseField>
+
+<ResponseField name="author_video_count" type="integer">
+  Total number of videos published by the author. Example: `1893`
+</ResponseField>
+
+<ResponseField name="author_digg_count" type="integer">
+  Total number of likes the author has given to other videos. Example: `2209`
+</ResponseField>
+
+<ResponseField name="author_friend_count" type="integer">
+  Number of mutual followers (friends) the author has. Example: `0`
+</ResponseField>
+
+<ResponseField name="author_avatar" type="string">
+  URL of the author's profile picture. Example: `https://p16-common-sign.tiktokcdn-eu.com/tos-maliva-avt-0068/a0d2d60a3d45a05ea7d2220c875cba22~tplv-tiktokx-cropcenter:100:100.jpeg?dr=10399&refresh_token=3b6951e9&x-expires=1788987600&x-signature=MP2LVGgC8j02XYhQROa%2BKDQ00HE%3D&t=4d5b0474&ps=13740610&shp=a5d48078&shcp=81f88b70&idc=no1a`
+</ResponseField>
+
+<ResponseField name="effect_stickers" type="json">
+  List of visual effects/stickers applied to the video. Example: `[{"id": "1911622141", "name": "IPHONE EVENING CAPTURE", "use_count": 0}, {"id": "127702155", "name": "comfy", "use_count": 0}]`
+</ResponseField>
+
+<ResponseField name="scraping_time" type="datetime">
+  Date and time when this video was scraped. Example: `2026-09-07T21:09:20.934Z`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"hashtag": "lobstr", "hashtag_rank": 1, "video_id": "7680941891700935944", "description": "GoPro POV: I found a party inside the lobster den #lobster #underwater #pov #party #higgsfield ", "text_language": "en", "hashtags": ["lobster", "underwater", "pov", "party", "higgsfield"], "mentions": [], "created_at": "2026-09-02T12:17:29Z", "play_count": 1500000, "like_count": 60900}]}
+```

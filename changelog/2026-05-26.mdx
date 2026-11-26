@@ -18,7 +18,7 @@ description: "API updates shipped May 26, 2026"
 - **ParuVendu: pagination beyond page 5** — pages 6 and beyond were returning 404 errors. Fixed by appending the required `allp=1` parameter to paginated URLs.
 - **Immoweb: XSRF token lost on proxy rotation** — session token was invalidated after proxy switches, causing requests to fail mid-run. Fixed.
 - **Instagram Posts: CSRF token invalidated by API calls** — CSRF token was being dropped after certain API responses, causing authentication failures. Fixed.
-- **Leboncoin Listing Status: failed checks** — some status checks failed. Fixed.
+- **Leboncoin Listing Status: DataDome 403s** — the status checker was blocked by DataDome anti-bot protection. Switched to a browser-based client that correctly handles the challenge.
 - **PAP: TLS failures on datacenter proxy** — proxy-related SSL errors now trigger an automatic retry.
 
 </Update>

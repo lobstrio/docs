@@ -1,0 +1,235 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Capterra Reviews Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Capterra Reviews Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Export Reviews
+
+<ResponseField name="review_id" type="string">
+  Numeric id of the review on the site it was written on (see `source_site`). Two reviews from different source sites can share this number, so use `global_review_id` to identify a review. Example: `7184664`
+</ResponseField>
+
+<ResponseField name="global_review_id" type="string">
+  Unique id of the review across Capterra, GetApp and Software Advice: the source site followed by the review number. Together with `source_domain` it identifies a row. Example: `Capterra___7184664`
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Headline the reviewer gave to the review. Example: `A practical platform for collecting public web data for research`
+</ResponseField>
+
+<ResponseField name="written_on" type="datetime">
+  Date the review was written (day precision, UTC midnight). Capterra does not publish a time of day for reviews. Example: `2026-07-14T00:00:00+00:00`
+</ResponseField>
+
+<ResponseField name="overall_rating" type="float">
+  Overall rating given by the reviewer, from 1 to 5. Example: `5.0`
+</ResponseField>
+
+<ResponseField name="ease_of_use_rating" type="float">
+  Ease of use rating, from 1 to 5. Example: `5.0`
+</ResponseField>
+
+<ResponseField name="customer_support_rating" type="float">
+  Customer service rating, from 1 to 5. Example: `5.0`
+</ResponseField>
+
+<ResponseField name="functionality_rating" type="float">
+  Features and functionality rating, from 1 to 5. Example: `5.0`
+</ResponseField>
+
+<ResponseField name="value_for_money_rating" type="float">
+  Value for money rating, from 1 to 5. Example: `5.0`
+</ResponseField>
+
+<ResponseField name="likelihood_to_recommend" type="float">
+  How likely the reviewer is to recommend the product, from 0 to 10. Example: `10.0`
+</ResponseField>
+
+<ResponseField name="pros_text" type="text">
+  What the reviewer likes about the product (Pros).
+</ResponseField>
+
+<ResponseField name="cons_text" type="text">
+  What the reviewer dislikes about the product (Cons).
+</ResponseField>
+
+<ResponseField name="general_comments" type="text">
+  Overall comments on the reviewer's experience with the product.
+</ResponseField>
+
+<ResponseField name="switching_reasons" type="text">
+  Why the reviewer switched to this product, when given.
+</ResponseField>
+
+<ResponseField name="chosen_reasons" type="text">
+  Why the reviewer chose this product over the alternatives, when given. Example: `Ease of use and the large library of ready-made Actors`
+</ResponseField>
+
+<ResponseField name="alternative_products" type="json">
+  Products the reviewer considered before choosing this one, each with its Capterra id, name, slug and link. Example: `[{"id": "234796", "name": "Selenium IDE", "slug": "Selenium-IDE", "url": "https://www.capterra.com/p/234796/Selenium-IDE/"}]`
+</ResponseField>
+
+<ResponseField name="alternative_products_names" type="text">
+  Names of the products the reviewer considered, comma separated. Example: `Selenium IDE, Octoparse`
+</ResponseField>
+
+<ResponseField name="switched_from_products" type="json">
+  Products the reviewer used before switching to this one, each with its Capterra id, name, slug and link.
+</ResponseField>
+
+<ResponseField name="switched_from_products_names" type="text">
+  Names of the products the reviewer switched from, comma separated. Example: `Selenium IDE`
+</ResponseField>
+
+<ResponseField name="incentivized" type="string">
+  Incentive disclosure code published by Capterra: `NoIncentive`, `VendorReferredIncentivized` or `NominalGift`. Example: `NoIncentive`
+</ResponseField>
+
+<ResponseField name="is_incentivized" type="boolean">
+  `true` when the reviewer was offered an incentive (a gift card or a vendor-referred incentive) to write the review. Example: `false`
+</ResponseField>
+
+<ResponseField name="review_source" type="string">
+  Capterra's own explanation of how the review was collected and whether an incentive was offered. Example: `No Incentive Offered: This review was submitted organically.`
+</ResponseField>
+
+<ResponseField name="source_site" type="string">
+  Site of the Gartner network the review was written on: `Capterra`, `GetApp` or `SoftwareAdvice`. Example: `Capterra`
+</ResponseField>
+
+<ResponseField name="is_anonymous" type="boolean">
+  `true` when the reviewer chose to stay anonymous (shown as "Verified Reviewer"). On regional Capterra sites in a language other than English, French, Spanish, Brazilian Portuguese or Dutch, it is empty for the first 5 reviews of a product when Capterra does not say. Example: `false`
+</ResponseField>
+
+<ResponseField name="vendor_response" type="text">
+  Public reply of the vendor to the review, when there is one.
+</ResponseField>
+
+<ResponseField name="vendor_response_date" type="datetime">
+  Date of the vendor's reply (day precision, UTC midnight). Example: `2024-05-28T00:00:00+00:00`
+</ResponseField>
+
+<ResponseField name="reviewer_name" type="string">
+  Name of the reviewer as displayed by Capterra (first name and initial, or "Verified Reviewer" when anonymous); regional sites show the first name only. Example: `Faustino G.`
+</ResponseField>
+
+<ResponseField name="reviewer_job_title" type="string">
+  Job title of the reviewer. On regional Capterra sites in a language other than English, French, Spanish, Portuguese or Dutch, the line is kept as Capterra shows it (job title followed by the reviewer's country). Example: `Researcher`
+</ResponseField>
+
+<ResponseField name="reviewer_industry" type="string">
+  Industry of the reviewer's company. Example: `Education Management`
+</ResponseField>
+
+<ResponseField name="reviewer_company_size" type="string">
+  Size of the reviewer's company. Example: `11-50 employees`
+</ResponseField>
+
+<ResponseField name="reviewer_time_used_product" type="string">
+  How long the reviewer has used the product. Example: `6-12 months`
+</ResponseField>
+
+<ResponseField name="reviewer_profile_picture" type="string">
+  Link to the reviewer's profile picture, when there is one.
+</ResponseField>
+
+<ResponseField name="reviewer_linkedin_verified" type="boolean">
+  `true` when the reviewer's identity was verified through LinkedIn. Example: `true`
+</ResponseField>
+
+<ResponseField name="reviewer_is_validated" type="boolean">
+  `true` when Capterra validated the reviewer. Example: `true`
+</ResponseField>
+
+<ResponseField name="reviewer_validations" type="string">
+  Validation checks the reviewer passed, comma separated (`LinkedIn`, `BusinessEmail`, `ProofOfLink`). Example: `LinkedIn, ProofOfLink`
+</ResponseField>
+
+<ResponseField name="product_id" type="string">
+  Capterra id of the reviewed product, the number after `/p/` in its URL. Example: `150854`
+</ResponseField>
+
+<ResponseField name="product_uuid" type="string">
+  Internal unique identifier of the product in the Gartner network. Example: `9332c814-d90b-4746-bb51-a6d200b2b406`
+</ResponseField>
+
+<ResponseField name="product_name" type="string">
+  Name of the reviewed product. Example: `Apify`
+</ResponseField>
+
+<ResponseField name="product_slug" type="string">
+  Slug of the product in its Capterra URL (it can differ from the product name). Example: `Apify`
+</ResponseField>
+
+<ResponseField name="vendor_name" type="string">
+  Name of the company that makes the product. Example: `Apify`
+</ResponseField>
+
+<ResponseField name="product_overall_rating" type="float">
+  Average overall rating of the product on Capterra, from 1 to 5. Example: `4.8`
+</ResponseField>
+
+<ResponseField name="product_total_reviews" type="integer">
+  Total number of reviews of the product on Capterra. Example: `579`
+</ResponseField>
+
+<ResponseField name="product_category" type="string">
+  Main Capterra software category of the product. Example: `Web Scraping`
+</ResponseField>
+
+<ResponseField name="source_url" type="string">
+  Capterra reviews page of the product the review was collected from (the regional site's own product page for a regional URL). Example: `https://www.capterra.com/p/150854/Apify/reviews/`
+</ResponseField>
+
+<ResponseField name="source_domain" type="string">
+  Capterra site the review was collected from: `capterra.com` or a regional site such as `capterra.co.uk` or `capterra.fr`. The same review can be collected from several sites (a regional site can show it in its original language), so a review is identified by `global_review_id` together with `source_domain`. Example: `capterra.com`
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"review_id": "7184664", "global_review_id": "Capterra___7184664", "title": "A practical platform for collecting public web data for research", "written_on": "2026-07-14T00:00:00+00:00", "overall_rating": 5.0, "ease_of_use_rating": 5.0, "customer_support_rating": 5.0, "functionality_rating": 5.0, "value_for_money_rating": 5.0, "likelihood_to_recommend": 10.0, "pros_text": "I mainly use Apify for academic research on socio-environmental issues and digital public debates...", "cons_text": "Some Actors have excellent documentation, while others require more experimentation...", "general_comments": "My overall experience has been very positive. I use Apify as part of my research workflow...", "incentivized": "NoIncentive", "is_incentivized": false, "source_site": "Capterra", "is_anonymous": false, "reviewer_name": "Faustino G.", "reviewer_job_title": "Researcher", "reviewer_industry": "Education Management", "reviewer_company_size": "11-50 employees", "reviewer_time_used_product": "6-12 months", "reviewer_linkedin_verified": true, "reviewer_is_validated": true, "reviewer_validations": "LinkedIn, ProofOfLink", "product_id": "150854", "product_name": "Apify", "product_slug": "Apify", "vendor_name": "Apify", "product_overall_rating": 4.8, "product_total_reviews": 579, "product_category": "Web Scraping", "source_url": "https://www.capterra.com/p/150854/Apify/reviews/", "source_domain": "capterra.com"}]}
+```

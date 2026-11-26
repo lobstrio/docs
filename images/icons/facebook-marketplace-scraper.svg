@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g data-name="Facebook Marketplace Scraper">
+    <rect width="40" height="40" rx="9" fill="#3b74ed"/>
+    <path d="M13 15.5 14.6 12h10.8l1.6 3.5" fill="none" stroke="#fff" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M12.5 15.5h15l-1 12.5a1.6 1.6 0 0 1-1.6 1.5H15.1a1.6 1.6 0 0 1-1.6-1.5z" fill="#fff"/>
+    <path d="M16.5 15.5v2a3.5 3.5 0 0 0 7 0v-2" fill="none" stroke="#3b74ed" stroke-width="1.6" stroke-linecap="round"/>
+  </g>
+</svg>

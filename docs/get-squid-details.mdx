@@ -49,11 +49,7 @@ This endpoint retrieves comprehensive details about a specific squid, including 
 </ResponseField>
 
 <ResponseField name="concurrency" type="integer">
-  Number of concurrent tasks the squid runs, when `auto_slots` is `false`. Example: `2`
-</ResponseField>
-
-<ResponseField name="auto_slots" type="boolean">
-  `true` when the engine sets the squid's workers from your plan's slots and its tasks left (see [Update Squid](/docs/update-squid)). Example: `false`
+  Number of concurrent tasks the squid runs. Example: `2`
 </ResponseField>
 
 <ResponseField name="accounts" type="array | null">

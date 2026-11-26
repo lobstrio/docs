@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="40" height="40" viewBox="0 0 40 40">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.061" y1="0.075" x2="0.91" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#7a17fe"/>
+      <stop offset="0.39" stop-color="#fc14bd"/>
+      <stop offset="0.657" stop-color="#ff4521"/>
+      <stop offset="1" stop-color="#ffc904"/>
+    </linearGradient>
+    <clipPath id="clip-path">
+      <rect id="Прямоугольник_14278" data-name="Прямоугольник 14278" width="17.865" height="21.071" fill="#fff"/>
+    </clipPath>
+  </defs>
+  <g id="icon_instagram_profile" transform="translate(-1016 -3330)">
+    <rect id="Прямоугольник_9302" data-name="Прямоугольник 9302" width="40" height="40" rx="9" transform="translate(1016 3330)" fill="url(#linear-gradient)"/>
+    <g id="instagram_profile_reels" transform="translate(0 401)">
+      <g id="Сгруппировать_17939" data-name="Сгруппировать 17939" transform="translate(1027.066 2938.672)">
+        <g id="Сгруппировать_17938" data-name="Сгруппировать 17938" clip-path="url(#clip-path)">
+          <path id="Контур_67904" data-name="Контур 67904" d="M5.683,170.3c2.088-.153,4.313.082,6.416-.015a6.088,6.088,0,0,1,5.606,4.643c.486,2.182-.1,3.117-2.181,3.749-3.324,1.01-10.517,1.044-13.766-.2-1.494-.57-1.921-1.327-1.707-2.935A6.164,6.164,0,0,1,5.683,170.3" transform="translate(0 -158.351)" fill="#fff"/>
+          <path id="Контур_67905" data-name="Контур 67905" d="M54.216.027a5.469,5.469,0,0,1,5.1,8.607,5.516,5.516,0,0,1-9.356-.673A5.489,5.489,0,0,1,54.216.027" transform="translate(-45.918 0)" fill="#fff"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

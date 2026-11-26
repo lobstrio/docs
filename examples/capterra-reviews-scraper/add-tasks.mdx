@@ -1,0 +1,76 @@
+---
+title: "Add Tasks"
+description: "Add tasks to your Capterra Reviews Scraper squid"
+api: "POST https://api.lobstr.io/v1/tasks"
+---
+
+Add Capterra product URLs to your **Capterra Reviews Scraper** squid.
+
+<Note>Crawler ID: `1b9cbf17d4315e37f52ddd8928b44484`</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Body
+
+<ParamField body="squid" type="string" required>
+  Hash ID of your squid.
+</ParamField>
+
+<ParamField body="tasks" type="array" required>
+  Array of task objects.
+</ParamField>
+
+## Task Fields
+
+<ParamField body="tasks[].url" type="string" required>
+  The Capterra page of the product whose reviews you want, e.g. `https://www.capterra.com/p/150854/Apify/reviews/`. The product page itself (`https://www.capterra.com/p/150854/Apify/`) and the older `https://www.capterra.com/reviews/150854/Apify` form work too, with or without the trailing slash: the product is identified by the number in the URL, so an outdated product name in the URL is corrected automatically. Capterra's regional sites work too, with their own URL form, e.g. `https://www.capterra.co.uk/software/150854/apify` or `https://www.capterra.fr/reviews/150854/apify`: `co.uk`, `ca`, `com.au`, `co.nz`, `ie`, `in`, `ae`, `co.za`, `fr`, `es`, `it`, `nl`, `be`, `ch`, `at`, `pt`, `com.br`, `mx`, `se`, `dk`, `no`, `fi` and `pl`. A regional site is collected on that site, in the language it shows by default. Regional sites sort only by Most Recent or Most Helpful and have no Reviewer's Role or Frequency of Use filter. The order and the filters come from the settings below, not from the URL. A URL ending in `?page=N` starts the collection at page N of that order (25 reviews per page; on a regional site page 1 holds the 5 highlighted reviews). Example: `https://www.capterra.com/p/150854/Apify/reviews/`
+</ParamField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/tasks \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "squid": "YOUR_SQUID_HASH",
+    "tasks": [
+      {"url": "https://www.capterra.com/p/150854/Apify/reviews/"}
+    ]
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/tasks",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "squid": "YOUR_SQUID_HASH",
+        "tasks": [
+            {"url": "https://www.capterra.com/p/150854/Apify/reviews/"}
+        ],
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"duplicated_count": 0, "tasks": [{"id": "TASK_HASH", "is_active": true, "params": {"url": "https://www.capterra.com/p/150854/Apify/reviews/"}, "object": "task"}]}
+```

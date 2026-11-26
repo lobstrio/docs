@@ -1,0 +1,71 @@
+---
+title: "Update Settings"
+description: "Configure Facebook Comments Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Facebook Comments Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| rows | integer | — | Number of rows returned per API page |
+| max_unique_results_per_run | integer | — | Max unique comments across all tasks in the run |
+| max_results | integer | — | Total comments per post (top-level + replies combined) |
+| sort_by | string | all_comments | Comment order: `most_relevant` or `all_comments` |
+| include_replies | boolean | false | Also collect replies of every top-level comment |
+| max_replies | integer | — | Max replies collected per top-level comment |
+| fetch_since | string | — | Stop scraping when comments older than this threshold are reached |
+| fetch_since_timezone | string | — | Timezone for fetch_since |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/3cf27be3402dbc529ed0db7d18135e8c \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "max_results": 500,
+    "sort_by": "all_comments",
+    "include_replies": true,
+    "max_replies": 50
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/3cf27be3402dbc529ed0db7d18135e8c",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "max_results": 500,
+        "sort_by": "all_comments",
+        "include_replies": True,
+        "max_replies": 50
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"max_results": 500, "sort_by": "all_comments", "include_replies": true, "max_replies": 50}}
+```

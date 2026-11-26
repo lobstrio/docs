@@ -17,11 +17,7 @@ This endpoint updates an existing squid's settings using its hash ID. You can co
 </ParamField>
 
 <ParamField body="concurrency" type="integer">
-  Number of concurrent tasks to run simultaneously (1-20), when `auto_slots` is `false`. Example: `2`
-</ParamField>
-
-<ParamField body="auto_slots" type="boolean">
-  Let the engine set the squid's workers (`true`), or use `concurrency` (`false`). On Auto, a run aims at its share of your plan's slots, leaving 1 slot free for another launch: the slots your Manual runs leave, split between your runs on Auto, at most one worker per task left and the crawler's `max_concurrency`, at least one. Only on crawlers whose `auto_slots` is `true` (Google Maps Leads Scraper today); elsewhere the update answers `AutoSlotsNotSupported`. Example: `true`
+  Number of concurrent tasks to run simultaneously (1-20). Example: `2`
 </ParamField>
 
 <ParamField body="to_complete" type="boolean">

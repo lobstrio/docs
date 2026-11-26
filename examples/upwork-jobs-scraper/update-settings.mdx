@@ -1,0 +1,81 @@
+---
+title: "Update Settings"
+description: "Configure Upwork Jobs Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Upwork Jobs Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| rows | integer | — | Number of rows returned per API page |
+| url | string | — | Upwork search URL, keyword, or single job posting link |
+| category | string | Any | Only return jobs from this Upwork category |
+| hourly_or_fixed | string | Any | Filter by hourly or fixed-price jobs |
+| budget_range | string | — | Budget filter as min-max in USD, e.g. `100-` or `-500` |
+| experience_level | string | Any | Entry Level, Intermediate, or Expert |
+| client_history | string | Any | Filter by client's hiring history |
+| client_location | string | — | Only return jobs from clients in this country |
+| posted_within | string | Any time | Only return jobs published within this window |
+| sort | string | Relevance | Relevance or Newest |
+| max_results | integer | 1000 | Stop each task after this many jobs |
+| fetch_since | string | — | Only collect jobs published after this threshold (24h, 7d, or YYYY-MM-DD) |
+| fetch_since_timezone | string | — | Timezone for fetch_since |
+| job_details | boolean | false | Open each job posting to collect client data (country, city, total spent, rating) |
+
+<Note>
+  Setting `job_details: true` enables additional detail fields in results.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/681a0d2e2641326f7b87cda35513618a \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "max_results": 500,
+    "sort": "Newest",
+    "experience_level": "Intermediate",
+    "job_details": true
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/681a0d2e2641326f7b87cda35513618a",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "max_results": 500,
+        "sort": "Newest",
+        "experience_level": "Intermediate",
+        "job_details": True
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"max_results": 500, "sort": "Newest", "experience_level": "Intermediate", "job_details": true, "hourly_or_fixed": "Any", "posted_within": "Any time"}}
+```

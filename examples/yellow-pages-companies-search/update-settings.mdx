@@ -1,0 +1,60 @@
+---
+title: "Update Settings"
+description: "Configure Yellow Pages Companies Search Export settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Yellow Pages Companies Search Export** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **url** | string | — | Yellow Pages search URL (use this OR keyword + location) |
+| **keyword** | string | — | What you are looking for on Yellow Pages |
+| **location** | string | — | US city and state to search in, e.g. 'Austin, TX' |
+| **max_unique_results_per_run** | integer | — | Max unique results across all tasks in a run |
+| **max_results** | integer | 3000 | Maximum results per task (Yellow Pages max ~3000) |
+| **sort** | string | Default | How Yellow Pages orders results: Default, Distance, Best Match, Highest Rated, Most Reviewed |
+| **min_rating** | string | — | Only collect businesses with at least this rating |
+| **min_reviews** | integer | — | Only collect businesses with at least this many reviews |
+| **category_match** | boolean | false | Only collect businesses whose categories contain your search term |
+| **results_details** | boolean | false | Visit each business page to collect lat/lng, email, description, social links |
+
+<Note>
+  Setting `results_details: true` enables additional detail fields in results, including latitude, longitude, email, description, and social media links.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"params": {"keyword": "plumber", "location": "Austin, TX", "max_results": 100, "sort": "Highest Rated"}}'
+```
+
+```python Python
+import requests
+requests.post("https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={"Authorization": "Token YOUR_API_KEY", "Content-Type": "application/json"},
+    json={"params": {"keyword": "plumber", "location": "Austin, TX", "max_results": 100, "sort": "Highest Rated"}})
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"keyword": "plumber", "location": "Austin, TX", "max_results": 100, "sort": "Highest Rated"}}
+```

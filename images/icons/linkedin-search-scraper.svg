@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="icon">
+    <rect data-layer="tile" width="40" height="40" rx="9" fill="#0466C8"/>
+    <g data-layer="glyph" fill="#FFFFFF">
+      <path d="M23.9,23.9 L29.4,29.4" fill="none" stroke="#FFFFFF" stroke-width="4.2" stroke-linecap="round"/>
+      <path fill-rule="evenodd" d="M17.4,7.8 a9.6,9.6 0 1,0 0.01,0 Z M17.4,11.0 a6.4,6.4 0 1,1 -0.01,0 Z"/>
+      <circle cx="17.4" cy="14.35" r="2.55"/>
+      <path d="M13.25,22.1 a4.15,4.0 0 0 1 8.3,0 Z"/>
+    </g>
+  </g>
+</svg>

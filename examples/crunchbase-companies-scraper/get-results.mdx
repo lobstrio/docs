@@ -1,0 +1,437 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Crunchbase Companies Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Crunchbase Companies Scraper** runs. One row per company. Company-URL tasks return every field for free on the first request; search tasks return the core fields for free and the "Full Company Details" fields only when `company_details` is enabled.
+
+<Note>
+  Crunchbase gates funding dates and amounts behind its paid plan, so `last_funding_amount`, `last_funding_currency` and `last_funding_date` are only filled for the minority of companies (about 3 of 20 sampled) where Crunchbase still publishes the amount on the public activity timeline.
+</Note>
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`.
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from.
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1).
+</ParamField>
+
+## Result Fields
+
+### Export Companies
+
+<ResponseField name="company_name" type="string">
+  Company name as published on Crunchbase. Example: `GitHub Inc`
+</ResponseField>
+
+<ResponseField name="permalink" type="string">
+  Crunchbase permalink (the slug in the company URL). Example: `github`
+</ResponseField>
+
+<ResponseField name="uuid" type="string">
+  Crunchbase internal company identifier, stable across renames.
+</ResponseField>
+
+<ResponseField name="crunchbase_url" type="string">
+  Crunchbase profile URL, built from the permalink.
+</ResponseField>
+
+<ResponseField name="logo_url" type="string">
+  Company logo hosted by Crunchbase.
+</ResponseField>
+
+<ResponseField name="short_description" type="text">
+  One-line company description.
+</ResponseField>
+
+<ResponseField name="industries" type="json">
+  Crunchbase industries (categories) of the company.
+</ResponseField>
+
+<ResponseField name="industry_groups" type="json">
+  Crunchbase industry groups the company belongs to.
+</ResponseField>
+
+<ResponseField name="headquarters_city" type="string">
+  Headquarters city.
+</ResponseField>
+
+<ResponseField name="headquarters_region" type="string">
+  Headquarters region or state.
+</ResponseField>
+
+<ResponseField name="headquarters_country" type="string">
+  Headquarters country.
+</ResponseField>
+
+<ResponseField name="headquarters_continent" type="string">
+  Headquarters continent.
+</ResponseField>
+
+<ResponseField name="cb_rank" type="integer">
+  Crunchbase Rank of the company (lower is better).
+</ResponseField>
+
+<ResponseField name="num_employees_range" type="string">
+  Employee count range published by Crunchbase (e.g. `1001-5000`).
+</ResponseField>
+
+<ResponseField name="last_funding_type" type="string">
+  Type of the most recent funding round.
+</ResponseField>
+
+<ResponseField name="ipo_status" type="string">
+  Whether the company is `private`, `public` or `delisted`.
+</ResponseField>
+
+### Full Company Details
+
+<ResponseField name="full_description" type="text">
+  Full company description.
+</ResponseField>
+
+<ResponseField name="website" type="string">
+  Company website.
+</ResponseField>
+
+<ResponseField name="legal_name" type="string">
+  Registered legal name.
+</ResponseField>
+
+<ResponseField name="company_type" type="string">
+  `for_profit` or `non_profit`.
+</ResponseField>
+
+<ResponseField name="operating_status" type="string">
+  Whether the company is still `active` or `closed`.
+</ResponseField>
+
+<ResponseField name="headquarters_regions" type="json">
+  Wider regions Crunchbase attaches to the headquarters.
+</ResponseField>
+
+<ResponseField name="contact_email" type="string">
+  Public contact email published on the profile.
+</ResponseField>
+
+<ResponseField name="contact_phone" type="string">
+  Public contact phone published on the profile.
+</ResponseField>
+
+<ResponseField name="linkedin_url" type="string">
+  LinkedIn page of the company.
+</ResponseField>
+
+<ResponseField name="twitter_url" type="string">
+  X (Twitter) profile of the company.
+</ResponseField>
+
+<ResponseField name="facebook_url" type="string">
+  Facebook page of the company.
+</ResponseField>
+
+<ResponseField name="founders" type="json">
+  Founders with their Crunchbase person profile.
+</ResponseField>
+
+<ResponseField name="num_funding_rounds" type="integer">
+  Number of funding rounds Crunchbase lists.
+</ResponseField>
+
+<ResponseField name="num_investors" type="integer">
+  Number of investors in the company.
+</ResponseField>
+
+<ResponseField name="num_lead_investors" type="integer">
+  Number of lead investors in the company.
+</ResponseField>
+
+<ResponseField name="num_investments" type="integer">
+  Number of investments the company itself made.
+</ResponseField>
+
+<ResponseField name="num_lead_investments" type="integer">
+  Number of investments the company led.
+</ResponseField>
+
+<ResponseField name="investors" type="json">
+  Investors of the company, with the round they joined and whether they led it. Crunchbase keeps the amounts behind its paid plan.
+</ResponseField>
+
+<ResponseField name="funding_rounds" type="json">
+  Funding rounds of the company. `announced_on`, `money_raised` and `currency` are only added to the few rounds Crunchbase still publishes on the public activity timeline.
+</ResponseField>
+
+<ResponseField name="last_funding_amount" type="bigint">
+  Amount raised by the company in the most recent round Crunchbase publishes an amount for. Only rounds the company itself raised are counted, never rounds it invested in. Empty for most companies (Pro-gated everywhere else). When filled, `last_funding_date` gives the date of that same round, which can be older than the round named by `last_funding_type`.
+</ResponseField>
+
+<ResponseField name="last_funding_currency" type="string">
+  Currency of `last_funding_amount`. Same minority coverage as the amount.
+</ResponseField>
+
+<ResponseField name="last_funding_date" type="string">
+  Date of the funding round `last_funding_amount` refers to. Same minority coverage as the amount.
+</ResponseField>
+
+<ResponseField name="num_acquisitions" type="integer">
+  Number of companies this company acquired.
+</ResponseField>
+
+<ResponseField name="acquisitions" type="json">
+  Companies acquired by this company.
+</ResponseField>
+
+<ResponseField name="acquired_by" type="string">
+  Company that acquired this company, when it was acquired.
+</ResponseField>
+
+<ResponseField name="acquisition_type" type="string">
+  Type of the acquisition of this company.
+</ResponseField>
+
+<ResponseField name="acquisition_terms" type="string">
+  Terms of the acquisition of this company (`cash`, `stock`, `cash_and_stock`).
+</ResponseField>
+
+<ResponseField name="parent_organization" type="string">
+  Parent company that owns this company.
+</ResponseField>
+
+<ResponseField name="num_sub_organizations" type="integer">
+  Number of sub-organizations owned by this company.
+</ResponseField>
+
+<ResponseField name="sub_organizations" type="json">
+  Sub-organizations owned by this company.
+</ResponseField>
+
+<ResponseField name="similar_companies" type="json">
+  Companies Crunchbase considers similar.
+</ResponseField>
+
+<ResponseField name="current_employees" type="json">
+  Highlighted current employees with their job title.
+</ResponseField>
+
+<ResponseField name="current_advisors" type="json">
+  Board members and advisors listed on the profile.
+</ResponseField>
+
+<ResponseField name="num_contacts" type="integer">
+  Number of contacts Crunchbase holds for this company.
+</ResponseField>
+
+<ResponseField name="num_contact_emails" type="integer">
+  Number of contact emails Crunchbase holds for this company.
+</ResponseField>
+
+<ResponseField name="num_contact_phones" type="integer">
+  Number of contact phone numbers Crunchbase holds for this company.
+</ResponseField>
+
+<ResponseField name="num_current_positions" type="integer">
+  Number of people currently employed according to Crunchbase profiles.
+</ResponseField>
+
+<ResponseField name="num_current_advisor_positions" type="integer">
+  Number of current advisor and board positions.
+</ResponseField>
+
+<ResponseField name="products" type="json">
+  Products and services of the company.
+</ResponseField>
+
+<ResponseField name="product_launches" type="json">
+  Product launches reported in the press.
+</ResponseField>
+
+<ResponseField name="partnership_announcements" type="json">
+  Partnership announcements reported in the press.
+</ResponseField>
+
+<ResponseField name="awards" type="json">
+  Awards reported in the press.
+</ResponseField>
+
+<ResponseField name="layoffs" type="json">
+  Layoffs reported in the press.
+</ResponseField>
+
+<ResponseField name="legal_proceedings" type="json">
+  Legal proceedings reported in the press.
+</ResponseField>
+
+<ResponseField name="key_employee_changes" type="json">
+  Key employee arrivals and departures reported in the press.
+</ResponseField>
+
+<ResponseField name="news_articles" type="json">
+  Recent press articles Crunchbase lists on the activity timeline of the company: date, title, publisher, author, article URL and thumbnail. At most 10 most-recent items.
+</ResponseField>
+
+<ResponseField name="num_news" type="integer">
+  Number of press articles returned in `news_articles` (at most 10).
+</ResponseField>
+
+<ResponseField name="offices" type="json">
+  Office openings reported in the press.
+</ResponseField>
+
+<ResponseField name="growth_score" type="integer">
+  Crunchbase Growth Score of the company.
+</ResponseField>
+
+<ResponseField name="growth_score_delta_d90" type="integer">
+  Change of the Growth Score over the last 90 days.
+</ResponseField>
+
+<ResponseField name="heat_score" type="integer">
+  Crunchbase Heat Score of the company.
+</ResponseField>
+
+<ResponseField name="heat_score_delta_d90" type="integer">
+  Change of the Heat Score over the last 90 days.
+</ResponseField>
+
+<ResponseField name="builtwith_num_technologies" type="integer">
+  Number of web technologies BuiltWith detects on the company website.
+</ResponseField>
+
+<ResponseField name="builtwith_technologies" type="json">
+  Web technologies BuiltWith detects, as shown on the profile.
+</ResponseField>
+
+<ResponseField name="semrush_visits_latest_month" type="bigint">
+  Monthly website visits measured by Semrush.
+</ResponseField>
+
+<ResponseField name="semrush_visits_mom_pct" type="float">
+  Month-over-month change of the Semrush visits, as a ratio.
+</ResponseField>
+
+<ResponseField name="semrush_last_updated" type="string">
+  Date the Semrush figures were last refreshed.
+</ResponseField>
+
+<ResponseField name="apptopia_total_apps" type="integer">
+  Number of mobile apps Apptopia attributes to the company.
+</ResponseField>
+
+<ResponseField name="apptopia_total_downloads" type="bigint">
+  Total mobile app downloads measured by Apptopia.
+</ResponseField>
+
+<ResponseField name="apptopia_total_downloads_mom_pct" type="float">
+  Month-over-month change of the Apptopia downloads, as a ratio.
+</ResponseField>
+
+<ResponseField name="siftery_num_products" type="integer">
+  Number of products the company uses according to Siftery.
+</ResponseField>
+
+<ResponseField name="siftery_products" type="json">
+  Products the company uses according to Siftery.
+</ResponseField>
+
+<ResponseField name="bombora_last_updated" type="string">
+  Date the Bombora intent data was last refreshed.
+</ResponseField>
+
+<ResponseField name="bombora_surge_topics" type="json">
+  Topics the company is currently researching, from Bombora intent data.
+</ResponseField>
+
+<ResponseField name="aberdeen_site_it_spend" type="bigint">
+  Estimated IT spend of the company in USD, from Aberdeen.
+</ResponseField>
+
+<ResponseField name="ipqwery_num_patent_granted" type="integer">
+  Number of granted patents, from IPqwery.
+</ResponseField>
+
+<ResponseField name="ipqwery_num_trademark_registered" type="integer">
+  Number of registered trademarks, from IPqwery.
+</ResponseField>
+
+<ResponseField name="ipqwery_popular_trademark_class" type="string">
+  Most frequent trademark class, from IPqwery.
+</ResponseField>
+
+<ResponseField name="stock_symbol" type="string">
+  Stock exchange and ticker, for public companies.
+</ResponseField>
+
+<ResponseField name="hub_tags" type="json">
+  Crunchbase hub tags such as `unicorn` or `exited_unicorn`.
+</ResponseField>
+
+<ResponseField name="featured_hubs" type="json">
+  Crunchbase hubs the company is featured in.
+</ResponseField>
+
+<ResponseField name="category_ranks" type="json">
+  Rank of the company inside each of its industries.
+</ResponseField>
+
+<ResponseField name="num_diversity_spotlight_investments" type="integer">
+  Number of investments in diversity-spotlight companies.
+</ResponseField>
+
+<ResponseField name="diversity_spotlights" type="json">
+  Investments made in companies with a diversity spotlight.
+</ResponseField>
+
+<ResponseField name="num_funds" type="integer">
+  Number of funds raised by the company, for investors.
+</ResponseField>
+
+<ResponseField name="funds" type="json">
+  Funds raised by the company, for investors. Fund amounts are Pro-gated.
+</ResponseField>
+
+<ResponseField name="investments" type="json">
+  Investments the company made in other companies.
+</ResponseField>
+
+<ResponseField name="exits" type="json">
+  Portfolio companies that exited.
+</ResponseField>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -G https://api.lobstr.io/v1/results \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -d "squid=YOUR_SQUID_HASH" \
+  -d "page=1"
+```
+
+```python Python
+import requests
+
+response = requests.get(
+    "https://api.lobstr.io/v1/results",
+    headers={"Authorization": "Token YOUR_API_KEY"},
+    params={"squid": "YOUR_SQUID_HASH", "page": 1},
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"company_name": "GitHub Inc", "permalink": "github", "crunchbase_url": "https://www.crunchbase.com/organization/github", "short_description": "GitHub is a software company that offers code hosting services.", "industries": ["Artificial Intelligence (AI)", "Developer Tools"], "headquarters_city": "San Francisco", "headquarters_country": "United States", "num_employees_range": "1001-5000", "last_funding_type": "series_b", "ipo_status": "private", "cb_rank": 38516}]}
+```

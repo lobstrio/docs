@@ -1,0 +1,231 @@
+---
+title: "Get Results"
+description: "Retrieve scraped data from Upwork Jobs Scraper"
+api: "GET https://api.lobstr.io/v1/results"
+---
+
+Retrieve scraped data from your **Upwork Jobs Scraper** runs.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+## Query Parameters
+
+<ParamField query="squid" type="string" required>
+  Hash of the squid to get results from
+</ParamField>
+
+<ParamField query="page" type="integer">
+  Page number (default: 1)
+</ParamField>
+
+## Result Fields
+
+<ResponseField name="job_id" type="string">
+  Unique Upwork job posting identifier. Example: `~01abc123def456`
+</ResponseField>
+
+<ResponseField name="url" type="string">
+  Direct URL to the job posting. Example: `https://www.upwork.com/jobs/~01abc123def456`
+</ResponseField>
+
+<ResponseField name="ciphertext" type="string">
+  Upwork's public job reference (the ~02... token)
+</ResponseField>
+
+<ResponseField name="title" type="string">
+  Job title. Example: `Python Developer for Data Pipeline`
+</ResponseField>
+
+<ResponseField name="description" type="text">
+  Full job description
+</ResponseField>
+
+<ResponseField name="posted_at" type="datetime">
+  Date and time published, in UTC. Example: `2026-09-14T10:30:00Z`
+</ResponseField>
+
+<ResponseField name="job_created_at" type="datetime">
+  Date and time created, in UTC
+</ResponseField>
+
+<ResponseField name="job_type" type="string">
+  Hourly or Fixed-Price. Example: `Fixed-Price`
+</ResponseField>
+
+<ResponseField name="budget" type="string">
+  Human-readable budget. Example: `$500`
+</ResponseField>
+
+<ResponseField name="budget_amount" type="float">
+  Fixed-price budget as a number. Example: `500.0`
+</ResponseField>
+
+<ResponseField name="hourly_rate_min" type="float">
+  Lower bound of hourly rate range
+</ResponseField>
+
+<ResponseField name="hourly_rate_max" type="float">
+  Upper bound of hourly rate range
+</ResponseField>
+
+<ResponseField name="duration" type="string">
+  Expected project duration. Example: `1 to 3 months`
+</ResponseField>
+
+<ResponseField name="duration_weeks" type="integer">
+  Expected project duration in weeks
+</ResponseField>
+
+<ResponseField name="workload" type="string">
+  Expected weekly workload on hourly jobs
+</ResponseField>
+
+<ResponseField name="experience_level" type="string">
+  Experience level the client asks for. Example: `Intermediate`
+</ResponseField>
+
+<ResponseField name="skills" type="string">
+  Skills attached to the posting, comma-separated. Example: `Python, Pandas, Apache Airflow`
+</ResponseField>
+
+### Detail Fields
+
+The following fields require `job_details: true` in settings.
+
+<ResponseField name="is_enterprise" type="boolean">
+  True when from an Upwork Enterprise client
+</ResponseField>
+
+<ResponseField name="freelancers_to_hire" type="integer">
+  Number of freelancers the client wants
+</ResponseField>
+
+<ResponseField name="currency" type="string">
+  Currency of the budget/hourly rate
+</ResponseField>
+
+<ResponseField name="proposals_count" type="integer">
+  Number of proposals received
+</ResponseField>
+
+<ResponseField name="category" type="string">
+  Upwork category of the job
+</ResponseField>
+
+<ResponseField name="category_group" type="string">
+  Top-level Upwork category group
+</ResponseField>
+
+<ResponseField name="job_status" type="string">
+  Hiring status of the posting
+</ResponseField>
+
+<ResponseField name="total_hired" type="integer">
+  Freelancers already hired
+</ResponseField>
+
+<ResponseField name="total_interviewed" type="integer">
+  Freelancers invited to interview
+</ResponseField>
+
+<ResponseField name="invitations_sent" type="integer">
+  Invitations the client sent
+</ResponseField>
+
+<ResponseField name="last_client_activity" type="datetime">
+  Last time the client acted on this posting
+</ResponseField>
+
+<ResponseField name="client_country" type="string">
+  Country of the client
+</ResponseField>
+
+<ResponseField name="client_city" type="string">
+  City of the client
+</ResponseField>
+
+<ResponseField name="client_timezone" type="string">
+  Timezone of the client
+</ResponseField>
+
+<ResponseField name="client_spend" type="float">
+  Total amount the client has spent on Upwork
+</ResponseField>
+
+<ResponseField name="client_rating" type="float">
+  Average feedback score of the client, out of 5
+</ResponseField>
+
+<ResponseField name="client_reviews_count" type="integer">
+  Number of reviews the client has received
+</ResponseField>
+
+<ResponseField name="client_total_jobs" type="integer">
+  Number of jobs the client has posted
+</ResponseField>
+
+<ResponseField name="client_active_jobs" type="integer">
+  Number of contracts currently running
+</ResponseField>
+
+<ResponseField name="client_total_hires" type="integer">
+  Number of jobs that ended in a hire
+</ResponseField>
+
+<ResponseField name="client_hours" type="float">
+  Total hours the client has paid for
+</ResponseField>
+
+<ResponseField name="client_avg_hourly_rate" type="float">
+  Average hourly rate the client has paid
+</ResponseField>
+
+<ResponseField name="client_payment_verified" type="boolean">
+  True when payment method is verified
+</ResponseField>
+
+<ResponseField name="client_member_since" type="datetime">
+  Date the client joined Upwork
+</ResponseField>
+
+<ResponseField name="client_open_jobs" type="integer">
+  Number of open job postings
+</ResponseField>
+
+<ResponseField name="allowed_applicant_countries" type="string">
+  Countries restricted to, comma-separated
+</ResponseField>
+
+<ResponseField name="min_job_success_score" type="integer">
+  Minimum Job Success Score required
+</ResponseField>
+
+<ResponseField name="preferred_english_level" type="string">
+  English level the client asks for
+</ResponseField>
+
+<ResponseField name="rising_talent_only" type="boolean">
+  True when only Rising Talent accepted
+</ResponseField>
+
+<ResponseField name="portfolio_required" type="boolean">
+  True when portfolio is required
+</ResponseField>
+
+<ResponseField name="local_market_only" type="boolean">
+  True when restricted to client's local market
+</ResponseField>
+
+<ResponseField name="similar_job_urls" type="string">
+  URLs of similar jobs, comma-separated
+</ResponseField>
+
+## Response
+
+```json 200
+{"total_results": 1, "data": [{"job_id": "~01abc123def456", "title": "Python Developer for Data Pipeline", "job_type": "Fixed-Price", "budget_amount": 500.0, "experience_level": "Intermediate", "skills": "Python, Pandas, Apache Airflow", "posted_at": "2026-09-14T10:30:00Z"}]}
+```

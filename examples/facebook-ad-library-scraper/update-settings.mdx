@@ -1,0 +1,82 @@
+---
+title: "Update Settings"
+description: "Configure Facebook Ad Library Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Facebook Ad Library Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| rows | integer | — | Number of rows returned per API page |
+| country | string | ALL | Country ads are served in, as a 2-letter ISO code |
+| ad_status | string | all | `all`, `active`, or `inactive` |
+| ad_type | string | all | `all` or `political_and_issue_ads` |
+| media_type | string | all | `image`, `video`, `meme`, `image_and_meme`, `none`, or `all` |
+| platforms | string | — | Comma-separated Meta platforms: `facebook`, `instagram`, `audience_network`, `messenger` |
+| languages | string | — | Comma-separated creative languages as ISO 639-1 codes |
+| date_from | string | — | Only collect ads running on or after this date (YYYY-MM-DD) |
+| date_to | string | — | Only collect ads running on or before this date (YYYY-MM-DD) |
+| sort_by | string | total_impressions | `total_impressions` or `recent` |
+| ad_details | boolean | false | Open each ad's transparency detail to add payer, beneficiary, EU targeting data |
+| max_results | integer | — | Max ads collected per URL |
+| max_unique_results_per_run | integer | — | Max unique ads across all tasks in the run |
+
+<Note>
+  Setting `ad_details: true` enables additional detail fields in results.
+</Note>
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/f667dfc7398156ba2359836105184825 \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "country": "US",
+    "ad_status": "active",
+    "sort_by": "recent",
+    "max_results": 200,
+    "ad_details": true
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/f667dfc7398156ba2359836105184825",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "country": "US",
+        "ad_status": "active",
+        "sort_by": "recent",
+        "max_results": 200,
+        "ad_details": True
+    }
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"country": "US", "ad_status": "active", "ad_type": "all", "sort_by": "recent", "max_results": 200, "ad_details": true}}
+```

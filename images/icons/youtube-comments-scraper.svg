@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="icon">
+    <rect data-layer="tile" width="40" height="40" rx="9" fill="#FF0000"/>
+    <g data-layer="glyph" transform="translate(9.000,9.000) scale(0.91667)" fill="none" stroke="#FFFFFF" stroke-width="2.182" stroke-linecap="round" stroke-linejoin="round"><path d="M22 17a2 2 0 0 1-2 2H6.828a2 2 0 0 0-1.414.586l-2.202 2.202A.71.71 0 0 1 2 21.286V5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2z" /></g>
+  </g>
+</svg>

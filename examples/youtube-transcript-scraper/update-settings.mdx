@@ -1,0 +1,50 @@
+---
+title: "Update Settings"
+description: "Configure YouTube Transcript Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **YouTube Transcript Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| **url** | string | — | YouTube video, playlist, or channel URL |
+| **language** | string | original | Caption language to download. 'original' uses the video's default language; 'en', 'fr', etc. downloads a specific language |
+| **include_auto_generated** | boolean | true | Also download auto-generated (speech-to-text) tracks |
+| **max_results** | integer | — | Maximum videos collected for a playlist or channel URL |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST "https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH" \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"params": {"language": "en", "include_auto_generated": true, "max_results": 50}}'
+```
+
+```python Python
+import requests
+requests.post("https://api.lobstr.io/v1/squids/YOUR_SQUID_HASH",
+    headers={"Authorization": "Token YOUR_API_KEY", "Content-Type": "application/json"},
+    json={"params": {"language": "en", "include_auto_generated": true, "max_results": 50}})
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"language": "en", "include_auto_generated": true, "max_results": 50}}
+```

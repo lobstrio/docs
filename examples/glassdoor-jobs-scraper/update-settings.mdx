@@ -1,0 +1,86 @@
+---
+title: "Update Settings"
+description: "Configure Glassdoor Jobs Scraper settings"
+api: "POST https://api.lobstr.io/v1/squids/{squid_hash}"
+---
+
+Configure your **Glassdoor Jobs Scraper** squid settings.
+
+## Headers
+
+<ParamField header="Authorization" type="string" required>
+  Your API authentication token. Value: `Token YOUR_API_KEY`
+</ParamField>
+
+<ParamField header="Content-Type" type="string" required>
+  Must be application/json. Value: `application/json`
+</ParamField>
+
+## Squid Parameters
+
+| Parameter | Type | Default | Description |
+| --- | --- | --- | --- |
+| location | string | — | City, state or country to search in, e.g. 'New York, NY' |
+| date_posted | string | Any time | Only collect jobs posted within this window: Any time, Last 24 hours, Last 3 days, Last 7 days, Last 14 days, Last 30 days |
+| job_type | string | Any | Employment type: Any, Full-time, Part-time, Contract, Temporary, Intern |
+| seniority | string | Any | Seniority level: Any, Internship, Entry Level, Mid Level, Senior Level, Director, Executive |
+| remote_only | boolean | false | Only collect jobs flagged as remote |
+| easy_apply | boolean | false | Only collect jobs that can be applied to directly on Glassdoor |
+| salary_min | integer | — | Min yearly salary in local currency |
+| salary_max | integer | — | Max yearly salary in local currency |
+| company_rating | string | Any | Only collect jobs from companies rated at least this (2.0, 2.5, 3.0, 3.5, 4.0) |
+| company_size | string | Any | Only from companies of this size |
+| industry | string | Any | Only from companies in this industry |
+| job_function | string | Any | Only jobs in this job function |
+| radius | string | Within 50 km | How far around the location to search |
+| sort_by | string | Relevance | Relevance or Most recent |
+| job_details | boolean | true | Open every job to collect full description, employment type, salary, company info |
+| max_results | integer | 900 | Max jobs per search (Glassdoor max ~900) |
+| max_unique_results_per_run | integer | — | Max unique jobs across all tasks in the run |
+| fetch_since | string | — | Only collect jobs posted after this threshold |
+| fetch_since_timezone | string | — | Timezone for fetch_since |
+
+## Code Examples
+
+<CodeGroup>
+```bash cURL
+curl -X POST https://api.lobstr.io/v1/squids/4bc153aae1e138d894b630bf165825ee \
+  -H "Authorization: Token YOUR_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "location": "New York, NY",
+    "date_posted": "Last 7 days",
+    "job_type": "Full-time",
+    "seniority": "Mid Level",
+    "job_details": true,
+    "max_results": 900
+  }'
+```
+
+```python Python
+import requests
+
+response = requests.post(
+    "https://api.lobstr.io/v1/squids/4bc153aae1e138d894b630bf165825ee",
+    headers={
+        "Authorization": "Token YOUR_API_KEY",
+        "Content-Type": "application/json",
+    },
+    json={
+        "location": "New York, NY",
+        "date_posted": "Last 7 days",
+        "job_type": "Full-time",
+        "seniority": "Mid Level",
+        "job_details": True,
+        "max_results": 900,
+    },
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Response
+
+```json 201
+{"params": {"location": "New York, NY", "date_posted": "Last 7 days", "job_type": "Full-time", "seniority": "Mid Level", "job_details": true, "max_results": 900}}
+```

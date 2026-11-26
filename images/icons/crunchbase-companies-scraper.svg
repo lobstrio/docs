@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="icon">
+    <rect data-layer="tile" width="40" height="40" rx="9" fill="#0288D1"/>
+    <g data-layer="glyph" transform="translate(7.613,8.306) scale(0.99099)" fill="#FFFFFF"><path fill-rule="evenodd" d="M1.4 14c0-1 .8-1.8 1.8-1.8h3.6c1 0 1.8.8 1.8 1.8v8.6H1.4V14Zm2.6 2.4v2.4h2.4v-2.4H4Z"/>
+  <path fill-rule="evenodd" d="M9 8.4c0-1 .8-1.8 1.8-1.8h3.6c1 0 1.8.8 1.8 1.8v14.2H9V8.4Zm2.6 2.4v2.4H14v-2.4h-2.4Zm0 5.6v2.4H14v-2.4h-2.4Z"/>
+  <path fill-rule="evenodd" d="M16.6 2.8c0-1 .8-1.8 1.8-1.8h3.4c1 0 1.8.8 1.8 1.8v19.8h-7V2.8Zm2.6 2.4v2.4h2.4V5.2h-2.4Zm0 5.6v2.4h2.4v-2.4h-2.4Zm0 5.6v2.4h2.4v-2.4h-2.4Z"/></g>
+  </g>
+</svg>
