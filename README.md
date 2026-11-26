@@ -1,6 +1,6 @@
 # lobstr.io docs
 
-The source of [docs.lobstr.io](https://docs.lobstr.io), in Markdown, as it is published: the API v2 at the root, the batches (v1) in `docs/`, `examples/` and `changelog/`.
+The source of [docs.lobstr.io](https://docs.lobstr.io?utm_source=docs-repo&utm_medium=readme), in Markdown, as it is published: the API v2 at the root, the batches (v1) in `docs/`, `examples/` and `changelog/`.
 
 | | |
 | --- | --- |
