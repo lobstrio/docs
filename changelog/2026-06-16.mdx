@@ -19,8 +19,8 @@ description: "API updates shipped June 16, 2026"
 - **Leboncoin listings: 0 results** — a parsing change on Leboncoin caused some search pages to return 0 results. Fixed.
 - **Leboncoin Boutiques: escape sequence parsing** — invalid escape sequences in store descriptions caused parsing errors. Fixed.
 - **ParuVendu listings: pycurl stream error** — intermittent stream errors on listing pages are now caught and retried. Fixed.
-- **PAP: connection retries** — base-level `ConnectionError` exceptions from `curl_cffi` are now retried automatically. Fixed.
-- **LaCentrale Listing Status Checker: DataDome bypass** — migrated to a more reliable DataDome bypass path; improves success rate on listing status checks.
+- **PAP: connection retries** — connection errors are now retried automatically. Fixed.
+- **LaCentrale Listing Status Checker: more reliable** — higher success rate on listing status checks.
 
 ### Platform
 - **Export: JSON and JSONL formats** — run results can now be downloaded as `.json` (array) or `.jsonl` (newline-delimited JSON) in addition to CSV and XLSX.

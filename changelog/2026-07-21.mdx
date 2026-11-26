@@ -16,7 +16,7 @@ description: "API updates shipped July 21, 2026"
 - **TripAdvisor Reviews: 401 error** — same session fix applied to the reviews scraper.
 - **Trustpilot Reviews: 403 error** — fixed a 403 rejection caused by a stale request signature.
 - **TikTok Top Ads: transient error handling** — the scraper now pauses on TikTok 50004 transient errors instead of hard-failing the run.
-- **PAP: proxy and Cloudflare clearance** — restored CapSolver `cf_clearance` escalation for region pagination and fixed a `proxy_error` that could stall region-based crawls.
+- **PAP: region pagination** — region pages load again, and a `proxy_error` that could stall region-based crawls is fixed.
 - **Facebook: pipeline hardening** — hardened the shared Facebook crawler pipeline against session kills and account contention, reducing mid-run failures across all Facebook scrapers.
 
 </Update>

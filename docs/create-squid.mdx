@@ -63,7 +63,11 @@ Any other field of [Update Squid](/docs/update-squid) (`concurrency`, `cron_expr
 </ResponseField>
 
 <ResponseField name="concurrency" type="integer">
-  Number of concurrent tasks (default: 1). Example: `1`
+  Number of concurrent tasks (default: 1), used when `auto_slots` is `false`. Example: `1`
+</ResponseField>
+
+<ResponseField name="auto_slots" type="boolean">
+  `true` for a new squid of a crawler whose `auto_slots` is `true`: the engine sets its workers. Send `auto_slots: false` with a `concurrency` to set them yourself. Example: `true`
 </ResponseField>
 
 <ResponseField name="params" type="object">
