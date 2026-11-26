@@ -1,0 +1,16 @@
+---
+title: "November 18, 2026"
+description: "Auto slots on Google Maps Leads Scraper: the engine sets a squid's workers from your plan's slots and its tasks left"
+---
+
+<Update label="November 18, 2026" description="Auto slots on Google Maps Leads Scraper: the engine sets a squid's workers from your plan's slots and its tasks left">
+
+## New
+
+**Auto slots on Google Maps Leads Scraper**
+
+A squid can now let the engine set its workers. On Auto, a run aims at its share of your plan's slots: the slots your Manual runs leave, split between your runs on Auto, at most one worker per task left and the scraper's cap, and one slot always kept free for another launch. A run on Auto needs one free slot to start, grows as slots free up, and gives back what goes over its share between two tasks; its log says "Auto slots: N running."
+
+New squids of Google Maps Leads Scraper start on Auto; existing squids keep their concurrency. In the app, it is **Slots**, **Auto** or **Manual**, under the squid's **Advanced settings**. Through the API, `auto_slots` on [Update Squid](/docs/update-squid) and [Get Squid Details](/docs/get-squid-details), and on the crawler in [List Crawlers](/docs/list-crawlers); a crawler without Auto slots answers `AutoSlotsNotSupported`. The MCP's `create_squid` and `update_scraper` take `auto_slots` too. The estimate's time uses the Auto share.
+
+</Update>
