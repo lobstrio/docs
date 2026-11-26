@@ -72,6 +72,10 @@ What went wrong or what you need, to lobstr.io's team: an error that does not ex
 
 They go through the API itself: an agent gets the same answers, errors and prices as your code. Listing the tools needs no key.
 
+## Agent frameworks
+
+The same tools for an agent written in code, from the [SDKs](/sdks#agent-frameworks): `LobstrToolkit` for LangChain and `lobstr_tools` for CrewAI (`pip install "lobstrio[langchain]"`, `"lobstrio[crewai]"`), `lobstrTools` for the Vercel AI SDK (`lobstrio/ai-sdk`). Agents that use them, end to end: [lobstrio/examples](https://github.com/lobstrio/examples).
+
 ## For agents that read
 
 - [lobstr.io/llms.txt](https://www.lobstr.io/llms.txt): lobstr.io in one page, every operation with its price.

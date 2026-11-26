@@ -33,41 +33,28 @@ curl https://api.lobstr.io/v2/run \
 ```
 
 ```python Python
-import os, requests
+# pip install lobstrio
+from lobstrio import Lobstr
 
-r = requests.post(
-    "https://api.lobstr.io/v2/run",
-    headers={"Authorization": f"Bearer {os.environ['LOBSTR_API_KEY']}"},
-    json={
-        "source": "google_maps",
-        "operation": "places/get",
-        "options": {
-            "place": "Gramercy Tavern, New York",
-        },
-    },
-)
-print(r.json()["results"][0]["name"])
+client = Lobstr()  # reads LOBSTR_API_KEY
+
+run = client.google_maps.places.get(place="Gramercy Tavern, New York")
+print(run.results[0]["name"])
 ```
 
-```js JavaScript
-const r = await fetch('https://api.lobstr.io/v2/run', {
-  method: 'POST',
-  headers: {
-    Authorization: `Bearer ${process.env.LOBSTR_API_KEY}`,
-    'Content-Type': 'application/json',
-  },
-  body: JSON.stringify({
-    source: 'google_maps',
-    operation: 'places/get',
-    options: {
-      place: 'Gramercy Tavern, New York',
-    },
-  }),
-})
-console.log((await r.json()).results[0].name)
+```js Node.js
+// npm install lobstrio
+import { Lobstr } from 'lobstrio'
+
+const client = new Lobstr() // reads LOBSTR_API_KEY
+
+const run = await client.googleMaps.places.get({ place: 'Gramercy Tavern, New York' })
+console.log(run.results[0].name)
 ```
 
 </CodeGroup>
+
+The Python and Node.js tabs use the [SDKs](/sdks), `lobstrio` on PyPI and npm.
 
 </Step>
 <Step title="Read the answer">

@@ -22,6 +22,15 @@ curl https://api.lobstr.io/v2/run \
 
 The answer holds the records and what the call cost. Step by step: [Quickstart](/quickstart).
 
+## Use it from your code
+
+```bash
+pip install lobstrio    # Python
+npm install lobstrio    # Node.js
+```
+
+A typed method for each operation, every page in one loop, retries never charged twice: [SDKs](/sdks).
+
 ## Use it from an agent
 
 ```bash
