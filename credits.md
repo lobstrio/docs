@@ -3,7 +3,7 @@ title: Credits and pricing
 description: Each operation has a fixed price a call, in credits, whatever the call brings back. A failed call is free.
 ---
 
-An operation costs the same credits on every call: 1 for a Google Maps place, 20 for a page of Google Maps search, 100 for a Google News search. Each operation's page says its price and what it does not charge: a failed call always, an empty page for most searches. One balance pays for every operation.
+An operation costs the same credits on every call: 1 for a Google Maps place, 20 for a page of Google Maps search, 100 for a page of Leboncoin search. Each operation's page says its price and what it does not charge: a failed call always, an empty page for most searches. One balance pays for every operation.
 
 ## Plans
 
