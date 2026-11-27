@@ -10,9 +10,26 @@ description: The MCP server gives Claude, ChatGPT, Cursor or any MCP client the 
 <Tabs>
 <Tab title="Claude Code">
 
+The plugin, the key asked once and kept secret:
+
+```text
+/plugin install lobstr --marketplace lobstrio/lobstr-mcp
+```
+
+Or without the plugin:
+
 ```bash
 claude mcp add --transport http lobstr https://api.lobstr.io/v2/mcp \
   --header "Authorization: Bearer YOUR_API_KEY"
+```
+
+</Tab>
+<Tab title="Gemini CLI">
+
+The extension, the key asked once and kept secret:
+
+```bash
+gemini extensions install https://github.com/lobstrio/lobstr-mcp
 ```
 
 </Tab>
