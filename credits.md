@@ -38,7 +38,7 @@ Every answer says it, with the credits left:
 What you can spend now: your balance, minus what calls running at this moment hold.
 </ResponseField>
 <ResponseField name="plan" type="object">
-`name`, `credits_per_month`, `concurrent_calls`, `billing` (`month` or `year`), `price` and `credit_price` (`null` on Free), each `{amount, currency}`.
+`name`, `credits_per_month`, `concurrent_calls`, `billing` (`month` or `year`), `price` and `credit_price` (`null` on Free), each `{amount, currency}`, and `renews_at`: when your credits come back, in UTC.
 </ResponseField>
 
 A call's price is held when it starts and settled when it ends: two calls never spend the same credits. A call that costs more than what is left answers `402` [`insufficient_credits`](/errors#insufficient_credits), before anything runs.
