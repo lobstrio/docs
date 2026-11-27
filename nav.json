@@ -27,7 +27,10 @@
           "group": "Agents",
           "pages": [
             "agents",
-            "feedback"
+            "feedback",
+            "langchain",
+            "crewai",
+            "ai-sdk"
           ]
         },
         {

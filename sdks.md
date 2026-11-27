@@ -130,4 +130,4 @@ const { text } = await generateText({
 
 </CodeGroup>
 
-Agents that use them, end to end: [lobstrio/examples](https://github.com/lobstrio/examples).
+A guide for each: [LangChain](/langchain), [CrewAI](/crewai), [Vercel AI SDK](/ai-sdk). Agents that use them, end to end: [lobstrio/examples](https://github.com/lobstrio/examples).

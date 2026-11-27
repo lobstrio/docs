@@ -74,7 +74,7 @@ They go through the API itself: an agent gets the same answers, errors and price
 
 ## Agent frameworks
 
-The same tools for an agent written in code, from the [SDKs](/sdks#agent-frameworks): `LobstrToolkit` for LangChain and `lobstr_tools` for CrewAI (`pip install "lobstrio[langchain]"`, `"lobstrio[crewai]"`), `lobstrTools` for the Vercel AI SDK (`lobstrio/ai-sdk`). Agents that use them, end to end: [lobstrio/examples](https://github.com/lobstrio/examples).
+The same tools for an agent written in code, from the [SDKs](/sdks#agent-frameworks): `LobstrToolkit` for [LangChain](/langchain), `lobstr_tools` for [CrewAI](/crewai), `lobstrTools` for the [Vercel AI SDK](/ai-sdk). Agents that use them, end to end: [lobstrio/examples](https://github.com/lobstrio/examples).
 
 ## For agents that read
 
