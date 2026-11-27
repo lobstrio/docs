@@ -5,12 +5,12 @@ description: The MCP server gives Claude, ChatGPT, Cursor or any MCP client the 
 
 ## Connect the MCP server
 
-`https://api.lobstr.io/v2/mcp`, with your API key:
+`https://api.lobstr.io/v2/mcp`: sign in to lobstr.io when it asks, or send your API key:
 
 <Tabs>
 <Tab title="Claude Code">
 
-The plugin, the key asked once and kept secret:
+The plugin: you sign in to lobstr.io, no key to copy:
 
 ```text
 /plugin install lobstr --marketplace lobstrio/lobstr-mcp
@@ -51,10 +51,10 @@ gemini extensions install https://github.com/lobstrio/lobstr-mcp
 </Tab>
 <Tab title="A URL only">
 
-For a client that takes a URL and no header, the key goes in it:
+Claude, ChatGPT and any client that takes a URL (a custom connector): the URL alone, and you sign in to lobstr.io when it asks.
 
 ```text
-https://api.lobstr.io/v2/mcp?api_key=YOUR_API_KEY
+https://api.lobstr.io/v2/mcp
 ```
 
 </Tab>
